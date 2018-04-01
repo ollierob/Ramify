@@ -6,4 +6,8 @@ public interface Position {
 
     double longitude();
 
+    default double altitude() {
+        return 0;
+    }
+
 }

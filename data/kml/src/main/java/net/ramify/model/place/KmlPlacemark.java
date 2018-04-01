@@ -8,8 +8,20 @@ import java.util.Optional;
 @XmlRootElement(name = "Placemark")
 public class KmlPlacemark implements Place {
 
+    @XmlElement(name = "name")
+    private String name;
+
     @XmlElement(name = "Point")
     private KmlPoint point;
+
+    @XmlElement(name = "ExtendedData")
+    private KmlExtendedData extendedData;
+
+    @Nonnull
+    @Override
+    public String name() {
+        return name;
+    }
 
     @Nonnull
     @Override
