@@ -10,4 +10,8 @@ public interface Position {
         return 0;
     }
 
+    static LatitudeAndLongitude of(final double latitude, final double longitude) {
+        return new LatitudeAndLongitude(latitude, longitude);
+    }
+
 }

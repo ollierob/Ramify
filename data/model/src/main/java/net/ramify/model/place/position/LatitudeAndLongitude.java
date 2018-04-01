@@ -1,10 +1,10 @@
 package net.ramify.model.place.position;
 
-public class LatitudeLongitude implements Position {
+public class LatitudeAndLongitude implements Position {
 
     private final double latitude, longitude;
 
-    public LatitudeLongitude(double latitude, double longitude) {
+    public LatitudeAndLongitude(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
