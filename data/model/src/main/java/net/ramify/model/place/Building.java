@@ -1,8 +1,10 @@
 package net.ramify.model.place;
 
-public class Building extends NamedPlace {
+import net.ramify.model.place.position.Position;
 
-    public Building(final String name) {
+public class Building extends NamedLocation {
+
+    public Building(final String name, final Position position) {
         super(name);
     }
 
