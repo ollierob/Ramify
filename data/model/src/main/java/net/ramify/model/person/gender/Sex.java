@@ -7,8 +7,7 @@ public enum Sex implements Gender {
 
     @Override
     public boolean is(final Gender that) {
-        return that == UNKNOWN
-                || (that instanceof Sex && this == that);
+        return that == UNKNOWN || this == that;
     }
 
 }
