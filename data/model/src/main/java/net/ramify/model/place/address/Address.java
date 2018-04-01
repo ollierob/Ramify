@@ -26,6 +26,10 @@ public interface Address {
                 .map(Optional::get);
     }
 
+    default boolean contains(@Nonnull final Place place) {
+        return this.placeStream().anyMatch(p -> p.equals(place));
+    }
+
     @Nonnull
     default <P extends Place> Optional<P> find(final Class<P> clazz) {
         return this.placeStream(clazz).findAny();
