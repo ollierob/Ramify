@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Churches</name>
+    <Style id="icon-503-4186F0-labelson">
+      <IconStyle>
+        <color>fff08641</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+    </Style>
+    <Style id="icon-503-4186F0-labelson-nodesc">
+      <IconStyle>
+        <color>fff08641</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Placemark>
+      <name>St Pauls (Cross Stone)</name>
+      <description>Church has existed here since the 15th century. See http://freepages.genealogy.rootsweb.ancestry.com/~todmordenandwalsden/St.PaulsCrossStone.htm</description>
+      <styleUrl>#icon-503-4186F0-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -2.0823759,53.7200757,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Benthead Congregationalist</name>
+      <description><![CDATA[Built 1719, closed 1807.<br>See http://www.hebdenbridgehistory.org.uk/charlestown/eastwood/chapel.html]]></description>
+      <styleUrl>#icon-503-4186F0-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -2.0630157,53.7288549,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Shore Baptist</name>
+      <description><![CDATA[Founded 1777, closed 1970's. See http://freepages.genealogy.rootsweb.ancestry.com/~todmordenandwalsden/shorechapel_000.htm]]></description>
+      <styleUrl>#icon-503-4186F0-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -2.1313584,53.7359188,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Heptonstall Wesleyan</name>
+      <description>Built 1764. See http://freepages.genealogy.rootsweb.ancestry.com/~todmordenandwalsden/heptonstallmethodist1.htm</description>
+      <styleUrl>#icon-503-4186F0-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -2.0200896,53.7498099,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>St Thomas a Becket</name>
+      <description>Built in the 13th century.</description>
+      <styleUrl>#icon-503-4186F0-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -2.0215702,53.7488916,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>St Thomas the Apostle</name>
+      <styleUrl>#icon-503-4186F0-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -2.021994,53.7483968,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Cross Lanes</name>
+      <styleUrl>#icon-503-4186F0-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -2.0160824,53.7447899,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Birchcliffe Baptist (3rd)</name>
+      <description><![CDATA[Built 1898, closed 1974.<br>See http://freepages.history.rootsweb.ancestry.com/~calderdalecompanion/kk_34.html]]></description>
+      <styleUrl>#icon-503-4186F0-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -2.0087707,53.743478,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Birchcliffe Baptist (1st, 2nd)</name>
+      <description><![CDATA[Opened 1764. Rebuilt 1825. Moved to neighbouring site in 1898.<br>See http://freepages.history.rootsweb.ancestry.com/~calderdalecompanion/kk_34.html]]></description>
+      <styleUrl>#icon-503-4186F0-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -2.0071882,53.7434733,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Wainsgate Baptist</name>
+      <description><![CDATA[Built 1750. Rebuilt 1815. Rebuilt 1857. Closed in 20th century.<br>See http://freepages.history.rootsweb.ancestry.com/~calderdalecompanion/qq_17.html]]></description>
+      <styleUrl>#icon-503-4186F0-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -2.004168,53.7555684,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Mount Zion Baptist</name>
+      <description>Built 1808. See http://freepages.genealogy.rootsweb.ancestry.com/~todmordenandwalsden/mountzion.htm</description>
+      <styleUrl>#icon-503-4186F0-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -2.0366335,53.7548484,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Ebenezer Baptist</name>
+      <description>Particular Baptist chapel built 1777.</description>
+      <styleUrl>#icon-503-4186F0-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -2.015377,53.7415142,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[St James's]]></name>
+      <description>Built 1833. See http://freepages.genealogy.rootsweb.ancestry.com/~todmordenandwalsden/stjamesmytholm.htm</description>
+      <styleUrl>#icon-503-4186F0-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -2.0252072,53.7433623,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Blackshaw Head Methodist</name>
+      <styleUrl>#icon-503-4186F0-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -2.0636058,53.7449612,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Blake Dean Baptist</name>
+      <description>Built 1820. See http://freepages.history.rootsweb.ancestry.com/~calderdalecompanion/c109_b.html#b75</description>
+      <styleUrl>#icon-503-4186F0-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -2.065494,53.7788733,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Crimsworth Dean</name>
+      <styleUrl>#icon-503-4186F0-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -2.0081699,53.7806642,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Crimsworth Wesleyan</name>
+      <description>Opened 1834. See http://freepages.history.rootsweb.ancestry.com/~calderdalecompanion/c109_c.html#c282</description>
+      <styleUrl>#icon-503-4186F0-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -2.0052999,53.763151,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Patmos Congregationalist</name>
+      <description><![CDATA[Built 1816, demolished 1970s.<br>See http://freepages.genealogy.rootsweb.ancestry.com/~todmordenandwalsden/patmoschapel.htm]]></description>
+      <styleUrl>#icon-503-4186F0-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -2.0971119,53.7160474,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Mount Olivet Baptist</name>
+      <description>See http://www.hebdenbridgehistory.org.uk/charlestown/underbank.html#naze</description>
+      <styleUrl>#icon-503-4186F0-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -2.047652,53.7357729,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Hope Baptist</name>
+      <description><![CDATA[Opened 1858.<br>See http://freepages.history.rootsweb.ancestry.com/~calderdalecompanion/c109_h.html#h90]]></description>
+      <styleUrl>#icon-503-4186F0-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -2.0124239,53.7409384,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Mankinholes Wesleyan</name>
+      <description><![CDATA[Built 1814.<br>See http://freepages.genealogy.rootsweb.ancestry.com/~todmordenandwalsden/mankinholeschapel.htm]]></description>
+      <styleUrl>#icon-503-4186F0-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -2.0619857,53.708488,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Christ Church</name>
+      <description>See http://freepages.genealogy.rootsweb.ancestry.com/~todmordenandwalsden/Christchurch.htm</description>
+      <styleUrl>#icon-503-4186F0-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -2.1000624,53.716176,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[St Mary's]]></name>
+      <description>See http://freepages.genealogy.rootsweb.ancestry.com/~todmordenandwalsden/stmarys.htm</description>
+      <styleUrl>#icon-503-4186F0-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -2.0983082,53.7136695,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>All Saints</name>
+      <description><![CDATA[Built 1858. Demolished 1975.<br>See http://freepages.genealogy.rootsweb.ancestry.com/~todmordenandwalsden/allsaints.htm]]></description>
+      <styleUrl>#icon-503-4186F0-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -2.1160805,53.7263477,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Salem Wesleyan</name>
+      <description><![CDATA[Built 1824. Rebuilt 1885. Rebuilt 1973.<br>See http://freepages.history.rootsweb.ancestry.com/~calderdalecompanion/c109_s.html#s583]]></description>
+      <styleUrl>#icon-503-4186F0-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -2.0179117,53.7410716,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>St Michael</name>
+      <styleUrl>#icon-503-4186F0-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -1.9816375,53.730118,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Broadstone Baptist</name>
+      <description>Built c.1853. See http://freepages.history.rootsweb.ancestry.com/~calderdalecompanion/c109_b.html#b307</description>
+      <styleUrl>#icon-503-4186F0-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -2.0588315,53.7554288,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Mytholmroyd Wesleyan</name>
+      <styleUrl>#icon-503-4186F0-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -1.9830161,53.7279726,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Chapel</name>
+      <styleUrl>#icon-503-4186F0-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -2.0000213,53.748917,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Eastwood</name>
+      <description>1840-1970</description>
+      <styleUrl>#icon-503-4186F0-labelson</styleUrl>
+      <Point>
+        <coordinates>
+          -2.0547545,53.7258875,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Lumbutts Methodist</name>
+      <styleUrl>#icon-503-4186F0-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -2.0654726,53.7068369,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Foster Lane Methodist</name>
+      <styleUrl>#icon-503-4186F0-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -2.0123461,53.7460414,0
+        </coordinates>
+      </Point>
+    </Placemark>
+  </Document>
+</kml>
