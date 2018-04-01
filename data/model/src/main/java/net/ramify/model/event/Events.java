@@ -1,9 +1,16 @@
 package net.ramify.model.event;
 
 import javax.annotation.Nonnull;
-import java.util.*;
+import java.util.Comparator;
+import java.util.Optional;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.stream.Stream;
 
+/**
+ * Set of events with helper methods.
+ */
 public interface Events {
 
     @Nonnull
@@ -51,5 +58,7 @@ public interface Events {
     default <E extends Event> Optional<E> latest(final Class<E> clazz, final Comparator<? super Event> comparator) {
         return this.eventStream(clazz).max(comparator);
     }
+
+    Events NONE = Set::of;
 
 }

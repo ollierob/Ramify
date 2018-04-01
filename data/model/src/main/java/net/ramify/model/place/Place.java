@@ -9,4 +9,6 @@ public interface Place extends Castable<Place> {
     @Nonnull
     String name();
 
+    Place UNKNOWN = () -> "Unknown";
+
 }

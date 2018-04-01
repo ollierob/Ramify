@@ -4,8 +4,12 @@ import net.ramify.model.event.Events;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
+import java.util.Set;
 
-public interface PersonEvents extends Events {
+/**
+ * Life events for a single person.
+ */
+public interface PersonalEvents extends Events {
 
     @Nonnull
     default Optional<Birth> birth() {
@@ -16,5 +20,7 @@ public interface PersonEvents extends Events {
     default Optional<Death> death() {
         return this.latest(Death.class);
     }
+
+    PersonalEvents NONE = Set::of;
 
 }
