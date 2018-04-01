@@ -1,7 +1,7 @@
 package net.ramify.model.event;
 
 import net.ramify.model.Castable;
-import net.ramify.model.place.Place;
+import net.ramify.model.place.address.Address;
 
 import javax.annotation.Nonnull;
 import java.util.Comparator;
@@ -18,6 +18,6 @@ public interface Event extends Castable<Event> {
     String description();
 
     @Nonnull
-    Place place();
+    Address address();
 
 }

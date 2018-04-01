@@ -40,4 +40,6 @@ public interface Address {
         return this.find(Country.class);
     }
 
+    Address NOWHERE = Set::of;
+
 }
