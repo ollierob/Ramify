@@ -1,4 +1,9 @@
 package net.ramify.model.place;
 
-public interface Settlement extends Place {
+public class Settlement extends NamedPlace {
+
+    public Settlement(final String name) {
+        super(name);
+    }
+
 }

@@ -1,4 +1,9 @@
 package net.ramify.model.place;
 
-public interface Country extends Place {
+public class Country extends NamedPlace {
+
+    public Country(final String name) {
+        super(name);
+    }
+
 }

@@ -1,4 +1,9 @@
 package net.ramify.model.place;
 
-public interface Township extends Place {
+public class Township extends NamedPlace {
+
+    public Township(String name) {
+        super(name);
+    }
+
 }
