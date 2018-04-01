@@ -19,4 +19,5 @@ public interface Event extends Castable<Event> {
 
     @Nonnull
     Place place();
+
 }

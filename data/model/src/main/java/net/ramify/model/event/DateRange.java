@@ -29,4 +29,23 @@ public interface DateRange {
 
     Comparator<DateRange> COMPARE_BY_EARLIEST = (d1, d2) -> d1.earliestInclusive().flatMap(e1 -> d2.earliestInclusive().map(e1::compareTo)).orElse(0); //FIXME check if present
 
+    DateRange ALWAYS = new DateRange() {
+
+        @Override
+        public Optional<? extends ChronoLocalDate> earliestInclusive() {
+            return Optional.empty();
+        }
+
+        @Override
+        public Optional<? extends ChronoLocalDate> latestInclusive() {
+            return Optional.empty();
+        }
+
+        @Override
+        public boolean contains(final ChronoLocalDate date) {
+            return true;
+        }
+
+    };
+
 }

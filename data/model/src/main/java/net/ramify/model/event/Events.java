@@ -27,10 +27,25 @@ public interface Events {
                 .map(Optional::get);
     }
 
+    default Optional<Event> earliest() {
+        return this.earliest(Event.class);
+    }
+
+    @Nonnull
+    default <E extends Event> Optional<E> earliest(final Class<E> clazz) {
+        return this.earliest(clazz, Event.COMPARE_BY_DATE);
+    }
+
     @Nonnull
     default <E extends Event> Optional<E> earliest(final Class<E> clazz, final Comparator<? super Event> comparator) {
         return this.eventStream(clazz).min(comparator);
     }
+
+    @Nonnull
+    default <E extends Event> Optional<E> latest(final Class<E> clazz) {
+        return this.latest(clazz, Event.COMPARE_BY_DATE);
+    }
+
 
     @Nonnull
     default <E extends Event> Optional<E> latest(final Class<E> clazz, final Comparator<? super Event> comparator) {
