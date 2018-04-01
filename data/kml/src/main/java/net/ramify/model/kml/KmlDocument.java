@@ -2,7 +2,6 @@ package net.ramify.model.kml;
 
 import net.ramify.model.place.KmlPlacemark;
 
-import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
@@ -15,5 +14,10 @@ public class KmlDocument {
 
     @XmlElement(name = "Placemark")
     private List<KmlPlacemark> placemarks;
+
+    public KmlDocument(final String name, final List<KmlPlacemark> placemarks) {
+        this.name = name;
+        this.placemarks = placemarks;
+    }
 
 }
