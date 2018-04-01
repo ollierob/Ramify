@@ -10,15 +10,7 @@ import java.util.stream.Stream;
 public interface Relationship {
 
     @Nonnull
-    Person from();
-
-    @Nonnull
-    Person to();
-
-    @Nonnull
-    default Stream<Person> peopleStream() {
-        return Stream.of(this.from(), this.to()).distinct();
-    }
+    Stream<Person> peopleStream();
 
     @Nonnull
     default Set<Person> people() {
