@@ -13,11 +13,14 @@
     <packaging>pom</packaging>
 
     <name>data</name>
-    <artifactId>data</artifactId>
+
+    <groupId>net.ramify.data</groupId>
+    <artifactId>parent</artifactId>
 
     <modules>
         <module>model</module>
         <module>kml</module>
+        <module>provider</module>
     </modules>
 
 </project>
