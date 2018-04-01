@@ -24,7 +24,6 @@ public class KmlPlacemark implements Place {
     }
 
     @Nonnull
-    @Override
     public Optional<KmlPoint> position() {
         return Optional.of(point);
     }
