@@ -1,14 +1,12 @@
 package net.ramify.model.place;
 
-import javax.annotation.Nonnull;
-import java.util.Optional;
+import net.ramify.model.Castable;
 
-public interface Place {
+import javax.annotation.Nonnull;
+
+public interface Place extends Castable<Place> {
 
     @Nonnull
     String name();
-
-    @Nonnull
-    Optional<? extends Position> position();
 
 }

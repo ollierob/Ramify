@@ -1,4 +1,4 @@
-package net.ramify.model.place;
+package net.ramify.model.place.position;
 
 public class LatitudeLongitude implements Position {
 
@@ -17,6 +17,11 @@ public class LatitudeLongitude implements Position {
     @Override
     public double longitude() {
         return longitude;
+    }
+
+    @Override
+    public String toString() {
+        return "(" + latitude + "," + longitude + "," + this.altitude() + ")";
     }
 
 }

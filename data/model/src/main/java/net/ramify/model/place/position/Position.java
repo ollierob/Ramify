@@ -1,4 +1,4 @@
-package net.ramify.model.place;
+package net.ramify.model.place.position;
 
 public interface Position {
 
