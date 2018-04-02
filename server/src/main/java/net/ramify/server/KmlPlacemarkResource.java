@@ -20,11 +20,11 @@ import java.util.stream.Collectors;
 
 @Path("kml/locations")
 @Produces({MediaType.APPLICATION_XML, MediaType.TEXT_XML})
-public class LocationKmlResource {
+public class KmlPlacemarkResource {
 
     private final RegionalAddressProvider churches, farms, mills;
 
-    public LocationKmlResource(
+    public KmlPlacemarkResource(
             final RegionalAddressProvider churches,
             final RegionalAddressProvider farms,
             final RegionalAddressProvider mills) {
@@ -54,7 +54,7 @@ public class LocationKmlResource {
     private static KmlBody convert(final String name, final Addresses locations) {
         final List<KmlPlacemark> placemarks = locations == null
                 ? List.of()
-                : locations.addresses().stream().map(LocationKmlResource::convert).filter(Objects::nonNull).collect(Collectors.toList());
+                : locations.addresses().stream().map(KmlPlacemarkResource::convert).filter(Objects::nonNull).collect(Collectors.toList());
         return new KmlBody(new KmlDocument(name, placemarks));
     }
 
