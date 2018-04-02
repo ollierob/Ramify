@@ -40,6 +40,10 @@ public interface DateRange {
         throw new UnsupportedOperationException(); //TODO
     }
 
+    default DateRange minus(final Period min, final Period max) {
+        throw new UnsupportedOperationException(); //TODO
+    }
+
     Comparator<DateRange> COMPARE_BY_EARLIEST = (d1, d2) -> d1.earliestInclusive().flatMap(e1 -> d2.earliestInclusive().map(e1::compareTo)).orElse(0); //FIXME check if present
 
     DateRange ALWAYS = new DateRange() {

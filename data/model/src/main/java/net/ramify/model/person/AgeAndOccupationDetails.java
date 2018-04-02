@@ -2,7 +2,7 @@ package net.ramify.model.person;
 
 import net.ramify.model.event.DateRange;
 import net.ramify.model.event.Event;
-import net.ramify.model.person.age.Age;
+import net.ramify.model.person.age.AgeRange;
 import net.ramify.model.person.event.Birth;
 import net.ramify.model.person.event.Death;
 import net.ramify.model.person.event.Occupation;
@@ -16,20 +16,20 @@ import java.util.Set;
 public class AgeAndOccupationDetails implements PersonalDetails {
 
     private final Person person;
-    private final Age age;
+    private final AgeRange age;
     private final String occupation;
     private final boolean deceased;
 
     public AgeAndOccupationDetails(
             final Person person,
-            final Age age,
+            final AgeRange age,
             final String occupation) {
         this(person, age, occupation, false);
     }
 
     public AgeAndOccupationDetails(
             final Person person,
-            final Age age,
+            final AgeRange age,
             final String occupation,
             final boolean deceased) {
         this.person = person;
@@ -45,7 +45,7 @@ public class AgeAndOccupationDetails implements PersonalDetails {
     }
 
     @Nonnull
-    public Optional<Age> age() {
+    public Optional<AgeRange> age() {
         return Optional.ofNullable(age);
     }
 
@@ -61,7 +61,7 @@ public class AgeAndOccupationDetails implements PersonalDetails {
     public Set<Event> inferredEvents(final DateRange date) {
         final Set<Event> events = new HashSet<>();
         if (age != null) {
-            events.add(new Birth(date.minus(age.toPeriod()), "Inferred birth of " + person, Address.UNKNOWN));
+            events.add(new Birth(date.minus(age.min(), age.max()), "Inferred birth of " + person, Address.UNKNOWN));
         }
         if (deceased) {
             final DateRange deathDate = DateRange.before(date);

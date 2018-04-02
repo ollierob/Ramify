@@ -10,4 +10,8 @@ public enum Sex implements Gender {
         return that == UNKNOWN || this == that;
     }
 
+    public Sex inverse() {
+        return this == MALE ? FEMALE : MALE;
+    }
+
 }
