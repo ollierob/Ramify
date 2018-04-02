@@ -11,4 +11,8 @@ public interface AgeRange {
     @Nonnull
     Period max();
 
+    static AgeRange ofYears(final int years) {
+        return Age.ofYears(years);
+    }
+
 }

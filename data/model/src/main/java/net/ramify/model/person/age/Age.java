@@ -15,7 +15,7 @@ public interface Age extends AgeRange {
         return () -> Period.ofMonths(months);
     }
 
-    static Age years(final int years) {
+    static Age ofYears(final int years) {
         return () -> Period.ofYears(years);
     }
 

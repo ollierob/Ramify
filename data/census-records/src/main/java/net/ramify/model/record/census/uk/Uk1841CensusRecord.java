@@ -33,6 +33,7 @@ public class Uk1841CensusRecord extends UkNamedCensusRecord<Uk1841CensusRecord.U
                 final String occupation) {
             super(person, new Uk1841CensusRecordAgeRange(age), occupation);
         }
+
     }
 
     public static class Uk1841CensusRecordAgeRange implements AgeRange {
