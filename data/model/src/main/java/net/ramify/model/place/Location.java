@@ -1,13 +1,9 @@
 package net.ramify.model.place;
 
-import net.ramify.model.place.position.Position;
+public abstract class Location extends NamedPlace {
 
-import javax.annotation.Nonnull;
-import java.util.Optional;
-
-public interface Location extends Place {
-
-    @Nonnull
-    Optional<? extends Position> position();
+    protected Location(final String name) {
+        super(name);
+    }
 
 }

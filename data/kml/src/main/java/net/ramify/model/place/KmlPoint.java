@@ -1,7 +1,9 @@
 package net.ramify.model.place;
 
+import net.ramify.model.place.position.LatitudeAndLongitude;
 import net.ramify.model.place.position.Position;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlElement;
 
 public class KmlPoint implements Position {
@@ -18,25 +20,24 @@ public class KmlPoint implements Position {
     }
 
     public static KmlPoint of(final Position position) {
-        return position instanceof KmlPoint
-                ? (KmlPoint) position
-                : new KmlPoint(position.longitude() + "," + position.latitude() + "," + position.altitude());
+        return of(position.toLatitudeAndLongitude());
     }
 
-    @Override
-    public double latitude() {
-        return Double.valueOf(coordinates.split(",")[1]);
+    public static KmlPoint of(final LatitudeAndLongitude position) {
+        return new KmlPoint(position.longitude() + "," + position.latitude());
     }
 
+    @Nonnull
     @Override
-    public double longitude() {
-        return Double.valueOf(coordinates.split(",")[0]);
+    public String name() {
+        return coordinates;
     }
 
+    @Nonnull
     @Override
-    public double altitude() {
+    public LatitudeAndLongitude toLatitudeAndLongitude() {
         final String[] split = coordinates.split(",");
-        return split.length == 2 ? Double.valueOf(split[2]) : 0;
+        return new LatitudeAndLongitude(Double.valueOf(split[1]), Double.valueOf(split[0]));
     }
 
 }

@@ -3,15 +3,13 @@ package net.ramify.model.place;
 import net.ramify.model.kml.KmlDocumentElement;
 import net.ramify.model.place.position.Position;
 
-import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Map;
-import java.util.Optional;
 
 @XmlRootElement(name = "Placemark")
-public class KmlPlacemark extends KmlDocumentElement implements Location {
+public class KmlPlacemark extends KmlDocumentElement {
 
     @XmlElement(name = "name")
     private String name;
@@ -29,26 +27,11 @@ public class KmlPlacemark extends KmlDocumentElement implements Location {
     }
 
     @Nonnull
-    @Override
-    public String name() {
-        return name;
-    }
-
-    @CheckForNull
-    public static KmlPlacemark convert(final Location location, final Map<String, String> extended) {
-        if (location instanceof KmlPlacemark) {
-            return (KmlPlacemark) location;
-        }
-        final Optional<? extends Position> position = location.position();
-        if (!position.isPresent()) {
-            return null;
-        }
-        return new KmlPlacemark(location.name(), KmlPoint.of(position.get()), KmlExtendedData.of(extended));
-    }
-
-    @Nonnull
-    public Optional<KmlPoint> position() {
-        return Optional.of(point);
+    public static KmlPlacemark convert(
+            @Nonnull final Place place,
+            @Nonnull final Position position,
+            @Nonnull final Map<String, String> extended) {
+        return new KmlPlacemark(place.name(), KmlPoint.of(position), KmlExtendedData.of(extended));
     }
 
 }

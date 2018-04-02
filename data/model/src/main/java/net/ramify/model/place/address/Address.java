@@ -1,8 +1,9 @@
 package net.ramify.model.place.address;
 
-import net.ramify.model.place.Building;
 import net.ramify.model.place.Country;
+import net.ramify.model.place.Location;
 import net.ramify.model.place.Place;
+import net.ramify.model.place.position.Position;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
@@ -44,8 +45,13 @@ public interface Address {
     }
 
     @Nonnull
-    default Optional<Building> building() {
-        return this.find(Building.class);
+    default Optional<Location> location() {
+        return this.find(Location.class);
+    }
+
+    @Nonnull
+    default Optional<Position> position() {
+        return this.find(Position.class);
     }
 
     default Map<String, String> describe() {

@@ -1,14 +1,13 @@
 package net.ramify.model.place.position;
 
-public interface Position {
+import net.ramify.model.place.Place;
 
-    double latitude();
+import javax.annotation.Nonnull;
 
-    double longitude();
+public interface Position extends Place {
 
-    default double altitude() {
-        return 0;
-    }
+    @Nonnull
+    LatitudeAndLongitude toLatitudeAndLongitude();
 
     static LatitudeAndLongitude of(final double latitude, final double longitude) {
         return new LatitudeAndLongitude(latitude, longitude);
