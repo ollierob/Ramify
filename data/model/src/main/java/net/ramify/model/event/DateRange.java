@@ -28,6 +28,10 @@ public interface DateRange {
         return date;
     }
 
+    static DateRange on(final ChronoLocalDate date) {
+        return new OnDate(date);
+    }
+
     static DateRange before(final DateRange date) {
         throw new UnsupportedOperationException(); //TODO
     }

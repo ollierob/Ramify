@@ -1,6 +1,5 @@
 package net.ramify.model.record.census.uk;
 
-import net.ramify.model.event.DateRange;
 import net.ramify.model.family.relationship.Relationship;
 import net.ramify.model.family.relationship.UnknownRelationship;
 import net.ramify.model.person.AgeAndOccupationDetails;
@@ -11,11 +10,10 @@ import java.util.Collection;
 public class Uk1841CensusRecord extends UkNamedCensusRecord<AgeAndOccupationDetails> {
 
     public Uk1841CensusRecord(
-            final DateRange date,
             final Address address,
             final AgeAndOccupationDetails head,
             final Collection<AgeAndOccupationDetails> others) {
-        super(date, address, head, others);
+        super(CENSUS_1841, address, head, others);
     }
 
     @Override

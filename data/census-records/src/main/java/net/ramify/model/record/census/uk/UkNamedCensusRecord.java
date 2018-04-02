@@ -8,6 +8,7 @@ import net.ramify.model.person.PersonalDetails;
 import net.ramify.model.person.event.PersonalEvents;
 import net.ramify.model.person.event.Residence;
 import net.ramify.model.place.address.Address;
+import net.ramify.model.record.census.AbstractCensusRecord;
 
 import javax.annotation.Nonnull;
 import java.util.Collection;
@@ -16,10 +17,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class UkNamedCensusRecord<T extends PersonalDetails> implements UkCensusRecord {
+public abstract class UkNamedCensusRecord<T extends PersonalDetails> extends AbstractCensusRecord implements UkCensusRecord {
 
-    private final DateRange date;
-    private final Address address;
     private final T head;
     private final Collection<T> others;
 
@@ -28,22 +27,9 @@ public abstract class UkNamedCensusRecord<T extends PersonalDetails> implements 
             final Address address,
             final T head,
             final Collection<T> others) {
-        this.date = date;
-        this.address = address;
+        super(date, address);
         this.head = head;
         this.others = others;
-    }
-
-    @Nonnull
-    @Override
-    public Address address() {
-        return address;
-    }
-
-    @Nonnull
-    @Override
-    public DateRange date() {
-        return date;
     }
 
     @Nonnull
@@ -51,7 +37,7 @@ public abstract class UkNamedCensusRecord<T extends PersonalDetails> implements 
     public Map<Person, PersonalEvents> personalEvents() {
         final Residence residence = this.residence();
         final Map<Person, PersonalEvents> events = new HashMap<>();
-        events.put(head.person(), PersonalEvents.of(residence, head.inferredEvents(date)));
+        events.put(head.person(), PersonalEvents.of(residence, head.inferredEvents(this.date())));
         throw new UnsupportedOperationException(); //TODO
     }
 
