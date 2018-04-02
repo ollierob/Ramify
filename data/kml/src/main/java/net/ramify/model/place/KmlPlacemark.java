@@ -1,5 +1,6 @@
 package net.ramify.model.place;
 
+import net.ramify.model.kml.KmlDocumentElement;
 import net.ramify.model.place.position.Position;
 
 import javax.annotation.CheckForNull;
@@ -10,7 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @XmlRootElement(name = "Placemark")
-public class KmlPlacemark implements Location {
+public class KmlPlacemark extends KmlDocumentElement implements Location {
 
     @XmlElement(name = "name")
     private String name;
