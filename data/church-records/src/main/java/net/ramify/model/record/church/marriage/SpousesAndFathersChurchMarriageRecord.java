@@ -80,7 +80,7 @@ public class SpousesAndFathersChurchMarriageRecord implements ChurchMarriageReco
     }
 
     PersonalEvents lifeEvents(final PersonalDetails details, final Marriage marriage) {
-        final Set<Event> events = new HashSet<>(details.inferredEvents(date));
+        final Set<Event> events = new HashSet<>(details.inferredEventSet(date));
         if (marriage != null) {
             events.add(marriage);
         }

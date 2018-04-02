@@ -3,20 +3,16 @@ package net.ramify.model.person;
 import net.ramify.model.event.DateRange;
 import net.ramify.model.event.Event;
 import net.ramify.model.person.age.AgeRange;
-import net.ramify.model.person.event.Birth;
 import net.ramify.model.person.event.Death;
 import net.ramify.model.person.event.Occupation;
 import net.ramify.model.place.address.Address;
 
 import javax.annotation.Nonnull;
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-public class AgeAndOccupationDetails implements PersonalDetails {
+public class AgeAndOccupationDetails extends AgeDetails {
 
-    private final Person person;
-    private final AgeRange age;
     private final String occupation;
     private final boolean deceased;
 
@@ -32,21 +28,9 @@ public class AgeAndOccupationDetails implements PersonalDetails {
             final AgeRange age,
             final String occupation,
             final boolean deceased) {
-        this.person = person;
-        this.age = age;
+        super(person, age);
         this.occupation = occupation;
         this.deceased = deceased;
-    }
-
-    @Nonnull
-    @Override
-    public Person person() {
-        return person;
-    }
-
-    @Nonnull
-    public Optional<AgeRange> age() {
-        return Optional.ofNullable(age);
     }
 
     @Nonnull
@@ -58,14 +42,11 @@ public class AgeAndOccupationDetails implements PersonalDetails {
         return deceased;
     }
 
-    public Set<Event> inferredEvents(final DateRange date) {
-        final Set<Event> events = new HashSet<>();
-        if (age != null) {
-            events.add(new Birth(date.minus(age.max(), age.min()), "Inferred birth of " + person, Address.UNKNOWN));
-        }
+    public Set<Event> inferredEventSet(final DateRange date) {
+        final Set<Event> events = super.inferredEventSet(date);
         if (deceased) {
             final DateRange deathDate = DateRange.before(date);
-            events.add(new Death(deathDate, "Inferred death of " + person, Address.UNKNOWN));
+            events.add(new Death(deathDate, "Inferred death of " + this.person(), Address.UNKNOWN));
             this.occupation().ifPresent(occupation -> events.add(new Occupation(deathDate, occupation, Address.UNKNOWN)));
         } else {
             this.occupation().ifPresent(occupation -> events.add(new Occupation(date, occupation, Address.UNKNOWN)));

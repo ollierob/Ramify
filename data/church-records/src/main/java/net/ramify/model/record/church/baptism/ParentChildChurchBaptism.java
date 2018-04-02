@@ -47,8 +47,8 @@ public class ParentChildChurchBaptism implements ChurchBaptismRecord {
     @Override
     public Map<Person, PersonalEvents> personalEvents() {
         final Map<Person, PersonalEvents> events = new HashMap<>();
-        events.put(parent.person(), PersonalEvents.of(parent.inferredEvents(date)));
-        events.put(child.person(), PersonalEvents.of(this.baptism(), child.inferredEvents(date)));
+        events.put(parent.person(), PersonalEvents.of(parent.inferredEventSet(date)));
+        events.put(child.person(), PersonalEvents.of(this.baptism(), child.inferredEventSet(date)));
         return events;
     }
 
