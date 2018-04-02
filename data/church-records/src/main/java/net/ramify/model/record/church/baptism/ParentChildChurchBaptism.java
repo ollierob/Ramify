@@ -33,7 +33,13 @@ public class ParentChildChurchBaptism implements ChurchBaptismRecord {
 
     @Nonnull
     @Override
-    public Address address() {
+    public DateRange date() {
+        return date;
+    }
+
+    @Nonnull
+    @Override
+    public Address churchAddress() {
         return address;
     }
 

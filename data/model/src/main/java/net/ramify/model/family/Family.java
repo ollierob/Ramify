@@ -22,6 +22,10 @@ public interface Family {
                 .collect(Collectors.toSet());
     }
 
+    static Family of(final Person person) {
+        return new SinglePersonFamily(person);
+    }
+
     static Family of(final Relationship relationship) {
         return of(Set.of(relationship));
     }

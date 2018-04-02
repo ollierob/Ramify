@@ -45,7 +45,13 @@ public class SpousesAndFathersChurchMarriageRecord implements ChurchMarriageReco
 
     @Nonnull
     @Override
-    public Address address() {
+    public DateRange date() {
+        return date;
+    }
+
+    @Nonnull
+    @Override
+    public Address churchAddress() {
         return address;
     }
 

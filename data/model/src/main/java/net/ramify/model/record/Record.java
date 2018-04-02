@@ -1,5 +1,6 @@
 package net.ramify.model.record;
 
+import net.ramify.model.event.DateRange;
 import net.ramify.model.event.Event;
 import net.ramify.model.family.Family;
 import net.ramify.model.person.Person;
@@ -11,6 +12,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public interface Record {
+
+    @Nonnull
+    DateRange date();
 
     @Nonnull
     Map<Person, PersonalEvents> personalEvents();

@@ -22,6 +22,7 @@
         <module>kml</module>
         <module>provider</module>
         <module>church-records</module>
+        <module>census-records</module>
     </modules>
 
     <dependencyManagement>

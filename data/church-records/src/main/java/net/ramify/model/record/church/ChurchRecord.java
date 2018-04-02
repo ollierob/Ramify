@@ -8,6 +8,6 @@ import javax.annotation.Nonnull;
 public interface ChurchRecord extends Record {
 
     @Nonnull
-    Address address();
+    Address churchAddress();
 
 }

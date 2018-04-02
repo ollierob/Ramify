@@ -13,14 +13,25 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-public class AgeAndOccupation implements PersonalDetails {
+public class AgeAndOccupationDetails implements PersonalDetails {
 
     private final Person person;
     private final Age age;
     private final String occupation;
     private final boolean deceased;
 
-    public AgeAndOccupation(final Person person, final Age age, final String occupation, final boolean deceased) {
+    public AgeAndOccupationDetails(
+            final Person person,
+            final Age age,
+            final String occupation) {
+        this(person, age, occupation, false);
+    }
+
+    public AgeAndOccupationDetails(
+            final Person person,
+            final Age age,
+            final String occupation,
+            final boolean deceased) {
         this.person = person;
         this.age = age;
         this.occupation = occupation;
