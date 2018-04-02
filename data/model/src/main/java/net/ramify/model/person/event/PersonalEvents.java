@@ -1,5 +1,6 @@
 package net.ramify.model.person.event;
 
+import net.ramify.model.event.Event;
 import net.ramify.model.event.Events;
 
 import javax.annotation.Nonnull;
@@ -19,6 +20,10 @@ public interface PersonalEvents extends Events {
     @Nonnull
     default Optional<Death> death() {
         return this.latest(Death.class);
+    }
+
+    static PersonalEvents of(final Event event) {
+        return new SinglePersonalEvent(event);
     }
 
     PersonalEvents NONE = Set::of;

@@ -22,4 +22,8 @@ public interface Family {
                 .collect(Collectors.toSet());
     }
 
+    static Family of(final Relationship relationship) {
+        return new SingleRelationshipFamily(relationship);
+    }
+
 }
