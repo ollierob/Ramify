@@ -2,9 +2,9 @@ package net.ramify.server;
 
 import net.ramify.model.kml.KmlBody;
 import net.ramify.model.kml.KmlDocument;
-import net.ramify.model.place.AddressProvider;
 import net.ramify.model.place.KmlPlacemark;
 import net.ramify.model.place.RegionId;
+import net.ramify.model.place.RegionalAddressProvider;
 import net.ramify.model.place.address.Address;
 import net.ramify.model.place.address.Addresses;
 
@@ -22,12 +22,12 @@ import java.util.stream.Collectors;
 @Produces({MediaType.APPLICATION_XML, MediaType.TEXT_XML})
 public class LocationKmlResource {
 
-    private final AddressProvider churches, farms, mills;
+    private final RegionalAddressProvider churches, farms, mills;
 
     public LocationKmlResource(
-            final AddressProvider churches,
-            final AddressProvider farms,
-            final AddressProvider mills) {
+            final RegionalAddressProvider churches,
+            final RegionalAddressProvider farms,
+            final RegionalAddressProvider mills) {
         this.churches = churches;
         this.farms = farms;
         this.mills = mills;
