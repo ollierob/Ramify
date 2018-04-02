@@ -4,6 +4,7 @@ import net.ramify.model.event.Event;
 import net.ramify.model.event.Events;
 
 import javax.annotation.Nonnull;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -23,7 +24,17 @@ public interface PersonalEvents extends Events {
     }
 
     static PersonalEvents of(final Event event) {
-        return new SinglePersonalEvent(event);
+        return of(Set.of(event));
+    }
+
+    static PersonalEvents of(final Set<Event> events) {
+        return events.isEmpty() ? NONE : () -> events;
+    }
+
+    static PersonalEvents of(final Event event, final Set<Event> otherEvents) {
+        final Set<Event> events = new HashSet<>(otherEvents);
+        events.add(event);
+        return () -> events;
     }
 
     PersonalEvents NONE = Set::of;

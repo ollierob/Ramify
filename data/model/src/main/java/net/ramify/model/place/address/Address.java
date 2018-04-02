@@ -60,6 +60,6 @@ public interface Address {
         return description;
     }
 
-    Address NOWHERE = Set::of;
+    Address UNKNOWN = Set::of;
 
 }

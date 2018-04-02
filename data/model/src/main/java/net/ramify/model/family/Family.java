@@ -23,7 +23,11 @@ public interface Family {
     }
 
     static Family of(final Relationship relationship) {
-        return new SingleRelationshipFamily(relationship);
+        return of(Set.of(relationship));
+    }
+
+    static Family of(final Set<Relationship> relationships) {
+        return () -> relationships;
     }
 
 }
