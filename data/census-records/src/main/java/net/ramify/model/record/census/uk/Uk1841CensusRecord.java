@@ -21,8 +21,8 @@ public class Uk1841CensusRecord extends UkNamedCensusRecord<Uk1841CensusRecord.U
     }
 
     @Override
-    protected Relationship relationshipBetween(final Uk1841CensusRecordPerson head, final Uk1841CensusRecordPerson other) {
-        return new UnknownRelationship(head.person(), other.person());
+    protected Relationship relationToHead(Uk1841CensusRecordPerson other) {
+        return new UnknownRelationship(this.head().person(), other.person());
     }
 
     public static class Uk1841CensusRecordPerson extends AgeAndOccupationDetails {

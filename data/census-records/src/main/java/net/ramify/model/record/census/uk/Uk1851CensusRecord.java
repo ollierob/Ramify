@@ -30,7 +30,7 @@ public class Uk1851CensusRecord extends UkNamedCensusRecord<Uk1851CensusRecord.U
 
         private final BiFunction<Person, Person, Relationship> relationshipToHead;
 
-        Uk1851CensusPerson(
+        public Uk1851CensusPerson(
                 final Person person,
                 final AgeRange age,
                 final String occupation,
