@@ -2,6 +2,7 @@ package net.ramify.model.record.census.uk;
 
 import net.ramify.model.event.DateRange;
 import net.ramify.model.family.Family;
+import net.ramify.model.family.relationship.UnknownRelationship;
 import net.ramify.model.person.AgeDetails;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonalDetails;
@@ -74,7 +75,10 @@ public abstract class UkEnumeratedCensusRecord extends AbstractCensusRecord impl
     @Nonnull
     @Override
     public Family family() {
-        throw new UnsupportedOperationException(); //TODO
+        if (others.isEmpty()) {
+            return Family.of(head.person());
+        }
+        return Family.of(UnknownRelationship.between(head.person(), others));
     }
 
 }

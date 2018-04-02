@@ -7,9 +7,10 @@ import net.ramify.model.person.event.PersonalEvents;
 import javax.annotation.Nonnull;
 import java.util.Set;
 
-public interface PersonalDetails {
+public interface PersonalDetails extends HasPerson {
 
     @Nonnull
+    @Override
     Person person();
 
     @Nonnull

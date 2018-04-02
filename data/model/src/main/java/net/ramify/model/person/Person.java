@@ -5,13 +5,20 @@ import net.ramify.model.person.name.Name;
 
 import javax.annotation.Nonnull;
 
-public interface Person {
+public interface Person extends HasPerson {
 
     @Nonnull
     Name name();
 
     @Nonnull
     Gender gender();
+
+    @Nonnull
+    @Deprecated
+    @Override
+    default Person person() {
+        return this;
+    }
 
     static Person of(final Gender gender) {
         return of(Name.UNKNOWN, gender);
