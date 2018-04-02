@@ -17,7 +17,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class UkNamedCensusRecord<T extends PersonalDetails> extends AbstractCensusRecord implements UkCensusRecord {
+public abstract class UkNamedCensusRecord<T extends PersonalDetails>
+        extends AbstractCensusRecord
+        implements UkCensusRecord {
 
     private final T head;
     private final Collection<T> others;
@@ -30,6 +32,10 @@ public abstract class UkNamedCensusRecord<T extends PersonalDetails> extends Abs
         super(date, address);
         this.head = head;
         this.others = others;
+    }
+
+    protected T head() {
+        return head;
     }
 
     @Nonnull
@@ -48,10 +54,10 @@ public abstract class UkNamedCensusRecord<T extends PersonalDetails> extends Abs
             return Family.of(head.person());
         }
         final Set<Relationship> relationships = new HashSet<>(others.size());
-        others.forEach(person -> relationships.add(this.relationshipBetween(head, person)));
+        others.forEach(person -> relationships.add(this.relationToHead(person)));
         return Family.of(relationships);
     }
 
-    protected abstract Relationship relationshipBetween(T head, T other);
+    protected abstract Relationship relationToHead(T other);
 
 }
