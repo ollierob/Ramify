@@ -61,7 +61,7 @@ public class AgeAndOccupationDetails implements PersonalDetails {
     public Set<Event> inferredEvents(final DateRange date) {
         final Set<Event> events = new HashSet<>();
         if (age != null) {
-            events.add(new Birth(date.minus(age.min(), age.max()), "Inferred birth of " + person, Address.UNKNOWN));
+            events.add(new Birth(date.minus(age.max(), age.min()), "Inferred birth of " + person, Address.UNKNOWN));
         }
         if (deceased) {
             final DateRange deathDate = DateRange.before(date);

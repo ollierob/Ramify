@@ -40,7 +40,7 @@ public interface DateRange {
         throw new UnsupportedOperationException(); //TODO
     }
 
-    default DateRange minus(final Period min, final Period max) {
+    default DateRange minus(final Period max, final Period min) {
         throw new UnsupportedOperationException(); //TODO
     }
 
