@@ -1,8 +1,13 @@
 package net.ramify.model.place;
 
+import net.ramify.model.place.position.Position;
+
+import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Map;
+import java.util.Optional;
 
 @XmlRootElement(name = "Placemark")
 public class KmlPlacemark implements Location {
@@ -16,7 +21,7 @@ public class KmlPlacemark implements Location {
     @XmlElement(name = "ExtendedData")
     private KmlExtendedData extendedData;
 
-    public KmlPlacemark(final String name, final KmlPoint point, KmlExtendedData extendedData) {
+    public KmlPlacemark(final String name, final KmlPoint point, final KmlExtendedData extendedData) {
         this.name = name;
         this.point = point;
         this.extendedData = extendedData;
@@ -28,16 +33,21 @@ public class KmlPlacemark implements Location {
         return name;
     }
 
-    public static KmlPlacemark convert(final Location location) {
-        return location instanceof KmlPlacemark
-                ? (KmlPlacemark) location
-                : new KmlPlacemark(location.name(), KmlPoint.of(location.position()), null);
-
+    @CheckForNull
+    public static KmlPlacemark convert(final Location location, final Map<String, String> extended) {
+        if (location instanceof KmlPlacemark) {
+            return (KmlPlacemark) location;
+        }
+        final Optional<? extends Position> position = location.position();
+        if (!position.isPresent()) {
+            return null;
+        }
+        return new KmlPlacemark(location.name(), KmlPoint.of(position.get()), KmlExtendedData.of(extended));
     }
 
     @Nonnull
-    public KmlPoint position() {
-        return point;
+    public Optional<KmlPoint> position() {
+        return Optional.of(point);
     }
 
 }

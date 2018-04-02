@@ -1,9 +1,12 @@
 package net.ramify.model.place.address;
 
+import net.ramify.model.place.Building;
 import net.ramify.model.place.Country;
 import net.ramify.model.place.Place;
 
 import javax.annotation.Nonnull;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -38,6 +41,17 @@ public interface Address {
     @Nonnull
     default Optional<Country> country() {
         return this.find(Country.class);
+    }
+
+    @Nonnull
+    default Optional<Building> building() {
+        return this.find(Building.class);
+    }
+
+    default Map<String, String> describe() {
+        final Map<String, String> description = new HashMap<>();
+        this.places().forEach(place -> description.put(place.getClass().getSimpleName(), place.name()));
+        return description;
     }
 
     Address NOWHERE = Set::of;
