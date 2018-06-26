@@ -10,6 +10,7 @@ import javax.annotation.Nonnull;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public interface Family {
 
@@ -19,11 +20,10 @@ public interface Family {
     Set<Relationship> relationships();
 
     @Nonnull
-    default Set<Person> people() {
+    default Stream<Person> peopleStream() {
         return this.relationships()
                 .stream()
-                .flatMap(Relationship::peopleStream)
-                .collect(Collectors.toSet());
+                .flatMap(Relationship::peopleStream);
     }
 
     @Nonnull

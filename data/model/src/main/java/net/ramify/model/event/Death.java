@@ -5,6 +5,10 @@ import net.ramify.model.place.address.Address;
 
 public class Death extends AbstractPhysicalEvent {
 
+    public Death(final DateRange date) {
+        this(date, Address.UNKNOWN);
+    }
+
     public Death(final DateRange date, final Address address) {
         this(date, "Death", address);
     }
