@@ -1,6 +1,6 @@
 package net.ramify.model.record.uk.census;
 
-import net.ramify.model.event.DateRange;
+import net.ramify.model.date.DateRange;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.relationship.Relationship;
 import net.ramify.model.person.Person;

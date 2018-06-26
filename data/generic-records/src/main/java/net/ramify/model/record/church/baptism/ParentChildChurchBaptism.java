@@ -1,6 +1,6 @@
 package net.ramify.model.record.church.baptism;
 
-import net.ramify.model.event.DateRange;
+import net.ramify.model.date.DateRange;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.relationship.ParentChild;
 import net.ramify.model.person.Person;

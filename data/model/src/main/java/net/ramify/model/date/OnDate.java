@@ -1,14 +1,14 @@
-package net.ramify.model.event;
+package net.ramify.model.date;
 
 import javax.annotation.Nonnull;
 import java.time.chrono.ChronoLocalDate;
 import java.util.Optional;
 
-public class OnDate implements DateRange {
+class OnDate implements DateRange {
 
     private final ChronoLocalDate date;
 
-    public OnDate(final ChronoLocalDate date) {
+    OnDate(final ChronoLocalDate date) {
         this.date = date;
     }
 

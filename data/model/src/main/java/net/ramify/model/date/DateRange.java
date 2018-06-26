@@ -1,4 +1,4 @@
-package net.ramify.model.event;
+package net.ramify.model.date;
 
 import javax.annotation.Nonnull;
 import java.time.LocalDate;

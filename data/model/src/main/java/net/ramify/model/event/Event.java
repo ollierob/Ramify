@@ -1,6 +1,7 @@
 package net.ramify.model.event;
 
 import net.ramify.model.Castable;
+import net.ramify.model.date.DateRange;
 
 import javax.annotation.Nonnull;
 import java.util.Comparator;

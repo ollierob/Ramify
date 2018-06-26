@@ -1,6 +1,6 @@
 package net.ramify.model.person.event;
 
-import net.ramify.model.event.DateRange;
+import net.ramify.model.date.DateRange;
 import net.ramify.model.place.address.Address;
 
 public class Birth extends AbstractPhysicalEvent {
