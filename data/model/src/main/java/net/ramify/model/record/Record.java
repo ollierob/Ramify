@@ -2,7 +2,7 @@ package net.ramify.model.record;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.PersonalEvents;
-import net.ramify.model.family.Family;
+import net.ramify.model.family.Families;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonalAttributes;
 
@@ -21,7 +21,7 @@ public interface Record {
     Map<Person, PersonalEvents> personalEvents();
 
     @Nonnull
-    Family family();
+    Families families();
 
     Comparator<Record> COMPARE_BY_DATE = Comparator.comparing(Record::date, DateRange.COMPARE_BY_EARLIEST);
 

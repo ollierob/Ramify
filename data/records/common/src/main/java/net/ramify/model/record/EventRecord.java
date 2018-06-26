@@ -1,5 +1,6 @@
 package net.ramify.model.record;
 
+import net.ramify.model.SingleFamilyRecord;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.PersonalEvents;
@@ -14,7 +15,7 @@ import java.util.Map;
  *
  * @param <E>
  */
-public abstract class EventRecord<E extends Event> implements Record {
+public abstract class EventRecord<E extends Event> implements SingleFamilyRecord {
 
     private final Person person;
     private final E event;

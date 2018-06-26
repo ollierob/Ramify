@@ -30,9 +30,7 @@ public interface PersonalEvents extends Events {
     }
 
     static PersonalEvents of(final Person person, final Set<Event> events) {
-        return events.isEmpty()
-                ? none(person)
-                : new PersonalEvents() {
+        return new PersonalEvents() {
 
             @Nonnull
             @Override
@@ -55,20 +53,7 @@ public interface PersonalEvents extends Events {
     }
 
     static PersonalEvents none(final Person person) {
-        return new PersonalEvents() {
-
-            @Nonnull
-            @Override
-            public Person person() {
-                return person;
-            }
-
-            @Nonnull
-            @Override
-            public Set<Event> events() {
-                return Collections.emptySet();
-            }
-        };
+        return of(person, Collections.emptySet());
     }
 
     @Nonnull
