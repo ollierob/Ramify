@@ -29,18 +29,26 @@ public class Uk1851CensusRecord extends UkNamedCensusRecord<Uk1851CensusRecord.U
     public static abstract class Uk1851CensusPerson extends AgeAndOccupationDetails {
 
         private final BiFunction<Person, Person, Relationship> relationshipToHead;
+        private final Address birthplace;
 
         public Uk1851CensusPerson(
                 final Person person,
                 final AgeRange age,
                 final String occupation,
-                final BiFunction<Person, Person, Relationship> relationshipToHead) {
+                final BiFunction<Person, Person, Relationship> relationshipToHead,
+                final Address birthplace) {
             super(person, age, occupation, CENSUS_1851);
             this.relationshipToHead = relationshipToHead;
+            this.birthplace = birthplace;
         }
 
         Relationship relationshipTo(final Uk1851CensusHead head) {
             return relationshipToHead.apply(this.person(), head.person());
+        }
+
+        @Override
+        protected Address birthplace() {
+            return birthplace;
         }
 
     }
@@ -50,8 +58,9 @@ public class Uk1851CensusRecord extends UkNamedCensusRecord<Uk1851CensusRecord.U
         public Uk1851CensusHead(
                 final Person person,
                 final AgeRange age,
-                final String occupation) {
-            super(person, age, occupation, null);
+                final String occupation,
+                final Address birthplace) {
+            super(person, age, occupation, null, birthplace);
         }
 
     }

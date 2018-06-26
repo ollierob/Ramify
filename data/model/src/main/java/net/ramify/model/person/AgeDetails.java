@@ -41,7 +41,11 @@ public class AgeDetails implements PersonalDetails {
     protected Birth birth(final DateRange date) {
         return age == null
                 ? null
-                : new Birth(date.minus(age.max(), age.min()), "Inferred birth of " + person, Address.UNKNOWN);
+                : new Birth(date.minus(age.max(), age.min()), "Inferred birth of " + person, this.birthplace());
+    }
+
+    protected Address birthplace() {
+        return Address.UNKNOWN;
     }
 
     @Nonnull

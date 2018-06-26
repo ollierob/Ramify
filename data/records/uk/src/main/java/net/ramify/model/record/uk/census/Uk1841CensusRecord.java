@@ -6,6 +6,7 @@ import net.ramify.model.person.AgeAndOccupationDetails;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.age.AgeRange;
 import net.ramify.model.place.address.Address;
+import net.ramify.model.place.address.CountyInCountry;
 
 import javax.annotation.Nonnull;
 import java.time.Period;
@@ -27,13 +28,22 @@ public class Uk1841CensusRecord extends UkNamedCensusRecord<Uk1841CensusRecord.U
 
     public static class Uk1841CensusRecordPerson extends AgeAndOccupationDetails {
 
+        private final CountyInCountry birthplace;
+
         public Uk1841CensusRecordPerson(
                 final Person person,
                 final int age,
-                final String occupation) {
+                final String occupation,
+                final CountyInCountry birthplace) {
             super(person, new Uk1841CensusRecordAgeRange(age), occupation, CENSUS_1841);
+            this.birthplace = birthplace;
         }
 
+        @Override
+        protected Address birthplace() {
+            return birthplace;
+        }
+        
     }
 
     public static class Uk1841CensusRecordAgeRange implements AgeRange {
