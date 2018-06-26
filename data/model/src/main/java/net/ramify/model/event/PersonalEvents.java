@@ -1,7 +1,4 @@
-package net.ramify.model.person.event;
-
-import net.ramify.model.event.Event;
-import net.ramify.model.event.Events;
+package net.ramify.model.event;
 
 import javax.annotation.Nonnull;
 import java.util.HashSet;

@@ -1,6 +1,6 @@
 package net.ramify.model.record.church.baptism;
 
-import net.ramify.model.person.event.Baptism;
+import net.ramify.model.event.Baptism;
 import net.ramify.model.record.church.ChurchRecord;
 
 import javax.annotation.Nonnull;

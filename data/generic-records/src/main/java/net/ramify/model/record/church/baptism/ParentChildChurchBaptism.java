@@ -1,12 +1,12 @@
 package net.ramify.model.record.church.baptism;
 
 import net.ramify.model.date.DateRange;
+import net.ramify.model.event.Baptism;
+import net.ramify.model.event.PersonalEvents;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.relationship.ParentChild;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonalDetails;
-import net.ramify.model.person.event.Baptism;
-import net.ramify.model.person.event.PersonalEvents;
 import net.ramify.model.place.address.Address;
 
 import javax.annotation.Nonnull;

@@ -1,7 +1,7 @@
 package net.ramify.model.person;
 
 import net.ramify.model.event.Event;
-import net.ramify.model.person.event.PersonalEvents;
+import net.ramify.model.event.PersonalEvents;
 
 import javax.annotation.Nonnull;
 import java.util.Set;

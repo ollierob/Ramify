@@ -1,6 +1,6 @@
 package net.ramify.model.record.death;
 
-import net.ramify.model.person.event.Burial;
+import net.ramify.model.event.Burial;
 import net.ramify.model.place.address.HasAddress;
 import net.ramify.model.record.Record;
 

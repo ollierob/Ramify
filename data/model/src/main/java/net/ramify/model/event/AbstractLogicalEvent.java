@@ -1,7 +1,6 @@
-package net.ramify.model.person.event;
+package net.ramify.model.event;
 
 import net.ramify.model.date.DateRange;
-import net.ramify.model.event.Event;
 
 import javax.annotation.Nonnull;
 

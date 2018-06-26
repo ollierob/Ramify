@@ -2,14 +2,14 @@ package net.ramify.model.record.uk.church;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.Event;
+import net.ramify.model.event.Marriage;
+import net.ramify.model.event.PersonalEvents;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.relationship.MarriedCouple;
 import net.ramify.model.family.relationship.ParentChild;
 import net.ramify.model.family.relationship.Relationship;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonalDetails;
-import net.ramify.model.person.event.Marriage;
-import net.ramify.model.person.event.PersonalEvents;
 import net.ramify.model.place.address.Address;
 import net.ramify.model.place.address.HasAddress;
 import net.ramify.model.record.marriage.MarriageRecord;

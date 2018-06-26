@@ -1,6 +1,6 @@
 package net.ramify.model.record.residence;
 
-import net.ramify.model.person.event.Residence;
+import net.ramify.model.event.Residence;
 import net.ramify.model.place.address.Address;
 import net.ramify.model.record.Record;
 

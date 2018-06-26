@@ -1,9 +1,9 @@
 package net.ramify.model.person;
 
 import net.ramify.model.date.DateRange;
+import net.ramify.model.event.Birth;
 import net.ramify.model.event.Event;
 import net.ramify.model.person.age.AgeRange;
-import net.ramify.model.person.event.Birth;
 import net.ramify.model.place.address.Address;
 
 import javax.annotation.CheckForNull;

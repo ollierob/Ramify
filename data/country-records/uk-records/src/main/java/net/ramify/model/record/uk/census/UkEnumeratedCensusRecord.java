@@ -1,13 +1,13 @@
 package net.ramify.model.record.uk.census;
 
 import net.ramify.model.date.DateRange;
+import net.ramify.model.event.PersonalEvents;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.relationship.UnknownRelationship;
 import net.ramify.model.person.AgeDetails;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonalDetails;
 import net.ramify.model.person.age.AgeRange;
-import net.ramify.model.person.event.PersonalEvents;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.place.address.Address;
 import net.ramify.model.record.Record;

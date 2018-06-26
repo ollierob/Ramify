@@ -1,4 +1,4 @@
-package net.ramify.model.person.event;
+package net.ramify.model.event;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.place.address.Address;
