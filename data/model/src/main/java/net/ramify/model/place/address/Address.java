@@ -60,6 +60,10 @@ public interface Address {
         return description;
     }
 
+    default boolean isUnknown() {
+        return this == UNKNOWN || this.places().isEmpty();
+    }
+
     Address UNKNOWN = Set::of;
 
     static Address of(final Object object) {

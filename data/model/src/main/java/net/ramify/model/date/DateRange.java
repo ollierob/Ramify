@@ -24,6 +24,10 @@ public interface DateRange {
                 && this.latestInclusive().map(DateRange::covariant).orElse(LocalDate.MAX).compareTo(date) >= 0;
     }
 
+    static ChronoLocalDate min(final ChronoLocalDate d1, final ChronoLocalDate d2) {
+        return d1.isBefore(d2) ? d1 : d2;
+    }
+
     static <T extends ChronoLocalDate> ChronoLocalDate covariant(final T date) {
         return date;
     }
@@ -41,6 +45,26 @@ public interface DateRange {
     }
 
     default DateRange minus(final Period max, final Period min) {
+        throw new UnsupportedOperationException(); //TODO
+    }
+
+    static ChronoLocalDate min(final Optional<? extends ChronoLocalDate> d1, final Optional<? extends ChronoLocalDate> d2) {
+        return d1.isPresent() && d2.isPresent()
+                ? min(d1.get(), d2.get())
+                : LocalDate.MIN;
+    }
+
+    static ChronoLocalDate max(final ChronoLocalDate d1, final ChronoLocalDate d2) {
+        return d1.isAfter(d2) ? d1 : d2;
+    }
+
+    static ChronoLocalDate max(final Optional<? extends ChronoLocalDate> d1, final Optional<? extends ChronoLocalDate> d2) {
+        return d1.isPresent() && d2.isPresent()
+                ? max(d1.get(), d2.get())
+                : LocalDate.MAX;
+    }
+
+    default Optional<DateRange> intersection(final DateRange that) {
         throw new UnsupportedOperationException(); //TODO
     }
 

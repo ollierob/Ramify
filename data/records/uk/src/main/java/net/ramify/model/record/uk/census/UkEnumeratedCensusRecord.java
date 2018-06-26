@@ -41,6 +41,9 @@ public abstract class UkEnumeratedCensusRecord
 
     private static Set<PersonalDetails> peopleIn(final Map<AgeRange, Integer> total, final Gender gender, final boolean removeHead, final DateRange date) {
         final Map<AgeRange, Integer> filtered = removeHead ? filterHead(total) : total;
+        if (filtered.isEmpty()) {
+            return Set.of();
+        }
         final Set<PersonalDetails> details = new HashSet<>();
         filtered.forEach((age, count) -> details.addAll(peopleIn(age, count, gender, date)));
         return details;
