@@ -3,6 +3,10 @@ package net.ramify.strategy.merge;
 import javax.annotation.Nonnull;
 import java.util.Optional;
 
+/**
+ * @param <T>
+ * @see net.ramify.strategy.join.Join
+ */
 public interface Merge<T> {
 
     @Nonnull

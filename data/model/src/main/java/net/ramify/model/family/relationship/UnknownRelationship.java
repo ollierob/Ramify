@@ -24,4 +24,10 @@ public class UnknownRelationship extends AbstractRelationship {
     public UnknownRelationship inverse() {
         return this;
     }
+
+    @Override
+    public Relationship replace(final Person from, final Person to) {
+        return new UnknownRelationship(from, to);
+    }
+
 }

@@ -11,19 +11,13 @@ public class MarriedCouple extends AbstractRelationship {
     }
 
     @Nonnull
-    public Person first() {
-        return super.from();
-    }
-
-    @Nonnull
-    public Person second() {
-        return super.to();
-    }
-
-    @Nonnull
     @Override
     public MarriedCouple inverse() {
         return this;
     }
 
+    @Override
+    public MarriedCouple replace(final Person from, final Person to) {
+        return new MarriedCouple(from, to);
+    }
 }

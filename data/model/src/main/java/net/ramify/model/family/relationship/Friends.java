@@ -23,4 +23,10 @@ public class Friends extends AbstractRelationship {
     public Friends inverse() {
         return this;
     }
+
+    @Override
+    public Relationship replace(Person from, Person to) {
+        return new Friends(from, to);
+    }
+
 }

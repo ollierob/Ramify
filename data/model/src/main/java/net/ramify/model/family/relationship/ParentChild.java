@@ -27,14 +27,31 @@ public class ParentChild extends AbstractRelationship {
         return new ChildParent();
     }
 
+    @Override
+    public Relationship replace(Person from, Person to) {
+        return new ParentChild(from, to);
+    }
+
     public class ChildParent implements Relationship {
 
         private ChildParent() {
         }
 
         @Nonnull
+        @Override
+        public Person from() {
+            return this.child();
+        }
+
+        @Nonnull
         public Person child() {
             return ParentChild.this.child();
+        }
+
+        @Nonnull
+        @Override
+        public Person to() {
+            return this.parent();
         }
 
         @Nonnull
@@ -52,6 +69,11 @@ public class ParentChild extends AbstractRelationship {
         @Override
         public ParentChild inverse() {
             return ParentChild.this;
+        }
+
+        @Override
+        public ChildParent replace(final Person from, final Person to) {
+            return new ParentChild(to, from).inverse();
         }
 
     }

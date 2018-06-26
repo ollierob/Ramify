@@ -3,7 +3,6 @@ package net.ramify.model.family.relationship;
 import net.ramify.model.person.Person;
 
 import javax.annotation.Nonnull;
-import java.util.stream.Stream;
 
 public abstract class AbstractRelationship implements Relationship {
 
@@ -15,19 +14,13 @@ public abstract class AbstractRelationship implements Relationship {
     }
 
     @Nonnull
-    protected Person from() {
+    public Person from() {
         return from;
     }
 
     @Nonnull
-    protected Person to() {
+    public Person to() {
         return to;
-    }
-
-    @Nonnull
-    @Override
-    public Stream<Person> peopleStream() {
-        return Stream.of(from, to).distinct();
     }
 
 }

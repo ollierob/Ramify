@@ -27,6 +27,14 @@ public interface Family {
                 .collect(Collectors.toSet());
     }
 
+    @Nonnull
+    default Set<Relationship> involving(final Person person) {
+        return this.relationships()
+                .stream()
+                .filter(relationship -> relationship.hasExact(person))
+                .collect(Collectors.toSet());
+    }
+
     static Family of(final Person person) {
         return new SinglePersonFamily(person);
     }
