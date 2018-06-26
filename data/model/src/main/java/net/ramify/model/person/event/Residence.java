@@ -3,7 +3,7 @@ package net.ramify.model.person.event;
 import net.ramify.model.event.DateRange;
 import net.ramify.model.place.address.Address;
 
-public class Residence extends AbstractEvent {
+public class Residence extends AbstractPhysicalEvent {
 
     public Residence(
             final DateRange date,

@@ -62,4 +62,10 @@ public interface Address {
 
     Address UNKNOWN = Set::of;
 
+    static Address of(final Object object) {
+        return object instanceof HasAddress
+                ? ((HasAddress) object).address()
+                : UNKNOWN;
+    }
+
 }

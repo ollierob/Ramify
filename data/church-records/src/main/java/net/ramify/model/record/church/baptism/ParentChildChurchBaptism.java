@@ -52,7 +52,8 @@ public class ParentChildChurchBaptism implements ChurchBaptismRecord {
         return events;
     }
 
-    protected Baptism baptism() {
+    @Override
+    public Baptism baptism() {
         return new Baptism(date, address);
     }
 

@@ -2,20 +2,17 @@ package net.ramify.model.person.event;
 
 import net.ramify.model.event.DateRange;
 import net.ramify.model.event.Event;
-import net.ramify.model.place.address.Address;
 
 import javax.annotation.Nonnull;
 
-public class AbstractEvent implements Event {
+public class AbstractLogicalEvent implements Event {
 
     private final DateRange date;
     private final String description;
-    private final Address address;
 
-    protected AbstractEvent(final DateRange date, final String description, final Address address) {
+    protected AbstractLogicalEvent(final DateRange date, final String description) {
         this.date = date;
         this.description = description;
-        this.address = address;
     }
 
     @Nonnull
@@ -28,12 +25,6 @@ public class AbstractEvent implements Event {
     @Override
     public String description() {
         return description;
-    }
-
-    @Nonnull
-    @Override
-    public Address address() {
-        return address;
     }
 
 }

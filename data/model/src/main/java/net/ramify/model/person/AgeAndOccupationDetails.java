@@ -50,9 +50,9 @@ public class AgeAndOccupationDetails extends AgeDetails {
         if (deceased) {
             final DateRange beforeEvent = DateRange.before(this.date());
             events.add(new Death(beforeEvent, "Inferred death of " + this.person(), Address.UNKNOWN));
-            this.occupation().ifPresent(occupation -> events.add(new Occupation(beforeEvent, occupation, Address.UNKNOWN)));
+            this.occupation().ifPresent(occupation -> events.add(new Occupation(beforeEvent, occupation)));
         } else {
-            this.occupation().ifPresent(occupation -> events.add(new Occupation(this.date(), occupation, Address.UNKNOWN)));
+            this.occupation().ifPresent(occupation -> events.add(new Occupation(this.date(), occupation)));
         }
         return events;
     }
