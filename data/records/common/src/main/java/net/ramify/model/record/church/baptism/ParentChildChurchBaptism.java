@@ -6,7 +6,7 @@ import net.ramify.model.event.PersonalEvents;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.relationship.ParentChild;
 import net.ramify.model.person.Person;
-import net.ramify.model.person.PersonalDetails;
+import net.ramify.model.person.PersonalAttributes;
 import net.ramify.model.place.address.Address;
 
 import javax.annotation.Nonnull;
@@ -16,14 +16,14 @@ import java.util.Map;
 public class ParentChildChurchBaptism implements ChurchBaptismRecord {
 
     private final Address address;
-    private final PersonalDetails parent;
-    private final PersonalDetails child;
+    private final PersonalAttributes parent;
+    private final PersonalAttributes child;
     private final DateRange date;
 
     public ParentChildChurchBaptism(
             final Address address,
-            final PersonalDetails parent,
-            final PersonalDetails child,
+            final PersonalAttributes parent,
+            final PersonalAttributes child,
             final DateRange date) {
         this.address = address;
         this.parent = parent;
@@ -47,8 +47,8 @@ public class ParentChildChurchBaptism implements ChurchBaptismRecord {
     @Override
     public Map<Person, PersonalEvents> personalEvents() {
         final Map<Person, PersonalEvents> events = new HashMap<>();
-        events.put(parent.person(), PersonalEvents.of(parent.inferredEventSet()));
-        events.put(child.person(), PersonalEvents.of(this.baptism(), child.inferredEventSet()));
+        events.put(parent.person(), parent.inferredEvents());
+        events.put(child.person(), child.inferredEvents().and(this.baptism()));
         return events;
     }
 

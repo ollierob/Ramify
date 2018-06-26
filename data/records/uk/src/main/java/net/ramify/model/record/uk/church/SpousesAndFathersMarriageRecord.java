@@ -9,7 +9,7 @@ import net.ramify.model.family.relationship.MarriedCouple;
 import net.ramify.model.family.relationship.ParentChild;
 import net.ramify.model.family.relationship.Relationship;
 import net.ramify.model.person.Person;
-import net.ramify.model.person.PersonalDetails;
+import net.ramify.model.person.PersonalAttributes;
 import net.ramify.model.place.address.Address;
 import net.ramify.model.place.address.HasAddress;
 import net.ramify.model.record.marriage.MarriageRecord;
@@ -27,19 +27,19 @@ import java.util.Set;
 public class SpousesAndFathersMarriageRecord implements MarriageRecord, HasAddress {
 
     private final DateRange date;
-    private final PersonalDetails groom;
-    private final PersonalDetails groomFather;
-    private final PersonalDetails bride;
-    private final PersonalDetails brideFather;
+    private final PersonalAttributes groom;
+    private final PersonalAttributes groomFather;
+    private final PersonalAttributes bride;
+    private final PersonalAttributes brideFather;
     private final Address address;
     private final Set<Person> witnesses;
 
     public SpousesAndFathersMarriageRecord(
             final DateRange date,
-            @Nonnull final PersonalDetails groom,
-            @CheckForNull final PersonalDetails groomFather,
-            @Nonnull final PersonalDetails bride,
-            @CheckForNull final PersonalDetails brideFather,
+            @Nonnull final PersonalAttributes groom,
+            @CheckForNull final PersonalAttributes groomFather,
+            @Nonnull final PersonalAttributes bride,
+            @CheckForNull final PersonalAttributes brideFather,
             final Address address,
             final Set<Person> witnesses) {
         this.date = date;
@@ -79,12 +79,12 @@ public class SpousesAndFathersMarriageRecord implements MarriageRecord, HasAddre
         return events;
     }
 
-    private PersonalEvents lifeEvents(final PersonalDetails details) {
+    private PersonalEvents lifeEvents(final PersonalAttributes details) {
         return this.lifeEvents(details, null);
     }
 
-    private PersonalEvents lifeEvents(final PersonalDetails details, final Marriage marriage) {
-        final Set<Event> events = new HashSet<>(details.inferredEventSet());
+    private PersonalEvents lifeEvents(final PersonalAttributes details, final Marriage marriage) {
+        final Set<Event> events = new HashSet<>(details.inferredEvents().events());
         if (marriage != null) {
             events.add(marriage);
         }

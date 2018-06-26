@@ -20,6 +20,10 @@ public interface PersonalEvents extends Events {
         return this.latest(Death.class);
     }
 
+    default PersonalEvents and(final Event event) {
+        return of(event, this.events());
+    }
+
     static PersonalEvents of(final Event event) {
         return of(Set.of(event));
     }

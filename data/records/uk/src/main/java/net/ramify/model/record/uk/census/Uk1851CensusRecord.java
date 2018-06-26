@@ -1,9 +1,11 @@
 package net.ramify.model.record.uk.census;
 
 import net.ramify.model.family.relationship.Relationship;
-import net.ramify.model.person.AgeAndOccupationDetails;
+import net.ramify.model.person.NameAgeGenderOccupation;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.age.AgeRange;
+import net.ramify.model.person.gender.Gender;
+import net.ramify.model.person.name.Name;
 import net.ramify.model.place.address.Address;
 
 import java.util.Collection;
@@ -26,18 +28,20 @@ public class Uk1851CensusRecord extends UkNamedCensusRecord<Uk1851CensusRecord.U
         return person.relationshipTo(head);
     }
 
-    public static abstract class Uk1851CensusPerson extends AgeAndOccupationDetails {
+    public static abstract class Uk1851CensusPerson extends NameAgeGenderOccupation {
 
         private final BiFunction<Person, Person, Relationship> relationshipToHead;
         private final Address birthplace;
 
         public Uk1851CensusPerson(
                 final Person person,
+                final Name name,
+                final Gender gender,
                 final AgeRange age,
                 final String occupation,
                 final BiFunction<Person, Person, Relationship> relationshipToHead,
                 final Address birthplace) {
-            super(person, age, occupation, CENSUS_1851);
+            super(person, name, gender, age, CENSUS_1851, occupation);
             this.relationshipToHead = relationshipToHead;
             this.birthplace = birthplace;
         }
@@ -57,10 +61,12 @@ public class Uk1851CensusRecord extends UkNamedCensusRecord<Uk1851CensusRecord.U
 
         public Uk1851CensusHead(
                 final Person person,
+                final Name name,
+                final Gender gender,
                 final AgeRange age,
                 final String occupation,
                 final Address birthplace) {
-            super(person, age, occupation, null, birthplace);
+            super(person, name, gender, age, occupation, null, birthplace);
         }
 
     }

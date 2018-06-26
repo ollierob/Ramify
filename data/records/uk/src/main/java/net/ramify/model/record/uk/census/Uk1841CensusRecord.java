@@ -2,9 +2,11 @@ package net.ramify.model.record.uk.census;
 
 import net.ramify.model.family.relationship.Relationship;
 import net.ramify.model.family.relationship.UnknownRelationship;
-import net.ramify.model.person.AgeAndOccupationDetails;
+import net.ramify.model.person.NameAgeGenderOccupation;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.age.AgeRange;
+import net.ramify.model.person.gender.Gender;
+import net.ramify.model.person.name.ForenameSurname;
 import net.ramify.model.place.address.Address;
 import net.ramify.model.place.address.CountyInCountry;
 
@@ -26,16 +28,18 @@ public class Uk1841CensusRecord extends UkNamedCensusRecord<Uk1841CensusRecord.U
         return new UnknownRelationship(this.head().person(), other.person());
     }
 
-    public static class Uk1841CensusRecordPerson extends AgeAndOccupationDetails {
+    public static class Uk1841CensusRecordPerson extends NameAgeGenderOccupation {
 
         private final CountyInCountry birthplace;
 
         public Uk1841CensusRecordPerson(
                 final Person person,
+                final ForenameSurname name,
+                final Gender gender,
                 final int age,
                 final String occupation,
                 final CountyInCountry birthplace) {
-            super(person, new Uk1841CensusRecordAgeRange(age), occupation, CENSUS_1841);
+            super(person, name, gender, new Uk1841CensusRecordAgeRange(age), CENSUS_1841, occupation);
             this.birthplace = birthplace;
         }
 
@@ -43,7 +47,7 @@ public class Uk1841CensusRecord extends UkNamedCensusRecord<Uk1841CensusRecord.U
         protected Address birthplace() {
             return birthplace;
         }
-        
+
     }
 
     public static class Uk1841CensusRecordAgeRange implements AgeRange {

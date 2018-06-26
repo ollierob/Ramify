@@ -5,7 +5,6 @@ import net.ramify.model.family.relationship.ParentChild;
 import net.ramify.model.family.relationship.Relationship;
 import net.ramify.model.family.relationship.UnknownRelationship;
 import net.ramify.model.person.Person;
-import net.ramify.model.person.gender.Gender;
 
 import javax.annotation.Nonnull;
 import java.util.HashSet;
@@ -80,7 +79,9 @@ public interface Family {
         }
 
         public Family withGrandparent(final Person grandparent) {
-            final Person unknownParent = Person.unknown(Gender.UNKNOWN);
+            final Person unknownParent = new Person() {
+
+            }; //FIXME
             return Family.of(new ParentChild(grandparent, unknownParent), new ParentChild(unknownParent, person));
         }
 

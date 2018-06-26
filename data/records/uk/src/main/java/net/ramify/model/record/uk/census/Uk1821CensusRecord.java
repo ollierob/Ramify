@@ -1,6 +1,6 @@
 package net.ramify.model.record.uk.census;
 
-import net.ramify.model.person.PersonalDetails;
+import net.ramify.model.person.PersonalAttributes;
 import net.ramify.model.person.age.AgeRange;
 import net.ramify.model.place.address.Address;
 
@@ -10,7 +10,7 @@ public class Uk1821CensusRecord extends UkEnumeratedCensusRecord {
 
     public Uk1821CensusRecord(
             final Address address,
-            final PersonalDetails head,
+            final PersonalAttributes head,
             final Map<AgeRange, Integer> maleCount,
             final Map<AgeRange, Integer> femaleCount) {
         super(CENSUS_1821, address, head, maleCount, femaleCount);
