@@ -1,6 +1,7 @@
 package net.ramify.model.record.uk.census;
 
 import net.ramify.model.date.DateRange;
+import net.ramify.model.event.Histories;
 import net.ramify.model.event.PersonalEvents;
 import net.ramify.model.event.Residence;
 import net.ramify.model.family.Family;
@@ -40,7 +41,7 @@ public abstract class UkNamedCensusRecord<T extends PersonalAttributes>
 
     @Nonnull
     @Override
-    public Map<Person, PersonalEvents> personalEvents() {
+    public Histories histories() {
         final Residence residence = this.residence();
         final Map<Person, PersonalEvents> events = new HashMap<>();
         events.put(head.person(), head.inferredEvents().and(residence));

@@ -1,6 +1,7 @@
 package net.ramify.model.record.uk.census;
 
 import net.ramify.model.date.DateRange;
+import net.ramify.model.event.Histories;
 import net.ramify.model.event.PersonalEvents;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.relationship.UnknownRelationship;
@@ -11,7 +12,6 @@ import net.ramify.model.person.age.AgeRange;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.name.Name;
 import net.ramify.model.place.address.Address;
-import net.ramify.model.record.Record;
 import net.ramify.model.record.residence.AbstractCensusRecord;
 
 import javax.annotation.Nonnull;
@@ -70,12 +70,11 @@ public abstract class UkEnumeratedCensusRecord
 
     @Nonnull
     @Override
-    public Map<Person, PersonalEvents> personalEvents() {
-        final DateRange date = this.date();
+    public Histories histories() {
         final Map<Person, PersonalEvents> events = new HashMap<>();
         events.put(head.person(), head.inferredEvents());
-        events.putAll(Record.personalEvents(others));
-        return events;
+        others.forEach(a -> events.put(a.person(), a.inferredEvents()));
+        return Histories.of(events);
     }
 
     @Nonnull

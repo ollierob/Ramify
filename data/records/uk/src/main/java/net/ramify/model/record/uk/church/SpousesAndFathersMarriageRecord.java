@@ -2,6 +2,7 @@ package net.ramify.model.record.uk.church;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.Event;
+import net.ramify.model.event.Histories;
 import net.ramify.model.event.Marriage;
 import net.ramify.model.event.PersonalEvents;
 import net.ramify.model.family.Family;
@@ -65,7 +66,7 @@ public class SpousesAndFathersMarriageRecord implements MarriageRecord, HasAddre
 
     @Nonnull
     @Override
-    public Map<Person, PersonalEvents> personalEvents() {
+    public Histories histories() {
         final Marriage marriage = this.marriage();
         final Map<Person, PersonalEvents> events = new HashMap<>();
         events.put(groom.person(), this.lifeEvents(groom, marriage));
@@ -76,7 +77,7 @@ public class SpousesAndFathersMarriageRecord implements MarriageRecord, HasAddre
         if (brideFather != null) {
             events.put(brideFather.person(), this.lifeEvents(brideFather));
         }
-        return events;
+        return Histories.of(events);
     }
 
     private PersonalEvents lifeEvents(final PersonalAttributes details) {

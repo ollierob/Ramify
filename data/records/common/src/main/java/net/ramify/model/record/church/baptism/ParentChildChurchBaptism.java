@@ -2,6 +2,7 @@ package net.ramify.model.record.church.baptism;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.Baptism;
+import net.ramify.model.event.Histories;
 import net.ramify.model.event.PersonalEvents;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.relationship.ParentChild;
@@ -45,11 +46,11 @@ public class ParentChildChurchBaptism implements ChurchBaptismRecord {
 
     @Nonnull
     @Override
-    public Map<Person, PersonalEvents> personalEvents() {
+    public Histories histories() {
         final Map<Person, PersonalEvents> events = new HashMap<>();
         events.put(parent.person(), parent.inferredEvents());
         events.put(child.person(), child.inferredEvents().and(this.baptism()));
-        return events;
+        return Histories.of(events);
     }
 
     @Override

@@ -2,6 +2,7 @@ package net.ramify.model.record;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.Event;
+import net.ramify.model.event.Histories;
 import net.ramify.model.event.PersonalEvents;
 import net.ramify.model.family.Family;
 import net.ramify.model.person.Person;
@@ -32,8 +33,8 @@ public abstract class EventRecord<E extends Event> implements SingleFamilyRecord
 
     @Nonnull
     @Override
-    public Map<Person, PersonalEvents> personalEvents() {
-        return Map.of(person, PersonalEvents.of(person, event));
+    public Histories histories() {
+        return Histories.of(Map.of(person, PersonalEvents.of(person, event)));
     }
 
     @Nonnull

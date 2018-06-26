@@ -27,6 +27,11 @@ public interface Family {
     }
 
     @Nonnull
+    default Set<Person> people() {
+        return this.peopleStream().collect(Collectors.toSet());
+    }
+
+    @Nonnull
     default Set<Relationship> involving(final Person person) {
         return this.relationships()
                 .stream()
