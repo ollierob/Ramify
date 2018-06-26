@@ -5,6 +5,10 @@ import java.util.Set;
 
 public interface Families {
 
+    static Families of() {
+        return Set::of;
+    }
+
     static Families of(final Family family) {
         return () -> Set.of(family);
     }

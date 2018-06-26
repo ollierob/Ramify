@@ -1,6 +1,5 @@
 package net.ramify.model.record;
 
-import net.ramify.model.SingleFamilyRecord;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.PersonalEvents;

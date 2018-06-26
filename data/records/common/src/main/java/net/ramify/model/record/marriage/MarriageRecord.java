@@ -1,8 +1,8 @@
 package net.ramify.model.record.marriage;
 
-import net.ramify.model.SingleFamilyRecord;
 import net.ramify.model.event.Marriage;
 import net.ramify.model.place.address.HasAddress;
+import net.ramify.model.record.SingleFamilyRecord;
 
 import javax.annotation.Nonnull;
 

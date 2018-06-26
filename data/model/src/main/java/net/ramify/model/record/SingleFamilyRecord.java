@@ -1,8 +1,7 @@
-package net.ramify.model;
+package net.ramify.model.record;
 
 import net.ramify.model.family.Families;
 import net.ramify.model.family.Family;
-import net.ramify.model.record.Record;
 
 import javax.annotation.Nonnull;
 
