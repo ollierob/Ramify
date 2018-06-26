@@ -31,7 +31,7 @@ public interface PersonalAttributes extends HasPerson {
 
     @Nonnull
     default PersonalEvents inferredEvents() {
-        return PersonalEvents.of(Birth.from(this.age(), this.date()));
+        return PersonalEvents.of(this.person(), Birth.from(this.age(), this.date()));
     }
 
 }

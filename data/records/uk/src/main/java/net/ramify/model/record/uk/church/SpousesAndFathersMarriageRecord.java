@@ -83,12 +83,13 @@ public class SpousesAndFathersMarriageRecord implements MarriageRecord, HasAddre
         return this.lifeEvents(details, null);
     }
 
-    private PersonalEvents lifeEvents(final PersonalAttributes details, final Marriage marriage) {
-        final Set<Event> events = new HashSet<>(details.inferredEvents().events());
-        if (marriage != null) {
-            events.add(marriage);
+    private PersonalEvents lifeEvents(final PersonalAttributes attributes, final Marriage marriage) {
+        if (marriage == null) {
+            return attributes.inferredEvents();
         }
-        return PersonalEvents.of(events);
+        final Set<Event> events = new HashSet<>(attributes.inferredEvents().events());
+        events.add(marriage);
+        return PersonalEvents.of(attributes.person(), events);
     }
 
     @Nonnull

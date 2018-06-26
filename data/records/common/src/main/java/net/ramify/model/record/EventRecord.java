@@ -33,7 +33,7 @@ public abstract class EventRecord<E extends Event> implements Record {
     @Nonnull
     @Override
     public Map<Person, PersonalEvents> personalEvents() {
-        return Map.of(person, PersonalEvents.of(event));
+        return Map.of(person, PersonalEvents.of(person, event));
     }
 
     @Nonnull
