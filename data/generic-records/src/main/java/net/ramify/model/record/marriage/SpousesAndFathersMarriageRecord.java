@@ -1,4 +1,4 @@
-package net.ramify.model.record.church.marriage;
+package net.ramify.model.record.marriage;
 
 import net.ramify.model.event.DateRange;
 import net.ramify.model.event.Event;
@@ -11,6 +11,7 @@ import net.ramify.model.person.PersonalDetails;
 import net.ramify.model.person.event.Marriage;
 import net.ramify.model.person.event.PersonalEvents;
 import net.ramify.model.place.address.Address;
+import net.ramify.model.place.address.HasAddress;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -19,7 +20,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class SpousesAndFathersChurchMarriageRecord implements ChurchMarriageRecord {
+public class SpousesAndFathersMarriageRecord implements MarriageRecord, HasAddress {
 
     private final DateRange date;
     private final PersonalDetails groom;
@@ -28,7 +29,7 @@ public class SpousesAndFathersChurchMarriageRecord implements ChurchMarriageReco
     private final PersonalDetails brideFather;
     private final Address address;
 
-    public SpousesAndFathersChurchMarriageRecord(
+    public SpousesAndFathersMarriageRecord(
             final DateRange date,
             @Nonnull final PersonalDetails groom,
             @CheckForNull final PersonalDetails groomFather,
@@ -51,7 +52,7 @@ public class SpousesAndFathersChurchMarriageRecord implements ChurchMarriageReco
 
     @Nonnull
     @Override
-    public Address churchAddress() {
+    public Address address() {
         return address;
     }
 
@@ -80,7 +81,7 @@ public class SpousesAndFathersChurchMarriageRecord implements ChurchMarriageReco
     }
 
     PersonalEvents lifeEvents(final PersonalDetails details, final Marriage marriage) {
-        final Set<Event> events = new HashSet<>(details.inferredEventSet(date));
+        final Set<Event> events = new HashSet<>(details.inferredEventSet());
         if (marriage != null) {
             events.add(marriage);
         }

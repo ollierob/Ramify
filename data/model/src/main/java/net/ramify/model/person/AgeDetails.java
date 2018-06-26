@@ -15,10 +15,12 @@ public class AgeDetails implements PersonalDetails {
 
     private final Person person;
     private final AgeRange age;
+    private final DateRange date;
 
-    public AgeDetails(Person person, AgeRange age) {
+    public AgeDetails(final Person person, final AgeRange age, final DateRange date) {
         this.person = person;
         this.age = age;
+        this.date = date;
     }
 
     @Nonnull
@@ -31,6 +33,10 @@ public class AgeDetails implements PersonalDetails {
         return age;
     }
 
+    public DateRange date() {
+        return date;
+    }
+
     @CheckForNull
     protected Birth birth(final DateRange date) {
         return age == null
@@ -40,7 +46,7 @@ public class AgeDetails implements PersonalDetails {
 
     @Nonnull
     @Override
-    public Set<Event> inferredEventSet(final DateRange date) {
+    public Set<Event> inferredEventSet() {
         final Set<Event> events = new HashSet<>();
         events.add(this.birth(date));
         events.remove(null);

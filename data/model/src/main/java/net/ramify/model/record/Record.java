@@ -8,6 +8,7 @@ import net.ramify.model.person.PersonalDetails;
 import net.ramify.model.person.event.PersonalEvents;
 
 import javax.annotation.Nonnull;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -38,9 +39,11 @@ public interface Record {
                 .collect(Collectors.toSet());
     }
 
-    static Map<Person, PersonalEvents> personalEvents(final DateRange date, final Set<PersonalDetails> details) {
+    Comparator<Record> COMPARE_BY_DATE = Comparator.comparing(Record::date, DateRange.COMPARE_BY_EARLIEST);
+
+    static Map<Person, PersonalEvents> personalEvents(final Set<PersonalDetails> details) {
         final Map<Person, PersonalEvents> events = new HashMap<>();
-        details.forEach(d -> events.put(d.person(), d.inferredEvents(date)));
+        details.forEach(d -> events.put(d.person(), d.inferredEvents()));
         return events;
     }
 

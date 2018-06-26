@@ -1,6 +1,5 @@
 package net.ramify.model.person;
 
-import net.ramify.model.event.DateRange;
 import net.ramify.model.event.Event;
 import net.ramify.model.person.event.PersonalEvents;
 
@@ -14,10 +13,10 @@ public interface PersonalDetails extends HasPerson {
     Person person();
 
     @Nonnull
-    Set<Event> inferredEventSet(DateRange dateRange);
+    Set<Event> inferredEventSet();
 
-    default PersonalEvents inferredEvents(final DateRange date) {
-        return PersonalEvents.of(this.inferredEventSet(date));
+    default PersonalEvents inferredEvents() {
+        return PersonalEvents.of(this.inferredEventSet());
     }
 
 }

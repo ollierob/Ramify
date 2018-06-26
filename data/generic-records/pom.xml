@@ -9,13 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <name>Generic records</name>
     <artifactId>generic-records</artifactId>
-
-    <dependencies>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>model</artifactId>
-        </dependency>
-    </dependencies>
 
 </project>

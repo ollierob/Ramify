@@ -19,16 +19,18 @@ public class AgeAndOccupationDetails extends AgeDetails {
     public AgeAndOccupationDetails(
             final Person person,
             final AgeRange age,
-            final String occupation) {
-        this(person, age, occupation, false);
+            final String occupation,
+            final DateRange date) {
+        this(person, age, occupation, date, false);
     }
 
     public AgeAndOccupationDetails(
             final Person person,
             final AgeRange age,
             final String occupation,
+            final DateRange date,
             final boolean deceased) {
-        super(person, age);
+        super(person, age, date);
         this.occupation = occupation;
         this.deceased = deceased;
     }
@@ -42,14 +44,15 @@ public class AgeAndOccupationDetails extends AgeDetails {
         return deceased;
     }
 
-    public Set<Event> inferredEventSet(final DateRange date) {
-        final Set<Event> events = super.inferredEventSet(date);
+    @Override
+    public Set<Event> inferredEventSet() {
+        final Set<Event> events = super.inferredEventSet();
         if (deceased) {
-            final DateRange deathDate = DateRange.before(date);
+            final DateRange deathDate = DateRange.before(this.date());
             events.add(new Death(deathDate, "Inferred death of " + this.person(), Address.UNKNOWN));
             this.occupation().ifPresent(occupation -> events.add(new Occupation(deathDate, occupation, Address.UNKNOWN)));
         } else {
-            this.occupation().ifPresent(occupation -> events.add(new Occupation(date, occupation, Address.UNKNOWN)));
+            this.occupation().ifPresent(occupation -> events.add(new Occupation(this.date(), occupation, Address.UNKNOWN)));
         }
         return events;
     }

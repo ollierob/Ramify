@@ -47,12 +47,12 @@ public class ParentChildChurchBaptism implements ChurchBaptismRecord {
     @Override
     public Map<Person, PersonalEvents> personalEvents() {
         final Map<Person, PersonalEvents> events = new HashMap<>();
-        events.put(parent.person(), PersonalEvents.of(parent.inferredEventSet(date)));
-        events.put(child.person(), PersonalEvents.of(this.baptism(), child.inferredEventSet(date)));
+        events.put(parent.person(), PersonalEvents.of(parent.inferredEventSet()));
+        events.put(child.person(), PersonalEvents.of(this.baptism(), child.inferredEventSet()));
         return events;
     }
 
-    Baptism baptism() {
+    protected Baptism baptism() {
         return new Baptism(date, "Baptism", address);
     }
 
@@ -62,7 +62,7 @@ public class ParentChildChurchBaptism implements ChurchBaptismRecord {
         return Family.of(this.relationship());
     }
 
-    ParentChild relationship() {
+    protected ParentChild relationship() {
         return new ParentChild(parent.person(), child.person());
     }
 

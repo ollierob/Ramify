@@ -67,7 +67,7 @@ public abstract class UkEnumeratedCensusRecord extends AbstractCensusRecord impl
     public Map<Person, PersonalEvents> personalEvents() {
         final DateRange date = this.date();
         final Map<Person, PersonalEvents> events = new HashMap<>();
-        events.put(head.person(), head.inferredEvents(date));
+        events.put(head.person(), head.inferredEvents());
         events.putAll(Record.personalEvents(date, others));
         return events;
     }
