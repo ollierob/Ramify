@@ -9,12 +9,17 @@ import net.ramify.model.person.event.PersonalEvents;
 import javax.annotation.Nonnull;
 import java.util.Map;
 
-public class EventRecord<E extends Event> implements Record {
+/**
+ * A record of some event.
+ *
+ * @param <E>
+ */
+public abstract class EventRecord<E extends Event> implements Record {
 
     private final Person person;
     private final E event;
 
-    public EventRecord(final Person person, final E event) {
+    protected EventRecord(final Person person, final E event) {
         this.person = person;
         this.event = event;
     }

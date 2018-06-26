@@ -20,11 +20,11 @@ public interface Person extends HasPerson {
         return this;
     }
 
-    static Person of(final Gender gender) {
-        return of(Name.UNKNOWN, gender);
+    static Person unknown(final Gender gender) {
+        return named(Name.UNKNOWN, gender);
     }
 
-    static Person of(final Name name, final Gender gender) {
+    static Person named(final Name name, final Gender gender) {
         throw new UnsupportedOperationException(); //TODO
     }
 

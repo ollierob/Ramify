@@ -48,9 +48,9 @@ public class AgeAndOccupationDetails extends AgeDetails {
     public Set<Event> inferredEventSet() {
         final Set<Event> events = super.inferredEventSet();
         if (deceased) {
-            final DateRange deathDate = DateRange.before(this.date());
-            events.add(new Death(deathDate, "Inferred death of " + this.person(), Address.UNKNOWN));
-            this.occupation().ifPresent(occupation -> events.add(new Occupation(deathDate, occupation, Address.UNKNOWN)));
+            final DateRange beforeEvent = DateRange.before(this.date());
+            events.add(new Death(beforeEvent, "Inferred death of " + this.person(), Address.UNKNOWN));
+            this.occupation().ifPresent(occupation -> events.add(new Occupation(beforeEvent, occupation, Address.UNKNOWN)));
         } else {
             this.occupation().ifPresent(occupation -> events.add(new Occupation(this.date(), occupation, Address.UNKNOWN)));
         }

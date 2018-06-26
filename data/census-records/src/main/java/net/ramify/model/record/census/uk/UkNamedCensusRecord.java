@@ -43,7 +43,7 @@ public abstract class UkNamedCensusRecord<T extends PersonalDetails>
     public Map<Person, PersonalEvents> personalEvents() {
         final Residence residence = this.residence();
         final Map<Person, PersonalEvents> events = new HashMap<>();
-        events.put(head.person(), PersonalEvents.of(residence, head.inferredEventSet(this.date())));
+        events.put(head.person(), PersonalEvents.of(residence, head.inferredEventSet()));
         throw new UnsupportedOperationException(); //TODO
     }
 

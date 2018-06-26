@@ -53,7 +53,7 @@ public class ParentChildChurchBaptism implements ChurchBaptismRecord {
     }
 
     protected Baptism baptism() {
-        return new Baptism(date, "Baptism", address);
+        return new Baptism(date, address);
     }
 
     @Nonnull

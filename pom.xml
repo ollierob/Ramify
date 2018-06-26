@@ -13,6 +13,7 @@
     <modules>
         <module>data</module>
         <module>server</module>
+        <module>strategy</module>
     </modules>
 
     <build>

@@ -35,7 +35,7 @@ public class Uk1851CensusRecord extends UkNamedCensusRecord<Uk1851CensusRecord.U
                 final AgeRange age,
                 final String occupation,
                 final BiFunction<Person, Person, Relationship> relationshipToHead) {
-            super(person, age, occupation);
+            super(person, age, occupation, CENSUS_1851);
             this.relationshipToHead = relationshipToHead;
         }
 
