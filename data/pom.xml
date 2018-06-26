@@ -21,9 +21,8 @@
         <module>model</module>
         <module>kml</module>
         <module>provider</module>
-        <module>church-records</module>
-        <module>census-records</module>
         <module>generic-records</module>
+        <module>country-records</module>
     </modules>
 
     <dependencyManagement>
@@ -35,12 +34,5 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <dependencies>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>model</artifactId>
-        </dependency>
-    </dependencies>
 
 </project>

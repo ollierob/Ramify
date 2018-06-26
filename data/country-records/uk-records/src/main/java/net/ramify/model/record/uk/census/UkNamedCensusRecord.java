@@ -1,4 +1,4 @@
-package net.ramify.model.record.census.uk;
+package net.ramify.model.record.uk.census;
 
 import net.ramify.model.event.DateRange;
 import net.ramify.model.family.Family;
@@ -8,7 +8,7 @@ import net.ramify.model.person.PersonalDetails;
 import net.ramify.model.person.event.PersonalEvents;
 import net.ramify.model.person.event.Residence;
 import net.ramify.model.place.address.Address;
-import net.ramify.model.record.census.AbstractCensusRecord;
+import net.ramify.model.record.residence.AbstractCensusRecord;
 
 import javax.annotation.Nonnull;
 import java.util.Collection;

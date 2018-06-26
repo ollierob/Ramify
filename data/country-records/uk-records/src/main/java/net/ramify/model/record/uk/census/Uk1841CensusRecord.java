@@ -1,4 +1,4 @@
-package net.ramify.model.record.census.uk;
+package net.ramify.model.record.uk.census;
 
 import net.ramify.model.family.relationship.Relationship;
 import net.ramify.model.family.relationship.UnknownRelationship;

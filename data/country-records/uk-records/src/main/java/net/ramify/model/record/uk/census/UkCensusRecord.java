@@ -1,7 +1,7 @@
-package net.ramify.model.record.census.uk;
+package net.ramify.model.record.uk.census;
 
 import net.ramify.model.event.DateRange;
-import net.ramify.model.record.census.CensusRecord;
+import net.ramify.model.record.residence.CensusRecord;
 
 import java.time.LocalDate;
 import java.time.Month;

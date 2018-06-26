@@ -1,4 +1,4 @@
-package net.ramify.model.record.census;
+package net.ramify.model.record.residence;
 
 import net.ramify.model.event.DateRange;
 import net.ramify.model.place.address.Address;

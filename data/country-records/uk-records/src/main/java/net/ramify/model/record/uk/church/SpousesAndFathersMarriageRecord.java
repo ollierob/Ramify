@@ -1,4 +1,4 @@
-package net.ramify.model.record.marriage;
+package net.ramify.model.record.uk.church;
 
 import net.ramify.model.event.DateRange;
 import net.ramify.model.event.Event;
@@ -12,6 +12,7 @@ import net.ramify.model.person.event.Marriage;
 import net.ramify.model.person.event.PersonalEvents;
 import net.ramify.model.place.address.Address;
 import net.ramify.model.place.address.HasAddress;
+import net.ramify.model.record.marriage.MarriageRecord;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -20,6 +21,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Standard UK marriage record since 1830s.
+ */
 public class SpousesAndFathersMarriageRecord implements MarriageRecord, HasAddress {
 
     private final DateRange date;
@@ -28,6 +32,7 @@ public class SpousesAndFathersMarriageRecord implements MarriageRecord, HasAddre
     private final PersonalDetails bride;
     private final PersonalDetails brideFather;
     private final Address address;
+    private final Set<Person> witnesses;
 
     public SpousesAndFathersMarriageRecord(
             final DateRange date,
@@ -35,13 +40,15 @@ public class SpousesAndFathersMarriageRecord implements MarriageRecord, HasAddre
             @CheckForNull final PersonalDetails groomFather,
             @Nonnull final PersonalDetails bride,
             @CheckForNull final PersonalDetails brideFather,
-            final Address address) {
+            final Address address,
+            final Set<Person> witnesses) {
         this.date = date;
         this.groom = groom;
         this.groomFather = groomFather;
         this.bride = bride;
         this.brideFather = brideFather;
         this.address = address;
+        this.witnesses = witnesses;
     }
 
     @Nonnull
