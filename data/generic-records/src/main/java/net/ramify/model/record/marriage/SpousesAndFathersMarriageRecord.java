@@ -72,15 +72,16 @@ public class SpousesAndFathersMarriageRecord implements MarriageRecord, HasAddre
         return events;
     }
 
-    Marriage marriage() {
+    @Override
+    public Marriage marriage() {
         return new Marriage(date, "Marriage", address);
     }
 
-    PersonalEvents lifeEvents(final PersonalDetails details) {
+    private PersonalEvents lifeEvents(final PersonalDetails details) {
         return this.lifeEvents(details, null);
     }
 
-    PersonalEvents lifeEvents(final PersonalDetails details, final Marriage marriage) {
+    private PersonalEvents lifeEvents(final PersonalDetails details, final Marriage marriage) {
         final Set<Event> events = new HashSet<>(details.inferredEventSet());
         if (marriage != null) {
             events.add(marriage);

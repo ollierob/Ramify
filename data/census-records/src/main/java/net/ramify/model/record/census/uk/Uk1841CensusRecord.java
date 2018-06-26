@@ -31,7 +31,7 @@ public class Uk1841CensusRecord extends UkNamedCensusRecord<Uk1841CensusRecord.U
                 final Person person,
                 final int age,
                 final String occupation) {
-            super(person, new Uk1841CensusRecordAgeRange(age), occupation);
+            super(person, new Uk1841CensusRecordAgeRange(age), occupation, CENSUS_1841);
         }
 
     }

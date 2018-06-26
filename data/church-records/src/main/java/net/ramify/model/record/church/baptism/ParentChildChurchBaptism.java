@@ -39,7 +39,7 @@ public class ParentChildChurchBaptism implements ChurchBaptismRecord {
 
     @Nonnull
     @Override
-    public Address churchAddress() {
+    public Address address() {
         return address;
     }
 
