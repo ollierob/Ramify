@@ -12,6 +12,10 @@ public interface Name {
 
     };
 
+    default boolean isUnknown() {
+        return this == UNKNOWN;
+    }
+
     @Override
     String toString();
 

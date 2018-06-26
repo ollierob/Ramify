@@ -8,4 +8,9 @@ public class Will extends AbstractLogicalEvent {
         super(date, "Will");
     }
 
+    @Override
+    public boolean unique() {
+        return true;
+    }
+
 }

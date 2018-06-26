@@ -4,7 +4,7 @@ import net.ramify.model.date.DateRange;
 
 import javax.annotation.Nonnull;
 
-public class AbstractLogicalEvent implements Event {
+public abstract class AbstractLogicalEvent implements Event {
 
     private final DateRange date;
     private final String description;

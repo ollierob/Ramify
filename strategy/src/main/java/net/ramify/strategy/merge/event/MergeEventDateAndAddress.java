@@ -9,12 +9,12 @@ import net.ramify.strategy.merge.date.DateMerge;
 
 import java.util.Optional;
 
-public abstract class MergeEventDateAndAddress<E extends Event & HasAddress> implements EventMerge<E> {
+abstract class MergeEventDateAndAddress<E extends Event & HasAddress> implements EventMerge<E> {
 
     private final DateMerge dateMerge;
     private final AddressMerge addressMerge;
 
-    protected MergeEventDateAndAddress(final DateMerge dateMerge, final AddressMerge addressMerge) {
+    MergeEventDateAndAddress(final DateMerge dateMerge, final AddressMerge addressMerge) {
         this.dateMerge = dateMerge;
         this.addressMerge = addressMerge;
     }

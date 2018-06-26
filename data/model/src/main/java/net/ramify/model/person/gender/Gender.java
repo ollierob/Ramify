@@ -8,4 +8,8 @@ public interface Gender {
 
     boolean is(Gender that);
 
+    default boolean isUnknown() {
+        return this == UNKNOWN;
+    }
+
 }

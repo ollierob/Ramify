@@ -13,4 +13,9 @@ public class Birth extends AbstractPhysicalEvent {
         super(date, description, address);
     }
 
+    @Override
+    public boolean unique() {
+        return true;
+    }
+
 }

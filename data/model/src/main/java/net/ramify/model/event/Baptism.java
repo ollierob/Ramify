@@ -9,4 +9,9 @@ public class Baptism extends AbstractPhysicalEvent {
         super(date, "Baptism", address);
     }
 
+    @Override
+    public boolean unique() {
+        return true;
+    }
+
 }

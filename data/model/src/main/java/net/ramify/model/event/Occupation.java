@@ -10,4 +10,9 @@ public class Occupation extends AbstractLogicalEvent {
         super(date, description);
     }
 
+    @Override
+    public boolean unique() {
+        return false;
+    }
+
 }

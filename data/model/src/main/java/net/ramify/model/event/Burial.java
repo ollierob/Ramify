@@ -9,4 +9,8 @@ public class Burial extends AbstractPhysicalEvent {
         super(date, "Burial", address);
     }
 
+    @Override
+    public boolean unique() {
+        return true;
+    }
 }

@@ -17,4 +17,6 @@ public interface Event extends Castable<Event> {
     @Nonnull
     String description();
 
+    boolean unique();
+
 }

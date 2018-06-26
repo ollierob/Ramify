@@ -9,4 +9,9 @@ public class Divorce extends AbstractPhysicalEvent {
         super(date, description, address);
     }
 
+    @Override
+    public boolean unique() {
+        return false;
+    }
+
 }

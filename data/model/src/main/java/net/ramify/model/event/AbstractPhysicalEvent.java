@@ -6,7 +6,7 @@ import net.ramify.model.place.address.HasAddress;
 
 import javax.annotation.Nonnull;
 
-public class AbstractPhysicalEvent extends AbstractLogicalEvent implements HasAddress {
+public abstract class AbstractPhysicalEvent extends AbstractLogicalEvent implements HasAddress {
 
     private final Address address;
 
