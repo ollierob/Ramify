@@ -72,11 +72,6 @@ public class SpousesAndFathersMarriageRecord implements MarriageRecord, HasAddre
         return events;
     }
 
-    @Override
-    public Marriage marriage() {
-        return new Marriage(date, "Marriage", address);
-    }
-
     private PersonalEvents lifeEvents(final PersonalDetails details) {
         return this.lifeEvents(details, null);
     }
