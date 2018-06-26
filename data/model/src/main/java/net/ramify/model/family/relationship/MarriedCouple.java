@@ -20,4 +20,5 @@ public class MarriedCouple extends AbstractRelationship {
     public MarriedCouple replace(final Person from, final Person to) {
         return new MarriedCouple(from, to);
     }
+
 }

@@ -1,14 +1,20 @@
 package net.ramify.model.family.relationship;
 
+import net.ramify.model.Castable;
 import net.ramify.model.person.Person;
 
+import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
 /**
  * Relationship between exactly two people.
+ *
+ * @see Relationships
+ * @see PersonalRelationships
  */
 public interface Relationship {
 
@@ -35,6 +41,12 @@ public interface Relationship {
     @Nonnull
     Relationship inverse();
 
+    @Nonnull
+    @CheckReturnValue
     Relationship replace(Person from, Person to);
+
+    default <R extends Relationship> Optional<R> as(final Class<R> clazz) {
+        return Castable.cast(this, clazz);
+    }
 
 }

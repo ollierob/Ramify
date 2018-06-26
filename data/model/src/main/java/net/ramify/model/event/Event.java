@@ -6,6 +6,10 @@ import net.ramify.model.date.DateRange;
 import javax.annotation.Nonnull;
 import java.util.Comparator;
 
+/**
+ * @see Events
+ * @see PersonalEvents
+ */
 public interface Event extends Castable<Event> {
 
     @Nonnull
