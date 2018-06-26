@@ -21,8 +21,7 @@
         <module>model</module>
         <module>kml</module>
         <module>provider</module>
-        <module>generic-records</module>
-        <module>country-records</module>
+        <module>records</module>
     </modules>
 
     <dependencyManagement>
