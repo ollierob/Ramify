@@ -14,7 +14,7 @@ interface MapContainerState {
     center: MapCoordinates;
 }
 
-export default class MapContainer extends React.Component<MapContainerProps, MapContainerState> {
+export default class MapContainer extends React.PureComponent<MapContainerProps, MapContainerState> {
 
     constructor(props: MapContainerProps) {
         super(props);
