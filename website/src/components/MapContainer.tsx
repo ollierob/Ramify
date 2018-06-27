@@ -1,6 +1,6 @@
 import * as React from "react";
 import {ErrorInfo, WheelEvent} from "react";
-import {MapCoordinates, Pin, ScreenCoordinates, SlippyMap} from "react-slippy-map";
+import {MapCoordinates, Pin, SlippyMap} from "react-slippy-map";
 import "./Markers.css"
 
 interface MapContainerProps {
@@ -27,12 +27,18 @@ export default class MapContainer extends React.PureComponent<MapContainerProps,
             onWheel={e => this.onZoom(e)}
             center={this.state.center}
             onCenterChange={center => this.setState({center: center})}>
-            {this.props.markers && this.props.markers.map(marker => <Pin className={"pin " + marker.type} zoom={this.state.zoom} coords={marker.coords} offset={marker.offset}>{marker.label}</Pin>)}
+            {this.props.markers && this.props.markers.map(marker => this.toPin(marker))}
         </SlippyMap>
     }
 
     componentDidCatch(error: Error, info: ErrorInfo) {
         console.error(error);
+    }
+
+    private toPin(marker: MapMarker) {
+        return <Pin key={marker.id} className={"pin " + marker.type} coords={marker.coords}>
+            <div className="label">{marker.label}</div>
+        </Pin>
     }
 
     private onZoom(e: WheelEvent<any>): void {
@@ -51,8 +57,8 @@ export default class MapContainer extends React.PureComponent<MapContainerProps,
 }
 
 export interface MapMarker {
+    id: string;
     label: string;
     type: "church" | "farm";
     coords: MapCoordinates;
-    offset: ScreenCoordinates;
 }

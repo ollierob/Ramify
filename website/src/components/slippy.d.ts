@@ -20,8 +20,6 @@ declare module "react-slippy-map" {
 
     interface PinProps {
         coords: MapCoordinates;
-        offset: ScreenCoordinates;
-        zoom: number;
         className?: string;
     }
 

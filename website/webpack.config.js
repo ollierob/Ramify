@@ -14,7 +14,7 @@ module.exports = {
         rules: [
             {test: /\.js$/, enforce: "pre", loader: "source-map-loader"},
             {test: /\.tsx?$/, loader: "awesome-typescript-loader"},
-            {test: /\.css$/, use: ['style-loader', 'css-loader']},
+            {test: /\.css$/, use: ["style-loader", "css-loader"]},
         ]
     },
     plugins: [

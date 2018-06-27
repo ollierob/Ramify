@@ -3,5 +3,17 @@
 }
 
 .pin.farm {
+    width: 18px;
+    height: 18px;
+    border: 1px solid green;
+    border-radius: 4px;
+    background-color: lightgreen;
+    background-position: 1px 1px;
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+}
 
+.pin .label {
+    position: absolute;
+    left: 20px;
 }
