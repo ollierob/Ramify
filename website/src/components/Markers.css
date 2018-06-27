@@ -1,5 +1,12 @@
 .pin.church {
-
+    width: 18px;
+    height: 18px;
+    border: 1px solid blue;
+    border-radius: 4px;
+    background-color: lightblue;
+    background-position: 1px 1px;
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
 }
 
 .pin.farm {
@@ -16,4 +23,5 @@
 .pin .label {
     position: absolute;
     left: 20px;
+    white-space: nowrap;
 }

@@ -7,6 +7,7 @@ interface MapContainerProps {
     zoom: number;
     center: MapCoordinates;
     markers?: MapMarker[];
+    show: MapMarkerType[];
 }
 
 interface MapContainerState {
@@ -22,12 +23,14 @@ export default class MapContainer extends React.PureComponent<MapContainerProps,
     }
 
     render() {
+        console.log("Zoom = " + this.state.zoom);
+        const types = new Set(this.props.show);
         return <SlippyMap
             zoom={this.state.zoom}
             onWheel={e => this.onZoom(e)}
             center={this.state.center}
             onCenterChange={center => this.setState({center: center})}>
-            {this.props.markers && this.props.markers.map(marker => this.toPin(marker))}
+            {this.props.markers && this.props.markers.filter(marker => types.has(marker.type)).map(marker => this.toPin(marker))}
         </SlippyMap>
     }
 
@@ -37,7 +40,7 @@ export default class MapContainer extends React.PureComponent<MapContainerProps,
 
     private toPin(marker: MapMarker) {
         return <Pin key={marker.id} className={"pin " + marker.type} coords={marker.coords}>
-            <div className="label">{marker.label}</div>
+            {this.state.zoom >= 15 && <div className="label">{marker.label}</div>}
         </Pin>
     }
 
@@ -56,9 +59,11 @@ export default class MapContainer extends React.PureComponent<MapContainerProps,
 
 }
 
+export type MapMarkerType = "church" | "farm";
+
 export interface MapMarker {
     id: string;
     label: string;
-    type: "church" | "farm";
+    type: MapMarkerType;
     coords: MapCoordinates;
 }
