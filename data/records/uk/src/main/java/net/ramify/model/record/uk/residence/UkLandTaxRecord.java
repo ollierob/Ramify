@@ -7,6 +7,7 @@ import net.ramify.model.event.Residence;
 import net.ramify.model.person.Person;
 import net.ramify.model.place.address.Address;
 import net.ramify.model.record.NonFamilyRecord;
+import net.ramify.model.record.uk.UkMoney;
 
 import javax.annotation.Nonnull;
 import java.util.Map;
@@ -17,16 +18,19 @@ public class UkLandTaxRecord implements NonFamilyRecord {
     private final Person owner;
     private final Person occupier;
     private final Address address;
+    private final UkMoney tax;
 
     public UkLandTaxRecord(
             final DateRange date,
             final Person owner,
             final Person occupier,
-            final Address address) {
+            final Address address,
+            final UkMoney tax) {
         this.date = date;
         this.owner = owner;
         this.occupier = occupier;
         this.address = address;
+        this.tax = tax;
     }
 
     @Nonnull
