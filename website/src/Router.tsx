@@ -1,11 +1,11 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import {SlippyMap} from "react-slippy-map";
+import MapContainer from "./components/MapContainer";
 
 export default class Router extends React.Component {
 
     render() {
-        return <SlippyMap zoom={12}/>
+        return <MapContainer zoom={13.5} center={{latitude: 53.74, longitude: -2.045}}/>
     }
 
 }

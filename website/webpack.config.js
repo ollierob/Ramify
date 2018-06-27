@@ -20,8 +20,8 @@ module.exports = {
     plugins: [
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     ],
-    externals: {
-        "react": "React",
-        "react-dom": "ReactDOM"
-    }
+    // externals: {
+    //     "react": "React",
+    //     "react-dom": "ReactDOM"
+    // }
 };
