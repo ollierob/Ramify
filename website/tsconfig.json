@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "outDir": "target/classes/webroot",
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "target": "es5",
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "./src/**/*.test.ts"
+  ]
+}

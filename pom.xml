@@ -14,6 +14,7 @@
         <module>data</module>
         <module>server</module>
         <module>strategy</module>
+        <module>website</module>
     </modules>
 
     <build>

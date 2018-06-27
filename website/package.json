@@ -1,0 +1,23 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "private": true,
+  "main": "webpack.config.js",
+  "dependencies": {
+    "react-slippy-map": "^0.12.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.4.2",
+    "@types/react-dom": "^16.0.6",
+    "awesome-typescript-loader": "^5.2.0",
+    "css-loader": "^0.28.11",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "typescript": "^2.9.2",
+    "webpack": "^4.12.2",
+    "webpack-cli": "^3.0.8"
+  },
+  "scripts": {
+    "build": "webpack -d"
+  }
+}
