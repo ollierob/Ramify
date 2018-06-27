@@ -15,10 +15,6 @@ import java.util.Set;
  */
 public interface PersonalEvents extends Events {
 
-    static PersonalEvents of(final Person person, final Event event) {
-        return of(person, Set.of(event));
-    }
-
     @Nonnull
     default Optional<Birth> birth() {
         return this.earliest(Birth.class);
@@ -27,6 +23,14 @@ public interface PersonalEvents extends Events {
     @Nonnull
     default Optional<Death> death() {
         return this.latest(Death.class);
+    }
+
+    static PersonalEvents of(final Person person) {
+        return of(person, Collections.emptySet());
+    }
+
+    static PersonalEvents of(final Person person, final Event event) {
+        return of(person, event == null ? Set.of() : Set.of(event));
     }
 
     static PersonalEvents of(final Person person, final Set<Event> events) {
