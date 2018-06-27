@@ -1,16 +1,17 @@
 import * as React from "react";
 import {ErrorInfo, WheelEvent} from "react";
-import {Coordinates, Pin, SlippyMap} from "react-slippy-map";
+import {MapCoordinates, Pin, ScreenCoordinates, SlippyMap} from "react-slippy-map";
+import "./Markers.css"
 
 interface MapContainerProps {
     zoom: number;
-    center: Coordinates;
+    center: MapCoordinates;
     markers?: MapMarker[];
 }
 
 interface MapContainerState {
     zoom: number;
-    center: Coordinates;
+    center: MapCoordinates;
 }
 
 export default class MapContainer extends React.Component<MapContainerProps, MapContainerState> {
@@ -26,7 +27,7 @@ export default class MapContainer extends React.Component<MapContainerProps, Map
             onWheel={e => this.onZoom(e)}
             center={this.state.center}
             onCenterChange={center => this.setState({center: center})}>
-            {this.props.markers && this.props.markers.map(marker => <Pin zoom={this.state.zoom} coords={marker.coords} offset={marker.offset}>{marker}</Pin>)}
+            {this.props.markers && this.props.markers.map(marker => <Pin className={"pin " + marker.type} zoom={this.state.zoom} coords={marker.coords} offset={marker.offset}>{marker.label}</Pin>)}
         </SlippyMap>
     }
 
@@ -50,6 +51,8 @@ export default class MapContainer extends React.Component<MapContainerProps, Map
 }
 
 export interface MapMarker {
-    coords: Coordinates;
-    offset?: number;
+    label: string;
+    type: "church" | "farm";
+    coords: MapCoordinates;
+    offset: ScreenCoordinates;
 }

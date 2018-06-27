@@ -2,15 +2,16 @@ declare module "react-slippy-map" {
 
     import {WheelEventHandler} from "react";
 
-    type Coordinates = { latitude: number, longitude: number };
+    type MapCoordinates = { latitude: number, longitude: number };
+    type ScreenCoordinates = { x: number, y: number };
 
     interface SlippyMapProps {
         zoom?: number;
-        center?: Coordinates;
+        center?: MapCoordinates;
         baseTilesUrl?: string;
         onClick?: (event: any) => void;
         onWheel?: WheelEventHandler<any>;
-        onCenterChange?: (center: Coordinates) => void;
+        onCenterChange?: (center: MapCoordinates) => void;
     }
 
     class SlippyMap extends React.Component<SlippyMapProps, any> {
@@ -18,9 +19,10 @@ declare module "react-slippy-map" {
     }
 
     interface PinProps {
-        coords: Coordinates;
-        offset: number;
+        coords: MapCoordinates;
+        offset: ScreenCoordinates;
         zoom: number;
+        className?: string;
     }
 
     class Pin extends React.Component<PinProps, any> {
