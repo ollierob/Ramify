@@ -57,6 +57,10 @@ export default class MapContainer extends React.PureComponent<MapContainerProps,
         });
     }
 
+    zoom(coords: MapCoordinates, zoom: number): void {
+        this.setState({zoom: zoom, center: coords})
+    }
+
 }
 
 export type MapMarkerType = "church" | "farm";
