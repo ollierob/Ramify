@@ -8,15 +8,12 @@ public interface Name {
         return new ForenameSurname(forename, List.of(), surname);
     }
 
-    Name UNKNOWN = new Name() {
-
-    };
+    Name UNKNOWN = () -> "?";
 
     default boolean isUnknown() {
         return this == UNKNOWN;
     }
 
-    @Override
-    String toString();
+    String value();
 
 }

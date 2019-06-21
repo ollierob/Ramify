@@ -3,7 +3,7 @@ package net.ramify.model.record.uk.census;
 import net.ramify.model.family.relationship.Relationship;
 import net.ramify.model.family.relationship.UnknownRelationship;
 import net.ramify.model.person.NameAgeGenderOccupation;
-import net.ramify.model.person.Person;
+import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.AgeRange;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.name.ForenameSurname;
@@ -25,7 +25,7 @@ public class Uk1841CensusRecord extends UkNamedCensusRecord<Uk1841CensusRecord.U
 
     @Override
     protected Relationship relationToHead(Uk1841CensusRecordPerson other) {
-        return new UnknownRelationship(this.head().person(), other.person());
+        return new UnknownRelationship(this.head().personId(), other.personId());
     }
 
     public static class Uk1841CensusRecordPerson extends NameAgeGenderOccupation {
@@ -33,7 +33,7 @@ public class Uk1841CensusRecord extends UkNamedCensusRecord<Uk1841CensusRecord.U
         private final CountyInCountry birthplace;
 
         public Uk1841CensusRecordPerson(
-                final Person person,
+                final PersonId person,
                 final ForenameSurname name,
                 final Gender gender,
                 final int age,

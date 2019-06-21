@@ -6,7 +6,7 @@ import net.ramify.model.event.PersonalEvents;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.relationship.UnknownRelationship;
 import net.ramify.model.person.NameAgeGender;
-import net.ramify.model.person.Person;
+import net.ramify.model.person.PersonId;
 import net.ramify.model.person.PersonalAttributes;
 import net.ramify.model.person.age.AgeRange;
 import net.ramify.model.person.gender.Gender;
@@ -53,7 +53,7 @@ public abstract class UkEnumeratedCensusRecord
     private static Set<PersonalAttributes> peopleIn(final AgeRange age, final int count, final Gender gender, final DateRange date) {
         final Set<PersonalAttributes> all = new HashSet<>(count);
         for (int i = 1; i <= count; i++) {
-            final Person person = new CensusPerson();
+            final PersonId person = new CensusPersonId();
             final PersonalAttributes details = new NameAgeGender(person, Name.UNKNOWN, gender, age, date);
             all.add(details);
         }
@@ -71,9 +71,9 @@ public abstract class UkEnumeratedCensusRecord
     @Nonnull
     @Override
     public Histories histories() {
-        final Map<Person, PersonalEvents> events = new HashMap<>();
-        events.put(head.person(), head.inferredEvents());
-        others.forEach(a -> events.put(a.person(), a.inferredEvents()));
+        final Map<PersonId, PersonalEvents> events = new HashMap<>();
+        events.put(head.personId(), head.inferredEvents());
+        others.forEach(a -> events.put(a.personId(), a.inferredEvents()));
         return Histories.of(events);
     }
 
@@ -81,12 +81,12 @@ public abstract class UkEnumeratedCensusRecord
     @Override
     public Family family() {
         if (others.isEmpty()) {
-            return Family.of(head.person());
+            return Family.of(head.personId());
         }
-        return Family.of(UnknownRelationship.between(head.person(), others));
+        return Family.of(UnknownRelationship.between(head.personId(), others));
     }
 
-    private static class CensusPerson implements Person {
+    private static class CensusPersonId implements PersonId {
 
     }
 

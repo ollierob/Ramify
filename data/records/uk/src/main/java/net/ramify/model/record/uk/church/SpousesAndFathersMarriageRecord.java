@@ -9,7 +9,7 @@ import net.ramify.model.family.Family;
 import net.ramify.model.family.relationship.MarriedCouple;
 import net.ramify.model.family.relationship.ParentChild;
 import net.ramify.model.family.relationship.Relationship;
-import net.ramify.model.person.Person;
+import net.ramify.model.person.PersonId;
 import net.ramify.model.person.PersonalAttributes;
 import net.ramify.model.place.address.Address;
 import net.ramify.model.place.address.HasAddress;
@@ -33,7 +33,7 @@ public class SpousesAndFathersMarriageRecord implements MarriageRecord, HasAddre
     private final PersonalAttributes bride;
     private final PersonalAttributes brideFather;
     private final Address address;
-    private final Set<Person> witnesses;
+    private final Set<PersonId> witnesses;
 
     public SpousesAndFathersMarriageRecord(
             final DateRange date,
@@ -42,7 +42,7 @@ public class SpousesAndFathersMarriageRecord implements MarriageRecord, HasAddre
             @Nonnull final PersonalAttributes bride,
             @CheckForNull final PersonalAttributes brideFather,
             final Address address,
-            final Set<Person> witnesses) {
+            final Set<PersonId> witnesses) {
         this.date = date;
         this.groom = groom;
         this.groomFather = groomFather;
@@ -68,14 +68,14 @@ public class SpousesAndFathersMarriageRecord implements MarriageRecord, HasAddre
     @Override
     public Histories histories() {
         final Marriage marriage = this.marriage();
-        final Map<Person, PersonalEvents> events = new HashMap<>();
-        events.put(groom.person(), this.lifeEvents(groom, marriage));
-        events.put(bride.person(), this.lifeEvents(bride, marriage));
+        final Map<PersonId, PersonalEvents> events = new HashMap<>();
+        events.put(groom.personId(), this.lifeEvents(groom, marriage));
+        events.put(bride.personId(), this.lifeEvents(bride, marriage));
         if (groomFather != null) {
-            events.put(groomFather.person(), this.lifeEvents(groomFather));
+            events.put(groomFather.personId(), this.lifeEvents(groomFather));
         }
         if (brideFather != null) {
-            events.put(brideFather.person(), this.lifeEvents(brideFather));
+            events.put(brideFather.personId(), this.lifeEvents(brideFather));
         }
         return Histories.of(events);
     }
@@ -90,19 +90,19 @@ public class SpousesAndFathersMarriageRecord implements MarriageRecord, HasAddre
         }
         final Set<Event> events = new HashSet<>(attributes.inferredEvents().events());
         events.add(marriage);
-        return PersonalEvents.of(attributes.person(), events);
+        return PersonalEvents.of(attributes.personId(), events);
     }
 
     @Nonnull
     @Override
     public Family family() {
         final Set<Relationship> relationships = new HashSet<>();
-        relationships.add(new MarriedCouple(groom.person(), bride.person()));
+        relationships.add(new MarriedCouple(groom.personId(), bride.personId()));
         if (groomFather != null) {
-            relationships.add(new ParentChild(groomFather.person(), groom.person()));
+            relationships.add(new ParentChild(groomFather.personId(), groom.personId()));
         }
         if (brideFather != null) {
-            relationships.add(new ParentChild(brideFather.person(), bride.person()));
+            relationships.add(new ParentChild(brideFather.personId(), bride.personId()));
         }
         return Family.of(relationships);
     }

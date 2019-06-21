@@ -1,7 +1,7 @@
 package net.ramify.model.family.relationship;
 
 import net.ramify.model.Castable;
-import net.ramify.model.person.Person;
+import net.ramify.model.person.PersonId;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
@@ -19,22 +19,22 @@ import java.util.stream.Stream;
 public interface Relationship {
 
     @Nonnull
-    Person from();
+    PersonId from();
 
     @Nonnull
-    Person to();
+    PersonId to();
 
     @Nonnull
-    default Stream<Person> peopleStream() {
+    default Stream<PersonId> peopleStream() {
         return Stream.of(this.from(), this.to());
     }
 
     @Nonnull
-    default Set<Person> people() {
+    default Set<PersonId> people() {
         return Set.of(this.from(), this.to());
     }
 
-    default boolean hasExact(final Person person) {
+    default boolean hasExact(final PersonId person) {
         return Objects.equals(this.from(), person) || Objects.equals(this.to(), person);
     }
 
@@ -43,7 +43,7 @@ public interface Relationship {
 
     @Nonnull
     @CheckReturnValue
-    Relationship replace(Person from, Person to);
+    Relationship replace(PersonId from, PersonId to);
 
     default <R extends Relationship> Optional<R> as(final Class<R> clazz) {
         return Castable.cast(this, clazz);

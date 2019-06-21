@@ -4,7 +4,7 @@ import net.ramify.model.family.relationship.MarriedCouple;
 import net.ramify.model.family.relationship.ParentChild;
 import net.ramify.model.family.relationship.Relationship;
 import net.ramify.model.family.relationship.UnknownRelationship;
-import net.ramify.model.person.Person;
+import net.ramify.model.person.PersonId;
 
 import javax.annotation.Nonnull;
 import java.util.HashSet;
@@ -19,28 +19,24 @@ public interface Family {
     @Nonnull
     Set<Relationship> relationships();
 
+    static Family of(final PersonId person) {
+        return new SinglePersonFamily(person);
+    }
+
+    static Builder startingWith(final PersonId person) {
+        return new Builder(person);
+    }
+
     @Nonnull
-    default Stream<Person> peopleStream() {
+    default Stream<PersonId> peopleStream() {
         return this.relationships()
                 .stream()
                 .flatMap(Relationship::peopleStream);
     }
 
     @Nonnull
-    default Set<Person> people() {
+    default Set<PersonId> people() {
         return this.peopleStream().collect(Collectors.toSet());
-    }
-
-    @Nonnull
-    default Set<Relationship> involving(final Person person) {
-        return this.relationships()
-                .stream()
-                .filter(relationship -> relationship.hasExact(person))
-                .collect(Collectors.toSet());
-    }
-
-    static Family of(final Person person) {
-        return new SinglePersonFamily(person);
     }
 
     static Family of(final Relationship relationship) {
@@ -55,15 +51,19 @@ public interface Family {
         return () -> relationships;
     }
 
-    static Builder startingWith(final Person person) {
-        return new Builder(person);
+    @Nonnull
+    default Set<Relationship> involving(final PersonId person) {
+        return this.relationships()
+                .stream()
+                .filter(relationship -> relationship.hasExact(person))
+                .collect(Collectors.toSet());
     }
 
     class Builder {
 
-        private final Person person;
+        private final PersonId person;
 
-        private Builder(final Person person) {
+        private Builder(final PersonId person) {
             this.person = person;
         }
 
@@ -71,11 +71,11 @@ public interface Family {
             return of(person);
         }
 
-        public Family withParent(final Person parent) {
+        public Family withParent(final PersonId parent) {
             return Family.of(new ParentChild(parent, person));
         }
 
-        public Family withParents(final Person firstParent, final Person secondParent, final boolean spouses) {
+        public Family withParents(final PersonId firstParent, final PersonId secondParent, final boolean spouses) {
             final Set<Relationship> relationships = new HashSet<>();
             relationships.add(new ParentChild(firstParent, person));
             relationships.add(new ParentChild(secondParent, person));
@@ -83,8 +83,8 @@ public interface Family {
             return Family.of(relationships);
         }
 
-        public Family withGrandparent(final Person grandparent) {
-            final Person unknownParent = new Person() {
+        public Family withGrandparent(final PersonId grandparent) {
+            final PersonId unknownParent = new PersonId() {
 
             }; //FIXME
             return Family.of(new ParentChild(grandparent, unknownParent), new ParentChild(unknownParent, person));

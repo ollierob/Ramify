@@ -5,7 +5,7 @@ import net.ramify.model.event.Event;
 import net.ramify.model.event.Histories;
 import net.ramify.model.event.PersonalEvents;
 import net.ramify.model.family.Family;
-import net.ramify.model.person.Person;
+import net.ramify.model.person.PersonId;
 
 import javax.annotation.Nonnull;
 import java.util.Map;
@@ -17,10 +17,10 @@ import java.util.Map;
  */
 public abstract class EventRecord<E extends Event> implements SingleFamilyRecord {
 
-    private final Person person;
+    private final PersonId person;
     private final E event;
 
-    protected EventRecord(final Person person, final E event) {
+    protected EventRecord(final PersonId person, final E event) {
         this.person = person;
         this.event = event;
     }

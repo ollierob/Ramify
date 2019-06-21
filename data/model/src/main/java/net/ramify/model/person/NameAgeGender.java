@@ -12,19 +12,19 @@ import javax.annotation.Nonnull;
 
 public class NameAgeGender implements PersonalAttributes {
 
-    private final Person person;
+    private final PersonId id;
     private final AgeRange age;
     private final Name name;
     private final Gender gender;
     private final DateRange date;
 
     public NameAgeGender(
-            final Person person,
+            final PersonId id,
             final Name name,
             final Gender gender,
             final AgeRange age,
             final DateRange date) {
-        this.person = person;
+        this.id = id;
         this.age = age;
         this.name = name;
         this.gender = gender;
@@ -33,8 +33,8 @@ public class NameAgeGender implements PersonalAttributes {
 
     @Nonnull
     @Override
-    public Person person() {
-        return person;
+    public PersonId personId() {
+        return id;
     }
 
     @Nonnull
@@ -63,7 +63,7 @@ public class NameAgeGender implements PersonalAttributes {
     protected Birth birth(final DateRange date) {
         return age == null
                 ? null
-                : new Birth(date.minus(age.max(), age.min()), "Inferred birth of " + person, this.birthplace());
+                : new Birth(date.minus(age.max(), age.min()), "Inferred birth of " + id, this.birthplace());
     }
 
     protected Address birthplace() {

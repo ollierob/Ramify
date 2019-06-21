@@ -15,7 +15,7 @@ public class NameAgeGenderOccupation extends NameAgeGender {
     private final String occupation;
 
     public NameAgeGenderOccupation(
-            final Person person,
+            final PersonId person,
             final Name name,
             final Gender gender,
             final AgeRange age,

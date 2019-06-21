@@ -4,7 +4,7 @@ import net.ramify.model.date.DateRange;
 import net.ramify.model.event.Histories;
 import net.ramify.model.event.PersonalEvents;
 import net.ramify.model.event.Residence;
-import net.ramify.model.person.Person;
+import net.ramify.model.person.PersonId;
 import net.ramify.model.place.address.Address;
 import net.ramify.model.record.NonFamilyRecord;
 import net.ramify.model.record.uk.UkMoney;
@@ -15,15 +15,15 @@ import java.util.Map;
 public class UkLandTaxRecord implements NonFamilyRecord {
 
     private final DateRange date;
-    private final Person owner;
-    private final Person occupier;
+    private final PersonId owner;
+    private final PersonId occupier;
     private final Address address;
     private final UkMoney tax;
 
     public UkLandTaxRecord(
             final DateRange date,
-            final Person owner,
-            final Person occupier,
+            final PersonId owner,
+            final PersonId occupier,
             final Address address,
             final UkMoney tax) {
         this.date = date;

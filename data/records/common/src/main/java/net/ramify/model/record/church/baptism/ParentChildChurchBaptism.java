@@ -6,7 +6,7 @@ import net.ramify.model.event.Histories;
 import net.ramify.model.event.PersonalEvents;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.relationship.ParentChild;
-import net.ramify.model.person.Person;
+import net.ramify.model.person.PersonId;
 import net.ramify.model.person.PersonalAttributes;
 import net.ramify.model.place.address.Address;
 
@@ -47,9 +47,9 @@ public class ParentChildChurchBaptism implements ChurchBaptismRecord {
     @Nonnull
     @Override
     public Histories histories() {
-        final Map<Person, PersonalEvents> events = new HashMap<>();
-        events.put(parent.person(), parent.inferredEvents());
-        events.put(child.person(), child.inferredEvents().and(this.baptism()));
+        final Map<PersonId, PersonalEvents> events = new HashMap<>();
+        events.put(parent.personId(), parent.inferredEvents());
+        events.put(child.personId(), child.inferredEvents().and(this.baptism()));
         return Histories.of(events);
     }
 
@@ -65,7 +65,7 @@ public class ParentChildChurchBaptism implements ChurchBaptismRecord {
     }
 
     protected ParentChild relationship() {
-        return new ParentChild(parent.person(), child.person());
+        return new ParentChild(parent.personId(), child.personId());
     }
 
 }

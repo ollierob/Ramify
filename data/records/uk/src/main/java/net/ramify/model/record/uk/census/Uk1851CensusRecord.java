@@ -2,7 +2,7 @@ package net.ramify.model.record.uk.census;
 
 import net.ramify.model.family.relationship.Relationship;
 import net.ramify.model.person.NameAgeGenderOccupation;
-import net.ramify.model.person.Person;
+import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.AgeRange;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.name.Name;
@@ -30,16 +30,16 @@ public class Uk1851CensusRecord extends UkNamedCensusRecord<Uk1851CensusRecord.U
 
     public static abstract class Uk1851CensusPerson extends NameAgeGenderOccupation {
 
-        private final BiFunction<Person, Person, Relationship> relationshipToHead;
+        private final BiFunction<PersonId, PersonId, Relationship> relationshipToHead;
         private final Address birthplace;
 
         public Uk1851CensusPerson(
-                final Person person,
+                final PersonId person,
                 final Name name,
                 final Gender gender,
                 final AgeRange age,
                 final String occupation,
-                final BiFunction<Person, Person, Relationship> relationshipToHead,
+                final BiFunction<PersonId, PersonId, Relationship> relationshipToHead,
                 final Address birthplace) {
             super(person, name, gender, age, CENSUS_1851, occupation);
             this.relationshipToHead = relationshipToHead;
@@ -47,7 +47,7 @@ public class Uk1851CensusRecord extends UkNamedCensusRecord<Uk1851CensusRecord.U
         }
 
         Relationship relationshipTo(final Uk1851CensusHead head) {
-            return relationshipToHead.apply(this.person(), head.person());
+            return relationshipToHead.apply(this.personId(), head.personId());
         }
 
         @Override
@@ -60,7 +60,7 @@ public class Uk1851CensusRecord extends UkNamedCensusRecord<Uk1851CensusRecord.U
     public static class Uk1851CensusHead extends Uk1851CensusPerson {
 
         public Uk1851CensusHead(
-                final Person person,
+                final PersonId person,
                 final Name name,
                 final Gender gender,
                 final AgeRange age,

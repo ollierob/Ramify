@@ -1,12 +1,12 @@
 package net.ramify.model.family.relationship;
 
-import net.ramify.model.person.Person;
+import net.ramify.model.person.PersonId;
 
 import javax.annotation.Nonnull;
 
 public class MarriedCouple extends AbstractRelationship {
 
-    public MarriedCouple(final Person from, final Person to) {
+    public MarriedCouple(final PersonId from, final PersonId to) {
         super(from, to);
     }
 
@@ -17,7 +17,7 @@ public class MarriedCouple extends AbstractRelationship {
     }
 
     @Override
-    public MarriedCouple replace(final Person from, final Person to) {
+    public MarriedCouple replace(final PersonId from, final PersonId to) {
         return new MarriedCouple(from, to);
     }
 

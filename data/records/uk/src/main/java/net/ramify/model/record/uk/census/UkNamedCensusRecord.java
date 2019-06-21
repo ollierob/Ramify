@@ -6,7 +6,7 @@ import net.ramify.model.event.PersonalEvents;
 import net.ramify.model.event.Residence;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.relationship.Relationship;
-import net.ramify.model.person.Person;
+import net.ramify.model.person.PersonId;
 import net.ramify.model.person.PersonalAttributes;
 import net.ramify.model.place.address.Address;
 import net.ramify.model.record.residence.AbstractCensusRecord;
@@ -43,8 +43,8 @@ public abstract class UkNamedCensusRecord<T extends PersonalAttributes>
     @Override
     public Histories histories() {
         final Residence residence = this.residence();
-        final Map<Person, PersonalEvents> events = new HashMap<>();
-        events.put(head.person(), head.inferredEvents().and(residence));
+        final Map<PersonId, PersonalEvents> events = new HashMap<>();
+        events.put(head.personId(), head.inferredEvents().and(residence));
         throw new UnsupportedOperationException(); //TODO
     }
 
@@ -52,7 +52,7 @@ public abstract class UkNamedCensusRecord<T extends PersonalAttributes>
     @Override
     public Family family() {
         if (others.isEmpty()) {
-            return Family.of(head.person());
+            return Family.of(head.personId());
         }
         final Set<Relationship> relationships = new HashSet<>(others.size());
         others.forEach(person -> relationships.add(this.relationToHead(person)));

@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>parent</artifactId>
+        <artifactId>data</artifactId>
         <groupId>net.ramify</groupId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
@@ -18,11 +18,12 @@
     <artifactId>parent</artifactId>
 
     <modules>
-        <module>model</module>
         <module>kml</module>
         <module>provider</module>
-        <module>records</module>
         <module>protobuf</module>
+        <module>model</module>
+        <module>records</module>
+        <module>places</module>
     </modules>
 
     <dependencyManagement>
@@ -30,6 +31,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>places</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

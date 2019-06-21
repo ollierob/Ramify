@@ -5,6 +5,6 @@ import javax.annotation.Nonnull;
 public interface HasPerson {
 
     @Nonnull
-    Person person();
+    PersonId personId();
 
 }

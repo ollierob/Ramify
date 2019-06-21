@@ -18,8 +18,8 @@ public abstract class DelegatedPersonalAttributes implements PersonalAttributes 
 
     @Override
     @Nonnull
-    public Person person() {
-        return delegate.person();
+    public PersonId personId() {
+        return delegate.personId();
     }
 
     @Override

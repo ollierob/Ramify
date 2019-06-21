@@ -1,6 +1,6 @@
 package net.ramify.model.family;
 
-import net.ramify.model.person.Person;
+import net.ramify.model.person.PersonId;
 
 import javax.annotation.Nonnull;
 import java.util.Set;
@@ -11,7 +11,7 @@ public interface Families {
     @Nonnull
     Set<Family> families();
 
-    default Stream<Person> people() {
+    default Stream<PersonId> people() {
         return this.families().stream().flatMap(Family::peopleStream);
     }
 

@@ -1,6 +1,6 @@
 package net.ramify.model.family.relationship;
 
-import net.ramify.model.person.Person;
+import net.ramify.model.person.PersonId;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -10,17 +10,17 @@ import java.util.stream.Stream;
 
 public class ParentChild extends AbstractRelationship {
 
-    public ParentChild(final Person parent, final Person child) {
+    public ParentChild(final PersonId parent, final PersonId child) {
         super(parent, child);
     }
 
     @Nonnull
-    public Person parent() {
+    public PersonId parent() {
         return this.from();
     }
 
     @Nonnull
-    public Person child() {
+    public PersonId child() {
         return this.to();
     }
 
@@ -31,12 +31,12 @@ public class ParentChild extends AbstractRelationship {
     }
 
     @Override
-    public ParentChild replace(final Person from, final Person to) {
+    public ParentChild replace(final PersonId from, final PersonId to) {
         return new ParentChild(from, to);
     }
 
     @CheckForNull
-    public Person parentOf(final Person child) {
+    public PersonId parentOf(final PersonId child) {
         if (Objects.equals(this.child(), child)) {
             return this.parent();
         }
@@ -44,7 +44,7 @@ public class ParentChild extends AbstractRelationship {
     }
 
     @CheckForNull
-    public Person childOf(final Person parent) {
+    public PersonId childOf(final PersonId parent) {
         if (Objects.equals(this.parent(), parent)) {
             return this.child();
         }
@@ -69,29 +69,29 @@ public class ParentChild extends AbstractRelationship {
 
         @Nonnull
         @Override
-        public Person from() {
+        public PersonId from() {
             return this.child();
         }
 
         @Nonnull
-        public Person child() {
+        public PersonId child() {
             return ParentChild.this.child();
         }
 
         @Nonnull
         @Override
-        public Person to() {
+        public PersonId to() {
             return this.parent();
         }
 
         @Nonnull
-        public Person parent() {
+        public PersonId parent() {
             return ParentChild.this.parent();
         }
 
         @Nonnull
         @Override
-        public Stream<Person> peopleStream() {
+        public Stream<PersonId> peopleStream() {
             return ParentChild.this.peopleStream();
         }
 
@@ -102,7 +102,7 @@ public class ParentChild extends AbstractRelationship {
         }
 
         @Override
-        public ChildParent replace(final Person from, final Person to) {
+        public ChildParent replace(final PersonId from, final PersonId to) {
             return new ParentChild(to, from).inverse();
         }
 

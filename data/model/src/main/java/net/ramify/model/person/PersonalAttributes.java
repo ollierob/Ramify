@@ -10,12 +10,12 @@ import net.ramify.model.person.name.Name;
 import javax.annotation.Nonnull;
 
 /**
- * Attributes of a {@link Person person} on a {@link DateRange date}.
+ * Attributes of a {@link PersonId person} on a {@link DateRange date}.
  */
 public interface PersonalAttributes extends HasPerson {
 
     @Nonnull
-    Person person();
+    PersonId personId();
 
     @Nonnull
     DateRange date();
@@ -31,7 +31,7 @@ public interface PersonalAttributes extends HasPerson {
 
     @Nonnull
     default PersonalEvents inferredEvents() {
-        return PersonalEvents.of(this.person(), Birth.from(this.age(), this.date()));
+        return PersonalEvents.of(this.personId(), Birth.from(this.age(), this.date()));
     }
 
 }

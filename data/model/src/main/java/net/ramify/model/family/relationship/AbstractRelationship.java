@@ -1,25 +1,25 @@
 package net.ramify.model.family.relationship;
 
-import net.ramify.model.person.Person;
+import net.ramify.model.person.PersonId;
 
 import javax.annotation.Nonnull;
 
 public abstract class AbstractRelationship implements Relationship {
 
-    private final Person from, to;
+    private final PersonId from, to;
 
-    protected AbstractRelationship(final Person from, final Person to) {
+    protected AbstractRelationship(final PersonId from, final PersonId to) {
         this.from = from;
         this.to = to;
     }
 
     @Nonnull
-    public Person from() {
+    public PersonId from() {
         return from;
     }
 
     @Nonnull
-    public Person to() {
+    public PersonId to() {
         return to;
     }
 

@@ -1,6 +1,6 @@
 package net.ramify.model.family.relationship;
 
-import net.ramify.model.person.Person;
+import net.ramify.model.person.PersonId;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
@@ -13,10 +13,10 @@ import java.util.stream.Collectors;
 public interface PersonalRelationships extends Relationships {
 
     @Nonnull
-    Person person();
+    PersonId person();
 
     @Nonnull
-    default Set<Person> parents() {
+    default Set<PersonId> parents() {
         return this.find(ParentChild.class)
                 .map(relationship -> relationship.parentOf(this.person()))
                 .filter(Objects::nonNull)
@@ -24,7 +24,7 @@ public interface PersonalRelationships extends Relationships {
     }
 
     @Nonnull
-    default Set<Person> children() {
+    default Set<PersonId> children() {
         return this.find(ParentChild.class)
                 .map(relationship -> relationship.childOf(this.person()))
                 .filter(Objects::nonNull)

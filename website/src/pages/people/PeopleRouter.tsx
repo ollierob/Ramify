@@ -1,12 +1,12 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import {BrowserRouter as Router, Switch} from "react-router-dom";
+import {HashRouter, Route, Switch} from "react-router-dom";
 
 const App = () =>
-    <Router>
+    <HashRouter>
         <Switch>
-
+            <Route exact path="" component={null}/>
         </Switch>
-    </Router>;
+    </HashRouter>;
 
 ReactDOM.render(<App/>, document.getElementById("main"));
