@@ -1,5 +1,7 @@
 package net.ramify.model.family;
 
-public class Family {
+import net.ramify.model.person.HasPeople;
+
+public interface Family extends HasPeople {
 
 }
