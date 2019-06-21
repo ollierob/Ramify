@@ -1,12 +1,13 @@
 package net.ramify.model.place.type;
 
-import javax.annotation.Nonnull;
-import java.util.Optional;
+import net.ramify.model.place.Place;
 
-public interface Region extends SettlementOrRegion {
+import javax.annotation.Nonnull;
+
+public interface Building extends Place {
 
     @Nonnull
-    Optional<Region> parent();
+    SettlementOrRegion parent();
 
     @Override
     default <R> R handleWith(final PlaceHandler<R> handler) {
