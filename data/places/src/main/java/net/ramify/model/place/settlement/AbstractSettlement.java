@@ -1,4 +1,4 @@
-package net.ramify.model.place.region;
+package net.ramify.model.place.settlement;
 
 import net.ramify.model.place.AbstractPlace;
 import net.ramify.model.place.PlaceId;
