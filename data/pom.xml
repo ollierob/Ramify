@@ -23,10 +23,10 @@
         <module>protobuf</module>
         <module>model</module>
         <module>records</module>
-        <module>places</module>
         <module>events</module>
-        <module>people</module>
         <module>date</module>
+        <module>people</module>
+        <module>places</module>
     </modules>
 
     <dependencyManagement>
