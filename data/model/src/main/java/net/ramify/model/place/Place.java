@@ -1,10 +1,16 @@
 package net.ramify.model.place;
 
+import net.ramify.model.place.type.HasCountry;
 import net.ramify.model.place.type.PlaceHandler;
 
-public interface Place extends HasPlaceId {
+import javax.annotation.Nonnull;
 
-    boolean contains(Place that);
+public interface Place extends HasPlaceId, HasCountry {
+
+    @Nonnull
+    String name();
+
+    boolean contains(@Nonnull Place that);
 
     <R> R handleWith(PlaceHandler<R> handler);
 
