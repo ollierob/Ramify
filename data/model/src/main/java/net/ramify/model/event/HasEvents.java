@@ -5,7 +5,7 @@ import net.ramify.utils.collections.Iterables;
 import javax.annotation.Nonnull;
 import java.util.Set;
 
-public interface Events {
+public interface HasEvents {
 
     @Nonnull
     Set<Event> events();
