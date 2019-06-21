@@ -24,6 +24,8 @@
         <module>model</module>
         <module>records</module>
         <module>places</module>
+        <module>events</module>
+        <module>people</module>
     </modules>
 
     <dependencyManagement>
@@ -36,6 +38,16 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>places</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>events</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>people</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
