@@ -1,8 +1,15 @@
 package net.ramify.model.person;
 
-public interface PersonId extends HasPerson {
+import net.ramify.model.Id;
 
-    default PersonId personId() {
+public class PersonId extends Id implements HasPersonId {
+
+    public PersonId(final String value) {
+        super(value);
+    }
+
+    @Override
+    public PersonId personId() {
         return this;
     }
 

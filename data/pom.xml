@@ -26,10 +26,16 @@
         <module>places</module>
         <module>events</module>
         <module>people</module>
+        <module>date</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>date</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>model</artifactId>

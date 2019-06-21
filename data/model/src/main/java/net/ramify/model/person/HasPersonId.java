@@ -2,7 +2,7 @@ package net.ramify.model.person;
 
 import javax.annotation.Nonnull;
 
-public interface HasPerson {
+public interface HasPersonId {
 
     @Nonnull
     PersonId personId();
