@@ -7,34 +7,32 @@
         <artifactId>parent</artifactId>
         <groupId>net.ramify</groupId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-
+    <packaging>pom</packaging>
     <name>server</name>
     <artifactId>server</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>net.ramify.data</groupId>
-            <artifactId>kml</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>net.ramify.data</groupId>
-            <artifactId>provider</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxrs</artifactId>
-            <version>3.1.4.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
-            <version>2.1</version>
-        </dependency>
-    </dependencies>
+    <modules>
+        <module>application</module>
+        <module>rest</module>
+    </modules>
+
+    <properties>
+        <guice.version>4.2.2</guice.version>
+        <resteasy.version>4.0.0.Final</resteasy.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-core</artifactId>
+                <version>${resteasy.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

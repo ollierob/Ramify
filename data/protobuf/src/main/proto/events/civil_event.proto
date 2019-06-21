@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option java_package = "net.ramify.data.proto";
+option java_outer_classname = "CivilEventProto";
+
+message Birth {
+
+}
+
+message Marriage {
+
+}
+
+message Death {
+
+}

@@ -1,2 +1,5 @@
 .idea/*
 **/*.pbf
+
+**/node_modules/*
+**/target/*

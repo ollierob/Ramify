@@ -22,6 +22,7 @@
         <module>kml</module>
         <module>provider</module>
         <module>records</module>
+        <module>protobuf</module>
     </modules>
 
     <dependencyManagement>
