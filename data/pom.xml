@@ -19,7 +19,6 @@
 
     <modules>
         <module>kml</module>
-        <module>provider</module>
         <module>protobuf</module>
         <module>model</module>
         <module>records</module>

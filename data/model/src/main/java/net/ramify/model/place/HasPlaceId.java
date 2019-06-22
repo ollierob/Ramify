@@ -1,15 +1,15 @@
 package net.ramify.model.place;
 
 import javax.annotation.Nonnull;
-import java.util.function.Function;
 
 public interface HasPlaceId {
 
     @Nonnull
     PlaceId placeId();
 
-    default Place place(final Function<? super PlaceId, ? extends Place> lookup) {
-        return lookup.apply(this.placeId());
+    @Nonnull
+    default <P extends Place> Place resolve(final PlaceProvider<P> lookup) {
+        return lookup.require(this.placeId());
     }
 
 }
