@@ -26,7 +26,6 @@ import java.time.Period;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
-import java.util.function.BiFunction;
 
 public class Census1851Record extends CensusRecord {
 
@@ -57,7 +56,7 @@ public class Census1851Record extends CensusRecord {
         private final PersonId id;
         private final Name name;
         private final Sex sex;
-        private final BiFunction<PersonId, PersonId, Relationship> relationshipToHead;
+        private final RelationshipToHead relationshipToHead;
         private final MarriageConditionEventInference condition;
         private final Period age;
         private final PlaceId birthPlace;
@@ -66,7 +65,7 @@ public class Census1851Record extends CensusRecord {
                 final PersonId id,
                 final Name name,
                 final Sex sex,
-                final BiFunction<PersonId, PersonId, Relationship> relationshipToHead,
+                final RelationshipToHead relationshipToHead,
                 final MarriageConditionEventInference condition,
                 final Period age,
                 final PlaceId birthPlace) {
@@ -89,7 +88,7 @@ public class Census1851Record extends CensusRecord {
                     name,
                     sex,
                     record.placeId(),
-                    relationshipToHead.apply(id, record.headId()),
+                    relationshipToHead.relationship(record.headId(), id),
                     Age.exactly(age).birthDate(CENSUS_DATE),
                     birthPlace,
                     condition.inferEvents(id, record));
@@ -117,7 +116,7 @@ public class Census1851Record extends CensusRecord {
                 final PersonId id,
                 final Name name,
                 final Sex sex,
-                final BiFunction<PersonId, PersonId, Relationship> relationshipToHead,
+                final RelationshipToHead relationshipToHead,
                 final MarriageConditionEventInference condition,
                 final Period age,
                 final PlaceId birthPlace) {
