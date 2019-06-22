@@ -4,7 +4,7 @@ import net.ramify.model.place.PlaceId;
 
 public class Wapentake extends Hundred {
 
-    public Wapentake(final PlaceId id, final String name, final County parent) {
+    public Wapentake(final PlaceId id, final String name, final CountryCounty parent) {
         super(id, name, parent);
     }
 

@@ -1,8 +1,6 @@
 package net.ramify.model.event.type;
 
-import net.ramify.model.event.Event;
-
-public interface Death extends Event {
+public interface Death extends UniqueEvent {
 
     @Override
     default <R> R handleWith(final EventHandler<R> handler) {

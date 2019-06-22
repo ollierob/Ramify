@@ -2,10 +2,11 @@ package net.ramify.utils.collections;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.RandomAccess;
 import java.util.function.Predicate;
 
-public class Iterables {
+public class IterableUtils {
 
     public static <T> boolean any(final Collection<T> collection, final Predicate<? super T> predicate) {
         if (collection.isEmpty()) return false;
@@ -31,6 +32,13 @@ public class Iterables {
             if (predicate.test(element)) return true;
         }
         return false;
+    }
+
+    public static <T> Optional<T> findFirst(final Iterable<? extends T> iterable, final Predicate<? super T> predicate) {
+        for (final var element : iterable) {
+            if (predicate.test(element)) return Optional.of(element);
+        }
+        return Optional.empty();
     }
 
 }

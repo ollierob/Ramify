@@ -1,5 +1,7 @@
 package net.ramify.model.record;
 
-public interface Record extends HasRecordId {
+import net.ramify.model.Castable;
+
+public interface Record extends HasRecordId, Castable<Record> {
 
 }

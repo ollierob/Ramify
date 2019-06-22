@@ -2,14 +2,9 @@ package net.ramify.model.place.type;
 
 import javax.annotation.Nonnull;
 
-public interface HasRegion extends HasCountry {
+public interface HasRegion {
 
     @Nonnull
     Region region();
-
-    @Override
-    default Country country() {
-        return this.region().country();
-    }
 
 }

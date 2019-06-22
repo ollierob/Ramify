@@ -10,8 +10,12 @@ public interface Castable<T> {
                 : Optional.empty();
     }
 
-    default <R extends T> Optional<R> cast(final Class<? extends R> clazz) {
+    default <R extends T> Optional<R> as(final Class<? extends R> clazz) {
         return cast(this, clazz);
+    }
+
+    default boolean is(final Class<?> type) {
+        return type.isAssignableFrom(this.getClass());
     }
 
 }
