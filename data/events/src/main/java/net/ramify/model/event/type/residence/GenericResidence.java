@@ -8,14 +8,18 @@ import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.PlaceId;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 
 public class GenericResidence extends AbstractEvent<GenericResidence> implements LifeEvent, HasPlaceId {
 
     private final PlaceId placeId;
 
-    public GenericResidence(final PersonId personId, final DateRange date, final PlaceId placeId) {
+    public GenericResidence(
+            @Nonnull final PersonId personId,
+            @Nonnull final DateRange date,
+            @Nonnull final PlaceId placeId) {
         super(personId, date);
-        this.placeId = placeId;
+        this.placeId = Objects.requireNonNull(placeId);
     }
 
     @Nonnull

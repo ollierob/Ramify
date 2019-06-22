@@ -7,7 +7,7 @@ import net.ramify.model.person.PersonId;
 
 import javax.annotation.Nonnull;
 
-public class GenericMarriage extends AbstractEvent implements LifeEvent {
+public class GenericMarriage extends AbstractEvent<GenericMarriage> implements LifeEvent {
 
     public GenericMarriage(final PersonId personId, final DateRange date) {
         super(personId, date);
