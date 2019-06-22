@@ -39,14 +39,14 @@ public class Census1841Record extends CensusRecord {
         return SetUtils.transform(entries, entry -> entry.build(this));
     }
 
+    DateRange inferBirthDate(final Period age) {
+        return inferAge(age).birthDate(CENSUS_DATE);
+    }
+
     static Age inferAge(final Period age) {
         if (age.getMonths() > 0 || age.getDays() > 0 || age.getYears() < 15 || age.getYears() % 5 != 0) return Age.exactly(age);
         final var years = age.getYears();
         return Age.between(years, years + 4);
-    }
-
-    DateRange inferBirthDate(final Period age) {
-        return inferAge(age).birthDate(CENSUS_DATE);
     }
 
     public static class Census1841Entry {
