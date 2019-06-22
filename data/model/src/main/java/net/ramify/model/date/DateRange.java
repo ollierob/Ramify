@@ -1,5 +1,9 @@
 package net.ramify.model.date;
 
+import net.ramify.data.proto.BuildsProto;
+import net.ramify.model.date.proto.DateProto;
+import net.ramify.model.date.proto.DateProtoUtils;
+
 import javax.annotation.Nonnull;
 import java.time.LocalDate;
 import java.time.Period;
@@ -7,7 +11,7 @@ import java.time.chrono.ChronoLocalDate;
 import java.util.Comparator;
 import java.util.Optional;
 
-public interface DateRange {
+public interface DateRange extends BuildsProto<DateProto.DateRange> {
 
     @Nonnull
     Optional<? extends ChronoLocalDate> earliestInclusive();
@@ -66,6 +70,19 @@ public interface DateRange {
 
     default Optional<DateRange> intersection(final DateRange that) {
         throw new UnsupportedOperationException(); //TODO
+    }
+
+    @Nonnull
+    default DateProto.DateRange.Builder toProtoBuilder() {
+        final var builder = DateProto.DateRange.newBuilder();
+        this.earliestInclusive().ifPresent(d -> builder.setEarliest(DateProtoUtils.toProto(d)));
+        this.latestInclusive().ifPresent(d -> builder.setLatest(DateProtoUtils.toProto(d)));
+        return builder;
+    }
+
+    @Override
+    default DateProto.DateRange toProto() {
+        return this.toProtoBuilder().build();
     }
 
     Comparator<DateRange> COMPARE_BY_EARLIEST = (d1, d2) -> d1.earliestInclusive().flatMap(e1 -> d2.earliestInclusive().map(e1::compareTo)).orElse(0); //FIXME check if present

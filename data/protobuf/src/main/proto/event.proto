@@ -3,9 +3,14 @@ syntax = "proto3";
 option java_package = "net.ramify.model.event.proto";
 option java_outer_classname = "EventProto";
 
+import "date.proto";
+import "place.proto";
+
 message Event {
 
     string title = 1;
+    DateRange date = 2;
+    Place place = 3;
 
 }
 

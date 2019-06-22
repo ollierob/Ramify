@@ -39,9 +39,11 @@ public interface Event extends HasPersonId, Castable<Event>, BuildsProto<EventPr
     @Nonnull
     String title();
 
+    @Nonnull
     default EventProto.Event.Builder toProtoBuilder() {
         return EventProto.Event.newBuilder()
-                .setTitle(this.title());
+                .setTitle(this.title())
+                .setDate(this.date().toProto());
     }
 
     @Nonnull

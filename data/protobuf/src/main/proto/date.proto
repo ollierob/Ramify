@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option java_package = "net.ramify.model.date.proto";
+option java_outer_classname = "DateProto";
+
+message DateRange {
+
+    Date earliest = 1;
+    Date latest = 2;
+
+}
+
+message Date {
+
+    uint32 year = 1;
+    uint32 month = 2;
+    uint32 day = 3;
+
+}

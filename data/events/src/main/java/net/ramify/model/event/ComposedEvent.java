@@ -1,6 +1,7 @@
 package net.ramify.model.event;
 
 import net.ramify.model.date.DateRange;
+import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.event.type.EventHandler;
 import net.ramify.model.person.PersonId;
 
@@ -48,4 +49,9 @@ public abstract class ComposedEvent<T extends Event> implements Event {
         return delegate.as(clazz);
     }
 
+    @Nonnull
+    @Override
+    public EventProto.Event.Builder toProtoBuilder() {
+        return delegate.toProtoBuilder();
+    }
 }
