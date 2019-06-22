@@ -1,5 +1,7 @@
 package net.ramify.model.event.type;
 
+import javax.annotation.Nonnull;
+
 public interface Birth extends UniqueEvent {
 
     @Override
@@ -7,4 +9,10 @@ public interface Birth extends UniqueEvent {
         return handler.handle(this);
     }
 
+    @Nonnull
+    @Override
+    default String title() {
+        return "Birth";
+    }
+    
 }

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option java_package = "net.ramify.model.event.proto";
+option java_outer_classname = "EventProto";
+
+message Event {
+
+    string title = 1;
+
+}
+
+message EventList {
+
+    repeated Event event = 1;
+
+}

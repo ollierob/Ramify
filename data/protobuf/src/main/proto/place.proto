@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option java_package = "net.ramify.model.place.proto";
+option java_outer_classname = "PlaceProto";
+
+message Place {
+
+    string id = 1;
+    string name = 2;
+    string address = 3;
+
+}

@@ -1,7 +1,9 @@
 package net.ramify.model.event;
 
+import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.Castable;
 import net.ramify.model.date.DateRange;
+import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.event.type.Birth;
 import net.ramify.model.event.type.Death;
 import net.ramify.model.event.type.EventHandler;
@@ -11,7 +13,7 @@ import net.ramify.model.person.HasPersonId;
 
 import javax.annotation.Nonnull;
 
-public interface Event extends HasPersonId, Castable<Event> {
+public interface Event extends HasPersonId, Castable<Event>, BuildsProto<EventProto.Event> {
 
     @Nonnull
     DateRange date();
@@ -32,6 +34,20 @@ public interface Event extends HasPersonId, Castable<Event> {
 
     default boolean isPostDeath() {
         return this.is(PostDeathEvent.class);
+    }
+
+    @Nonnull
+    String title();
+
+    default EventProto.Event.Builder toProtoBuilder() {
+        return EventProto.Event.newBuilder()
+                .setTitle(this.title());
+    }
+
+    @Nonnull
+    @Override
+    default EventProto.Event toProto() {
+        return this.toProtoBuilder().build();
     }
 
 }

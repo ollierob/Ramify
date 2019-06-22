@@ -1,6 +1,7 @@
 package net.ramify.model.place;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 
 public abstract class AbstractPlace implements Place {
 
@@ -8,8 +9,8 @@ public abstract class AbstractPlace implements Place {
     private final String name;
 
     protected AbstractPlace(final PlaceId id, final String name) {
-        this.id = id;
-        this.name = name;
+        this.id = Objects.requireNonNull(id);
+        this.name = Objects.requireNonNull(name);
     }
 
     @Nonnull

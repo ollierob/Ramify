@@ -24,4 +24,10 @@ public class GenericResidence extends AbstractEvent<GenericResidence> implements
         return placeId;
     }
 
+    @Nonnull
+    @Override
+    public String title() {
+        return "Residence";
+    }
+
 }

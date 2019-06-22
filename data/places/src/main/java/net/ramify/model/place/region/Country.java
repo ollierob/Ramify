@@ -1,6 +1,7 @@
 package net.ramify.model.place.region;
 
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.type.Region;
 
 public class Country extends AbstractRegion {
 
@@ -9,8 +10,8 @@ public class Country extends AbstractRegion {
     }
 
     @Override
-    public Country parent() {
-        return this;
+    public Region parent() {
+        return null;
     }
 
 }

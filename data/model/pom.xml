@@ -20,6 +20,10 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>utils</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>protobuf</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

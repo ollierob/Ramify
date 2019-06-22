@@ -27,18 +27,24 @@ public abstract class ComposedEvent<T extends Event> implements Event {
         return delegate.personId();
     }
 
+    @Nonnull
+    @Override
+    public String title() {
+        return delegate.title();
+    }
+
     @Override
     public <R> R handleWith(final EventHandler<R> handler) {
         return delegate.handleWith(handler);
     }
 
     @Override
-    public boolean is(Class<?> type) {
+    public boolean is(final Class<?> type) {
         return delegate.is(type);
     }
 
     @Override
-    public <R extends Event> Optional<R> as(Class<? extends R> clazz) {
+    public <R extends Event> Optional<R> as(final Class<? extends R> clazz) {
         return delegate.as(clazz);
     }
 
