@@ -1,5 +1,6 @@
 package net.ramify.model.family;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.graph.Network;
 import com.google.common.graph.NetworkBuilder;
@@ -24,7 +25,8 @@ public interface Family extends HasPeople, HasRelationships {
 
     @Nonnull
     default Network<Person, Relationship> asNetwork() {
-        final var network = NetworkBuilder.directed().<Person, Relationship>build();
+        final var directed = Iterables.any(this.relationships(), Relationship::isDirected);
+        final var network = (directed ? NetworkBuilder.directed() : NetworkBuilder.undirected()).<Person, Relationship>build();
         final var mapped = Maps.<PersonId, Person>newHashMap();
         this.people().forEach(network::addNode);
         this.relationships().forEach(r -> network.addEdge(mapped.get(r.from()), mapped.get(r.to()), r)); //TODO also add inverses?

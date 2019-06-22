@@ -9,6 +9,11 @@ import java.util.Set;
 
 public interface AffineRelationship extends Relationship {
 
+    @Override
+    default boolean isDirected() {
+        return false;
+    }
+
     @Nonnull
     default Set<PersonId> affines() {
         return Sets.newHashSet(this.from(), this.to());

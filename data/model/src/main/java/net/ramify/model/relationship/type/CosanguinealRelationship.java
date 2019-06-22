@@ -9,6 +9,11 @@ import java.util.Set;
 
 public interface CosanguinealRelationship extends Relationship {
 
+    @Override
+    default boolean isDirected() {
+        return true;
+    }
+
     @Nonnull
     default Set<PersonId> relatives() {
         return Sets.newHashSet(this.from(), this.to());

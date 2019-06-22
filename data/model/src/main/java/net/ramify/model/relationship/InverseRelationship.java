@@ -27,6 +27,11 @@ public class InverseRelationship<R extends Relationship> implements Relationship
     }
 
     @Override
+    public boolean isDirected() {
+        return inverse.isDirected();
+    }
+
+    @Override
     public R inverse() {
         return inverse;
     }
