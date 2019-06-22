@@ -1,8 +1,8 @@
 package net.ramify.model.event.type.misc;
 
 import net.ramify.model.date.DateRange;
+import net.ramify.model.event.AbstractEvent;
 import net.ramify.model.event.Event;
-import net.ramify.model.event.type.AbstractEvent;
 import net.ramify.model.event.type.LifeEvent;
 import net.ramify.model.person.PersonId;
 

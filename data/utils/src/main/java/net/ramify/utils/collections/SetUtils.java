@@ -18,4 +18,10 @@ public class SetUtils {
         return set;
     }
 
+    public static <T> Set<T> union(final Set<T> left, final Set<T> right) {
+        if (left.isEmpty()) return right;
+        if (right.isEmpty()) return left;
+        return Sets.union(left, right);
+    }
+
 }
