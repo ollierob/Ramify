@@ -1,8 +1,8 @@
 package net.ramify.model.record.type;
 
 import net.ramify.model.place.HasPlaceId;
-import net.ramify.model.record.Record;
+import net.ramify.model.record.SingleFamilyRecord;
 
-public interface ResidenceRecord extends Record, HasPlaceId {
+public interface ResidenceRecord extends SingleFamilyRecord, HasPlaceId {
 
 }

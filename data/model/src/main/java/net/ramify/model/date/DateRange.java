@@ -44,28 +44,17 @@ public interface DateRange extends BuildsProto<DateProto.DateRange> {
         throw new UnsupportedOperationException(); //TODO
     }
 
+    static DateRange between(final ChronoLocalDate earliest, final ChronoLocalDate latest) {
+        if (earliest.isAfter(latest)) return between(latest, earliest);
+        return new ClosedDateRange(earliest, latest);
+    }
+
     default DateRange minus(final Period period) {
         throw new UnsupportedOperationException(); //TODO
     }
 
     default DateRange minus(final Period max, final Period min) {
         throw new UnsupportedOperationException(); //TODO
-    }
-
-    static ChronoLocalDate min(final Optional<? extends ChronoLocalDate> d1, final Optional<? extends ChronoLocalDate> d2) {
-        return d1.isPresent() && d2.isPresent()
-                ? min(d1.get(), d2.get())
-                : LocalDate.MIN;
-    }
-
-    static ChronoLocalDate max(final ChronoLocalDate d1, final ChronoLocalDate d2) {
-        return d1.isAfter(d2) ? d1 : d2;
-    }
-
-    static ChronoLocalDate max(final Optional<? extends ChronoLocalDate> d1, final Optional<? extends ChronoLocalDate> d2) {
-        return d1.isPresent() && d2.isPresent()
-                ? max(d1.get(), d2.get())
-                : LocalDate.MAX;
     }
 
     default Optional<DateRange> intersection(final DateRange that) {

@@ -16,6 +16,10 @@ public abstract class Id {
         return value;
     }
 
+    public boolean isUnknown() {
+        return value.isBlank() || value.equals("?");
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

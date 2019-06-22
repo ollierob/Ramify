@@ -2,6 +2,7 @@ package net.ramify.model.date;
 
 import javax.annotation.Nonnull;
 import java.time.chrono.ChronoLocalDate;
+import java.util.Objects;
 import java.util.Optional;
 
 public class ExactDate implements DateRange {
@@ -9,7 +10,12 @@ public class ExactDate implements DateRange {
     private final ChronoLocalDate date;
 
     public ExactDate(final ChronoLocalDate date) {
-        this.date = date;
+        this.date = Objects.requireNonNull(date);
+    }
+
+    @Nonnull
+    public ChronoLocalDate date() {
+        return date;
     }
 
     @Nonnull

@@ -34,8 +34,9 @@ public abstract class AbstractEvent<T extends AbstractEvent<T>> implements Event
 
     @Nonnull
     @CheckReturnValue
-    public EventWithPlace<T> with(final PlaceId place) {
-        return new EventWithPlace<>(this.self(), place);
+    public Event with(final PlaceId place) {
+        if (place == null) return this;
+        return new EventWithPlace<T>(this.self(), place);
     }
 
 }

@@ -14,8 +14,11 @@ public interface Age {
     @Nonnull
     Period upperBound();
 
-    default DateRange birthDate(final ExactDate date) {
-        throw new UnsupportedOperationException();
+    default DateRange birthDate(final ExactDate exactDate) {
+        final var date = exactDate.date();
+        final var latest = date.minus(this.lowerBound());
+        final var earliest = date.minus(this.upperBound());
+        return DateRange.between(earliest, latest);
     }
 
     static Age exactly(final Period period) {

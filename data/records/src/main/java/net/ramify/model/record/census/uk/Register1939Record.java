@@ -4,7 +4,7 @@ import com.google.common.collect.Sets;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.Event;
-import net.ramify.model.event.type.birth.GenericBirth;
+import net.ramify.model.event.type.civil.GenericBirth;
 import net.ramify.model.event.type.residence.GenericResidence;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyOfUnknownRelationships;
@@ -21,7 +21,6 @@ import net.ramify.utils.collections.SetUtils;
 import javax.annotation.Nonnull;
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -44,8 +43,8 @@ public class Register1939Record extends CensusRecord {
 
     @Nonnull
     @Override
-    public Set<? extends Family> families() {
-        return Collections.singleton(new FamilyOfUnknownRelationships(this.people()));
+    public Family family() {
+        return new FamilyOfUnknownRelationships(this.people());
     }
 
     public static class Register1939Entry {
