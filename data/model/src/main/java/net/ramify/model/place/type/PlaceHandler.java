@@ -8,8 +8,6 @@ public interface PlaceHandler<R> {
         return place.handleWith(this);
     }
 
-    R handle(Country country);
-
     R handle(Region region);
 
     R handle(Settlement settlement);
