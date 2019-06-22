@@ -7,10 +7,11 @@ import net.ramify.model.event.type.Death;
 import net.ramify.model.event.type.EventHandler;
 import net.ramify.model.event.type.LifeEvent;
 import net.ramify.model.event.type.PostDeathEvent;
+import net.ramify.model.person.HasPersonId;
 
 import javax.annotation.Nonnull;
 
-public interface Event extends HasEventId, Castable<Event> {
+public interface Event extends HasPersonId, Castable<Event> {
 
     @Nonnull
     DateRange date();

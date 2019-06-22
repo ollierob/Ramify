@@ -11,11 +11,11 @@ import java.util.Set;
 public interface HasEvents extends Has<Event> {
 
     @Nonnull
-    Set<Event> events();
+    Set<? extends Event> events();
 
     @Override
     @Deprecated
-    default Set<Event> values() {
+    default Set<? extends Event> values() {
         return this.events();
     }
 

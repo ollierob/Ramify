@@ -4,11 +4,11 @@ import javax.annotation.Nonnull;
 import java.time.chrono.ChronoLocalDate;
 import java.util.Optional;
 
-class OnDate implements DateRange {
+public class ExactDate implements DateRange {
 
     private final ChronoLocalDate date;
 
-    OnDate(final ChronoLocalDate date) {
+    public ExactDate(final ChronoLocalDate date) {
         this.date = date;
     }
 

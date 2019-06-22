@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public interface Has<T extends Castable<? super T>> {
 
     @Nonnull
-    Set<T> values();
+    Set<? extends T> values();
 
     default boolean has(@Nonnull final Class<? extends T> type) {
         return IterableUtils.any(this.values(), event -> event.is(type));
