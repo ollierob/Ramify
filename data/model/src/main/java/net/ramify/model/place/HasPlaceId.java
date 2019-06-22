@@ -1,5 +1,7 @@
 package net.ramify.model.place;
 
+import net.ramify.model.place.provider.PlaceProvider;
+
 import javax.annotation.Nonnull;
 
 public interface HasPlaceId {
