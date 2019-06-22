@@ -27,15 +27,17 @@ public class GeneralRegisterRecordDeathEntry extends GeneralRegisterRecordEntry 
             @CheckForNull final PlaceId deathPlace,
             @CheckForNull final Occupation occupation,
             @CheckForNull final Age age) {
-        super(id, name, gender, deathPlace, occupation);
+        super(id, name, gender, deathPlace, occupation, age, true);
         this.age = age;
     }
 
-    Person buildWithDeath(final GeneralRegisterDeath record) {
-        return new GeneralRegisterRecordPerson(id, name, gender, this.events(record));
+    @Nonnull
+    Person build(final GeneralRegisterDeath record) {
+        return this.build(this.events(record));
     }
 
-    private Set<Event> events(final GeneralRegisterDeath record) {
+    @Nonnull
+    Set<Event> events(final GeneralRegisterDeath record) {
         final var events = Sets.<Event>newHashSet();
         events.add(new GenericDeath(id, record.deathDate()));
         if (age != null) events.add(new GenericBirth(id, age.birthDate(record.deathDate())));

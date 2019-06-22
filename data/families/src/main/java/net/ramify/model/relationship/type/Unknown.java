@@ -1,11 +1,11 @@
 package net.ramify.model.relationship.type;
 
-import net.ramify.model.person.PersonId;
+import net.ramify.model.person.HasPersonId;
 import net.ramify.model.relationship.AbstractRelationship;
 
 public class Unknown extends AbstractRelationship implements UnknownRelationship {
 
-    public Unknown(PersonId from, PersonId to) {
+    public Unknown(final HasPersonId from, final HasPersonId to) {
         super(from, to);
     }
 

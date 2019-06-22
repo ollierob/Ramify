@@ -1,5 +1,6 @@
 package net.ramify.model.relationship.type;
 
+import net.ramify.model.person.HasPersonId;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.relationship.AbstractRelationship;
 
@@ -7,7 +8,7 @@ import javax.annotation.Nonnull;
 
 public class ChildParent extends AbstractRelationship implements CosanguinealRelationship {
 
-    public ChildParent(final PersonId child, final PersonId parent) {
+    public ChildParent(final HasPersonId child, final HasPersonId parent) {
         super(child, parent);
     }
 

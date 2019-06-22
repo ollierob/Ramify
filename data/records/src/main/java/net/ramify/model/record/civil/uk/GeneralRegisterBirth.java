@@ -16,7 +16,7 @@ public class GeneralRegisterBirth extends AbstractCivilRecord implements General
 
     private final GeneralRegisterRecordEntry father;
     private final GeneralRegisterRecordEntry mother;
-    private final GeneralRegisterRecordEntry child;
+    private final GeneralRegisterRecordBirthEntry child;
     private final PlaceId birthPlace;
 
     public GeneralRegisterBirth(
@@ -24,7 +24,7 @@ public class GeneralRegisterBirth extends AbstractCivilRecord implements General
             final ExactDate birthDate,
             final GeneralRegisterRecordEntry father,
             final GeneralRegisterRecordEntry mother,
-            final GeneralRegisterRecordEntry child,
+            final GeneralRegisterRecordBirthEntry child,
             final PlaceId birthPlace) {
         super(id, birthDate);
         this.father = father;
@@ -45,14 +45,14 @@ public class GeneralRegisterBirth extends AbstractCivilRecord implements General
     @Override
     public Family family() {
         final var builder = new FamilyBuilder();
-        final var child = this.child.buildWithBirth(this);
+        final var child = this.child.build(this);
         builder.addPerson(child);
         if (this.father != null) {
-            final var father = this.father.buildWithResidence(this);
+            final var father = this.father.build(this);
             builder.addRelationship(child, father, new ParentChild(father.personId(), child.personId()));
         }
         if (this.mother != null) {
-            final var mother = this.mother.buildWithResidence(this);
+            final var mother = this.mother.build(this);
             builder.addRelationship(child, mother, new ParentChild(mother.personId(), child.personId()));
         }
         return builder.build();

@@ -8,6 +8,8 @@ import java.time.Period;
 
 public interface Age {
 
+    Age ZERO = exactly(Period.ZERO);
+
     @Nonnull
     Period lowerBound();
 

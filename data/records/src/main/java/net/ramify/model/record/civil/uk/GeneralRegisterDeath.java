@@ -32,7 +32,7 @@ public class GeneralRegisterDeath extends AbstractCivilRecord implements General
     @Nonnull
     @Override
     public Family family() {
-        final var died = this.died.buildWithDeath(this);
+        final var died = this.died.build(this);
         return new SinglePersonFamily(died); //TODO informant
     }
 

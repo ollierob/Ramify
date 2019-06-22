@@ -23,6 +23,7 @@ public class FamilyBuilder {
     }
 
     public Family build() {
+        //FIXME lazily determine if directed
         return new NetworkedFamily(ImmutableNetwork.copyOf(network));
     }
 
