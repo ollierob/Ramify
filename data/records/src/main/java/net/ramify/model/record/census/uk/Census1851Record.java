@@ -4,7 +4,7 @@ import com.google.common.collect.Sets;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.Event;
-import net.ramify.model.event.infer.MarriageEventStatus;
+import net.ramify.model.event.infer.MarriageConditionEventInference;
 import net.ramify.model.event.type.civil.GenericBirth;
 import net.ramify.model.event.type.residence.GenericResidence;
 import net.ramify.model.family.Family;
@@ -58,7 +58,7 @@ public class Census1851Record extends CensusRecord {
         private final Name name;
         private final Sex sex;
         private final BiFunction<PersonId, PersonId, Relationship> relationshipToHead;
-        private final MarriageEventStatus condition;
+        private final MarriageConditionEventInference condition;
         private final Period age;
         private final PlaceId birthPlace;
 
@@ -67,7 +67,7 @@ public class Census1851Record extends CensusRecord {
                 final Name name,
                 final Sex sex,
                 final BiFunction<PersonId, PersonId, Relationship> relationshipToHead,
-                final MarriageEventStatus condition,
+                final MarriageConditionEventInference condition,
                 final Period age,
                 final PlaceId birthPlace) {
             this.id = id;
@@ -103,7 +103,7 @@ public class Census1851Record extends CensusRecord {
                 final PersonId id,
                 final Name name,
                 final Sex sex,
-                final MarriageEventStatus condition,
+                final MarriageConditionEventInference condition,
                 final Period age,
                 final PlaceId birthPlace) {
             super(id, name, sex, (a, b) -> null, condition, age, birthPlace);
@@ -118,7 +118,7 @@ public class Census1851Record extends CensusRecord {
                 final Name name,
                 final Sex sex,
                 final BiFunction<PersonId, PersonId, Relationship> relationshipToHead,
-                final MarriageEventStatus condition,
+                final MarriageConditionEventInference condition,
                 final Period age,
                 final PlaceId birthPlace) {
             super(id, name, sex, Objects.requireNonNull(relationshipToHead), condition, age, birthPlace);

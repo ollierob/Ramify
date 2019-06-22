@@ -15,7 +15,7 @@ public interface CosanguinealRelationship extends DirectRelationship {
 
     @Nonnull
     default Set<PersonId> relatives() {
-        return Sets.newHashSet(this.from(), this.to());
+        return Sets.newHashSet(this.fromId(), this.toId());
     }
 
     @Override

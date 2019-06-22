@@ -11,7 +11,7 @@ public class Married extends AbstractRelationship implements AffineRelationship 
 
     @Override
     public Married inverse() {
-        return new Married(this.to(), this.from());
+        return new Married(this.toId(), this.fromId());
     }
 
 }

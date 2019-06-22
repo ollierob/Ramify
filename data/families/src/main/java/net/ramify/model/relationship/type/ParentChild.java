@@ -10,11 +10,11 @@ public class ParentChild extends AbstractRelationship implements CosanguinealRel
     }
 
     public PersonId parent() {
-        return this.from();
+        return this.fromId();
     }
 
     public PersonId child() {
-        return this.to();
+        return this.toId();
     }
 
     public ChildParent inverse() {

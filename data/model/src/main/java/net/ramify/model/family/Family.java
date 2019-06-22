@@ -45,7 +45,7 @@ public interface Family extends HasPeople, HasRelationships {
             mapped.put(person.personId(), person);
             network.addNode(person);
         });
-        this.relationships().forEach(r -> network.addEdge(mapped.get(r.from()), mapped.get(r.to()), r)); //TODO also add inverses?
+        this.relationships().forEach(r -> network.addEdge(mapped.get(r.fromId()), mapped.get(r.toId()), r)); //TODO also add inverses?
         return network;
     }
 

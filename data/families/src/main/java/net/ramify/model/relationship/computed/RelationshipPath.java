@@ -20,14 +20,14 @@ public class RelationshipPath implements IndirectRelationship {
 
     @Nonnull
     @Override
-    public PersonId from() {
-        return relationships.get(0).from();
+    public PersonId fromId() {
+        return relationships.get(0).fromId();
     }
 
     @Nonnull
     @Override
-    public PersonId to() {
-        return relationships.get(relationships.size() - 1).to();
+    public PersonId toId() {
+        return relationships.get(relationships.size() - 1).toId();
     }
 
     @Nonnull

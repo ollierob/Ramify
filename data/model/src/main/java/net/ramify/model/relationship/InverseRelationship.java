@@ -16,14 +16,14 @@ public class InverseRelationship<R extends Relationship> implements Relationship
 
     @Nonnull
     @Override
-    public PersonId from() {
-        return inverse.to();
+    public PersonId fromId() {
+        return inverse.toId();
     }
 
     @Nonnull
     @Override
-    public PersonId to() {
-        return inverse.from();
+    public PersonId toId() {
+        return inverse.fromId();
     }
 
     @Override

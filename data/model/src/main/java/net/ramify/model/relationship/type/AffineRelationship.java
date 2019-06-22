@@ -15,7 +15,7 @@ public interface AffineRelationship extends DirectRelationship {
 
     @Nonnull
     default Set<PersonId> affines() {
-        return Sets.newHashSet(this.from(), this.to());
+        return Sets.newHashSet(this.fromId(), this.toId());
     }
 
     @Override

@@ -9,13 +9,13 @@ import javax.annotation.Nonnull;
 public interface Relationship extends Castable<Relationship> {
 
     @Nonnull
-    PersonId from();
+    PersonId fromId();
 
     @Nonnull
-    PersonId to();
+    PersonId toId();
 
     default boolean has(final PersonId personId) {
-        return personId.equals(this.from()) || personId.equals(this.to());
+        return personId.equals(this.fromId()) || personId.equals(this.toId());
     }
 
     <R> R handleWith(final RelationshipHandler<R> handler);

@@ -14,13 +14,13 @@ public abstract class AbstractRelationship implements Relationship {
     }
 
     @Override
-    public PersonId from() {
+    public PersonId fromId() {
         return from;
     }
 
     @Nonnull
     @Override
-    public PersonId to() {
+    public PersonId toId() {
         return to;
     }
 }
