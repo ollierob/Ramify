@@ -1,7 +1,6 @@
 package net.ramify.model.event;
 
 import net.ramify.data.proto.BuildsProto;
-import net.ramify.model.Castable;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.event.type.Birth;
@@ -10,6 +9,7 @@ import net.ramify.model.event.type.EventHandler;
 import net.ramify.model.event.type.LifeEvent;
 import net.ramify.model.event.type.PostDeathEvent;
 import net.ramify.model.person.HasPersonId;
+import net.ramify.utils.objects.Castable;
 
 import javax.annotation.Nonnull;
 

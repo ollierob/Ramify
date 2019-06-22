@@ -41,12 +41,15 @@ public abstract class ComposedEvent<T extends Event> implements Event {
 
     @Override
     public boolean is(final Class<?> type) {
-        return delegate.is(type);
+        return delegate.is(type) || Event.super.is(type);
     }
 
     @Override
-    public <R extends Event> Optional<R> as(final Class<? extends R> clazz) {
-        return delegate.as(clazz);
+    public <R> Optional<R> as(final Class<? extends R> clazz) {
+        //return delegate.as(clazz).or(() -> Event.super.as(clazz));
+        final var d = delegate.<R>as(clazz);
+        if (d.isPresent()) return d;
+        return Event.super.as(clazz);
     }
 
     @Nonnull

@@ -1,9 +1,9 @@
 package net.ramify.model.place;
 
 import net.ramify.data.proto.BuildsProto;
-import net.ramify.model.Castable;
 import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.type.PlaceHandler;
+import net.ramify.utils.objects.Castable;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;

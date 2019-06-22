@@ -1,10 +1,18 @@
 package net.ramify.utils.collections;
 
+import com.google.common.collect.Streams;
+import net.ramify.utils.objects.Castable;
+
+import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.RandomAccess;
+import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class IterableUtils {
 
@@ -39,6 +47,21 @@ public class IterableUtils {
             if (predicate.test(element)) return Optional.of(element);
         }
         return Optional.empty();
+    }
+
+    public static <T> Stream<T> stream(final Iterable<T> iterable) {
+        return Streams.stream(iterable);
+    }
+
+    public static <T extends Castable<? super T>> boolean has(final Iterable<? extends T> iterable, @Nonnull final Class<? extends T> type) {
+        return IterableUtils.any(iterable, event -> event.is(type));
+    }
+
+    public static <T extends Castable<? super T>, R extends T> Set<R> findAll(@Nonnull final Iterable<? extends T> iterable, @Nonnull final Class<R> type) {
+        return stream(iterable)
+                .map(e -> e.as(type).orElse(null))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
     }
 
 }

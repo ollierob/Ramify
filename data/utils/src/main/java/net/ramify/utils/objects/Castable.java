@@ -1,4 +1,4 @@
-package net.ramify.model;
+package net.ramify.utils.objects;
 
 import java.util.Optional;
 
@@ -10,7 +10,7 @@ public interface Castable<T> {
                 : Optional.empty();
     }
 
-    default <R extends T> Optional<R> as(final Class<? extends R> clazz) {
+    default <R> Optional<R> as(final Class<? extends R> clazz) {
         return cast(this, clazz);
     }
 
