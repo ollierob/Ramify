@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option java_package = "net.ramify.data.proto";
+option java_package = "net.ramify.model.person.proto";
 option java_outer_classname = "PersonProto";
 
 import "event.proto";

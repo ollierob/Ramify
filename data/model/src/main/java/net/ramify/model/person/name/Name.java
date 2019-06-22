@@ -1,7 +1,7 @@
 package net.ramify.model.person.name;
 
 import net.ramify.data.proto.BuildsProto;
-import net.ramify.data.proto.PersonProto;
+import net.ramify.model.person.proto.PersonProto;
 
 import javax.annotation.Nonnull;
 
