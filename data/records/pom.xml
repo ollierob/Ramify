@@ -30,6 +30,10 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>people</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>families</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

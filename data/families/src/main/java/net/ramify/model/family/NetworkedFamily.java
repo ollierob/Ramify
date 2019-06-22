@@ -3,9 +3,14 @@ package net.ramify.model.family;
 import com.google.common.graph.ImmutableNetwork;
 import com.google.common.graph.Network;
 import net.ramify.model.person.Person;
+import net.ramify.model.person.PersonId;
 import net.ramify.model.relationship.Relationship;
+import net.ramify.model.relationship.computed.RelationshipPath;
+import net.ramify.model.relationship.type.Unknown;
+import net.ramify.utils.graph.NetworkUtils;
 
 import javax.annotation.Nonnull;
+import java.util.Optional;
 import java.util.Set;
 
 public class NetworkedFamily implements Family {
@@ -34,4 +39,16 @@ public class NetworkedFamily implements Family {
         return network;
     }
 
+    @Nonnull
+    @Override
+    public Optional<Relationship> between(final PersonId from, final PersonId to) {
+        final var start = this.find(from).orElse(null);
+        if (start == null) return Optional.empty();
+        final var end = this.find(to).orElse(null);
+        if (end == null) return Optional.empty();
+        final var path = NetworkUtils.findPath(network, start, end);
+        return Optional.of(path.isEmpty()
+                ? new Unknown(from, to)
+                : new RelationshipPath(path));
+    }
 }

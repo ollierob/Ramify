@@ -12,6 +12,7 @@ import net.ramify.model.relationship.Relationship;
 import net.ramify.model.relationship.collection.HasRelationships;
 
 import javax.annotation.Nonnull;
+import java.util.Optional;
 import java.util.Set;
 
 public interface Family extends HasPeople, HasRelationships {
@@ -28,6 +29,9 @@ public interface Family extends HasPeople, HasRelationships {
     default Set<? extends Relationship> relationships(final PersonId person) {
         return Sets.filter(this.relationships(), r -> r.has(person));
     }
+
+    @Nonnull
+    Optional<Relationship> between(PersonId from, PersonId to);
 
     default boolean hasDirected() {
         return Iterables.any(this.relationships(), Relationship::isDirected);

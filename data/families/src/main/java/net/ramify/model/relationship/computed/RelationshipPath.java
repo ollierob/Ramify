@@ -30,6 +30,12 @@ public class RelationshipPath implements IndirectRelationship {
         return relationships.get(relationships.size() - 1).to();
     }
 
+    @Nonnull
+    @Override
+    public List<Relationship> relationships() {
+        return relationships;
+    }
+
     @Override
     public boolean isDirected() {
         return IterableUtils.any(relationships, Relationship::isDirected);

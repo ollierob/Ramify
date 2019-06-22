@@ -7,6 +7,7 @@ import net.ramify.model.relationship.Relationship;
 
 import javax.annotation.Nonnull;
 import java.util.Collections;
+import java.util.Optional;
 import java.util.Set;
 
 public class SinglePersonFamily implements Family, HasPersonId {
@@ -39,4 +40,9 @@ public class SinglePersonFamily implements Family, HasPersonId {
         return person.personId();
     }
 
+    @Nonnull
+    @Override
+    public Optional<Relationship> between(PersonId from, PersonId to) {
+        return Optional.empty();
+    }
 }
