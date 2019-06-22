@@ -1,8 +1,8 @@
-package net.ramify.model.event;
+package net.ramify.model.event.type;
 
 import net.ramify.model.date.DateRange;
+import net.ramify.model.event.Event;
 import net.ramify.model.event.proto.EventProto;
-import net.ramify.model.event.type.EventHandler;
 import net.ramify.model.person.PersonId;
 
 import javax.annotation.Nonnull;

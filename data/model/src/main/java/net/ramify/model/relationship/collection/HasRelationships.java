@@ -1,5 +1,6 @@
-package net.ramify.model.relationship;
+package net.ramify.model.relationship.collection;
 
+import net.ramify.model.relationship.Relationship;
 import net.ramify.utils.collections.IterableUtils;
 
 import javax.annotation.Nonnull;

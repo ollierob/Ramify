@@ -1,7 +1,7 @@
-package net.ramify.model.event.death;
+package net.ramify.model.event.type.death;
 
 import net.ramify.model.date.DateRange;
-import net.ramify.model.event.AbstractEvent;
+import net.ramify.model.event.type.AbstractEvent;
 import net.ramify.model.event.type.Death;
 import net.ramify.model.person.PersonId;
 

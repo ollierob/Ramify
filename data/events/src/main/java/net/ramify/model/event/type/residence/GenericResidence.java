@@ -1,7 +1,7 @@
-package net.ramify.model.event.residence;
+package net.ramify.model.event.type.residence;
 
 import net.ramify.model.date.DateRange;
-import net.ramify.model.event.AbstractEvent;
+import net.ramify.model.event.type.AbstractEvent;
 import net.ramify.model.event.type.LifeEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.place.HasPlaceId;

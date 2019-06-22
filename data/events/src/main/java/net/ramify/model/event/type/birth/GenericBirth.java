@@ -1,7 +1,7 @@
-package net.ramify.model.event.birth;
+package net.ramify.model.event.type.birth;
 
 import net.ramify.model.date.DateRange;
-import net.ramify.model.event.AbstractEvent;
+import net.ramify.model.event.type.AbstractEvent;
 import net.ramify.model.event.type.Birth;
 import net.ramify.model.person.PersonId;
 

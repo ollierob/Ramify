@@ -1,7 +1,8 @@
-package net.ramify.model.event;
+package net.ramify.model.event.type;
 
 import net.ramify.model.SelfTyped;
 import net.ramify.model.date.DateRange;
+import net.ramify.model.event.Event;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.place.PlaceId;
 

@@ -1,5 +1,6 @@
-package net.ramify.model.event;
+package net.ramify.model.event.type;
 
+import net.ramify.model.event.Event;
 import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.PlaceId;
 
