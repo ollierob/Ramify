@@ -8,9 +8,18 @@ import "event.proto";
 message Person {
 
     string id = 1;
-    string name = 2;
+    Name name = 2;
     string gender = 3;
 
     repeated Event events = 10;
+
+}
+
+message Name {
+
+    repeated string forename = 1;
+    string surname = 2;
+    string prefix = 3;
+    string suffix = 4;
 
 }
