@@ -17,6 +17,10 @@ public interface Relationship extends Castable<Relationship> {
     @Nonnull
     PersonId to();
 
+    default boolean has(final PersonId personId) {
+        return personId.equals(this.from()) || personId.equals(this.to());
+    }
+
     <R> R handleWith(final RelationshipHandler<R> handler);
 
     default boolean isAffine() {

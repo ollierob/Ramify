@@ -2,6 +2,7 @@ package net.ramify.model.family;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.common.graph.Network;
 import com.google.common.graph.NetworkBuilder;
 import net.ramify.model.person.Person;
@@ -24,11 +25,19 @@ public interface Family extends HasPeople, HasRelationships {
     Set<? extends Relationship> relationships();
 
     @Nonnull
+    default Set<? extends Relationship> relationships(final PersonId person) {
+        return Sets.filter(this.relationships(), r -> r.has(person));
+    }
+
+    @Nonnull
     default Network<Person, Relationship> asNetwork() {
         final var directed = Iterables.any(this.relationships(), Relationship::isDirected);
         final var network = (directed ? NetworkBuilder.directed() : NetworkBuilder.undirected()).<Person, Relationship>build();
         final var mapped = Maps.<PersonId, Person>newHashMap();
-        this.people().forEach(network::addNode);
+        this.people().forEach(person -> {
+            mapped.put(person.personId(), person);
+            network.addNode(person);
+        });
         this.relationships().forEach(r -> network.addEdge(mapped.get(r.from()), mapped.get(r.to()), r)); //TODO also add inverses?
         return network;
     }
