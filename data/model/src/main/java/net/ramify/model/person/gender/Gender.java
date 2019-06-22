@@ -1,10 +1,15 @@
 package net.ramify.model.person.gender;
 
+import javax.annotation.Nonnull;
+
 public interface Gender {
 
-    Gender MALE = Sex.MALE;
-    Gender FEMALE = Sex.FEMALE;
-    Gender UNKNOWN = null;
+    Sex MALE = Sex.MALE;
+    Sex FEMALE = Sex.FEMALE;
+    Gender UNKNOWN = () -> "Unknown";
+
+    @Nonnull
+    String value();
 
     default boolean equals(final Gender that) {
         return this == that || that == UNKNOWN;

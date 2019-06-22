@@ -1,8 +1,22 @@
 package net.ramify.model.person.gender;
 
+import javax.annotation.Nonnull;
+
 public enum Sex implements Gender {
 
-    MALE,
-    FEMALE;
+    MALE("Male"),
+    FEMALE("Female");
 
+    private final String value;
+
+    Sex(final String value) {
+        this.value = value;
+    }
+
+    @Nonnull
+    @Override
+    public String value() {
+        return value;
+    }
+    
 }
