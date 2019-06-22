@@ -49,11 +49,11 @@ public class GeneralRegisterBirth extends AbstractCivilRecord implements General
         builder.addPerson(child);
         if (this.father != null) {
             final var father = this.father.build(this);
-            builder.addRelationship(child, father, new ChildParent(father, child));
+            builder.addRelationship(child, father, ChildParent::new);
         }
         if (this.mother != null) {
             final var mother = this.mother.build(this);
-            builder.addRelationship(child, mother, new ChildParent(child, mother));
+            builder.addRelationship(child, mother, ChildParent::new);
         }
         return builder.build();
     }

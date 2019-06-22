@@ -48,23 +48,22 @@ public class GeneralRegisterMarriage extends AbstractCivilRecord implements Gene
         final var builder = new FamilyBuilder();
         final var groom = this.groom.build(this);
         final var bride = this.bride.build(this);
-        final var relationship = new Married(groom.personId(), bride.personId());
-        builder.addRelationship(bride, groom, relationship);
+        builder.addRelationship(bride, groom, Married::new);
         if (groomFather != null) {
             final var father = groomFather.build(this);
-            builder.addRelationship(groom, father, new ChildParent(groom, father));
+            builder.addRelationship(groom, father, ChildParent::new);
         }
         if (brideFather != null) {
             final var father = brideFather.build(this);
-            builder.addRelationship(bride, father, new ChildParent(bride, father));
+            builder.addRelationship(bride, father, ChildParent::new);
         }
         if (firstWitness != null) {
             final var witness = firstWitness.build(this);
-            builder.addRelationship(groom, witness, new Unknown(groom, witness));
+            builder.addRelationship(groom, witness, Unknown::new);
         }
         if (secondWitness != null) {
             final var witness = secondWitness.build(this);
-            builder.addRelationship(groom, witness, new Unknown(groom, witness));
+            builder.addRelationship(groom, witness, Unknown::new);
         }
         return builder.build();
     }
