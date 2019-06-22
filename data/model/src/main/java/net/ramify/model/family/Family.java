@@ -24,10 +24,10 @@ public interface Family extends HasPeople, HasRelationships {
 
     @Nonnull
     default Network<Person, Relationship> asNetwork() {
-        final var network = NetworkBuilder.undirected().<Person, Relationship>build();
+        final var network = NetworkBuilder.directed().<Person, Relationship>build();
         final var mapped = Maps.<PersonId, Person>newHashMap();
         this.people().forEach(network::addNode);
-        this.relationships().forEach(r -> network.addEdge(mapped.get(r.from()), mapped.get(r.to()), r));
+        this.relationships().forEach(r -> network.addEdge(mapped.get(r.from()), mapped.get(r.to()), r)); //TODO also add inverses?
         return network;
     }
 

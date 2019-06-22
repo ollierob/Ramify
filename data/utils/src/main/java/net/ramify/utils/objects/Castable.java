@@ -10,7 +10,7 @@ public interface Castable<T> {
                 : Optional.empty();
     }
 
-    default <R> Optional<R> as(final Class<? extends R> clazz) {
+    default <R extends T> Optional<R> as(final Class<? extends R> clazz) {
         return cast(this, clazz);
     }
 

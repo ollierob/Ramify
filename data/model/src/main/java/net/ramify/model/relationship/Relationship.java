@@ -31,4 +31,9 @@ public interface Relationship extends Castable<Relationship> {
         return this.is(CosanguinealRelationship.class);
     }
 
+    @Nonnull
+    default Relationship inverse() {
+        return new InverseRelationship<>(this);
+    }
+
 }
