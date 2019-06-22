@@ -1,15 +1,15 @@
 package net.ramify.model.record;
 
-import net.ramify.model.date.DateRange;
+import net.ramify.model.date.ExactDate;
 
 import javax.annotation.Nonnull;
 
 public abstract class AbstractRecord implements Record {
 
     private final RecordId id;
-    private final DateRange date;
+    private final ExactDate date;
 
-    protected AbstractRecord(final RecordId id, final DateRange date) {
+    protected AbstractRecord(final RecordId id, final ExactDate date) {
         this.id = id;
         this.date = date;
     }
@@ -22,7 +22,7 @@ public abstract class AbstractRecord implements Record {
 
     @Nonnull
     @Override
-    public DateRange date() {
+    public ExactDate date() {
         return date;
     }
 
