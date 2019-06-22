@@ -7,7 +7,7 @@ import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.civil.AbstractCivilRecord;
-import net.ramify.model.relationship.type.ParentChild;
+import net.ramify.model.relationship.type.ChildParent;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
@@ -49,11 +49,11 @@ public class GeneralRegisterBirth extends AbstractCivilRecord implements General
         builder.addPerson(child);
         if (this.father != null) {
             final var father = this.father.build(this);
-            builder.addRelationship(child, father, new ParentChild(father.personId(), child.personId()));
+            builder.addRelationship(child, father, new ChildParent(father, child));
         }
         if (this.mother != null) {
             final var mother = this.mother.build(this);
-            builder.addRelationship(child, mother, new ParentChild(mother.personId(), child.personId()));
+            builder.addRelationship(child, mother, new ChildParent(child, mother));
         }
         return builder.build();
     }
