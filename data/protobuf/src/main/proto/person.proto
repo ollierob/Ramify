@@ -2,3 +2,15 @@ syntax = "proto3";
 
 option java_package = "net.ramify.data.proto";
 option java_outer_classname = "PersonProto";
+
+import "event.proto";
+
+message Person {
+
+    string id = 1;
+    string name = 2;
+    string gender = 3;
+
+    repeated Event events = 10;
+
+}
