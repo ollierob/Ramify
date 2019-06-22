@@ -8,12 +8,25 @@ import javax.annotation.Nonnull;
 public interface Name extends BuildsProto<PersonProto.Name> {
 
     @Nonnull
-    PersonProto.Name.Builder toProtoBuilder();
+    String value();
+
+    default boolean isUnknown() {
+        if (this == UNKNOWN) return true;
+        final var value = this.value();
+        return value.isBlank() || value.equals(UNKNOWN.value());
+    }
+
+    @Nonnull
+    default PersonProto.Name.Builder toProtoBuilder() {
+        return PersonProto.Name.newBuilder();
+    }
 
     @Nonnull
     @Override
     default PersonProto.Name toProto() {
         return this.toProtoBuilder().build();
     }
+
+    Name UNKNOWN = () -> "?";
 
 }

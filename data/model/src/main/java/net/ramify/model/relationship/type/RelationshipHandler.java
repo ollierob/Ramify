@@ -14,4 +14,8 @@ public interface RelationshipHandler<R> {
 
     R handle(FictiveRelationship relationship);
 
+    R handle(IndirectRelationship relationship);
+
+    R handle(UnknownRelationship relationship);
+
 }

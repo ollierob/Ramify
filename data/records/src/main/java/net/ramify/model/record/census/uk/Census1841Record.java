@@ -6,6 +6,7 @@ import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.type.birth.GenericBirth;
 import net.ramify.model.event.type.residence.GenericResidence;
+import net.ramify.model.family.Family;
 import net.ramify.model.person.AbstractPerson;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
@@ -37,6 +38,12 @@ public class Census1841Record extends CensusRecord {
     @Override
     public Set<Census1841Person> people() {
         return SetUtils.transform(entries, entry -> entry.build(this));
+    }
+
+    @Nonnull
+    @Override
+    public Set<? extends Family> families() {
+        throw new UnsupportedOperationException(); //TODO
     }
 
     DateRange inferBirthDate(final Period age) {

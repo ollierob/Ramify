@@ -14,11 +14,13 @@ public interface Person extends HasName, HasGender, HasPersonEvents, BuildsProto
 
     @Nonnull
     default PersonProto.Person.Builder toProtoBuilder() {
-        return PersonProto.Person.newBuilder()
+        final var builder = PersonProto.Person.newBuilder()
                 .setId(this.personId().value())
-                .setName(this.name().toProto())
                 .setGender(this.gender().value())
                 .addAllEvents(Iterables.transform(this.events(), Event::toProto));
+        final var name = this.name();
+        if (!name.isUnknown()) builder.setName(name.toProto());
+        return builder;
     }
 
     @Nonnull

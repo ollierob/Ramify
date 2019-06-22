@@ -29,10 +29,13 @@ public interface Family extends HasPeople, HasRelationships {
         return Sets.filter(this.relationships(), r -> r.has(person));
     }
 
+    default boolean hasDirected() {
+        return Iterables.any(this.relationships(), Relationship::isDirected);
+    }
+
     @Nonnull
     default Network<Person, Relationship> asNetwork() {
-        final var directed = Iterables.any(this.relationships(), Relationship::isDirected);
-        final var network = (directed ? NetworkBuilder.directed() : NetworkBuilder.undirected()).<Person, Relationship>build();
+        final var network = (this.hasDirected() ? NetworkBuilder.directed() : NetworkBuilder.undirected()).<Person, Relationship>build();
         final var mapped = Maps.<PersonId, Person>newHashMap();
         this.people().forEach(person -> {
             mapped.put(person.personId(), person);

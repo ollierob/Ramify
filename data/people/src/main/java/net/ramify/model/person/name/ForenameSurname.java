@@ -1,7 +1,7 @@
 package net.ramify.model.person.name;
 
 import com.google.common.base.MoreObjects;
-import net.ramify.data.proto.PersonProto;
+import net.ramify.model.person.proto.PersonProto;
 
 import javax.annotation.Nonnull;
 import java.util.Collections;
@@ -27,8 +27,14 @@ public class ForenameSurname implements Name {
 
     @Nonnull
     @Override
+    public String value() {
+        throw new UnsupportedOperationException(); //TODO
+    }
+
+    @Nonnull
+    @Override
     public PersonProto.Name.Builder toProtoBuilder() {
-        return PersonProto.Name.newBuilder()
+        return Name.super.toProtoBuilder()
                 .setPrefix(MoreObjects.firstNonNull(prefix, ""))
                 .addAllForename(forenames)
                 .setSurname(surname)
