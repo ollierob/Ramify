@@ -2,6 +2,7 @@ package net.ramify.model.record.civil.uk;
 
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.family.Family;
+import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.family.SinglePersonFamily;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.civil.AbstractCivilRecord;
@@ -11,16 +12,16 @@ import javax.annotation.Nonnull;
 
 public class GeneralRegisterDeath extends AbstractCivilRecord implements GeneralRegisterRecord {
 
-    private final GeneralRegisterRecordDeathEntry died;
-    private final GeneralRegisterRecordEntry informant;
+    private final GeneralRegisterRecordDeathEntry deceased;
+    private final GeneralRegisterRecordDeathInformant informant;
 
     public GeneralRegisterDeath(
             final RecordId id,
             final ExactDate deathDate,
-            @Nonnull final GeneralRegisterRecordDeathEntry died,
-            @CheckForNull final GeneralRegisterRecordEntry informant) {
+            @Nonnull final GeneralRegisterRecordDeathEntry deceased,
+            @CheckForNull final GeneralRegisterRecordDeathInformant informant) {
         super(id, deathDate);
-        this.died = died;
+        this.deceased = deceased;
         this.informant = informant;
     }
 
@@ -32,8 +33,12 @@ public class GeneralRegisterDeath extends AbstractCivilRecord implements General
     @Nonnull
     @Override
     public Family family() {
-        final var died = this.died.build(this);
-        return new SinglePersonFamily(died); //TODO informant
+        final var deceased = this.deceased.build(this);
+        if (informant == null) return new SinglePersonFamily(deceased);
+        final var informant = this.informant.build(this);
+        return new FamilyBuilder()
+                .addRelationship(deceased, informant, this.informant.relationshipToDeceased())
+                .build();
     }
 
 }

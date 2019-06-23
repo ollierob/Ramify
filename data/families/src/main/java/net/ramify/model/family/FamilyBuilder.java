@@ -5,8 +5,7 @@ import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
 import net.ramify.model.person.Person;
 import net.ramify.model.relationship.Relationship;
-
-import java.util.function.BiFunction;
+import net.ramify.model.relationship.RelationshipFactory;
 
 public class FamilyBuilder {
 
@@ -17,10 +16,10 @@ public class FamilyBuilder {
         return this;
     }
 
-    public FamilyBuilder addRelationship(final Person from, final Person to, final BiFunction<Person, Person, ? extends Relationship> relationship) {
+    public FamilyBuilder addRelationship(final Person from, final Person to, final RelationshipFactory relationship) {
         network.addNode(from);
         network.addNode(to);
-        network.addEdge(from, to, relationship.apply(from, to));
+        network.addEdge(from, to, relationship.relationshipBetween(from, to));
         return this;
     }
 
