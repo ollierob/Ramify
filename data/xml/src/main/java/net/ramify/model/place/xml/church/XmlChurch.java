@@ -15,10 +15,13 @@ import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
-class XmlChurchBuilder implements HasPlaceId {
+class XmlChurch implements HasPlaceId {
 
     @XmlAttribute(name = "id", required = true)
-    private String id;
+    private String placeId;
+
+    @XmlAttribute(name = "parentId", required = true)
+    private String parentId;
 
     @XmlAttribute(name = "denomination")
     private String denomination;
@@ -31,7 +34,7 @@ class XmlChurchBuilder implements HasPlaceId {
 
     @Override
     public PlaceId placeId() {
-        return Spid.church(id);
+        return Spid.church(placeId);
     }
 
     String denomination() {
@@ -53,10 +56,10 @@ class XmlChurchBuilder implements HasPlaceId {
 
     private static class ResolvedChurch implements Church {
 
-        private final XmlChurchBuilder xml;
+        private final XmlChurch xml;
         private final Building building;
 
-        ResolvedChurch(final XmlChurchBuilder xml, final Building building) {
+        ResolvedChurch(final XmlChurch xml, final Building building) {
             this.xml = xml;
             this.building = building;
         }

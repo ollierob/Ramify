@@ -1,4 +1,4 @@
-package net.ramify.model.place.xml.church;
+package net.ramify.model.place.xml;
 
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.church.Church;
