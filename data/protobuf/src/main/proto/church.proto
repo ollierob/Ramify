@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option java_package = "net.ramify.model.place.proto";
+option java_outer_classname = "ChurchProto";
+
+import "place.proto";
+import "date.proto";
+
+message Church {
+
+    Place place = 1;
+    string denomination = 2;
+    DateRange established = 3;
+    DateRange closed = 4;
+
+}
+
+message ChurchList {
+
+    repeated Church church = 1;
+
+}

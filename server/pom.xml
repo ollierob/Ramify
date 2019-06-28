@@ -35,4 +35,11 @@
         </dependencies>
     </dependencyManagement>
 
+    <dependencies>
+        <dependency>
+            <groupId>net.ramify</groupId>
+            <artifactId>model</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>
