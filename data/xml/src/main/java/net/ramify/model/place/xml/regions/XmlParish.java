@@ -13,7 +13,7 @@ public class XmlParish extends XmlRegion {
     }
 
     @Override
-    Place place(final PlaceId id, final Place parent) {
+    Parish place(final PlaceId id, final Place parent) {
         throw new UnsupportedOperationException(); //TODO
     }
 

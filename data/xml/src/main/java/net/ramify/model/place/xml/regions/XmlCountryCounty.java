@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 
 public class XmlCountryCounty extends XmlRegion {
 
-    @XmlAttribute(name = "name", required = true)
+    @XmlAttribute(name = "name")
     private String name;
 
     @Override
@@ -19,7 +19,7 @@ public class XmlCountryCounty extends XmlRegion {
     }
 
     @Override
-    Place place(final PlaceId id, final Place parent) {
+    CountryCounty place(final PlaceId id, final Place parent) {
         return new CountryCounty(id, name, parent.requireAs(Country.class));
     }
 

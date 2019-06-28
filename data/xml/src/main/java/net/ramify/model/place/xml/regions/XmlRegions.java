@@ -11,7 +11,10 @@ import java.util.List;
 public class XmlRegions {
 
     @XmlElements({
-            @XmlElement(name = "country", type = XmlCountry.class)
+            @XmlElement(name = "country", type = XmlCountry.class),
+            @XmlElement(name = "state", type = XmlState.class),
+            @XmlElement(name = "county", type = XmlCountryCounty.class),
+            @XmlElement(name = "parish", type = XmlParish.class)
     })
     private List<XmlRegion> regions;
 

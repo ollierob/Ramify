@@ -13,7 +13,7 @@ import java.util.List;
 
 public class XmlCountry extends XmlRegion {
 
-    @XmlAttribute(name = "name", required = true)
+    @XmlAttribute(name = "name")
     private String name;
 
     @XmlElements({
