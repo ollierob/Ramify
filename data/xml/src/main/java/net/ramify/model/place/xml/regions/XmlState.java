@@ -4,13 +4,10 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.State;
 
-import javax.annotation.Nonnull;
-
 public class XmlState extends XmlRegion {
 
-    @Nonnull
     @Override
-    public PlaceId placeId() {
+    PlaceId placeId(final String id) {
         return new Spid(State.class, id);
     }
 

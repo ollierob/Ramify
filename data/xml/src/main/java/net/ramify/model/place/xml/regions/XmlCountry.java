@@ -22,8 +22,7 @@ public class XmlCountry extends XmlRegion {
     private List<XmlRegion> regions;
 
     @Nonnull
-    @Override
-    public PlaceId placeId() {
+    PlaceId placeId(final String id) {
         return new Spid(Country.class, id);
     }
 

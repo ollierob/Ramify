@@ -1,17 +1,14 @@
-//package net.ramify.model.place.xml.regions;
-//
-//import net.ramify.model.place.PlaceId;
-//import net.ramify.model.place.id.Spid;
-//import net.ramify.model.place.region.Parish;
-//
-//import javax.annotation.Nonnull;
-//
-//public class XmlParish extends XmlRegion {
-//
-//    @Nonnull
-//    @Override
-//    public PlaceId placeId() {
-//        return new Spid(Parish.class, id);
-//    }
-//
-//}
+package net.ramify.model.place.xml.regions;
+
+import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.id.Spid;
+import net.ramify.model.place.region.Parish;
+
+public class XmlParish extends XmlRegion {
+
+    @Override
+    PlaceId placeId(final String id) {
+        return new Spid(Parish.class, id);
+    }
+
+}
