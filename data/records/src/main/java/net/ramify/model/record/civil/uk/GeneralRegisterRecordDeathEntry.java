@@ -11,12 +11,13 @@ import net.ramify.model.person.age.Age;
 import net.ramify.model.person.gender.Sex;
 import net.ramify.model.person.name.Name;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.record.GenericRecordEntry;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.util.Set;
 
-public class GeneralRegisterRecordDeathEntry extends GeneralRegisterRecordEntry {
+public class GeneralRegisterRecordDeathEntry extends GenericRecordEntry {
 
     private final Age age;
 
@@ -39,8 +40,8 @@ public class GeneralRegisterRecordDeathEntry extends GeneralRegisterRecordEntry 
     @Nonnull
     Set<Event> events(final GeneralRegisterDeath record) {
         final var events = Sets.<Event>newHashSet();
-        events.add(new GenericDeath(id, record.deathDate()));
-        if (age != null) events.add(new GenericBirth(id, age.birthDate(record.deathDate())));
+        events.add(new GenericDeath(this.personId(), record.deathDate()));
+        if (age != null) events.add(new GenericBirth(this.personId(), age.birthDate(record.deathDate())));
         return events;
     }
 

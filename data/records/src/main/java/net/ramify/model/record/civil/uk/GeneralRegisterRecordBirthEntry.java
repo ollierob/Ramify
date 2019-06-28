@@ -7,11 +7,12 @@ import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
 import net.ramify.model.person.gender.Sex;
 import net.ramify.model.person.name.Name;
+import net.ramify.model.record.GenericRecordEntry;
 
 import java.util.Collections;
 import java.util.Set;
 
-public class GeneralRegisterRecordBirthEntry extends GeneralRegisterRecordEntry {
+public class GeneralRegisterRecordBirthEntry extends GenericRecordEntry {
 
     public GeneralRegisterRecordBirthEntry(
             final PersonId id,
@@ -25,7 +26,7 @@ public class GeneralRegisterRecordBirthEntry extends GeneralRegisterRecordEntry 
     }
 
     Set<Event> events(final GeneralRegisterBirth record) {
-        return Collections.singleton(new GenericBirth(id, record.birthDate()).with(record.birthPlace()));
+        return Collections.singleton(new GenericBirth(this.personId(), record.birthDate()).with(record.birthPlace()));
     }
 
 }

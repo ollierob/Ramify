@@ -4,6 +4,7 @@ import net.ramify.model.date.ExactDate;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.record.GenericRecordEntry;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.civil.AbstractCivilRecord;
 import net.ramify.model.relationship.type.ChildParent;
@@ -15,23 +16,23 @@ import javax.annotation.Nonnull;
 public class GeneralRegisterMarriage extends AbstractCivilRecord implements GeneralRegisterRecord {
 
     private final PlaceId marriagePlace;
-    private final GeneralRegisterRecordEntry groom;
-    private final GeneralRegisterRecordEntry bride;
-    private final GeneralRegisterRecordEntry groomFather;
-    private final GeneralRegisterRecordEntry brideFather;
-    private final GeneralRegisterRecordEntry firstWitness;
-    private final GeneralRegisterRecordEntry secondWitness;
+    private final GenericRecordEntry groom;
+    private final GenericRecordEntry bride;
+    private final GenericRecordEntry groomFather;
+    private final GenericRecordEntry brideFather;
+    private final GenericRecordEntry firstWitness;
+    private final GenericRecordEntry secondWitness;
 
     public GeneralRegisterMarriage(
             final RecordId id,
             final ExactDate date,
             final PlaceId marriagePlace,
-            final GeneralRegisterRecordEntry groom,
-            final GeneralRegisterRecordEntry bride,
-            final GeneralRegisterRecordEntry groomFather,
-            final GeneralRegisterRecordEntry brideFather,
-            final GeneralRegisterRecordEntry firstWitness,
-            final GeneralRegisterRecordEntry secondWitness) {
+            final GenericRecordEntry groom,
+            final GenericRecordEntry bride,
+            final GenericRecordEntry groomFather,
+            final GenericRecordEntry brideFather,
+            final GenericRecordEntry firstWitness,
+            final GenericRecordEntry secondWitness) {
         super(id, date);
         this.marriagePlace = marriagePlace;
         this.groom = groom;

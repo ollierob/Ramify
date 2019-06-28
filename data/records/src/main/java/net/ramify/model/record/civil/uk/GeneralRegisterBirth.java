@@ -5,6 +5,7 @@ import net.ramify.model.date.ExactDate;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.record.GenericRecordEntry;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.civil.AbstractCivilRecord;
 import net.ramify.model.relationship.type.ChildParent;
@@ -14,17 +15,17 @@ import java.util.Objects;
 
 public class GeneralRegisterBirth extends AbstractCivilRecord implements GeneralRegisterRecord {
 
-    private final GeneralRegisterRecordEntry father;
-    private final GeneralRegisterRecordEntry mother;
+    private final GenericRecordEntry father;
+    private final GenericRecordEntry mother;
     private final GeneralRegisterRecordBirthEntry child;
     private final PlaceId birthPlace;
 
     public GeneralRegisterBirth(
             final RecordId id,
             final ExactDate birthDate,
-            final GeneralRegisterRecordEntry father,
-            final GeneralRegisterRecordEntry mother,
             final GeneralRegisterRecordBirthEntry child,
+            final GenericRecordEntry father,
+            final GenericRecordEntry mother,
             final PlaceId birthPlace) {
         super(id, birthDate);
         this.father = father;

@@ -1,4 +1,4 @@
-package net.ramify.model.record.civil.uk;
+package net.ramify.model.record;
 
 import net.ramify.model.event.Event;
 import net.ramify.model.person.AbstractPerson;
@@ -7,18 +7,13 @@ import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.name.Name;
 
 import javax.annotation.Nonnull;
-import java.util.Collections;
 import java.util.Set;
 
-class GeneralRegisterRecordPerson extends AbstractPerson {
+class GenericRecordPerson extends AbstractPerson {
 
     private final Set<Event> events;
 
-    GeneralRegisterRecordPerson(PersonId id, Name name, Gender gender, Event event) {
-        this(id, name, gender, event == null ? Collections.emptySet() : Collections.singleton(event));
-    }
-
-    GeneralRegisterRecordPerson(PersonId id, Name name, Gender gender, Set<Event> events) {
+    GenericRecordPerson(PersonId id, Name name, Gender gender, Set<Event> events) {
         super(id, name, gender);
         this.events = events;
     }
