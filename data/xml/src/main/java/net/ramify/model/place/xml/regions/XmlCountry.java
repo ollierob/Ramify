@@ -1,5 +1,6 @@
 package net.ramify.model.place.xml.regions;
 
+import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.Country;
@@ -12,8 +13,8 @@ import java.util.List;
 
 public class XmlCountry extends XmlRegion {
 
-    @XmlAttribute(name = "id", required = true)
-    private String id;
+    @XmlAttribute(name = "name", required = true)
+    private String name;
 
     @XmlElements({
             @XmlElement(name = "county", type = XmlCountryCounty.class),
@@ -24,6 +25,11 @@ public class XmlCountry extends XmlRegion {
     @Nonnull
     PlaceId placeId(final String id) {
         return new Spid(Country.class, id);
+    }
+
+    @Override
+    Place place(final PlaceId id, final Place parent) {
+        return new Country(id, name);
     }
 
 }

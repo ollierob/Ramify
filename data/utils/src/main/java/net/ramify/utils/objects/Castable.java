@@ -18,4 +18,8 @@ public interface Castable<T> {
         return type.isAssignableFrom(this.getClass());
     }
 
+    default <R extends T> R requireAs(final Class<? extends R> clazz) {
+        return this.as(clazz).get();
+    }
+
 }

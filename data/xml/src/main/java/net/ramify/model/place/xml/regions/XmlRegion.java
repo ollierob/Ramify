@@ -1,6 +1,7 @@
 package net.ramify.model.place.xml.regions;
 
 import net.ramify.model.place.HasPlaceId;
+import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 
 import javax.annotation.Nonnull;
@@ -22,5 +23,7 @@ public abstract class XmlRegion implements HasPlaceId {
     public PlaceId placeId() {
         return this.placeId(id);
     }
+
+    abstract Place place(PlaceId id, Place parent);
 
 }
