@@ -21,7 +21,6 @@
     </modules>
 
     <properties>
-        <guice.version>4.2.2</guice.version>
         <resteasy.version>4.0.0.Final</resteasy.version>
     </properties>
 

@@ -28,6 +28,7 @@
         <module>places</module>
         <module>utils</module>
         <module>families</module>
+        <module>xml</module>
     </modules>
 
     <dependencies>

@@ -20,6 +20,7 @@
     <properties>
         <maven.compiler.source>12</maven.compiler.source>
         <maven.compiler.target>12</maven.compiler.target>
+        <guice.version>4.2.2</guice.version>
     </properties>
 
     <build>
@@ -91,6 +92,11 @@
                 <groupId>${project.groupId}</groupId>
                 <artifactId>protobuf</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.inject</groupId>
+                <artifactId>guice</artifactId>
+                <version>${guice.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
