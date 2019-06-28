@@ -4,7 +4,7 @@ import net.ramify.model.Id;
 
 public class PlaceId extends Id implements HasPlaceId {
 
-    public PlaceId(final String value) {
+    protected PlaceId(final String value) {
         super(value);
     }
 

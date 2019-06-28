@@ -1,19 +1,20 @@
 package net.ramify.model.place.xml.regions;
 
+import com.google.common.collect.Sets;
 import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
+import java.util.Set;
 
-//@XmlSeeAlso({XmlCountry.class})
-public abstract class XmlRegion implements HasPlaceId {
+public abstract class XmlPlace implements HasPlaceId {
 
     @XmlAttribute(name = "id", required = true)
     private String id;
 
-    XmlRegion() {
+    XmlPlace() {
     }
 
     abstract PlaceId placeId(String id);
@@ -25,5 +26,15 @@ public abstract class XmlRegion implements HasPlaceId {
     }
 
     abstract Place place(PlaceId id, Place parent);
+
+    @Nonnull
+    public Set<PlaceId> placeIds() {
+        final var places = Sets.<PlaceId>newHashSet();
+        places.add(this.placeId());
+        this.addPlaces(places);
+        return places;
+    }
+
+    abstract void addPlaces(Set<PlaceId> places);
 
 }

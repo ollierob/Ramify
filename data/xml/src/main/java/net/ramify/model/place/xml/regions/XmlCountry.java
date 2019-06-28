@@ -10,8 +10,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import java.util.List;
+import java.util.Set;
 
-public class XmlCountry extends XmlRegion {
+public class XmlCountry extends XmlPlace {
 
     @XmlAttribute(name = "name")
     private String name;
@@ -20,7 +21,7 @@ public class XmlCountry extends XmlRegion {
             @XmlElement(name = "county", type = XmlCountryCounty.class),
             @XmlElement(name = "state", type = XmlState.class)
     })
-    private List<XmlRegion> regions;
+    private List<XmlPlace> regions;
 
     @Nonnull
     PlaceId placeId(final String id) {
@@ -30,6 +31,11 @@ public class XmlCountry extends XmlRegion {
     @Override
     Place place(final PlaceId id, final Place parent) {
         return new Country(id, name);
+    }
+
+    @Override
+    void addPlaces(final Set<PlaceId> places) {
+        regions.forEach(region -> region.addPlaces(places));
     }
 
 }

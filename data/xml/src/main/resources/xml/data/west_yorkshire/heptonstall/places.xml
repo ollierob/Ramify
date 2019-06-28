@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<places
+        xmlns="http://ramify.net/places"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://ramify.net/places ../../../schema/schema1.xsd">
+
+    <parish id="heptonstall">
+        <township id="heptonstall" name="Heptonstall"/>
+        <township id="erringden" name="Erringden"/>
+        <township id="stansfield" name="Stansfield"/>
+        <township id="langfield" name="Langfield"/>
+        <township id="wadsworth" name="Wadsworth"/>
+        <town id="hebden_bridge" name="Hebden Bridge"/>
+        <town id="todmorden" name="Todmorden"/>
+    </parish>
+
+</places>

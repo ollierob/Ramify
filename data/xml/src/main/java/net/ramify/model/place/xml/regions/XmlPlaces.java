@@ -8,7 +8,7 @@ import java.util.List;
 
 @XmlType(namespace = "http://ramify.net/places", name = "regions")
 @XmlRootElement(name = "regions")
-public class XmlRegions {
+public class XmlPlaces {
 
     @XmlElements({
             @XmlElement(name = "country", type = XmlCountry.class),
@@ -16,6 +16,6 @@ public class XmlRegions {
             @XmlElement(name = "county", type = XmlCountryCounty.class),
             @XmlElement(name = "parish", type = XmlParish.class)
     })
-    private List<XmlRegion> regions;
+    private List<XmlPlace> regions;
 
 }
