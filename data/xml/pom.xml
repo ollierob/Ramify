@@ -37,6 +37,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
                 <configuration>
                     <filesets>
                         <fileset>
@@ -57,13 +58,24 @@
                         </goals>
                         <phase>generate-sources</phase>
                         <configuration>
+                            <createJavaDocAnnotations>false</createJavaDocAnnotations>
                             <outputDirectory>${xml.schema.dir}</outputDirectory>
                             <transformSchemas>
                                 <transformSchema>
-                                    <uri>church</uri>
-                                    <toPrefix>churches</toPrefix>
+                                    <uri>http://ramify.net/places</uri>
+                                    <toFile>places.xsd</toFile>
                                 </transformSchema>
                             </transformSchemas>
+                            <schemaSourceExcludeFilters>
+                                <myExcludes
+                                        implementation="org.codehaus.mojo.jaxb2.shared.filters.pattern.PatternFileFilter">
+                                    <patterns>
+                                        <pattern>.*Module.java</pattern>
+                                        <pattern>.*Provider.java</pattern>
+                                        <pattern>Resolved.*.java</pattern>
+                                    </patterns>
+                                </myExcludes>
+                            </schemaSourceExcludeFilters>
                         </configuration>
                     </execution>
                 </executions>

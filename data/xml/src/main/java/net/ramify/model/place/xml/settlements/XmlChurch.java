@@ -5,13 +5,10 @@ import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.church.Church;
-import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.type.Building;
 import net.ramify.utils.objects.Functions;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
@@ -34,7 +31,7 @@ class XmlChurch implements HasPlaceId {
 
     @Override
     public PlaceId placeId() {
-        return Spid.church(placeId);
+        throw new UnsupportedOperationException(); //TODO
     }
 
     String denomination() {
@@ -52,42 +49,6 @@ class XmlChurch implements HasPlaceId {
     Church resolve(final PlaceProvider<Building> placeProvider) {
         final var place = placeProvider.require(this.placeId());
         return new ResolvedChurch(this, place);
-    }
-
-    private static class ResolvedChurch implements Church {
-
-        private final XmlChurch xml;
-        private final Building building;
-
-        ResolvedChurch(final XmlChurch xml, final Building building) {
-            this.xml = xml;
-            this.building = building;
-        }
-
-        @Nonnull
-        @Override
-        public Building place() {
-            return building;
-        }
-
-        @CheckForNull
-        @Override
-        public String denomination() {
-            return xml.denomination();
-        }
-
-        @Nonnull
-        @Override
-        public DateRange founded() {
-            return xml.founded();
-        }
-
-        @CheckForNull
-        @Override
-        public DateRange closed() {
-            return xml.closed();
-        }
-
     }
 
 }
