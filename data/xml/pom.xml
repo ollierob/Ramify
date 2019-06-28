@@ -56,7 +56,7 @@
                         <goals>
                             <goal>schemagen</goal>
                         </goals>
-                        <phase>generate-sources</phase>
+                        <phase>generate-resources</phase>
                         <configuration>
                             <createJavaDocAnnotations>false</createJavaDocAnnotations>
                             <outputDirectory>${xml.schema.dir}</outputDirectory>
@@ -73,6 +73,7 @@
                                         <pattern>.*Module.java</pattern>
                                         <pattern>.*Provider.java</pattern>
                                         <pattern>Resolved.*.java</pattern>
+                                        <pattern>Abstract.*.java</pattern>
                                     </patterns>
                                 </myExcludes>
                             </schemaSourceExcludeFilters>
