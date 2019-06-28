@@ -1,6 +1,7 @@
 package net.ramify.model.place.church;
 
 import com.google.common.base.MoreObjects;
+import com.google.common.collect.Iterables;
 import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.place.HasPlace;
@@ -10,6 +11,7 @@ import net.ramify.utils.objects.Consumers;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import java.util.Collection;
 
 public interface Church extends HasPlace, BuildsProto<ChurchProto.Church> {
 
@@ -43,6 +45,13 @@ public interface Church extends HasPlace, BuildsProto<ChurchProto.Church> {
     @Override
     default ChurchProto.Church toProto() {
         return this.toProtoBuilder().build();
+    }
+
+    @Nonnull
+    static ChurchProto.ChurchList toProto(final Collection<Church> churches) {
+        final var list = ChurchProto.ChurchList.newBuilder();
+        list.addAllChurch(Iterables.transform(churches, Church::toProto));
+        return list.build();
     }
 
 }
