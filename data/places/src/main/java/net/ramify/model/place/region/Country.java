@@ -5,7 +5,7 @@ import net.ramify.model.place.type.Region;
 
 public class Country extends AbstractRegion {
 
-    public Country(PlaceId id, String name) {
+    public Country(final PlaceId id, final String name) {
         super(id, name);
     }
 

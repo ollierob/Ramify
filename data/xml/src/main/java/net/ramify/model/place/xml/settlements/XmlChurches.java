@@ -1,11 +1,11 @@
-package net.ramify.model.place.xml.church;
+package net.ramify.model.place.xml.settlements;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
-@XmlType(namespace = "http://ramify.net", name = "churches")
+@XmlType(namespace = "http://ramify.net/places", name = "churches")
 @XmlRootElement(name = "churches")
 public class XmlChurches {
 

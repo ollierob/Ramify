@@ -1,29 +1,15 @@
 package net.ramify.model.place.id;
 
+import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 
 public class Spid extends PlaceId {
 
-    public static Spid region(final String id) {
-        return new Spid(Type.REGION, id);
-    }
+    private final Class<? extends Place> type;
 
-    public static Spid church(final String id) {
-        return new Spid(Type.CHURCH, id);
-    }
-
-    private final Type type;
-
-    private Spid(final Type type, final String value) {
-        super(type.name().toLowerCase() + ':' + value);
+    public Spid(final Class<? extends Place> type, final String value) {
+        super(type.getSimpleName().toLowerCase() + ":" + value);
         this.type = type;
-    }
-
-    private enum Type {
-
-        REGION,
-        CHURCH;
-
     }
 
 }
