@@ -6,7 +6,9 @@ import net.ramify.model.date.xml.XmlBeforeDate;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.building.Church;
 import net.ramify.model.place.church.ChurchInfo;
+import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.type.Building;
 
@@ -21,9 +23,6 @@ class XmlChurchInfo implements HasPlaceId {
     @XmlAttribute(name = "id", required = true)
     private String placeId;
 
-    @XmlAttribute(name = "parentId", required = true)
-    private String parentId;
-
     @XmlAttribute(name = "denomination")
     private String denomination;
 
@@ -34,7 +33,7 @@ class XmlChurchInfo implements HasPlaceId {
 
     @Override
     public PlaceId placeId() {
-        throw new UnsupportedOperationException(); //TODO
+        return new Spid(Church.class, placeId);
     }
 
     String denomination() {

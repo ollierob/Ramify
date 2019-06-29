@@ -64,12 +64,6 @@
                         <configuration>
                             <createJavaDocAnnotations>false</createJavaDocAnnotations>
                             <outputDirectory>${xml.schema.dir}</outputDirectory>
-                            <transformSchemas>
-                                <transformSchema>
-                                    <uri>http://ramify.net/places</uri>
-                                    <toFile>places.xsd</toFile>
-                                </transformSchema>
-                            </transformSchemas>
                             <schemaSourceExcludeFilters>
                                 <myExcludes
                                         implementation="org.codehaus.mojo.jaxb2.shared.filters.pattern.PatternFileFilter">
