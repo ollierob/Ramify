@@ -55,7 +55,7 @@ class XmlPlaceProvider implements PlaceProvider {
     static PlaceProvider readPlacesInDirectory(final JAXBContext context, final File root) throws JAXBException {
         final var provider = new XmlPlaceProvider(Maps.newConcurrentMap());
         final var unmarshaller = context.createUnmarshaller();
-        FileTraverseUtils.traverseDirectory(root, file -> file.getName().endsWith(".xml"), file -> readPlacesInFile(unmarshaller, file, provider));
+        FileTraverseUtils.traverseSubdirectories(root, file -> file.getName().endsWith(".xml"), file -> readPlacesInFile(unmarshaller, file, provider));
         logger.info("Loaded {} places from {}.", provider.size(), root);
         return provider.immutable();
     }
