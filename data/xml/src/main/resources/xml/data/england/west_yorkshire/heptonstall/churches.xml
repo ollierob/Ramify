@@ -9,4 +9,8 @@
         <foundedBefore date="1260"/>
     </church>
 
+    <church id="birchcliffe" denomination="Baptist">
+        <foundedIn year="1763"/>
+    </church>
+
 </churches>

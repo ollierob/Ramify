@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<places
+        xmlns="http://ramify.net/places"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://ramify.net/places ../../../../schema/schema1.xsd">
+
+    <township id="heptonstall">
+
+        <village id="heptonstall" name="Heptonstall">
+
+            <church id="st-thomas" name="St Thomas"/>
+
+        </village>
+
+    </township>
+
+</places>

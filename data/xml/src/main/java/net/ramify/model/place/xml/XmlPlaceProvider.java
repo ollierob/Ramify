@@ -16,6 +16,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 
@@ -64,7 +65,9 @@ class XmlPlaceProvider implements PlaceProvider {
         Preconditions.checkArgument(directory.isDirectory(), "Not a directory: %s", directory);
         Preconditions.checkArgument(directory.canRead(), "Not a readable directory: %s", directory);
         //First read files
-        for (final var file : MoreObjects.firstNonNull(directory.listFiles((d, name) -> name.endsWith(".xml")), EMPTY_FILES)) {
+        final var files = MoreObjects.firstNonNull(directory.listFiles((d, name) -> name.endsWith(".xml")), EMPTY_FILES);
+        Arrays.sort(files);
+        for (final var file : files) {
             if (file.isFile()) readPlacesInFile(unmarshaller, file, placeProvider);
         }
         //Second read subdirectories

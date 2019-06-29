@@ -6,9 +6,11 @@ import net.ramify.model.date.parse.DateParser;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(namespace = "http://ramify.net/dates", name = "dateRange")
-@XmlSeeAlso({XmlBeforeDate.class})
+@XmlType(namespace = XmlDateRange.NAMESPACE)
+@XmlSeeAlso({XmlBeforeDate.class, XmlInYear.class})
 public abstract class XmlDateRange {
+
+    public static final String NAMESPACE = "http://ramify.net/dates";
 
     public abstract DateRange resolve(DateParser parser);
 

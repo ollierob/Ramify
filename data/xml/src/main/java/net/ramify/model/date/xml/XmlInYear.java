@@ -1,21 +1,21 @@
 package net.ramify.model.date.xml;
 
-import net.ramify.model.date.BeforeDate;
 import net.ramify.model.date.DateRange;
+import net.ramify.model.date.InYear;
 import net.ramify.model.date.parse.DateParser;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlType(namespace = XmlDateRange.NAMESPACE)
-public class XmlBeforeDate extends XmlDateRange {
+public class XmlInYear extends XmlDateRange {
 
-    @XmlAttribute(name = "date", required = true)
-    private String date;
+    @XmlAttribute(name = "year", required = true)
+    private int year;
 
     @Override
     public DateRange resolve(final DateParser parser) {
-        return BeforeDate.strictlyBefore(parser.parse(date));
+        return new InYear(year);
     }
 
 }
