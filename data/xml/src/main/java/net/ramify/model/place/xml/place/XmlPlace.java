@@ -1,6 +1,6 @@
 package net.ramify.model.place.xml.place;
 
-import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
@@ -9,7 +9,7 @@ import net.ramify.model.place.provider.PlaceProvider;
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import java.util.Collection;
-import java.util.Map;
+import java.util.Set;
 import java.util.function.Consumer;
 
 public abstract class XmlPlace implements HasPlaceId {
@@ -34,11 +34,11 @@ public abstract class XmlPlace implements HasPlaceId {
         return name;
     }
 
-    public Map<PlaceId, Place> places(final PlaceProvider placeProvider) {
-        final var places = Maps.<PlaceId, Place>newHashMap();
+    public Set<Place> places(final PlaceProvider placeProvider) {
+        final var places = Sets.<Place>newHashSet();
         final var id = this.placeId();
         final var parent = placeProvider.get(id);
-        this.addPlaces(placeProvider, parent, place -> places.put(place.placeId(), place));
+        this.addPlaces(placeProvider, parent, places::add);
         return places;
     }
 
