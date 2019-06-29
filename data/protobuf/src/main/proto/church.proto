@@ -6,17 +6,29 @@ option java_outer_classname = "ChurchProto";
 import "place.proto";
 import "date.proto";
 
+message ChurchList {
+
+    repeated Church church = 1;
+
+}
+
 message Church {
 
     Place place = 1;
     string denomination = 2;
     DateRange established = 3;
     DateRange closed = 4;
+    string description = 5;
+
+    repeated ChurchRecordSet recordSet = 6;
 
 }
 
-message ChurchList {
+message ChurchRecordSet {
 
-    repeated Church church = 1;
+    string id = 1;
+    string name = 2;
+    DateRange covers = 3;
+    string notes = 4;
 
 }

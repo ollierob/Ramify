@@ -6,12 +6,14 @@ import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.place.HasPlace;
 import net.ramify.model.place.building.Church;
+import net.ramify.model.place.church.record.ChurchRecordSetInfo;
 import net.ramify.model.place.proto.ChurchProto;
 import net.ramify.utils.objects.Consumers;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.util.Collection;
+import java.util.Set;
 
 public interface ChurchInfo extends HasPlace, BuildsProto<ChurchProto.Church> {
 
@@ -27,7 +29,10 @@ public interface ChurchInfo extends HasPlace, BuildsProto<ChurchProto.Church> {
     @CheckForNull
     DateRange closed();
 
-    default boolean isRedundant() {
+    @Nonnull
+    Set<ChurchRecordSetInfo> records();
+
+    default boolean isClosed() {
         return this.closed() != null;
     }
 
@@ -38,6 +43,7 @@ public interface ChurchInfo extends HasPlace, BuildsProto<ChurchProto.Church> {
                 .setDenomination(MoreObjects.firstNonNull(this.denomination(), ""))
                 .setEstablished(this.founded().toProto());
         Consumers.ifNonNull(this.closed(), c -> builder.setClosed(c.toProto()));
+        this.records().forEach(record -> builder.addRecordSet(record.toProto()));
         return builder;
     }
 
