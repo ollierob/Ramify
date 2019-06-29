@@ -6,14 +6,25 @@
         xsi:schemaLocation="http://ramify.net/places ../../../schema/schema1.xsd">
 
     <parish id="heptonstall">
+
         <township id="heptonstall" name="Heptonstall">
+            <village id="heptonstall" name="Heptonstall">
+                <church id="heptonstall-st-thomas" name="St Thomas"/>
+            </village>
         </township>
+
         <township id="erringden" name="Erringden"/>
+
         <township id="stansfield" name="Stansfield"/>
+
         <township id="langfield" name="Langfield"/>
+
         <township id="wadsworth" name="Wadsworth"/>
+
         <town id="hebden_bridge" name="Hebden Bridge"/>
+
         <town id="todmorden" name="Todmorden"/>
+
     </parish>
 
 </places>

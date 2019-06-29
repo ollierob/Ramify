@@ -2,19 +2,19 @@ package net.ramify.model.place.xml.church;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.parse.DateParser;
-import net.ramify.model.place.church.Church;
+import net.ramify.model.place.church.ChurchInfo;
 import net.ramify.model.place.type.Building;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 
-public class ResolvedChurch implements Church {
+public class ResolvedChurchInfo implements ChurchInfo {
 
-    private final XmlChurch xml;
+    private final XmlChurchInfo xml;
     private final Building building;
     private final DateParser dateParser;
 
-    ResolvedChurch(final XmlChurch xml, final Building building, final DateParser dateParser) {
+    ResolvedChurchInfo(final XmlChurchInfo xml, final Building building, final DateParser dateParser) {
         this.xml = xml;
         this.building = building;
         this.dateParser = dateParser;

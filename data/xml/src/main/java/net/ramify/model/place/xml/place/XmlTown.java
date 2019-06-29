@@ -17,12 +17,13 @@ class XmlTown extends XmlPlace {
     }
 
     @Override
-    Place place(final PlaceId id, final Place parent) {
+    Place place(final PlaceId id, final String name, final Place parent) {
         throw new UnsupportedOperationException(); //TODO
     }
 
     @Override
     void addPlaces(final Set<PlaceId> places) {
+        places.add(this.placeId());
         throw new UnsupportedOperationException(); //TODO
     }
 }

@@ -6,7 +6,7 @@ import net.ramify.model.date.xml.XmlBeforeDate;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.PlaceId;
-import net.ramify.model.place.church.Church;
+import net.ramify.model.place.church.ChurchInfo;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.type.Building;
 
@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 
-class XmlChurch implements HasPlaceId {
+class XmlChurchInfo implements HasPlaceId {
 
     @XmlAttribute(name = "id", required = true)
     private String placeId;
@@ -52,9 +52,9 @@ class XmlChurch implements HasPlaceId {
     }
 
     @Nonnull
-    Church resolve(final PlaceProvider placeProvider, final DateParser dateParser) {
+    ChurchInfo resolve(final PlaceProvider placeProvider, final DateParser dateParser) {
         final var place = placeProvider.require(this.placeId(), Building.class);
-        return new ResolvedChurch(this, place, dateParser);
+        return new ResolvedChurchInfo(this, place, dateParser);
     }
 
 }

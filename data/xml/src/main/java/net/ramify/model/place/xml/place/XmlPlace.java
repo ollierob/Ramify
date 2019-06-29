@@ -14,6 +14,9 @@ public abstract class XmlPlace implements HasPlaceId {
     @XmlAttribute(name = "id", required = true)
     private String id;
 
+    @XmlAttribute(name = "name", required = true)
+    private String name;
+
     XmlPlace() {
     }
 
@@ -25,7 +28,7 @@ public abstract class XmlPlace implements HasPlaceId {
         return this.placeId(id);
     }
 
-    abstract Place place(PlaceId id, Place parent);
+    abstract Place place(PlaceId id, String name, Place parent);
 
     @Nonnull
     public Set<PlaceId> placeIds() {

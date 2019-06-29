@@ -7,9 +7,7 @@
         xsi:schemaLocation="http://ramify.net/places ../../../schema/schema1.xsd http://ramify.net/dates ../../../schema/schema2.xsd">
 
     <p:church id="church:heptonstall-st-thomas" parentId="village:heptonstall">
-
         <d:foundedBefore date="1260"/>
-
     </p:church>
 
 </churches>

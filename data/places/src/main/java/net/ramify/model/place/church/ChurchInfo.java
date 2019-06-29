@@ -13,7 +13,7 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.util.Collection;
 
-public interface Church extends HasPlace, BuildsProto<ChurchProto.Church> {
+public interface ChurchInfo extends HasPlace, BuildsProto<ChurchProto.Church> {
 
     @Nonnull
     Building place();
@@ -48,9 +48,9 @@ public interface Church extends HasPlace, BuildsProto<ChurchProto.Church> {
     }
 
     @Nonnull
-    static ChurchProto.ChurchList toProto(final Collection<Church> churches) {
+    static ChurchProto.ChurchList toProto(final Collection<ChurchInfo> churches) {
         final var list = ChurchProto.ChurchList.newBuilder();
-        list.addAllChurch(Iterables.transform(churches, Church::toProto));
+        list.addAllChurch(Iterables.transform(churches, ChurchInfo::toProto));
         return list.build();
     }
 

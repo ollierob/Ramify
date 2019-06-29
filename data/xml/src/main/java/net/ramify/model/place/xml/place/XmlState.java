@@ -6,15 +6,11 @@ import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.Country;
 import net.ramify.model.place.region.State;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Set;
 
 @XmlRootElement(name = "state")
 class XmlState extends XmlPlace {
-
-    @XmlAttribute(name = "name", required = true)
-    private String name;
 
     @Override
     PlaceId placeId(final String id) {
@@ -22,7 +18,7 @@ class XmlState extends XmlPlace {
     }
 
     @Override
-    State place(PlaceId id, Place parent) {
+    State place(final PlaceId id, final String name, final Place parent) {
         return new State(id, name, parent.requireAs(Country.class));
     }
 
