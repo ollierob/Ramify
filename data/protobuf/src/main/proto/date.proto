@@ -8,6 +8,8 @@ message DateRange {
     Date earliest = 1;
     Date latest = 2;
 
+    bool approximate = 3;
+
 }
 
 message Date {
