@@ -1,19 +1,23 @@
-package net.ramify.model.place.xml.places;
+package net.ramify.model.place.xml.place;
 
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
-import net.ramify.model.place.settlement.Town;
+import net.ramify.model.place.type.Building;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Set;
 
-@XmlRootElement(name = "town")
-class XmlTown extends XmlPlace {
+@XmlRootElement(name = "building")
+class XmlBuilding extends XmlPlace {
+
+    @XmlAttribute(name = "name")
+    private String name;
 
     @Override
     PlaceId placeId(final String id) {
-        return new Spid(Town.class, id);
+        return new Spid(Building.class, id);
     }
 
     @Override
@@ -23,6 +27,7 @@ class XmlTown extends XmlPlace {
 
     @Override
     void addPlaces(final Set<PlaceId> places) {
-        throw new UnsupportedOperationException(); //TODO
+        places.add(this.placeId());
     }
+
 }

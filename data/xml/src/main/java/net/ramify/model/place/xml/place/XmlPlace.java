@@ -1,4 +1,4 @@
-package net.ramify.model.place.xml.places;
+package net.ramify.model.place.xml.place;
 
 import com.google.common.collect.Sets;
 import net.ramify.model.place.HasPlaceId;

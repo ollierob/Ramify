@@ -1,4 +1,4 @@
-package net.ramify.model.place.xml.settlements;
+package net.ramify.model.place.xml.church;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.parse.DateParser;

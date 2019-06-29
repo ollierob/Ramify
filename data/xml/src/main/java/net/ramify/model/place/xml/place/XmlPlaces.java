@@ -1,4 +1,4 @@
-package net.ramify.model.place.xml.places;
+package net.ramify.model.place.xml.place;
 
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;

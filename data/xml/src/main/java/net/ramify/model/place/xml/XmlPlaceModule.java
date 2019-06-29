@@ -4,8 +4,8 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import net.ramify.model.place.church.ChurchProvider;
-import net.ramify.model.place.xml.places.XmlPlaces;
-import net.ramify.model.place.xml.settlements.XmlChurches;
+import net.ramify.model.place.xml.church.XmlChurches;
+import net.ramify.model.place.xml.place.XmlPlaces;
 
 import javax.inject.Named;
 import javax.xml.bind.JAXBContext;

@@ -1,4 +1,4 @@
-package net.ramify.model.place.xml.settlements;
+package net.ramify.model.place.xml.church;
 
 import com.google.common.collect.Lists;
 import net.ramify.model.date.parse.DateParser;
