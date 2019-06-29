@@ -5,7 +5,6 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.Parish;
-import net.ramify.model.place.type.Region;
 
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
@@ -31,8 +30,8 @@ public class XmlParish extends XmlPlace {
     }
 
     @Override
-    Parish place(final Place parent) {
-        return new Parish(this.placeId(), this.name(), parent.requireAs(Region.class));
+    Parish place(final Place parent) throws Place.InvalidPlaceTypeException {
+        return new Parish(this.placeId(), this.name(), parent);
     }
 
     @Override

@@ -28,7 +28,7 @@ class XmlCountryCounty extends XmlPlace {
     }
 
     @Override
-    CountryCounty place(final Place parent) {
+    CountryCounty place(final Place parent) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
         return new CountryCounty(this.placeId(), this.name(), parent);
     }

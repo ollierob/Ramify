@@ -18,7 +18,7 @@ class XmlChurch extends XmlPlace {
     }
 
     @Override
-    Church place(final Place parent) {
+    Church place(final Place parent) throws Place.InvalidPlaceTypeException {
         return new Church(this.placeId(), this.name(), parent);
     }
 

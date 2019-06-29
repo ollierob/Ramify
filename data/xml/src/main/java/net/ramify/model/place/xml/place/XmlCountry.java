@@ -29,7 +29,7 @@ class XmlCountry extends XmlPlace {
     }
 
     @Override
-    Place place(final Place parent) {
+    Place place(final Place parent) throws Place.InvalidPlaceTypeException {
         return new Country(this.placeId(), this.name(), parent);
     }
 

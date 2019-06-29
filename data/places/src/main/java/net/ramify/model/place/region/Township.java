@@ -8,7 +8,7 @@ public class Township extends AbstractRegion {
 
     private final Region parent;
 
-    public Township(final PlaceId id, final String name, final Place parent) {
+    public Township(final PlaceId id, final String name, final Place parent) throws InvalidPlaceTypeException {
         this(id, name, parent.requireAs(Region.class));
     }
 

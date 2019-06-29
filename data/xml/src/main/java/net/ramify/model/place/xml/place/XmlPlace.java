@@ -54,17 +54,17 @@ public abstract class XmlPlace implements HasPlaceId {
             final var self = this.place(placeProvider, parent);
             addPlace.accept(self);
             this.children().forEach(child -> child.addPlaces(placeProvider, self, addPlace));
-        } catch (final RuntimeException rex) {
+        } catch (final Place.InvalidPlaceTypeException | RuntimeException rex) {
             throw new RuntimeException("Error reading " + this, rex);
         }
     }
 
-    private Place place(final PlaceProvider placeProvider, final Place parent) {
+    private Place place(final PlaceProvider placeProvider, final Place parent) throws Place.InvalidPlaceTypeException {
         return name == null ? placeProvider.require(this.placeId()) : this.place(parent);
     }
 
     @Nonnull
-    abstract Place place(Place parent);
+    abstract Place place(Place parent) throws Place.InvalidPlaceTypeException;
 
     abstract Collection<XmlPlace> children();
 

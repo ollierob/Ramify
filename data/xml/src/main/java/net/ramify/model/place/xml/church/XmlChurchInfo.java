@@ -5,6 +5,7 @@ import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.date.xml.XmlBeforeDate;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.place.HasPlaceId;
+import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.building.Church;
 import net.ramify.model.place.church.ChurchInfo;
@@ -51,8 +52,12 @@ class XmlChurchInfo implements HasPlaceId {
 
     @Nonnull
     ChurchInfo resolve(final PlaceProvider placeProvider, final DateParser dateParser) {
-        final var place = placeProvider.require(this.placeId(), Church.class);
-        return new ResolvedChurchInfo(this, place, dateParser);
+        try {
+            final var place = placeProvider.require(this.placeId(), Church.class);
+            return new ResolvedChurchInfo(this, place, dateParser);
+        } catch (final Place.InvalidPlaceTypeException ex) {
+            throw new IllegalArgumentException(ex);
+        }
     }
 
 }

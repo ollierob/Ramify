@@ -27,7 +27,7 @@ class XmlVillage extends XmlPlace {
     }
 
     @Override
-    Village place(final Place parent) {
+    Village place(final Place parent) throws Place.InvalidPlaceTypeException {
         return new Village(this.placeId(), this.name(), parent);
     }
 

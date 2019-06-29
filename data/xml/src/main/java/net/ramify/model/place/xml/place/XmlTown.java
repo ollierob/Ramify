@@ -4,7 +4,6 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.settlement.Town;
-import net.ramify.model.place.type.Region;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
@@ -19,8 +18,8 @@ class XmlTown extends XmlPlace {
     }
 
     @Override
-    Town place(final Place parent) {
-        return new Town(this.placeId(), this.name(), parent.requireAs(Region.class));
+    Town place(final Place parent) throws Place.InvalidPlaceTypeException {
+        return new Town(this.placeId(), this.name(), parent);
     }
 
     @Override

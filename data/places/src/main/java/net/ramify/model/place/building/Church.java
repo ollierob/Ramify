@@ -6,22 +6,21 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.type.Building;
 import net.ramify.model.place.type.SettlementOrRegion;
 
-import javax.annotation.CheckForNull;
+import java.util.Objects;
 
 public class Church extends AbstractPlace implements Building {
 
     private final SettlementOrRegion parent;
 
-    public Church(final PlaceId id, final String name, final Place parent) {
+    public Church(final PlaceId id, final String name, final Place parent) throws InvalidPlaceTypeException {
         this(id, name, parent.requireAs(SettlementOrRegion.class));
     }
 
     public Church(final PlaceId id, final String name, final SettlementOrRegion parent) {
         super(id, name);
-        this.parent = parent;
+        this.parent = Objects.requireNonNull(parent, "parent");
     }
 
-    @CheckForNull
     @Override
     public SettlementOrRegion parent() {
         return parent;

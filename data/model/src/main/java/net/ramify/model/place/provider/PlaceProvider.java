@@ -18,7 +18,7 @@ public interface PlaceProvider extends Provider<PlaceId, Place> {
     }
 
     @Nonnull
-    default <P extends Place> P require(final PlaceId id, final Class<P> type) {
+    default <P extends Place> P require(final PlaceId id, final Class<P> type) throws Place.InvalidPlaceTypeException {
         return this.require(id).requireAs(type);
     }
 

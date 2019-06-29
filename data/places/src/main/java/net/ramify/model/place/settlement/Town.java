@@ -6,7 +6,7 @@ import net.ramify.model.place.type.Region;
 
 public class Town extends AbstractSettlement {
 
-    public Town(final PlaceId id, final String name, final Place parent) {
+    public Town(final PlaceId id, final String name, final Place parent) throws InvalidPlaceTypeException {
         this(id, name, parent.requireAs(Region.class));
     }
 

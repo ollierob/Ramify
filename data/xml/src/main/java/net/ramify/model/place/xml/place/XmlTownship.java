@@ -28,7 +28,7 @@ class XmlTownship extends XmlPlace {
     }
 
     @Override
-    Township place(final Place parent) {
+    Township place(final Place parent) throws Place.InvalidPlaceTypeException {
         return new Township(this.placeId(), this.name(), parent);
     }
 

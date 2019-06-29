@@ -3,7 +3,6 @@ package net.ramify.model.place.xml.place;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
-import net.ramify.model.place.region.Country;
 import net.ramify.model.place.region.State;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -18,8 +17,8 @@ class XmlState extends XmlPlace {
     }
 
     @Override
-    State place(final Place parent) {
-        return new State(this.placeId(), this.name(), parent.requireAs(Country.class));
+    State place(final Place parent) throws Place.InvalidPlaceTypeException {
+        return new State(this.placeId(), this.name(), parent);
     }
 
     @Override

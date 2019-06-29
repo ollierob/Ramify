@@ -7,7 +7,7 @@ public class CountryCounty extends AbstractRegion {
 
     private final Country country;
 
-    public CountryCounty(final PlaceId id, final String name, final Place parent) {
+    public CountryCounty(final PlaceId id, final String name, final Place parent) throws InvalidPlaceTypeException {
         this(id, name, parent.requireAs(Country.class));
     }
 
