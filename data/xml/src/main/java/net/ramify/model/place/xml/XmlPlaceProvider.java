@@ -16,9 +16,10 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.util.Collection;
 import java.util.Map;
 
-public class XmlPlaceProvider implements PlaceProvider {
+class XmlPlaceProvider implements PlaceProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(XmlPlaceProvider.class);
     private static final File[] EMPTY_FILES = new File[0];
@@ -39,6 +40,14 @@ public class XmlPlaceProvider implements PlaceProvider {
         places.put(place.placeId(), place);
     }
 
+    void addAll(final Collection<Place> places) {
+        places.forEach(this::add);
+    }
+
+    int size() {
+        return places.size();
+    }
+
     PlaceProvider immutable() {
         return new XmlPlaceProvider(ImmutableMap.copyOf(places));
     }
@@ -47,6 +56,7 @@ public class XmlPlaceProvider implements PlaceProvider {
         final var provider = new XmlPlaceProvider(Maps.newConcurrentMap());
         final var unmarshaller = context.createUnmarshaller();
         readPlacesInDirectory(unmarshaller, directory, provider);
+        logger.info("Loaded {} places from {}.", provider.size(), directory);
         return provider.immutable();
     }
 
@@ -68,11 +78,13 @@ public class XmlPlaceProvider implements PlaceProvider {
         Preconditions.checkArgument(file.canRead(), "Not a readable file: %s", file);
         Preconditions.checkArgument(file.getName().endsWith(".xml"), "Not an XML file: %s", file);
         try {
+            logger.info("Reading places from file {}", file);
             final var unmarshalled = unmarshaller.unmarshal(file);
             if (!(unmarshalled instanceof XmlPlaces)) return;
             final var places = (XmlPlaces) unmarshalled;
+            placeProvider.addAll(places.places(placeProvider));
         } catch (final JAXBException jex) {
-            logger.warn("Could not read places in file " + file, jex);
+            logger.warn("Could not read places in file " + file + ": " + jex.getMessage());
         }
     }
 

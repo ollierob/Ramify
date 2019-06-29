@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-
 <places
         xmlns="http://ramify.net/places"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://ramify.net/places ../../schema/schema1.xsd">
 
-    <county id="wry">
+    <country id="england" name="England">
 
-        <parish id="halifax" name="Halifax">
+        <county id="west_yorkshire" name="West Yorkshire"/>
 
-            <parish id="heptonstall" name="Heptonstall"/>
-
-        </parish>
-
-    </county>
-
+    </country>
 
 </places>

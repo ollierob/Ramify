@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "county")
 class XmlCountryCounty extends XmlPlace {
@@ -27,6 +28,7 @@ class XmlCountryCounty extends XmlPlace {
 
     @Override
     CountryCounty place(final Place parent) {
+        Objects.requireNonNull(parent, "parent");
         return new CountryCounty(this.placeId(), this.name(), parent.requireAs(Country.class));
     }
 

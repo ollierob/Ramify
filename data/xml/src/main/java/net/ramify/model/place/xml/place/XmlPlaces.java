@@ -8,6 +8,7 @@ import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -20,6 +21,7 @@ public class XmlPlaces {
 
     @Nonnull
     public Set<Place> places(final PlaceProvider placeProvider) {
+        if (places == null) return Collections.emptySet();
         final var places = Sets.<Place>newHashSet();
         this.places.forEach(place -> places.addAll(place.places(placeProvider)));
         return places;

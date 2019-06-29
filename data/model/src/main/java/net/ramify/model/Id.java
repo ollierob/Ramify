@@ -33,4 +33,9 @@ public abstract class Id {
         return value.hashCode();
     }
 
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + '[' + value + ']';
+    }
+
 }

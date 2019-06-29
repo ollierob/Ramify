@@ -8,10 +8,12 @@ import net.ramify.model.place.provider.PlaceProvider;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.Collection;
 import java.util.Set;
 import java.util.function.Consumer;
 
+@XmlSeeAlso({XmlCountry.class, XmlState.class, XmlCountryCounty.class, XmlParish.class})
 public abstract class XmlPlace implements HasPlaceId {
 
     public static final String NAMESPACE = "http://ramify.net/places";
@@ -43,13 +45,22 @@ public abstract class XmlPlace implements HasPlaceId {
     }
 
     private void addPlaces(final PlaceProvider placeProvider, final Place parent, final Consumer<Place> addPlace) {
-        final var self = this.place(parent);
-        addPlace.accept(self);
-        this.children().forEach(child -> child.addPlaces(placeProvider, self, addPlace));
+        try {
+            final var self = this.place(parent);
+            addPlace.accept(self);
+            this.children().forEach(child -> child.addPlaces(placeProvider, self, addPlace));
+        } catch (final RuntimeException rex) {
+            throw new RuntimeException("Error reading " + this, rex);
+        }
     }
 
+    @Nonnull
     abstract Place place(Place parent);
 
     abstract Collection<XmlPlace> children();
 
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + "[" + id + "]";
+    }
 }

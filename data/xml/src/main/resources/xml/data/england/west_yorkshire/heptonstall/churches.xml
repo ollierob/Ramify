@@ -3,7 +3,7 @@
 <churches
         xmlns="http://ramify.net/places"
         xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
-        xs:schemaLocation="http://ramify.net/places ../../../schema/schema1.xsd">
+        xs:schemaLocation="http://ramify.net/places ../../../../schema/schema1.xsd">
 
     <church id="heptonstall-st-thomas" denomination="Church of England">
         <foundedBefore date="1260"/>

@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "country")
 class XmlCountry extends XmlPlace {
@@ -34,7 +35,7 @@ class XmlCountry extends XmlPlace {
 
     @Override
     Collection<XmlPlace> children() {
-        return children;
+        return Objects.requireNonNull(children, "Country has no children");
     }
 
 }
