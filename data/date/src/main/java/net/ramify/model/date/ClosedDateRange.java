@@ -4,11 +4,11 @@ import javax.annotation.Nonnull;
 import java.time.chrono.ChronoLocalDate;
 import java.util.Optional;
 
-class ClosedDateRange implements DateRange {
+public class ClosedDateRange implements DateRange {
 
     private final ChronoLocalDate earliest, latest;
 
-    ClosedDateRange(ChronoLocalDate earliest, ChronoLocalDate latest) {
+    public ClosedDateRange(final ChronoLocalDate earliest, final ChronoLocalDate latest) {
         this.earliest = earliest;
         this.latest = latest;
     }

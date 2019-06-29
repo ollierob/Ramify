@@ -1,7 +1,7 @@
 package net.ramify.model.record;
 
 import com.google.common.collect.Sets;
-import net.ramify.model.date.DateRange;
+import net.ramify.model.date.BeforeDate;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.type.civil.GenericBirth;
 import net.ramify.model.event.type.civil.GenericDeath;
@@ -73,7 +73,7 @@ public class GenericRecordEntry implements HasPersonId {
         final var events = Sets.<Event>newHashSet();
         if (age != null) events.add(new GenericBirth(id, age.birthDate(record.date())));
         if (residence != null) events.add(new GenericResidence(id, record.date(), residence));
-        if (predeceased) events.add(new GenericDeath(id, DateRange.before(record.date())));
+        if (predeceased) events.add(new GenericDeath(id, BeforeDate.strictlyBefore(record.date())));
         if (events.isEmpty()) events.add(new Flourished(id, record.date()));
         return events;
     }

@@ -1,6 +1,6 @@
 package net.ramify.model.event.infer;
 
-import net.ramify.model.date.DateRange;
+import net.ramify.model.date.BeforeDate;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.type.civil.GenericMarriage;
 import net.ramify.model.person.PersonId;
@@ -16,7 +16,7 @@ public interface MarriageConditionEventInference {
     Set<Event> inferEvents(PersonId personId, Record record);
 
     MarriageConditionEventInference UNMARRIED = (id, record) -> Collections.emptySet();
-    MarriageConditionEventInference MARRIED = (id, record) -> Collections.singleton(new GenericMarriage(id, DateRange.before(record.date())));
+    MarriageConditionEventInference MARRIED = (id, record) -> Collections.singleton(new GenericMarriage(id, BeforeDate.strictlyBefore(record.date())));
     MarriageConditionEventInference WIDOWED = MARRIED;
 
 }

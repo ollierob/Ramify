@@ -65,24 +65,6 @@ public interface DateRange extends BuildsProto<DateProto.DateRange> {
         return date;
     }
 
-    static ExactDate on(final ChronoLocalDate date) {
-        return new ExactDate(date);
-    }
-
-    static DateRange before(final DateRange date) {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
-    static DateRange between(final ChronoLocalDate earliest, final ChronoLocalDate latest) {
-        if (earliest.isAfter(latest)) return between(latest, earliest);
-        return new ClosedDateRange(earliest, latest);
-    }
-
-    static DateRange approximately(final ChronoLocalDate date, final Period delta) {
-        if (delta.isZero()) return on(date);
-        return new ApproximateDate(date, delta);
-    }
-
     Comparator<DateRange> COMPARE_BY_EARLIEST = (d1, d2) -> d1.earliestInclusive().flatMap(e1 -> d2.earliestInclusive().map(e1::compareTo)).orElse(0); //FIXME check if present
 
     DateRange ALWAYS = new DateRange() {

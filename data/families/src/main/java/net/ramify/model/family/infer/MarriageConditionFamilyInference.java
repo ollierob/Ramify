@@ -2,7 +2,7 @@ package net.ramify.model.family.infer;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import net.ramify.model.date.DateRange;
+import net.ramify.model.date.BeforeDate;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.infer.MarriageConditionEventInference;
 import net.ramify.model.event.type.civil.GenericDeath;
@@ -33,7 +33,7 @@ public interface MarriageConditionFamilyInference {
     MarriageConditionFamilyInference WIDOWED = (person, record, f) -> {
         final var deceased = f.createSpouse();
         final var relationship = new Married(person, deceased);
-        final var date = DateRange.before(record.date());
+        final var date = BeforeDate.strictlyBefore(record.date());
         final var events = ArrayListMultimap.<PersonId, Event>create();
         events.putAll(person, MarriageConditionEventInference.WIDOWED.inferEvents(person, record));
         events.putAll(deceased, MarriageConditionEventInference.WIDOWED.inferEvents(deceased, record));

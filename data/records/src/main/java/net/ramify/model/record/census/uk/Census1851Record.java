@@ -20,7 +20,6 @@ import net.ramify.model.record.census.CensusRecord;
 import net.ramify.model.relationship.Relationship;
 
 import javax.annotation.Nonnull;
-import java.time.LocalDate;
 import java.time.Month;
 import java.time.Period;
 import java.util.Collection;
@@ -29,7 +28,7 @@ import java.util.Set;
 
 public class Census1851Record extends CensusRecord {
 
-    public static final ExactDate CENSUS_DATE = DateRange.on(LocalDate.of(1851, Month.MARCH, 30));
+    public static final ExactDate CENSUS_DATE = ExactDate.on(1851, Month.MARCH, 30);
 
     private final Census1851Head head;
     private final Collection<Census1851Resident> residents;

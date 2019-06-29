@@ -1,7 +1,6 @@
 package net.ramify.model.person.age;
 
 import net.ramify.model.date.DateRange;
-import net.ramify.model.date.ExactDate;
 
 import javax.annotation.Nonnull;
 import java.time.Period;
@@ -16,15 +15,10 @@ public interface Age {
     @Nonnull
     Period upperBound();
 
-    default DateRange birthDate(final DateRange range) {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
-    default DateRange birthDate(final ExactDate exactDate) {
-        final var date = exactDate.date();
-        final var latest = date.minus(this.lowerBound());
-        final var earliest = date.minus(this.upperBound());
-        return DateRange.between(earliest, latest);
+    default DateRange birthDate(final DateRange date) {
+        final var latest = date.earliestInclusive().map(d -> d.minus(this.lowerBound()));
+        final var earliest = date.latestInclusive().map(d -> d.plus(this.upperBound()));
+        return new AgeDateRange(earliest, latest);
     }
 
     static Age exactly(final Period period) {

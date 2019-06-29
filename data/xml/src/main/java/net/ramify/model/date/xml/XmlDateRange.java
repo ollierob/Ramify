@@ -2,13 +2,13 @@ package net.ramify.model.date.xml;
 
 import net.ramify.model.date.DateRange;
 
+import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlType(namespace = "http://ramify.net", name = "dateRange")
-public class XmlDateRange {
+@XmlSeeAlso({XmlBeforeDate.class})
+public abstract class XmlDateRange {
 
-    public DateRange resolve() {
-        throw new UnsupportedOperationException();
-    }
+    public abstract DateRange resolve();
 
 }

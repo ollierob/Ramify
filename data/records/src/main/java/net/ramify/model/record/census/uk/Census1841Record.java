@@ -19,14 +19,13 @@ import net.ramify.model.record.census.CensusRecord;
 import net.ramify.utils.collections.SetUtils;
 
 import javax.annotation.Nonnull;
-import java.time.LocalDate;
 import java.time.Month;
 import java.time.Period;
 import java.util.Set;
 
 public class Census1841Record extends CensusRecord {
 
-    public static final ExactDate CENSUS_DATE = DateRange.on(LocalDate.of(1841, Month.JUNE, 6));
+    public static final ExactDate CENSUS_DATE = ExactDate.on(1841, Month.JUNE, 6);
 
     private final Set<Census1841Entry> entries;
 

@@ -1,7 +1,6 @@
 package net.ramify.model.record.census.uk;
 
 import com.google.common.collect.Sets;
-import net.ramify.model.date.DateRange;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.type.civil.GenericBirth;
@@ -26,7 +25,7 @@ import java.util.Set;
 
 public class Register1939Record extends CensusRecord {
 
-    public static final ExactDate CENSUS_DATE = DateRange.on(LocalDate.of(1939, Month.SEPTEMBER, 29));
+    public static final ExactDate CENSUS_DATE = ExactDate.on(1939, Month.SEPTEMBER, 29);
 
     private final List<Register1939Entry> entries;
 
@@ -69,7 +68,7 @@ public class Register1939Record extends CensusRecord {
         }
 
         Register1939Person build(final Register1939Record record) {
-            return new Register1939Person(id, name, gender, record.placeId(), DateRange.on(birthDate), occupation);
+            return new Register1939Person(id, name, gender, record.placeId(), ExactDate.on(birthDate), occupation);
         }
 
     }
