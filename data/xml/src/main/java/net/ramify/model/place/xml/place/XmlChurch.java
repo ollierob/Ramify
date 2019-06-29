@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.Collections;
 
-@XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "building")
+@XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "church")
 class XmlChurch extends XmlPlace {
 
     @Override
@@ -18,7 +18,7 @@ class XmlChurch extends XmlPlace {
     }
 
     @Override
-    Church place(Place parent) {
+    Church place(final Place parent) {
         return new Church(this.placeId(), this.name(), parent);
     }
 

@@ -5,6 +5,7 @@ import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.provider.PlaceProvider;
+import net.ramify.utils.objects.Functions;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -39,19 +40,27 @@ public abstract class XmlPlace implements HasPlaceId {
     public Set<Place> places(final PlaceProvider placeProvider) {
         final var places = Sets.<Place>newHashSet();
         final var id = this.placeId();
-        final var parent = placeProvider.get(id);
+        final var parent = this.parent(id, placeProvider);
         this.addPlaces(placeProvider, parent, places::add);
         return places;
     }
 
+    private Place parent(final PlaceId id, final PlaceProvider placeProvider) {
+        return Functions.ifNonNull(placeProvider.get(id), Place::parent);
+    }
+
     private void addPlaces(final PlaceProvider placeProvider, final Place parent, final Consumer<Place> addPlace) {
         try {
-            final var self = this.place(parent);
+            final var self = this.place(placeProvider, parent);
             addPlace.accept(self);
             this.children().forEach(child -> child.addPlaces(placeProvider, self, addPlace));
         } catch (final RuntimeException rex) {
             throw new RuntimeException("Error reading " + this, rex);
         }
+    }
+
+    private Place place(final PlaceProvider placeProvider, final Place parent) {
+        return name == null ? placeProvider.require(this.placeId()) : this.place(parent);
     }
 
     @Nonnull

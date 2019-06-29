@@ -9,8 +9,8 @@ public abstract class AbstractPlace implements Place {
     private final String name;
 
     protected AbstractPlace(final PlaceId id, final String name) {
-        this.id = Objects.requireNonNull(id);
-        this.name = Objects.requireNonNull(name);
+        this.id = Objects.requireNonNull(id, "id");
+        this.name = Objects.requireNonNull(name, "name");
     }
 
     @Nonnull

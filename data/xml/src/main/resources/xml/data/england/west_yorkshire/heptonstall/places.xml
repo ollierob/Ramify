@@ -9,7 +9,7 @@
 
         <township id="heptonstall" name="Heptonstall">
             <village id="heptonstall" name="Heptonstall">
-                <church id="heptonstall-st-thomas" name="St Thomas"/>
+                <church id="st-thomas" name="St Thomas"/>
             </village>
         </township>
 

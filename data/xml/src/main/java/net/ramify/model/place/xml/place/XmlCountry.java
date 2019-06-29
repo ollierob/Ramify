@@ -6,8 +6,8 @@ import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.Country;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.List;
@@ -16,10 +16,10 @@ import java.util.Objects;
 @XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "country")
 class XmlCountry extends XmlPlace {
 
-    @XmlElements({
-            @XmlElement(name = "country", type = XmlCountry.class),
-            @XmlElement(name = "county", type = XmlCountryCounty.class),
-            @XmlElement(name = "state", type = XmlState.class)
+    @XmlElementRefs({
+            @XmlElementRef(name = "country", type = XmlCountry.class),
+            @XmlElementRef(name = "county", type = XmlCountryCounty.class),
+            @XmlElementRef(name = "state", type = XmlState.class)
     })
     private List<XmlPlace> children;
 

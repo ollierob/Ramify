@@ -60,4 +60,18 @@ public interface Place extends HasPlaceId, Castable<Place>, BuildsProto<PlacePro
         return this.toProtoBuilder().build();
     }
 
+    @Override
+    default <R extends Place> R requireAs(final Class<? extends R> type) {
+        final var cast = this.as(type).orElse(null);
+        if (cast == null) throw new InvalidPlaceTypeException(type, this.getClass());
+        return cast;
+    }
+
+    class InvalidPlaceTypeException extends RuntimeException {
+
+        public InvalidPlaceTypeException(final Class<?> expected, final Class<?> actual) {
+            super("Invalid type: expected " + expected.getSimpleName() + " but was " + actual.getSimpleName());
+        }
+    }
+
 }

@@ -1,21 +1,23 @@
 package net.ramify.model.place.xml.place;
 
+import com.google.common.base.MoreObjects;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.settlement.Village;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "village")
 class XmlVillage extends XmlPlace {
 
-    @XmlElements({
-            @XmlElement(name = "church", type = XmlChurch.class),
+    @XmlElementRefs({
+            @XmlElementRef(name = "church", type = XmlChurch.class),
     })
     private List<XmlPlace> children;
 
@@ -31,7 +33,7 @@ class XmlVillage extends XmlPlace {
 
     @Override
     Collection<XmlPlace> children() {
-        return children;
+        return MoreObjects.firstNonNull(children, Collections.emptyList());
     }
 
 }

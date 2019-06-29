@@ -1,23 +1,24 @@
 package net.ramify.model.place.xml.place;
 
+import com.google.common.base.MoreObjects;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
-import net.ramify.model.place.region.Country;
 import net.ramify.model.place.region.CountryCounty;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 @XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "county")
 class XmlCountryCounty extends XmlPlace {
 
-    @XmlElements({
-            @XmlElement(name = "parish", type = XmlParish.class)
+    @XmlElementRefs({
+            @XmlElementRef(name = "parish", type = XmlParish.class)
     })
     private List<XmlPlace> children;
 
@@ -29,12 +30,12 @@ class XmlCountryCounty extends XmlPlace {
     @Override
     CountryCounty place(final Place parent) {
         Objects.requireNonNull(parent, "parent");
-        return new CountryCounty(this.placeId(), this.name(), parent.requireAs(Country.class));
+        return new CountryCounty(this.placeId(), this.name(), parent);
     }
 
     @Override
     Collection<XmlPlace> children() {
-        return children;
+        return MoreObjects.firstNonNull(children, Collections.emptyList());
     }
 
 }
