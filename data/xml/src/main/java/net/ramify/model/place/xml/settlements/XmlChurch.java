@@ -1,16 +1,20 @@
 package net.ramify.model.place.xml.settlements;
 
 import net.ramify.model.date.DateRange;
+import net.ramify.model.date.parse.DateParser;
+import net.ramify.model.date.xml.XmlBeforeDate;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.church.Church;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.type.Building;
-import net.ramify.utils.objects.Functions;
 
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
 
 class XmlChurch implements HasPlaceId {
 
@@ -23,11 +27,10 @@ class XmlChurch implements HasPlaceId {
     @XmlAttribute(name = "denomination")
     private String denomination;
 
-    @XmlElement(name = "founded", required = true)
+    @XmlElements({
+            @XmlElement(name = "foundedBefore", type = XmlBeforeDate.class)
+    })
     private XmlDateRange founded;
-
-    @XmlElement(name = "closed")
-    private XmlDateRange closed;
 
     @Override
     public PlaceId placeId() {
@@ -38,17 +41,20 @@ class XmlChurch implements HasPlaceId {
         return denomination;
     }
 
-    DateRange founded() {
-        return founded.resolve();
+    @Nonnull
+    DateRange founded(final DateParser dateParser) {
+        return founded.resolve(dateParser);
     }
 
+    @CheckForNull
     DateRange closed() {
-        return Functions.ifNonNull(closed, XmlDateRange::resolve);
+        return null;
     }
 
-    Church resolve(final PlaceProvider<Building> placeProvider) {
+    @Nonnull
+    Church resolve(final PlaceProvider<Building> placeProvider, final DateParser dateParser) {
         final var place = placeProvider.require(this.placeId());
-        return new ResolvedChurch(this, place);
+        return new ResolvedChurch(this, place, dateParser);
     }
 
 }

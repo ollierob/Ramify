@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <churches
-        xmlns="http://ramify.net/places"
+        xmlns:p="http://ramify.net/places"
+        xmlns:d="http://ramify.net/dates"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://ramify.net/places ../../../schema/schema1.xsd">
+        xsi:schemaLocation="http://ramify.net/places ../../../schema/schema1.xsd http://ramify.net/dates ../../../schema/schema2.xsd">
 
-    <church id="church:heptonstall-st-thomas" parentId="village:heptonstall">
+    <p:church id="church:heptonstall-st-thomas" parentId="village:heptonstall">
 
-    </church>
+        <d:foundedBefore date="1260"/>
+
+    </p:church>
 
 </churches>

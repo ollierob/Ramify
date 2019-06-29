@@ -14,10 +14,6 @@ public class BeforeDate<D extends ChronoLocalDate> implements DateRange {
         return new BeforeDate<>(date, false);
     }
 
-    public static BeforeDate<ChronoLocalDate> strictlyBefore(final String date) {
-        return strictlyBefore(DateParsing.parse(date));
-    }
-
     private final D date;
     private final boolean approximate;
 
