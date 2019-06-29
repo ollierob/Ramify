@@ -1,6 +1,5 @@
 package net.ramify.model.place.xml;
 
-import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
@@ -8,6 +7,7 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.xml.place.XmlPlaces;
+import net.ramify.utils.file.FileTraverseUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +16,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 
@@ -53,30 +52,15 @@ class XmlPlaceProvider implements PlaceProvider {
         return new XmlPlaceProvider(ImmutableMap.copyOf(places));
     }
 
-    static PlaceProvider readPlacesInDirectory(final JAXBContext context, final File directory) throws JAXBException {
+    static PlaceProvider readPlacesInDirectory(final JAXBContext context, final File root) throws JAXBException {
         final var provider = new XmlPlaceProvider(Maps.newConcurrentMap());
         final var unmarshaller = context.createUnmarshaller();
-        readPlacesInDirectory(unmarshaller, directory, provider);
-        logger.info("Loaded {} places from {}.", provider.size(), directory);
+        FileTraverseUtils.traverseDirectory(root, file -> file.getName().endsWith(".xml"), file -> readPlacesInFile(unmarshaller, file, provider));
+        logger.info("Loaded {} places from {}.", provider.size(), root);
         return provider.immutable();
     }
 
-    static void readPlacesInDirectory(final Unmarshaller unmarshaller, final File directory, final XmlPlaceProvider placeProvider) {
-        Preconditions.checkArgument(directory.isDirectory(), "Not a directory: %s", directory);
-        Preconditions.checkArgument(directory.canRead(), "Not a readable directory: %s", directory);
-        //First read files
-        final var files = MoreObjects.firstNonNull(directory.listFiles((d, name) -> name.endsWith(".xml")), EMPTY_FILES);
-        Arrays.sort(files);
-        for (final var file : files) {
-            if (file.isFile()) readPlacesInFile(unmarshaller, file, placeProvider);
-        }
-        //Second read subdirectories
-        for (final var subdirectory : MoreObjects.firstNonNull(directory.listFiles(File::isDirectory), EMPTY_FILES)) {
-            readPlacesInDirectory(unmarshaller, subdirectory, placeProvider);
-        }
-    }
-
-    static void readPlacesInFile(final Unmarshaller unmarshaller, final File file, final XmlPlaceProvider placeProvider) {
+    private static void readPlacesInFile(final Unmarshaller unmarshaller, final File file, final XmlPlaceProvider placeProvider) {
         Preconditions.checkArgument(file.isFile(), "Not a file: %s", file);
         Preconditions.checkArgument(file.canRead(), "Not a readable file: %s", file);
         Preconditions.checkArgument(file.getName().endsWith(".xml"), "Not an XML file: %s", file);
