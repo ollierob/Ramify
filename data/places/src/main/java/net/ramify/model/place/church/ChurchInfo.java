@@ -5,8 +5,8 @@ import com.google.common.collect.Iterables;
 import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.place.HasPlace;
+import net.ramify.model.place.building.Church;
 import net.ramify.model.place.proto.ChurchProto;
-import net.ramify.model.place.type.Building;
 import net.ramify.utils.objects.Consumers;
 
 import javax.annotation.CheckForNull;
@@ -16,7 +16,7 @@ import java.util.Collection;
 public interface ChurchInfo extends HasPlace, BuildsProto<ChurchProto.Church> {
 
     @Nonnull
-    Building place();
+    Church place();
 
     @CheckForNull
     String denomination();

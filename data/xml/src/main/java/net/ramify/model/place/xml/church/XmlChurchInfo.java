@@ -10,7 +10,6 @@ import net.ramify.model.place.building.Church;
 import net.ramify.model.place.church.ChurchInfo;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.provider.PlaceProvider;
-import net.ramify.model.place.type.Building;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -52,7 +51,7 @@ class XmlChurchInfo implements HasPlaceId {
 
     @Nonnull
     ChurchInfo resolve(final PlaceProvider placeProvider, final DateParser dateParser) {
-        final var place = placeProvider.require(this.placeId(), Building.class);
+        final var place = placeProvider.require(this.placeId(), Church.class);
         return new ResolvedChurchInfo(this, place, dateParser);
     }
 
