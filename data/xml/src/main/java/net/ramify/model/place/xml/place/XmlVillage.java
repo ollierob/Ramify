@@ -7,9 +7,11 @@ import net.ramify.model.place.settlement.Village;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 import java.util.Set;
 
+@XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "village")
 class XmlVillage extends XmlPlace {
 
     @XmlElements({

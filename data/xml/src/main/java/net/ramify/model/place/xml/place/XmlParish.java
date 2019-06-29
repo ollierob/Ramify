@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 import java.util.Set;
 
-@XmlRootElement(name = "parish")
+@XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "parish")
 public class XmlParish extends XmlPlace {
 
     @XmlElements({

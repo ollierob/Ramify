@@ -9,7 +9,7 @@ import net.ramify.model.place.region.State;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Set;
 
-@XmlRootElement(name = "state")
+@XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "state")
 class XmlState extends XmlPlace {
 
     @Override

@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 import java.util.Set;
 
-@XmlRootElement(name = "township")
+@XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "township")
 class XmlTownship extends XmlPlace {
 
     @XmlElements({

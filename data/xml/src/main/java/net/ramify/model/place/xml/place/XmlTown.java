@@ -8,7 +8,7 @@ import net.ramify.model.place.settlement.Town;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Set;
 
-@XmlRootElement(name = "town")
+@XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "town")
 class XmlTown extends XmlPlace {
 
     @Override

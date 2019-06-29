@@ -9,7 +9,7 @@ import net.ramify.model.place.type.SettlementOrRegion;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Set;
 
-@XmlRootElement(name = "building")
+@XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "building")
 class XmlChurch extends XmlPlace {
 
     @Override

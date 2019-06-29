@@ -11,14 +11,13 @@ import java.util.Set;
 
 public abstract class XmlPlace implements HasPlaceId {
 
+    public static final String NAMESPACE = "http://ramify.net/places";
+
     @XmlAttribute(name = "id", required = true)
     private String id;
 
     @XmlAttribute(name = "name", required = true)
     private String name;
-
-    XmlPlace() {
-    }
 
     abstract PlaceId placeId(String id);
 
