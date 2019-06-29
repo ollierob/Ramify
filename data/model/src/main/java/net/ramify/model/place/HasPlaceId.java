@@ -10,7 +10,7 @@ public interface HasPlaceId {
     PlaceId placeId();
 
     @Nonnull
-    default <P extends Place> P resolvePlace(final PlaceProvider<P> lookup) {
+    default Place resolvePlace(final PlaceProvider lookup) {
         return lookup.require(this.placeId());
     }
 

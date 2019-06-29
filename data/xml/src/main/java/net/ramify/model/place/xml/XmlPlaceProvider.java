@@ -6,7 +6,7 @@ import net.ramify.model.place.provider.PlaceProvider;
 
 import javax.annotation.CheckForNull;
 
-public class XmlPlaceProvider implements PlaceProvider<Place> {
+public class XmlPlaceProvider implements PlaceProvider {
 
     @CheckForNull
     @Override

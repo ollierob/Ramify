@@ -52,8 +52,8 @@ class XmlChurch implements HasPlaceId {
     }
 
     @Nonnull
-    Church resolve(final PlaceProvider<Building> placeProvider, final DateParser dateParser) {
-        final var place = placeProvider.require(this.placeId());
+    Church resolve(final PlaceProvider placeProvider, final DateParser dateParser) {
+        final var place = placeProvider.require(this.placeId(), Building.class);
         return new ResolvedChurch(this, place, dateParser);
     }
 

@@ -1,4 +1,4 @@
-package net.ramify.model.place.xml.regions;
+package net.ramify.model.place.xml.places;
 
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
@@ -6,12 +6,22 @@ import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.Township;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.List;
 import java.util.Set;
 
-public class XmlTownship extends XmlPlace {
+@XmlRootElement(name = "township")
+class XmlTownship extends XmlPlace {
 
     @XmlAttribute(name = "name")
     private String name;
+
+    @XmlElements({
+            @XmlElement(name = "building", type = XmlBuilding.class),
+    })
+    private List<XmlPlace> children;
 
     @Override
     PlaceId placeId(final String id) {
@@ -25,7 +35,7 @@ public class XmlTownship extends XmlPlace {
 
     @Override
     void addPlaces(final Set<PlaceId> places) {
-        throw new UnsupportedOperationException();
+        children.forEach(child -> child.addPlaces(places));
     }
 
 }

@@ -1,4 +1,4 @@
-package net.ramify.model.place.xml.regions;
+package net.ramify.model.place.xml.places;
 
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
@@ -7,9 +7,11 @@ import net.ramify.model.place.region.Country;
 import net.ramify.model.place.region.State;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Set;
 
-public class XmlState extends XmlPlace {
+@XmlRootElement(name = "state")
+class XmlState extends XmlPlace {
 
     @XmlAttribute(name = "name", required = true)
     private String name;

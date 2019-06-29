@@ -1,4 +1,4 @@
-package net.ramify.model.place.xml.regions;
+package net.ramify.model.place.xml.places;
 
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
@@ -7,16 +7,18 @@ import net.ramify.model.place.region.Parish;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 import java.util.Set;
 
+@XmlRootElement(name = "parish")
 public class XmlParish extends XmlPlace {
 
     @XmlElements({
             @XmlElement(name = "township", type = XmlTownship.class),
             @XmlElement(name = "town", type = XmlTown.class)
     })
-    private List<XmlPlace> places;
+    private List<XmlPlace> children;
 
     @Override
     PlaceId placeId(final String id) {
@@ -30,7 +32,7 @@ public class XmlParish extends XmlPlace {
 
     @Override
     void addPlaces(final Set<PlaceId> places) {
-        this.places.forEach(region -> region.addPlaces(places));
+        children.forEach(region -> region.addPlaces(places));
     }
 
 }

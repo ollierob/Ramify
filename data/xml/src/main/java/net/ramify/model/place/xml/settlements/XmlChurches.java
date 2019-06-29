@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.place.church.Church;
 import net.ramify.model.place.provider.PlaceProvider;
-import net.ramify.model.place.type.Building;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -20,7 +19,7 @@ public class XmlChurches {
     private List<XmlChurch> churches;
 
     public Collection<Church> resolve(
-            final PlaceProvider<Building> placeProvider,
+            final PlaceProvider placeProvider,
             final DateParser dateParser) {
         return Lists.transform(churches, c -> c.resolve(placeProvider, dateParser));
     }
