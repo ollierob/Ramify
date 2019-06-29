@@ -17,7 +17,7 @@ import java.util.List;
 class XmlVillage extends XmlPlace {
 
     @XmlElementRefs({
-            @XmlElementRef(name = "church", type = XmlChurch.class),
+            @XmlElementRef(type = XmlChurch.class),
     })
     private List<XmlPlace> children;
 

@@ -18,7 +18,7 @@ import java.util.Objects;
 class XmlCountryCounty extends XmlPlace {
 
     @XmlElementRefs({
-            @XmlElementRef(name = "parish", type = XmlParish.class)
+            @XmlElementRef(type = XmlParish.class)
     })
     private List<XmlPlace> children;
 
