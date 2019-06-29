@@ -1,13 +1,16 @@
 package net.ramify.model.place.xml.place;
 
-import com.google.common.collect.Sets;
+import com.google.common.collect.Maps;
 import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.provider.PlaceProvider;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
-import java.util.Set;
+import java.util.Collection;
+import java.util.Map;
+import java.util.function.Consumer;
 
 public abstract class XmlPlace implements HasPlaceId {
 
@@ -27,16 +30,26 @@ public abstract class XmlPlace implements HasPlaceId {
         return this.placeId(id);
     }
 
-    abstract Place place(PlaceId id, String name, Place parent);
+    public String name() {
+        return name;
+    }
 
-    @Nonnull
-    public Set<PlaceId> placeIds() {
-        final var places = Sets.<PlaceId>newHashSet();
-        places.add(this.placeId());
-        this.addPlaces(places);
+    public Map<PlaceId, Place> places(final PlaceProvider placeProvider) {
+        final var places = Maps.<PlaceId, Place>newHashMap();
+        final var id = this.placeId();
+        final var parent = placeProvider.get(id);
+        this.addPlaces(placeProvider, parent, place -> places.put(place.placeId(), place));
         return places;
     }
 
-    abstract void addPlaces(Set<PlaceId> places);
+    private void addPlaces(final PlaceProvider placeProvider, final Place parent, final Consumer<Place> addPlace) {
+        final var self = this.place(parent);
+        addPlace.accept(self);
+        this.children().forEach(child -> child.addPlaces(placeProvider, self, addPlace));
+    }
+
+    abstract Place place(Place parent);
+
+    abstract Collection<XmlPlace> children();
 
 }

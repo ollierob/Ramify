@@ -9,17 +9,18 @@ import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 @XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "country")
 class XmlCountry extends XmlPlace {
 
     @XmlElements({
+            @XmlElement(name = "country", type = XmlCountry.class),
             @XmlElement(name = "county", type = XmlCountryCounty.class),
             @XmlElement(name = "state", type = XmlState.class)
     })
-    private List<XmlPlace> regions;
+    private List<XmlPlace> children;
 
     @Nonnull
     PlaceId placeId(final String id) {
@@ -27,14 +28,13 @@ class XmlCountry extends XmlPlace {
     }
 
     @Override
-    Place place(final PlaceId id, final String name, final Place parent) {
-        return new Country(id, name);
+    Place place(final Place parent) {
+        return new Country(this.placeId(), this.name(), parent);
     }
 
     @Override
-    void addPlaces(final Set<PlaceId> places) {
-        places.add(this.placeId());
-        regions.forEach(region -> region.addPlaces(places));
+    Collection<XmlPlace> children() {
+        return children;
     }
 
 }

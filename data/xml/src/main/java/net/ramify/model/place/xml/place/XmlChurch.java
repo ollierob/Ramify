@@ -4,10 +4,10 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.building.Church;
 import net.ramify.model.place.id.Spid;
-import net.ramify.model.place.type.SettlementOrRegion;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Set;
+import java.util.Collection;
+import java.util.Collections;
 
 @XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "building")
 class XmlChurch extends XmlPlace {
@@ -18,13 +18,13 @@ class XmlChurch extends XmlPlace {
     }
 
     @Override
-    Church place(final PlaceId id, final String name, final Place parent) {
-        return new Church(id, name, parent.requireAs(SettlementOrRegion.class));
+    Church place(Place parent) {
+        return new Church(this.placeId(), this.name(), parent);
     }
 
     @Override
-    void addPlaces(final Set<PlaceId> places) {
-        places.add(this.placeId());
+    Collection<XmlPlace> children() {
+        return Collections.emptyList();
     }
 
 }

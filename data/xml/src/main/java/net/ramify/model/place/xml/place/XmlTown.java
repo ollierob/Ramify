@@ -4,9 +4,11 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.settlement.Town;
+import net.ramify.model.place.type.Region;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Set;
+import java.util.Collection;
+import java.util.Collections;
 
 @XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "town")
 class XmlTown extends XmlPlace {
@@ -17,13 +19,13 @@ class XmlTown extends XmlPlace {
     }
 
     @Override
-    Place place(final PlaceId id, final String name, final Place parent) {
-        throw new UnsupportedOperationException(); //TODO
+    Town place(final Place parent) {
+        return new Town(this.placeId(), this.name(), parent.requireAs(Region.class));
     }
 
     @Override
-    void addPlaces(final Set<PlaceId> places) {
-        places.add(this.placeId());
-        throw new UnsupportedOperationException(); //TODO
+    Collection<XmlPlace> children() {
+        return Collections.emptyList();
     }
+
 }

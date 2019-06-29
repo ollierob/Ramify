@@ -7,7 +7,7 @@ import net.ramify.model.place.region.Country;
 import net.ramify.model.place.region.State;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Set;
+import java.util.Collection;
 
 @XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "state")
 class XmlState extends XmlPlace {
@@ -18,13 +18,13 @@ class XmlState extends XmlPlace {
     }
 
     @Override
-    State place(final PlaceId id, final String name, final Place parent) {
-        return new State(id, name, parent.requireAs(Country.class));
+    State place(final Place parent) {
+        return new State(this.placeId(), this.name(), parent.requireAs(Country.class));
     }
 
     @Override
-    void addPlaces(final Set<PlaceId> places) {
-        //this.places.forEach(region -> region.addPlaces(places));
+    Collection<XmlPlace> children() {
+        throw new UnsupportedOperationException(); //TODO
     }
 
 }

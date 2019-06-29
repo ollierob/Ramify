@@ -8,8 +8,8 @@ import net.ramify.model.place.settlement.Village;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 @XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "village")
 class XmlVillage extends XmlPlace {
@@ -25,14 +25,13 @@ class XmlVillage extends XmlPlace {
     }
 
     @Override
-    Village place(final PlaceId id, final String name, final Place parent) {
-        return new Village(id, name, parent);
+    Village place(final Place parent) {
+        return new Village(this.placeId(), this.name(), parent);
     }
 
     @Override
-    void addPlaces(Set<PlaceId> places) {
-        places.add(this.placeId());
-        children.forEach(child -> child.addPlaces(places));
+    Collection<XmlPlace> children() {
+        return children;
     }
 
 }
