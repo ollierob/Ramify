@@ -12,8 +12,36 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>website</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>protobuf</artifactId>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
+            <!--Copy protos-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <id>unpack-dependencies</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includes>**/*.proto</includes>
+                            <outputDirectory>${project.build.directory}/protos</outputDirectory>
+                            <overWriteReleases>true</overWriteReleases>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <!--NPM-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

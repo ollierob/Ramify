@@ -4,3 +4,5 @@
 **/node_modules/*
 **/target/*
 /data/protobuf/target/
+
+**/generated/*
