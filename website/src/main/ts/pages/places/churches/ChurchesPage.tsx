@@ -5,6 +5,7 @@ import {DefaultChurchFetcher} from "../../../components/places/ChurchesFetcher";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 
 type Props = RouteComponentProps<any>;
+
 type State = {
     region?: PlaceId
     churches?: AsyncData<ReadonlyArray<PlaceId>>

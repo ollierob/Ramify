@@ -25,3 +25,11 @@ body {
     width: 100%;
 }
 
+.body .submenu {
+    position: absolute;
+    top: 0;
+    height: 48px;
+    width: 100%;
+    background-color: white;
+    border-bottom: 1px solid #D7D7D7;
+}

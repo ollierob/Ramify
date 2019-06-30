@@ -9,10 +9,6 @@ export default class PlacesHomePage extends React.PureComponent<RouteComponentPr
 
             <h1>Places</h1>
 
-            Path: {this.props.match.path}
-            <br/>
-            URL: {this.props.match.url}
-
         </>
 
     }

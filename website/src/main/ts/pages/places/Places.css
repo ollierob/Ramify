@@ -1,0 +1,10 @@
+.submenu .places {
+    height: 48px;
+    line-height: 48px;
+    font-size: 18px;
+    padding-left: 150px;
+}
+
+.submenu .places .place {
+    color: #AAAAAA;
+}
