@@ -17,12 +17,14 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.File;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
 
 @XmlTransient
 public class XmlPlaceModule extends PrivateModule {
 
     @Override
     protected void configure() {
+        this.expose(ChurchInfoProvider.class);
     }
 
     @Provides
@@ -51,6 +53,15 @@ public class XmlPlaceModule extends PrivateModule {
         final var places = XmlPlaceModule.class.getResource("/xml/data");
         Preconditions.checkState(places != null, "Could not load XML data");
         return new File(places.toURI());
+    }
+
+    @Provides
+    @Singleton
+    DateParser provideDateParser() {
+        return date -> {
+            if (date.length() == 4) return LocalDate.of(Integer.parseInt(date), 1, 1);
+            return LocalDate.parse(date);
+        };
     }
 
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<schema xmlns:tns="http://ramify.net/dates" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:tns="http://ramify.net/dates" xmlns:xs="http://www.w3.org/2001/XMLSchema"
         targetNamespace="http://ramify.net/dates" version="1.0">
 
     <element name="closedBefore" type="tns:xmlBeforeDate"/>

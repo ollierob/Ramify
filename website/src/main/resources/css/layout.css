@@ -1,27 +1,27 @@
 body {
     font-family: 'Source Sans Pro', sans-serif !important;
-    background-color: white !important;
+    background-color: #EEEEEE !important;
 }
 
 .header {
     position: absolute;
     top: 0;
     width: 100%;
-    height: 80px;
+    height: 60px;
     background-color: white;
     border-bottom: 1px solid #D7D7D7;
 }
 
 .header .menu {
     position: absolute;
-    left: 200px;
+    left: 150px;
     bottom: -1px;
     font-size: 1.25em;
 }
 
 .body {
     position: absolute;
-    top: 80px;
+    top: 60px;
     width: 100%;
 }
 

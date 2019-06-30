@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<schema xmlns:ns1="http://ramify.net/dates" xmlns:tns="http://ramify.net/places"
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:ns1="http://ramify.net/dates" xmlns:tns="http://ramify.net/places"
         xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://ramify.net/places" version="1.0">
 
   <import namespace="http://ramify.net/dates" schemaLocation="schema2.xsd"/>
