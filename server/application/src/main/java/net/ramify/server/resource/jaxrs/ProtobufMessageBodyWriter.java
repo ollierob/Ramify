@@ -13,16 +13,20 @@ import java.io.OutputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
+import static net.ramify.server.resource.Resource.APPLICATION_PROTOBUF_TYPE;
+
 @Provider
 @Singleton
 class ProtobufMessageBodyWriter implements MessageBodyWriter<WritesProto> {
 
-    public static final MediaType PROTOBUF_TYPE = new MediaType("application", "protobuf");
-
     @Override
     public boolean isWriteable(Class<?> aClass, Type type, Annotation[] annotations, MediaType mediaType) {
-        return WritesProto.class.isAssignableFrom(aClass)
-                && PROTOBUF_TYPE.isCompatible(mediaType);
+        return isProtobufType(mediaType)
+                && WritesProto.class.isAssignableFrom(aClass);
+    }
+
+    static boolean isProtobufType(final MediaType type) {
+        return APPLICATION_PROTOBUF_TYPE.isCompatible(type);
     }
 
     @Override

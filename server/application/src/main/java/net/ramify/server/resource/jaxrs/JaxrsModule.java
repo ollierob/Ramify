@@ -9,6 +9,7 @@ public class JaxrsModule extends AbstractModule {
         super.configure();
         this.bind(ProtobufMessageBodyWriter.class);
         this.bind(ProtobufStringMessageBodyWriter.class);
+        this.bind(ProtobufListMessageBodyWriter.class);
     }
 
 }

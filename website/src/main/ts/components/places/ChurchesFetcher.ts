@@ -1,6 +1,7 @@
 import {PlaceId} from "./Place";
 import {Church} from "../../protobuf/generated/church_pb";
 import {protoFetch} from "../fetch/ProtoFetch";
+import {PlaceIdList} from "../../protobuf/generated/place_pb";
 
 export interface ChurchesFetcher {
 
@@ -13,7 +14,8 @@ export interface ChurchesFetcher {
 class ProtoChurchesFetcher implements ChurchesFetcher {
 
     fetchChurches(region: PlaceId) {
-        return undefined;
+        return protoFetch("/places/churches/in/" + region, PlaceIdList.deserializeBinary)
+            .then(l => l ? l.getIdList() : []);
     }
 
     fetchChurch(id: PlaceId) {

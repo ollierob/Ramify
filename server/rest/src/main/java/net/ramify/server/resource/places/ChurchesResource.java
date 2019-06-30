@@ -11,7 +11,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.Collection;
 
-@Produces({MediaType.TEXT_PLAIN})
+import static net.ramify.server.resource.Resource.APPLICATION_PROTOBUF;
+
+@Produces({MediaType.TEXT_PLAIN, APPLICATION_PROTOBUF})
 public interface ChurchesResource extends Resource {
 
     @GET

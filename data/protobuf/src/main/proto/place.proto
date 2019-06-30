@@ -11,3 +11,9 @@ message Place {
     Place parent = 4;
 
 }
+
+message PlaceIdList {
+
+    repeated string id = 1;
+
+}
