@@ -1,4 +1,5 @@
 const webpack = require("webpack");
+const Chunks2JsonPlugin = require('chunks-2-json-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -13,6 +14,19 @@ module.exports = {
     devtool: "source-map",
     resolve: {
         extensions: [".ts", ".tsx", ".js", ".json", ".less"]
+    },
+    optimization: {
+        splitChunks: {
+            chunks: "all",
+            maxInitialRequests: Infinity,
+            minSize: 0,
+            cacheGroups: {
+                vendor: {
+                    name: "vendors",
+                    test: /node_modules/
+                }
+            }
+        }
     },
     module: {
         rules: [
@@ -40,6 +54,7 @@ module.exports = {
     },
     plugins: [
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+        new Chunks2JsonPlugin({outputDir: 'target/classes/js/'}) //Outputs manifest
     ],
     externals: {
         "react": "React",
