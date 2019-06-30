@@ -50,17 +50,7 @@
 
     <build>
         <plugins>
-            <plugin>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                    <filesets>
-                        <fileset>
-                            <directory>${xml.schema.dir}</directory>
-                        </fileset>
-                    </filesets>
-                </configuration>
-            </plugin>
+            <!--Note: running this plugin doesn't set the default namespace to schema,add manually: <schema xmlns="http://www.w3.org/2001/XMLSchema" .. -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>jaxb2-maven-plugin</artifactId>
@@ -71,14 +61,12 @@
                         <goals>
                             <goal>schemagen</goal>
                         </goals>
-                        <phase>generate-resources</phase>
                         <configuration>
                             <createJavaDocAnnotations>false</createJavaDocAnnotations>
                             <outputDirectory>${xml.schema.dir}</outputDirectory>
                             <transformSchemas>
                                 <transformSchema>
                                     <uri>http://ramify.net/places</uri>
-                                    <toPrefix>p</toPrefix>
                                     <toFile>places.xsd</toFile>
                                 </transformSchema>
                             </transformSchemas>
@@ -88,8 +76,6 @@
                                     <patterns>
                                         <pattern>.*Module.java</pattern>
                                         <pattern>.*Provider.java</pattern>
-                                        <pattern>Resolved.*.java</pattern>
-                                        <pattern>Abstract.*.java</pattern>
                                     </patterns>
                                 </myExcludes>
                             </schemaSourceExcludeFilters>

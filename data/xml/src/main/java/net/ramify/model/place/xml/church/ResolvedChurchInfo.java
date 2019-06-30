@@ -7,8 +7,10 @@ import net.ramify.model.place.church.record.ChurchRecordSetInfo;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.Set;
 
+@XmlTransient
 public class ResolvedChurchInfo implements ChurchInfo {
 
     private final Church church;
@@ -21,7 +23,8 @@ public class ResolvedChurchInfo implements ChurchInfo {
             final Church church,
             final String denomination,
             final DateRange founded,
-            final DateRange closed, Set<ChurchRecordSetInfo> records) {
+            final DateRange closed,
+            final Set<ChurchRecordSetInfo> records) {
         this.church = church;
         this.denomination = denomination;
         this.founded = founded;

@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<churches
+<churchInfos
         xmlns="http://ramify.net/places"
-        xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
-        xs:schemaLocation="http://ramify.net/places ../../../../schema/schema1.xsd">
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://ramify.net/places ../../../../schema/schema1.xsd">
 
-    <church id="heptonstall-st-thomas" denomination="Church of England">
+    <churchInfo id="heptonstall-st-thomas" denomination="Church of England">
         <foundedBefore date="1260"/>
-    </church>
+        <record id="heptonstall-st-thomas-baptisms" type="baptism" startYear="1599" endYear="1812"/>
+        <record id="heptonstall-st-thomas-marriages" type="marriage" startYear="1593" endYear="1755"/>
+        <record id="heptonstall-st-thomas-burials" type="burial" startYear="1593" endYear="1812"/>
+    </churchInfo>
 
-    <church id="birchcliffe" denomination="Baptist">
+    <churchInfo id="birchcliffe" denomination="Baptist">
         <foundedIn year="1763"/>
-    </church>
+    </churchInfo>
 
-</churches>
+</churchInfos>

@@ -1,7 +1,7 @@
 package net.ramify.model.date.xml;
 
 import net.ramify.model.date.DateRange;
-import net.ramify.model.date.InYear;
+import net.ramify.model.date.InYears;
 import net.ramify.model.date.parse.DateParser;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -15,7 +15,7 @@ public class XmlInYear extends XmlDateRange {
 
     @Override
     public DateRange resolve(final DateParser parser) {
-        return new InYear(year);
+        return new InYears(year);
     }
 
 }

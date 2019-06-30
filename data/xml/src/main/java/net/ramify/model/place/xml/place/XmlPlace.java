@@ -22,7 +22,7 @@ public abstract class XmlPlace implements HasPlaceId {
     @XmlAttribute(name = "id", required = true)
     private String id;
 
-    @XmlAttribute(name = "name", required = true)
+    @XmlAttribute(name = "name")
     private String name;
 
     abstract PlaceId placeId(String id);

@@ -15,14 +15,15 @@ import javax.annotation.CheckForNull;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.File;
 import java.util.Collection;
 import java.util.Map;
 
+@XmlTransient
 class XmlPlaceProvider implements PlaceProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(XmlPlaceProvider.class);
-    private static final File[] EMPTY_FILES = new File[0];
 
     private final Map<PlaceId, Place> places;
 

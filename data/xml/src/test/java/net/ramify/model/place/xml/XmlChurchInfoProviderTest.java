@@ -1,0 +1,34 @@
+package net.ramify.model.place.xml;
+
+import net.ramify.model.date.parse.DateParser;
+import net.ramify.model.place.provider.PlaceProvider;
+import net.ramify.model.place.xml.church.XmlChurchInfos;
+import org.junit.jupiter.api.Test;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.validation.SchemaFactory;
+import java.io.File;
+
+import static org.mockito.Mockito.mock;
+
+class XmlChurchInfoProviderTest {
+
+    @Test
+    void shouldReadRecords() throws Exception {
+
+        final var context = JAXBContext.newInstance(XmlChurchInfos.class);
+        final var data = new File(XmlPlaceProviderTest.class.getResource("/xml/data/england/west_yorkshire/heptonstall").toURI());
+        final var mockPlaceProvider = mock(PlaceProvider.class);
+        final var mockDateParser = mock(DateParser.class);
+
+        final var schemaFile = new File(XmlPlaceProviderTest.class.getResource("/xml/schema/schema1.xsd").toURI());
+        final var schema = SchemaFactory.newDefaultInstance().newSchema(schemaFile);
+
+        final var unmarshaller = context.createUnmarshaller();
+        unmarshaller.setSchema(schema);
+
+        final var provider = XmlChurchInfoProvider.readChurchInfo(unmarshaller, data, mockPlaceProvider, mockDateParser);
+
+    }
+
+}
