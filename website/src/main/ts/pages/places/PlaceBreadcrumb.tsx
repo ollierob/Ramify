@@ -41,7 +41,7 @@ const Breadcrumb = (props: {place: Place.AsObject, separator: boolean}) => {
     return <>
         <span className="place">
         {typeBreadcrumb(place.type)}
-            <a href={"#/" + place.type.toLowerCase() + "?place=" + place.id}>
+            <a href={"#/?place=" + place.id}>
                 <b>{place.name}</b>
             </a>
         </span>

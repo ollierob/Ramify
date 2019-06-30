@@ -14,7 +14,7 @@ class PlacesBasePage extends BasePage {
         return <HashRouter>
             <Switch>
                 <Route exact path="/" component={breadcrumb(PlacesHomePage)}/>
-                <Route path="/church" component={breadcrumb(ChurchesPage)}/>
+                <Route path="/?place=church:" component={breadcrumb(ChurchesPage)}/>
                 <Route path="*" component={breadcrumb(GeneralPlacePage)}/>
             </Switch>
         </HashRouter>;
