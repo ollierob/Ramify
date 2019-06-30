@@ -1,4 +1,4 @@
-package net.ramify.server.authentication;
+package net.ramify.authentication;
 
 import net.ramify.server.resource.Resource;
 

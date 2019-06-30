@@ -24,7 +24,7 @@ public class Server {
 
     public void run() throws Exception {
 
-        final var server = new org.eclipse.jetty.server.Server();
+        final var server = new org.eclipse.jetty.server.Server(8090);
 
         final var servletHandler = new ServletContextHandler();
         servletHandler.setInitParameter("org.eclipse.jetty.servlet.Default.dirAllowed", "false"); //Disable directory listings

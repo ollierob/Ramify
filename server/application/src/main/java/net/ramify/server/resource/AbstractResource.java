@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import net.ramify.server.authentication.UserSession;
+import net.ramify.authentication.UserSession;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +32,10 @@ public abstract class AbstractResource implements Resource {
     protected Response readRouterResource(final UserSession session, final String bundleKey) {
         final var replacements = Collections.singletonMap("<!--%BUNDLEs%-->", bundleCache.computeIfAbsent(bundleKey, this::readBundles));
         return this.readSessionResource(session, "/router.html", replacements);
+    }
+
+    protected Response readSessionResource(final UserSession session, final String resource) {
+        return this.readSessionResource(session, resource, Collections.emptyMap());
     }
 
     protected Response readSessionResource(final UserSession session, final String resource, final Map<String, String> replacements) {

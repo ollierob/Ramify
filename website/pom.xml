@@ -21,7 +21,8 @@
 
     <build>
         <plugins>
-            <!--Copy protos-->
+
+            <!--Copy proto definitions into module-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -42,6 +43,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <!--NPM-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -92,6 +94,31 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!--Copy resources into server module-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-js-resources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>../server/application/target/classes/js</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/target/classes/js</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 
