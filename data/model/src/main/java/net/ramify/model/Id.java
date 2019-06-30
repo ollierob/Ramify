@@ -23,9 +23,14 @@ public abstract class Id {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Id id = (Id) o;
-        return value.equals(id.value);
+        if (o == null) return false;
+        return o instanceof Id
+                && this.equals((Id) o);
+    }
+
+    protected boolean equals(Id that) {
+        return this.getClass() == that.getClass()
+                & Objects.equals(this.value, that.value);
     }
 
     @Override

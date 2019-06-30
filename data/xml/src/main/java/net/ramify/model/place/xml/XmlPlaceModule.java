@@ -25,6 +25,7 @@ public class XmlPlaceModule extends PrivateModule {
     @Override
     protected void configure() {
         this.expose(ChurchInfoProvider.class);
+        this.expose(PlaceProvider.class);
     }
 
     @Provides
