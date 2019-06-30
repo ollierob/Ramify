@@ -3,8 +3,8 @@ const Chunks2JsonPlugin = require('chunks-2-json-webpack-plugin');
 
 module.exports = {
     entry: {
-        people: ["./src/pages/people/PeopleRouter.tsx"],
-        places: ["./src/pages/places/PlacesRouter.tsx"],
+        people: ["./src/main/ts/pages/people/PeopleRouter.tsx"],
+        places: ["./src/main/ts/pages/places/PlacesBasePage.tsx"],
     },
     output: {
         path: __dirname + "/target/classes/js",
