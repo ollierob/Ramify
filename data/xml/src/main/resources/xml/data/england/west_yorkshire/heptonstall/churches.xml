@@ -11,10 +11,14 @@
         <churchRecordSet id="heptonstall-st-thomas-baptisms" type="baptism" startYear="1599" endYear="1812"/>
         <churchRecordSet id="heptonstall-st-thomas-marriages" type="marriage" startYear="1593" endYear="1755"/>
         <churchRecordSet id="heptonstall-st-thomas-burials" type="burial" startYear="1593" endYear="1812"/>
+        <description>
+            Heptonstall church was founded before 1260.
+        </description>
     </churchInfo>
 
     <churchInfo id="birchcliffe" denomination="Baptist">
         <d:foundedIn year="1763"/>
+        <d:closedIn year="1974"/>
     </churchInfo>
 
 </churchInfos>

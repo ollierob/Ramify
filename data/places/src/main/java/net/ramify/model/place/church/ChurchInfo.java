@@ -23,6 +23,9 @@ public interface ChurchInfo extends HasPlace, BuildsProto<ChurchProto.Church> {
     @CheckForNull
     String denomination();
 
+    @CheckForNull
+    String description();
+
     @Nonnull
     DateRange founded();
 
@@ -40,6 +43,7 @@ public interface ChurchInfo extends HasPlace, BuildsProto<ChurchProto.Church> {
     default ChurchProto.Church.Builder toProtoBuilder() {
         final var builder = ChurchProto.Church.newBuilder()
                 .setPlace(this.place().toProto())
+                .setDescription(MoreObjects.firstNonNull(this.description(), ""))
                 .setDenomination(MoreObjects.firstNonNull(this.denomination(), ""))
                 .setEstablished(this.founded().toProto());
         Consumers.ifNonNull(this.closed(), c -> builder.setClosed(c.toProto()));

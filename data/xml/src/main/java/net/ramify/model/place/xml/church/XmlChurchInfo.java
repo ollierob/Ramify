@@ -14,6 +14,7 @@ import net.ramify.model.place.church.record.ChurchRecordSetInfo;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.xml.place.XmlPlace;
+import net.ramify.utils.objects.Functions;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -42,8 +43,17 @@ public class XmlChurchInfo implements HasPlaceId {
     })
     private XmlDateRange founded;
 
+    @XmlElements({
+            @XmlElement(name = "closedBefore", type = XmlBeforeDate.class, namespace = XmlDateRange.NAMESPACE),
+            @XmlElement(name = "closedIn", type = XmlInYear.class, namespace = XmlDateRange.NAMESPACE)
+    })
+    private XmlDateRange closed;
+
     @XmlElementRef
     private List<XmlChurchRecordSetInfo> recordSets;
+
+    @XmlElement(name = "description", namespace = XmlPlace.NAMESPACE)
+    private String description;
 
     @Override
     public PlaceId placeId() {
@@ -60,8 +70,8 @@ public class XmlChurchInfo implements HasPlaceId {
     }
 
     @CheckForNull
-    private DateRange closed() {
-        return null;
+    private DateRange closed(final DateParser parser) {
+        return Functions.ifNonNull(closed, c -> c.resolve(parser));
     }
 
     @Nonnull
@@ -78,8 +88,9 @@ public class XmlChurchInfo implements HasPlaceId {
             return new ResolvedChurchInfo(
                     placeProvider.require(this.placeId(), Church.class),
                     denomination,
+                    description,
                     this.founded(dateParser),
-                    this.closed(),
+                    this.closed(dateParser),
                     this.recordSets(dateParser));
         } catch (final Place.InvalidPlaceTypeException ex) {
             throw new IllegalArgumentException(ex);

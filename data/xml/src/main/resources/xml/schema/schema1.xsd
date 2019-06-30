@@ -41,7 +41,17 @@
 
       </choice>
 
+      <choice minOccurs="0">
+
+        <element ref="ns1:closedBefore"/>
+
+        <element ref="ns1:closedIn"/>
+
+      </choice>
+
       <element maxOccurs="unbounded" minOccurs="0" ref="tns:churchRecordSet"/>
+
+      <element form="qualified" minOccurs="0" name="description" type="xs:string"/>
 
     </sequence>
 
@@ -279,13 +289,13 @@
 
     <restriction base="xs:string">
 
-      <enumeration value="marriage"/>
-
       <enumeration value="baptism"/>
+
+      <enumeration value="membership"/>
 
       <enumeration value="burial"/>
 
-      <enumeration value="membership"/>
+      <enumeration value="marriage"/>
 
     </restriction>
 
