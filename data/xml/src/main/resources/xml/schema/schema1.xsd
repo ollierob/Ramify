@@ -1,292 +1,294 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema"
-        xmlns:ns1="http://ramify.net/dates" xmlns:tns="http://ramify.net/places"
-        xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://ramify.net/places" version="1.0">
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/dates"
+        xmlns:tns="http://ramify.net/places" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://ramify.net/places" version="1.0">
 
-    <import namespace="http://ramify.net/dates" schemaLocation="schema2.xsd"/>
+  <import namespace="http://ramify.net/dates" schemaLocation="schema2.xsd"/>
 
-    <element name="church" type="tns:xmlChurch"/>
+  <element name="church" type="tns:xmlChurch"/>
 
-    <element name="churchInfo" type="tns:xmlChurchInfo"/>
+  <element name="churchInfo" type="tns:xmlChurchInfo"/>
 
-    <element name="churchInfos" type="tns:churchInfos"/>
+  <element name="churchInfos" type="tns:churchInfos"/>
 
-    <element name="country" type="tns:xmlCountry"/>
+  <element name="churchRecordSet" type="tns:xmlChurchRecordSetInfo"/>
 
-    <element name="county" type="tns:xmlCountryCounty"/>
+  <element name="country" type="tns:xmlCountry"/>
 
-    <element name="parish" type="tns:xmlParish"/>
+  <element name="county" type="tns:xmlCountryCounty"/>
 
-    <element name="places" type="tns:places"/>
+  <element name="parish" type="tns:xmlParish"/>
 
-    <element name="state" type="tns:xmlState"/>
+  <element name="places" type="tns:places"/>
 
-    <element name="town" type="tns:xmlTown"/>
+  <element name="state" type="tns:xmlState"/>
 
-    <element name="township" type="tns:xmlTownship"/>
+  <element name="town" type="tns:xmlTown"/>
 
-    <element name="village" type="tns:xmlVillage"/>
+  <element name="township" type="tns:xmlTownship"/>
 
-    <complexType name="xmlChurchInfo">
+  <element name="village" type="tns:xmlVillage"/>
 
-        <sequence>
+  <complexType name="xmlChurchInfo">
 
-            <choice minOccurs="0">
+    <sequence>
 
-                <element name="foundedBefore" type="ns1:xmlBeforeDate"/>
+      <choice minOccurs="0">
 
-                <element name="foundedIn" type="ns1:xmlInYear"/>
+        <element ref="ns1:foundedBefore"/>
 
-            </choice>
+        <element ref="ns1:foundedIn"/>
 
-            <element maxOccurs="unbounded" minOccurs="0" name="record" type="tns:xmlChurchRecordSetInfo"/>
+      </choice>
 
-        </sequence>
+      <element maxOccurs="unbounded" minOccurs="0" ref="tns:churchRecordSet"/>
+
+    </sequence>
+
+    <attribute name="id" type="xs:string" use="required"/>
+
+    <attribute name="denomination" type="xs:string"/>
+
+  </complexType>
+
+  <complexType name="xmlChurchRecordSetInfo">
+
+    <simpleContent>
+
+      <extension base="xs:string">
 
         <attribute name="id" type="xs:string" use="required"/>
 
-        <attribute name="denomination" type="xs:string"/>
+        <attribute name="type" type="tns:type" use="required"/>
 
-    </complexType>
+        <attribute name="startYear" type="xs:int" use="required"/>
 
-    <complexType name="xmlChurchRecordSetInfo">
+        <attribute name="endYear" type="xs:int" use="required"/>
 
-        <simpleContent>
+      </extension>
 
-            <extension base="xs:string">
+    </simpleContent>
 
-                <attribute name="id" type="xs:string" use="required"/>
+  </complexType>
 
-                <attribute name="type" type="tns:type" use="required"/>
+  <complexType name="churchInfos">
 
-                <attribute name="startYear" type="xs:int" use="required"/>
+    <sequence>
 
-                <attribute name="endYear" type="xs:int" use="required"/>
+      <element maxOccurs="unbounded" minOccurs="0" ref="tns:churchInfo"/>
 
-            </extension>
+    </sequence>
 
-        </simpleContent>
+  </complexType>
 
-    </complexType>
+  <complexType name="xmlChurch">
 
-    <complexType name="churchInfos">
+    <complexContent>
 
-        <sequence>
-
-            <element maxOccurs="unbounded" minOccurs="0" ref="tns:churchInfo"/>
-
-        </sequence>
-
-    </complexType>
-
-    <complexType name="xmlChurch">
-
-        <complexContent>
-
-            <extension base="tns:xmlPlace">
-
-                <sequence/>
-
-            </extension>
-
-        </complexContent>
-
-    </complexType>
-
-    <complexType abstract="true" name="xmlPlace">
+      <extension base="tns:xmlPlace">
 
         <sequence/>
 
-        <attribute name="id" type="xs:string" use="required"/>
+      </extension>
 
-        <attribute name="name" type="xs:string"/>
+    </complexContent>
 
-    </complexType>
+  </complexType>
 
-    <complexType name="xmlCountry">
+  <complexType abstract="true" name="xmlPlace">
 
-        <complexContent>
+    <sequence/>
 
-            <extension base="tns:xmlPlace">
+    <attribute name="id" type="xs:string" use="required"/>
 
-                <sequence>
+    <attribute name="name" type="xs:string"/>
 
-                    <choice maxOccurs="unbounded" minOccurs="0">
+  </complexType>
 
-                        <element ref="tns:country"/>
+  <complexType name="xmlCountry">
 
-                        <element ref="tns:county"/>
+    <complexContent>
 
-                        <element ref="tns:state"/>
-
-                    </choice>
-
-                </sequence>
-
-            </extension>
-
-        </complexContent>
-
-    </complexType>
-
-    <complexType name="xmlCountryCounty">
-
-        <complexContent>
-
-            <extension base="tns:xmlPlace">
-
-                <sequence>
-
-                    <element maxOccurs="unbounded" minOccurs="0" ref="tns:parish"/>
-
-                </sequence>
-
-            </extension>
-
-        </complexContent>
-
-    </complexType>
-
-    <complexType name="xmlParish">
-
-        <complexContent>
-
-            <extension base="tns:xmlPlace">
-
-                <sequence>
-
-                    <choice maxOccurs="unbounded" minOccurs="0">
-
-                        <element ref="tns:parish"/>
-
-                        <element ref="tns:township"/>
-
-                        <element ref="tns:town"/>
-
-                        <element ref="tns:village"/>
-
-                    </choice>
-
-                </sequence>
-
-            </extension>
-
-        </complexContent>
-
-    </complexType>
-
-    <complexType name="xmlTownship">
-
-        <complexContent>
-
-            <extension base="tns:xmlPlace">
-
-                <sequence>
-
-                    <choice maxOccurs="unbounded" minOccurs="0">
-
-                        <element ref="tns:church"/>
-
-                        <element ref="tns:village"/>
-
-                    </choice>
-
-                </sequence>
-
-            </extension>
-
-        </complexContent>
-
-    </complexType>
-
-    <complexType name="xmlVillage">
-
-        <complexContent>
-
-            <extension base="tns:xmlPlace">
-
-                <sequence>
-
-                    <element maxOccurs="unbounded" minOccurs="0" ref="tns:church"/>
-
-                </sequence>
-
-            </extension>
-
-        </complexContent>
-
-    </complexType>
-
-    <complexType name="xmlTown">
-
-        <complexContent>
-
-            <extension base="tns:xmlPlace">
-
-                <sequence/>
-
-            </extension>
-
-        </complexContent>
-
-    </complexType>
-
-    <complexType name="xmlState">
-
-        <complexContent>
-
-            <extension base="tns:xmlPlace">
-
-                <sequence/>
-
-            </extension>
-
-        </complexContent>
-
-    </complexType>
-
-    <complexType name="places">
+      <extension base="tns:xmlPlace">
 
         <sequence>
 
-            <choice maxOccurs="unbounded" minOccurs="0">
+          <choice maxOccurs="unbounded" minOccurs="0">
 
-                <element ref="tns:church"/>
+            <element ref="tns:country"/>
 
-                <element ref="tns:country"/>
+            <element ref="tns:county"/>
 
-                <element ref="tns:county"/>
+            <element ref="tns:state"/>
 
-                <element ref="tns:parish"/>
-
-                <element ref="tns:township"/>
-
-                <element ref="tns:village"/>
-
-                <element ref="tns:town"/>
-
-                <element ref="tns:state"/>
-
-            </choice>
+          </choice>
 
         </sequence>
 
-    </complexType>
+      </extension>
 
-    <simpleType name="type">
+    </complexContent>
 
-        <restriction base="xs:string">
+  </complexType>
 
-            <enumeration value="membership"/>
+  <complexType name="xmlCountryCounty">
 
-            <enumeration value="baptism"/>
+    <complexContent>
 
-            <enumeration value="burial"/>
+      <extension base="tns:xmlPlace">
 
-            <enumeration value="marriage"/>
+        <sequence>
 
-        </restriction>
+          <element maxOccurs="unbounded" minOccurs="0" ref="tns:parish"/>
 
-    </simpleType>
+        </sequence>
+
+      </extension>
+
+    </complexContent>
+
+  </complexType>
+
+  <complexType name="xmlParish">
+
+    <complexContent>
+
+      <extension base="tns:xmlPlace">
+
+        <sequence>
+
+          <choice maxOccurs="unbounded" minOccurs="0">
+
+            <element ref="tns:parish"/>
+
+            <element ref="tns:township"/>
+
+            <element ref="tns:town"/>
+
+            <element ref="tns:village"/>
+
+          </choice>
+
+        </sequence>
+
+      </extension>
+
+    </complexContent>
+
+  </complexType>
+
+  <complexType name="xmlTownship">
+
+    <complexContent>
+
+      <extension base="tns:xmlPlace">
+
+        <sequence>
+
+          <choice maxOccurs="unbounded" minOccurs="0">
+
+            <element ref="tns:church"/>
+
+            <element ref="tns:village"/>
+
+          </choice>
+
+        </sequence>
+
+      </extension>
+
+    </complexContent>
+
+  </complexType>
+
+  <complexType name="xmlVillage">
+
+    <complexContent>
+
+      <extension base="tns:xmlPlace">
+
+        <sequence>
+
+          <element maxOccurs="unbounded" minOccurs="0" ref="tns:church"/>
+
+        </sequence>
+
+      </extension>
+
+    </complexContent>
+
+  </complexType>
+
+  <complexType name="xmlTown">
+
+    <complexContent>
+
+      <extension base="tns:xmlPlace">
+
+        <sequence/>
+
+      </extension>
+
+    </complexContent>
+
+  </complexType>
+
+  <complexType name="xmlState">
+
+    <complexContent>
+
+      <extension base="tns:xmlPlace">
+
+        <sequence/>
+
+      </extension>
+
+    </complexContent>
+
+  </complexType>
+
+  <complexType name="places">
+
+    <sequence>
+
+      <choice maxOccurs="unbounded" minOccurs="0">
+
+        <element ref="tns:church"/>
+
+        <element ref="tns:country"/>
+
+        <element ref="tns:county"/>
+
+        <element ref="tns:parish"/>
+
+        <element ref="tns:township"/>
+
+        <element ref="tns:village"/>
+
+        <element ref="tns:town"/>
+
+        <element ref="tns:state"/>
+
+      </choice>
+
+    </sequence>
+
+  </complexType>
+
+  <simpleType name="type">
+
+    <restriction base="xs:string">
+
+      <enumeration value="marriage"/>
+
+      <enumeration value="baptism"/>
+
+      <enumeration value="burial"/>
+
+      <enumeration value="membership"/>
+
+    </restriction>
+
+  </simpleType>
 
 </schema>

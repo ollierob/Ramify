@@ -4,6 +4,8 @@ import net.ramify.model.date.DateRange;
 import net.ramify.model.date.InYears;
 import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.place.church.record.ChurchBaptismInfo;
+import net.ramify.model.place.church.record.ChurchBurialInfo;
+import net.ramify.model.place.church.record.ChurchMarriageInfo;
 import net.ramify.model.place.church.record.ChurchRecordSetInfo;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.record.set.HasRecordSetId;
@@ -13,9 +15,11 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlEnumValue;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 
+@XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "churchRecordSet")
 public class XmlChurchRecordSetInfo implements HasRecordSetId {
 
     @XmlAttribute(name = "id", required = true)
@@ -68,8 +72,8 @@ public class XmlChurchRecordSetInfo implements HasRecordSetId {
         @XmlEnumValue("marriage")
         MARRIAGE {
             @Override
-            ChurchRecordSetInfo build(XmlChurchRecordSetInfo info, DateParser dateParser) {
-                throw new UnsupportedOperationException(); //TODO
+            ChurchRecordSetInfo build(final XmlChurchRecordSetInfo info, final DateParser dateParser) {
+                return new ChurchMarriageInfo(info.recordSetId(), info.date(), info.notes);
             }
         },
 
@@ -77,7 +81,7 @@ public class XmlChurchRecordSetInfo implements HasRecordSetId {
         BURIAL {
             @Override
             ChurchRecordSetInfo build(XmlChurchRecordSetInfo info, DateParser dateParser) {
-                throw new UnsupportedOperationException(); //TODO
+                return new ChurchBurialInfo(info.recordSetId(), info.date(), info.notes);
             }
         },
 

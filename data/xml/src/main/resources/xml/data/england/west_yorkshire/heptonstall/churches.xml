@@ -2,18 +2,19 @@
 
 <churchInfos
         xmlns="http://ramify.net/places"
+        xmlns:d="http://ramify.net/dates"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://ramify.net/places ../../../../schema/schema1.xsd">
+        xsi:schemaLocation="http://ramify.net/places ../../../../schema/schema1.xsd http://ramify.net/dates ../../../../schema/schema2.xsd">
 
     <churchInfo id="heptonstall-st-thomas" denomination="Church of England">
-        <foundedBefore date="1260"/>
-        <record id="heptonstall-st-thomas-baptisms" type="baptism" startYear="1599" endYear="1812"/>
-        <record id="heptonstall-st-thomas-marriages" type="marriage" startYear="1593" endYear="1755"/>
-        <record id="heptonstall-st-thomas-burials" type="burial" startYear="1593" endYear="1812"/>
+        <d:foundedBefore date="1260"/>
+        <churchRecordSet id="heptonstall-st-thomas-baptisms" type="baptism" startYear="1599" endYear="1812"/>
+        <churchRecordSet id="heptonstall-st-thomas-marriages" type="marriage" startYear="1593" endYear="1755"/>
+        <churchRecordSet id="heptonstall-st-thomas-burials" type="burial" startYear="1593" endYear="1812"/>
     </churchInfo>
 
     <churchInfo id="birchcliffe" denomination="Baptist">
-        <foundedIn year="1763"/>
+        <d:foundedIn year="1763"/>
     </churchInfo>
 
 </churchInfos>

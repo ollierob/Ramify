@@ -19,6 +19,7 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collections;
@@ -36,12 +37,12 @@ public class XmlChurchInfo implements HasPlaceId {
     private String denomination;
 
     @XmlElements({
-            @XmlElement(name = "foundedBefore", type = XmlBeforeDate.class),
-            @XmlElement(name = "foundedIn", type = XmlInYear.class)
+            @XmlElement(name = "foundedBefore", type = XmlBeforeDate.class, namespace = XmlDateRange.NAMESPACE),
+            @XmlElement(name = "foundedIn", type = XmlInYear.class, namespace = XmlDateRange.NAMESPACE)
     })
     private XmlDateRange founded;
 
-    @XmlElement(name = "record")
+    @XmlElementRef
     private List<XmlChurchRecordSetInfo> recordSets;
 
     @Override

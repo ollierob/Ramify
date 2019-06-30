@@ -5,9 +5,9 @@ import net.ramify.model.date.InYears;
 import net.ramify.model.date.parse.DateParser;
 
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlType(namespace = XmlDateRange.NAMESPACE)
+@XmlRootElement(namespace = XmlDateRange.NAMESPACE)
 public class XmlInYear extends XmlDateRange {
 
     @XmlAttribute(name = "year", required = true)

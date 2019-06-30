@@ -5,9 +5,9 @@ import net.ramify.model.date.DateRange;
 import net.ramify.model.date.parse.DateParser;
 
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlType(namespace = XmlDateRange.NAMESPACE)
+@XmlRootElement(namespace = XmlDateRange.NAMESPACE)
 public class XmlBeforeDate extends XmlDateRange {
 
     @XmlAttribute(name = "date", required = true)
