@@ -291,6 +291,8 @@
 
       <enumeration value="baptism"/>
 
+      <enumeration value="birth"/>
+
       <enumeration value="membership"/>
 
       <enumeration value="burial"/>

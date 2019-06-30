@@ -19,6 +19,11 @@
     <churchInfo id="birchcliffe" denomination="Baptist">
         <d:foundedIn year="1763"/>
         <d:closedIn year="1974"/>
+        <churchRecordSet id="birchcliffe-births" type="birth" startYear="1785" endYear="1837"/>
+        <churchRecordSet id="birchcliffe-burials" type="burial" startYear="1816" endYear="1920"/>
+        <description>
+            Birchcliffe was opened on the 12th December 1763 by Daniel Taylor.
+        </description>
     </churchInfo>
 
 </churchInfos>
