@@ -1,10 +1,14 @@
 const webpack = require("webpack");
 
 module.exports = {
-    entry: ["./src/Router.tsx"],
+    entry: {
+        people: ["./src/pages/people/PeopleRouter.tsx"],
+        places: ["./src/pages/places/PlacesRouter.tsx"],
+    },
     output: {
-        filename: "bundle.js",
-        path: __dirname + "/target/classes/webroot"
+        path: __dirname + "/target/classes/js",
+        filename: "[name].bundle.js", //filename: "[name].[contenthash].bundle.js",
+        chunkFilename: "[name].bundle.js",
     },
     devtool: "source-map",
     resolve: {
@@ -12,16 +16,33 @@ module.exports = {
     },
     module: {
         rules: [
-            {test: /\.js$/, enforce: "pre", loader: "source-map-loader"},
-            {test: /\.tsx?$/, loader: "awesome-typescript-loader"},
-            {test: /\.css$/, use: ["style-loader", "css-loader"]},
+            {
+                test: /\.tsx?$/,
+                use: [
+                    {loader: 'cache-loader'},
+                    {loader: 'thread-loader', options: {workers: require('os').cpus().length - 2}},
+                    {loader: 'ts-loader', options: {happyPackMode: true, transpileOnly: true}}
+                ]
+            },
+            {
+                test: /\.css$/,
+                use: ["style-loader", "css-loader"]
+            },
+            {
+                test: /\.less$/,
+                use: [
+                    {loader: 'style-loader'},
+                    {loader: 'css-loader'},
+                    {loader: 'less-loader', options: {javascriptEnabled: true}}
+                ]
+            }
         ]
     },
     plugins: [
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     ],
-    // externals: {
-    //     "react": "React",
-    //     "react-dom": "ReactDOM"
-    // }
+    externals: {
+        "react": "React",
+        "react-dom": "ReactDOM"
+    }
 };

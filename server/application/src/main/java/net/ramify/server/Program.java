@@ -6,7 +6,7 @@ public class Program {
 
     public static void main(final String[] args) throws Exception {
 
-        final var injector = Guice.createInjector();
+        final var injector = Guice.createInjector(new ProgramModule());
 
         new Server(injector).run();
 

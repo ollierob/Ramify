@@ -18,6 +18,7 @@
     <modules>
         <module>application</module>
         <module>rest</module>
+        <module>authentication</module>
     </modules>
 
     <properties>
