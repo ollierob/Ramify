@@ -37,6 +37,10 @@ class XmlChurchInfoProvider implements ChurchInfoProvider {
         return churches.get(id);
     }
 
+    public int size() {
+        return churches.size();
+    }
+
     private void add(final ChurchInfo info) {
         churches.put(info.placeId(), info);
     }
@@ -59,11 +63,13 @@ class XmlChurchInfoProvider implements ChurchInfoProvider {
         try {
             final var unmarshalled = unmarshaller.unmarshal(file);
             if (!(unmarshalled instanceof XmlChurchInfos)) return;
-            logger.info("Reading church data in {}", file);
             final var info = (XmlChurchInfos) unmarshalled;
+            final var startSize = infoProvider.size();
             info.resolve(placeProvider, dateParser).forEach(infoProvider::add);
+            final var endSize = infoProvider.size();
+            logger.info("Read {} church infos from {}.", endSize - startSize, file);
         } catch (final JAXBException jex) {
-            logger.warn("Could not read church data in file " + file, jex);
+            logger.warn("Could not read church data in " + file, jex);
         }
     }
 
