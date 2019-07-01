@@ -2,7 +2,7 @@
     height: 48px;
     line-height: 48px;
     font-size: 18px;
-    padding-left: 150px;
+    padding-left: 24px;
 }
 
 .submenu .places .place {
@@ -10,9 +10,17 @@
 }
 
 .churchInfo {
-    width: 500px;
+    position: absolute;
+    left: 300px;
+    right: 350px;
 }
 
-.churchInfo .ant-card-head-title {
+.churchInfo .ant-card-head-title, .churchRecords .ant-card-head-title {
     font-size: 1.5em;
+}
+
+.churchRecords {
+    position: absolute;
+    right: 0;
+    width: 340px;
 }

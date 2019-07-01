@@ -3,8 +3,8 @@ import {DefaultChurchFetcher} from "../../../components/places/ChurchesFetcher";
 import {PlacesPageProps} from "../PlacesBasePage";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {Church} from "../../../protobuf/generated/church_pb";
-import {DateRange} from "../../../components/date/DateRange";
-import {Card} from "antd";
+import {ChurchInfo} from "./ChurchInfo";
+import {ChurchRecords} from "./ChurchRecords";
 
 type Props = PlacesPageProps
 
@@ -25,21 +25,13 @@ export default class ChurchPage extends React.PureComponent<Props, State> {
 
     render() {
 
-        if (!this.state.church.data || !this.props.place) return null;
-
-        const place = this.props.place;
         const church = this.state.church.data;
+        if (!church) return null; //TODO loading
 
         return <>
 
-            <Card
-                title={<><b>{place.name}</b></>}
-                className="churchInfo">
-
-                {church.established && <div>Founded <DateRange date={church.established}/></div>}
-                {church.closed && <div>Closed <DateRange date={church.closed}/></div>}
-
-            </Card>
+            <ChurchInfo church={church}/>
+            <ChurchRecords church={church}/>
 
         </>;
 
