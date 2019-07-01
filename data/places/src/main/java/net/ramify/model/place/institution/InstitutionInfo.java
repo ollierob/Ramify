@@ -1,13 +1,12 @@
-package net.ramify.model.place.church;
+package net.ramify.model.place.institution;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.Iterables;
 import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.place.HasPlace;
-import net.ramify.model.place.building.Church;
-import net.ramify.model.place.church.record.ChurchRecordSetInfo;
-import net.ramify.model.place.proto.ChurchProto;
+import net.ramify.model.place.institution.church.ChurchInfo;
+import net.ramify.model.place.proto.InstitutionProto;
 import net.ramify.utils.objects.Consumers;
 
 import javax.annotation.CheckForNull;
@@ -15,13 +14,7 @@ import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.Set;
 
-public interface ChurchInfo extends HasPlace, BuildsProto<ChurchProto.Church> {
-
-    @Nonnull
-    Church place();
-
-    @CheckForNull
-    String denomination();
+public interface InstitutionInfo extends HasPlace, BuildsProto<InstitutionProto.Institution> {
 
     @CheckForNull
     String description();
@@ -32,19 +25,18 @@ public interface ChurchInfo extends HasPlace, BuildsProto<ChurchProto.Church> {
     @CheckForNull
     DateRange closed();
 
-    @Nonnull
-    Set<ChurchRecordSetInfo> records();
-
     default boolean isClosed() {
         return this.closed() != null;
     }
 
     @Nonnull
-    default ChurchProto.Church.Builder toProtoBuilder() {
-        final var builder = ChurchProto.Church.newBuilder()
+    Set<? extends InstitutionRecordSetInfo> records();
+
+    @Nonnull
+    default InstitutionProto.Institution.Builder toProtoBuilder() {
+        final var builder = InstitutionProto.Institution.newBuilder()
                 .setPlace(this.place().toProto())
                 .setDescription(MoreObjects.firstNonNull(this.description(), ""))
-                .setDenomination(MoreObjects.firstNonNull(this.denomination(), ""))
                 .setEstablished(this.founded().toProto());
         Consumers.ifNonNull(this.closed(), c -> builder.setClosed(c.toProto()));
         this.records().forEach(record -> builder.addRecordSet(record.toProto()));
@@ -53,14 +45,14 @@ public interface ChurchInfo extends HasPlace, BuildsProto<ChurchProto.Church> {
 
     @Nonnull
     @Override
-    default ChurchProto.Church toProto() {
+    default InstitutionProto.Institution toProto() {
         return this.toProtoBuilder().build();
     }
 
     @Nonnull
-    static ChurchProto.ChurchList toProto(final Collection<ChurchInfo> churches) {
-        final var list = ChurchProto.ChurchList.newBuilder();
-        list.addAllChurch(Iterables.transform(churches, ChurchInfo::toProto));
+    static InstitutionProto.InstitutionList toProto(final Collection<ChurchInfo> churches) {
+        final var list = InstitutionProto.InstitutionList.newBuilder();
+        list.addAllInstitution(Iterables.transform(churches, ChurchInfo::toProto));
         return list.build();
     }
 

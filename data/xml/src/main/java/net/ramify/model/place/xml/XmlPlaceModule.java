@@ -5,7 +5,7 @@ import com.google.inject.PrivateModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import net.ramify.model.date.parse.DateParser;
-import net.ramify.model.place.church.ChurchInfoProvider;
+import net.ramify.model.place.institution.church.ChurchInfoProvider;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.xml.church.XmlChurchInfos;
 import net.ramify.model.place.xml.place.XmlPlaces;

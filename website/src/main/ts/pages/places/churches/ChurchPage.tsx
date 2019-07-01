@@ -1,5 +1,5 @@
 import * as React from "react";
-import {DefaultChurchFetcher} from "../../../components/places/ChurchesFetcher";
+import {DEFAULT_CHURCH_LOADER} from "../../../components/places/ChurchLoader";
 import {PlacesPageProps} from "../PlacesBasePage";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {Church} from "../../../protobuf/generated/church_pb";
@@ -14,7 +14,7 @@ type State = {
 
 export default class ChurchPage extends React.PureComponent<Props, State> {
 
-    private readonly churchFetcher = DefaultChurchFetcher;
+    private readonly churchLoader = DEFAULT_CHURCH_LOADER;
 
     constructor(props: Props) {
         super(props);
@@ -49,7 +49,7 @@ export default class ChurchPage extends React.PureComponent<Props, State> {
     private loadChurch() {
         const id = this.props.placeId;
         if (!id) return;
-        asyncLoadData(id, this.churchFetcher.fetchChurch, church => this.setState({church}));
+        asyncLoadData(id, this.churchLoader.loadChurch, church => this.setState({church}));
     }
 
 }

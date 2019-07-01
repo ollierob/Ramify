@@ -2,8 +2,8 @@ package net.ramify.server.resource.places.churches;
 
 import com.google.common.collect.Collections2;
 import net.ramify.model.place.PlaceId;
-import net.ramify.model.place.church.ChurchInfo;
-import net.ramify.model.place.church.ChurchInfoProvider;
+import net.ramify.model.place.institution.church.ChurchInfo;
+import net.ramify.model.place.institution.church.ChurchInfoProvider;
 import net.ramify.server.resource.places.ChurchesResource;
 
 import javax.inject.Inject;

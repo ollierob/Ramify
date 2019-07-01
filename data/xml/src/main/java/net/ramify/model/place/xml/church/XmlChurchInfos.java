@@ -3,7 +3,7 @@ package net.ramify.model.place.xml.church;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import net.ramify.model.date.parse.DateParser;
-import net.ramify.model.place.church.ChurchInfo;
+import net.ramify.model.place.institution.church.ChurchInfo;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.xml.place.XmlPlace;
 

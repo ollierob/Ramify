@@ -1,15 +1,15 @@
-package net.ramify.model.place.church.record;
+package net.ramify.model.place.institution;
 
 import com.google.common.base.MoreObjects;
 import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.date.HasDate;
-import net.ramify.model.place.proto.ChurchProto;
+import net.ramify.model.place.proto.InstitutionProto;
 import net.ramify.model.record.set.HasRecordSetId;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 
-public interface ChurchRecordSetInfo extends HasRecordSetId, HasDate, BuildsProto<ChurchProto.ChurchRecordSet> {
+public interface InstitutionRecordSetInfo extends HasRecordSetId, HasDate, BuildsProto<InstitutionProto.InstitutionRecordSet> {
 
     @Nonnull
     String name();
@@ -18,8 +18,8 @@ public interface ChurchRecordSetInfo extends HasRecordSetId, HasDate, BuildsProt
     String notes();
 
     @Nonnull
-    default ChurchProto.ChurchRecordSet.Builder toProtoBuilder() {
-        return ChurchProto.ChurchRecordSet.newBuilder()
+    default InstitutionProto.InstitutionRecordSet.Builder toProtoBuilder() {
+        return InstitutionProto.InstitutionRecordSet.newBuilder()
                 .setId(this.recordSetId().value())
                 .setName(this.name())
                 .setCovers(this.date().toProto())
@@ -28,7 +28,7 @@ public interface ChurchRecordSetInfo extends HasRecordSetId, HasDate, BuildsProt
 
     @Nonnull
     @Override
-    default ChurchProto.ChurchRecordSet toProto() {
+    default InstitutionProto.InstitutionRecordSet toProto() {
         return this.toProtoBuilder().build();
     }
 

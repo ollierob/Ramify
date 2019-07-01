@@ -1,4 +1,4 @@
-package net.ramify.model.place.church.record;
+package net.ramify.model.place.institution.church.record;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.record.set.RecordSetId;

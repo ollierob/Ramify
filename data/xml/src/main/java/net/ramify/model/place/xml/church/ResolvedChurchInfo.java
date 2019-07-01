@@ -2,8 +2,8 @@ package net.ramify.model.place.xml.church;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.place.building.Church;
-import net.ramify.model.place.church.ChurchInfo;
-import net.ramify.model.place.church.record.ChurchRecordSetInfo;
+import net.ramify.model.place.institution.church.ChurchInfo;
+import net.ramify.model.place.institution.church.record.ChurchRecordSetInfo;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;

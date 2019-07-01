@@ -1,7 +1,7 @@
 package net.ramify.server.resource.places;
 
 import net.ramify.model.place.PlaceId;
-import net.ramify.model.place.church.ChurchInfo;
+import net.ramify.model.place.institution.church.ChurchInfo;
 import net.ramify.server.resource.Resource;
 
 import javax.ws.rs.GET;
