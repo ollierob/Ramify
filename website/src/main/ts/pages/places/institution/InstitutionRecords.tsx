@@ -8,7 +8,7 @@ export const InstitutionRecords = (props: {institution: Institution.AsObject}) =
     if (!institution) return null;
 
     return <Card
-        className="churchRecords"
+        className="records"
         title={"Records"}>
 
     </Card>

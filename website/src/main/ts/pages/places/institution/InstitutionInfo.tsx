@@ -9,7 +9,7 @@ export const InstitutionInfo = (props: {institution: Institution.AsObject}) => {
     if (!institution) return null;
 
     return <Card
-        className="churchInfo"
+        className="info"
         title={<Title institution={institution}/>}>
 
         {institution.established && <div>Founded <DateRange date={institution.established}/></div>}

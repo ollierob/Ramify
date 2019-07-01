@@ -5,6 +5,7 @@ import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {InstitutionInfo} from "./InstitutionInfo";
 import {InstitutionRecords} from "./InstitutionRecords";
 import {Institution} from "../../../protobuf/generated/institution_pb";
+import {PlaceMap} from "../../../components/places/PlaceMap";
 
 type Props = PlacesPageProps
 
@@ -28,12 +29,13 @@ export default class ChurchPage extends React.PureComponent<Props, State> {
         const church = this.state.church.data;
         if (!church) return null; //TODO loading
 
-        return <>
+        return <div className="institution">
 
+            <PlaceMap/>
             <InstitutionInfo institution={church}/>
             <InstitutionRecords institution={church}/>
 
-        </>;
+        </div>;
 
     }
 
