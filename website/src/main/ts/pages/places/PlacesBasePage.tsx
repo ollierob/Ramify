@@ -3,7 +3,7 @@ import * as ReactDOM from "react-dom";
 import {HashRouter, Route, RouteComponentProps, Switch} from "react-router-dom";
 import BasePage from "../BasePage";
 import PlacesHomePage from "./home/PlacesHomePage";
-import ChurchPage from "./churches/ChurchPage";
+import ChurchPage from "./institution/ChurchPage";
 import PlacesBreadcrumbWrapper from "./PlacesBreadcrumbWrapper";
 import "./Places.css"
 import GeneralPlacePage from "./general/GeneralPlacePage";

@@ -2,14 +2,14 @@ import * as React from "react";
 import {DEFAULT_CHURCH_LOADER} from "../../../components/places/ChurchLoader";
 import {PlacesPageProps} from "../PlacesBasePage";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
-import {Church} from "../../../protobuf/generated/church_pb";
-import {ChurchInfo} from "./ChurchInfo";
-import {ChurchRecords} from "./ChurchRecords";
+import {InstitutionInfo} from "./InstitutionInfo";
+import {InstitutionRecords} from "./InstitutionRecords";
+import {Institution} from "../../../protobuf/generated/institution_pb";
 
 type Props = PlacesPageProps
 
 type State = {
-    church: AsyncData<Church.AsObject>
+    church: AsyncData<Institution.AsObject>
 }
 
 export default class ChurchPage extends React.PureComponent<Props, State> {
@@ -30,8 +30,8 @@ export default class ChurchPage extends React.PureComponent<Props, State> {
 
         return <>
 
-            <ChurchInfo church={church}/>
-            <ChurchRecords church={church}/>
+            <InstitutionInfo institution={church}/>
+            <InstitutionRecords institution={church}/>
 
         </>;
 
