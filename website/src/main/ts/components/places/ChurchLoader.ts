@@ -1,13 +1,13 @@
 import {PlaceId} from "./Place";
-import {Church} from "../../protobuf/generated/church_pb";
 import {protoFetch} from "../fetch/ProtoFetch";
 import {PlaceIdList} from "../../protobuf/generated/place_pb";
+import {Institution} from "../../protobuf/generated/institution_pb";
 
 export interface ChurchLoader {
 
     loadChurches(region: PlaceId): Promise<ReadonlyArray<PlaceId>>
 
-    loadChurch(id: PlaceId): Promise<Church.AsObject>
+    loadChurch(id: PlaceId): Promise<Institution.AsObject>
 
 }
 
@@ -19,7 +19,7 @@ class ProtoChurchLoader implements ChurchLoader {
     }
 
     loadChurch(id: PlaceId) {
-        return protoFetch("/places/churches/at/" + id, Church.deserializeBinary)
+        return protoFetch("/places/churches/at/" + id, Institution.deserializeBinary)
             .then(c => c ? c.toObject() : null);
     }
 
