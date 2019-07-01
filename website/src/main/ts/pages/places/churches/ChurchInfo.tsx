@@ -23,7 +23,6 @@ const Title = (props: {church: Church.AsObject}) => {
     const church = props.church;
     return <>
         <b>{church.place.name}</b>
-        {" "}
-        <span className="gray">{church.denomination}</span>
+        {church.denomination && <> <span className="gray">{church.denomination}</span></>}
     </>
 }
