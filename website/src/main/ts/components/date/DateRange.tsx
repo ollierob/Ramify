@@ -4,7 +4,9 @@ import {Date as DateProto, DateRange as DateRangeProto} from "../../protobuf/gen
 export const DateRange = (props: {date: DateRangeProto.AsObject}) => {
     const date = props.date;
     if (!date) return null;
-    if (date.earliest && !date.latest) return <>by {date.earliest}</>;
+    if (!date.earliest && !date.latest) return <>unknown</>
+    if (date.earliest && !date.latest) return <>after {format(date.earliest)}</>;
+    if (!date.earliest && date.latest) return <>by {format(date.latest)}</>;
     return null;
 }
 

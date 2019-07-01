@@ -8,3 +8,11 @@
 .submenu .places .place {
     color: #AAAAAA;
 }
+
+.churchInfo {
+    width: 500px;
+}
+
+.churchInfo .ant-card-head-title {
+    font-size: 1.5em;
+}
