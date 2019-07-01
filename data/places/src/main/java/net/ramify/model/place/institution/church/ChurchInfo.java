@@ -16,6 +16,12 @@ public interface ChurchInfo extends InstitutionInfo {
     @CheckForNull
     String denomination();
 
+    @Override
+    @Deprecated
+    default String type() {
+        return this.denomination();
+    }
+
     @Nonnull
     Set<? extends ChurchRecordSetInfo> records();
 
