@@ -39,25 +39,30 @@ public interface Place extends HasPlaceId, Castable<Place>, BuildsProto<PlacePro
         return parent == null ? address : address + ", " + parent.address();
     }
 
+    default String type() {
+        return this.getClass().getSimpleName();
+    }
+
     <R> R handleWith(PlaceHandler<R> handler);
 
-    default PlaceProto.Place.Builder toProtoBuilder() {
+    default PlaceProto.Place.Builder toProtoBuilder(final boolean includeParent) {
         final var builder = PlaceProto.Place.newBuilder()
                 .setId(this.placeId().value())
                 .setName(this.name())
                 .setType(this.type());
-        Consumers.ifNonNull(this.parent(), parent -> builder.setParent(parent.toProto()));
+        if (includeParent) Consumers.ifNonNull(this.parent(), parent -> builder.setParent(parent.toProto()));
         return builder;
     }
 
-    default String type() {
-        return this.getClass().getSimpleName();
+    @Nonnull
+    default PlaceProto.Place toProto(final boolean includeParent) {
+        return this.toProtoBuilder(includeParent).build();
     }
 
     @Nonnull
     @Override
     default PlaceProto.Place toProto() {
-        return this.toProtoBuilder().build();
+        return this.toProto(true);
     }
 
     default <R extends Place> R requireAs(final Class<? extends R> type) throws InvalidPlaceTypeException {
@@ -71,6 +76,7 @@ public interface Place extends HasPlaceId, Castable<Place>, BuildsProto<PlacePro
         public InvalidPlaceTypeException(final Class<?> expected, final Class<?> actual) {
             super("Invalid type: expected " + expected.getSimpleName() + " but was " + actual.getSimpleName());
         }
+
     }
 
 }

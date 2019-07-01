@@ -24,4 +24,10 @@ public class SetUtils {
         return Sets.union(left, right);
     }
 
+    public static <T> Set<T> asSet(final Collection<T> collection) {
+        return collection instanceof Set
+                ? (Set<T>) collection
+                : Sets.newHashSet(collection);
+    }
+
 }
