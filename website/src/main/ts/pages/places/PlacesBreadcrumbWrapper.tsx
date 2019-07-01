@@ -5,9 +5,10 @@ import {PlaceId} from "../../components/places/Place";
 import {AsyncData, asyncLoadData} from "../../components/fetch/AsyncData";
 import {DEFAULT_PLACE_FETCHER} from "../../components/places/PlaceFetcher";
 import {PlaceBreadcrumb} from "./PlaceBreadcrumb";
+import {PlacesPageProps} from "./PlacesBasePage";
 
 type Props = RouteComponentProps<any> & {
-    childType: React.ComponentType<RouteComponentProps<any>>;
+    childType: React.ComponentType<PlacesPageProps>;
 }
 
 type State = {
@@ -36,7 +37,13 @@ export default class PlacesBreadcrumbWrapper extends React.PureComponent<Props, 
                 loading={this.state.place.loading}
                 place={this.state.place.data}/>
 
-            <Type {...this.props}/>
+            <div className="content">
+                <Type
+                    {...this.props}
+                    placeId={this.state.placeId}
+                    place={this.state.place.data}
+                    loading={this.state.place.loading}/>
+            </div>
 
         </>
 

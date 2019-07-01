@@ -1,7 +1,9 @@
 import * as React from "react";
-import {RouteComponentProps} from "react-router";
+import {PlacesPageProps} from "../PlacesBasePage";
 
-export default class PlacesHomePage extends React.PureComponent<RouteComponentProps<any>> {
+type Props = PlacesPageProps;
+
+export default class PlacesHomePage extends React.PureComponent<Props> {
 
     render() {
 

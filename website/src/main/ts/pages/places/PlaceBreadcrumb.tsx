@@ -10,7 +10,7 @@ export const PlaceBreadcrumb = (props: {loading: boolean, place: Place.AsObject}
 
 const Hierarchy = (props: {place: Place.AsObject}) => {
 
-    const hierarchy = listHierarchy(props.place, 4);
+    const hierarchy = listHierarchy(props.place, 7);
 
     if (!hierarchy.length) return null;
 
@@ -41,7 +41,7 @@ const Breadcrumb = (props: {place: Place.AsObject, separator: boolean}) => {
     return <>
         <span className="place">
         {typeBreadcrumb(place.type)}
-            <a href={"#/?place=" + place.id}>
+            <a href={"#/" + place.type.toLowerCase() + "?place=" + place.id}>
                 <b>{place.name}</b>
             </a>
         </span>

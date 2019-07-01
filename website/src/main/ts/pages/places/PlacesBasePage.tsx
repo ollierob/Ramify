@@ -3,18 +3,20 @@ import * as ReactDOM from "react-dom";
 import {HashRouter, Route, RouteComponentProps, Switch} from "react-router-dom";
 import BasePage from "../BasePage";
 import PlacesHomePage from "./home/PlacesHomePage";
-import ChurchesPage from "./churches/ChurchesPage";
+import ChurchPage from "./churches/ChurchPage";
 import PlacesBreadcrumbWrapper from "./PlacesBreadcrumbWrapper";
 import "./Places.css"
 import GeneralPlacePage from "./general/GeneralPlacePage";
+import {PlaceId} from "../../components/places/Place";
+import {Place} from "../../protobuf/generated/place_pb";
 
 class PlacesBasePage extends BasePage {
 
     body() {
         return <HashRouter>
             <Switch>
+                <Route path="/church" component={breadcrumb(ChurchPage)}/>
                 <Route exact path="/" component={breadcrumb(PlacesHomePage)}/>
-                <Route path="/?place=church:" component={breadcrumb(ChurchesPage)}/>
                 <Route path="*" component={breadcrumb(GeneralPlacePage)}/>
             </Switch>
         </HashRouter>;
@@ -26,8 +28,10 @@ class PlacesBasePage extends BasePage {
 
 }
 
-function breadcrumb(type: React.ComponentType<RouteComponentProps<any>>): React.ComponentType<RouteComponentProps<any>> {
+function breadcrumb(type: React.ComponentType<PlacesPageProps>): React.ComponentType<RouteComponentProps<any>> {
     return params => <PlacesBreadcrumbWrapper {...params} childType={type}/>
 }
+
+export type PlacesPageProps = RouteComponentProps<any> & {placeId: PlaceId, place: Place.AsObject, loading: boolean}
 
 ReactDOM.render(<PlacesBasePage/>, document.getElementById("main"));

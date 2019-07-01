@@ -7,7 +7,7 @@ export interface ChurchesFetcher {
 
     fetchChurches(region: PlaceId): Promise<ReadonlyArray<PlaceId>>
 
-    fetchChurch(id: PlaceId): Promise<Church>
+    fetchChurch(id: PlaceId): Promise<Church.AsObject>
 
 }
 
@@ -19,7 +19,8 @@ class ProtoChurchesFetcher implements ChurchesFetcher {
     }
 
     fetchChurch(id: PlaceId) {
-        return protoFetch("/places/churches/at/" + id, Church.deserializeBinary);
+        return protoFetch("/places/churches/at/" + id, Church.deserializeBinary)
+            .then(c => c ? c.toObject() : null);
     }
 
 }

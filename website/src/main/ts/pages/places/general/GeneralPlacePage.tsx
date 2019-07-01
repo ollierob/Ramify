@@ -1,7 +1,7 @@
-import {RouteComponentProps} from "react-router";
 import * as React from "react";
+import {PlacesPageProps} from "../PlacesBasePage";
 
-type Props = RouteComponentProps<any>;
+type Props = PlacesPageProps;
 
 export default class GeneralPlacePage extends React.PureComponent<Props> {
 
