@@ -1,17 +1,23 @@
 package net.ramify.model.place.xml;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSetMultimap;
 import com.google.common.collect.Maps;
+import com.google.common.collect.SetMultimap;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.xml.place.XmlPlaces;
+import net.ramify.utils.collections.SetUtils;
 import net.ramify.utils.file.FileTraverseUtils;
+import net.ramify.utils.objects.Consumers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -19,6 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import java.io.File;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 
 @XmlTransient
 class XmlPlaceProvider implements PlaceProvider {
@@ -26,9 +33,11 @@ class XmlPlaceProvider implements PlaceProvider {
     private static final Logger logger = LoggerFactory.getLogger(XmlPlaceProvider.class);
 
     private final Map<PlaceId, Place> places;
+    private final SetMultimap<PlaceId, PlaceId> children;
 
-    private XmlPlaceProvider(final Map<PlaceId, Place> places) {
+    private XmlPlaceProvider(final Map<PlaceId, Place> places, final SetMultimap<PlaceId, PlaceId> children) {
         this.places = places;
+        this.children = children;
     }
 
     @CheckForNull
@@ -37,8 +46,15 @@ class XmlPlaceProvider implements PlaceProvider {
         return places.get(id);
     }
 
+    @Nonnull
+    @Override
+    public Set<Place> children(final PlaceId id) {
+        return SetUtils.transform(children.get(id), this::get);
+    }
+
     void add(final Place place) {
         places.put(place.placeId(), place);
+        Consumers.ifNonNull(place.parent(), parent -> children.put(parent.placeId(), place.placeId()));
     }
 
     void addAll(final Collection<Place> places) {
@@ -50,11 +66,11 @@ class XmlPlaceProvider implements PlaceProvider {
     }
 
     PlaceProvider immutable() {
-        return new XmlPlaceProvider(ImmutableMap.copyOf(places));
+        return new XmlPlaceProvider(ImmutableMap.copyOf(places), ImmutableSetMultimap.copyOf(children));
     }
 
     static PlaceProvider readPlacesInDirectory(final JAXBContext context, final File root) throws JAXBException {
-        final var provider = new XmlPlaceProvider(Maps.newConcurrentMap());
+        final var provider = new XmlPlaceProvider(Maps.newConcurrentMap(), HashMultimap.create());
         final var unmarshaller = context.createUnmarshaller();
         FileTraverseUtils.traverseSubdirectories(root, file -> file.getName().endsWith(".xml"), file -> readPlacesInFile(unmarshaller, file, provider));
         logger.info("Loaded {} places from {}.", provider.size(), root);

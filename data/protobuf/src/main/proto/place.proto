@@ -12,6 +12,12 @@ message Place {
 
 }
 
+message PlaceList {
+
+    repeated Place place = 1;
+
+}
+
 message PlaceIdList {
 
     repeated string id = 1;

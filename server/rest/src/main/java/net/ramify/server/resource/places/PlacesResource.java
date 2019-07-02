@@ -2,6 +2,7 @@ package net.ramify.server.resource.places;
 
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.collection.Places;
 import net.ramify.server.resource.RootResource;
 
 import javax.ws.rs.GET;
@@ -19,6 +20,10 @@ public interface PlacesResource extends RootResource {
     @GET
     @Path("at/{id}")
     Place at(@PathParam("id") PlaceId id);
+
+    @GET
+    @Path("children/{id}")
+    Places within(@PathParam("id") PlaceId id);
 
     @Path("churches")
     ChurchesResource churches();

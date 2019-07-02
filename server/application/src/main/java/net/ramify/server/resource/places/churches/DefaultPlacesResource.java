@@ -2,6 +2,7 @@ package net.ramify.server.resource.places.churches;
 
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.collection.Places;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.server.resource.places.ChurchesResource;
 import net.ramify.server.resource.places.PlacesResource;
@@ -24,6 +25,11 @@ public class DefaultPlacesResource implements PlacesResource {
     @Override
     public Place at(final PlaceId id) {
         return placeProvider.get(id);
+    }
+
+    @Override
+    public Places within(final PlaceId id) {
+        return Places.of(placeProvider.children(id), false);
     }
 
     @Override

@@ -6,6 +6,8 @@ import net.ramify.model.place.PlaceId;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 
 public interface PlaceProvider extends Provider<PlaceId, Place> {
 
@@ -21,6 +23,14 @@ public interface PlaceProvider extends Provider<PlaceId, Place> {
     default <P extends Place> P require(final PlaceId id, final Class<P> type) throws Place.InvalidPlaceTypeException {
         return this.require(id).requireAs(type);
     }
+
+    @Nonnull
+    default Optional<Place> parent(final PlaceId id) {
+        return this.maybeGet(id).map(Place::parent);
+    }
+
+    @Nonnull
+    Set<Place> children(PlaceId id);
 
     class UnknownPlaceException extends RuntimeException {
 
