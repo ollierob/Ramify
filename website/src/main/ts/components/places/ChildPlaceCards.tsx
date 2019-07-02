@@ -3,6 +3,7 @@ import {Place} from "../../protobuf/generated/place_pb";
 import {stringMultimap} from "../Maps";
 import {Card} from "antd";
 import {placeHref} from "./Place";
+import {sortByType} from "./PlaceType";
 
 type Props = {
     loading: boolean;
@@ -27,7 +28,9 @@ export default class ChildPlaceCards extends React.PureComponent<Props, State> {
         if (this.props.loading) return null; //TODO
 
         return <div className="childPlaces">
-            {Object.keys(this.state.groupedPlaces).map(type => <TypeCard type={type} places={this.state.groupedPlaces[type]}/>)}
+            {Object.keys(this.state.groupedPlaces)
+                .sort(sortByType)
+                .map(type => <TypeCard type={type} places={this.state.groupedPlaces[type]}/>)}
         </div>;
 
     }

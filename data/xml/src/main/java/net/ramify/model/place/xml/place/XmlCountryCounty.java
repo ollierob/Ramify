@@ -4,7 +4,7 @@ import com.google.common.base.MoreObjects;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
-import net.ramify.model.place.region.CountryCounty;
+import net.ramify.model.place.region.County;
 
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
@@ -24,13 +24,13 @@ class XmlCountryCounty extends XmlPlace {
 
     @Override
     PlaceId placeId(final String id) {
-        return new Spid(CountryCounty.class, id);
+        return new Spid(County.class, id);
     }
 
     @Override
-    CountryCounty place(final Place parent) throws Place.InvalidPlaceTypeException {
+    County place(final Place parent) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
-        return new CountryCounty(this.placeId(), this.name(), parent);
+        return new County(this.placeId(), this.name(), parent);
     }
 
     @Override
