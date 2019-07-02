@@ -9,18 +9,21 @@
     color: #AAAAAA;
 }
 
-.institution .info {
+.leftRest .map {
     position: absolute;
-    left: 300px;
-    right: 350px;
-}
-
-.institution .info .ant-card-head-title, .churchRecords .ant-card-head-title {
-    font-size: 1.5em;
-}
-
-.institution .map {
+    left: 0;
+    width: 290px;
     height: 290px;
     background-color: white;
     border: 1px solid #D7D7D7;
+}
+
+.leftRest .info {
+    position: absolute;
+    left: 300px;
+    right: 0;
+}
+
+.leftRest .info .ant-card-head-title, .churchRecords .ant-card-head-title {
+    font-size: 1.5em;
 }

@@ -28,10 +28,10 @@ export default class ChurchPage extends React.PureComponent<Props, State> {
         const church = this.state.church.data;
         if (!church) return null; //TODO loading
 
-        return <div className="institution">
+        return <div className="institution leftRest">
 
-            <PlaceMap className="left"/>
-            <InstitutionInfo className="middleRight" institution={church}/>
+            <PlaceMap/>
+            <InstitutionInfo institution={church}/>
 
         </div>;
 

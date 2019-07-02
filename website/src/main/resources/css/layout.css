@@ -46,15 +46,3 @@ body {
 .body .submenu + .content {
     top: 54px;
 }
-
-.body .content .left {
-    position: absolute;
-    left: 0;
-    width: 290px;
-}
-
-.body .content .middleRight {
-    position: absolute;
-    left: 300px;
-    right: 0;
-}
