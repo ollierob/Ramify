@@ -1,6 +1,7 @@
 package net.ramify.model.place.region;
 
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.proto.PlaceProto;
 
 import javax.annotation.Nonnull;
 
@@ -19,4 +20,9 @@ public class Hundred extends AbstractRegion {
         return parent;
     }
 
+    @Nonnull
+    @Override
+    public PlaceProto.PlaceType protoType() {
+        return PlaceProto.PlaceType.HUNDRED;
+    }
 }

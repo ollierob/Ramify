@@ -39,17 +39,17 @@ public interface Place extends HasPlaceId, Castable<Place>, BuildsProto<PlacePro
         return parent == null ? address : address + ", " + parent.address();
     }
 
-    default String type() {
-        return this.getClass().getSimpleName();
-    }
+    <R> R handleWith(@Nonnull PlaceHandler<R> handler);
 
-    <R> R handleWith(PlaceHandler<R> handler);
+    @Nonnull
+    PlaceProto.PlaceType protoType();
 
+    @Nonnull
     default PlaceProto.Place.Builder toProtoBuilder(final boolean includeParent) {
         final var builder = PlaceProto.Place.newBuilder()
                 .setId(this.placeId().value())
                 .setName(this.name())
-                .setType(this.type());
+                .setType(this.protoType());
         if (includeParent) Consumers.ifNonNull(this.parent(), parent -> builder.setParent(parent.toProto()));
         return builder;
     }

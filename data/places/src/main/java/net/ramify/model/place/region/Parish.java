@@ -2,6 +2,7 @@ package net.ramify.model.place.region;
 
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.type.Region;
 
 import javax.annotation.Nonnull;
@@ -23,6 +24,11 @@ public class Parish extends AbstractRegion {
     @Override
     public Region parent() {
         return parent;
+    }
+
+    @Override
+    public PlaceProto.PlaceType protoType() {
+        return PlaceProto.PlaceType.PARISH;
     }
 
 }

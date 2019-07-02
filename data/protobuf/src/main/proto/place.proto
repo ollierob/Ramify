@@ -7,8 +7,38 @@ message Place {
 
     string id = 1;
     string name = 2;
-    string type = 3;
+    PlaceType type = 3;
     Place parent = 4;
+
+}
+
+enum PlaceType {
+
+    COUNTRY = 0;
+
+    STATE = 10;
+    COUNTY = 11;
+
+    RAPE = 20;
+
+    HUNDRED = 30;
+    WAPENTAKE = 31;
+
+    PARISH = 40;
+    BOROUGH = 41;
+    CITY = 42;
+
+    TOWNSHIP = 50;
+    DISTRICT = 51;
+
+    TOWN = 60;
+    VILLAGE = 61;
+
+    HOUSE = 100;
+    FARMSTEAD = 101;
+    CHURCH = 102;
+    HOSPITAL = 103;
+    SCHOOL = 104;
 
 }
 

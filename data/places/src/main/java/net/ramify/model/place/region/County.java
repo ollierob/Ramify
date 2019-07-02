@@ -2,7 +2,10 @@ package net.ramify.model.place.region;
 
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.type.Region;
+
+import javax.annotation.Nonnull;
 
 public class County extends AbstractRegion {
 
@@ -20,6 +23,12 @@ public class County extends AbstractRegion {
     @Override
     public Region parent() {
         return parent;
+    }
+
+    @Nonnull
+    @Override
+    public PlaceProto.PlaceType protoType() {
+        return PlaceProto.PlaceType.COUNTY;
     }
 
 }

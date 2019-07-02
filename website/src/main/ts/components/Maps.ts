@@ -18,3 +18,16 @@ export function stringMultimap<T>(objects: ReadonlyArray<T>, toString: (t: T) =>
     });
     return map;
 }
+
+export type NumberMap<T> = {[k: number]: T}
+
+export function numberMap<T>(objects: ReadonlyArray<T>, toNumber: (t: T) => number): NumberMap<T> {
+    if (!objects || !objects.length) return {};
+    const map: NumberMap<T> = {};
+    objects.forEach(o => map[toNumber(o)] = o);
+    return map;
+}
+
+export function numericKeys(map: NumberMap<any>): number[] {
+    return Object.keys(map).map(m => parseFloat(m));
+}

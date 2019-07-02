@@ -1,28 +1,41 @@
 //TODO this should be determined server-side
-const TypePrecedence = {
 
-    Country: 0,
+import {PlaceType as PlaceTypeProtoValues, PlaceTypeMap} from "../../protobuf/generated/place_pb";
+import {numberMap, numericKeys} from "../Maps";
 
-    State: 1,
-    County: 2,
+export type PlaceType = keyof PlaceTypeMap;
+type Name = {s: string, p?: string}
 
-    Hundred: 3,
-    Wapentake: 3,
-
-    Parish: 4,
-
-    Town: 5,
-    Township: 5.1,
-
-    Village: 6,
-    Hamlet: 6.1,
-
-    Church: 7
-
+const PlaceTypeNames: { [key in PlaceType]: Name } = {
+    BOROUGH: {s: "Borough"},
+    CITY: {s: "City"},
+    COUNTRY: {s: "Country", p: "Countries"},
+    COUNTY: {s: "County", p: "Counties"},
+    CHURCH: {s: "Church", p: "Churches"},
+    DISTRICT: {s: "District"},
+    FARMSTEAD: {s: "Farmstead"},
+    HOSPITAL: {s: "Hospital"},
+    HOUSE: {s: "House"},
+    HUNDRED: {s: "Hundred"},
+    PARISH: {s: "Parish", p: "Parishes"},
+    RAPE: {s: "Rape"},
+    SCHOOL: {s: "School"},
+    STATE: {s: "State"},
+    TOWN: {s: "Town"},
+    TOWNSHIP: {s: "Township"},
+    VILLAGE: {s: "Village"},
+    WAPENTAKE: {s: "Wapentake"},
 };
 
-export function sortByType(t1: string, t2: string): number {
-    const p1 = TypePrecedence[t1] || 99;
-    const p2 = TypePrecedence[t2] || 99;
-    return p1 - p2;
+const ValueToPlaceLookup = numberMap(numericKeys(PlaceTypeProtoValues), v => PlaceTypeProtoValues[v]);
+
+export function placeTypeName(type: PlaceTypeMap[keyof PlaceTypeMap], plural: boolean = false) {
+    const n = PlaceTypeNames[ValueToPlaceLookup[type]];
+    return plural ? (n.p || n.s + "s") : n.s;
+}
+
+export function sortByType(t1: PlaceType, t2: PlaceType): number {
+    const v1 = PlaceTypeProtoValues[t1];
+    const v2 = PlaceTypeProtoValues[t2];
+    return v1 - v2;
 }
