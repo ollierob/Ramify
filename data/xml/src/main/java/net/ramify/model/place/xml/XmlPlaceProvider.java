@@ -6,6 +6,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSetMultimap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.SetMultimap;
+import com.google.common.collect.Sets;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.provider.PlaceProvider;
@@ -24,6 +25,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.File;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
@@ -48,8 +50,21 @@ class XmlPlaceProvider implements PlaceProvider {
 
     @Nonnull
     @Override
-    public Set<Place> children(final PlaceId id) {
-        return SetUtils.transform(children.get(id), this::get);
+    public Set<Place> children(final PlaceId id, final int depth) {
+        switch (depth) {
+            case 0:
+                return Collections.emptySet();
+            case 1:
+                return SetUtils.transform(children.get(id), this::get);
+            default:
+                Preconditions.checkArgument(depth < 5, "Exceeded max depth");
+                final var places = Sets.<Place>newHashSet();
+                children.get(id).forEach(child -> {
+                    places.add(this.get(child));
+                    places.addAll(this.children(child.placeId(), depth - 1));
+                });
+                return places;
+        }
     }
 
     void add(final Place place) {

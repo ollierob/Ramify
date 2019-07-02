@@ -5,10 +5,12 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.collection.Places;
 import net.ramify.server.resource.RootResource;
 
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import static net.ramify.server.resource.Resource.APPLICATION_PROTOBUF;
@@ -23,7 +25,9 @@ public interface PlacesResource extends RootResource {
 
     @GET
     @Path("children/{id}")
-    Places within(@PathParam("id") PlaceId id);
+    Places within(
+            @PathParam("id") PlaceId id,
+            @QueryParam("depth") @DefaultValue("1") int depth);
 
     @Path("churches")
     ChurchesResource churches();

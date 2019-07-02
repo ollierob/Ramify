@@ -28,8 +28,8 @@ public class DefaultPlacesResource implements PlacesResource {
     }
 
     @Override
-    public Places within(final PlaceId id) {
-        return Places.of(placeProvider.children(id), false);
+    public Places within(final PlaceId id, final int depth) {
+        return Places.of(placeProvider.children(id, depth), false);
     }
 
     @Override

@@ -30,7 +30,7 @@ public interface PlaceProvider extends Provider<PlaceId, Place> {
     }
 
     @Nonnull
-    Set<Place> children(PlaceId id);
+    Set<Place> children(PlaceId id, int depth);
 
     class UnknownPlaceException extends RuntimeException {
 
