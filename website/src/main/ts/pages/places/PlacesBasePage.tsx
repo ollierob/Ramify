@@ -9,6 +9,7 @@ import "./Places.css"
 import GeneralPlacePage from "./general/GeneralPlacePage";
 import {PlaceId} from "../../components/places/Place";
 import {Place} from "../../protobuf/generated/place_pb";
+import AreaPage from "./area/AreaPage";
 
 class PlacesBasePage extends BasePage {
 
@@ -16,6 +17,10 @@ class PlacesBasePage extends BasePage {
         return <HashRouter>
             <Switch>
                 <Route path="/church" component={breadcrumb(ChurchPage)}/>
+                <Route path="/village" component={breadcrumb(AreaPage)}/>
+                <Route path="/town" component={breadcrumb(AreaPage)}/>
+                <Route path="/township" component={breadcrumb(AreaPage)}/>
+                <Route path="/parish" component={breadcrumb(AreaPage)}/>
                 <Route exact path="/" component={breadcrumb(PlacesHomePage)}/>
                 <Route path="*" component={breadcrumb(GeneralPlacePage)}/>
             </Switch>

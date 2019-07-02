@@ -3,7 +3,7 @@ import {RouteComponentProps} from "react-router";
 import {Place} from "../../protobuf/generated/place_pb";
 import {PlaceId} from "../../components/places/Place";
 import {AsyncData, asyncLoadData} from "../../components/fetch/AsyncData";
-import {DEFAULT_PLACE_FETCHER} from "../../components/places/PlaceFetcher";
+import {DEFAULT_PLACE_LOADER} from "../../components/places/PlaceLoader";
 import {PlaceBreadcrumb} from "./PlaceBreadcrumb";
 import {PlacesPageProps} from "./PlacesBasePage";
 
@@ -18,7 +18,7 @@ type State = {
 
 export default class PlacesBreadcrumbWrapper extends React.PureComponent<Props, State> {
 
-    private readonly placeFetcher = DEFAULT_PLACE_FETCHER;
+    private readonly placeFetcher = DEFAULT_PLACE_LOADER;
 
     constructor(props: Props) {
         super(props);
@@ -76,7 +76,7 @@ export default class PlacesBreadcrumbWrapper extends React.PureComponent<Props, 
         if (!id) return;
         asyncLoadData(
             id,
-            id => this.placeFetcher.fetchPlace(id),
+            id => this.placeFetcher.loadPlace(id),
             place => this.setState({place}))
     }
 

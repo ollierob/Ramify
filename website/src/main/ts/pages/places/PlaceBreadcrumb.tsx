@@ -1,6 +1,7 @@
 import {Place} from "../../protobuf/generated/place_pb";
 import {SubMenu} from "../SubMenu";
 import * as React from "react";
+import {placeHref} from "../../components/places/Place";
 
 export const PlaceBreadcrumb = (props: {loading: boolean, place: Place.AsObject}) => {
     return <SubMenu>
@@ -41,7 +42,7 @@ const Breadcrumb = (props: {place: Place.AsObject, separator: boolean}) => {
     return <>
         <span className="place">
         {typeBreadcrumb(place.type)}
-            <a href={"#/" + place.type.toLowerCase() + "?place=" + place.id}>
+            <a href={placeHref(place)}>
                 <b>{place.name}</b>
             </a>
         </span>

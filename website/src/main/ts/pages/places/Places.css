@@ -27,3 +27,14 @@
 .leftRest .info .ant-card-head-title, .churchRecords .ant-card-head-title {
     font-size: 1.5em;
 }
+
+.childPlace {
+    display: inline-block;
+    width: 200px;
+    vertical-align: top;
+    border: 0;
+}
+
+.childPlace .ant-card-head-title {
+    font-size: 1.25em;
+}

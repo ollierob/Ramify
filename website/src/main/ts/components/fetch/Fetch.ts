@@ -16,3 +16,17 @@ function parseHtmlResponse(html: string): string {
     if (h2 && h2.length) return h2[0].innerText;
     return "Server error";
 }
+
+type Queryable = string | number | boolean;
+
+export function queryParameters(query: {[key: string]: Queryable | Queryable[]}): string {
+    if (!query) return "";
+    const queryParameters: string[] = [];
+    Object.keys(query).forEach(key => {
+        const value = query[key];
+        if (Array.isArray(value)) value.forEach(v => queryParameters.push(key + "=" + String(v)));
+        else queryParameters.push(key + "=" + String(value));
+    })
+    if (!queryParameters.length) return "";
+    return "?" + queryParameters.join("&");
+}

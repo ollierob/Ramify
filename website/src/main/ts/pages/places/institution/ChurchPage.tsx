@@ -31,7 +31,9 @@ export default class ChurchPage extends React.PureComponent<Props, State> {
         return <div className="institution leftRest">
 
             <PlaceMap/>
-            <InstitutionInfo institution={church}/>
+
+            <InstitutionInfo
+                institution={church}/>
 
         </div>;
 
