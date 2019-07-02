@@ -3,7 +3,6 @@ import {DEFAULT_CHURCH_LOADER} from "../../../components/places/ChurchLoader";
 import {PlacesPageProps} from "../PlacesBasePage";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {InstitutionInfo} from "./InstitutionInfo";
-import {InstitutionRecords} from "./InstitutionRecords";
 import {Institution} from "../../../protobuf/generated/institution_pb";
 import {PlaceMap} from "../../../components/places/PlaceMap";
 
@@ -31,9 +30,8 @@ export default class ChurchPage extends React.PureComponent<Props, State> {
 
         return <div className="institution">
 
-            <PlaceMap/>
-            <InstitutionInfo institution={church}/>
-            <InstitutionRecords institution={church}/>
+            <PlaceMap className="left"/>
+            <InstitutionInfo className="middleRight" institution={church}/>
 
         </div>;
 

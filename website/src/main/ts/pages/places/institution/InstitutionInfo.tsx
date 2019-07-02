@@ -2,14 +2,16 @@ import * as React from "react";
 import {DateRange} from "../../../components/date/DateRange";
 import {Card} from "antd";
 import {Institution} from "../../../protobuf/generated/institution_pb";
+import {HasClass} from "../../../components/style/HasClass";
 
-export const InstitutionInfo = (props: {institution: Institution.AsObject}) => {
+export const InstitutionInfo = (props: {institution: Institution.AsObject} & HasClass) => {
 
     const institution = props.institution;
     if (!institution) return null;
 
     return <Card
-        className="info"
+        className={"info " + props.className}
+        style={props.style}
         title={<Title institution={institution}/>}>
 
         {institution.established && <div>Founded <DateRange date={institution.established}/></div>}
