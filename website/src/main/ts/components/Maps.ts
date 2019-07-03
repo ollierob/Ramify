@@ -1,3 +1,5 @@
+import {Sorter} from "./Sort";
+
 export type StringMap<T> = {[k: string]: T}
 
 export function stringMap<T>(objects: ReadonlyArray<T>, toString: (t: T) => string): StringMap<T> {
@@ -7,7 +9,7 @@ export function stringMap<T>(objects: ReadonlyArray<T>, toString: (t: T) => stri
     return map;
 }
 
-export function stringMultimap<T>(objects: ReadonlyArray<T>, toString: (t: T) => string): StringMap<T[]> {
+export function stringMultimap<T>(objects: ReadonlyArray<T>, toString: (t: T) => string, sorter?: Sorter<T>): StringMap<T[]> {
     if (!objects || !objects.length) return {};
     const map: StringMap<T[]> = {};
     objects.forEach(o => {
@@ -16,6 +18,7 @@ export function stringMultimap<T>(objects: ReadonlyArray<T>, toString: (t: T) =>
         if (!array) array = map[k] = [];
         array.push(o);
     });
+    if (sorter) Object.keys(map).forEach(k => map[k].sort(sorter));
     return map;
 }
 

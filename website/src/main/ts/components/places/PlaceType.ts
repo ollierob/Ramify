@@ -1,7 +1,7 @@
 //TODO this should be determined server-side
 
-import {PlaceType as PlaceTypeProtoValues, PlaceTypeMap} from "../../protobuf/generated/place_pb";
-import {numberMap} from "../Maps";
+import {Place, PlaceType as PlaceTypeProtoValues, PlaceTypeMap} from "../../protobuf/generated/place_pb";
+import {NumberMap, numberMap} from "../Maps";
 
 export type PlaceType = keyof PlaceTypeMap;
 type Name = {s: string, p?: string}
@@ -28,16 +28,25 @@ const PlaceTypeNames: { [key in PlaceType]: Name } = {
     WAPENTAKE: {s: "Wapentake"},
 };
 
-const ValueToPlaceLookup = numberMap(Object.keys(PlaceTypeProtoValues), k => PlaceTypeProtoValues[k]);
+const PlaceTypes: ReadonlyArray<PlaceType> = Object.keys(PlaceTypeProtoValues) as Array<PlaceType>;
+const ValueToPlaceTypeLookup: NumberMap<PlaceType> = numberMap(PlaceTypes, k => PlaceTypeProtoValues[k]);
 
-export function placeTypeName(type: PlaceTypeMap[keyof PlaceTypeMap], plural: boolean = false): string {
-    const n = PlaceTypeNames[ValueToPlaceLookup[type]];
+export function placeTypeName(type: PlaceTypeMap[keyof PlaceTypeMap] | PlaceType, plural: boolean = false): string {
+    const n = PlaceTypeNames[typeof type == "number" ? placeTypeKey(type) : type];
     if (!n) return null;
     return plural ? (n.p || n.s + "s") : n.s;
 }
 
-export function sortByType(t1: PlaceType, t2: PlaceType): number {
+export function placeTypeKey(type: PlaceTypeMap[keyof PlaceTypeMap]): PlaceType {
+    return ValueToPlaceTypeLookup[type];
+}
+
+export function sortByPlaceType(t1: PlaceType, t2: PlaceType): number {
     const v1 = PlaceTypeProtoValues[t1];
     const v2 = PlaceTypeProtoValues[t2];
     return v1 - v2;
+}
+
+export function sortByPlaceName(p1: Place.AsObject, p2: Place.AsObject): number {
+    return p1.name.localeCompare(p2.name);
 }

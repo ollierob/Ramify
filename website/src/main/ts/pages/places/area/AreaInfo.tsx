@@ -9,7 +9,7 @@ type Props = {
     loadingChildren: boolean;
 }
 
-export const TownInfo = (props: Props) => {
+export const AreaInfo = (props: Props) => {
 
     const place = props.place;
     if (!place) return null;
@@ -18,7 +18,9 @@ export const TownInfo = (props: Props) => {
         className="info"
         title={<><b>{place.name}</b></>}>
 
-        <ChildPlaceCards {...props} loading={props.loadingChildren}/>
+        <ChildPlaceCards
+            {...props}
+            loading={props.loadingChildren}/>
 
     </Card>
 

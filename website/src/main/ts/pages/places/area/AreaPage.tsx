@@ -1,7 +1,7 @@
 import * as React from "react";
 import {PlacesPageProps} from "../PlacesBasePage";
 import {PlaceMap} from "../../../components/places/PlaceMap";
-import {TownInfo} from "./TownInfo";
+import {AreaInfo} from "./AreaInfo";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {Place} from "../../../protobuf/generated/place_pb";
 import {DEFAULT_PLACE_LOADER} from "../../../components/places/PlaceLoader";
@@ -31,7 +31,7 @@ export default class AreaPage extends React.PureComponent<Props, State> {
 
             <PlaceMap/>
 
-            <TownInfo
+            <AreaInfo
                 place={this.props.place}
                 loadingChildren={this.state.children.loading}
                 childPlaces={this.state.children.data}/>

@@ -3,7 +3,7 @@ import {Place} from "../../protobuf/generated/place_pb";
 import {stringMultimap} from "../Maps";
 import {Card} from "antd";
 import {placeHref} from "./Place";
-import {placeTypeName, sortByType} from "./PlaceType";
+import {PlaceType, placeTypeKey, placeTypeName, sortByPlaceName, sortByPlaceType} from "./PlaceType";
 
 type Props = {
     loading: boolean;
@@ -29,8 +29,8 @@ export default class ChildPlaceCards extends React.PureComponent<Props, State> {
 
         return <div className="childPlaces">
             {Object.keys(this.state.groupedPlaces)
-                .sort(sortByType)
-                .map(type => <TypeCard type={type} places={this.state.groupedPlaces[type]}/>)}
+                .sort(sortByPlaceType)
+                .map(type => <TypeCard type={type as PlaceType} places={this.state.groupedPlaces[type]}/>)}
         </div>;
 
     }
@@ -46,7 +46,7 @@ export default class ChildPlaceCards extends React.PureComponent<Props, State> {
 
     private group(places: ReadonlyArray<Place.AsObject>) {
         if (!places) return;
-        const grouped = stringMultimap(places, place => placeTypeName(place.type, true));
+        const grouped = stringMultimap(places, place => placeTypeKey(place.type), sortByPlaceName);
         this.setState({groupedPlaces: grouped})
     }
 
@@ -54,12 +54,12 @@ export default class ChildPlaceCards extends React.PureComponent<Props, State> {
 
 type PlaceTypeMap = {[type: string]: ReadonlyArray<Place.AsObject>}
 
-const TypeCard = (props: {type: string, places: ReadonlyArray<Place.AsObject>}) => {
+const TypeCard = (props: {type: PlaceType, places: ReadonlyArray<Place.AsObject>}) => {
     let places = props.places;
     if (!places || !places.length) return null;
     return <Card
         className="childPlace"
-        title={props.type}>
+        title={placeTypeName(props.type, true)}>
         <ul>
             {places.map(place => <li>
                 <a href={placeHref(place)}>{place.name}</a>
