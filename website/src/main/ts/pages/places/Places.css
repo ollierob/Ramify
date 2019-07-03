@@ -38,3 +38,7 @@
 .childPlace .ant-card-head-title {
     font-size: 1.25em;
 }
+
+.childPlace ul {
+    padding-left: 24px;
+}
