@@ -8,29 +8,7 @@
     <county id="west_yorkshire">
 
         <parish id="halifax" name="Halifax">
-
-            <town id="halifax" name="Halifax"/>
-
-            <township id="barkisland" name="Barkisland"/>
-            <township id="elland" name="Elland cum Greetland"/>
-            <township id="fixby" name="Fixby"/>
-            <township id="hipperholme" name="Hipperholme cum Brighouse"/>
-            <township id="midgley" name="Midgley"/>
-            <township id="norland" name="Norland"/>
-            <township id="ovenden" name="Ovenden"/>
-            <township id="northowram" name="Northowram"/>
-            <township id="southowram" name="Southowram"/>
-            <township id="rastrick" name="Rastrick"/>
-            <township id="rishworth" name="Rishworth"/>
-            <township id="shelf" name="Shelf"/>
-            <township id="skircoat" name="Skircoat"/>
-            <township id="sowerby" name="Sowerby"/>
-            <township id="soyland" name="Soyland"/>
-            <township id="stainland" name="Stainland"/>
-            <township id="warley" name="Warley"/>
-
             <parish id="heptonstall" name="Heptonstall"/>
-
         </parish>
 
     </county>
