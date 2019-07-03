@@ -28,6 +28,6 @@ export function numberMap<T>(objects: ReadonlyArray<T>, toNumber: (t: T) => numb
     return map;
 }
 
-export function numericKeys(map: NumberMap<any>): number[] {
-    return Object.keys(map).map(m => parseFloat(m));
+export function integerKeys(map: NumberMap<any>): number[] {
+    return Object.keys(map).map(m => parseInt(m));
 }

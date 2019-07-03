@@ -34,7 +34,7 @@ module.exports = {
                 test: /\.tsx?$/,
                 use: [
                     {loader: 'cache-loader'},
-                    {loader: 'thread-loader', options: {workers: require('os').cpus().length - 2}},
+                    {loader: 'thread-loader'},
                     {loader: 'ts-loader', options: {happyPackMode: true, transpileOnly: true}}
                 ]
             },

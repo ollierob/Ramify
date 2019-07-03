@@ -1,7 +1,8 @@
-import {Place} from "../../protobuf/generated/place_pb";
+import {Place, PlaceTypeMap} from "../../protobuf/generated/place_pb";
 import {SubMenu} from "../SubMenu";
 import * as React from "react";
 import {placeHref} from "../../components/places/Place";
+import {placeTypeName} from "../../components/places/PlaceType";
 
 export const PlaceBreadcrumb = (props: {loading: boolean, place: Place.AsObject}) => {
     return <SubMenu>
@@ -36,8 +37,7 @@ function listHierarchy(place: Place.AsObject, max: number): ReadonlyArray<Place.
 const Breadcrumb = (props: {place: Place.AsObject, separator: boolean}) => {
 
     const place = props.place;
-
-    if (place == null) return <> ... &raquo; </>;
+    if (!place) return <> ... &raquo; </>;
 
     return <>
         <span className="place">
@@ -51,13 +51,6 @@ const Breadcrumb = (props: {place: Place.AsObject, separator: boolean}) => {
 
 };
 
-function typeBreadcrumb(type: string) {
-    switch (type.toLowerCase()) {
-        case "country":
-            return null;
-        case "countrycounty":
-            return "County of ";
-        default:
-            return type + " of ";
-    }
+function typeBreadcrumb(type: PlaceTypeMap[keyof PlaceTypeMap]) {
+    return placeTypeName(type) + " of ";
 }

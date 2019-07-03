@@ -18,7 +18,7 @@ class XmlCountry extends XmlPlace {
 
     @XmlElementRefs({
             @XmlElementRef(type = XmlCountry.class),
-            @XmlElementRef(type = XmlCountryCounty.class),
+            @XmlElementRef(type = XmlCounty.class),
             @XmlElementRef(type = XmlState.class)
     })
     private List<XmlPlace> children;

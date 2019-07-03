@@ -1,7 +1,7 @@
 //TODO this should be determined server-side
 
 import {PlaceType as PlaceTypeProtoValues, PlaceTypeMap} from "../../protobuf/generated/place_pb";
-import {numberMap, numericKeys} from "../Maps";
+import {numberMap} from "../Maps";
 
 export type PlaceType = keyof PlaceTypeMap;
 type Name = {s: string, p?: string}
@@ -17,6 +17,7 @@ const PlaceTypeNames: { [key in PlaceType]: Name } = {
     HOSPITAL: {s: "Hospital"},
     HOUSE: {s: "House"},
     HUNDRED: {s: "Hundred"},
+    MANOR: {s: "Manor"},
     PARISH: {s: "Parish", p: "Parishes"},
     RAPE: {s: "Rape"},
     SCHOOL: {s: "School"},
@@ -27,10 +28,11 @@ const PlaceTypeNames: { [key in PlaceType]: Name } = {
     WAPENTAKE: {s: "Wapentake"},
 };
 
-const ValueToPlaceLookup = numberMap(numericKeys(PlaceTypeProtoValues), v => PlaceTypeProtoValues[v]);
+const ValueToPlaceLookup = numberMap(Object.keys(PlaceTypeProtoValues), k => PlaceTypeProtoValues[k]);
 
-export function placeTypeName(type: PlaceTypeMap[keyof PlaceTypeMap], plural: boolean = false) {
+export function placeTypeName(type: PlaceTypeMap[keyof PlaceTypeMap], plural: boolean = false): string {
     const n = PlaceTypeNames[ValueToPlaceLookup[type]];
+    if (!n) return null;
     return plural ? (n.p || n.s + "s") : n.s;
 }
 
