@@ -5,9 +5,9 @@ import com.google.common.collect.Maps;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 
 public interface Provider<K, V> {
 
@@ -16,7 +16,14 @@ public interface Provider<K, V> {
 
     @Nonnull
     default V require(final K key) {
-        return Objects.requireNonNull(this.get(key));
+        return this.requireOrThrow(key, k -> new NullPointerException());
+    }
+
+    @Nonnull
+    default <X extends Exception> V requireOrThrow(final K key, final Function<? super K, X> makeException) throws X {
+        final var value = this.get(key);
+        if (value == null) throw makeException.apply(key);
+        return value;
     }
 
     @Nonnull

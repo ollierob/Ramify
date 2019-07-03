@@ -13,10 +13,8 @@ public interface PlaceProvider extends Provider<PlaceId, Place> {
 
     @Nonnull
     @Override
-    default Place require(final PlaceId id) {
-        final var place = this.get(id);
-        if (place == null) throw new UnknownPlaceException(id);
-        return place;
+    default Place require(final PlaceId id) throws UnknownPlaceException {
+        return this.requireOrThrow(id, UnknownPlaceException::new);
     }
 
     @Nonnull

@@ -21,6 +21,10 @@
 
   <element name="parish" type="tns:xmlParish"/>
 
+  <element name="placeLocations" type="tns:placeLocations"/>
+
+  <element name="placePoint" type="tns:xmlPlacePoint"/>
+
   <element name="places" type="tns:places"/>
 
   <element name="state" type="tns:xmlState"/>
@@ -90,6 +94,28 @@
       <element maxOccurs="unbounded" minOccurs="0" ref="tns:churchInfo"/>
 
     </sequence>
+
+  </complexType>
+
+  <complexType name="placeLocations">
+
+    <sequence>
+
+      <element maxOccurs="unbounded" minOccurs="0" ref="tns:placePoint"/>
+
+    </sequence>
+
+  </complexType>
+
+  <complexType name="xmlPlacePoint">
+
+    <sequence/>
+
+    <attribute name="id" type="xs:string" use="required"/>
+
+    <attribute name="latitude" type="xs:double" use="required"/>
+
+    <attribute name="longitude" type="xs:double" use="required"/>
 
   </complexType>
 
@@ -321,13 +347,13 @@
 
     <restriction base="xs:string">
 
-      <enumeration value="membership"/>
-
-      <enumeration value="baptism"/>
-
       <enumeration value="marriage"/>
 
+      <enumeration value="membership"/>
+
       <enumeration value="birth"/>
+
+      <enumeration value="baptism"/>
 
       <enumeration value="burial"/>
 

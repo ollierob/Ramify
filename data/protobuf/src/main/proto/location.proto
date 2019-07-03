@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option java_package = "net.ramify.model.place.proto";
+option java_outer_classname = "LocationProto";
+
+message Point {
+
+    double latitude = 1;
+    double longitude = 2;
+
+}
+
+message Area {
+
+    repeated Point boundary = 1;
+
+}

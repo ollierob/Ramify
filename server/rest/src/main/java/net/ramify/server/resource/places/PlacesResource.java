@@ -3,6 +3,7 @@ package net.ramify.server.resource.places;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.collection.Places;
+import net.ramify.model.place.position.Position;
 import net.ramify.server.resource.RootResource;
 
 import javax.ws.rs.DefaultValue;
@@ -28,6 +29,10 @@ public interface PlacesResource extends RootResource {
     Places within(
             @PathParam("id") PlaceId id,
             @QueryParam("depth") @DefaultValue("1") int depth);
+
+    @GET
+    @Path("position/{id}")
+    Position position(@PathParam("id") PlaceId id);
 
     @Path("churches")
     ChurchesResource churches();
