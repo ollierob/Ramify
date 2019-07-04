@@ -9,10 +9,24 @@
 
         <manor id="wakefield" name="Wakefield">
 
-            <manor id="halifax" name="Halifax"/>
-            <manor id="heptonstall" name="Heptonstall"/>
-            <manor id="stansfield" name="Stansfield"/>
-            <manor id="wadsworth" name="Wadsworth"/>
+            <graveship id="holme" name="Holme"/>
+
+            <graveship id="sowerby" name="Sowerby">
+
+                <manor id="halifax" name="Halifax"/>
+                <manor id="midgley" name="Sowerby"/>
+                <manor id="sowerby" name="Sowerby"/>
+                <manor id="warley" name="Warley"/>
+                <manor id="ovenden" name="Ovenden"/>
+
+                <manor id="heptonstall" name="Heptonstall"/>
+                <manor id="langfield" name="Langfield"/>
+                <manor id="stansfield" name="Stansfield"/>
+                <manor id="wadsworth" name="Wadsworth"/>
+
+            </graveship>
+
+            <graveship id="wakefield" name="Wakefield"/>
 
         </manor>
 

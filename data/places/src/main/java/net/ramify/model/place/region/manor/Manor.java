@@ -1,8 +1,9 @@
-package net.ramify.model.place.region;
+package net.ramify.model.place.region.manor;
 
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.proto.PlaceProto;
+import net.ramify.model.place.region.AbstractRegion;
 import net.ramify.model.place.type.Region;
 
 import javax.annotation.Nonnull;

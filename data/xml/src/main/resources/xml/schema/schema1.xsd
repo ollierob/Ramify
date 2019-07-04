@@ -17,6 +17,8 @@
 
   <element name="county" type="tns:xmlCounty"/>
 
+  <element name="graveship" type="tns:xmlGraveship"/>
+
   <element name="manor" type="tns:xmlManor"/>
 
   <element name="parish" type="tns:xmlParish"/>
@@ -289,6 +291,30 @@
 
         <sequence>
 
+          <choice maxOccurs="unbounded" minOccurs="0">
+
+            <element ref="tns:manor"/>
+
+            <element ref="tns:graveship"/>
+
+          </choice>
+
+        </sequence>
+
+      </extension>
+
+    </complexContent>
+
+  </complexType>
+
+  <complexType name="xmlGraveship">
+
+    <complexContent>
+
+      <extension base="tns:xmlPlace">
+
+        <sequence>
+
           <element maxOccurs="unbounded" minOccurs="0" ref="tns:manor"/>
 
         </sequence>
@@ -335,6 +361,8 @@
 
         <element ref="tns:manor"/>
 
+        <element ref="tns:graveship"/>
+
         <element ref="tns:state"/>
 
       </choice>
@@ -347,13 +375,13 @@
 
     <restriction base="xs:string">
 
-      <enumeration value="marriage"/>
-
       <enumeration value="membership"/>
 
-      <enumeration value="baptism"/>
+      <enumeration value="marriage"/>
 
       <enumeration value="birth"/>
+
+      <enumeration value="baptism"/>
 
       <enumeration value="burial"/>
 
