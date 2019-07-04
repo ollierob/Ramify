@@ -36,8 +36,13 @@
     border: 0;
 }
 
-.childPlace .ant-card-head-title {
-    font-size: 1.25em;
+.childPlace .ant-card-head {
+    min-height: 32px;
+}
+
+.childPlace .ant-card-head .ant-card-head-title {
+    font-size: 1.25em !important;
+    padding: 0;
 }
 
 .childPlace ul {

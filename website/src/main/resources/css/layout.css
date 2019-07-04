@@ -46,3 +46,9 @@ body {
 .body .submenu + .content {
     top: 54px;
 }
+
+.image {
+    height: 1em;
+    width: 1em;
+    vertical-align: inherit;
+}

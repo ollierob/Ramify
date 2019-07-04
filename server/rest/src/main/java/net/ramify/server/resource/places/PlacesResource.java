@@ -4,8 +4,10 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.collection.Places;
 import net.ramify.model.place.position.Position;
+import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.server.resource.RootResource;
 
+import javax.annotation.CheckForNull;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -22,6 +24,7 @@ public interface PlacesResource extends RootResource {
 
     @GET
     @Path("at/{id}")
+    @CheckForNull
     Place at(@PathParam("id") PlaceId id);
 
     @GET
@@ -32,7 +35,19 @@ public interface PlacesResource extends RootResource {
 
     @GET
     @Path("position/{id}")
+    @CheckForNull
     Position position(@PathParam("id") PlaceId id);
+
+    @GET
+    @Path("describe/{id}")
+    @CheckForNull
+    @Produces(MediaType.TEXT_HTML)
+    String describe(@PathParam("id") PlaceId id);
+
+    @GET
+    @CheckForNull
+    @Path("bundle/{id}")
+    PlaceProto.PlaceBundle bundle(@PathParam("id") PlaceId id);
 
     @Path("churches")
     ChurchesResource churches();

@@ -3,6 +3,7 @@ import {Place, PlaceList} from "../../protobuf/generated/place_pb";
 import {protoFetch} from "../fetch/ProtoFetch";
 import {queryParameters} from "../fetch/Fetch";
 import {Position} from "../../protobuf/generated/location_pb";
+import {PlaceType} from "./PlaceType";
 
 export interface PlaceLoader {
 
@@ -11,6 +12,8 @@ export interface PlaceLoader {
     loadChildren(id: PlaceId, maxDepth?: number): Promise<ReadonlyArray<Place.AsObject>>
 
     loadPosition(id: PlaceId): Promise<Position.AsObject>
+
+    loadTypeDescription(type: PlaceType): Promise<string>
 
 }
 
@@ -31,6 +34,9 @@ class ProtoPlaceLoader implements PlaceLoader {
             .then(p => p ? p.toObject() : null);
     }
 
+    loadTypeDescription(type: PlaceType) {
+        return undefined;
+    }
 
 }
 

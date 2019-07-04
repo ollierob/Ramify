@@ -4,6 +4,7 @@ import {stringMultimap} from "../Maps";
 import {Card} from "antd";
 import {placeHref} from "./Place";
 import {PlaceType, placeTypeKey, placeTypeName, sortByPlaceName, sortByPlaceType} from "./PlaceType";
+import {Img} from "../style/Img";
 
 type Props = {
     loading: boolean;
@@ -59,7 +60,7 @@ const TypeCard = (props: {type: PlaceType, places: ReadonlyArray<Place.AsObject>
     if (!places || !places.length) return null;
     return <Card
         className="childPlace"
-        title={placeTypeName(props.type, true)}>
+        title={<><Img src={"/images/" + props.type.toLowerCase() + ".svg"}/> {placeTypeName(props.type, true)}</>}>
         <ul>
             {places.map(place => <li>
                 <a href={placeHref(place)}>{place.name}</a>

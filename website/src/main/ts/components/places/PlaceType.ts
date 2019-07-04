@@ -4,9 +4,9 @@ import {Place, PlaceType as PlaceTypeProtoValues, PlaceTypeMap} from "../../prot
 import {NumberMap, numberMap} from "../Maps";
 
 export type PlaceType = keyof PlaceTypeMap;
-type Name = {s: string, p?: string}
+type PlaceInfo = {s: string, p?: string, d?: string}
 
-const PlaceTypeNames: { [key in PlaceType]: Name } = {
+const PlaceTypeInfo: { [key in PlaceType]: PlaceInfo } = {
     BOROUGH: {s: "Borough"},
     CHAPELRY: {s: "Chapelry", p: "Chapelries"},
     CITY: {s: "City"},
@@ -35,7 +35,7 @@ const PlaceTypes: ReadonlyArray<PlaceType> = Object.keys(PlaceTypeProtoValues) a
 const ValueToPlaceTypeLookup: NumberMap<PlaceType> = numberMap(PlaceTypes, k => PlaceTypeProtoValues[k]);
 
 export function placeTypeName(type: PlaceTypeMap[keyof PlaceTypeMap] | PlaceType, plural: boolean = false): string {
-    const n = PlaceTypeNames[typeof type == "number" ? placeTypeKey(type) : type];
+    const n = PlaceTypeInfo[typeof type == "number" ? placeTypeKey(type) : type];
     if (!n) return null;
     return plural ? (n.p || n.s + "s") : n.s;
 }
