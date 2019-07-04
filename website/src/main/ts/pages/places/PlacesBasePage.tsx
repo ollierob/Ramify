@@ -9,6 +9,7 @@ import "./Places.css"
 import {PlaceId} from "../../components/places/Place";
 import {Place} from "../../protobuf/generated/place_pb";
 import AreaPage from "./area/AreaPage";
+import {Position} from "../../protobuf/generated/location_pb";
 
 class PlacesBasePage extends BasePage {
 
@@ -32,6 +33,11 @@ function breadcrumb(type: React.ComponentType<PlacesPageProps>): React.Component
     return params => <PlacesBreadcrumbWrapper {...params} childType={type}/>
 }
 
-export type PlacesPageProps = RouteComponentProps<any> & {placeId: PlaceId, place: Place.AsObject, loading: boolean}
+export type PlacesPageProps = RouteComponentProps<any> & {
+    placeId: PlaceId;
+    place: Place.AsObject;
+    position: Position.AsObject;
+    loading: boolean
+}
 
 ReactDOM.render(<PlacesBasePage/>, document.getElementById("main"));

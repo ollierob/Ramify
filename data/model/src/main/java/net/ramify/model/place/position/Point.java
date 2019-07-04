@@ -4,35 +4,15 @@ import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.place.proto.LocationProto;
 
 import javax.annotation.Nonnull;
-import java.util.Collections;
-import java.util.Set;
 
-public interface Point extends Position, BuildsProto<LocationProto.Point> {
+public interface Point extends BuildsProto<LocationProto.Point> {
 
     double latitude();
 
     double longitude();
 
-    @Deprecated
-    @Override
-    default Set<Point> points() {
-        return Collections.singleton(this);
-    }
-
-    @Override
-    default boolean isNowhere() {
-        return false;
-    }
-
-    @Override
-    @Deprecated
-    default boolean isPoint() {
-        return true;
-    }
-
-    @Override
-    default boolean isLine() {
-        return false;
+    default Position toPosition() {
+        return Position.of(this);
     }
 
     @Nonnull

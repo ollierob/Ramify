@@ -10,8 +10,9 @@ message Point {
 
 }
 
-message Area {
+message Position {
 
-    repeated Point boundary = 1;
+    Point center = 1;
+    repeated Point boundary = 2;
 
 }

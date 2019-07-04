@@ -30,7 +30,11 @@ export default class ChurchPage extends React.PureComponent<Props, State> {
 
         return <div className="institution leftRest">
 
-            <PlaceMap/>
+            <PlaceMap
+                place={this.props.place}
+                loading={this.props.loading}
+                position={this.props.position}
+                zoom={12}/>/>
 
             <InstitutionInfo
                 institution={church}/>

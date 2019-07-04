@@ -6,7 +6,7 @@ import com.google.common.collect.Maps;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.position.Position;
 import net.ramify.model.place.position.PositionProvider;
-import net.ramify.model.place.xml.location.XmlPlaceLocations;
+import net.ramify.model.place.xml.location.XmlPlacePositions;
 import net.ramify.utils.file.FileTraverseUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,9 +63,9 @@ public class XmlPositionProvider implements PositionProvider {
         try {
             logger.info("Reading locations from file {}", file);
             final var unmarshalled = unmarshaller.unmarshal(file);
-            if (!(unmarshalled instanceof XmlPlaceLocations)) return;
-            final var places = (XmlPlaceLocations) unmarshalled;
-            locationProvider.putAll(places.points());
+            if (!(unmarshalled instanceof XmlPlacePositions)) return;
+            final var places = (XmlPlacePositions) unmarshalled;
+            locationProvider.putAll(places.positions());
         } catch (final JAXBException jex) {
             logger.warn("Could not read locations in file " + file + ": " + jex.getMessage());
         }

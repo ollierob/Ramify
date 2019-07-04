@@ -29,7 +29,12 @@ export default class AreaPage extends React.PureComponent<Props, State> {
 
         return <div className="town leftRest">
 
-            <PlaceMap/>
+            <PlaceMap
+                area={true}
+                place={this.props.place}
+                loading={this.props.loading}
+                position={this.props.position}
+                zoom={10}/>
 
             <AreaInfo
                 place={this.props.place}

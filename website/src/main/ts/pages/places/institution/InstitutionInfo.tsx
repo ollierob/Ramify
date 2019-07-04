@@ -10,7 +10,7 @@ export const InstitutionInfo = (props: {institution: Institution.AsObject} & Has
     if (!institution) return null;
 
     return <Card
-        className={"info " + props.className}
+        className={"info " + (props.className || "")}
         style={props.style}
         title={<Title institution={institution}/>}>
 

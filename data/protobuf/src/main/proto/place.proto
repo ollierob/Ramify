@@ -38,6 +38,7 @@ enum PlaceType {
 
     //
     MANOR = 70;
+    GRAVESHIP = 71;
 
     //Specific places
     HOUSE = 100;

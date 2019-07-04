@@ -1,13 +1,9 @@
 package net.ramify.model.place.position;
 
-import com.google.common.collect.Iterables;
-import net.ramify.data.proto.BuildsProto;
-import net.ramify.model.place.proto.LocationProto;
-
 import javax.annotation.Nonnull;
 import java.util.Set;
 
-public interface Area extends Position, BuildsProto<LocationProto.Area> {
+public interface Area extends Position {
 
     @Nonnull
     Set<Point> boundary();
@@ -20,10 +16,8 @@ public interface Area extends Position, BuildsProto<LocationProto.Area> {
 
     @Nonnull
     @Override
-    default LocationProto.Area toProto() {
-        return LocationProto.Area.newBuilder()
-                .addAllBoundary(Iterables.transform(this.boundary(), Point::toProto))
-                .build();
+    default Point center() {
+        throw new UnsupportedOperationException(); //TODO compute
     }
 
 }
