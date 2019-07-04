@@ -47,6 +47,7 @@
 
 .childPlace .ant-card-head {
     min-height: 38px;
+    padding: 0 12px;
 }
 
 .childPlace .ant-card-head .ant-card-head-title {
