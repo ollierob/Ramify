@@ -45,6 +45,12 @@ public interface PlacesResource extends RootResource {
     String describe(@PathParam("id") PlaceId id);
 
     @GET
+    @Path("describe/{id}/type")
+    @CheckForNull
+    @Produces(MediaType.TEXT_HTML)
+    String describeType(@PathParam("id") PlaceId id);
+
+    @GET
     @CheckForNull
     @Path("bundle/{id}")
     PlaceProto.PlaceBundle bundle(@PathParam("id") PlaceId id);

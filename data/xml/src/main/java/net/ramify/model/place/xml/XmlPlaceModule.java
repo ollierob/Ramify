@@ -7,8 +7,10 @@ import com.google.inject.Singleton;
 import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.place.institution.church.ChurchInfoProvider;
 import net.ramify.model.place.position.PositionProvider;
+import net.ramify.model.place.provider.PlaceDescriptionProvider;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.xml.church.XmlChurchInfos;
+import net.ramify.model.place.xml.description.XmlPlaceDescriptions;
 import net.ramify.model.place.xml.location.XmlPlacePositions;
 import net.ramify.model.place.xml.place.XmlPlaces;
 
@@ -29,12 +31,13 @@ public class XmlPlaceModule extends PrivateModule {
         this.expose(ChurchInfoProvider.class);
         this.expose(PlaceProvider.class);
         this.expose(PositionProvider.class);
+        this.expose(PlaceDescriptionProvider.class);
     }
 
     @Provides
     @Singleton
     JAXBContext providePlaceContext() throws JAXBException {
-        return JAXBContext.newInstance(XmlPlaces.class, XmlChurchInfos.class, XmlPlacePositions.class);
+        return JAXBContext.newInstance(XmlPlaces.class, XmlChurchInfos.class, XmlPlacePositions.class, XmlPlaceDescriptions.class);
     }
 
     @Provides
@@ -53,6 +56,12 @@ public class XmlPlaceModule extends PrivateModule {
     @Singleton
     PositionProvider providePositionProvider(final JAXBContext context, @Named("data") final File data) throws JAXBException {
         return XmlPositionProvider.readPositionsInDirectory(context, data);
+    }
+
+    @Provides
+    @Singleton
+    PlaceDescriptionProvider placeDescriptionProvider(final JAXBContext context, @Named("data") final File data) throws JAXBException {
+        return XmlPlaceDescriptionProvider.readDescriptionsInDirectory(context, data);
     }
 
     @Provides

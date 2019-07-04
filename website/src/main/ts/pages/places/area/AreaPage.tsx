@@ -42,7 +42,7 @@ export default class AreaPage extends React.PureComponent<Props, State> {
                 loadingChildren={this.state.children.loading}
                 childPlaces={this.state.children.data}
                 place={bundle && bundle.place}
-                typeDescription={bundle && bundle.typedescription}/>
+                description={bundle && bundle.description}/>
 
         </div>;
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<placeDescriptions
+        xmlns="http://ramify.net/places"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://ramify.net/places ../../../schema/schema1.xsd">
+
+    <placeDescription id="manor:wakefield">
+        The Manor of Wakefield was first mentioned in Domesday Book in 1086.
+        Much of the manor now lay *in waste*, likely as a consequence of William's Harrying of the North.
+    </placeDescription>
+
+</placeDescriptions>

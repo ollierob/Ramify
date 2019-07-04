@@ -6,7 +6,7 @@ import {placeTypeName} from "../../../components/places/PlaceType";
 
 type Props = {
     place: Place.AsObject;
-    typeDescription: string;
+    description: string;
     childPlaces: ReadonlyArray<Place.AsObject>
     loadingChildren: boolean;
 }
@@ -19,6 +19,10 @@ export const AreaInfo = (props: Props) => {
     return <Card
         className="info"
         title={<AreaTitle {...props}/>}>
+
+        {props.description && <div className="description">
+            {props.description}
+        </div>}
 
         <ChildPlaceCards
             {...props}
