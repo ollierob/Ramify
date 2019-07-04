@@ -28,12 +28,14 @@ export default class ChurchPage extends React.PureComponent<Props, State> {
         const church = this.state.church.data;
         if (!church) return null; //TODO loading
 
+        const bundle = this.props.place;
+
         return <div className="institution leftRest">
 
             <PlaceMap
-                place={this.props.place}
+                place={bundle && bundle.place}
                 loading={this.props.loading}
-                position={this.props.position}
+                position={bundle && bundle.position}
                 zoom={14}/>/>
 
             <InstitutionInfo

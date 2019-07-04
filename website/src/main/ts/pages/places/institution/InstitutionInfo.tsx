@@ -4,7 +4,11 @@ import {Card} from "antd";
 import {Institution} from "../../../protobuf/generated/institution_pb";
 import {HasClass} from "../../../components/style/HasClass";
 
-export const InstitutionInfo = (props: {institution: Institution.AsObject} & HasClass) => {
+type Props = HasClass & {
+    institution: Institution.AsObject;
+};
+
+export const InstitutionInfo = (props: Props) => {
 
     const institution = props.institution;
     if (!institution) return null;

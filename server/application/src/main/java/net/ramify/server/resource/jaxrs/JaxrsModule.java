@@ -7,7 +7,8 @@ public class JaxrsModule extends AbstractModule {
     @Override
     protected void configure() {
         super.configure();
-        this.bind(ProtobufMessageBodyWriter.class);
+        this.bind(ProtobufCompatibleMessageBodyWriter.class);
+        this.bind(ProtobufDirectMessageBodyWriter.class);
         this.bind(ProtobufStringMessageBodyWriter.class);
     }
 

@@ -27,19 +27,22 @@ export default class AreaPage extends React.PureComponent<Props, State> {
 
         if (!this.props.place) return null;
 
+        const bundle = this.props.place;
+
         return <div className="town leftRest">
 
             <PlaceMap
                 area={true}
-                place={this.props.place}
                 loading={this.props.loading}
-                position={this.props.position}
+                place={bundle && bundle.place}
+                position={bundle && bundle.position}
                 zoom={10}/>
 
             <AreaInfo
-                place={this.props.place}
                 loadingChildren={this.state.children.loading}
-                childPlaces={this.state.children.data}/>
+                childPlaces={this.state.children.data}
+                place={bundle && bundle.place}
+                typeDescription={bundle && bundle.typedescription}/>
 
         </div>;
 

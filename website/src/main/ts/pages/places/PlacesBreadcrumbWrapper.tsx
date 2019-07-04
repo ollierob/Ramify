@@ -1,12 +1,11 @@
 import * as React from "react";
 import {RouteComponentProps} from "react-router";
-import {Place} from "../../protobuf/generated/place_pb";
+import {PlaceBundle} from "../../protobuf/generated/place_pb";
 import {PlaceId} from "../../components/places/Place";
 import {AsyncData, asyncLoadData} from "../../components/fetch/AsyncData";
 import {DEFAULT_PLACE_LOADER} from "../../components/places/PlaceLoader";
 import {PlaceBreadcrumb} from "./PlaceBreadcrumb";
 import {PlacesPageProps} from "./PlacesBasePage";
-import {Position} from "../../protobuf/generated/location_pb";
 
 type Props = RouteComponentProps<any> & {
     childType: React.ComponentType<PlacesPageProps>;
@@ -14,8 +13,7 @@ type Props = RouteComponentProps<any> & {
 
 type State = {
     placeId?: PlaceId;
-    place: AsyncData<Place.AsObject>;
-    position: AsyncData<Position.AsObject>
+    place: AsyncData<PlaceBundle.AsObject>;
 }
 
 export default class PlacesBreadcrumbWrapper extends React.PureComponent<Props, State> {
@@ -26,27 +24,26 @@ export default class PlacesBreadcrumbWrapper extends React.PureComponent<Props, 
         super(props);
         this.state = {
             place: {},
-            position: {}
         }
     }
 
     render() {
 
         const Type = this.props.childType;
+        const bundle = this.state.place.data;
 
         return <>
 
             <PlaceBreadcrumb
                 loading={this.state.place.loading}
-                place={this.state.place.data}/>
+                place={bundle && bundle.place}/>
 
             <div className="content">
                 <Type
                     {...this.props}
                     placeId={this.state.placeId}
-                    place={this.state.place.data}
-                    position={this.state.position.data}
-                    loading={this.state.place.loading || this.state.position.loading}/>
+                    place={bundle}
+                    loading={this.state.place.loading}/>
             </div>
 
         </>
@@ -80,12 +77,8 @@ export default class PlacesBreadcrumbWrapper extends React.PureComponent<Props, 
         if (!id) return;
         asyncLoadData(
             id,
-            id => this.placeFetcher.loadPlace(id),
+            id => this.placeFetcher.loadPlaceBundle(id),
             place => this.setState({place}));
-        asyncLoadData(
-            id,
-            id => this.placeFetcher.loadPosition(id),
-            position => this.setState({position}));
     }
 
 

@@ -17,7 +17,7 @@ import static net.ramify.server.resource.Resource.APPLICATION_PROTOBUF_TYPE;
 
 @Provider
 @Singleton
-class ProtobufMessageBodyWriter implements MessageBodyWriter<WritesProto> {
+class ProtobufCompatibleMessageBodyWriter implements MessageBodyWriter<WritesProto> {
 
     @Override
     public boolean isWriteable(Class<?> aClass, Type type, Annotation[] annotations, MediaType mediaType) {

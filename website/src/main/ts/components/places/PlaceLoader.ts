@@ -1,9 +1,8 @@
 import {PlaceId} from "./Place";
-import {Place, PlaceList} from "../../protobuf/generated/place_pb";
+import {Place, PlaceBundle, PlaceList} from "../../protobuf/generated/place_pb";
 import {protoFetch} from "../fetch/ProtoFetch";
 import {queryParameters} from "../fetch/Fetch";
 import {Position} from "../../protobuf/generated/location_pb";
-import {PlaceType} from "./PlaceType";
 
 export interface PlaceLoader {
 
@@ -13,7 +12,7 @@ export interface PlaceLoader {
 
     loadPosition(id: PlaceId): Promise<Position.AsObject>
 
-    loadTypeDescription(type: PlaceType): Promise<string>
+    loadPlaceBundle(id: PlaceId): Promise<PlaceBundle.AsObject>
 
 }
 
@@ -34,8 +33,9 @@ class ProtoPlaceLoader implements PlaceLoader {
             .then(p => p ? p.toObject() : null);
     }
 
-    loadTypeDescription(type: PlaceType) {
-        return undefined;
+    loadPlaceBundle(id: string): Promise<PlaceBundle.AsObject> {
+        return protoFetch("/places/bundle/" + id, PlaceBundle.deserializeBinary)
+            .then(b => b ? b.toObject() : null);
     }
 
 }
