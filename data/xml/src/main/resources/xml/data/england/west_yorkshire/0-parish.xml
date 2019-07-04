@@ -8,7 +8,8 @@
     <county id="west_yorkshire">
 
         <parish id="halifax" name="Halifax">
-            <parish id="heptonstall" name="Heptonstall"/>
+            <chapelry id="heptonstall" name="Heptonstall"/>
+            <chapelry id="elland" name="Elland"/>
         </parish>
 
     </county>

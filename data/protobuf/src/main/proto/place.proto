@@ -29,6 +29,7 @@ enum PlaceType {
     PARISH = 40;
     BOROUGH = 41;
     CITY = 42;
+    CHAPELRY = 43;
 
     TOWNSHIP = 50;
     DISTRICT = 51;

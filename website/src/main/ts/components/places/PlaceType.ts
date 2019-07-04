@@ -8,6 +8,7 @@ type Name = {s: string, p?: string}
 
 const PlaceTypeNames: { [key in PlaceType]: Name } = {
     BOROUGH: {s: "Borough"},
+    CHAPELRY: {s: "Chapelry", p: "Chapelries"},
     CITY: {s: "City"},
     COUNTRY: {s: "Country", p: "Countries"},
     COUNTY: {s: "County", p: "Counties"},

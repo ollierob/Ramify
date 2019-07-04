@@ -5,6 +5,8 @@
 
   <import namespace="http://ramify.net/dates" schemaLocation="schema2.xsd"/>
 
+  <element name="chapelry" type="tns:xmlChapelry"/>
+
   <element name="church" type="tns:xmlChurch"/>
 
   <element name="churchInfo" type="tns:xmlChurchInfo"/>
@@ -121,13 +123,25 @@
 
   </complexType>
 
-  <complexType name="xmlChurch">
+  <complexType name="xmlChapelry">
 
     <complexContent>
 
       <extension base="tns:xmlPlace">
 
-        <sequence/>
+        <sequence>
+
+          <choice maxOccurs="unbounded" minOccurs="0">
+
+            <element ref="tns:township"/>
+
+            <element ref="tns:town"/>
+
+            <element ref="tns:village"/>
+
+          </choice>
+
+        </sequence>
 
       </extension>
 
@@ -142,6 +156,44 @@
     <attribute name="id" type="xs:string" use="required"/>
 
     <attribute name="name" type="xs:string"/>
+
+  </complexType>
+
+  <complexType name="xmlTownship">
+
+    <complexContent>
+
+      <extension base="tns:xmlPlace">
+
+        <sequence>
+
+          <choice maxOccurs="unbounded" minOccurs="0">
+
+            <element ref="tns:church"/>
+
+            <element ref="tns:village"/>
+
+          </choice>
+
+        </sequence>
+
+      </extension>
+
+    </complexContent>
+
+  </complexType>
+
+  <complexType name="xmlChurch">
+
+    <complexContent>
+
+      <extension base="tns:xmlPlace">
+
+        <sequence/>
+
+      </extension>
+
+    </complexContent>
 
   </complexType>
 
@@ -207,6 +259,8 @@
 
             <element ref="tns:parish"/>
 
+            <element ref="tns:chapelry"/>
+
             <element ref="tns:township"/>
 
             <element ref="tns:town"/>
@@ -223,31 +277,7 @@
 
   </complexType>
 
-  <complexType name="xmlTownship">
-
-    <complexContent>
-
-      <extension base="tns:xmlPlace">
-
-        <sequence>
-
-          <choice maxOccurs="unbounded" minOccurs="0">
-
-            <element ref="tns:church"/>
-
-            <element ref="tns:village"/>
-
-          </choice>
-
-        </sequence>
-
-      </extension>
-
-    </complexContent>
-
-  </complexType>
-
-  <complexType name="xmlVillage">
+  <complexType name="xmlTown">
 
     <complexContent>
 
@@ -265,7 +295,7 @@
 
   </complexType>
 
-  <complexType name="xmlTown">
+  <complexType name="xmlVillage">
 
     <complexContent>
 
@@ -345,6 +375,10 @@
 
       <choice maxOccurs="unbounded" minOccurs="0">
 
+        <element ref="tns:chapelry"/>
+
+        <element ref="tns:township"/>
+
         <element ref="tns:church"/>
 
         <element ref="tns:country"/>
@@ -353,11 +387,9 @@
 
         <element ref="tns:parish"/>
 
-        <element ref="tns:township"/>
+        <element ref="tns:town"/>
 
         <element ref="tns:village"/>
-
-        <element ref="tns:town"/>
 
         <element ref="tns:manor"/>
 
@@ -375,15 +407,15 @@
 
     <restriction base="xs:string">
 
-      <enumeration value="membership"/>
+      <enumeration value="baptism"/>
 
-      <enumeration value="marriage"/>
+      <enumeration value="membership"/>
 
       <enumeration value="birth"/>
 
-      <enumeration value="baptism"/>
-
       <enumeration value="burial"/>
+
+      <enumeration value="marriage"/>
 
     </restriction>
 

@@ -4,7 +4,7 @@ import com.google.common.base.MoreObjects;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
-import net.ramify.model.place.region.Parish;
+import net.ramify.model.place.region.Chapelry;
 
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
@@ -13,12 +13,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-@XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "parish")
-public class XmlParish extends XmlPlace {
+@XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "chapelry")
+public class XmlChapelry extends XmlPlace {
 
     @XmlElementRefs({
-            @XmlElementRef(type = XmlParish.class),
-            @XmlElementRef(type = XmlChapelry.class),
             @XmlElementRef(type = XmlTownship.class),
             @XmlElementRef(type = XmlTown.class),
             @XmlElementRef(type = XmlVillage.class)
@@ -27,12 +25,12 @@ public class XmlParish extends XmlPlace {
 
     @Override
     PlaceId placeId(final String id) {
-        return new Spid(Parish.class, id);
+        return new Spid(Chapelry.class, id);
     }
 
     @Override
-    Parish place(final Place parent) throws Place.InvalidPlaceTypeException {
-        return new Parish(this.placeId(), this.name(), parent);
+    Chapelry place(final Place parent) throws Place.InvalidPlaceTypeException {
+        return new Chapelry(this.placeId(), this.name(), parent);
     }
 
     @Override
