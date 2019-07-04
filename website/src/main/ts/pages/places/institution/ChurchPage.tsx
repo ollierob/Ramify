@@ -34,7 +34,7 @@ export default class ChurchPage extends React.PureComponent<Props, State> {
                 place={this.props.place}
                 loading={this.props.loading}
                 position={this.props.position}
-                zoom={12}/>/>
+                zoom={14}/>/>
 
             <InstitutionInfo
                 institution={church}/>
