@@ -36,8 +36,12 @@
     border: 0;
 }
 
+.childPlace .ant-card-body {
+    padding: 8px !important;
+}
+
 .childPlace .ant-card-head {
-    min-height: 32px;
+    min-height: 38px;
 }
 
 .childPlace .ant-card-head .ant-card-head-title {
