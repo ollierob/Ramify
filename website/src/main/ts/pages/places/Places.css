@@ -43,3 +43,8 @@
 .childPlace ul {
     padding-left: 24px;
 }
+
+.map .leaflet-container {
+    width: 100%;
+    height: 100%;
+}
