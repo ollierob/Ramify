@@ -61,7 +61,7 @@ export default class AreaPage extends React.PureComponent<Props, State> {
 
     private loadChildren(id = this.props.placeId) {
         if (!id) return;
-        asyncLoadData(id, id => this.placeLoader.loadChildren(id, 3), children => this.setState({children}));
+        asyncLoadData(id, id => this.placeLoader.loadChildren(id, 2), children => this.setState({children}));
     }
 
 }
