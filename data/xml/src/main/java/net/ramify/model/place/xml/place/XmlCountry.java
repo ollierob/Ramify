@@ -24,17 +24,17 @@ class XmlCountry extends XmlPlace {
     private List<XmlPlace> children;
 
     @Nonnull
-    PlaceId placeId(final String id) {
+    protected PlaceId placeId(final String id) {
         return new Spid(Country.class, id);
     }
 
     @Override
-    Place place(final Place parent) throws Place.InvalidPlaceTypeException {
+    protected Place place(final Place parent) throws Place.InvalidPlaceTypeException {
         return new Country(this.placeId(), this.name(), parent);
     }
 
     @Override
-    Collection<XmlPlace> children() {
+    protected Collection<XmlPlace> children() {
         return Objects.requireNonNull(children, "Country has no children");
     }
 

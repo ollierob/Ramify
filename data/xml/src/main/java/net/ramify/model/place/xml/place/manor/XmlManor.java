@@ -1,10 +1,11 @@
-package net.ramify.model.place.xml.place;
+package net.ramify.model.place.xml.place.manor;
 
 import com.google.common.base.MoreObjects;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.manor.Manor;
+import net.ramify.model.place.xml.place.XmlPlace;
 
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
@@ -14,7 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 @XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "manor")
-class XmlManor extends XmlPlace {
+public class XmlManor extends XmlPlace {
 
     @XmlElementRefs({
             @XmlElementRef(type = XmlManor.class),
@@ -23,17 +24,17 @@ class XmlManor extends XmlPlace {
     private List<XmlPlace> children;
 
     @Override
-    PlaceId placeId(final String id) {
+    protected PlaceId placeId(final String id) {
         return new Spid(Manor.class, id);
     }
 
     @Override
-    Manor place(final Place parent) throws Place.InvalidPlaceTypeException {
+    protected Manor place(final Place parent) throws Place.InvalidPlaceTypeException {
         return new Manor(this.placeId(), this.name(), parent);
     }
 
     @Override
-    Collection<XmlPlace> children() {
+    protected Collection<XmlPlace> children() {
         return MoreObjects.firstNonNull(children, Collections.emptyList());
     }
 

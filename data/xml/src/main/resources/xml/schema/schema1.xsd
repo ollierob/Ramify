@@ -19,7 +19,11 @@
 
   <element name="county" type="tns:xmlCounty"/>
 
+  <element name="farmstead" type="tns:xmlFarmstead"/>
+
   <element name="graveship" type="tns:xmlGraveship"/>
+
+  <element name="hamlet" type="tns:xmlHamlet"/>
 
   <element name="manor" type="tns:xmlManor"/>
 
@@ -169,11 +173,33 @@
 
           <choice maxOccurs="unbounded" minOccurs="0">
 
-            <element ref="tns:church"/>
-
             <element ref="tns:village"/>
 
+            <element ref="tns:hamlet"/>
+
+            <element ref="tns:church"/>
+
+            <element ref="tns:farmstead"/>
+
           </choice>
+
+        </sequence>
+
+      </extension>
+
+    </complexContent>
+
+  </complexType>
+
+  <complexType name="xmlVillage">
+
+    <complexContent>
+
+      <extension base="tns:xmlPlace">
+
+        <sequence>
+
+          <element maxOccurs="unbounded" minOccurs="0" ref="tns:church"/>
 
         </sequence>
 
@@ -295,24 +321,6 @@
 
   </complexType>
 
-  <complexType name="xmlVillage">
-
-    <complexContent>
-
-      <extension base="tns:xmlPlace">
-
-        <sequence>
-
-          <element maxOccurs="unbounded" minOccurs="0" ref="tns:church"/>
-
-        </sequence>
-
-      </extension>
-
-    </complexContent>
-
-  </complexType>
-
   <complexType name="xmlManor">
 
     <complexContent>
@@ -369,6 +377,44 @@
 
   </complexType>
 
+  <complexType name="xmlHamlet">
+
+    <complexContent>
+
+      <extension base="tns:xmlPlace">
+
+        <sequence>
+
+          <choice maxOccurs="unbounded" minOccurs="0">
+
+            <element ref="tns:church"/>
+
+            <element ref="tns:farmstead"/>
+
+          </choice>
+
+        </sequence>
+
+      </extension>
+
+    </complexContent>
+
+  </complexType>
+
+  <complexType name="xmlFarmstead">
+
+    <complexContent>
+
+      <extension base="tns:xmlPlace">
+
+        <sequence/>
+
+      </extension>
+
+    </complexContent>
+
+  </complexType>
+
   <complexType name="places">
 
     <sequence>
@@ -378,6 +424,8 @@
         <element ref="tns:chapelry"/>
 
         <element ref="tns:township"/>
+
+        <element ref="tns:village"/>
 
         <element ref="tns:church"/>
 
@@ -389,13 +437,15 @@
 
         <element ref="tns:town"/>
 
-        <element ref="tns:village"/>
-
         <element ref="tns:manor"/>
 
         <element ref="tns:graveship"/>
 
         <element ref="tns:state"/>
+
+        <element ref="tns:hamlet"/>
+
+        <element ref="tns:farmstead"/>
 
       </choice>
 
@@ -407,13 +457,13 @@
 
     <restriction base="xs:string">
 
+      <enumeration value="burial"/>
+
       <enumeration value="baptism"/>
 
       <enumeration value="membership"/>
 
       <enumeration value="birth"/>
-
-      <enumeration value="burial"/>
 
       <enumeration value="marriage"/>
 

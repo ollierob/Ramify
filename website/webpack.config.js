@@ -1,5 +1,6 @@
 const webpack = require("webpack");
 const Chunks2JsonPlugin = require('chunks-2-json-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -64,7 +65,8 @@ module.exports = {
     },
     plugins: [
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-        new Chunks2JsonPlugin({outputDir: 'target/classes/js/'}) //Outputs manifest
+        new Chunks2JsonPlugin({outputDir: 'target/classes/js/'}), //Outputs manifest
+        new ForkTsCheckerWebpackPlugin() //Type checks
     ],
     externals: {
         "react": "React",

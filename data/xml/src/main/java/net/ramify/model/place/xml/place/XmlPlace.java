@@ -25,7 +25,7 @@ public abstract class XmlPlace implements HasPlaceId {
     @XmlAttribute(name = "name")
     private String name;
 
-    abstract PlaceId placeId(String id);
+    protected abstract PlaceId placeId(String id);
 
     @Nonnull
     @Override
@@ -64,9 +64,9 @@ public abstract class XmlPlace implements HasPlaceId {
     }
 
     @Nonnull
-    abstract Place place(Place parent) throws Place.InvalidPlaceTypeException;
+    protected abstract Place place(Place parent) throws Place.InvalidPlaceTypeException;
 
-    abstract Collection<XmlPlace> children();
+    protected abstract Collection<XmlPlace> children();
 
     @Override
     public String toString() {

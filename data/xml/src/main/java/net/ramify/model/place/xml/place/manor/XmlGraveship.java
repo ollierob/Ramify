@@ -1,10 +1,11 @@
-package net.ramify.model.place.xml.place;
+package net.ramify.model.place.xml.place.manor;
 
 import com.google.common.base.MoreObjects;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.manor.Graveship;
+import net.ramify.model.place.xml.place.XmlPlace;
 
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
@@ -22,17 +23,17 @@ class XmlGraveship extends XmlPlace {
     private List<XmlPlace> children;
 
     @Override
-    PlaceId placeId(final String id) {
+    protected PlaceId placeId(final String id) {
         return new Spid(Graveship.class, id);
     }
 
     @Override
-    Graveship place(final Place parent) throws Place.InvalidPlaceTypeException {
+    protected Graveship place(final Place parent) throws Place.InvalidPlaceTypeException {
         return new Graveship(this.placeId(), this.name(), parent);
     }
 
     @Override
-    Collection<XmlPlace> children() {
+    protected Collection<XmlPlace> children() {
         return MoreObjects.firstNonNull(children, Collections.emptyList());
     }
 

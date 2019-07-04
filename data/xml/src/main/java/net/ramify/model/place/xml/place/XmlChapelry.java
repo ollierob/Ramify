@@ -5,6 +5,8 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.Chapelry;
+import net.ramify.model.place.xml.place.settlement.XmlTown;
+import net.ramify.model.place.xml.place.settlement.XmlVillage;
 
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
@@ -24,17 +26,17 @@ public class XmlChapelry extends XmlPlace {
     private List<XmlPlace> children;
 
     @Override
-    PlaceId placeId(final String id) {
+    protected PlaceId placeId(final String id) {
         return new Spid(Chapelry.class, id);
     }
 
     @Override
-    Chapelry place(final Place parent) throws Place.InvalidPlaceTypeException {
+    protected Chapelry place(final Place parent) throws Place.InvalidPlaceTypeException {
         return new Chapelry(this.placeId(), this.name(), parent);
     }
 
     @Override
-    Collection<XmlPlace> children() {
+    protected Collection<XmlPlace> children() {
         return MoreObjects.firstNonNull(children, Collections.emptyList());
     }
 

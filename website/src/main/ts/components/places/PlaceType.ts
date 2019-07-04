@@ -16,6 +16,7 @@ const PlaceTypeNames: { [key in PlaceType]: Name } = {
     DISTRICT: {s: "District"},
     FARMSTEAD: {s: "Farmstead"},
     GRAVESHIP: {s: "Graveship"},
+    HAMLET: {s: "Hamlet"},
     HOSPITAL: {s: "Hospital"},
     HOUSE: {s: "House"},
     HUNDRED: {s: "Hundred"},
