@@ -14,6 +14,6 @@ public class ChurchBurialInfo extends AbstractChurchRecordSetInfo {
     @Nonnull
     @Override
     public String name() {
-        return "Burial";
+        return "Burials";
     }
 }

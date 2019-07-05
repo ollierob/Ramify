@@ -8,9 +8,9 @@
 
     <churchInfo id="heptonstall-st-thomas" denomination="Church of England">
         <d:foundedBefore date="1260"/>
-        <churchRecordSet id="heptonstall-st-thomas-baptisms" type="baptism" startYear="1599" endYear="1812"/>
-        <churchRecordSet id="heptonstall-st-thomas-marriages" type="marriage" startYear="1593" endYear="1755"/>
-        <churchRecordSet id="heptonstall-st-thomas-burials" type="burial" startYear="1593" endYear="1812"/>
+        <churchRecordSet id="heptonstall-st-thomas-baptisms" type="baptism" startYear="1599" endYear="1904"/>
+        <churchRecordSet id="heptonstall-st-thomas-marriages" type="marriage" startYear="1593" endYear="1986"/>
+        <churchRecordSet id="heptonstall-st-thomas-burials" type="burial" startYear="1593" endYear="1898"/>
     </churchInfo>
 
     <churchInfo id="birchcliffe" denomination="Baptist">

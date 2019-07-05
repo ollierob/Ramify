@@ -7,6 +7,7 @@ import net.ramify.model.place.institution.church.record.ChurchBaptismInfo;
 import net.ramify.model.place.institution.church.record.ChurchBirthInfo;
 import net.ramify.model.place.institution.church.record.ChurchBurialInfo;
 import net.ramify.model.place.institution.church.record.ChurchMarriageInfo;
+import net.ramify.model.place.institution.church.record.ChurchPewRentalInfo;
 import net.ramify.model.place.institution.church.record.ChurchRecordSetInfo;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.record.set.HasRecordSetId;
@@ -99,6 +100,13 @@ public class XmlChurchRecordSetInfo implements HasRecordSetId {
             @Override
             ChurchRecordSetInfo build(XmlChurchRecordSetInfo info, DateParser dateParser) {
                 throw new UnsupportedOperationException(); //TODO
+            }
+        },
+        @XmlEnumValue("pewRents")
+        PEW_RENTS {
+            @Override
+            ChurchRecordSetInfo build(XmlChurchRecordSetInfo info, DateParser dateParser) {
+                return new ChurchPewRentalInfo(info.recordSetId(), info.date(), info.notes);
             }
         };
 

@@ -5,15 +5,15 @@ import net.ramify.model.record.set.RecordSetId;
 
 import javax.annotation.Nonnull;
 
-public class ChurchBaptismInfo extends AbstractChurchRecordSetInfo {
+public class ChurchPewRentalInfo extends AbstractChurchRecordSetInfo {
 
-    public ChurchBaptismInfo(final RecordSetId id, final DateRange date, final String notes) {
+    public ChurchPewRentalInfo(final RecordSetId id, final DateRange date, final String notes) {
         super(id, date, notes);
     }
 
     @Nonnull
     @Override
     public String name() {
-        return "Baptisms";
+        return "Pew rentals";
     }
 }

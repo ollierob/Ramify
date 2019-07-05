@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
-        xmlns:ns1="http://ramify.net/dates" xmlns:tns="http://ramify.net/places"
-        xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://ramify.net/places" version="1.0">
+        xmlns:ns1="http://ramify.net/dates"
+        xmlns:tns="http://ramify.net/places"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://ramify.net/places"
+        version="1.0">
 
     <import namespace="http://ramify.net/dates" schemaLocation="schema2.xsd"/>
 
@@ -495,15 +498,17 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="membership"/>
-
-            <enumeration value="baptism"/>
-
-            <enumeration value="birth"/>
-
             <enumeration value="burial"/>
 
             <enumeration value="marriage"/>
+
+            <enumeration value="baptism"/>
+
+            <enumeration value="membership"/>
+
+            <enumeration value="pewRents"/>
+
+            <enumeration value="birth"/>
 
         </restriction>
 
