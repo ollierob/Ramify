@@ -1,0 +1,18 @@
+<places
+        xmlns="http://ramify.net/places"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://ramify.net/places ../../../../schema/schema1.xsd">
+
+    <township id="wadsworth">
+
+        <church id="wainsgate" name="Wainsgate"/>
+
+        <hamlet id="old_town" name="Old Town"/>
+        <hamlet id="pecket_well" name="Pecket Well"/>
+
+        <hamlet id="shackleton" name="Shackleton"/>
+        <hamlet id="widdop" name="Widdop"/>
+
+    </township>
+
+</places>
