@@ -3,7 +3,8 @@ import {DateRange} from "../../../components/date/DateRange";
 import {Card} from "antd";
 import {Institution, InstitutionRecordSet} from "../../../protobuf/generated/institution_pb";
 import {HasClass} from "../../../components/style/HasClass";
-import {PlaceDescription} from "../../../protobuf/generated/place_pb";
+import {Place, PlaceDescription} from "../../../protobuf/generated/place_pb";
+import {placeHref} from "../../../components/places/Place";
 
 type Props = HasClass & {
     description: PlaceDescription.AsObject;
@@ -31,7 +32,9 @@ export const InstitutionInfo = (props: Props) => {
 
         {props.children}
 
-        <RecordCards records={institution.recordsetList}/>
+        <RecordCards
+            records={institution.recordsetList}
+            alsoSee={description && description.alsoseeList}/>
 
     </Card>
 
@@ -45,17 +48,29 @@ const Title = (props: {institution: Institution.AsObject}) => {
     </>
 };
 
-const RecordCards = (props: {records: ReadonlyArray<InstitutionRecordSet.AsObject>}) => {
+const RecordCards = (props: {records: ReadonlyArray<InstitutionRecordSet.AsObject>, alsoSee: ReadonlyArray<Place.AsObject>}) => {
     const records = props.records;
     if (!records || !records.length) return null;
     return <div className="institutionRecords">
         {records.map(record => <RecordCard record={record}/>)}
+        {props.alsoSee && <AlsoSeeCard alsoSee={props.alsoSee}/>}
     </div>
-}
+};
 
 const RecordCard = (props: {record: InstitutionRecordSet.AsObject}) => {
     const record = props.record;
     return <Card title={record.name} className="placeCard">
         Available <DateRange date={record.covers}/>
+    </Card>
+};
+
+
+const AlsoSeeCard = (props: {alsoSee: ReadonlyArray<Place.AsObject>}) => {
+    const alsoSee = props.alsoSee;
+    if (!alsoSee || !alsoSee.length) return null;
+    return <Card title="Also see" className="placeCard">
+        <ul>
+            {alsoSee.map(p => <li><a href={placeHref(p)}>{p.name}</a></li>)}
+        </ul>
     </Card>
 };

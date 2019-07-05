@@ -31,6 +31,13 @@
         </description>
     </placeDescription>
 
+    <placeDescription id="church:slack-mt-zion">
+        <alsoSee id="church:birchcliffe"/>
+        <description>
+            Mount Zion was founded by former members of Birchcliffe, who were upset at the ordination of a new minister.
+        </description>
+    </placeDescription>
+
     <placeDescription id="farmstead:robertshaw">
         <alsoSee id="farmstead:learings"/>
         <description>
