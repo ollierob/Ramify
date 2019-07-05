@@ -6,6 +6,7 @@ import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {Place, PlaceType} from "../../../protobuf/generated/place_pb";
 import {DEFAULT_PLACE_LOADER} from "../../../components/places/PlaceLoader";
 import {PlaceTypeDescription} from "../../../components/places/PlaceTypeDescription";
+import {Loading} from "../../../components/Loading";
 
 type Props = PlacesPageProps;
 
@@ -26,27 +27,28 @@ export default class AreaPage extends React.PureComponent<Props, State> {
 
     render() {
 
-        if (!this.props.place) return null;
+        if (this.props.loading) return <Loading/>;
 
         const bundle = this.props.place;
+        if (!bundle) return null;
 
         return <div className="town leftRest">
 
             <PlaceMap
                 area={true}
                 loading={this.props.loading}
-                place={bundle && bundle.place}
-                position={bundle && bundle.position}
-                zoom={bundle ? zoom(bundle.place) : 10}/>
+                place={bundle.place}
+                position={bundle.position}
+                zoom={zoom(bundle.place)}/>
 
-            {bundle && <PlaceTypeDescription
-                description={bundle.typedescription}/>}
+            <PlaceTypeDescription
+                description={bundle.typedescription}/>
 
             <AreaInfo
                 loadingChildren={this.state.children.loading}
                 childPlaces={this.state.children.data}
-                place={bundle && bundle.place}
-                description={bundle && bundle.description}/>
+                place={bundle.place}
+                description={bundle.description}/>
 
         </div>;
 
@@ -65,7 +67,10 @@ export default class AreaPage extends React.PureComponent<Props, State> {
 
     private loadChildren(id = this.props.placeId) {
         if (!id) return;
-        asyncLoadData(id, id => this.placeLoader.loadChildren(id, 2), children => this.setState({children}));
+        asyncLoadData(
+            id,
+            id => this.placeLoader.loadChildren(id), //Let server determine best max depth
+            children => this.setState({children}));
     }
 
 }

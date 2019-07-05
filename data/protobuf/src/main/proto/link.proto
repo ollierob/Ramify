@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option java_package = "net.ramify.model.util.proto";
+option java_outer_classname = "LinkProto";
+
+message Link {
+
+    string href = 1;
+    string text = 2;
+
+}

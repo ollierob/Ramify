@@ -6,6 +6,7 @@
         xsi:schemaLocation="http://ramify.net/places ../../../../schema/schema1.xsd">
 
     <placeDescription id="chapelry:heptonstall">
+        <alsoSee id="chapelry:elland"/>
         <description>
             Heptonstall chapelry is formed of five townships.
         </description>

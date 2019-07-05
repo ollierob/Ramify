@@ -5,6 +5,7 @@ import {Card} from "antd";
 import {placeHref} from "./Place";
 import {PlaceType, placeTypeKey, placeTypeName, sortByPlaceName, sortByPlaceType} from "./PlaceType";
 import {Img} from "../style/Img";
+import {Loading} from "../Loading";
 
 type Props = {
     loading: boolean;
@@ -27,7 +28,7 @@ export default class ChildPlaceCards extends React.PureComponent<Props, State> {
 
     render() {
 
-        if (this.props.loading) return null; //TODO
+        if (this.props.loading) return <Loading/>; //TODO
 
         return <div className="childPlaces">
 

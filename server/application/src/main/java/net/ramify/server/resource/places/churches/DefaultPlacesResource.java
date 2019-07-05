@@ -1,5 +1,6 @@
 package net.ramify.server.resource.places.churches;
 
+import com.google.common.base.MoreObjects;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceDescription;
 import net.ramify.model.place.PlaceId;
@@ -44,8 +45,8 @@ public class DefaultPlacesResource implements PlacesResource {
     }
 
     @Override
-    public Places within(final PlaceId id, final int depth) {
-        return Places.of(placeProvider.children(id, depth), false);
+    public Places within(final PlaceId id, final Integer depth) {
+        return Places.of(placeProvider.children(id, MoreObjects.firstNonNull(depth, 3)), false);
     }
 
     @Override

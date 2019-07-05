@@ -23,7 +23,7 @@ class ProtoPlaceLoader implements PlaceLoader {
             .then(p => p ? p.toObject() : null);
     }
 
-    loadChildren(id: string, maxDepth: number = 1) {
+    loadChildren(id: string, maxDepth?: number) {
         return protoFetch("/places/children/" + id + queryParameters({depth: maxDepth}), PlaceList.deserializeBinary)
             .then(l => l ? l.getPlaceList().map(p => p.toObject()) : []);
     }

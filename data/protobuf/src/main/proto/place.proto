@@ -4,6 +4,7 @@ option java_package = "net.ramify.model.place.proto";
 option java_outer_classname = "PlaceProto";
 
 import "location.proto";
+import "link.proto";
 
 message Place {
 
@@ -67,6 +68,7 @@ message PlaceDescription {
 
     string description = 1;
     repeated Place alsoSee = 2;
+    repeated Link link = 3;
 
 }
 

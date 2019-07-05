@@ -8,7 +8,6 @@ import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.server.resource.RootResource;
 
 import javax.annotation.CheckForNull;
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -31,7 +30,7 @@ public interface PlacesResource extends RootResource {
     @Path("children/{id}")
     Places within(
             @PathParam("id") PlaceId id,
-            @QueryParam("depth") @DefaultValue("1") int depth);
+            @QueryParam("depth") Integer depth);
 
     @GET
     @Path("position/{id}")

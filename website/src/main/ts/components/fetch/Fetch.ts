@@ -24,9 +24,10 @@ export function queryParameters(query: {[key: string]: Queryable | Queryable[]})
     const queryParameters: string[] = [];
     Object.keys(query).forEach(key => {
         const value = query[key];
+        if (value == null) return;
         if (Array.isArray(value)) value.forEach(v => queryParameters.push(key + "=" + String(v)));
         else queryParameters.push(key + "=" + String(value));
-    })
+    });
     if (!queryParameters.length) return "";
     return "?" + queryParameters.join("&");
 }
