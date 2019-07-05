@@ -1,6 +1,7 @@
 package net.ramify.server.resource.places.churches;
 
 import net.ramify.model.place.Place;
+import net.ramify.model.place.PlaceDescription;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.collection.Places;
 import net.ramify.model.place.position.Position;
@@ -55,7 +56,7 @@ public class DefaultPlacesResource implements PlacesResource {
     @CheckForNull
     @Override
     public String describe(final PlaceId id) {
-        return descriptionProvider.get(id);
+        return descriptionProvider.maybeGet(id).map(PlaceDescription::description).orElse(null);
     }
 
     @Override
@@ -73,7 +74,7 @@ public class DefaultPlacesResource implements PlacesResource {
         if (place == null) return null;
         final var builder = PlaceProto.PlaceBundle.newBuilder().setPlace(place.toProto());
         Consumers.ifNonNull(this.position(id), pos -> builder.setPosition(pos.toProto()));
-        Consumers.ifNonNull(this.describe(id), builder::setDescription);
+        descriptionProvider.maybeGet(id).ifPresent(d -> builder.setDescription(d.toProto()));
         Consumers.ifNonNull(this.describeType(id), builder::setTypeDescription);
         return builder.build();
     }

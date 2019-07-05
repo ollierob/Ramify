@@ -5,6 +5,8 @@
 
   <import namespace="http://ramify.net/dates" schemaLocation="schema2.xsd"/>
 
+  <element name="alsoSee" type="tns:xmlAlsoSeeId"/>
+
   <element name="chapelry" type="tns:xmlChapelry"/>
 
   <element name="church" type="tns:xmlChurch"/>
@@ -29,11 +31,11 @@
 
   <element name="parish" type="tns:xmlParish"/>
 
-    <element name="placeDescription" type="tns:xmlPlaceDescription"/>
+  <element name="placeDescription" type="tns:xmlPlaceDescription"/>
 
-    <element name="placeDescriptions" type="tns:placeDescriptions"/>
+  <element name="placeDescriptions" type="tns:placeDescriptions"/>
 
-    <element name="placePoint" type="tns:xmlPlacePoint"/>
+  <element name="placePoint" type="tns:xmlPlacePoint"/>
 
   <element name="placePositions" type="tns:placePositions"/>
 
@@ -109,31 +111,39 @@
 
   </complexType>
 
-    <complexType name="xmlPlaceDescription">
+  <complexType name="xmlAlsoSeeId">
 
-        <simpleContent>
+    <sequence/>
 
-            <extension base="xs:string">
+    <attribute name="id" type="xs:string" use="required"/>
 
-                <attribute name="id" type="xs:string" use="required"/>
+  </complexType>
 
-            </extension>
+  <complexType name="xmlPlaceDescription">
 
-        </simpleContent>
+    <sequence>
 
-    </complexType>
+      <element maxOccurs="unbounded" minOccurs="0" ref="tns:alsoSee"/>
 
-    <complexType name="placeDescriptions">
+      <element form="qualified" name="description" type="xs:string"/>
 
-        <sequence>
+    </sequence>
 
-            <element maxOccurs="unbounded" minOccurs="0" ref="tns:placeDescription"/>
+    <attribute name="id" type="xs:string" use="required"/>
 
-        </sequence>
+  </complexType>
 
-    </complexType>
+  <complexType name="placeDescriptions">
 
-    <complexType name="xmlPlacePoint">
+    <sequence>
+
+      <element maxOccurs="unbounded" minOccurs="0" ref="tns:placeDescription"/>
+
+    </sequence>
+
+  </complexType>
+
+  <complexType name="xmlPlacePoint">
 
     <sequence/>
 
@@ -485,15 +495,15 @@
 
     <restriction base="xs:string">
 
-        <enumeration value="marriage"/>
+      <enumeration value="birth"/>
 
-        <enumeration value="burial"/>
+      <enumeration value="membership"/>
 
-        <enumeration value="birth"/>
+      <enumeration value="marriage"/>
 
-        <enumeration value="membership"/>
+      <enumeration value="baptism"/>
 
-        <enumeration value="baptism"/>
+      <enumeration value="burial"/>
 
     </restriction>
 

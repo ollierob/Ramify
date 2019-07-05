@@ -10,10 +10,20 @@ import java.util.function.Function;
 public class SetUtils {
 
     public static <F, T> Set<T> transform(final Collection<F> collection, final Function<? super F, ? extends T> transform) {
+        return transform(collection, transform, false);
+    }
+
+    public static <F, T> Set<T> transformIgnoreNull(final Collection<F> collection, final Function<? super F, ? extends T> transform) {
+        return transform(collection, transform, true);
+    }
+
+    private static <F, T> Set<T> transform(final Collection<F> collection, final Function<? super F, ? extends T> transform, final boolean ignoreNull) {
         if (collection.isEmpty()) return Collections.emptySet();
         final var set = Sets.<T>newHashSetWithExpectedSize(collection.size());
         for (final var element : collection) {
-            set.add(transform.apply(element));
+            final var transformed = transform.apply(element);
+            if (transformed == null & ignoreNull) continue;
+            set.add(transformed);
         }
         return set;
     }

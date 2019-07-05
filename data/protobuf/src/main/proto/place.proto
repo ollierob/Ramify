@@ -63,12 +63,18 @@ message PlaceIdList {
 
 }
 
+message PlaceDescription {
+
+    string description = 1;
+    repeated Place alsoSee = 2;
+
+}
+
 message PlaceBundle {
 
     Place place = 1;
     Position position = 2;
-    string description = 3;
+    PlaceDescription description = 3;
     string typeDescription = 4;
-    repeated Place alsoSee = 5;
 
 }

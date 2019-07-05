@@ -6,22 +6,33 @@
         xsi:schemaLocation="http://ramify.net/places ../../../../schema/schema1.xsd">
 
     <placeDescription id="chapelry:heptonstall">
-        Heptonstall chapelry is formed of five townships.
+        <description>
+            Heptonstall chapelry is formed of five townships.
+        </description>
     </placeDescription>
 
     <placeDescription id="township:heptonstall">
-        Heptonstall township, centered on the village, encompassed part of Hebden Bridge and the lands along Widdop road
-        and Edge Lane.
-        Its border with Stansfield township lay along the Colden Water.
+        <description>
+            Heptonstall township, centered on the village, encompassed part of Hebden Bridge and the lands along Widdop
+            road
+            and Edge Lane.
+            Its border with Stansfield township lay along the Colden Water.
+        </description>
     </placeDescription>
 
     <placeDescription id="village:heptonstall">
-        The village of Heptonstall sits on the hilltop above Hebden Bridge.
-        First mentioned in the 13th century, it formed part of the *rectorial* manor of Halifax-cum-Heptonstall.
+        <alsoSee id="town:hebden_bridge"/>
+        <description>
+            The village of Heptonstall sits on the hilltop above Hebden Bridge.
+            First mentioned in the 13th century, it formed part of the *rectorial* manor of Halifax-cum-Heptonstall.
+        </description>
     </placeDescription>
 
     <placeDescription id="farmstead:robertshaw">
-        Robertshaw was first named in a rental for Halifax-cum-Heptonstall manor dated 1429.
+        <alsoSee id="farmstead:learings"/>
+        <description>
+            Robertshaw was first named in a rental for Halifax-cum-Heptonstall manor dated 1429.
+        </description>
     </placeDescription>
 
 </placeDescriptions>
