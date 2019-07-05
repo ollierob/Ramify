@@ -69,7 +69,13 @@
     padding-left: 24px;
 }
 
+/*Specific oddity overrides*/
+
 .map .leaflet-container {
     width: 100%;
     height: 100%;
+}
+
+.typeDescription p {
+    margin-bottom: 0;
 }
