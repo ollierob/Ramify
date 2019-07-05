@@ -16,6 +16,7 @@ import net.ramify.model.place.region.County;
 import net.ramify.model.place.region.Parish;
 import net.ramify.model.place.region.Township;
 import net.ramify.model.place.region.manor.Manor;
+import net.ramify.model.place.settlement.City;
 import net.ramify.model.place.settlement.Town;
 import net.ramify.model.place.settlement.Village;
 import net.ramify.server.resource.places.ChurchesResource;
@@ -74,7 +75,7 @@ public class DefaultPlacesResource implements PlacesResource {
             case COUNTRY:
                 return p -> p.is(County.class);
             case COUNTY:
-                return p -> p.is(Parish.class) || p.is(Manor.class);
+                return p -> p.is(City.class) || p.is(Parish.class) || p.is(Manor.class);
             case PARISH:
             case CHAPELRY:
                 return p -> p.is(Chapelry.class) || p.is(Township.class) || p.is(Town.class) || p.is(Village.class) || p.is(Church.class);

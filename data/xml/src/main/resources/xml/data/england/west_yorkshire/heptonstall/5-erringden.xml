@@ -1,0 +1,13 @@
+<places
+        xmlns="http://ramify.net/places"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://ramify.net/places ../../../../schema/schema1.xsd">
+
+    <township id="erringden">
+
+        <farmstead id="cruttonstall" name="Cruttonstall"/>
+        <farmstead id="old_chamber" name="Old Chamber"/>
+
+    </township>
+
+</places>

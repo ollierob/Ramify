@@ -7,11 +7,19 @@
 
         <church id="cross_stone" name="St Pauls"/>
 
-        <hamlet id="eastwood" name="Eastwood"/>
-        <church id="eastwood" name="Eastwood"/>
+        <village id="blackshaw_head" name="Blackshaw Head">
+            <church id="blackshaw_head_chapel" name="Blackshaw Head Chapel"/>
+        </village>
 
-        <hamlet id="shore" name="Shore"/>
-        <church id="shore" name="Shore"/>
+        <hamlet id="eastwood" name="Eastwood">
+            <church id="eastwood" name="Eastwood"/>
+        </hamlet>
+
+        <hamlet id="shore" name="Shore">
+            <church id="shore" name="Shore"/>
+        </hamlet>
+
+        <hamlet id="rawtonstall" name="Rawtonstall"/>
 
     </township>
 

@@ -8,23 +8,22 @@
     <township id="heptonstall">
 
         <village id="heptonstall" name="Heptonstall">
-
             <church id="heptonstall-st-thomas" name="St Thomas"/>
             <church id="heptonstall-wesleyan" name="Heptonstall Methodist"/>
-
         </village>
 
         <hamlet id="slack" name="Slack">
-
             <church id="slack-mt-zion" name="Mount Zion"/>
             <farmstead id="robertshaw" name="Robertshaw"/>
             <farmstead id="popples_bottom" name="Popples Bottom"/>
             <farmstead id="learings" name="Learings"/>
-
         </hamlet>
 
         <hamlet id="heptonstall_high_gate" name="High Gate">
-
+            <church id="broadstone" name="Broadstone"/>
+            <church id="highgate" name="Highgate"/>
+            <farmstead id="high_gate" name="High Gate"/>
+            <farmstead id="hudson_fold" name="Hudson Fold"/>
         </hamlet>
 
     </township>
