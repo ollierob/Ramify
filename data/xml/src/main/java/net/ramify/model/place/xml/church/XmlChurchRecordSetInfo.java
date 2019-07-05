@@ -3,6 +3,7 @@ package net.ramify.model.place.xml.church;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.InYears;
 import net.ramify.model.date.parse.DateParser;
+import net.ramify.model.place.institution.church.record.ChurchAccountInfo;
 import net.ramify.model.place.institution.church.record.ChurchBaptismInfo;
 import net.ramify.model.place.institution.church.record.ChurchBirthInfo;
 import net.ramify.model.place.institution.church.record.ChurchBurialInfo;
@@ -107,6 +108,13 @@ public class XmlChurchRecordSetInfo implements HasRecordSetId {
             @Override
             ChurchRecordSetInfo build(XmlChurchRecordSetInfo info, DateParser dateParser) {
                 return new ChurchPewRentalInfo(info.recordSetId(), info.date(), info.notes);
+            }
+        },
+        @XmlEnumValue("accounts")
+        ACCOUNTS {
+            @Override
+            ChurchRecordSetInfo build(XmlChurchRecordSetInfo info, DateParser dateParser) {
+                return new ChurchAccountInfo(info.recordSetId(), info.date(), info.notes);
             }
         };
 

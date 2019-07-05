@@ -11,6 +11,7 @@
         <churchRecordSet id="heptonstall-st-thomas-baptisms" type="baptism" startYear="1599" endYear="1904"/>
         <churchRecordSet id="heptonstall-st-thomas-marriages" type="marriage" startYear="1593" endYear="1986"/>
         <churchRecordSet id="heptonstall-st-thomas-burials" type="burial" startYear="1593" endYear="1898"/>
+        <churchRecordSet id="heptonstall-st-thomas-pew_rents" type="pewRents" startYear="1796" endYear="1847"/>
     </churchInfo>
 
     <churchInfo id="birchcliffe" denomination="Baptist">

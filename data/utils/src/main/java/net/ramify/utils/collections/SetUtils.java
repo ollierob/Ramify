@@ -6,20 +6,25 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.function.IntFunction;
 
 public class SetUtils {
 
     public static <F, T> Set<T> transform(final Collection<F> collection, final Function<? super F, ? extends T> transform) {
-        return transform(collection, transform, false);
+        return transform(collection, transform, Sets::newHashSetWithExpectedSize);
+    }
+
+    public static <F, T> Set<T> transform(final Collection<F> collection, final Function<? super F, ? extends T> transform, final IntFunction<Set<T>> createSet) {
+        return transform(collection, transform, false, createSet);
     }
 
     public static <F, T> Set<T> transformIgnoreNull(final Collection<F> collection, final Function<? super F, ? extends T> transform) {
-        return transform(collection, transform, true);
+        return transform(collection, transform, true, Sets::newHashSetWithExpectedSize);
     }
 
-    private static <F, T> Set<T> transform(final Collection<F> collection, final Function<? super F, ? extends T> transform, final boolean ignoreNull) {
+    private static <F, T> Set<T> transform(final Collection<F> collection, final Function<? super F, ? extends T> transform, final boolean ignoreNull, final IntFunction<Set<T>> createSet) {
         if (collection.isEmpty()) return Collections.emptySet();
-        final var set = Sets.<T>newHashSetWithExpectedSize(collection.size());
+        final var set = createSet.apply(collection.size());
         for (final var element : collection) {
             final var transformed = transform.apply(element);
             if (transformed == null & ignoreNull) continue;

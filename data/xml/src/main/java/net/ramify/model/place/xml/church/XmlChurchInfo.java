@@ -1,5 +1,6 @@
 package net.ramify.model.place.xml.church;
 
+import com.google.common.collect.Sets;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.date.xml.XmlBeforeDate;
@@ -14,6 +15,7 @@ import net.ramify.model.place.institution.church.ChurchInfo;
 import net.ramify.model.place.institution.church.record.ChurchRecordSetInfo;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.xml.place.XmlPlace;
+import net.ramify.utils.collections.SetUtils;
 import net.ramify.utils.objects.Functions;
 
 import javax.annotation.CheckForNull;
@@ -26,7 +28,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "churchInfo")
 public class XmlChurchInfo implements HasPlaceId {
@@ -74,9 +75,7 @@ public class XmlChurchInfo implements HasPlaceId {
     @Nonnull
     private Set<ChurchRecordSetInfo> recordSets(final DateParser parser) {
         if (recordSets == null) return Collections.emptySet();
-        return recordSets.stream()
-                .map(s -> s.build(parser))
-                .collect(Collectors.toSet());
+        return SetUtils.transform(recordSets, set -> set.build(parser), Sets::newLinkedHashSetWithExpectedSize);
     }
 
     @Nonnull

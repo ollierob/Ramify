@@ -55,7 +55,7 @@ const RecordCards = (props: {records: ReadonlyArray<InstitutionRecordSet.AsObjec
 
 const RecordCard = (props: {record: InstitutionRecordSet.AsObject}) => {
     const record = props.record;
-    return <Card title={record.name + " records"} className="placeCard">
+    return <Card title={record.name} className="placeCard">
         Available <DateRange date={record.covers}/>
     </Card>
 };
