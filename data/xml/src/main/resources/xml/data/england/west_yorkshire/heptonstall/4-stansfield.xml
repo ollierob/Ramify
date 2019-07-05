@@ -1,0 +1,24 @@
+<places
+        xmlns="http://ramify.net/places"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://ramify.net/places ../../../../schema/schema1.xsd">
+
+    <township id="stansfield">
+
+        <church id="cross_stone" name="St Pauls"/>
+
+        <hamlet id="eastwood" name="Eastwood"/>
+        <church id="eastwood" name="Eastwood"/>
+
+        <hamlet id="shore" name="Shore"/>
+        <church id="shore" name="Shore"/>
+
+    </township>
+
+    <town id="todmorden">
+
+        <church id="roomfield" name="Roomfield"/>
+
+    </town>
+
+</places>
