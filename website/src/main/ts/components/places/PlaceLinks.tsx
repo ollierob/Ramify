@@ -13,6 +13,6 @@ export const PlaceLinks = (props: {links: ReadonlyArray<Link.AsObject>}) => {
 const PlaceLink = (props: {link: Link.AsObject}) => {
     const link = props.link;
     if (!link) return null;
-    if (link.type == TypeMap.WIKIPEDIA) return <a href={"https://" + link.href}><img src="/images/wikipedia.png"/></a>
+    if (link.type == TypeMap.WIKIPEDIA) return <a href={"https://" + link.href} target="_blank"><img src="/images/wikipedia.png"/></a>
     return null;
 };

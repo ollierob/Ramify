@@ -88,3 +88,12 @@
 .typeDescription p {
     margin-bottom: 0;
 }
+
+.info .links {
+    display: inline-block;
+    margin-left: 16px;
+}
+
+.info .links img {
+    height: 1em;
+}
