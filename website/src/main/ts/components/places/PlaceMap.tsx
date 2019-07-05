@@ -30,6 +30,10 @@ export class PlaceMap extends React.PureComponent<Props> {
                 markers={!this.props.area && markerPoints(this.props.place, this.props.position)}
             />}
 
+            {!this.props.position && <span className="unimportant">
+                No position information available.
+            </span>}
+
         </div>;
 
     }
