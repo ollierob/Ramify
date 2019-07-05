@@ -9,8 +9,8 @@
 
         <village id="heptonstall" name="Heptonstall">
 
-            <church id="heptonstall-wesleyan" name="Heptonstall Methodist"/>
             <church id="heptonstall-st-thomas" name="St Thomas"/>
+            <church id="heptonstall-wesleyan" name="Heptonstall Methodist"/>
 
         </village>
 

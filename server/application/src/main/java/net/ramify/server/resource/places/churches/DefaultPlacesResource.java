@@ -57,6 +57,7 @@ public class DefaultPlacesResource implements PlacesResource {
             case COUNTY:
                 return 1;
             case PARISH:
+            case CHAPELRY:
                 return 2;
             case TOWNSHIP:
                 return 10;

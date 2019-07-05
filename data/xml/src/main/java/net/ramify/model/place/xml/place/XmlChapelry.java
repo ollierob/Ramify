@@ -5,6 +5,7 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.Chapelry;
+import net.ramify.model.place.xml.place.settlement.XmlChurch;
 import net.ramify.model.place.xml.place.settlement.XmlTown;
 import net.ramify.model.place.xml.place.settlement.XmlVillage;
 
@@ -21,7 +22,8 @@ public class XmlChapelry extends XmlPlace {
     @XmlElementRefs({
             @XmlElementRef(type = XmlTownship.class),
             @XmlElementRef(type = XmlTown.class),
-            @XmlElementRef(type = XmlVillage.class)
+            @XmlElementRef(type = XmlVillage.class),
+            @XmlElementRef(type = XmlChurch.class)
     })
     private List<XmlPlace> children;
 
