@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<placeDescriptions
+        xmlns="http://ramify.net/places"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://ramify.net/places ../../../../schema/schema1.xsd">
+
+    <placeDescription id="township:wadsworth">
+        <alsoSee id="township:stansfield"/>
+        <alsoSee id="township:heptonstall"/>
+        <alsoSee id="township:erringden"/>
+        <alsoSee id="township:langfield"/>
+        <description>
+            Wadsworth township was recorded as *Wadesuurde* in Domesday Book.
+            Its name derives from *Wada's worth* (lands).
+        </description>
+    </placeDescription>
+
+</placeDescriptions>
