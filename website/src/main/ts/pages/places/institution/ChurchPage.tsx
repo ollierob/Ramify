@@ -40,6 +40,7 @@ export default class ChurchPage extends React.PureComponent<Props, State> {
                 zoom={14}/>/>
 
             <InstitutionInfo
+                description={bundle.description}
                 institution={this.state.church.data}/>
 
         </div>;

@@ -52,9 +52,6 @@ public class XmlChurchInfo implements HasPlaceId {
     @XmlElementRef
     private List<XmlChurchRecordSetInfo> recordSets;
 
-    @XmlElement(name = "description", namespace = XmlPlace.NAMESPACE)
-    private String description;
-
     @Override
     public PlaceId placeId() {
         return new Spid(Church.class, placeId);
@@ -88,7 +85,6 @@ public class XmlChurchInfo implements HasPlaceId {
             return new ResolvedChurchInfo(
                     placeProvider.require(this.placeId(), Church.class),
                     denomination,
-                    description,
                     this.founded(dateParser),
                     this.closed(dateParser),
                     this.recordSets(dateParser));

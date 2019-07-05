@@ -16,7 +16,6 @@ public class ResolvedChurchInfo implements ChurchInfo {
 
     private final Church church;
     private final String denomination;
-    private final String description;
     private final DateRange founded;
     private final DateRange closed;
     private final Set<ChurchRecordSetInfo> records;
@@ -24,13 +23,11 @@ public class ResolvedChurchInfo implements ChurchInfo {
     ResolvedChurchInfo(
             final Church church,
             final String denomination,
-            final String description,
             final DateRange founded,
             final DateRange closed,
             final Set<ChurchRecordSetInfo> records) {
         this.church = Objects.requireNonNull(church);
         this.denomination = denomination;
-        this.description = description;
         this.founded = founded;
         this.closed = closed;
         this.records = records;
@@ -46,12 +43,6 @@ public class ResolvedChurchInfo implements ChurchInfo {
     @Override
     public String denomination() {
         return denomination;
-    }
-
-    @CheckForNull
-    @Override
-    public String description() {
-        return description;
     }
 
     @Nonnull

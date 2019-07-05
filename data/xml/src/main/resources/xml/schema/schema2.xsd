@@ -3,68 +3,68 @@
         xmlns:tns="http://ramify.net/dates" xmlns:xs="http://www.w3.org/2001/XMLSchema"
         targetNamespace="http://ramify.net/dates" version="1.0">
 
-  <element name="closedBefore" type="tns:xmlBeforeDate"/>
+    <element name="closedBefore" type="tns:xmlBeforeDate"/>
 
-  <element name="closedIn" type="tns:xmlInYear"/>
+    <element name="closedIn" type="tns:xmlInYear"/>
 
-  <element name="foundedBefore" type="tns:xmlBeforeDate"/>
+    <element name="foundedBefore" type="tns:xmlBeforeDate"/>
 
-  <element name="foundedIn" type="tns:xmlInYear"/>
+    <element name="foundedIn" type="tns:xmlInYear"/>
 
-  <element name="xmlBeforeDate" type="tns:xmlBeforeDate"/>
+    <element name="xmlBeforeDate" type="tns:xmlBeforeDate"/>
 
-  <element name="xmlInYear" type="tns:xmlInYear"/>
+    <element name="xmlInYear" type="tns:xmlInYear"/>
 
-  <complexType name="xmlBeforeDate">
+    <complexType name="xmlBeforeDate">
 
-    <complexContent>
+        <complexContent>
 
-      <extension base="tns:xmlDateRange">
+            <extension base="tns:xmlDateRange">
 
-        <sequence/>
+                <sequence/>
 
-        <attribute name="date" type="xs:string" use="required"/>
+                <attribute name="date" type="xs:string" use="required"/>
 
-      </extension>
+            </extension>
 
-    </complexContent>
+        </complexContent>
 
-  </complexType>
+    </complexType>
 
-  <complexType abstract="true" name="xmlDateRange">
-
-    <sequence/>
-
-  </complexType>
-
-  <complexType name="xmlInYear">
-
-    <complexContent>
-
-      <extension base="tns:xmlDateRange">
+    <complexType abstract="true" name="xmlDateRange">
 
         <sequence/>
 
-        <attribute name="year" type="xs:int" use="required"/>
+    </complexType>
 
-      </extension>
+    <complexType name="xmlInYear">
 
-    </complexContent>
+        <complexContent>
 
-  </complexType>
+            <extension base="tns:xmlDateRange">
 
-  <complexType name="xmlBetweenYears">
+                <sequence/>
 
-    <complexContent>
+                <attribute name="year" type="xs:int" use="required"/>
 
-      <extension base="tns:xmlDateRange">
+            </extension>
 
-        <sequence/>
+        </complexContent>
 
-      </extension>
+    </complexType>
 
-    </complexContent>
+    <complexType name="xmlBetweenYears">
 
-  </complexType>
+        <complexContent>
+
+            <extension base="tns:xmlDateRange">
+
+                <sequence/>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
 
 </schema>

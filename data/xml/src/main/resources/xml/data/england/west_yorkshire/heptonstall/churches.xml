@@ -11,9 +11,6 @@
         <churchRecordSet id="heptonstall-st-thomas-baptisms" type="baptism" startYear="1599" endYear="1812"/>
         <churchRecordSet id="heptonstall-st-thomas-marriages" type="marriage" startYear="1593" endYear="1755"/>
         <churchRecordSet id="heptonstall-st-thomas-burials" type="burial" startYear="1593" endYear="1812"/>
-        <description>
-            Heptonstall's old church, dedicated to St Thomas a Becket, was founded before 1260.
-        </description>
     </churchInfo>
 
     <churchInfo id="birchcliffe" denomination="Baptist">
@@ -21,9 +18,6 @@
         <d:closedIn year="1974"/>
         <churchRecordSet id="birchcliffe-births" type="birth" startYear="1785" endYear="1837"/>
         <churchRecordSet id="birchcliffe-burials" type="burial" startYear="1816" endYear="1920"/>
-        <description>
-            Birchcliffe was opened on the 12th December 1763 by Daniel Taylor.
-        </description>
     </churchInfo>
 
 </churchInfos>

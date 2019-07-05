@@ -18,9 +18,7 @@ message Institution {
     string type = 2;
     DateRange established = 3;
     DateRange closed = 4;
-    string description = 5;
-
-    repeated InstitutionRecordSet recordSet = 6;
+    repeated InstitutionRecordSet recordSet = 5;
 
 }
 

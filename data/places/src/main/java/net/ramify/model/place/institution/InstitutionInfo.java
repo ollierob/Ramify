@@ -16,9 +16,6 @@ import java.util.Set;
 
 public interface InstitutionInfo extends HasPlace, BuildsProto<InstitutionProto.Institution> {
 
-    @CheckForNull
-    String description();
-
     @Nonnull
     DateRange founded();
 
@@ -39,7 +36,6 @@ public interface InstitutionInfo extends HasPlace, BuildsProto<InstitutionProto.
     default InstitutionProto.Institution.Builder toProtoBuilder() {
         final var builder = InstitutionProto.Institution.newBuilder()
                 .setPlace(this.place().toProto())
-                .setDescription(MoreObjects.firstNonNull(this.description(), ""))
                 .setType(MoreObjects.firstNonNull(this.type(), ""))
                 .setEstablished(this.founded().toProto());
         Consumers.ifNonNull(this.closed(), c -> builder.setClosed(c.toProto()));

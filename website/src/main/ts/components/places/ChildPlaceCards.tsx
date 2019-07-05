@@ -65,7 +65,7 @@ const TypeCard = (props: {type: PlaceType, places: ReadonlyArray<Place.AsObject>
     let places = props.places;
     if (!places || !places.length) return null;
     return <Card
-        className="childPlace"
+        className="placeCard"
         title={<><Img src={"/images/" + props.type.toLowerCase() + ".svg"}/> {placeTypeName(props.type, true)}</>}>
         <ul>
             {places.map(place => <li>
@@ -79,7 +79,7 @@ const AlsoSeeCard = (props: {places: ReadonlyArray<Place.AsObject>}) => {
     const places = props.places;
     if (!places || !places.length) return null;
     return <Card
-        className="childPlace"
+        className="placeCard"
         title={<>Also see</>}>
         <ul>
             {places.map(place => <li>

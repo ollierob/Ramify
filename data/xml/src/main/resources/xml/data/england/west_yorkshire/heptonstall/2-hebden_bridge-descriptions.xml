@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<placeDescriptions
+        xmlns="http://ramify.net/places"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://ramify.net/places ../../../../schema/schema1.xsd">
+
+    <placeDescription id="town:hebden_bridge">
+        <alsoSee id="village:heptonstall"/>
+        <description>
+            Hebden Bridge is a town several miles west of Halifax that sits on the confluence of the Calder River and
+            Hebden Water.
+            Known in medieval times as *Hepton brigge*, it was sparsely populated marshland until numerous mills were
+            established on the rivers during the Industrial Revolution.
+        </description>
+    </placeDescription>
+
+</placeDescriptions>

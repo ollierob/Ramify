@@ -5,19 +5,10 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://ramify.net/places ../../../../schema/schema1.xsd">
 
-    <placeDescription id="chapelry:heptonstall">
-        <alsoSee id="chapelry:elland"/>
-        <description>
-            Heptonstall chapelry is formed of five townships.
-        </description>
-    </placeDescription>
-
     <placeDescription id="township:heptonstall">
         <description>
             Heptonstall township, centered on the village, encompassed part of Hebden Bridge and the lands along Widdop
-            road
-            and Edge Lane.
-            Its border with Stansfield township lay along the Colden Water.
+            road and Edge Lane. Its border with Stansfield township lay along the Colden Water.
         </description>
     </placeDescription>
 
@@ -29,20 +20,16 @@
         </description>
     </placeDescription>
 
+    <placeDescription id="church:heptonstall-st-thomas">
+        <description>
+            St Thomas church was built before 1260 and dedicated to St Thomas a Becket.
+        </description>
+    </placeDescription>
+
     <placeDescription id="farmstead:robertshaw">
         <alsoSee id="farmstead:learings"/>
         <description>
             Robertshaw was first named in a rental for Halifax-cum-Heptonstall manor dated 1429.
-        </description>
-    </placeDescription>
-
-    <placeDescription id="town:hebden_bridge">
-        <alsoSee id="village:heptonstall"/>
-        <description>
-            Hebden Bridge is a town several miles west of Halifax that sits on the confluence of the Calder River and
-            Hebden Water.
-            Known in medieval times as *Hepton brigge*, it was sparsely populated marshland until numerous mills were
-            established on the rivers during the Industrial Revolution.
         </description>
     </placeDescription>
 

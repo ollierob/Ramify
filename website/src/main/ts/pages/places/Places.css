@@ -44,29 +44,38 @@
     margin-bottom: 2em;
 }
 
-.childPlace {
+.placeCard {
     display: inline-block;
     width: 200px;
     vertical-align: top;
     border: 0;
 }
 
-.childPlace .ant-card-body {
+.placeCard .ant-card-body {
     padding: 8px !important;
 }
 
-.childPlace .ant-card-head {
+.placeCard .ant-card-head {
     min-height: 38px;
     padding: 0 12px;
 }
 
-.childPlace .ant-card-head .ant-card-head-title {
+.placeCard .ant-card-head .ant-card-head-title {
     font-size: 1.25em !important;
     padding: 0;
 }
 
-.childPlace ul {
+.childPlaces .placeCard ul {
     padding-left: 24px;
+}
+
+.institutionRecords .placeCard {
+    width: unset !important;
+    min-width: 200px;
+}
+
+.institutionRecords .placeCard .ant-card-head {
+    padding: 0 8px;
 }
 
 /*Specific oddity overrides*/
