@@ -3,7 +3,7 @@ import {PlacesPageProps} from "../PlacesBasePage";
 import {PlaceMap} from "../../../components/places/PlaceMap";
 import {AreaInfo} from "./AreaInfo";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
-import {Place} from "../../../protobuf/generated/place_pb";
+import {Place, PlaceType} from "../../../protobuf/generated/place_pb";
 import {DEFAULT_PLACE_LOADER} from "../../../components/places/PlaceLoader";
 
 type Props = PlacesPageProps;
@@ -36,7 +36,7 @@ export default class AreaPage extends React.PureComponent<Props, State> {
                 loading={this.props.loading}
                 place={bundle && bundle.place}
                 position={bundle && bundle.position}
-                zoom={10}/>
+                zoom={bundle ? zoom(bundle.place) : 10}/>
 
             <AreaInfo
                 loadingChildren={this.state.children.loading}
@@ -64,4 +64,17 @@ export default class AreaPage extends React.PureComponent<Props, State> {
         asyncLoadData(id, id => this.placeLoader.loadChildren(id, 2), children => this.setState({children}));
     }
 
+}
+
+function zoom(place: Place.AsObject): number {
+    switch (place.type) {
+        case PlaceType.CHAPELRY:
+            return 11;
+        case PlaceType.TOWNSHIP:
+            return 12;
+        case PlaceType.VILLAGE:
+            return 13;
+        default:
+            return 10;
+    }
 }
