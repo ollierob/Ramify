@@ -27,11 +27,12 @@ export const AreaInfo = (props: Props) => {
 
         <ChildPlaceCards
             {...props}
+            alsoSeePlaces={props.description && props.description.alsoseeList}
             loading={props.loadingChildren}/>
 
     </Card>
 
-}
+};
 
 const AreaTitle = (props: {place: Place.AsObject}) => {
     const place = props.place;
@@ -40,4 +41,4 @@ const AreaTitle = (props: {place: Place.AsObject}) => {
         {" "}
         <span className="unimportant">{placeTypeName(place.type)}</span>
     </>
-}
+};

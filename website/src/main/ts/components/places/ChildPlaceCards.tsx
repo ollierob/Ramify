@@ -9,6 +9,7 @@ import {Img} from "../style/Img";
 type Props = {
     loading: boolean;
     childPlaces: ReadonlyArray<Place.AsObject>
+    alsoSeePlaces: ReadonlyArray<Place.AsObject>
 }
 
 type State = {
@@ -29,9 +30,13 @@ export default class ChildPlaceCards extends React.PureComponent<Props, State> {
         if (this.props.loading) return null; //TODO
 
         return <div className="childPlaces">
+
             {Object.keys(this.state.groupedPlaces)
                 .sort(sortByPlaceType)
                 .map(type => <TypeCard type={type as PlaceType} places={this.state.groupedPlaces[type]}/>)}
+
+            {this.props.alsoSeePlaces && <AlsoSeeCard places={this.props.alsoSeePlaces}/>}
+
         </div>;
 
     }
@@ -64,6 +69,20 @@ const TypeCard = (props: {type: PlaceType, places: ReadonlyArray<Place.AsObject>
         <ul>
             {places.map(place => <li>
                 <a href={placeHref(place)}>{place.name}</a>
+            </li>)}
+        </ul>
+    </Card>
+};
+
+const AlsoSeeCard = (props: {places: ReadonlyArray<Place.AsObject>}) => {
+    const places = props.places;
+    if (!places || !places.length) return null;
+    return <Card
+        className="childPlace"
+        title={<>Also see</>}>
+        <ul>
+            {places.map(place => <li>
+                <a href={placeHref(place)}>{place.name}</a> ({placeTypeName(place.type)})
             </li>)}
         </ul>
     </Card>
