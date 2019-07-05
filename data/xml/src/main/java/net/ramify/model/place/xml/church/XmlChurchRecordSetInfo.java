@@ -8,6 +8,8 @@ import net.ramify.model.place.institution.church.record.ChurchBaptismInfo;
 import net.ramify.model.place.institution.church.record.ChurchBirthInfo;
 import net.ramify.model.place.institution.church.record.ChurchBurialInfo;
 import net.ramify.model.place.institution.church.record.ChurchMarriageInfo;
+import net.ramify.model.place.institution.church.record.ChurchMeetingMinutesInfo;
+import net.ramify.model.place.institution.church.record.ChurchMembershipInfo;
 import net.ramify.model.place.institution.church.record.ChurchPewRentalInfo;
 import net.ramify.model.place.institution.church.record.ChurchRecordSetInfo;
 import net.ramify.model.place.xml.place.XmlPlace;
@@ -100,7 +102,7 @@ public class XmlChurchRecordSetInfo implements HasRecordSetId {
         MEMBERSHIP {
             @Override
             ChurchRecordSetInfo build(XmlChurchRecordSetInfo info, DateParser dateParser) {
-                throw new UnsupportedOperationException(); //TODO
+                return new ChurchMembershipInfo(info.recordSetId(), info.date(), info.notes);
             }
         },
         @XmlEnumValue("pewRents")
@@ -115,6 +117,13 @@ public class XmlChurchRecordSetInfo implements HasRecordSetId {
             @Override
             ChurchRecordSetInfo build(XmlChurchRecordSetInfo info, DateParser dateParser) {
                 return new ChurchAccountInfo(info.recordSetId(), info.date(), info.notes);
+            }
+        },
+        @XmlEnumValue("minutes")
+        MINUTES {
+            @Override
+            ChurchRecordSetInfo build(XmlChurchRecordSetInfo info, DateParser dateParser) {
+                return new ChurchMeetingMinutesInfo(info.recordSetId(), info.date(), info.notes);
             }
         };
 

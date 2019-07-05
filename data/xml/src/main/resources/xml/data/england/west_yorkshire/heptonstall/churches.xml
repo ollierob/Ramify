@@ -14,6 +14,15 @@
         <churchRecordSet id="heptonstall-st-thomas-pew_rents" type="pewRents" startYear="1796" endYear="1847"/>
     </churchInfo>
 
+    <churchInfo id="slack-mt-zion" denomination="Baptist">
+        <d:foundedIn year="1806"/>
+        <d:closedIn year="1974"/>
+        <churchRecordSet id="slack-mt-zion-births" type="birth" startYear="1789" endYear="1837"/>
+        <churchRecordSet id="slack-mt-zion-burials" type="burial" startYear="1807" endYear="1847"/>
+        <churchRecordSet id="slack-mt-zion-members" type="membership" startYear="1842" endYear="1961"/>
+        <churchRecordSet id="slack-mt-zion-minutes" type="minutes" startYear="1807" endYear="1845"/>
+    </churchInfo>
+
     <churchInfo id="birchcliffe" denomination="Baptist">
         <d:foundedIn year="1763"/>
         <d:closedIn year="1974"/>
