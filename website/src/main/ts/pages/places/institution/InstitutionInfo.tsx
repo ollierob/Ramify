@@ -5,6 +5,7 @@ import {Institution, InstitutionRecordSet} from "../../../protobuf/generated/ins
 import {HasClass} from "../../../components/style/HasClass";
 import {Place, PlaceDescription} from "../../../protobuf/generated/place_pb";
 import {placeHref} from "../../../components/places/Place";
+import {placeTypeName} from "../../../components/places/PlaceType";
 
 type Props = HasClass & {
     description: PlaceDescription.AsObject;
@@ -70,7 +71,11 @@ const AlsoSeeCard = (props: {alsoSee: ReadonlyArray<Place.AsObject>}) => {
     if (!alsoSee || !alsoSee.length) return null;
     return <Card title="Also see" className="placeCard">
         <ul>
-            {alsoSee.map(p => <li><a href={placeHref(p)}>{p.name}</a></li>)}
+            {alsoSee.map(place => <li>
+                <a href={placeHref(place)}>{place.name}</a>
+                {" "}
+                ({placeTypeName(place.type)})
+            </li>)}
         </ul>
     </Card>
 };
