@@ -52,6 +52,8 @@
 
     <element name="village" type="tns:xmlVillage"/>
 
+    <element name="wikipediaLink" type="tns:xmlWikipediaLink"/>
+
     <complexType name="xmlChurchInfo">
 
         <sequence>
@@ -120,11 +122,21 @@
 
     </complexType>
 
+    <complexType abstract="true" name="xmlLink">
+
+        <sequence/>
+
+        <attribute name="href" type="xs:string" use="required"/>
+
+    </complexType>
+
     <complexType name="xmlPlaceDescription">
 
         <sequence>
 
             <element maxOccurs="unbounded" minOccurs="0" ref="tns:alsoSee"/>
+
+            <element maxOccurs="unbounded" minOccurs="0" ref="tns:wikipediaLink"/>
 
             <element form="qualified" name="description" type="xs:string"/>
 
@@ -141,6 +153,20 @@
             <element maxOccurs="unbounded" minOccurs="0" ref="tns:placeDescription"/>
 
         </sequence>
+
+    </complexType>
+
+    <complexType name="xmlWikipediaLink">
+
+        <complexContent>
+
+            <extension base="tns:xmlLink">
+
+                <sequence/>
+
+            </extension>
+
+        </complexContent>
 
     </complexType>
 
@@ -498,21 +524,21 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="burial"/>
-
-            <enumeration value="baptism"/>
+            <enumeration value="pewRents"/>
 
             <enumeration value="minutes"/>
 
-            <enumeration value="pewRents"/>
-
-            <enumeration value="membership"/>
+            <enumeration value="marriage"/>
 
             <enumeration value="birth"/>
 
-            <enumeration value="marriage"/>
+            <enumeration value="membership"/>
 
             <enumeration value="accounts"/>
+
+            <enumeration value="baptism"/>
+
+            <enumeration value="burial"/>
 
         </restriction>
 

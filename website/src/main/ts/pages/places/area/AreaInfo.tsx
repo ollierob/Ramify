@@ -3,6 +3,7 @@ import {Card} from "antd";
 import {Place, PlaceDescription} from "../../../protobuf/generated/place_pb";
 import ChildPlaceCards from "../../../components/places/ChildPlaceCards";
 import {placeTypeName} from "../../../components/places/PlaceType";
+import {PlaceLinks} from "../../../components/places/PlaceLinks";
 import ReactMarkdown = require("react-markdown");
 
 type Props = {
@@ -34,11 +35,12 @@ export const AreaInfo = (props: Props) => {
 
 };
 
-const AreaTitle = (props: {place: Place.AsObject}) => {
+const AreaTitle = (props: {place: Place.AsObject, description: PlaceDescription.AsObject;}) => {
     const place = props.place;
     return <>
         <b>{place.name}</b>
         {" "}
         <span className="unimportant">{placeTypeName(place.type)}</span>
+        <PlaceLinks links={props.description && props.description.linkList}/>
     </>
 };

@@ -1,10 +1,12 @@
 package net.ramify.model.place.xml.description;
 
+import com.google.common.collect.Sets;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceDescription;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.xml.place.XmlPlace;
+import net.ramify.model.util.Link;
 import net.ramify.utils.collections.SetUtils;
 
 import javax.annotation.Nonnull;
@@ -25,6 +27,9 @@ class XmlPlaceDescription {
     @XmlElementRef
     private List<XmlAlsoSeeId> alsoSee;
 
+    @XmlElementRef
+    private List<XmlLink> links;
+
     @XmlElement(name = "description", required = true, namespace = XmlPlace.NAMESPACE)
     private String description;
 
@@ -38,13 +43,22 @@ class XmlPlaceDescription {
         return new ResolvedPlaceDescription(
                 this.placeId(),
                 description.trim(),
-                this.alsoSee(placeProvider));
+                this.alsoSee(placeProvider),
+                this.links());
     }
 
-    private Set<Place> alsoSee(PlaceProvider placeProvider) {
+    @Nonnull
+    private Set<Place> alsoSee(final PlaceProvider placeProvider) {
         return this.alsoSee == null
                 ? Collections.emptySet()
                 : SetUtils.transformIgnoreNull(this.alsoSee, id -> placeProvider.get(id.placeId()));
+    }
+
+    @Nonnull
+    private Set<Link> links() {
+        return this.links == null
+                ? Collections.emptySet()
+                : Sets.newHashSet(this.links);
     }
 
 }
