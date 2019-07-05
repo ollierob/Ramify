@@ -54,12 +54,22 @@ public class DefaultPlacesResource implements PlacesResource {
 
     @Override
     public Places within(final PlaceId id, final Integer depth) {
-        return Places.of(placeProvider.children(id, 5, this.children(id)), false);
+        final var place = placeProvider.get(id);
+        if (place == null) return null;
+        return Places.of(placeProvider.children(id, this.maxDepth(place), this.children(place)), false);
     }
 
-    private Predicate<Place> children(final PlaceId id) {
-        final var place = placeProvider.get(id);
-        if (place == null) return p -> false;
+    private int maxDepth(final Place place) {
+        switch (place.protoType()) {
+            case COUNTRY:
+            case COUNTY:
+                return 1;
+            default:
+                return 5;
+        }
+    }
+
+    private Predicate<Place> children(final Place place) {
         switch (place.protoType()) {
             case COUNTRY:
                 return p -> p.is(County.class);
