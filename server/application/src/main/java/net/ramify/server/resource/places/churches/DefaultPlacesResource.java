@@ -3,13 +3,21 @@ package net.ramify.server.resource.places.churches;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceDescription;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.building.Church;
 import net.ramify.model.place.collection.Places;
 import net.ramify.model.place.position.Position;
 import net.ramify.model.place.position.PositionProvider;
 import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.provider.PlaceDescriptionProvider;
 import net.ramify.model.place.provider.PlaceProvider;
+import net.ramify.model.place.region.Chapelry;
 import net.ramify.model.place.region.Country;
+import net.ramify.model.place.region.County;
+import net.ramify.model.place.region.Parish;
+import net.ramify.model.place.region.Township;
+import net.ramify.model.place.region.manor.Manor;
+import net.ramify.model.place.settlement.Town;
+import net.ramify.model.place.settlement.Village;
 import net.ramify.server.resource.places.ChurchesResource;
 import net.ramify.server.resource.places.PlacesResource;
 import net.ramify.utils.objects.Consumers;
@@ -17,6 +25,7 @@ import net.ramify.utils.objects.Consumers;
 import javax.annotation.CheckForNull;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.function.Predicate;
 
 @Singleton
 public class DefaultPlacesResource implements PlacesResource {
@@ -45,24 +54,22 @@ public class DefaultPlacesResource implements PlacesResource {
 
     @Override
     public Places within(final PlaceId id, final Integer depth) {
-        final int maxDepth = depth == null ? this.maxDepth(id) : depth;
-        return Places.of(placeProvider.children(id, maxDepth), false);
+        return Places.of(placeProvider.children(id, 5, this.children(id)), false);
     }
 
-    private int maxDepth(final PlaceId id) {
+    private Predicate<Place> children(final PlaceId id) {
         final var place = placeProvider.get(id);
-        if (place == null) return 3;
+        if (place == null) return p -> false;
         switch (place.protoType()) {
             case COUNTRY:
+                return p -> p.is(County.class);
             case COUNTY:
-                return 1;
+                return p -> p.is(Parish.class) || p.is(Manor.class);
             case PARISH:
             case CHAPELRY:
-                return 2;
-            case TOWNSHIP:
-                return PlaceProvider.MAX_DEPTH;
+                return p -> p.is(Chapelry.class) || p.is(Township.class) || p.is(Town.class) || p.is(Village.class) || p.is(Church.class);
             default:
-                return 3;
+                return p -> true;
         }
     }
 

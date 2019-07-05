@@ -11,7 +11,6 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.xml.place.XmlPlaces;
-import net.ramify.utils.collections.SetUtils;
 import net.ramify.utils.file.FileTraverseUtils;
 import net.ramify.utils.objects.Consumers;
 import org.slf4j.Logger;
@@ -28,6 +27,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @XmlTransient
 class XmlPlaceProvider implements PlaceProvider {
@@ -50,18 +51,19 @@ class XmlPlaceProvider implements PlaceProvider {
 
     @Nonnull
     @Override
-    public Set<Place> children(final PlaceId id, final int depth) {
+    public Set<Place> children(final PlaceId id, final int depth, final Predicate<Place> placePredicate) {
         switch (depth) {
             case 0:
                 return Collections.emptySet();
             case 1:
-                return SetUtils.transform(children.get(id), this::get);
+                return children.get(id).stream().map(this::get).filter(placePredicate).collect(Collectors.toSet());
             default:
                 Preconditions.checkArgument(depth <= MAX_DEPTH, "Exceeded max depth");
                 final var places = Sets.<Place>newHashSet();
                 children.get(id).forEach(child -> {
-                    places.add(this.get(child));
-                    places.addAll(this.children(child.placeId(), depth - 1));
+                    final var place = this.get(child);
+                    if (placePredicate.test(place)) places.add(this.get(child));
+                    places.addAll(this.children(child.placeId(), depth - 1, placePredicate));
                 });
                 return places;
         }
