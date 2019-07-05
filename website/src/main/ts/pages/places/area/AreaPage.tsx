@@ -77,8 +77,11 @@ function zoom(place: Place.AsObject): number {
             return 11;
         case PlaceType.TOWNSHIP:
             return 12;
-        case PlaceType.VILLAGE:
+        case PlaceType.TOWN:
             return 13;
+        case PlaceType.VILLAGE:
+        case PlaceType.HAMLET:
+            return 14;
         default:
             return 10;
     }
