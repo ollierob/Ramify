@@ -58,6 +58,8 @@ public class DefaultPlacesResource implements PlacesResource {
                 return 1;
             case PARISH:
                 return 2;
+            case TOWNSHIP:
+                return 10;
             default:
                 return 3;
         }
