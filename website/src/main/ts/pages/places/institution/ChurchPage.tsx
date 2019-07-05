@@ -26,7 +26,7 @@ export default class ChurchPage extends React.PureComponent<Props, State> {
 
     render() {
 
-        if (this.props.loading) return <Loading/>
+        if (this.props.loading) return <Loading/>;
 
         const bundle = this.props.place;
         if (!bundle) return null;

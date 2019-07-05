@@ -77,6 +77,8 @@ export default class AreaPage extends React.PureComponent<Props, State> {
 
 function zoom(place: Place.AsObject): number {
     switch (place.type) {
+        case PlaceType.COUNTY:
+            return 8;
         case PlaceType.PARISH:
         case PlaceType.CHAPELRY:
             return 11;
@@ -87,6 +89,8 @@ function zoom(place: Place.AsObject): number {
         case PlaceType.VILLAGE:
         case PlaceType.HAMLET:
             return 14;
+        case PlaceType.FARMSTEAD:
+            return 15;
         default:
             return 10;
     }
