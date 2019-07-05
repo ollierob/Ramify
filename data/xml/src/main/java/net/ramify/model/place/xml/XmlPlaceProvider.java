@@ -57,7 +57,7 @@ class XmlPlaceProvider implements PlaceProvider {
             case 1:
                 return SetUtils.transform(children.get(id), this::get);
             default:
-                Preconditions.checkArgument(depth < 5, "Exceeded max depth");
+                Preconditions.checkArgument(depth <= MAX_DEPTH, "Exceeded max depth");
                 final var places = Sets.<Place>newHashSet();
                 children.get(id).forEach(child -> {
                     places.add(this.get(child));

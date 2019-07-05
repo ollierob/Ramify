@@ -60,7 +60,7 @@ public class DefaultPlacesResource implements PlacesResource {
             case CHAPELRY:
                 return 2;
             case TOWNSHIP:
-                return 10;
+                return PlaceProvider.MAX_DEPTH;
             default:
                 return 3;
         }

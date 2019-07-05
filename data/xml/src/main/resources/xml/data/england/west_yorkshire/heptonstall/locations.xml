@@ -14,4 +14,6 @@
 
     <placePoint id="farmstead:robertshaw" latitude="53.75427" longitude="-2.03458"/>
 
+    <placePoint id="church:shore" latitude="53.73595" longitude="-2.1314"/>
+
 </placePositions>

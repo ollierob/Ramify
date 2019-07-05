@@ -5,6 +5,7 @@ import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {InstitutionInfo} from "./InstitutionInfo";
 import {Institution} from "../../../protobuf/generated/institution_pb";
 import {PlaceMap} from "../../../components/places/PlaceMap";
+import {Loading} from "../../../components/Loading";
 
 type Props = PlacesPageProps
 
@@ -25,10 +26,10 @@ export default class ChurchPage extends React.PureComponent<Props, State> {
 
     render() {
 
-        const church = this.state.church.data;
-        if (!church) return null; //TODO loading
+        if (this.props.loading) return <Loading/>
 
         const bundle = this.props.place;
+        if (!bundle) return null;
 
         return <div className="institution leftRest">
 
@@ -39,7 +40,7 @@ export default class ChurchPage extends React.PureComponent<Props, State> {
                 zoom={14}/>/>
 
             <InstitutionInfo
-                institution={church}/>
+                institution={this.state.church.data}/>
 
         </div>;
 
