@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("places")
-public class PlaceRouterResource extends AbstractResource {
+public class PlacesRouterResource extends AbstractResource {
 
     @GET
     @Produces(MediaType.TEXT_HTML)

@@ -10,10 +10,18 @@ export default class HeaderMenu extends React.PureComponent<Props> {
 
     render() {
         return <Menu mode="horizontal" selectedKeys={[this.props.active]} className="menu">
-            <Menu.Item key="trees"><TreeIcon/> Trees</Menu.Item>
-            <Menu.Item key="people"><PeopleIcon/> People</Menu.Item>
-            <Menu.Item key="places"><PlacesIcon/> Places</Menu.Item>
-            <Menu.Item key="records"><RecordsIcon/> Records</Menu.Item>
+            <Menu.Item key="trees">
+                <TreeIcon/> Trees
+            </Menu.Item>
+            <Menu.Item key="people">
+                <PeopleIcon/> People
+            </Menu.Item>
+            <Menu.Item key="places">
+                <a href="/places"><PlacesIcon/> Places</a>
+            </Menu.Item>
+            <Menu.Item key="records">
+                <a href="/records"><RecordsIcon/> Records</a>
+            </Menu.Item>
         </Menu>;
     }
 

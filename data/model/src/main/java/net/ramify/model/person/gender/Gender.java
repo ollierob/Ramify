@@ -12,7 +12,7 @@ public interface Gender {
     String value();
 
     default boolean equals(final Gender that) {
-        return this == that || that == UNKNOWN;
+        return this == that || this == UNKNOWN || that == UNKNOWN;
     }
 
 }

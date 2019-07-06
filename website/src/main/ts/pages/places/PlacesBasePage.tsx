@@ -13,6 +13,10 @@ import SchoolPage from "./institution/SchoolPage";
 
 class PlacesBasePage extends BasePage {
 
+    active(): string {
+        return "places";
+    }
+
     body() {
         return <HashRouter>
             <Switch>
@@ -22,10 +26,6 @@ class PlacesBasePage extends BasePage {
                 <Route path="*" component={breadcrumb(AreaPage)}/>
             </Switch>
         </HashRouter>;
-    }
-
-    active(): string {
-        return "places";
     }
 
 }
