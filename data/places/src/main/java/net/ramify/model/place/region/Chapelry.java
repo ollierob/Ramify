@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class Chapelry extends AbstractRegion {
 
-    static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(Chapelry.class, Township.class, Town.class, Village.class, Institution.class);
+    private static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(Township.class, Town.class, Village.class, Institution.class);
 
     private final Parish parent;
 

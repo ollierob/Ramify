@@ -1,6 +1,9 @@
 package net.ramify.utils.objects;
 
+import com.google.common.collect.Iterables;
+
 import java.util.Optional;
+import java.util.Set;
 
 public interface Castable<T> {
 
@@ -16,6 +19,10 @@ public interface Castable<T> {
 
     default boolean is(final Class<?> type) {
         return type.isAssignableFrom(this.getClass());
+    }
+
+    default boolean isAny(final Set<? extends Class<?>> types) {
+        return Iterables.any(types, this::is);
     }
 
 }

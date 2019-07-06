@@ -48,7 +48,7 @@ public class DefaultPlacesResource implements PlacesResource {
         final var place = placeProvider.get(id);
         if (place == null) return null;
         final var childTypes = place.childTypes();
-        final var children = placeProvider.children(id, this.maxDepth(place), childTypes.isEmpty() ? p -> true : p -> childTypes.contains(p.getClass()));
+        final var children = placeProvider.children(id, this.maxDepth(place), childTypes.isEmpty() ? p -> true : p -> p.isAny(childTypes));
         return Places.of(children, false);
     }
 
