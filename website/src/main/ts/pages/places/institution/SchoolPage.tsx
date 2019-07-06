@@ -9,13 +9,9 @@ import {Loading} from "../../../components/Loading";
 import {InstitutionPage} from "./InstitutionPage";
 import {PlaceId} from "../../../components/places/Place";
 
-export default class ChurchPage extends InstitutionPage {
-
-    private readonly churchLoader = DEFAULT_CHURCH_LOADER;
+export default class SchoolPage extends InstitutionPage {
 
     loadInstitution(id: PlaceId) {
-        if (!id) return;
-        asyncLoadData(id, this.churchLoader.loadChurch, church => this.setState({institution: church}));
     }
 
 }

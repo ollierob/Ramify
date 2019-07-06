@@ -9,6 +9,7 @@ import "./Places.css"
 import {PlaceId} from "../../components/places/Place";
 import {PlaceBundle} from "../../protobuf/generated/place_pb";
 import AreaPage from "./area/AreaPage";
+import SchoolPage from "./institution/SchoolPage";
 
 class PlacesBasePage extends BasePage {
 
@@ -16,6 +17,7 @@ class PlacesBasePage extends BasePage {
         return <HashRouter>
             <Switch>
                 <Route path="/church" component={breadcrumb(ChurchPage)}/>
+                <Route path="/school" component={breadcrumb(SchoolPage)}/>
                 <Route exact path="/" component={breadcrumb(PlacesHomePage)}/>
                 <Route path="*" component={breadcrumb(AreaPage)}/>
             </Switch>
