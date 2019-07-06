@@ -18,17 +18,21 @@ export const AreaInfo = (props: Props) => {
     const place = props.place;
     if (!place) return null;
 
+    const description = props.description;
+
     return <Card
         className="info"
         title={<AreaTitle {...props}/>}>
 
-        {props.description && <ReactMarkdown
-            className="description"
-            source={props.description.description}/>}
+        {description
+            ? <ReactMarkdown
+                className="description"
+                source={description.description}/>
+            : <div className="description">No description available.</div>}
 
         <ChildPlaceCards
             {...props}
-            alsoSeePlaces={props.description && props.description.alsoseeList}
+            alsoSeePlaces={description && description.alsoseeList}
             loading={props.loadingChildren}/>
 
     </Card>
