@@ -29,7 +29,9 @@ export const InstitutionInfo = (props: Props) => {
         <div className="description">
             {institution && institution.established && <div>Founded <DateRange date={institution.established}/></div>}
             {institution && institution.closed && <div>Closed <DateRange date={institution.closed}/></div>}
-            {description && <div>{description.description}</div>}
+            <div className="description">
+                {description ? description.description : <i>No description available.</i>}
+            </div>
         </div>
 
         {props.children}
