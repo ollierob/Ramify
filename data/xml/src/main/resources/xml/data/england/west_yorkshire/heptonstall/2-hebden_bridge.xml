@@ -12,6 +12,12 @@
         <church id="hope" name="Hope"/>
         <church id="roomfield" name="Roomfield"/>
 
+        <mill id="hangingroyd" name="Hangingroyd"/>
+        <mill id="nutclough" name="Nutclough"/>
+        <mill id="calder" name="Calder"/>
+        <mill id="bank_foot" name="Bank Foot"/>
+        <mill id="salem" name="Salem"/>
+
     </town>
 
 </places>

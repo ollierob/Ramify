@@ -8,6 +8,7 @@ import net.ramify.model.place.region.Township;
 import net.ramify.model.place.xml.place.settlement.XmlChurch;
 import net.ramify.model.place.xml.place.settlement.XmlFarmstead;
 import net.ramify.model.place.xml.place.settlement.XmlHamlet;
+import net.ramify.model.place.xml.place.settlement.XmlMill;
 import net.ramify.model.place.xml.place.settlement.XmlVillage;
 
 import javax.xml.bind.annotation.XmlElementRef;
@@ -25,6 +26,7 @@ class XmlTownship extends XmlPlace {
             @XmlElementRef(type = XmlHamlet.class),
             @XmlElementRef(type = XmlChurch.class),
             @XmlElementRef(type = XmlFarmstead.class),
+            @XmlElementRef(type = XmlMill.class)
     })
     private List<XmlPlace> children;
 

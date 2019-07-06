@@ -49,6 +49,7 @@ enum PlaceType {
     CHURCH = 102;
     HOSPITAL = 103;
     SCHOOL = 104;
+    MILL = 105;
 
 }
 

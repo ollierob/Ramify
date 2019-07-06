@@ -19,6 +19,7 @@ public class XmlTown extends XmlPlace {
 
     @XmlElementRefs({
             @XmlElementRef(type = XmlChurch.class),
+            @XmlElementRef(type = XmlMill.class),
     })
     private List<XmlPlace> children;
 
