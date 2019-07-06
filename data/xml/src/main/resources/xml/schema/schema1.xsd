@@ -46,6 +46,8 @@
 
     <element name="places" type="tns:places"/>
 
+    <element name="school" type="tns:xmlSchool"/>
+
     <element name="state" type="tns:xmlState"/>
 
     <element name="town" type="tns:xmlTown"/>
@@ -214,6 +216,8 @@
 
                         <element ref="tns:church"/>
 
+                        <element ref="tns:school"/>
+
                     </choice>
 
                 </sequence>
@@ -250,6 +254,8 @@
 
                         <element ref="tns:church"/>
 
+                        <element ref="tns:school"/>
+
                         <element ref="tns:farmstead"/>
 
                         <element ref="tns:mill"/>
@@ -277,6 +283,8 @@
                         <element ref="tns:church"/>
 
                         <element ref="tns:mill"/>
+
+                        <element ref="tns:school"/>
 
                     </choice>
 
@@ -396,6 +404,8 @@
 
                         <element ref="tns:mill"/>
 
+                        <element ref="tns:school"/>
+
                     </choice>
 
                 </sequence>
@@ -407,6 +417,20 @@
     </complexType>
 
     <complexType name="xmlMill">
+
+        <complexContent>
+
+            <extension base="tns:xmlPlace">
+
+                <sequence/>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
+    <complexType name="xmlSchool">
 
         <complexContent>
 
@@ -538,6 +562,8 @@
 
                 <element ref="tns:mill"/>
 
+                <element ref="tns:school"/>
+
                 <element ref="tns:manor"/>
 
                 <element ref="tns:graveship"/>
@@ -560,17 +586,17 @@
 
             <enumeration value="minutes"/>
 
-            <enumeration value="membership"/>
-
-            <enumeration value="burial"/>
-
             <enumeration value="pewRents"/>
 
-            <enumeration value="birth"/>
+            <enumeration value="burial"/>
 
             <enumeration value="marriage"/>
 
             <enumeration value="baptism"/>
+
+            <enumeration value="birth"/>
+
+            <enumeration value="membership"/>
 
             <enumeration value="accounts"/>
 

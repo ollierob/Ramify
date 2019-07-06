@@ -10,6 +10,7 @@
         <village id="heptonstall" name="Heptonstall">
             <church id="heptonstall-st-thomas" name="St Thomas"/>
             <church id="heptonstall-wesleyan" name="Heptonstall Methodist"/>
+            <school id="heptonstall_grammar" name="Heptonstall Grammar"/>
         </village>
 
         <hamlet id="slack" name="Slack">

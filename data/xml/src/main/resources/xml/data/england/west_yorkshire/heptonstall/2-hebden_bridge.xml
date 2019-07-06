@@ -11,6 +11,7 @@
         <church id="ebenezer" name="Ebenezer"/>
         <church id="hope" name="Hope"/>
         <church id="roomfield" name="Roomfield"/>
+        <church id="foster_lane" name="Foster Lane"/>
 
         <mill id="hangingroyd" name="Hangingroyd"/>
         <mill id="nutclough" name="Nutclough"/>

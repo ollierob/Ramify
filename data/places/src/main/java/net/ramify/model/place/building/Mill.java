@@ -4,12 +4,11 @@ import net.ramify.model.place.AbstractPlace;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.proto.PlaceProto;
-import net.ramify.model.place.type.Building;
 import net.ramify.model.place.type.SettlementOrRegion;
 
 import java.util.Objects;
 
-public class Mill extends AbstractPlace implements Building {
+public class Mill extends AbstractPlace implements Institution {
 
     private final SettlementOrRegion parent;
 
