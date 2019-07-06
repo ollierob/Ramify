@@ -30,7 +30,7 @@ class XmlPlaceProviderTest {
         final var heptonstall = placeProvider.get(new Spid(Village.class, "heptonstall"));
         assertNotNull(heptonstall);
 
-        final var church = placeProvider.get(new Spid(Church.class, "heptonstall-st-thomas"));
+        final var church = placeProvider.get(new Spid(Church.class, "heptonstall_st-thomas"));
         assertNotNull(church);
         assertEquals(heptonstall, church.parent());
 

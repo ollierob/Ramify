@@ -1,7 +1,6 @@
 import * as React from "react";
-import {DEFAULT_CHURCH_LOADER} from "../../../components/places/ChurchLoader";
 import {PlacesPageProps} from "../PlacesBasePage";
-import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
+import {AsyncData} from "../../../components/fetch/AsyncData";
 import {InstitutionInfo} from "./InstitutionInfo";
 import {Institution} from "../../../protobuf/generated/institution_pb";
 import {PlaceMap} from "../../../components/places/PlaceMap";

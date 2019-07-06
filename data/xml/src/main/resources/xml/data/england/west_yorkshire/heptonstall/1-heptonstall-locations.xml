@@ -7,8 +7,9 @@
 
     <placePoint id="chapelry:heptonstall" latitude="53.737632" longitude="-2.071990" zoom="11"/>
     <placePoint id="township:heptonstall" latitude="53.754719" longitude="-2.037193" zoom="12"/>
-    <placePoint id="village:heptonstall" latitude="53.748845" longitude="-2.021594" zoom="14"/>
-    <placePoint id="church:heptonstall-st-thomas" latitude="53.748845" longitude="-2.021594"/>
+    <placePoint id="village:heptonstall" latitude="53.748845" longitude="-2.021594" zoom="15"/>
+    <placePoint id="church:heptonstall_st-thomas" latitude="53.748845" longitude="-2.021594" zoom="16"/>
+    <placePoint id="church:heptonstall_wesleyan" latitude="53.7498" longitude="-2.02008" zoom="16"/>
     <placePoint id="school:heptonstall_grammar" latitude="53.74888" longitude="-2.02118" zoom="16"/>
 
     <placePoint id="church:slack-mt-zion" latitude="53.75484" longitude="-2.03663"/>

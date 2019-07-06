@@ -25,7 +25,7 @@
         </description>
     </placeDescription>
 
-    <placeDescription id="church:heptonstall-st-thomas">
+    <placeDescription id="church:heptonstall_st-thomas">
         <description>
             St Thomas church was built before 1260 and dedicated to St Thomas a Becket, the Archbishop of Canterbury
             who was murdered in 1170.
@@ -47,6 +47,13 @@
         <alsoSee id="farmstead:learings"/>
         <description>
             Robertshaw was first named in a rental for Halifax-cum-Heptonstall manor dated 1429.
+        </description>
+    </placeDescription>
+
+    <placeDescription id="school:heptonstall_grammar">
+        <description>
+            A grammar school was founded at Heptonstall by the will of the Rev. Charles Greenwood, lord of the manor of
+            Heptonstall, in 1642.
         </description>
     </placeDescription>
 

@@ -13,6 +13,8 @@
         <hamlet id="shackleton" name="Shackleton"/>
         <hamlet id="widdop" name="Widdop"/>
 
+        <village id="pecket_well" name="Pecket Well"/>
+
     </township>
 
 </places>
