@@ -30,6 +30,8 @@
 
     <element name="hamlet" type="tns:xmlHamlet"/>
 
+    <element name="inn" type="tns:xmlInn"/>
+
     <element name="manor" type="tns:xmlManor"/>
 
     <element name="mill" type="tns:xmlMill"/>
@@ -260,6 +262,8 @@
 
                         <element ref="tns:mill"/>
 
+                        <element ref="tns:inn"/>
+
                     </choice>
 
                 </sequence>
@@ -285,6 +289,8 @@
                         <element ref="tns:mill"/>
 
                         <element ref="tns:school"/>
+
+                        <element ref="tns:inn"/>
 
                     </choice>
 
@@ -406,6 +412,8 @@
 
                         <element ref="tns:school"/>
 
+                        <element ref="tns:inn"/>
+
                     </choice>
 
                 </sequence>
@@ -431,6 +439,20 @@
     </complexType>
 
     <complexType name="xmlSchool">
+
+        <complexContent>
+
+            <extension base="tns:xmlPlace">
+
+                <sequence/>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
+    <complexType name="xmlInn">
 
         <complexContent>
 
@@ -564,6 +586,8 @@
 
                 <element ref="tns:school"/>
 
+                <element ref="tns:inn"/>
+
                 <element ref="tns:manor"/>
 
                 <element ref="tns:graveship"/>
@@ -584,21 +608,21 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="minutes"/>
+            <enumeration value="birth"/>
 
             <enumeration value="pewRents"/>
 
-            <enumeration value="burial"/>
+            <enumeration value="membership"/>
 
             <enumeration value="marriage"/>
 
+            <enumeration value="accounts"/>
+
             <enumeration value="baptism"/>
 
-            <enumeration value="birth"/>
+            <enumeration value="burial"/>
 
-            <enumeration value="membership"/>
-
-            <enumeration value="accounts"/>
+            <enumeration value="minutes"/>
 
         </restriction>
 

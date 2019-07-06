@@ -1,31 +1,21 @@
 package net.ramify.model.place.xml.place.settlement;
 
 import net.ramify.model.place.Place;
-import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.building.Church;
-import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.xml.place.XmlPlace;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Collection;
-import java.util.Collections;
 
 @XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "church")
-public class XmlChurch extends XmlPlace {
+public class XmlChurch extends XmlBuilding<Church> {
 
-    @Override
-    protected PlaceId placeId(final String id) {
-        return new Spid(Church.class, id);
+    XmlChurch() {
+        super(Church.class);
     }
 
     @Override
     protected Church place(final Place parent) throws Place.InvalidPlaceTypeException {
         return new Church(this.placeId(), this.name(), parent);
-    }
-
-    @Override
-    protected Collection<XmlPlace> children() {
-        return Collections.emptyList();
     }
 
 }
