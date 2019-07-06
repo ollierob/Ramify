@@ -15,4 +15,6 @@
     <placePoint id="church:slack-mt-zion" latitude="53.75484" longitude="-2.03663"/>
     <placePoint id="farmstead:robertshaw" latitude="53.75427" longitude="-2.03458"/>
 
+    <placePoint id="hamlet:colden" latitude="53.753" longitude="-2.057" zoom="15"/>
+
 </placePositions>
