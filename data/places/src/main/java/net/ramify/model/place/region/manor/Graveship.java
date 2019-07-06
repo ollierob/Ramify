@@ -6,6 +6,7 @@ import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.region.AbstractRegion;
 
 import javax.annotation.Nonnull;
+import java.util.Set;
 
 public class Graveship extends AbstractRegion {
 
@@ -23,6 +24,12 @@ public class Graveship extends AbstractRegion {
     @Override
     public Manor parent() {
         return parent;
+    }
+
+    @Nonnull
+    @Override
+    public Set<Class<? extends Place>> childTypes() {
+        return Manor.CHILD_TYPES;
     }
 
     @Nonnull

@@ -6,6 +6,8 @@ import net.ramify.model.place.proto.PlaceProto;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import java.util.Collections;
+import java.util.Set;
 
 public class Country extends AbstractRegion {
 
@@ -28,6 +30,12 @@ public class Country extends AbstractRegion {
     @CheckForNull
     public Country parent() {
         return parent;
+    }
+
+    @Nonnull
+    @Override
+    public Set<Class<? extends Place>> childTypes() {
+        return Collections.singleton(County.class);
     }
 
     @Nonnull

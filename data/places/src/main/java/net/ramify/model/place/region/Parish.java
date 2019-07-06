@@ -1,13 +1,20 @@
 package net.ramify.model.place.region;
 
+import com.google.common.collect.ImmutableSet;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.building.Church;
 import net.ramify.model.place.proto.PlaceProto;
+import net.ramify.model.place.settlement.Town;
+import net.ramify.model.place.settlement.Village;
 import net.ramify.model.place.type.Region;
 
 import javax.annotation.Nonnull;
+import java.util.Set;
 
 public class Parish extends AbstractRegion {
+
+    static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(Chapelry.class, Township.class, Town.class, Village.class, Church.class);
 
     private final Region parent;
 
@@ -24,6 +31,12 @@ public class Parish extends AbstractRegion {
     @Override
     public Region parent() {
         return parent;
+    }
+
+    @Nonnull
+    @Override
+    public Set<Class<? extends Place>> childTypes() {
+        return CHILD_TYPES;
     }
 
     @Override

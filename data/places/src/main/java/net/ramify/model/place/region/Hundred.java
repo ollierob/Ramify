@@ -1,9 +1,11 @@
 package net.ramify.model.place.region;
 
+import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.proto.PlaceProto;
 
 import javax.annotation.Nonnull;
+import java.util.Set;
 
 public class Hundred extends AbstractRegion {
 
@@ -18,6 +20,12 @@ public class Hundred extends AbstractRegion {
     @Override
     public County parent() {
         return parent;
+    }
+
+    @Nonnull
+    @Override
+    public Set<Class<? extends Place>> childTypes() {
+        throw new UnsupportedOperationException(); //TODO
     }
 
     @Nonnull
