@@ -12,12 +12,16 @@
         <church id="hope" name="Hope"/>
         <church id="roomfield" name="Roomfield"/>
         <church id="foster_lane" name="Foster Lane"/>
+        <church id="salem" name="Salem"/>
 
         <mill id="hangingroyd" name="Hangingroyd"/>
         <mill id="nutclough" name="Nutclough"/>
         <mill id="calder" name="Calder"/>
         <mill id="bank_foot" name="Bank Foot"/>
         <mill id="salem" name="Salem"/>
+        <mill id="brunswick" name="Brunswick"/>
+        <mill id="waterside" name="Waterside"/>
+        <mill id="mytholm" name="Mytholm"/>
 
     </town>
 

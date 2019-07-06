@@ -8,16 +8,23 @@
         <church id="wainsgate" name="Wainsgate"/>
 
         <hamlet id="old_town" name="Old Town"/>
-        <hamlet id="pecket_well" name="Pecket Well"/>
 
         <hamlet id="shackleton" name="Shackleton"/>
-        <hamlet id="widdop" name="Widdop"/>
 
         <village id="pecket_well" name="Pecket Well">
             <church id="crimsworth" name="Crimsworth"/>
         </village>
 
         <church id="crimsworth_dean" name="Crimsworth Dean"/>
+
+        <farmstead id="high_hirst" name="High Hirst"/>
+
+        <hamlet id="widdop" name="Widdop">
+            <farmstead id="lower_houses" name="Lower Houses"/>
+            <farmstead id="higher_houses" name="Higher Houses"/>
+        </hamlet>
+
+        <hamlet id="walshaw" name="Walshaw"/>
 
     </township>
 

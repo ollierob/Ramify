@@ -13,6 +13,8 @@
             <school id="heptonstall_grammar" name="Heptonstall Grammar"/>
         </village>
 
+        <church id="cross_lanes" name="Cross Lanes"/>
+
         <hamlet id="slack" name="Slack">
             <church id="slack-mt-zion" name="Mount Zion"/>
             <farmstead id="robertshaw" name="Robertshaw"/>
@@ -21,7 +23,7 @@
             <farmstead id="black_dyke" name="Black Dyke"/>
             <farmstead id="learings" name="Learings"/>
         </hamlet>
-        
+
         <farmstead id="stones_hey_gate" name="Stones Hey Gate"/>
         <farmstead id="acre_lane" name="Acre Lane"/>
         <farmstead id="acre" name="Acre"/>
