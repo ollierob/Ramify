@@ -93,6 +93,10 @@ function defaultZoom(place: Place.AsObject): number {
             return 14;
         case PlaceType.FARMSTEAD:
             return 15;
+        case PlaceType.SCHOOL:
+            return 16;
+        case PlaceType.INN:
+            return 17;
         default:
             return 10;
     }

@@ -11,6 +11,8 @@
     <placePoint id="church:heptonstall_st-thomas" latitude="53.748845" longitude="-2.021594" zoom="16"/>
     <placePoint id="church:heptonstall_wesleyan" latitude="53.7498" longitude="-2.02008" zoom="16"/>
     <placePoint id="school:heptonstall_grammar" latitude="53.74888" longitude="-2.02118" zoom="16"/>
+    <placePoint id="inn:union_cross" latitude="53.74922" longitude="-2.02083"/>
+    <placePoint id="inn:white_lion" latitude="53.74931" longitude="-2.02121"/>
 
     <placePoint id="church:slack-mt-zion" latitude="53.75484" longitude="-2.03663"/>
     <placePoint id="farmstead:robertshaw" latitude="53.75427" longitude="-2.03458"/>
