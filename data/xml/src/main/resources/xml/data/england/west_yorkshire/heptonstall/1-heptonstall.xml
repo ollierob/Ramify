@@ -11,9 +11,14 @@
             <church id="heptonstall_st-thomas" name="St Thomas"/>
             <church id="heptonstall_wesleyan" name="Heptonstall Methodist"/>
             <school id="heptonstall_grammar" name="Heptonstall Grammar"/>
+            <inn id="angel" name="The Angel"/>
+            <inn id="black_bull" name="Black Bull"/>
             <inn id="cross" name="The Cross"/>
-            <inn id="white_lion" name="White Lion"/>
+            <inn id="dog_and_partridge" name="Dog and Partridge"/>
             <inn id="swan" name="The Swan"/>
+            <inn id="union_cross" name="Union Cross"/>
+            <inn id="white_horse" name="White Horse"/>
+            <inn id="white_lion" name="White Lion"/>
         </village>
 
         <church id="cross_lanes" name="Cross Lanes"/>
