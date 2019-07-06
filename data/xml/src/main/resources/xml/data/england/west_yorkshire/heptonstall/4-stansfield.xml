@@ -17,6 +17,8 @@
 
         <hamlet id="shore" name="Shore">
             <church id="shore" name="Shore"/>
+            <farmstead id="parrock" name="Parrock"/>
+            <farmstead id="west_bar" name="West Bar"/>
         </hamlet>
 
         <hamlet id="rawtonstall" name="Rawtonstall"/>
@@ -26,6 +28,7 @@
     <town id="todmorden">
 
         <church id="roomfield" name="Roomfield"/>
+        <church id="patmos" name="Patmos"/>
 
     </town>
 
