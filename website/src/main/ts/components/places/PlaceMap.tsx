@@ -4,7 +4,7 @@ import {Point, Position} from "../../protobuf/generated/location_pb";
 import {Map, Marker, Popup, TileLayer} from 'react-leaflet'
 import {LatLngLiteral} from "leaflet";
 import {Loading} from "../Loading";
-import {Place} from "../../protobuf/generated/place_pb";
+import {Place, PlaceType} from "../../protobuf/generated/place_pb";
 
 require('leaflet/dist/leaflet.css');
 
@@ -12,8 +12,8 @@ type Props = HasClass & {
     loading: boolean;
     place: Place.AsObject,
     position: Position.AsObject;
-    area?: boolean;
-    zoom: number;
+    area?: boolean
+    zoom?: number;
 };
 
 export class PlaceMap extends React.PureComponent<Props> {
@@ -26,6 +26,7 @@ export class PlaceMap extends React.PureComponent<Props> {
 
             {this.props.position && <MapComponent
                 {...this.props}
+                zoom={this.props.zoom || this.props.position.zoom || defaultZoom(this.props.place)}
                 center={this.props.position.center}
                 markers={!this.props.area && markerPoints(this.props.place, this.props.position)}
             />}
@@ -73,3 +74,26 @@ function toLatLong(point: Point.AsObject): LatLngLiteral {
 }
 
 type MarkerPoint = {point: Point.AsObject, label: React.ReactNode}
+
+function defaultZoom(place: Place.AsObject): number {
+    switch (place.type) {
+        case PlaceType.COUNTRY:
+            return 4;
+        case PlaceType.COUNTY:
+            return 8;
+        case PlaceType.PARISH:
+        case PlaceType.CHAPELRY:
+            return 11;
+        case PlaceType.TOWNSHIP:
+            return 12;
+        case PlaceType.TOWN:
+            return 13;
+        case PlaceType.VILLAGE:
+        case PlaceType.HAMLET:
+            return 14;
+        case PlaceType.FARMSTEAD:
+            return 15;
+        default:
+            return 10;
+    }
+}

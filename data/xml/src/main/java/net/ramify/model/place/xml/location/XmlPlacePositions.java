@@ -24,7 +24,7 @@ public class XmlPlacePositions {
     public Map<PlaceId, Position> positions() {
         if (placePoints == null) return Collections.emptyMap();
         final var map = Maps.<PlaceId, Position>newHashMap();
-        placePoints.forEach(p -> map.put(p.placeId(), p.toPosition()));
+        placePoints.forEach(p -> map.put(p.placeId(), Position.of(p, p.zoom())));
         return map;
     }
 

@@ -16,6 +16,8 @@ public interface Position extends BuildsProto<LocationProto.Position> {
     @Nonnull
     Set<Point> points();
 
+    int zoom();
+
     default boolean isNowhere() {
         return this.points().isEmpty();
     }
@@ -34,10 +36,11 @@ public interface Position extends BuildsProto<LocationProto.Position> {
         return LocationProto.Position.newBuilder()
                 .setCenter(this.center().toProto())
                 .addAllBoundary(Iterables.transform(this.points(), Point::toProto))
+                .setZoom(this.zoom())
                 .build();
     }
 
-    static Position of(final Point point) {
+    static Position of(final Point point, final int zoom) {
         return new Position() {
 
             @Nonnull
@@ -52,6 +55,10 @@ public interface Position extends BuildsProto<LocationProto.Position> {
                 return Collections.emptySet();
             }
 
+            @Override
+            public int zoom() {
+                return zoom;
+            }
         };
     }
 

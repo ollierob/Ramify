@@ -11,10 +11,6 @@ public interface Point extends BuildsProto<LocationProto.Point> {
 
     double longitude();
 
-    default Position toPosition() {
-        return Position.of(this);
-    }
-
     @Nonnull
     @Override
     default LocationProto.Point toProto() {

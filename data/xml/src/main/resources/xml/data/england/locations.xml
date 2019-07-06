@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<places
+<placePositions
         xmlns="http://ramify.net/places"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://ramify.net/places ../../schema/schema1.xsd">
 
-    <country id="england" name="England">
+    <placePoint id="country:england" latitude="52.567" longitude="-1.485" zoom="5"/>
+    <placePoint id="county:west_yorkshire" latitude="53.75" longitude="-1.666667" zoom="8"/>
 
-        <county id="west_yorkshire" name="West Yorkshire"/>
-
-    </country>
-
-</places>
+</placePositions>

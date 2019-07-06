@@ -1,5 +1,6 @@
 package net.ramify.model.place.xml.location;
 
+import com.google.common.base.MoreObjects;
 import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.position.Point;
@@ -21,6 +22,9 @@ public class XmlPlacePoint implements Point, HasPlaceId {
     @XmlAttribute(name = "longitude", required = true)
     private double longitude;
 
+    @XmlAttribute(name = "zoom", required = false)
+    private Integer zoom;
+
     @Deprecated
     XmlPlacePoint() {
     }
@@ -39,6 +43,10 @@ public class XmlPlacePoint implements Point, HasPlaceId {
     @Override
     public double longitude() {
         return longitude;
+    }
+
+    public int zoom() {
+        return MoreObjects.firstNonNull(zoom, 0);
     }
 
 }

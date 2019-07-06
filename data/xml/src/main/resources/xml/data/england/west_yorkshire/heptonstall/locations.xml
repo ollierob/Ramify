@@ -5,11 +5,11 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://ramify.net/places ../../../../schema/schema1.xsd">
 
-    <placePoint id="town:hebden_bridge" latitude="53.742" longitude="-2.009"/>
+    <placePoint id="town:hebden_bridge" latitude="53.742" longitude="-2.009" zoom="13"/>
 
-    <placePoint id="chapelry:heptonstall" latitude="53.737632" longitude="-2.071990"/>
-    <placePoint id="township:heptonstall" latitude="53.754719" longitude="-2.037193"/>
-    <placePoint id="village:heptonstall" latitude="53.748845" longitude="-2.021594"/>
+    <placePoint id="chapelry:heptonstall" latitude="53.737632" longitude="-2.071990" zoom="11"/>
+    <placePoint id="township:heptonstall" latitude="53.754719" longitude="-2.037193" zoom="12"/>
+    <placePoint id="village:heptonstall" latitude="53.748845" longitude="-2.021594" zoom="14"/>
     <placePoint id="church:heptonstall-st-thomas" latitude="53.748845" longitude="-2.021594"/>
 
     <placePoint id="church:slack-mt-zion" latitude="53.75484" longitude="-2.03663"/>

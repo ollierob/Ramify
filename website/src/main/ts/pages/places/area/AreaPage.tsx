@@ -3,7 +3,7 @@ import {PlacesPageProps} from "../PlacesBasePage";
 import {PlaceMap} from "../../../components/places/PlaceMap";
 import {AreaInfo} from "./AreaInfo";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
-import {Place, PlaceType} from "../../../protobuf/generated/place_pb";
+import {Place} from "../../../protobuf/generated/place_pb";
 import {DEFAULT_PLACE_LOADER} from "../../../components/places/PlaceLoader";
 import {PlaceTypeDescription} from "../../../components/places/PlaceTypeDescription";
 import {Loading} from "../../../components/Loading";
@@ -38,8 +38,7 @@ export default class AreaPage extends React.PureComponent<Props, State> {
                 area={true}
                 loading={this.props.loading}
                 place={bundle.place}
-                position={bundle.position}
-                zoom={zoom(bundle.place)}/>
+                position={bundle.position}/>
 
             <PlaceTypeDescription
                 description={bundle.typedescription}/>
@@ -73,25 +72,4 @@ export default class AreaPage extends React.PureComponent<Props, State> {
             children => this.setState({children}));
     }
 
-}
-
-function zoom(place: Place.AsObject): number {
-    switch (place.type) {
-        case PlaceType.COUNTY:
-            return 8;
-        case PlaceType.PARISH:
-        case PlaceType.CHAPELRY:
-            return 11;
-        case PlaceType.TOWNSHIP:
-            return 12;
-        case PlaceType.TOWN:
-            return 13;
-        case PlaceType.VILLAGE:
-        case PlaceType.HAMLET:
-            return 14;
-        case PlaceType.FARMSTEAD:
-            return 15;
-        default:
-            return 10;
-    }
 }

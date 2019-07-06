@@ -14,5 +14,6 @@ message Position {
 
     Point center = 1;
     repeated Point boundary = 2;
+    uint32 zoom = 3;
 
 }
