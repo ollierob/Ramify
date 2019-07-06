@@ -37,7 +37,7 @@ export default class ChurchPage extends React.PureComponent<Props, State> {
                 place={bundle && bundle.place}
                 loading={this.props.loading}
                 position={bundle && bundle.position}
-                zoom={14}/>/>
+                defaultZoom={14}/>/>
 
             <InstitutionInfo
                 description={bundle.description}

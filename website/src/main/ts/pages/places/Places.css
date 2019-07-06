@@ -69,6 +69,10 @@
     padding-left: 24px;
 }
 
+.placeCard .notes {
+    max-width: 300px;
+}
+
 .institutionRecords .placeCard {
     width: unset !important;
     min-width: 200px;

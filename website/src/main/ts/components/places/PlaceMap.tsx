@@ -13,7 +13,7 @@ type Props = HasClass & {
     place: Place.AsObject,
     position: Position.AsObject;
     area?: boolean
-    zoom?: number;
+    defaultZoom?: number;
 };
 
 export class PlaceMap extends React.PureComponent<Props> {
@@ -26,7 +26,7 @@ export class PlaceMap extends React.PureComponent<Props> {
 
             {this.props.position && <MapComponent
                 {...this.props}
-                zoom={this.props.zoom || this.props.position.zoom || defaultZoom(this.props.place)}
+                zoom={this.props.position.zoom || this.props.defaultZoom || defaultZoom(this.props.place)}
                 center={this.props.position.center}
                 markers={!this.props.area && markerPoints(this.props.place, this.props.position)}
             />}

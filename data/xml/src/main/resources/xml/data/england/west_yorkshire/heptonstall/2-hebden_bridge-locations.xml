@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<placePositions
+        xmlns="http://ramify.net/places"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://ramify.net/places ../../../../schema/schema1.xsd">
+
+    <placePoint id="town:hebden_bridge" latitude="53.742" longitude="-2.009" zoom="13"/>
+    <placePoint id="church:birchcliffe" latitude="53.74347" longitude="-2.00718" zoom="15"/>
+    <placePoint id="church:ebenezer" latitude="53.74151" longitude="-2.01537" zoom="15"/>
+
+</placePositions>

@@ -27,7 +27,9 @@
         <d:foundedIn year="1763"/>
         <d:closedIn year="1974"/>
         <churchRecordSet id="birchcliffe-births" type="birth" startYear="1785" endYear="1837"/>
-        <churchRecordSet id="birchcliffe-burials" type="burial" startYear="1816" endYear="1920"/>
+        <churchRecordSet id="birchcliffe-burials" type="burial" startYear="1816" endYear="1920">
+            The graveyard is split into four sections. The oldest was in use between 1813-1830.
+        </churchRecordSet>
     </churchInfo>
 
 </churchInfos>
