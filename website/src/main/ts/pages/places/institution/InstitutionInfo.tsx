@@ -27,9 +27,11 @@ export const InstitutionInfo = (props: Props) => {
         title={<Title place={props.place}/>}>
 
         <div className="description">
-            {institution && institution.established && <div>Founded <DateRange date={institution.established}/></div>}
-            {institution && institution.closed && <div>Closed <DateRange date={institution.closed}/></div>}
-            <div className="description">
+            {institution && <div className="dates">
+                {institution.established && <div>Founded <DateRange date={institution.established}/></div>}
+                {institution && institution.closed && <div>Closed <DateRange date={institution.closed}/></div>}
+            </div>}
+            <div>
                 {description ? description.description : <i>No description available.</i>}
             </div>
         </div>

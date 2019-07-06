@@ -13,7 +13,11 @@
         <hamlet id="shackleton" name="Shackleton"/>
         <hamlet id="widdop" name="Widdop"/>
 
-        <village id="pecket_well" name="Pecket Well"/>
+        <village id="pecket_well" name="Pecket Well">
+            <church id="crimsworth" name="Crimsworth"/>
+        </village>
+
+        <church id="crimsworth_dean" name="Crimsworth Dean"/>
 
     </township>
 
