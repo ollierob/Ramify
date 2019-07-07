@@ -6,12 +6,28 @@ import PlacesHomePage from "./home/PlacesHomePage";
 import ChurchPage from "./institution/ChurchPage";
 import PlacesBreadcrumbWrapper from "./PlacesBreadcrumbWrapper";
 import "./Places.css"
-import {PlaceId} from "../../components/places/Place";
+import {PlaceId, PlaceList} from "../../components/places/Place";
 import {PlaceBundle} from "../../protobuf/generated/place_pb";
 import AreaPage from "./area/AreaPage";
 import SchoolPage from "./institution/SchoolPage";
+import {getPlaceFavourites} from "../../components/places/PlaceFavourites";
+import {getPlaceHistory} from "../../components/places/PlaceHistory";
 
-class PlacesBasePage extends BasePage {
+type State = {
+    history: PlaceList;
+    favourites: PlaceList;
+}
+
+class PlacesBasePage extends BasePage<State> {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            history: getPlaceHistory(),
+            favourites: getPlaceFavourites()
+        }
+    }
+
 
     active(): string {
         return "places";
@@ -28,10 +44,20 @@ class PlacesBasePage extends BasePage {
         </HashRouter>;
     }
 
+    placeFavourites() {
+        return this.state.favourites;
+    }
+
+    placeHistory() {
+        return this.state.history;
+    }
+
 }
 
 function breadcrumb(type: React.ComponentType<PlacesPageProps>): React.ComponentType<RouteComponentProps<any>> {
-    return params => <PlacesBreadcrumbWrapper {...params} childType={type}/>
+    return params => <PlacesBreadcrumbWrapper
+        {...params}
+        childType={type}/>
 }
 
 export type PlacesPageProps = RouteComponentProps<any> & {

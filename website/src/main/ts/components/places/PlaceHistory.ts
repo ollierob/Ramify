@@ -29,5 +29,5 @@ export function addNewPlace(place: Place.AsObject, list: PlaceList, permitDuplic
         const i = list.findIndex(h => h.id == place.id);
         if (i >= 0) return [].concat(list).splice(i, 1).concat(place);
     }
-    return list.concat(place);
+    return [place].concat(list);
 }

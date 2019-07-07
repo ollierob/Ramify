@@ -10,7 +10,7 @@ import {PlaceId} from "../../../components/places/Place";
 type Props = PlacesPageProps
 
 type State = {
-    institution: AsyncData<Institution.AsObject>
+    institution: AsyncData<Institution.AsObject>;
 }
 
 export abstract class InstitutionPage extends React.PureComponent<Props, State> {
