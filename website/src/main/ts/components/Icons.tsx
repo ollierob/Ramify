@@ -1,7 +1,10 @@
 import * as React from "react";
 import {Icon} from "antd";
+import {HasClass} from "./style/HasClass";
 
-type IconProps = {};
+type IconProps = HasClass & {
+    onClick?: React.MouseEventHandler<HTMLElement>
+};
 
 export const TreeIcon = (props: IconProps) => <Icon type="apartment" {...props}/>;
 export const PeopleIcon = (props: IconProps) => <Icon type="user" {...props}/>;

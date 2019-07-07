@@ -1,3 +1,7 @@
 .gray, .unimportant, .background {
     color: #AAAAAA;
 }
+
+.yellow, .favourite {
+    color: #ffe234 !important;
+}

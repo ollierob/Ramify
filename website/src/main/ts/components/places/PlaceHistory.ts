@@ -1,5 +1,5 @@
 import {Place} from "../../protobuf/generated/place_pb";
-import {PlaceList} from "../../components/places/Place";
+import {PlaceList} from "./Place";
 
 export function updatePlaceHistory(place: Place.AsObject): PlaceList {
     let currentHistory = getPlaceHistory();

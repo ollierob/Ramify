@@ -6,7 +6,7 @@ import {AsyncData, asyncLoadData} from "../../components/fetch/AsyncData";
 import {DEFAULT_PLACE_LOADER} from "../../components/places/PlaceLoader";
 import {PlaceBreadcrumb} from "./PlaceBreadcrumb";
 import {PlacesPageProps} from "./PlacesBasePage";
-import {updatePlaceHistory} from "./PlaceHistory";
+import {updatePlaceHistory} from "../../components/places/PlaceHistory";
 
 type Props = RouteComponentProps<any> & {
     childType: React.ComponentType<PlacesPageProps>;

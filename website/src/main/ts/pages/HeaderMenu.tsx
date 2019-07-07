@@ -8,6 +8,7 @@ import {placeTypeName} from "../components/places/PlaceType";
 type Props = {
     active: string;
     placeHistory: PlaceList;
+    placeFavourites: PlaceList;
 }
 
 export default class HeaderMenu extends React.PureComponent<Props> {
@@ -15,6 +16,7 @@ export default class HeaderMenu extends React.PureComponent<Props> {
     render() {
 
         const history = this.props.placeHistory;
+        const favourites = this.props.placeFavourites;
 
         return <Menu mode="horizontal" selectedKeys={[this.props.active]} className="menu">
             <Menu.Item key="trees">
@@ -25,7 +27,8 @@ export default class HeaderMenu extends React.PureComponent<Props> {
             </Menu.Item>
             <Menu.SubMenu key="places" title={<a href="/places"><PlacesIcon/> Places</a>}>
                 <Menu.SubMenu title={<><FavouritesIcon/> Favourites</>}>
-                    <Menu.Item disabled>No favourite places.</Menu.Item>
+                    {!favourites.length && <Menu.Item disabled>No favourite places.</Menu.Item>}
+                    {favourites.map(h => <Menu.Item key={h.id}><PlaceMenuItem place={h}/></Menu.Item>)}
                 </Menu.SubMenu>
                 <Menu.SubMenu title={<><Icon type="history"/> Recent</>}>
                     {!history.length && <Menu.Item key="" disabled>No recent places.</Menu.Item>}
