@@ -5,7 +5,7 @@ import {PlaceId} from "../../components/places/Place";
 import {AsyncData, asyncLoadData} from "../../components/fetch/AsyncData";
 import {DEFAULT_PLACE_LOADER} from "../../components/places/PlaceLoader";
 import {PlaceBreadcrumb} from "./PlaceBreadcrumb";
-import {PlacesPageProps} from "./PlacesBasePage";
+import {PlacesPageProps} from "./PlacesPage";
 import {addPlaceHistory, PlaceHistoryHandler} from "../../components/places/PlaceHistory";
 import {PlaceFavouritesHandler} from "../../components/places/PlaceFavourites";
 

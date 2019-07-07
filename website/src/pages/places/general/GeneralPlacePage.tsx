@@ -1,5 +1,5 @@
 import * as React from "react";
-import {PlacesPageProps} from "../PlacesBasePage";
+import {PlacesPageProps} from "../PlacesPage";
 
 type Props = PlacesPageProps;
 

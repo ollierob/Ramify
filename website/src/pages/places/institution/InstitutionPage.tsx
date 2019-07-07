@@ -1,5 +1,5 @@
 import * as React from "react";
-import {PlacesPageProps} from "../PlacesBasePage";
+import {PlacesPageProps} from "../PlacesPage";
 import {AsyncData} from "../../../components/fetch/AsyncData";
 import {InstitutionInfo} from "./InstitutionInfo";
 import {Institution} from "../../../protobuf/generated/institution_pb";

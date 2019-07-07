@@ -4,8 +4,8 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
     entry: {
-        places: ["./src/main/ts/pages/places/PlacesBasePage.tsx"],
-        records: ["./src/main/ts/pages/records/RecordsBasePage.tsx"],
+        places: ["./src/pages/places/PlacesPage.tsx"],
+        records: ["./src/pages/records/RecordsPage.tsx"],
     },
     output: {
         path: __dirname + "/target/classes/js",

@@ -2,7 +2,7 @@ import BasePage from "../BasePage";
 import * as ReactDOM from "react-dom";
 import * as React from "react";
 
-class RecordsBasePage extends BasePage {
+class RecordsPage extends BasePage {
 
     active() {
         return "records";
@@ -13,4 +13,5 @@ class RecordsBasePage extends BasePage {
     }
 
 }
-ReactDOM.render(<RecordsBasePage/>, document.getElementById("main"));
+
+ReactDOM.render(<RecordsPage/>, document.getElementById("main"));

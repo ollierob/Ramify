@@ -18,7 +18,7 @@ type State = {
     favourites: PlaceList;
 }
 
-class PlacesBasePage extends BasePage<State> {
+class PlacesPage extends BasePage<State> {
 
     constructor(props) {
         super(props);
@@ -89,4 +89,4 @@ export type PlacesPageProps = RouteComponentProps<any> & PlaceFavouritesHandler 
     placeHistory: PlaceList;
 }
 
-ReactDOM.render(<PlacesBasePage/>, document.getElementById("main"));
+ReactDOM.render(<PlacesPage/>, document.getElementById("main"));

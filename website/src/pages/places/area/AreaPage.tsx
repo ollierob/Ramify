@@ -1,5 +1,5 @@
 import * as React from "react";
-import {PlacesPageProps} from "../PlacesBasePage";
+import {PlacesPageProps} from "../PlacesPage";
 import {PlaceMap} from "../../../components/places/PlaceMap";
 import {AreaInfo} from "./AreaInfo";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
