@@ -5,7 +5,16 @@ export type PlaceId = string;
 
 export function placeHref(place: Place.AsObject) {
     const type = placeTypeName(place.type).toLowerCase();
-    return "#/" + type + "?place=" + place.id;
+    return placePrefix() + "#/" + type + "?place=" + place.id;
+}
+
+function placePrefix() {
+    try {
+        const current = window.location.pathname;
+        if (current && !current.startsWith("/places")) return "/places";
+    } catch (e) {
+    }
+    return "";
 }
 
 export type PlaceList = ReadonlyArray<Place.AsObject>
