@@ -4,6 +4,10 @@ export function addPlaceHistory(place: Place.AsObject): PlaceHistory {
     let currentHistory = getPlaceHistory();
     if (!place) return currentHistory;
     if (currentHistory.length && currentHistory[0].id == place.id) return currentHistory;
+    {
+        const currentIndex = currentHistory.findIndex(h => h.id == place.id);
+        if (currentIndex >= 0) currentHistory.splice(currentIndex, 1);
+    }
     const placeWithoutParent: Place.AsObject = place.parent ? {...place, parent: null} : place;
     const history = [placeWithoutParent].concat(currentHistory);
     savePlaceHistory(history);
