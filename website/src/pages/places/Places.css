@@ -9,6 +9,13 @@
     color: #AAAAAA;
 }
 
+/*Home page*/
+.home .country {
+    display: inline-block;
+    width: 300px;
+}
+
+/*Other pages*/
 .leftRest .map {
     position: absolute;
     left: 0;

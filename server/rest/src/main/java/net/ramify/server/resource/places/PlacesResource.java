@@ -33,6 +33,10 @@ public interface PlacesResource extends RootResource {
             @QueryParam("depth") Integer depth);
 
     @GET
+    @Path("countries")
+    Places countries();
+
+    @GET
     @Path("position/{id}")
     @CheckForNull
     Position position(@PathParam("id") PlaceId id);

@@ -14,6 +14,8 @@ export interface PlaceLoader {
 
     loadPlaceBundle(id: PlaceId): Promise<PlaceBundle.AsObject>
 
+    loadCountries(): Promise<ReadonlyArray<Place.AsObject>>
+
 }
 
 class ProtoPlaceLoader implements PlaceLoader {
@@ -36,6 +38,11 @@ class ProtoPlaceLoader implements PlaceLoader {
     loadPlaceBundle(id: string): Promise<PlaceBundle.AsObject> {
         return protoFetch("/places/bundle/" + id, PlaceBundle.deserializeBinary)
             .then(b => b ? b.toObject() : null);
+    }
+
+    loadCountries() {
+        return protoFetch("/places/countries", PlaceList.deserializeBinary)
+            .then(places => places ? places.getPlaceList().map(p => p.toObject()) : []);
     }
 
 }

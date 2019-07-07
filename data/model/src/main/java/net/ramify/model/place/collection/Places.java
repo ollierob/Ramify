@@ -1,5 +1,6 @@
 package net.ramify.model.place.collection;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import net.ramify.data.proto.BuildsProto;
@@ -30,7 +31,8 @@ public interface Places extends Iterable<Place>, HasPlaces, BuildsProto<PlacePro
                 .build();
     }
 
-    static Places of(final Set<Place> places, final boolean includeParent) {
+    static Places of(final Set<? extends Place> places, final boolean includeParent) {
+        final ImmutableSet<Place> fixedPlaces = ImmutableSet.copyOf(places);
         return new Places() {
 
             @Override
@@ -40,13 +42,13 @@ public interface Places extends Iterable<Place>, HasPlaces, BuildsProto<PlacePro
 
             @Override
             public Iterator<Place> iterator() {
-                return places.iterator();
+                return fixedPlaces.iterator();
             }
 
             @Nonnull
             @Override
-            public Set<Place> places() {
-                return places;
+            public ImmutableSet<Place> places() {
+                return fixedPlaces;
             }
 
         };

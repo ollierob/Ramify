@@ -38,6 +38,9 @@ public interface PlaceProvider extends Provider<PlaceId, Place> {
     @Nonnull
     Set<Place> children(PlaceId id, int depth, Predicate<Place> placePredicate);
 
+    @Nonnull
+    Set<? extends Place> countries();
+
     class UnknownPlaceException extends RuntimeException {
 
         private final PlaceId placeId;

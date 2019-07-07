@@ -63,6 +63,11 @@ public class DefaultPlacesResource implements PlacesResource {
     }
 
     @Override
+    public Places countries() {
+        return Places.of(placeProvider.countries(), false);
+    }
+
+    @Override
     public Position position(final PlaceId id) {
         return positionProvider.get(id);
     }

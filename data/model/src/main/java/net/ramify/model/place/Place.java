@@ -19,6 +19,12 @@ public interface Place extends HasPlaceId, Castable<Place>, BuildsProto<PlacePro
     @CheckForNull
     Place parent();
 
+    @Nonnull
+    default Place ultimateParent() {
+        final var parent = this.parent();
+        return parent == null ? this : parent.ultimateParent();
+    }
+
     default boolean contains(final Place that) {
         if (that == null) return false;
         if (this.equals(that)) return true;
