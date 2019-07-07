@@ -5,6 +5,7 @@ import ChildPlaceCards from "../../../components/places/ChildPlaceCards";
 import {placeTypeName} from "../../../components/places/PlaceType";
 import {PlaceLinks} from "../../../components/places/PlaceLinks";
 import ReactMarkdown = require("react-markdown");
+import {PlaceTitle} from "../../../components/places/PlaceTitle";
 
 type Props = {
     place: Place.AsObject;
@@ -22,7 +23,7 @@ export const AreaInfo = (props: Props) => {
 
     return <Card
         className="info"
-        title={<AreaTitle {...props}/>}>
+        title={<PlaceTitle {...props}/>}>
 
         {description
             ? <ReactMarkdown
@@ -37,14 +38,4 @@ export const AreaInfo = (props: Props) => {
 
     </Card>
 
-};
-
-const AreaTitle = (props: {place: Place.AsObject, description: PlaceDescription.AsObject;}) => {
-    const place = props.place;
-    return <>
-        <b>{place.name}</b>
-        {" "}
-        <span className="unimportant">{placeTypeName(place.type)}</span>
-        <PlaceLinks links={props.description && props.description.linkList}/>
-    </>
 };

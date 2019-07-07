@@ -6,7 +6,7 @@ import {AsyncData, asyncLoadData} from "../../components/fetch/AsyncData";
 import {DEFAULT_PLACE_LOADER} from "../../components/places/PlaceLoader";
 import {PlaceBreadcrumb} from "./PlaceBreadcrumb";
 import {PlacesPageProps} from "./PlacesBasePage";
-import {addPlaceHistory} from "./PlaceHistory";
+import {updatePlaceHistory} from "./PlaceHistory";
 
 type Props = RouteComponentProps<any> & {
     childType: React.ComponentType<PlacesPageProps>;
@@ -64,7 +64,7 @@ export default class PlacesBreadcrumbWrapper extends React.PureComponent<Props, 
             this.loadPlace(this.state.placeId);
 
         if (this.state.place.data && this.state.place != prevState.place)
-            addPlaceHistory(this.state.place.data.place);
+            updatePlaceHistory(this.state.place.data.place);
 
     }
 

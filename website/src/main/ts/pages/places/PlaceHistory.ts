@@ -1,16 +1,10 @@
 import {Place} from "../../protobuf/generated/place_pb";
 import {PlaceList} from "../../components/places/Place";
 
-export function addPlaceHistory(place: Place.AsObject): PlaceList {
+export function updatePlaceHistory(place: Place.AsObject): PlaceList {
     let currentHistory = getPlaceHistory();
     if (!place) return currentHistory;
-    if (currentHistory.length && currentHistory[0].id == place.id) return currentHistory;
-    {
-        const currentIndex = currentHistory.findIndex(h => h.id == place.id);
-        if (currentIndex >= 0) currentHistory.splice(currentIndex, 1);
-    }
-    const placeWithoutParent: Place.AsObject = place.parent ? {...place, parent: null} : place;
-    const history = [placeWithoutParent].concat(currentHistory);
+    const history = addNewPlace(place, currentHistory);
     savePlaceHistory(history);
     return history;
 }
@@ -26,3 +20,14 @@ export function getPlaceHistory(): PlaceHistory {
 
 const MAX_HISTORY = 10;
 type PlaceHistory = Place.AsObject[];
+
+export function addNewPlace(place: Place.AsObject, list: PlaceList, permitDuplicates: boolean = false): PlaceList {
+    place = place.parent ? {...place, parent: null} : place;
+    if (!list.length) return [place];
+    if (list[0].id == place.id) return list;
+    if (!permitDuplicates) {
+        const i = list.findIndex(h => h.id == place.id);
+        if (i >= 0) return [].concat(list).splice(i, 1).concat(place);
+    }
+    return list.concat(place);
+}

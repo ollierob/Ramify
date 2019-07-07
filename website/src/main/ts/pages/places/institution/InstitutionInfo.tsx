@@ -5,7 +5,7 @@ import {Institution} from "../../../protobuf/generated/institution_pb";
 import {HasClass} from "../../../components/style/HasClass";
 import {Place, PlaceDescription} from "../../../protobuf/generated/place_pb";
 import {RecordCards} from "./InstitutionRecordCards";
-import {placeTypeName} from "../../../components/places/PlaceType";
+import {PlaceTitle} from "../../../components/places/PlaceTitle";
 
 type Props = HasClass & {
     place: Place.AsObject;
@@ -24,7 +24,7 @@ export const InstitutionInfo = (props: Props) => {
     return <Card
         className={"info " + (props.className || "")}
         style={props.style}
-        title={<Title place={props.place}/>}>
+        title={<PlaceTitle {...props}/>}>
 
         <div className="description">
             {institution && <div className="dates">
@@ -44,12 +44,4 @@ export const InstitutionInfo = (props: Props) => {
 
     </Card>
 
-};
-
-const Title = (props: {place: Place.AsObject}) => {
-    const place = props.place;
-    return <>
-        <b>{place.name}</b>
-        {place.type && <> <span className="gray">{placeTypeName(place.type)}</span></>}
-    </>
 };
