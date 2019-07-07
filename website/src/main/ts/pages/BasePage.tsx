@@ -1,7 +1,8 @@
 import * as React from "react";
 import HeaderMenu from "./HeaderMenu";
 import "./Core"
-import {getPlaceHistory, PlaceHistory} from "./places/PlaceHistory";
+import {getPlaceHistory} from "./places/PlaceHistory";
+import {PlaceList} from "../components/places/Place";
 
 export default abstract class BasePage<S = any> extends React.PureComponent<any, S> {
 
@@ -27,7 +28,8 @@ export default abstract class BasePage<S = any> extends React.PureComponent<any,
             active={this.active()}/>
     }
 
-    placeHistory(): PlaceHistory {
+    placeHistory(): PlaceList {
+        //TODO override without causing mount/update loops
         return getPlaceHistory();
     }
 

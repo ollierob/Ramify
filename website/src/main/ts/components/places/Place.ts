@@ -7,3 +7,5 @@ export function placeHref(place: Place.AsObject) {
     const type = placeTypeName(place.type).toLowerCase();
     return "#/" + type + "?place=" + place.id;
 }
+
+export type PlaceList = ReadonlyArray<Place.AsObject>

@@ -1,14 +1,13 @@
 import * as React from "react";
-import {Menu} from "antd";
-import {PeopleIcon, PlacesIcon, RecordsIcon, TreeIcon} from "../components/Icons";
-import {PlaceHistory} from "./places/PlaceHistory";
-import {placeHref} from "../components/places/Place";
+import {Icon, Menu} from "antd";
+import {FavouritesIcon, PeopleIcon, PlacesIcon, RecordsIcon, TreeIcon} from "../components/Icons";
+import {placeHref, PlaceList} from "../components/places/Place";
 import {Place} from "../protobuf/generated/place_pb";
 import {placeTypeName} from "../components/places/PlaceType";
 
 type Props = {
     active: string;
-    placeHistory: PlaceHistory;
+    placeHistory: PlaceList;
 }
 
 export default class HeaderMenu extends React.PureComponent<Props> {
@@ -25,7 +24,10 @@ export default class HeaderMenu extends React.PureComponent<Props> {
                 <PeopleIcon/> People
             </Menu.Item>
             <Menu.SubMenu key="places" title={<a href="/places"><PlacesIcon/> Places</a>}>
-                <Menu.SubMenu title="Recent places">
+                <Menu.SubMenu title={<><FavouritesIcon/> Favourites</>}>
+                    <Menu.Item disabled>No favourite places.</Menu.Item>
+                </Menu.SubMenu>
+                <Menu.SubMenu title={<><Icon type="history"/> Recent</>}>
                     {!history.length && <Menu.Item key="" disabled>No recent places.</Menu.Item>}
                     {history.map(h => <Menu.Item key={h.id}><PlaceMenuItem place={h}/></Menu.Item>)}
                 </Menu.SubMenu>

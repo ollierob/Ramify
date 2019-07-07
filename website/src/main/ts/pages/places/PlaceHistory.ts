@@ -1,6 +1,7 @@
 import {Place} from "../../protobuf/generated/place_pb";
+import {PlaceList} from "../../components/places/Place";
 
-export function addPlaceHistory(place: Place.AsObject): PlaceHistory {
+export function addPlaceHistory(place: Place.AsObject): PlaceList {
     let currentHistory = getPlaceHistory();
     if (!place) return currentHistory;
     if (currentHistory.length && currentHistory[0].id == place.id) return currentHistory;
@@ -14,7 +15,7 @@ export function addPlaceHistory(place: Place.AsObject): PlaceHistory {
     return history;
 }
 
-function savePlaceHistory(history: PlaceHistory) {
+function savePlaceHistory(history: PlaceList): void {
     if (history.length > MAX_HISTORY) history = history.slice(0, MAX_HISTORY);
     sessionStorage.setItem("place-history", JSON.stringify(history));
 }
@@ -24,4 +25,4 @@ export function getPlaceHistory(): PlaceHistory {
 }
 
 const MAX_HISTORY = 10;
-export type PlaceHistory = Place.AsObject[];
+type PlaceHistory = Place.AsObject[];

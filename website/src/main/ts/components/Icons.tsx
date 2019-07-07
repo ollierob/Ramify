@@ -3,7 +3,9 @@ import {Icon} from "antd";
 
 type IconProps = {};
 
-export const TreeIcon = (props: IconProps) => <Icon type="apartment" {...props}/>
-export const PeopleIcon = (props: IconProps) => <Icon type="user" {...props}/>
-export const PlacesIcon = (props: IconProps) => <Icon type="global" {...props}/>
-export const RecordsIcon = (props: IconProps) => <Icon type="book" {...props}/>
+export const TreeIcon = (props: IconProps) => <Icon type="apartment" {...props}/>;
+export const PeopleIcon = (props: IconProps) => <Icon type="user" {...props}/>;
+export const PlacesIcon = (props: IconProps) => <Icon type="global" {...props}/>;
+export const RecordsIcon = (props: IconProps) => <Icon type="book" {...props}/>;
+
+export const FavouritesIcon = (props: IconProps) => <Icon type="star" {...props}/>;
