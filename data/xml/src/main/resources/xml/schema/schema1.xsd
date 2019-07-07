@@ -608,19 +608,19 @@
 
         <restriction base="xs:string">
 
+            <enumeration value="accounts"/>
+
+            <enumeration value="burial"/>
+
+            <enumeration value="baptism"/>
+
+            <enumeration value="marriage"/>
+
             <enumeration value="birth"/>
 
             <enumeration value="pewRents"/>
 
             <enumeration value="membership"/>
-
-            <enumeration value="marriage"/>
-
-            <enumeration value="accounts"/>
-
-            <enumeration value="baptism"/>
-
-            <enumeration value="burial"/>
 
             <enumeration value="minutes"/>
 

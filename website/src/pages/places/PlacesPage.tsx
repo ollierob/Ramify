@@ -41,7 +41,7 @@ class PlacesPage extends BasePage<State> {
             <Switch>
                 <Route path="/church" component={this.breadcrumb(ChurchPage)}/>
                 <Route path="/school" component={this.breadcrumb(SchoolPage)}/>
-                <Route exact path="/" component={this.breadcrumb(PlacesHomePage)}/>
+                <Route exact path="/" component={this.breadcrumb(PlacesHomePage, true)}/>
                 <Route path="*" component={this.breadcrumb(AreaPage)}/>
             </Switch>
         </HashRouter>;
@@ -55,11 +55,12 @@ class PlacesPage extends BasePage<State> {
         return this.state.history;
     }
 
-    private breadcrumb(type: React.ComponentType<PlacesPageProps>): React.ComponentType<RouteComponentProps<any>> {
+    private breadcrumb(type: React.ComponentType<PlacesPageProps>, hideMenu?: boolean): React.ComponentType<RouteComponentProps<any>> {
         return params => <PlacesBreadcrumbWrapper
             {...params}
             key="placeBreadcrumb"
             childType={type}
+            hideMenu={hideMenu}
             placeHistory={this.state.history}
             addPlaceHistory={this.addPlaceHistory}
             placeFavourites={this.state.favourites}

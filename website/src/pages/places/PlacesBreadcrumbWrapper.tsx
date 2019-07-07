@@ -10,6 +10,7 @@ import {addPlaceHistory, PlaceHistoryHandler} from "../../components/places/Plac
 import {PlaceFavouritesHandler} from "../../components/places/PlaceFavourites";
 
 type Props = RouteComponentProps<any> & PlaceFavouritesHandler & PlaceHistoryHandler & {
+    hideMenu?: boolean;
     childType: React.ComponentType<PlacesPageProps>;
 }
 
@@ -36,9 +37,9 @@ export default class PlacesBreadcrumbWrapper extends React.PureComponent<Props, 
 
         return <>
 
-            <PlaceBreadcrumb
+            {!this.props.hideMenu && <PlaceBreadcrumb
                 loading={this.state.place.loading}
-                place={bundle && bundle.place}/>
+                place={bundle && bundle.place}/>}
 
             <div className="content">
                 <Type
