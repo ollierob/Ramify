@@ -31,6 +31,12 @@ export function getPlaceFavourites(): PlaceList {
     return JSON.parse(sessionStorage.getItem("place-favourites")) || [];
 }
 
-export function isPlaceFavourite(id: PlaceId): boolean {
-    return getPlaceFavourites().some(s => s.id == id);
+export function isPlaceFavourite(id: PlaceId, favourites: PlaceList = getPlaceFavourites()): boolean {
+    return favourites.some(s => s.id == id);
+}
+
+export type PlaceFavouritesHandler = {
+    placeFavourites: PlaceList;
+    addPlaceFavourite: (place: Place.AsObject) => void;
+    removePlaceFavourite: (place: Place.AsObject) => void;
 }

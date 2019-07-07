@@ -6,8 +6,9 @@ import {HasClass} from "../../../components/style/HasClass";
 import {Place, PlaceDescription} from "../../../protobuf/generated/place_pb";
 import {RecordCards} from "./InstitutionRecordCards";
 import {PlaceTitle} from "../../../components/places/PlaceTitle";
+import {PlaceFavouritesHandler} from "../../../components/places/PlaceFavourites";
 
-type Props = HasClass & {
+type Props = HasClass & PlaceFavouritesHandler & {
     place: Place.AsObject;
     description: PlaceDescription.AsObject;
     institution: Institution.AsObject;

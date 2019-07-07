@@ -44,6 +44,7 @@ export default class AreaPage extends React.PureComponent<Props, State> {
                 description={bundle.typedescription}/>
 
             <AreaInfo
+                {...this.props}
                 loadingChildren={this.state.children.loading}
                 childPlaces={this.state.children.data}
                 place={bundle.place}

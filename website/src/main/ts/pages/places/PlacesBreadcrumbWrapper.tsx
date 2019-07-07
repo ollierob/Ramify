@@ -1,15 +1,17 @@
 import * as React from "react";
 import {RouteComponentProps} from "react-router";
 import {PlaceBundle} from "../../protobuf/generated/place_pb";
-import {PlaceId} from "../../components/places/Place";
+import {PlaceId, PlaceList} from "../../components/places/Place";
 import {AsyncData, asyncLoadData} from "../../components/fetch/AsyncData";
 import {DEFAULT_PLACE_LOADER} from "../../components/places/PlaceLoader";
 import {PlaceBreadcrumb} from "./PlaceBreadcrumb";
 import {PlacesPageProps} from "./PlacesBasePage";
 import {updatePlaceHistory} from "../../components/places/PlaceHistory";
+import {PlaceFavouritesHandler} from "../../components/places/PlaceFavourites";
 
-type Props = RouteComponentProps<any> & {
+type Props = RouteComponentProps<any> & PlaceFavouritesHandler & {
     childType: React.ComponentType<PlacesPageProps>;
+    placeHistory: PlaceList;
 }
 
 type State = {

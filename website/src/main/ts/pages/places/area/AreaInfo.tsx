@@ -6,8 +6,9 @@ import {placeTypeName} from "../../../components/places/PlaceType";
 import {PlaceLinks} from "../../../components/places/PlaceLinks";
 import ReactMarkdown = require("react-markdown");
 import {PlaceTitle} from "../../../components/places/PlaceTitle";
+import {PlaceFavouritesHandler} from "../../../components/places/PlaceFavourites";
 
-type Props = {
+type Props = PlaceFavouritesHandler & {
     place: Place.AsObject;
     description: PlaceDescription.AsObject;
     childPlaces: ReadonlyArray<Place.AsObject>

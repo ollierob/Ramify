@@ -38,6 +38,7 @@ export abstract class InstitutionPage extends React.PureComponent<Props, State> 
                 defaultZoom={14}/>/>
 
             <InstitutionInfo
+                {...this.props}
                 place={bundle.place}
                 description={bundle.description}
                 institution={this.state.institution.data}/>
