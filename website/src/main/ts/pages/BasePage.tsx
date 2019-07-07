@@ -30,10 +30,10 @@ export default abstract class BasePage<S = any> extends React.PureComponent<any,
 
 }
 
-const Header = (props: { children: React.ReactNode }) => <div className="header">
+const Header = (props: {children: React.ReactNode}) => <div className="header">
     {props.children}
 </div>
 
-const Body = (props: { children: React.ReactNode }) => <div className="body">
+const Body = (props: {children: React.ReactNode}) => <div className="body">
     {props.children}
 </div>
