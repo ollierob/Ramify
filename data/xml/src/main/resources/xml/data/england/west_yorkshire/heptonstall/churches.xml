@@ -32,4 +32,10 @@
         </churchRecordSet>
     </churchInfo>
 
+    <churchInfo id="heptonstall_wesleyan" denomination="Methodist">
+        <d:foundedIn year="1764"/>
+        <churchRecordSet id="heptonstall_wesleyan_baptisms" type="baptism" startYear="1798" endYear="1837"/>
+        <churchRecordSet id="heptonstall_wesleyan_minutes" type="minutes" startYear="1842" endYear="1880"/>
+    </churchInfo>
+
 </churchInfos>

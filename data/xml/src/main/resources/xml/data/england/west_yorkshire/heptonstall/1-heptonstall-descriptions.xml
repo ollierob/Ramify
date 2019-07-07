@@ -21,7 +21,8 @@
         <wikipediaLink href="en.wikipedia.org/wiki/Heptonstall"/>
         <description>
             The village of Heptonstall sits on the hilltop above Hebden Bridge.
-            First mentioned in the 13th century, it formed part of the *rectorial* manor of Halifax-cum-Heptonstall.
+            First mentioned in the 13th century, it formed part of the *rectorial* manor of Halifax-cum-Heptonstall,
+            with tithes and rental income due to the monks of the Priory of Lewes in Sussex.
         </description>
     </placeDescription>
 
@@ -33,6 +34,14 @@
             In 1847 a storm tore off some of the roof and part of the tower collapsed.
             It was decided that a new church should be built, and a new church dedicated to St Thomas the Apostle was
             consecrated in 1854.
+        </description>
+    </placeDescription>
+
+    <placeDescription id="church:heptonstall_wesleyan">
+        <description>
+            Methodism in Heptonstall can trace its roots back to the 1740s, with the establishment of Darney Societies
+            and visitations by the Wesley brothers.
+            An octagonal church was built in 1764 and claims to be the oldest Methodist church still in use.
         </description>
     </placeDescription>
 
