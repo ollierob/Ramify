@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom";
 import * as React from "react";
 import {HashRouter, Route, Switch} from "react-router-dom";
 import RecordsHomePage from "./home/RecordsHomePage";
+import "./Records.css"
 
 class RecordsPage extends BasePage {
 

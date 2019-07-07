@@ -4,10 +4,11 @@ export default class RecordsHomePage extends React.PureComponent {
 
     render() {
 
-        return <>
+        return <div className="home">
 
+            <h1>Records</h1>
 
-        </>;
+        </div>;
 
     }
 

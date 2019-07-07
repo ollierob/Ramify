@@ -7,11 +7,11 @@ export default class PlacesHomePage extends React.PureComponent<Props> {
 
     render() {
 
-        return <>
+        return <div className="home">
 
             <h1>Places</h1>
 
-        </>
+        </div>
 
     }
 

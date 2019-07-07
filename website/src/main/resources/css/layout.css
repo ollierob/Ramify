@@ -19,6 +19,10 @@ body {
     font-size: 1.25em;
 }
 
+.header ul.menu {
+    border-bottom: 1px solid #D7D7D7 !important;
+}
+
 .body {
     position: absolute;
     top: 60px;
@@ -51,4 +55,11 @@ body {
     height: 1em;
     width: 1em;
     vertical-align: inherit;
+}
+
+.home {
+    background-color: white;
+    border: 1px solid #D7D7D7;
+    margin-top: 10px;
+    padding: 12px;
 }
