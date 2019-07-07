@@ -1,19 +1,21 @@
 import * as React from "react";
 import {Menu} from "antd";
 import {PeopleIcon, PlacesIcon, RecordsIcon, TreeIcon} from "../components/Icons";
-import {getPlaceHistory} from "./places/PlaceHistory";
+import {PlaceHistory} from "./places/PlaceHistory";
 import {placeHref} from "../components/places/Place";
 import {Place} from "../protobuf/generated/place_pb";
+import {placeTypeName} from "../components/places/PlaceType";
 
 type Props = {
     active: string;
+    placeHistory: PlaceHistory;
 }
 
 export default class HeaderMenu extends React.PureComponent<Props> {
 
     render() {
 
-        const history = getPlaceHistory();
+        const history = this.props.placeHistory;
 
         return <Menu mode="horizontal" selectedKeys={[this.props.active]} className="menu">
             <Menu.Item key="trees">
@@ -39,9 +41,7 @@ export default class HeaderMenu extends React.PureComponent<Props> {
 
 const PlaceMenuItem = (props: {place: Place.AsObject}) => {
     const place = props.place;
-    return <>
-        <a href={placeHref(place)}>{place.name}</a>
-        {" "}
-        ({place.type})
-    </>
-}
+    return <a href={placeHref(place)}>
+        {place.name} ({placeTypeName(place.type)})
+    </a>
+};

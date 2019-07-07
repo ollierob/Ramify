@@ -1,6 +1,7 @@
 import * as React from "react";
 import HeaderMenu from "./HeaderMenu";
 import "./Core"
+import {getPlaceHistory, PlaceHistory} from "./places/PlaceHistory";
 
 export default abstract class BasePage<S = any> extends React.PureComponent<any, S> {
 
@@ -21,7 +22,13 @@ export default abstract class BasePage<S = any> extends React.PureComponent<any,
     }
 
     menu(): React.ReactNode {
-        return <HeaderMenu active={this.active()}/>
+        return <HeaderMenu
+            placeHistory={this.placeHistory()}
+            active={this.active()}/>
+    }
+
+    placeHistory(): PlaceHistory {
+        return getPlaceHistory();
     }
 
     abstract body(): React.ReactNode;
