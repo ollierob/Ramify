@@ -25,10 +25,10 @@ export default class HeaderMenu extends React.PureComponent<Props> {
                 <PeopleIcon/> People
             </Menu.Item>
             <Menu.SubMenu key="places" title={<a href="/places"><PlacesIcon/> Places</a>}>
-                <Menu.ItemGroup title="Recent places">
+                <Menu.SubMenu title="Recent places">
                     {!history.length && <Menu.Item key="" disabled>No recent places.</Menu.Item>}
                     {history.map(h => <Menu.Item key={h.id}><PlaceMenuItem place={h}/></Menu.Item>)}
-                </Menu.ItemGroup>
+                </Menu.SubMenu>
             </Menu.SubMenu>
             <Menu.Item key="records">
                 <a href="/records"><RecordsIcon/> Records</a>
