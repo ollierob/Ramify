@@ -3,6 +3,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://ramify.net/places ../../../../schema/schema1.xsd">
 
+
     <town id="hebden_bridge">
 
         <church id="hebden_bridge_st_james" name="St James the Great"/>
@@ -22,6 +23,13 @@
         <mill id="brunswick" name="Brunswick"/>
         <mill id="waterside" name="Waterside"/>
         <mill id="mytholm" name="Mytholm"/>
+
+        <!--http://www.calderdalecompanion.co.uk/qq_53.html-->
+        <inn id="albert" name="Albert"/>
+        <inn id="black_bull" name="Black Bull"/>
+        <inn id="hebden_bridge_white_lion" name="White Lion"/>
+        <inn id="hole_in_the_wall" name="Hole in the Wall"/>
+        <inn id="hare_and_hounds" name="Hare and Hounds"/>
 
     </town>
 
