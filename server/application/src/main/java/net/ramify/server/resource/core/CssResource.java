@@ -2,6 +2,7 @@ package net.ramify.server.resource.core;
 
 import net.ramify.authentication.UserSessionContext;
 import net.ramify.server.resource.AbstractResource;
+import net.ramify.server.resource.Cached;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -16,6 +17,7 @@ public class CssResource extends AbstractResource {
 
     @GET
     @Path("{file}")
+    @Cached(maxAgeDays = 1)
     @Produces("text/css")
     public Response readCss(
             @Context final UserSessionContext context,
