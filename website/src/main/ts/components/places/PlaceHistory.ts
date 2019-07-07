@@ -1,7 +1,7 @@
 import {Place} from "../../protobuf/generated/place_pb";
 import {PlaceList} from "./Place";
 
-export function updatePlaceHistory(place: Place.AsObject): PlaceList {
+export function addPlaceHistory(place: Place.AsObject): PlaceList {
     let currentHistory = getPlaceHistory();
     if (!place) return currentHistory;
     const history = addNewPlace(place, currentHistory);
@@ -30,4 +30,9 @@ export function addNewPlace(place: Place.AsObject, list: PlaceList, permitDuplic
         if (i >= 0) return [].concat(list).splice(i, 1).concat(place);
     }
     return [place].concat(list);
+}
+
+export type PlaceHistoryHandler = {
+    placeHistory: PlaceList;
+    addPlaceHistory: (place: Place.AsObject) => void;
 }

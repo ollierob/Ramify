@@ -1,17 +1,16 @@
 import * as React from "react";
 import {RouteComponentProps} from "react-router";
 import {PlaceBundle} from "../../protobuf/generated/place_pb";
-import {PlaceId, PlaceList} from "../../components/places/Place";
+import {PlaceId} from "../../components/places/Place";
 import {AsyncData, asyncLoadData} from "../../components/fetch/AsyncData";
 import {DEFAULT_PLACE_LOADER} from "../../components/places/PlaceLoader";
 import {PlaceBreadcrumb} from "./PlaceBreadcrumb";
 import {PlacesPageProps} from "./PlacesBasePage";
-import {updatePlaceHistory} from "../../components/places/PlaceHistory";
+import {addPlaceHistory, PlaceHistoryHandler} from "../../components/places/PlaceHistory";
 import {PlaceFavouritesHandler} from "../../components/places/PlaceFavourites";
 
-type Props = RouteComponentProps<any> & PlaceFavouritesHandler & {
+type Props = RouteComponentProps<any> & PlaceFavouritesHandler & PlaceHistoryHandler & {
     childType: React.ComponentType<PlacesPageProps>;
-    placeHistory: PlaceList;
 }
 
 type State = {
@@ -66,7 +65,7 @@ export default class PlacesBreadcrumbWrapper extends React.PureComponent<Props, 
             this.loadPlace(this.state.placeId);
 
         if (this.state.place.data && this.state.place != prevState.place)
-            updatePlaceHistory(this.state.place.data.place);
+            this.props.addPlaceHistory(this.state.place.data.place);
 
     }
 

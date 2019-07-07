@@ -11,7 +11,7 @@ import {Place, PlaceBundle} from "../../protobuf/generated/place_pb";
 import AreaPage from "./area/AreaPage";
 import SchoolPage from "./institution/SchoolPage";
 import {addPlaceFavourite, getPlaceFavourites, PlaceFavouritesHandler, removePlaceFavourite} from "../../components/places/PlaceFavourites";
-import {getPlaceHistory} from "../../components/places/PlaceHistory";
+import {addPlaceHistory, getPlaceHistory} from "../../components/places/PlaceHistory";
 
 type State = {
     history: PlaceList;
@@ -28,6 +28,7 @@ class PlacesBasePage extends BasePage<State> {
         };
         this.addPlaceFavourite = this.addPlaceFavourite.bind(this);
         this.removePlaceFavourite = this.removePlaceFavourite.bind(this);
+        this.addPlaceHistory = this.addPlaceHistory.bind(this);
     }
 
 
@@ -57,11 +58,18 @@ class PlacesBasePage extends BasePage<State> {
     private breadcrumb(type: React.ComponentType<PlacesPageProps>): React.ComponentType<RouteComponentProps<any>> {
         return params => <PlacesBreadcrumbWrapper
             {...params}
+            key="placeBreadcrumb"
             childType={type}
             placeHistory={this.state.history}
+            addPlaceHistory={this.addPlaceHistory}
             placeFavourites={this.state.favourites}
             addPlaceFavourite={this.addPlaceFavourite}
             removePlaceFavourite={this.removePlaceFavourite}/>
+    }
+
+    private addPlaceHistory(place: Place.AsObject) {
+        //if (place) this.setState({history: addPlaceHistory(place)}) //FIXME stop this remounting on state change
+        addPlaceHistory(place);
     }
 
     private addPlaceFavourite(place: Place.AsObject) {
