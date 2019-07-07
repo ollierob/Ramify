@@ -3,7 +3,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://ramify.net/places ../../../../schema/schema1.xsd">
 
-
+    <!--http://www.calderdalecompanion.co.uk/mmh4054.html-->
     <town id="hebden_bridge">
 
         <church id="hebden_bridge_st_james" name="St James the Great"/>
@@ -31,6 +31,9 @@
         <inn id="hole_in_the_wall" name="Hole in the Wall"/>
         <inn id="hare_and_hounds" name="Hare and Hounds"/>
         <inn id="white_swan" name="White Swan"/>
+
+        <!--http://www.calderdalecompanion.co.uk/qq_51.html-->
+        <school id="moss_academy" name="Moss's Academy"/>
 
     </town>
 
