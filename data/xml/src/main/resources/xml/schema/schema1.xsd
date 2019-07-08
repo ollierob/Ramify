@@ -336,6 +336,8 @@
 
                 </sequence>
 
+                <attribute name="iso" type="xs:string" use="required"/>
+
             </extension>
 
         </complexContent>
@@ -608,21 +610,21 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="accounts"/>
-
-            <enumeration value="burial"/>
-
             <enumeration value="baptism"/>
-
-            <enumeration value="marriage"/>
-
-            <enumeration value="birth"/>
 
             <enumeration value="pewRents"/>
 
-            <enumeration value="membership"/>
+            <enumeration value="birth"/>
 
             <enumeration value="minutes"/>
+
+            <enumeration value="burial"/>
+
+            <enumeration value="accounts"/>
+
+            <enumeration value="membership"/>
+
+            <enumeration value="marriage"/>
 
         </restriction>
 

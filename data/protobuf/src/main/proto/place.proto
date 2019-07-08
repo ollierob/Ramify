@@ -12,6 +12,7 @@ message Place {
     string name = 2;
     PlaceType type = 3;
     Place parent = 4;
+    string iso = 5;
 
 }
 

@@ -1,6 +1,6 @@
 import * as React from "react";
 import {Icon} from "antd";
-import {HasClass} from "./style/HasClass";
+import {HasClass} from "../style/HasClass";
 
 type IconProps = HasClass & {
     onClick?: React.MouseEventHandler<HTMLElement>

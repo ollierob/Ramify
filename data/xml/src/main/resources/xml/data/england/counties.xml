@@ -5,7 +5,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://ramify.net/places ../../schema/schema1.xsd">
 
-    <country id="england" name="England">
+    <country id="england" name="England" iso="GB-ENG">
 
         <county id="west_yorkshire" name="West Yorkshire"/>
 

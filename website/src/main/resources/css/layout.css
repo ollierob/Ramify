@@ -53,8 +53,13 @@ body {
 
 .image {
     height: 1em;
-    width: 1em;
     vertical-align: inherit;
+}
+
+.flag {
+    height: 1.25em;
+    border: 1px solid #EEEEEE;
+    vertical-align: bottom;
 }
 
 .home {

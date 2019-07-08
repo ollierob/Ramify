@@ -13,6 +13,7 @@
 .home .country {
     display: inline-block;
     width: 300px;
+    border: 0;
 }
 
 /*Other pages*/

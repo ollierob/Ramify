@@ -10,7 +10,7 @@ class CountryTest {
 
     @Test
     void testAddress() {
-        assertEquals("England", new Country(mock(PlaceId.class), "England").address());
+        assertEquals("England", new Country(mock(PlaceId.class), "England", "_england").address());
     }
 
 }

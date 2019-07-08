@@ -5,6 +5,8 @@ import {Place} from "../../../protobuf/generated/place_pb";
 import {Card} from "antd";
 import {DEFAULT_PLACE_LOADER} from "../../../components/places/PlaceLoader";
 import {Loading} from "../../../components/Loading";
+import {Flag} from "../../../components/images/Flag";
+import {placeHref} from "../../../components/places/Place";
 
 type Props = PlacesPageProps;
 
@@ -44,9 +46,12 @@ export default class PlacesHomePage extends React.PureComponent<Props, State> {
 }
 
 const CountryCard = (props: {country: Place.AsObject}) => {
+    const country = props.country;
+    if (!country) return null;
     return <Card
         className="country"
-        title={props.country.name}>
+        title={<><Flag iso={country.iso}/> <a href={placeHref(country)}>{country.name}</a></>}>
 
     </Card>
-}
+};
+

@@ -3,7 +3,7 @@ import {Place, PlaceDescription} from "../../protobuf/generated/place_pb";
 import {placeTypeName} from "./PlaceType";
 import {PlaceLinks} from "./PlaceLinks";
 import {isPlaceFavourite, PlaceFavouritesHandler} from "./PlaceFavourites";
-import {FavouritesIcon} from "../Icons";
+import {FavouritesIcon} from "../images/Icons";
 
 export const PlaceTitle = (props: {place: Place.AsObject, description: PlaceDescription.AsObject} & PlaceFavouritesHandler) => {
 
