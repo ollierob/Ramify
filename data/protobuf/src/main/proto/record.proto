@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option java_package = "net.ramify.model.record.proto";
+option java_outer_classname = "RecordProto";
+
+import "date.proto";
+import "family.proto";
+
+message Record {
+
+    string id = 1;
+    Date date = 2;
+    Family family = 3;
+
+}
+
+message RecordSet {
+
+    string id = 1;
+    string title = 2;
+    string description = 3;
+    RecordType type = 4;
+    string parentId = 5;
+
+}
+
+enum RecordType {
+
+    BIRTH = 0;
+    BAPTISM = 1;
+    RESIDENCE = 2;
+    MARRIAGE = 3;
+    DEATH = 4;
+    BURIAL = 5;
+
+}
