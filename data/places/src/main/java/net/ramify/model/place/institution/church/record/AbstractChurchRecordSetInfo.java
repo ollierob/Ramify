@@ -1,7 +1,7 @@
 package net.ramify.model.place.institution.church.record;
 
 import net.ramify.model.date.DateRange;
-import net.ramify.model.record.set.RecordSetId;
+import net.ramify.model.record.collection.RecordSetId;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;

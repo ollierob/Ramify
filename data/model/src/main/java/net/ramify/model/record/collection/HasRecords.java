@@ -12,7 +12,7 @@ public interface HasRecords {
     @Nonnull
     Set<Record> records();
 
-    default boolean hasRecord(final RecordId id) {
+    default boolean hasRecord(@Nonnull final RecordId id) {
         return IterableUtils.any(this.records(), r -> r.recordId().equals(id));
     }
 

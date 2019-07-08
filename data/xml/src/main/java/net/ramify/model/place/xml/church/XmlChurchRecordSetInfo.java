@@ -13,8 +13,8 @@ import net.ramify.model.place.institution.church.record.ChurchMembershipInfo;
 import net.ramify.model.place.institution.church.record.ChurchPewRentalInfo;
 import net.ramify.model.place.institution.church.record.ChurchRecordSetInfo;
 import net.ramify.model.place.xml.place.XmlPlace;
-import net.ramify.model.record.set.HasRecordSetId;
-import net.ramify.model.record.set.RecordSetId;
+import net.ramify.model.record.collection.HasRecordSetId;
+import net.ramify.model.record.collection.RecordSetId;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;

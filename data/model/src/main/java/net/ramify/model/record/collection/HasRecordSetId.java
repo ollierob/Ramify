@@ -1,4 +1,4 @@
-package net.ramify.model.record.set;
+package net.ramify.model.record.collection;
 
 import javax.annotation.Nonnull;
 

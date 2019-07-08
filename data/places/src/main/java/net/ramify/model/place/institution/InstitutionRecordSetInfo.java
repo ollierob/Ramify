@@ -4,7 +4,7 @@ import com.google.common.base.MoreObjects;
 import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.date.HasDate;
 import net.ramify.model.place.proto.InstitutionProto;
-import net.ramify.model.record.set.HasRecordSetId;
+import net.ramify.model.record.collection.HasRecordSetId;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
