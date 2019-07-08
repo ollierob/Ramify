@@ -41,7 +41,7 @@ body {
 
 .body .content {
     position: absolute;
-    top: 0;
+    top: 10px;
     left: 10px;
     right: 10px;
     bottom: 10px;
@@ -62,9 +62,7 @@ body {
     vertical-align: bottom;
 }
 
-.home {
-    background-color: white;
-    border: 1px solid #D7D7D7;
-    margin-top: 10px;
-    padding: 12px;
+.large.ant-card .ant-card-head-title {
+    font-size: 24px;
+    font-weight: bold;
 }
