@@ -1,16 +1,21 @@
 import * as React from "react";
-import {Card, Select} from "antd";
+import {Card, Cascader, Select} from "antd";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {Place} from "../../../protobuf/generated/place_pb";
 import {Flag} from "../../../components/images/Flag";
 import {PlaceId} from "../../../components/places/Place";
 import {DEFAULT_PLACE_LOADER} from "../../../components/places/PlaceLoader";
+import {CascaderOptionType} from "antd/es/cascader";
+import {YearRange} from "../../../components/date/DateRange";
 
 type Props = {}
 
 type State = {
-    selectedCountries: ReadonlyArray<PlaceId>
+    selectedRegion: PlaceId[];
     countries: AsyncData<ReadonlyArray<Place.AsObject>>;
+    regions: CascaderOptionType[];
+    selectedRange: string[];
+    ranges: CascaderOptionType[];
 }
 
 export default class RecordsHomePage extends React.PureComponent<Props, State> {
@@ -20,9 +25,13 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
     constructor(props) {
         super(props);
         this.state = {
-            selectedCountries: [],
-            countries: {}
-        }
+            selectedRegion: [],
+            countries: {},
+            regions: [],
+            selectedRange: [],
+            ranges: generateYearRanges()
+        };
+        this.renderRange = this.renderRange.bind(this);
     }
 
 
@@ -33,28 +42,27 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
             title={<>Records</>}>
 
             <div className="filter">
-                Filter by country:
+                Filter by region:
                 <br/>
-                <Select
+                <Cascader
                     placeholder="Showing all countries"
-                    mode="multiple"
                     size="large"
-                    value={this.state.selectedCountries}
-                    onChange={values => this.setState({selectedCountries: values})}
-                    loading={this.state.countries.loading}>
-                    {this.state.countries.data && this.state.countries.data.map(countrySelectOption)}
-                </Select>
+                    value={this.state.selectedRegion}
+                    onChange={selectedRegion => this.setState({selectedRegion})}
+                    options={this.state.regions}/>
             </div>
 
             <div className="filter">
                 Filter by date:
                 <br/>
-                <Select
+                <Cascader
                     placeholder="Showing all dates"
-                    mode="multiple"
-                    size="large">
-
-                </Select>
+                    size="large"
+                    changeOnSelect
+                    value={this.state.selectedRange}
+                    onChange={selectedRange => this.setState({selectedRange})}
+                    options={this.state.ranges}
+                    displayRender={this.renderRange}/>
             </div>
 
         </Card>;
@@ -65,14 +73,57 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
         this.loadCountries();
     }
 
+    componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>) {
+
+        if (this.state.countries != prevState.countries)
+            this.setState({regions: generateCountryOptions(this.state.countries.data)})
+
+    }
+
+    private renderRange(range: string[]) {
+        if (!range.length) return null;
+        return range[range.length - 1];
+    }
+
     private loadCountries() {
         asyncLoadData(null, this.placeLoader.loadCountries, countries => this.setState({countries}))
     }
 
 }
 
-function countrySelectOption(country: Place.AsObject) {
-    return <Select.Option key={country.id} value={country.id}>
-        <Flag iso={country.iso}/> {country.name}
-    </Select.Option>
+function generateCountryOptions(countries: ReadonlyArray<Place.AsObject>): CascaderOptionType[] {
+    if (!countries) return [];
+    return countries.map<CascaderOptionType>(country => ({
+        label: <><Flag iso={country.iso}/> {country.name}</>,
+        value: country.id
+    }));
+}
+
+function generateYearRanges(): CascaderOptionType[] {
+    const options: CascaderOptionType[] = [];
+    for (let century = 1400; century <= 1900; century += 100) {
+        const centuryEnd = century + 100;
+        const centuryOption: CascaderOptionType = {
+            label: century + " - " + centuryEnd,
+            value: century + "-" + centuryEnd,
+            children: [],
+            range: yearRange(century, centuryEnd)
+        };
+        options.push(centuryOption);
+        for (let decade = 0; decade < 100; decade += 10) {
+            const decadeStart = century + decade;
+            const decadeEnd = decadeStart + 10;
+            const decadeOption: CascaderOptionType = {
+                label: decadeStart + " - " + decadeEnd,
+                value: decadeStart + "-" + decadeEnd,
+                range: yearRange(decadeStart, decadeEnd)
+            };
+            centuryOption.children.push(decadeOption);
+        }
+    }
+    return options;
+}
+
+function yearRange(from: number, to: number): YearRange {
+    return {from, to};
 }

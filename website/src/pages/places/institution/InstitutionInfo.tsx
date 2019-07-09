@@ -1,5 +1,5 @@
 import * as React from "react";
-import {DateRange} from "../../../components/date/DateRange";
+import {FormattedDateRange} from "../../../components/date/FormattedDateRange";
 import {Card} from "antd";
 import {Institution} from "../../../protobuf/generated/institution_pb";
 import {HasClass} from "../../../components/style/HasClass";
@@ -29,8 +29,8 @@ export const InstitutionInfo = (props: Props) => {
 
         <div className="description">
             {institution && <div className="dates">
-                {institution.established && <div>Founded <DateRange date={institution.established}/></div>}
-                {institution && institution.closed && <div>Closed <DateRange date={institution.closed}/></div>}
+                {institution.established && <div>Founded <FormattedDateRange date={institution.established}/></div>}
+                {institution && institution.closed && <div>Closed <FormattedDateRange date={institution.closed}/></div>}
             </div>}
             <div>
                 {description ? description.description : <i>No description available.</i>}

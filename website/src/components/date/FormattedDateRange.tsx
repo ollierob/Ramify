@@ -1,7 +1,7 @@
 import * as React from "react";
 import {Date as DateProto, DateRange as DateRangeProto} from "../../protobuf/generated/date_pb";
 
-export const DateRange = (props: {date: DateRangeProto.AsObject}) => {
+export const FormattedDateRange = (props: {date: DateRangeProto.AsObject}) => {
     const date = props.date;
     if (!date) return null;
     if (!date.earliest && !date.latest) return <>unknown</>;
