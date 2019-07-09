@@ -32,6 +32,7 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
             ranges: generateYearRanges()
         };
         this.renderRange = this.renderRange.bind(this);
+        this.loadLeafPlace = this.loadLeafPlace.bind(this);
     }
 
 
@@ -47,9 +48,11 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
                 <Cascader
                     placeholder="Showing all countries"
                     size="large"
+                    changeOnSelect
                     value={this.state.selectedRegion}
                     onChange={selectedRegion => this.setState({selectedRegion})}
-                    options={this.state.regions}/>
+                    options={this.state.regions}
+                    loadData={this.loadLeafPlace}/>
             </div>
 
             <div className="filter">
@@ -89,13 +92,27 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
         asyncLoadData(null, this.placeLoader.loadCountries, countries => this.setState({countries}))
     }
 
+    private loadLeafPlace(selected: CascaderOptionType[]) {
+        const target = selected[selected.length - 1];
+        if (target.depth == 1) {
+            target.loading = true;
+            this.placeLoader.loadChildren(target.value, 1)
+                .then(children => {
+                    target.loading = false;
+                    target.children = children.map<CascaderOptionType>(c => ({label: c.name, value: c.id, depth: 2}))
+                }).then(() => this.setState(current => ({regions: [...current.regions]})));
+        }
+    }
+
 }
 
 function generateCountryOptions(countries: ReadonlyArray<Place.AsObject>): CascaderOptionType[] {
     if (!countries) return [];
     return countries.map<CascaderOptionType>(country => ({
         label: <><Flag iso={country.iso}/> {country.name}</>,
-        value: country.id
+        value: country.id,
+        isLeaf: false,
+        depth: 1
     }));
 }
 
@@ -104,7 +121,7 @@ function generateYearRanges(): CascaderOptionType[] {
     for (let century = 1400; century <= 1900; century += 100) {
         const centuryEnd = century + 100;
         const centuryOption: CascaderOptionType = {
-            label: century + " - " + centuryEnd,
+            label: century + "s",
             value: century + "-" + centuryEnd,
             children: [],
             range: yearRange(century, centuryEnd)
