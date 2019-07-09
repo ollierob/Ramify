@@ -9,6 +9,7 @@ import net.ramify.model.place.settlement.City;
 import net.ramify.model.place.type.Region;
 
 import javax.annotation.Nonnull;
+import java.util.Optional;
 import java.util.Set;
 
 public class County extends AbstractRegion {
@@ -16,14 +17,16 @@ public class County extends AbstractRegion {
     private static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(Manor.class, Parish.class, City.class);
 
     private final Region parent;
+    private final String iso;
 
-    public County(final PlaceId id, final String name, final Place parent) throws InvalidPlaceTypeException {
-        this(id, name, parent.requireAs(Region.class));
+    public County(final PlaceId id, final String name, final Place parent, final String iso) throws InvalidPlaceTypeException {
+        this(id, name, parent.requireAs(Region.class), iso);
     }
 
-    public County(final PlaceId id, final String name, final Region parent) {
+    public County(final PlaceId id, final String name, final Region parent, final String iso) {
         super(id, name);
         this.parent = parent;
+        this.iso = iso;
     }
 
     @Override
@@ -43,4 +46,9 @@ public class County extends AbstractRegion {
         return PlaceProto.PlaceType.COUNTY;
     }
 
+    @Nonnull
+    @Override
+    public Optional<String> iso() {
+        return Optional.ofNullable(iso);
+    }
 }

@@ -50,7 +50,7 @@ const CountryCard = (props: {country: Place.AsObject}) => {
     if (!country) return null;
     return <Card
         className="country"
-        title={<><Flag iso={country.iso}/> <a href={placeHref(country)}>{country.name}</a></>}>
+        title={<><Flag iso={country.iso}/><a href={placeHref(country)}>{country.name}</a></>}>
 
     </Card>
 };

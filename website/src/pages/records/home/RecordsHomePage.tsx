@@ -12,7 +12,6 @@ type Props = {}
 
 type State = {
     selectedRegion: PlaceId[];
-    countries: AsyncData<ReadonlyArray<Place.AsObject>>;
     regions: CascaderOptionType[];
     selectedRange: string[];
     ranges: CascaderOptionType[];
@@ -26,7 +25,6 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
         super(props);
         this.state = {
             selectedRegion: [],
-            countries: {},
             regions: [],
             selectedRange: [],
             ranges: generateYearRanges()
@@ -52,7 +50,8 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
                     value={this.state.selectedRegion}
                     onChange={selectedRegion => this.setState({selectedRegion})}
                     options={this.state.regions}
-                    loadData={this.loadLeafPlace}/>
+                    loadData={this.loadLeafPlace}
+                    displayRender={this.renderPlace}/>
             </div>
 
             <div className="filter">
@@ -73,23 +72,18 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
     }
 
     componentDidMount() {
-        this.loadCountries();
+        this.placeLoader.loadCountries()
+            .then(countries => this.setState({regions: generateCountryOptions(countries)}))
     }
 
-    componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>) {
-
-        if (this.state.countries != prevState.countries)
-            this.setState({regions: generateCountryOptions(this.state.countries.data)})
-
+    private renderPlace(places: PlaceId[]): React.ReactNode {
+        if (!places.length) return null;
+        return places[places.length - 1];
     }
 
-    private renderRange(range: string[]) {
+    private renderRange(range: string[]): React.ReactNode {
         if (!range.length) return null;
         return range[range.length - 1];
-    }
-
-    private loadCountries() {
-        asyncLoadData(null, this.placeLoader.loadCountries, countries => this.setState({countries}))
     }
 
     private loadLeafPlace(selected: CascaderOptionType[]) {
@@ -99,7 +93,11 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
             this.placeLoader.loadChildren(target.value, 1)
                 .then(children => {
                     target.loading = false;
-                    target.children = children.map<CascaderOptionType>(c => ({label: c.name, value: c.id, depth: 2}))
+                    target.children = children.map<CascaderOptionType>(child => ({
+                        label: <><Flag iso={child.iso}/>{child.name}</>,
+                        value: child.id,
+                        depth: 2
+                    }))
                 }).then(() => this.setState(current => ({regions: [...current.regions]})));
         }
     }
@@ -109,7 +107,7 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
 function generateCountryOptions(countries: ReadonlyArray<Place.AsObject>): CascaderOptionType[] {
     if (!countries) return [];
     return countries.map<CascaderOptionType>(country => ({
-        label: <><Flag iso={country.iso}/> {country.name}</>,
+        label: <><Flag iso={country.iso}/>{country.name}</>,
         value: country.id,
         isLeaf: false,
         depth: 1

@@ -7,7 +7,7 @@
 
     <country id="england" name="England" iso="GB-ENG">
 
-        <county id="west_yorkshire" name="West Yorkshire"/>
+        <county id="west_yorkshire" name="West Yorkshire" iso="GB-WRY"/>
 
     </country>
 

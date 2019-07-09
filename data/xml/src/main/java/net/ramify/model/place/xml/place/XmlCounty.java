@@ -7,6 +7,7 @@ import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.County;
 import net.ramify.model.place.xml.place.manor.XmlManor;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -24,6 +25,9 @@ class XmlCounty extends XmlPlace {
     })
     private List<XmlPlace> children;
 
+    @XmlAttribute(name = "iso")
+    private String iso;
+
     @Override
     protected PlaceId placeId(final String id) {
         return new Spid(County.class, id);
@@ -32,7 +36,7 @@ class XmlCounty extends XmlPlace {
     @Override
     protected County place(final Place parent) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
-        return new County(this.placeId(), this.name(), parent);
+        return new County(this.placeId(), this.name(), parent, iso);
     }
 
     @Override
