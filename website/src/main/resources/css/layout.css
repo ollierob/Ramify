@@ -59,7 +59,7 @@ body {
 .flag {
     height: 1.25em;
     border: 1px solid #EEEEEE;
-    vertical-align: bottom;
+    vertical-align: text-top;
     margin-right: 8px;
 }
 
