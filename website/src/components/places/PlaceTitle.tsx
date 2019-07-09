@@ -4,6 +4,7 @@ import {placeTypeName} from "./PlaceType";
 import {PlaceLinks} from "./PlaceLinks";
 import {isPlaceFavourite, PlaceFavouritesHandler} from "./PlaceFavourites";
 import {FavouritesIcon} from "../images/Icons";
+import {Flag} from "../images/Flag";
 
 export const PlaceTitle = (props: {place: Place.AsObject, description: PlaceDescription.AsObject} & PlaceFavouritesHandler) => {
 
@@ -13,6 +14,7 @@ export const PlaceTitle = (props: {place: Place.AsObject, description: PlaceDesc
     const isFavourite = isPlaceFavourite(place.id, props.placeFavourites);
 
     return <>
+        <Flag iso={place.iso}/>
         <b>{place.name}</b>
         {" "}
         <span className="unimportant">
