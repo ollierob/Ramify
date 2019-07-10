@@ -61,7 +61,7 @@
                         <goals>
                             <goal>schemagen</goal>
                         </goals>
-                        <phase>test</phase>
+                        <phase>package</phase>
                         <configuration>
                             <createJavaDocAnnotations>false</createJavaDocAnnotations>
                             <outputDirectory>${xml.schema.dir}</outputDirectory>
@@ -100,6 +100,36 @@
                         <version>1.2.0</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>com.coderplus.maven.plugins</groupId>
+                <artifactId>copy-rename-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <id>rename-xsds</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>rename</goal>
+                        </goals>
+                        <configuration>
+                            <fileSets>
+                                <fileSet>
+                                    <sourceFile>src/main/resources/xml/schema/schema1.xsd</sourceFile>
+                                    <destinationFile>src/main/resources/xml/schema/records.xsd</destinationFile>
+                                </fileSet>
+                                <fileSet>
+                                    <sourceFile>src/main/resources/xml/schema/schema2.xsd</sourceFile>
+                                    <destinationFile>src/main/resources/xml/schema/places.xsd</destinationFile>
+                                </fileSet>
+                                <fileSet>
+                                    <sourceFile>src/main/resources/xml/schema/schema3.xsd</sourceFile>
+                                    <destinationFile>src/main/resources/xml/schema/dates.xsd</destinationFile>
+                                </fileSet>
+                            </fileSets>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

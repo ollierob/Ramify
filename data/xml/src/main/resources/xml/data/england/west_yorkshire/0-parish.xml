@@ -3,7 +3,7 @@
 <places
         xmlns="http://ramify.net/places"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://ramify.net/places ../../../schema/schema1.xsd">
+        xsi:schemaLocation="http://ramify.net/places ../../../schema/places.xsd">
 
     <county id="west_yorkshire">
 

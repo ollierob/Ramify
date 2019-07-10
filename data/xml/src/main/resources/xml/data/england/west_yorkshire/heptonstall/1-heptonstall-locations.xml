@@ -3,7 +3,7 @@
 <placePositions
         xmlns="http://ramify.net/places"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://ramify.net/places ../../../../schema/schema1.xsd">
+        xsi:schemaLocation="http://ramify.net/places ../../../../schema/places.xsd">
 
     <placePoint id="chapelry:heptonstall" latitude="53.737632" longitude="-2.071990" zoom="11"/>
     <placePoint id="township:heptonstall" latitude="53.754719" longitude="-2.037193" zoom="12"/>
