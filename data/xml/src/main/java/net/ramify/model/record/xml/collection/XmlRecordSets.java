@@ -1,4 +1,4 @@
-package net.ramify.model.record.xml.set;
+package net.ramify.model.record.xml.collection;
 
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.utils.collections.SetUtils;
