@@ -30,10 +30,10 @@ public interface Place extends HasPlaceId, Castable<Place>, BuildsProto<PlacePro
         return parent == null ? this : parent.ultimateParent();
     }
 
-    default boolean contains(final Place that) {
+    default boolean isParentOf(final Place that) {
         if (that == null) return false;
         if (this.equals(that)) return true;
-        return this.contains(that.parent());
+        return this.isParentOf(that.parent());
     }
 
     @Nonnull
