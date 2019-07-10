@@ -1,11 +1,15 @@
 package net.ramify.model.record.xml.collection;
 
 import net.ramify.model.record.collection.RecordSet;
+import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.xml.record.XmlRecord;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Collection;
+import java.util.List;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "recordSet")
 class XmlRecordSet {
@@ -19,7 +23,14 @@ class XmlRecordSet {
     @XmlElement(namespace = XmlRecord.NAMESPACE, name = "description", required = false)
     private String description;
 
-    RecordSet build() {
+    @XmlElementRef
+    private List<XmlRecordSet> children;
+
+    Collection<RecordSet> build() {
+        throw new UnsupportedOperationException();
+    }
+
+    Collection<RecordSet> build(final RecordSetId parentId) {
         throw new UnsupportedOperationException();
     }
 

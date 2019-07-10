@@ -1,15 +1,15 @@
 package net.ramify.model.record.xml.collection;
 
+import com.google.common.collect.Sets;
 import net.ramify.model.record.collection.RecordSet;
-import net.ramify.utils.collections.SetUtils;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import static net.ramify.model.record.xml.record.XmlRecord.NAMESPACE;
 
@@ -21,9 +21,11 @@ public class XmlRecordSets {
     private List<XmlRecordSet> recordSets;
 
     @Nonnull
-    public Collection<RecordSet> recordSets() {
+    public Set<RecordSet> recordSets() {
         if (recordSets == null) return Collections.emptySet();
-        return SetUtils.transform(recordSets, XmlRecordSet::build);
+        final var sets = Sets.<RecordSet>newIdentityHashSet();
+        recordSets.forEach(rs -> sets.addAll(rs.build()));
+        return sets;
     }
 
 }
