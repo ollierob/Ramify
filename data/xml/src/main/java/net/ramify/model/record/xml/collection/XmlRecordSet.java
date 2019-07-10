@@ -20,6 +20,9 @@ class XmlRecordSet {
     @XmlAttribute(name = "title", required = true)
     private String title;
 
+    @XmlAttribute(name = "place", required = true)
+    private String place;
+
     @XmlElement(namespace = XmlRecord.NAMESPACE, name = "description", required = false)
     private String description;
 

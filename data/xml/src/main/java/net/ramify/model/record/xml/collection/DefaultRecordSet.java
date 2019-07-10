@@ -1,6 +1,7 @@
 package net.ramify.model.record.xml.collection;
 
 import net.ramify.model.date.DateRange;
+import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.proto.RecordProto;
@@ -16,6 +17,7 @@ class DefaultRecordSet implements RecordSet {
     private final RecordSetId parentId;
     private final RecordProto.RecordType type;
     private final DateRange date;
+    private final PlaceId placeId;
     private final String title;
     private final String description;
 
@@ -24,12 +26,13 @@ class DefaultRecordSet implements RecordSet {
             final RecordSetId parentId,
             final RecordProto.RecordType type,
             final DateRange date,
-            final String title,
+            PlaceId placeId, final String title,
             final String description) {
         this.id = id;
         this.parentId = parentId;
         this.type = type;
         this.date = date;
+        this.placeId = placeId;
         this.title = title;
         this.description = description;
     }
@@ -56,6 +59,12 @@ class DefaultRecordSet implements RecordSet {
     @Override
     public DateRange date() {
         return date;
+    }
+
+    @Nonnull
+    @Override
+    public PlaceId placeId() {
+        return placeId;
     }
 
     @Nonnull

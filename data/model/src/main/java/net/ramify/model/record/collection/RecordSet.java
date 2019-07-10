@@ -3,6 +3,7 @@ package net.ramify.model.record.collection;
 import com.google.common.base.MoreObjects;
 import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.date.HasDate;
+import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.record.HasTitleDescription;
 import net.ramify.model.record.proto.RecordProto;
 import net.ramify.utils.objects.Functions;
@@ -13,7 +14,7 @@ import javax.annotation.Nonnull;
 /**
  *
  */
-public interface RecordSet extends HasTitleDescription, HasRecordSetId, HasDate, BuildsProto<RecordProto.RecordSet> {
+public interface RecordSet extends HasTitleDescription, HasRecordSetId, HasDate, HasPlaceId, BuildsProto<RecordProto.RecordSet> {
 
     @CheckForNull
     RecordSetId parentId();
