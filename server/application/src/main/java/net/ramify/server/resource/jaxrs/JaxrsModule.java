@@ -11,6 +11,7 @@ public class JaxrsModule extends AbstractModule {
         this.bind(ProtobufDirectMessageBodyWriter.class);
         this.bind(ProtobufStringMessageBodyWriter.class);
         this.bind(CacheControlFilter.class);
+        this.bind(DateRangeParamConverterProvider.class);
     }
 
 }

@@ -44,6 +44,10 @@ public interface DateRange extends BuildsProto<DateProto.DateRange> {
         throw new UnsupportedOperationException(); //TODO
     }
 
+    default boolean intersects(final DateRange that) {
+        return this.intersection(that).isPresent();
+    }
+
     @Nonnull
     default DateProto.DateRange.Builder toProtoBuilder() {
         final var builder = DateProto.DateRange.newBuilder().setApproximate(this.isApproximate());
