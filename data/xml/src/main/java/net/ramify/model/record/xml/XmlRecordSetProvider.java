@@ -39,7 +39,7 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
         final var provider = new XmlRecordSetProvider(Maps.newConcurrentMap());
         final var unmarshaller = context.createUnmarshaller();
         FileTraverseUtils.traverseSubdirectories(root, file -> file.getName().endsWith(".xml") && file.getName().contains("record"), file -> readRecordsInFile(unmarshaller, file, provider));
-        logger.info("Loaded {} places from {}.", provider.size(), root);
+        logger.info("Loaded {} record sets from {}.", provider.size(), root);
         return new XmlRecordSetProvider(provider.immutableMap());
     }
 
@@ -47,13 +47,13 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
         FileUtils.checkReadableFile(file);
         Preconditions.checkArgument(file.getName().endsWith(".xml"), "Not an XML file: %s", file);
         try {
-            logger.info("Reading locations from file {}", file);
+            logger.info("Reading records from file {}", file);
             final var unmarshalled = unmarshaller.unmarshal(file);
             if (!(unmarshalled instanceof XmlRecordSets)) return;
             final var records = (XmlRecordSets) unmarshalled;
             provider.addAll(records.recordSets());
         } catch (final JAXBException jex) {
-            logger.warn("Could not read locations in file " + file + ": " + jex.getMessage());
+            logger.warn("Could not read records in file " + file + ": " + jex.getMessage());
         }
     }
 
