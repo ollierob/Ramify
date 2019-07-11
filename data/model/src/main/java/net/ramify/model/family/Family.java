@@ -5,6 +5,8 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.graph.Network;
 import com.google.common.graph.NetworkBuilder;
+import net.ramify.data.proto.BuildsProto;
+import net.ramify.model.family.proto.FamilyProto;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.collection.HasPeople;
@@ -15,7 +17,7 @@ import javax.annotation.Nonnull;
 import java.util.Optional;
 import java.util.Set;
 
-public interface Family extends HasPeople, HasRelationships {
+public interface Family extends HasPeople, HasRelationships, BuildsProto<FamilyProto.Family> {
 
     @Nonnull
     @Override
@@ -47,6 +49,18 @@ public interface Family extends HasPeople, HasRelationships {
         });
         this.relationships().forEach(r -> network.addEdge(mapped.get(r.fromId()), mapped.get(r.toId()), r)); //TODO also add inverses?
         return network;
+    }
+
+    @Nonnull
+    default FamilyProto.Family.Builder toProtoBuilder() {
+        return FamilyProto.Family.newBuilder()
+                .addAllPerson(Iterables.transform(this.people(), Person::toProto));
+    }
+
+    @Nonnull
+    @Override
+    default FamilyProto.Family toProto() {
+        return this.toProtoBuilder().build();
     }
 
 }

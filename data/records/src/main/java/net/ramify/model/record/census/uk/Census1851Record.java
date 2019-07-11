@@ -22,7 +22,7 @@ import net.ramify.model.relationship.Relationship;
 import javax.annotation.Nonnull;
 import java.time.Month;
 import java.time.Period;
-import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -31,9 +31,9 @@ public class Census1851Record extends CensusRecord {
     public static final ExactDate CENSUS_DATE = ExactDate.on(1851, Month.MARCH, 30);
 
     private final Census1851Head head;
-    private final Collection<Census1851Resident> residents;
+    private final List<Census1851Resident> residents;
 
-    public Census1851Record(final RecordId id, final PlaceId placeId, final Census1851Head head, final Collection<Census1851Resident> residents) {
+    public Census1851Record(final RecordId id, final PlaceId placeId, final Census1851Head head, final List<Census1851Resident> residents) {
         super(id, CENSUS_DATE, placeId);
         this.head = head;
         this.residents = residents;

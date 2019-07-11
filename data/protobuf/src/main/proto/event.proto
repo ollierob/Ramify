@@ -10,7 +10,7 @@ message Event {
 
     string title = 1;
     DateRange date = 2;
-    Place place = 3;
+    string placeId = 3;
 
 }
 

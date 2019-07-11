@@ -1,6 +1,7 @@
 package net.ramify.model.event.type.misc;
 
 import net.ramify.model.event.Event;
+import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.PlaceId;
 
@@ -21,4 +22,10 @@ public class EventWithPlace<E extends Event> extends ComposedEvent<E> implements
         return placeId;
     }
 
+    @Nonnull
+    @Override
+    public EventProto.Event.Builder toProtoBuilder() {
+        return super.toProtoBuilder()
+                .setPlaceId(placeId.value());
+    }
 }

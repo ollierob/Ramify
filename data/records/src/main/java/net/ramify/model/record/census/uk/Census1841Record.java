@@ -21,15 +21,16 @@ import net.ramify.utils.collections.SetUtils;
 import javax.annotation.Nonnull;
 import java.time.Month;
 import java.time.Period;
+import java.util.List;
 import java.util.Set;
 
 public class Census1841Record extends CensusRecord {
 
     public static final ExactDate CENSUS_DATE = ExactDate.on(1841, Month.JUNE, 6);
 
-    private final Set<Census1841Entry> entries;
+    private final List<Census1841Entry> entries;
 
-    public Census1841Record(final RecordId id, final PlaceId placeId, final Set<Census1841Entry> entries) {
+    public Census1841Record(final RecordId id, final PlaceId placeId, final List<Census1841Entry> entries) {
         super(id, CENSUS_DATE, placeId);
         this.entries = entries;
     }

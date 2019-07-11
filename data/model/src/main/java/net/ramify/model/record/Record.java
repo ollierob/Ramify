@@ -1,9 +1,29 @@
 package net.ramify.model.record;
 
+import com.google.common.collect.Iterables;
+import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.date.HasDate;
+import net.ramify.model.family.Family;
 import net.ramify.model.family.collection.HasFamilies;
+import net.ramify.model.record.proto.RecordProto;
 import net.ramify.utils.objects.Castable;
 
-public interface Record extends HasRecordId, HasDate, HasFamilies, Castable<Record> {
+import javax.annotation.Nonnull;
+
+public interface Record extends HasRecordId, HasDate, HasFamilies, Castable<Record>, BuildsProto<RecordProto.Record> {
+
+    @Nonnull
+    default RecordProto.Record.Builder toProtoBuilder() {
+        return RecordProto.Record.newBuilder()
+                .setId(this.recordId().value())
+                .setDate(this.date().toProto())
+                .addAllFamily(Iterables.transform(this.families(), Family::toProto));
+    }
+
+    @Nonnull
+    @Override
+    default RecordProto.Record toProto() {
+        return this.toProtoBuilder().build();
+    }
 
 }

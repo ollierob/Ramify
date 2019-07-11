@@ -9,8 +9,8 @@ import "family.proto";
 message Record {
 
     string id = 1;
-    Date date = 2;
-    Family family = 3;
+    DateRange date = 2;
+    repeated Family family = 3;
 
 }
 
