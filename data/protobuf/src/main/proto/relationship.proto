@@ -2,3 +2,11 @@ syntax = "proto3";
 
 option java_package = "net.ramify.model.relationship.proto";
 option java_outer_classname = "RelationshipProto";
+
+message Relationship {
+
+    string fromId = 1;
+    string toId = 2;
+    bool directed = 3;
+
+}
