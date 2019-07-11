@@ -5,6 +5,7 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.xml.record.XmlRecord;
+import net.ramify.utils.objects.Functions;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -54,7 +55,7 @@ class XmlRecordSet {
                 null, //TODO
                 new PlaceId(place),
                 title,
-                description);
+                Functions.ifNonNull(description, String::trim));
         if (children == null) return Collections.singletonList(self);
         final var recordSets = Lists.<RecordSet>newArrayListWithExpectedSize(1 + 2 * children.size());
         recordSets.add(self);

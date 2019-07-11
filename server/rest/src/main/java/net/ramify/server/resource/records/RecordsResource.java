@@ -3,6 +3,7 @@ package net.ramify.server.resource.records;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.collection.RecordSets;
+import net.ramify.server.resource.Cached;
 import net.ramify.server.resource.RootResource;
 
 import javax.annotation.Nonnull;
@@ -22,6 +23,7 @@ public interface RecordsResource extends RootResource {
     @Nonnull
     @GET
     @Path("sets")
+    @Cached(maxAgeMinutes = 1)
     RecordSets recordSets(
             @QueryParam("place") PlaceId withinPlace,
             @QueryParam("date") DateRange withinDate,

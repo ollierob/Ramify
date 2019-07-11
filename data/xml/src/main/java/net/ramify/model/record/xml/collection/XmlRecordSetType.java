@@ -3,6 +3,7 @@ package net.ramify.model.record.xml.collection;
 import net.ramify.model.record.proto.RecordProto;
 import net.ramify.model.record.xml.record.XmlRecord;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlType;
 
@@ -50,6 +51,7 @@ enum XmlRecordSetType {
         this.type = type == null ? RecordProto.RecordType.valueOf(this.name()) : type;
     }
 
+    @Nonnull
     RecordProto.RecordType type() {
         return type;
     }

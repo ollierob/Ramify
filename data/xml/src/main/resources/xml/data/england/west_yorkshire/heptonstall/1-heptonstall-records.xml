@@ -13,6 +13,10 @@
             source="church"
             type="mixed">
 
+        <description>
+            Registers of the church of St Thomas at Heptonstall.
+        </description>
+
         <recordSet
                 id="heptonstall_st-thomas_baptisms"
                 title="Heptonstall St. Thomas Baptisms"
