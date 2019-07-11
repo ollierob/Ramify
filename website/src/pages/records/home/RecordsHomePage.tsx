@@ -7,6 +7,8 @@ import {PlaceId} from "../../../components/places/Place";
 import {DEFAULT_PLACE_LOADER} from "../../../components/places/PlaceLoader";
 import {CascaderOptionType} from "antd/es/cascader";
 import {YearRange} from "../../../components/date/DateRange";
+import {Record, RecordSet} from "../../../protobuf/generated/record_pb";
+import RecordSetTable from "./RecordSetTable";
 
 type Props = {}
 
@@ -15,6 +17,7 @@ type State = {
     regions: CascaderOptionType[];
     selectedRange: string[];
     ranges: CascaderOptionType[];
+    recordSets: AsyncData<ReadonlyArray<RecordSet.AsObject>>
 }
 
 export default class RecordsHomePage extends React.PureComponent<Props, State> {
@@ -27,7 +30,8 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
             selectedRegion: [],
             regions: [],
             selectedRange: [],
-            ranges: generateYearRanges()
+            ranges: generateYearRanges(),
+            recordSets: {}
         };
         this.renderRange = this.renderRange.bind(this);
         this.loadLeafPlace = this.loadLeafPlace.bind(this);
@@ -41,14 +45,14 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
             title={<>Records</>}>
 
             <div className="search">
-                Search by name:
+                Search by record name:
                 <br/>
                 <Input
                     size="large"/>
             </div>
 
             <div className="filter">
-                Filter by region:
+                Filter by record place:
                 <br/>
                 <Cascader
                     placeholder="Matching all countries"
@@ -62,7 +66,7 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
             </div>
 
             <div className="filter">
-                Filter by date:
+                Filter by record date:
                 <br/>
                 <Cascader
                     placeholder="Matching all dates"
@@ -72,6 +76,11 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
                     onChange={selectedRange => this.setState({selectedRange})}
                     options={this.state.ranges}
                     displayRender={this.renderRange}/>
+            </div>
+
+            <div className="table">
+                <RecordSetTable
+                    recordSets={this.state.recordSets}/>
             </div>
 
         </Card>;

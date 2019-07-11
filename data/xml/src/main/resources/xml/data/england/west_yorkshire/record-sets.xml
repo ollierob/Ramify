@@ -13,10 +13,19 @@
             type="mixed"/>
 
     <recordSet
-            id="wry_census"
-            title="West Yorkshire Census Records"
+            id="census_1841_wry"
+            title="West Yorkshire 1841 Census"
             place="county:west_yorkshire"
             source="government"
-            type="census"/>
+            type="census">
+
+        <recordSet
+                id="census_1841_wry_halifax"
+                title="Halifax Parish 1841 Census"
+                place="parish:halifax"
+                source="government"
+                type="census"/>
+
+    </recordSet>
 
 </records>

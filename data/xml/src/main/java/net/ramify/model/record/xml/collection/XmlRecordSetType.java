@@ -22,6 +22,15 @@ enum XmlRecordSetType {
     @XmlEnumValue("census")
     CENSUS(RecordProto.RecordType.RESIDENCE),
 
+    @XmlEnumValue("membership")
+    MEMBERSHIP,
+
+    @XmlEnumValue("residence")
+    RESIDENCE,
+
+    @XmlEnumValue("payment")
+    PAYMENT,
+
     @XmlEnumValue("death")
     DEATH,
 
@@ -38,11 +47,11 @@ enum XmlRecordSetType {
     }
 
     XmlRecordSetType(final RecordProto.RecordType type) {
-        this.type = type;
+        this.type = type == null ? RecordProto.RecordType.valueOf(this.name()) : type;
     }
 
     RecordProto.RecordType type() {
-        return type == null ? RecordProto.RecordType.valueOf(this.name()) : type;
+        return type;
     }
 
 }

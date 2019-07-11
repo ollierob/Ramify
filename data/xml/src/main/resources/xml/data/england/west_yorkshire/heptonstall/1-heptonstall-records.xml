@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<records
+        xmlns="http://ramify.net/records"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://ramify.net/records ../../../../schema/records.xsd">
+
+    <recordSet
+            id="heptonstall_st-thomas_registers"
+            parentId="wry_coe_registers"
+            title="Heptonstall St. Thomas Registers"
+            place="chapelry:heptonstall"
+            source="church"
+            type="mixed">
+
+        <recordSet
+                id="heptonstall_st-thomas_baptisms"
+                title="Heptonstall St. Thomas Baptisms"
+                place="chapelry:heptonstall"
+                source="church"
+                type="baptism"/>
+
+        <recordSet
+                id="heptonstall_st-thomas_marriages"
+                title="Heptonstall St. Thomas Marriages"
+                place="chapelry:heptonstall"
+                source="church"
+                type="marriage"/>
+
+        <recordSet
+                id="heptonstall_st-thomas_burials"
+                title="Heptonstall St. Thomas Burials"
+                place="chapelry:heptonstall"
+                source="church"
+                type="burial"/>
+
+        <recordSet
+                id="heptonstall_st-thomas_pew_rents"
+                title="Heptonstall St. Thomas Pew Rents"
+                place="chapelry:heptonstall"
+                source="church"
+                type="membership"/>
+
+    </recordSet>
+
+</records>

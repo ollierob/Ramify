@@ -21,6 +21,8 @@
 
         <attribute name="id" type="xs:string" use="required"/>
 
+        <attribute name="parentId" type="xs:string"/>
+
         <attribute name="title" type="xs:string" use="required"/>
 
         <attribute name="place" type="xs:string" use="required"/>
@@ -63,19 +65,25 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="mixed"/>
+            <enumeration value="payment"/>
 
             <enumeration value="burial"/>
 
+            <enumeration value="marriage"/>
+
             <enumeration value="census"/>
 
-            <enumeration value="birth"/>
+            <enumeration value="baptism"/>
 
             <enumeration value="death"/>
 
-            <enumeration value="marriage"/>
+            <enumeration value="birth"/>
 
-            <enumeration value="baptism"/>
+            <enumeration value="mixed"/>
+
+            <enumeration value="membership"/>
+
+            <enumeration value="residence"/>
 
         </restriction>
 

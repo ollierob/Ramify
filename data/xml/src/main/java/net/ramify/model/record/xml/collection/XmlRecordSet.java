@@ -20,6 +20,9 @@ class XmlRecordSet {
     @XmlAttribute(name = "id", required = true)
     private String id;
 
+    @XmlAttribute(name = "parentId", required = false)
+    private String parentId;
+
     @XmlAttribute(name = "title", required = true)
     private String title;
 
@@ -39,7 +42,7 @@ class XmlRecordSet {
     private List<XmlRecordSet> children;
 
     Collection<RecordSet> build() {
-        return this.build(null);
+        return this.build(parentId == null ? null : new RecordSetId(parentId));
     }
 
     Collection<RecordSet> build(final RecordSetId parentId) {

@@ -52,6 +52,8 @@ enum RecordType {
     MENTION = 20;
     MARRIAGE = 21;
     RESIDENCE = 22;
+    PAYMENT = 23;
+    MEMBERSHIP = 24;
 
     MIXED = 99;
 
