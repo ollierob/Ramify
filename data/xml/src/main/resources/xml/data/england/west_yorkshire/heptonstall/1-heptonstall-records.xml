@@ -43,4 +43,11 @@
 
     </recordSet>
 
+    <recordSet
+            id="protestation_1642_heptonstall"
+            title="Heptonstall 1642 Protestation Returns"
+            place="township:heptonstall"
+            source="government"
+            type="residence"/>
+
 </records>

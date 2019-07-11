@@ -28,4 +28,11 @@
 
     </recordSet>
 
+    <recordSet
+            id="protestation_1642_wry"
+            title="West Yorkshire 1642 Protestation Returns"
+            place="county:west_yorkshire"
+            source="government"
+            type="residence"/>
+
 </records>
