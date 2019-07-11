@@ -6,12 +6,17 @@
         xsi:schemaLocation="http://ramify.net/records ../../../schema/records.xsd">
 
     <recordSet
-            id="wry_coe_records"
+            id="wry_coe_registers"
             title="West Yorkshire Church of England Registers"
             place="county:west_yorkshire"
             source="church"
-            type="mixed">
+            type="mixed"/>
 
-    </recordSet>
+    <recordSet
+            id="wry_census"
+            title="West Yorkshire Census Records"
+            place="county:west_yorkshire"
+            source="government"
+            type="census"/>
 
 </records>
