@@ -1,4 +1,4 @@
-.records .filter {
+.records .search, .records .filter {
     display: inline-block;
     font-size: 16px;
     margin-right: 16px;
@@ -6,4 +6,8 @@
 
 .records .filter .ant-select {
     width: 250px;
+}
+
+.records .search input {
+    width: 210px;
 }

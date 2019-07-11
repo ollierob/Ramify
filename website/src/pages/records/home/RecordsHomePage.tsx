@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Card, Cascader, Select} from "antd";
+import {Card, Cascader, Input, Select} from "antd";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {Place} from "../../../protobuf/generated/place_pb";
 import {Flag} from "../../../components/images/Flag";
@@ -40,11 +40,18 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
             className="records large"
             title={<>Records</>}>
 
+            <div className="search">
+                Search by name:
+                <br/>
+                <Input
+                    size="large"/>
+            </div>
+
             <div className="filter">
                 Filter by region:
                 <br/>
                 <Cascader
-                    placeholder="Showing all countries"
+                    placeholder="Matching all countries"
                     size="large"
                     changeOnSelect
                     value={this.state.selectedRegion}
@@ -58,7 +65,7 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
                 Filter by date:
                 <br/>
                 <Cascader
-                    placeholder="Showing all dates"
+                    placeholder="Matching all dates"
                     size="large"
                     changeOnSelect
                     value={this.state.selectedRange}
