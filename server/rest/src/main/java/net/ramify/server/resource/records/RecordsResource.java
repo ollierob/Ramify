@@ -7,13 +7,20 @@ import net.ramify.server.resource.RootResource;
 
 import javax.annotation.Nonnull;
 import javax.ws.rs.DefaultValue;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+
+import static net.ramify.server.resource.Resource.APPLICATION_PROTOBUF;
 
 @Path("records")
+@Produces({MediaType.TEXT_PLAIN, APPLICATION_PROTOBUF})
 public interface RecordsResource extends RootResource {
 
     @Nonnull
+    @GET
     @Path("sets")
     RecordSets recordSets(
             @QueryParam("place") PlaceId withinPlace,

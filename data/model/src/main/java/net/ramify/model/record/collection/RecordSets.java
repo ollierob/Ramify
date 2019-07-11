@@ -1,5 +1,6 @@
 package net.ramify.model.record.collection;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.record.proto.RecordProto;
@@ -18,6 +19,11 @@ public interface RecordSets extends BuildsProto<RecordProto.RecordSetList> {
         return RecordProto.RecordSetList.newBuilder()
                 .addAllRecordSet(Iterables.transform(this.recordSets(), RecordSet::toProto))
                 .build();
+    }
+
+    static RecordSets of(final Set<RecordSet> records) {
+        final var immutable = ImmutableSet.copyOf(records);
+        return () -> immutable;
     }
 
 }

@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableMap;
 import javax.annotation.CheckForNull;
 import javax.xml.bind.annotation.XmlTransient;
 import java.util.Map;
+import java.util.Set;
 
 @XmlTransient
 public abstract class AbstractMappedProvider<K, V> implements Provider<K, V> {
@@ -19,6 +20,10 @@ public abstract class AbstractMappedProvider<K, V> implements Provider<K, V> {
     @Override
     public V get(K key) {
         return map.get(key);
+    }
+
+    protected Set<K> keys() {
+        return map.keySet();
     }
 
     protected void putAll(final Map<? extends K, ? extends V> map) {

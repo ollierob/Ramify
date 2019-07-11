@@ -14,6 +14,7 @@ import net.ramify.utils.file.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -21,6 +22,9 @@ import javax.xml.bind.annotation.XmlTransient;
 import java.io.File;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @XmlTransient
 class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet> implements RecordSetProvider {
@@ -33,6 +37,17 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
 
     void addAll(final Collection<RecordSet> recordSets) {
         super.putAll(MapUtils.toMapLastKey(recordSets, HasRecordSetId::recordSetId));
+    }
+
+    @Nonnull
+    @Override
+    public Set<RecordSet> matching(final Predicate<? super RecordSet> predicate, final int limit) {
+        return this.keys()
+                .stream()
+                .limit(limit)
+                .map(this::get)
+                .filter(predicate)
+                .collect(Collectors.toSet());
     }
 
     static RecordSetProvider readRecordsInDirectory(final JAXBContext context, final File root) throws JAXBException {
