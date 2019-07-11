@@ -7,6 +7,7 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.GenericRecordEntry;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.civil.AbstractCivilRecord;
+import net.ramify.model.record.proto.RecordProto;
 import net.ramify.model.relationship.type.ChildParent;
 import net.ramify.model.relationship.type.Married;
 import net.ramify.model.relationship.type.Unknown;
@@ -67,6 +68,11 @@ public class GeneralRegisterMarriage extends AbstractCivilRecord implements Gene
             builder.addRelationship(groom, witness, Unknown::new);
         }
         return builder.build();
+    }
+
+    @Override
+    protected RecordProto.RecordType protoType() {
+        return RecordProto.RecordType.MARRIAGE;
     }
 
 }

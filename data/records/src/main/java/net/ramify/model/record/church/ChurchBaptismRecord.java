@@ -4,6 +4,7 @@ import net.ramify.model.date.ExactDate;
 import net.ramify.model.family.Family;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.RecordId;
+import net.ramify.model.record.proto.RecordProto;
 
 import javax.annotation.Nonnull;
 import java.util.Set;
@@ -23,4 +24,8 @@ public class ChurchBaptismRecord extends AbstractChurchRecord {
         throw new UnsupportedOperationException(); //TODO
     }
 
+    @Override
+    protected RecordProto.RecordType protoType() {
+        return RecordProto.RecordType.BAPTISM;
+    }
 }

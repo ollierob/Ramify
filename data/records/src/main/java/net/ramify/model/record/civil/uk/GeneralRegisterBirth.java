@@ -8,6 +8,7 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.GenericRecordEntry;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.civil.AbstractCivilRecord;
+import net.ramify.model.record.proto.RecordProto;
 import net.ramify.model.relationship.type.ChildParent;
 
 import javax.annotation.Nonnull;
@@ -59,4 +60,8 @@ public class GeneralRegisterBirth extends AbstractCivilRecord implements General
         return builder.build();
     }
 
+    @Override
+    protected RecordProto.RecordType protoType() {
+        return RecordProto.RecordType.BIRTH;
+    }
 }

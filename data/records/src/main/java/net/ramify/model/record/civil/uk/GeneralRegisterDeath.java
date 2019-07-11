@@ -6,6 +6,7 @@ import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.family.SinglePersonFamily;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.civil.AbstractCivilRecord;
+import net.ramify.model.record.proto.RecordProto;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -39,6 +40,11 @@ public class GeneralRegisterDeath extends AbstractCivilRecord implements General
         return new FamilyBuilder()
                 .addRelationship(deceased, informant, this.informant.relationshipToDeceased())
                 .build();
+    }
+
+    @Override
+    protected RecordProto.RecordType protoType() {
+        return RecordProto.RecordType.DEATH;
     }
 
 }
