@@ -12,9 +12,11 @@ import javax.annotation.Nonnull;
 import javax.inject.Named;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.File;
 import java.net.URISyntaxException;
 
+@XmlTransient
 public class XmlRecordModule extends PrivateModule {
 
     @Override
@@ -33,15 +35,15 @@ public class XmlRecordModule extends PrivateModule {
     @Singleton
     @Named("data")
     File provideXmlDirectory() throws URISyntaxException {
-        final var places = XmlPlaceModule.class.getResource("/xml/data/records");
+        final var places = XmlPlaceModule.class.getResource("/xml/data");
         Preconditions.checkState(places != null, "Could not load XML data");
         return new File(places.toURI());
     }
 
     @Provides
     @Singleton
-    RecordSetProvider provideRecordSetProvider(final JAXBContext context) {
-        throw new UnsupportedOperationException();
+    RecordSetProvider provideRecordSetProvider(final JAXBContext context, @Named("data") final File data) throws JAXBException {
+        return XmlRecordSetProvider.readRecordsInDirectory(context, data);
     }
 
 }
