@@ -5,7 +5,12 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://ramify.net/records ../../../schema/records.xsd">
 
-    <recordSet id="west_yorkshire_church" title="West Yorkshire Church Records" place="county:west_yorkshire">
+    <recordSet
+            id="wry_coe_records"
+            title="West Yorkshire Church of England Registers"
+            place="county:west_yorkshire"
+            source="church"
+            type="mixed">
 
     </recordSet>
 

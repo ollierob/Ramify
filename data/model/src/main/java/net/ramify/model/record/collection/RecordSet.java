@@ -25,12 +25,8 @@ public interface RecordSet extends HasTitleDescription, HasRecordSetId, HasDate,
                 .setId(this.recordSetId().value())
                 .setTitle(this.title())
                 .setDescription(MoreObjects.firstNonNull(this.description(), ""))
-                .setParentId(Functions.ifNonNull(this.parentId(), RecordSetId::value, ""))
-                .setType(this.protoType());
+                .setParentId(Functions.ifNonNull(this.parentId(), RecordSetId::value, ""));
     }
-
-    @Nonnull
-    RecordProto.RecordType protoType();
 
     @Nonnull
     @Override

@@ -15,6 +15,7 @@ class DefaultRecordSet implements RecordSet {
 
     private final RecordSetId id;
     private final RecordSetId parentId;
+    private final RecordProto.SourceType source;
     private final RecordProto.RecordType type;
     private final DateRange date;
     private final PlaceId placeId;
@@ -24,12 +25,15 @@ class DefaultRecordSet implements RecordSet {
     DefaultRecordSet(
             final RecordSetId id,
             final RecordSetId parentId,
+            final RecordProto.SourceType source,
             final RecordProto.RecordType type,
             final DateRange date,
-            PlaceId placeId, final String title,
+            final PlaceId placeId,
+            final String title,
             final String description) {
         this.id = id;
         this.parentId = parentId;
+        this.source = source;
         this.type = type;
         this.date = date;
         this.placeId = placeId;
@@ -47,12 +51,6 @@ class DefaultRecordSet implements RecordSet {
     @Override
     public RecordSetId parentId() {
         return parentId;
-    }
-
-    @Nonnull
-    @Override
-    public RecordProto.RecordType protoType() {
-        return type;
     }
 
     @Nonnull
@@ -79,4 +77,11 @@ class DefaultRecordSet implements RecordSet {
         return description;
     }
 
+    @Nonnull
+    @Override
+    public RecordProto.RecordSet.Builder toProtoBuilder() {
+        return RecordSet.super.toProtoBuilder()
+                .setType(type)
+                .setSource(source);
+    }
 }

@@ -25,6 +25,10 @@
 
         <attribute name="place" type="xs:string" use="required"/>
 
+        <attribute name="source" type="tns:xmlRecordSetSource" use="required"/>
+
+        <attribute name="type" type="tns:xmlRecordSetType" use="required"/>
+
     </complexType>
 
     <complexType name="records">
@@ -42,5 +46,27 @@
         <sequence/>
 
     </complexType>
+
+    <simpleType name="xmlRecordSetSource">
+
+        <restriction base="xs:string">
+
+            <enumeration value="church"/>
+
+            <enumeration value="government"/>
+
+        </restriction>
+
+    </simpleType>
+
+    <simpleType name="xmlRecordSetType">
+
+        <restriction base="xs:string">
+
+            <enumeration value="mixed"/>
+
+        </restriction>
+
+    </simpleType>
 
 </schema>
