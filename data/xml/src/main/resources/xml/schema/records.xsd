@@ -9,7 +9,7 @@
 
     <element name="recordSetReference" type="tns:xmlRecordSetReference"/>
 
-    <element name="records" type="tns:records"/>
+    <element name="recordSets" type="tns:recordSets"/>
 
     <complexType name="xmlRecordSet">
 
@@ -47,7 +47,7 @@
 
     </complexType>
 
-    <complexType name="records">
+    <complexType name="recordSets">
 
         <sequence>
 
@@ -67,9 +67,9 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="church"/>
-
             <enumeration value="government"/>
+
+            <enumeration value="church"/>
 
         </restriction>
 
@@ -79,25 +79,25 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="membership"/>
-
-            <enumeration value="birth"/>
-
-            <enumeration value="burial"/>
+            <enumeration value="death"/>
 
             <enumeration value="residence"/>
 
-            <enumeration value="baptism"/>
+            <enumeration value="birth"/>
 
-            <enumeration value="payment"/>
+            <enumeration value="baptism"/>
 
             <enumeration value="mixed"/>
 
+            <enumeration value="burial"/>
+
             <enumeration value="marriage"/>
+
+            <enumeration value="membership"/>
 
             <enumeration value="census"/>
 
-            <enumeration value="death"/>
+            <enumeration value="payment"/>
 
         </restriction>
 

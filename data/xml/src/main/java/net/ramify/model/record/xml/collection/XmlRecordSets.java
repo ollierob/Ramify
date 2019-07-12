@@ -13,8 +13,8 @@ import java.util.Set;
 
 import static net.ramify.model.record.xml.record.XmlRecord.NAMESPACE;
 
-@XmlType(namespace = NAMESPACE, name = "records")
-@XmlRootElement(name = "records")
+@XmlType(namespace = NAMESPACE, name = "recordSets")
+@XmlRootElement(name = "recordSets")
 public class XmlRecordSets {
 
     @XmlElementRef

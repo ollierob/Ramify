@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<records
+<recordSets
         xmlns="http://ramify.net/records"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://ramify.net/records ../../../../../schema/records.xsd">
@@ -13,4 +13,4 @@
             source="government"
             type="census"/>
 
-</records>
+</recordSets>

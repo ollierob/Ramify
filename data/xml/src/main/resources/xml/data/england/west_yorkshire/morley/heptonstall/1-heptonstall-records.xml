@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<records
+<recordSets
         xmlns="http://ramify.net/records"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://ramify.net/records ../../../../../schema/records.xsd">
@@ -47,4 +47,13 @@
 
     </recordSet>
 
-</records>
+    <recordSet
+            id="protestation_1642_heptonstall"
+            title="Heptonstall 1642 Protestation Returns"
+            place="township:heptonstall"
+            source="government"
+            type="residence">
+        <recordSetReference reference="HL/PO/JO/10/1/109/10" archive="Parliamentary Archives"/>
+    </recordSet>
+
+</recordSets>
