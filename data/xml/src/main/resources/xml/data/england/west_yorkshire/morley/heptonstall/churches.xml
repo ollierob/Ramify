@@ -17,23 +17,23 @@
     <churchInfo id="slack-mt-zion" denomination="Baptist">
         <d:foundedIn year="1806"/>
         <d:closedIn year="1974"/>
-        <churchRecordSet id="slack_mt-zion_births"/>
-        <churchRecordSet id="slack_mt-zion_burials"/>
-        <churchRecordSet id="slack_mt-zion_members"/>
-        <churchRecordSet id="slack_mt-zion_minutes"/>
+        <churchRecordSet id="slack_mt-zion_births" title="Births"/>
+        <churchRecordSet id="slack_mt-zion_burials" title="Burials"/>
+        <churchRecordSet id="slack_mt-zion_members" title="Members Register"/>
+        <churchRecordSet id="slack_mt-zion_minutes" title="Meeting Minutes"/>
     </churchInfo>
 
     <churchInfo id="birchcliffe" denomination="Baptist">
         <d:foundedIn year="1763"/>
         <d:closedIn year="1974"/>
-        <churchRecordSet id="birchcliffe_births"/>
-        <churchRecordSet id="birchcliffe_burials"/>
+        <churchRecordSet id="birchcliffe_births" title="Births"/>
+        <churchRecordSet id="birchcliffe_burials" title="Burials"/>
     </churchInfo>
 
     <churchInfo id="heptonstall_wesleyan" denomination="Methodist">
         <d:foundedIn year="1764"/>
-        <churchRecordSet id="heptonstall_wesleyan_baptisms"/>
-        <churchRecordSet id="heptonstall_wesleyan_minutes"/>
+        <churchRecordSet id="heptonstall_wesleyan_baptisms" title="Baptisms"/>
+        <churchRecordSet id="heptonstall_wesleyan_minutes" title="Meeting Minutes"/>
     </churchInfo>
 
 </churchInfos>
