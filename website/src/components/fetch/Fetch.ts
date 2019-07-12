@@ -25,8 +25,8 @@ export function queryParameters(query: {[key: string]: Queryable | Queryable[]})
     Object.keys(query).forEach(key => {
         const value = query[key];
         if (value == null) return;
-        if (Array.isArray(value)) value.forEach(v => queryParameters.push(key + "=" + String(v)));
-        else queryParameters.push(key + "=" + String(value));
+        if (Array.isArray(value)) value.forEach(v => queryParameters.push(encodeURIComponent(key) + "=" + encodeURIComponent(String(v))));
+        else queryParameters.push(encodeURIComponent(key) + "=" + encodeURIComponent(String(value)));
     });
     if (!queryParameters.length) return "";
     return "?" + queryParameters.join("&");
