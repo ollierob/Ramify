@@ -3,7 +3,7 @@
 <records
         xmlns="http://ramify.net/records"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://ramify.net/records ../../../../schema/records.xsd">
+        xsi:schemaLocation="http://ramify.net/records ../../../../../schema/records.xsd">
 
     <recordSet
             id="census_1841_hebden_bridge"

@@ -2,8 +2,6 @@ package net.ramify.model.place.xml.place;
 
 import com.google.common.base.MoreObjects;
 import net.ramify.model.place.Place;
-import net.ramify.model.place.PlaceId;
-import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.Chapelry;
 import net.ramify.model.place.xml.place.settlement.XmlChurch;
 import net.ramify.model.place.xml.place.settlement.XmlSchool;
@@ -18,7 +16,7 @@ import java.util.Collections;
 import java.util.List;
 
 @XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "chapelry")
-public class XmlChapelry extends XmlPlace {
+public class XmlChapelry extends XmlArea<Chapelry> {
 
     @XmlElementRefs({
             @XmlElementRef(type = XmlTownship.class),
@@ -29,9 +27,8 @@ public class XmlChapelry extends XmlPlace {
     })
     private List<XmlPlace> children;
 
-    @Override
-    protected PlaceId placeId(final String id) {
-        return new Spid(Chapelry.class, id);
+    XmlChapelry() {
+        super(Chapelry.class);
     }
 
     @Override

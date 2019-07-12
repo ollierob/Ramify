@@ -58,6 +58,8 @@
 
     <element name="village" type="tns:xmlVillage"/>
 
+    <element name="wapentake" type="tns:xmlWapentake"/>
+
     <element name="wikipediaLink" type="tns:xmlWikipediaLink"/>
 
     <complexType name="xmlChurchInfo">
@@ -200,6 +202,102 @@
 
     </complexType>
 
+    <complexType abstract="true" name="xmlPlace">
+
+        <sequence/>
+
+        <attribute name="id" type="xs:string" use="required"/>
+
+        <attribute name="name" type="xs:string"/>
+
+    </complexType>
+
+    <complexType name="xmlCountry">
+
+        <complexContent>
+
+            <extension base="tns:xmlPlace">
+
+                <sequence>
+
+                    <choice maxOccurs="unbounded" minOccurs="0">
+
+                        <element ref="tns:country"/>
+
+                        <element ref="tns:county"/>
+
+                        <element ref="tns:state"/>
+
+                    </choice>
+
+                </sequence>
+
+                <attribute name="iso" type="xs:string" use="required"/>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
+    <complexType name="xmlCounty">
+
+        <complexContent>
+
+            <extension base="tns:xmlPlace">
+
+                <sequence>
+
+                    <choice maxOccurs="unbounded" minOccurs="0">
+
+                        <element ref="tns:parish"/>
+
+                        <element ref="tns:manor"/>
+
+                        <element ref="tns:wapentake"/>
+
+                    </choice>
+
+                </sequence>
+
+                <attribute name="iso" type="xs:string"/>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
+    <complexType name="xmlParish">
+
+        <complexContent>
+
+            <extension base="tns:xmlPlace">
+
+                <sequence>
+
+                    <choice maxOccurs="unbounded" minOccurs="0">
+
+                        <element ref="tns:parish"/>
+
+                        <element ref="tns:chapelry"/>
+
+                        <element ref="tns:township"/>
+
+                        <element ref="tns:town"/>
+
+                        <element ref="tns:village"/>
+
+                    </choice>
+
+                </sequence>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
     <complexType name="xmlChapelry">
 
         <complexContent>
@@ -227,16 +325,6 @@
             </extension>
 
         </complexContent>
-
-    </complexType>
-
-    <complexType abstract="true" name="xmlPlace">
-
-        <sequence/>
-
-        <attribute name="id" type="xs:string" use="required"/>
-
-        <attribute name="name" type="xs:string"/>
 
     </complexType>
 
@@ -316,118 +404,6 @@
 
     </complexType>
 
-    <complexType name="xmlCountry">
-
-        <complexContent>
-
-            <extension base="tns:xmlPlace">
-
-                <sequence>
-
-                    <choice maxOccurs="unbounded" minOccurs="0">
-
-                        <element ref="tns:country"/>
-
-                        <element ref="tns:county"/>
-
-                        <element ref="tns:state"/>
-
-                    </choice>
-
-                </sequence>
-
-                <attribute name="iso" type="xs:string" use="required"/>
-
-            </extension>
-
-        </complexContent>
-
-    </complexType>
-
-    <complexType name="xmlCounty">
-
-        <complexContent>
-
-            <extension base="tns:xmlPlace">
-
-                <sequence>
-
-                    <choice maxOccurs="unbounded" minOccurs="0">
-
-                        <element ref="tns:parish"/>
-
-                        <element ref="tns:manor"/>
-
-                    </choice>
-
-                </sequence>
-
-                <attribute name="iso" type="xs:string"/>
-
-            </extension>
-
-        </complexContent>
-
-    </complexType>
-
-    <complexType name="xmlParish">
-
-        <complexContent>
-
-            <extension base="tns:xmlPlace">
-
-                <sequence>
-
-                    <choice maxOccurs="unbounded" minOccurs="0">
-
-                        <element ref="tns:parish"/>
-
-                        <element ref="tns:chapelry"/>
-
-                        <element ref="tns:township"/>
-
-                        <element ref="tns:town"/>
-
-                        <element ref="tns:village"/>
-
-                    </choice>
-
-                </sequence>
-
-            </extension>
-
-        </complexContent>
-
-    </complexType>
-
-    <complexType name="xmlTown">
-
-        <complexContent>
-
-            <extension base="tns:xmlPlace">
-
-                <sequence>
-
-                    <choice maxOccurs="unbounded" minOccurs="0">
-
-                        <element ref="tns:church"/>
-
-                        <element ref="tns:mill"/>
-
-                        <element ref="tns:school"/>
-
-                        <element ref="tns:inn"/>
-
-                    </choice>
-
-                </sequence>
-
-            </extension>
-
-        </complexContent>
-
-    </complexType>
-
     <complexType name="xmlMill">
 
         <complexContent>
@@ -457,62 +433,6 @@
     </complexType>
 
     <complexType name="xmlInn">
-
-        <complexContent>
-
-            <extension base="tns:xmlPlace">
-
-                <sequence/>
-
-            </extension>
-
-        </complexContent>
-
-    </complexType>
-
-    <complexType name="xmlManor">
-
-        <complexContent>
-
-            <extension base="tns:xmlPlace">
-
-                <sequence>
-
-                    <choice maxOccurs="unbounded" minOccurs="0">
-
-                        <element ref="tns:manor"/>
-
-                        <element ref="tns:graveship"/>
-
-                    </choice>
-
-                </sequence>
-
-            </extension>
-
-        </complexContent>
-
-    </complexType>
-
-    <complexType name="xmlGraveship">
-
-        <complexContent>
-
-            <extension base="tns:xmlPlace">
-
-                <sequence>
-
-                    <element maxOccurs="unbounded" minOccurs="0" ref="tns:manor"/>
-
-                </sequence>
-
-            </extension>
-
-        </complexContent>
-
-    </complexType>
-
-    <complexType name="xmlState">
 
         <complexContent>
 
@@ -564,11 +484,125 @@
 
     </complexType>
 
+    <complexType name="xmlTown">
+
+        <complexContent>
+
+            <extension base="tns:xmlPlace">
+
+                <sequence>
+
+                    <choice maxOccurs="unbounded" minOccurs="0">
+
+                        <element ref="tns:church"/>
+
+                        <element ref="tns:mill"/>
+
+                        <element ref="tns:school"/>
+
+                        <element ref="tns:inn"/>
+
+                    </choice>
+
+                </sequence>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
+    <complexType name="xmlManor">
+
+        <complexContent>
+
+            <extension base="tns:xmlPlace">
+
+                <sequence>
+
+                    <choice maxOccurs="unbounded" minOccurs="0">
+
+                        <element ref="tns:manor"/>
+
+                        <element ref="tns:graveship"/>
+
+                    </choice>
+
+                </sequence>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
+    <complexType name="xmlGraveship">
+
+        <complexContent>
+
+            <extension base="tns:xmlPlace">
+
+                <sequence>
+
+                    <element maxOccurs="unbounded" minOccurs="0" ref="tns:manor"/>
+
+                </sequence>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
+    <complexType name="xmlWapentake">
+
+        <complexContent>
+
+            <extension base="tns:xmlPlace">
+
+                <sequence>
+
+                    <choice maxOccurs="unbounded" minOccurs="0">
+
+                        <element ref="tns:parish"/>
+
+                        <element ref="tns:manor"/>
+
+                    </choice>
+
+                </sequence>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
+    <complexType name="xmlState">
+
+        <complexContent>
+
+            <extension base="tns:xmlPlace">
+
+                <sequence/>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
     <complexType name="places">
 
         <sequence>
 
             <choice maxOccurs="unbounded" minOccurs="0">
+
+                <element ref="tns:country"/>
+
+                <element ref="tns:county"/>
+
+                <element ref="tns:parish"/>
 
                 <element ref="tns:chapelry"/>
 
@@ -578,29 +612,25 @@
 
                 <element ref="tns:church"/>
 
-                <element ref="tns:country"/>
-
-                <element ref="tns:county"/>
-
-                <element ref="tns:parish"/>
-
-                <element ref="tns:town"/>
-
                 <element ref="tns:mill"/>
 
                 <element ref="tns:school"/>
 
                 <element ref="tns:inn"/>
 
+                <element ref="tns:hamlet"/>
+
+                <element ref="tns:farmstead"/>
+
+                <element ref="tns:town"/>
+
                 <element ref="tns:manor"/>
 
                 <element ref="tns:graveship"/>
 
+                <element ref="tns:wapentake"/>
+
                 <element ref="tns:state"/>
-
-                <element ref="tns:hamlet"/>
-
-                <element ref="tns:farmstead"/>
 
             </choice>
 
@@ -612,21 +642,21 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="burial"/>
-
-            <enumeration value="accounts"/>
-
-            <enumeration value="baptism"/>
+            <enumeration value="marriage"/>
 
             <enumeration value="pewRents"/>
 
-            <enumeration value="marriage"/>
-
-            <enumeration value="membership"/>
+            <enumeration value="minutes"/>
 
             <enumeration value="birth"/>
 
-            <enumeration value="minutes"/>
+            <enumeration value="accounts"/>
+
+            <enumeration value="burial"/>
+
+            <enumeration value="membership"/>
+
+            <enumeration value="baptism"/>
 
         </restriction>
 

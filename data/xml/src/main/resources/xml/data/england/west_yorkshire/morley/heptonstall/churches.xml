@@ -4,7 +4,7 @@
         xmlns="http://ramify.net/places"
         xmlns:d="http://ramify.net/dates"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://ramify.net/places ../../../../schema/places.xsd http://ramify.net/dates ../../../../schema/dates.xsd">
+        xsi:schemaLocation="http://ramify.net/places ../../../../../schema/places.xsd http://ramify.net/dates ../../../../schema/dates.xsd">
 
     <churchInfo id="heptonstall_st-thomas" denomination="Church of England">
         <d:foundedBefore date="1260"/>

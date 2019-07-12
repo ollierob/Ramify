@@ -22,7 +22,7 @@ class XmlChurchInfoProviderTest {
     void shouldReadRecords() throws Exception {
 
         final var context = JAXBContext.newInstance(XmlChurchInfos.class);
-        final var data = new File(XmlPlaceProviderTest.class.getResource("/xml/data/england/west_yorkshire/heptonstall").toURI());
+        final var data = new File(XmlPlaceProviderTest.class.getResource("/xml/data/england/west_yorkshire/morley/heptonstall").toURI());
         final var mockDateParser = mock(DateParser.class);
 
         final var mockPlaceProvider = mock(PlaceProvider.class);

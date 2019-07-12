@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<records
+        xmlns="http://ramify.net/records"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://ramify.net/records ../../../../../../schema/records.xsd">
+
+    <recordSet
+            id="protestation_1642_heptonstall"
+            title="Heptonstall 1642 Protestation Returns"
+            place="township:heptonstall"
+            source="government"
+            type="residence">
+
+    </recordSet>
+
+</records>

@@ -3,7 +3,7 @@
 <placeDescriptions
         xmlns="http://ramify.net/places"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://ramify.net/places ../../../../schema/places.xsd">
+        xsi:schemaLocation="http://ramify.net/places ../../../../../schema/places.xsd">
 
     <placeDescription id="township:heptonstall">
         <alsoSee id="township:stansfield"/>

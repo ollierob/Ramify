@@ -3,7 +3,7 @@
 <placePositions
         xmlns="http://ramify.net/places"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://ramify.net/places ../../../../schema/places.xsd">
+        xsi:schemaLocation="http://ramify.net/places ../../../../../schema/places.xsd">
 
     <placePoint id="town:hebden_bridge" latitude="53.742" longitude="-2.009" zoom="13"/>
     <placePoint id="church:birchcliffe" latitude="53.74347" longitude="-2.00718" zoom="15"/>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<places
+        xmlns="http://ramify.net/places"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://ramify.net/places ../../../../schema/places.xsd">
+
+    <wapentake id="morley">
+
+        <parish id="halifax" name="Halifax">
+
+            <chapelry id="heptonstall" name="Heptonstall"/>
+            <chapelry id="elland" name="Elland"/>
+
+            <village id="mytholmroyd" name="Mytholmroyd"/>
+
+        </parish>
+
+    </wapentake>
+
+</places>
