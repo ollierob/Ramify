@@ -5,6 +5,8 @@
         targetNamespace="http://ramify.net/dates"
         version="1.0">
 
+    <element name="betweenYears" type="tns:xmlBetweenYears"/>
+
     <element name="closedBefore" type="tns:xmlBeforeDate"/>
 
     <element name="closedIn" type="tns:xmlInYear"/>
@@ -13,11 +15,13 @@
 
     <element name="foundedIn" type="tns:xmlInYear"/>
 
+    <element name="inYear" type="tns:xmlInYear"/>
+
     <element name="xmlBeforeDate" type="tns:xmlBeforeDate"/>
 
-    <element name="xmlInYear" type="tns:xmlInYear"/>
+    <element name="xmlBetweenYears" type="tns:xmlBetweenYears"/>
 
-    <element name="year" type="tns:xmlInYear"/>
+    <element name="xmlInYear" type="tns:xmlInYear"/>
 
     <complexType name="xmlBeforeDate">
 
@@ -64,6 +68,10 @@
             <extension base="tns:xmlDateRange">
 
                 <sequence/>
+
+                <attribute name="start" type="xs:int" use="required"/>
+
+                <attribute name="end" type="xs:int" use="required"/>
 
             </extension>
 

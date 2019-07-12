@@ -18,33 +18,43 @@
             Registers of the church of St Thomas at Heptonstall.
         </description>
 
+        <d:betweenYears start="1593" end="1986"/>
+
         <recordSet
                 id="heptonstall_st-thomas_baptisms"
                 title="Heptonstall St. Thomas Baptisms"
                 place="chapelry:heptonstall"
                 source="church"
-                type="baptism"/>
+                type="baptism">
+            <d:betweenYears start="1599" end="1904"/>
+        </recordSet>
 
         <recordSet
                 id="heptonstall_st-thomas_marriages"
                 title="Heptonstall St. Thomas Marriages"
                 place="chapelry:heptonstall"
                 source="church"
-                type="marriage"/>
+                type="marriage">
+            <d:betweenYears start="1593" end="1986"/>
+        </recordSet>
 
         <recordSet
                 id="heptonstall_st-thomas_burials"
                 title="Heptonstall St. Thomas Burials"
                 place="chapelry:heptonstall"
                 source="church"
-                type="burial"/>
+                type="burial">
+            <d:betweenYears start="1593" end="1898"/>
+        </recordSet>
 
         <recordSet
                 id="heptonstall_st-thomas_pew_rents"
                 title="Heptonstall St. Thomas Pew Rents"
                 place="chapelry:heptonstall"
                 source="church"
-                type="membership"/>
+                type="membership">
+            <d:betweenYears start="1796" end="1847"/>
+        </recordSet>
 
     </recordSet>
 
@@ -54,7 +64,7 @@
             place="township:heptonstall"
             source="government"
             type="residence">
-        <d:year year="1642"/>
+        <d:inYear year="1642"/>
         <recordSetReference reference="HL/PO/JO/10/1/109/10" archive="Parliamentary Archives"/>
     </recordSet>
 

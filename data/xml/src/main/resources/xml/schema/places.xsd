@@ -642,21 +642,21 @@
 
         <restriction base="xs:string">
 
+            <enumeration value="accounts"/>
+
+            <enumeration value="baptism"/>
+
             <enumeration value="marriage"/>
+
+            <enumeration value="pewRents"/>
+
+            <enumeration value="minutes"/>
+
+            <enumeration value="membership"/>
 
             <enumeration value="burial"/>
 
             <enumeration value="birth"/>
-
-            <enumeration value="accounts"/>
-
-            <enumeration value="minutes"/>
-
-            <enumeration value="pewRents"/>
-
-            <enumeration value="baptism"/>
-
-            <enumeration value="membership"/>
 
         </restriction>
 

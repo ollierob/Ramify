@@ -20,7 +20,13 @@
 
             <element form="qualified" minOccurs="0" name="description" type="xs:string"/>
 
-            <element minOccurs="0" ref="ns1:year"/>
+            <choice minOccurs="0">
+
+                <element ref="ns1:inYear"/>
+
+                <element ref="ns1:betweenYears"/>
+
+            </choice>
 
             <element maxOccurs="unbounded" minOccurs="0" ref="tns:recordSetReference"/>
 
@@ -72,9 +78,9 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="church"/>
-
             <enumeration value="government"/>
+
+            <enumeration value="church"/>
 
         </restriction>
 
@@ -84,25 +90,25 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="birth"/>
-
-            <enumeration value="mixed"/>
-
-            <enumeration value="residence"/>
+            <enumeration value="marriage"/>
 
             <enumeration value="death"/>
 
-            <enumeration value="baptism"/>
+            <enumeration value="payment"/>
 
-            <enumeration value="membership"/>
-
-            <enumeration value="marriage"/>
-
-            <enumeration value="burial"/>
+            <enumeration value="birth"/>
 
             <enumeration value="census"/>
 
-            <enumeration value="payment"/>
+            <enumeration value="membership"/>
+
+            <enumeration value="baptism"/>
+
+            <enumeration value="burial"/>
+
+            <enumeration value="residence"/>
+
+            <enumeration value="mixed"/>
 
         </restriction>
 

@@ -11,7 +11,7 @@
             place="chapelry:heptonstall"
             source="government"
             type="census">
-        <d:year year="1841"/>
+        <d:inYear year="1841"/>
     </recordSet>
 
 </recordSets>

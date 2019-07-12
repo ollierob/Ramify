@@ -2,6 +2,7 @@ package net.ramify.model.record.xml.collection;
 
 import com.google.common.collect.Lists;
 import net.ramify.model.date.parse.DateParser;
+import net.ramify.model.date.xml.XmlBetweenYears;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlInYear;
 import net.ramify.model.place.PlaceId;
@@ -47,7 +48,8 @@ class XmlRecordSet {
     private String description;
 
     @XmlElements({
-            @XmlElement(name = "year", type = XmlInYear.class, namespace = XmlDateRange.NAMESPACE),
+            @XmlElement(name = "inYear", type = XmlInYear.class, namespace = XmlDateRange.NAMESPACE),
+            @XmlElement(name = "betweenYears", type = XmlBetweenYears.class, namespace = XmlDateRange.NAMESPACE)
     })
     private XmlDateRange date;
 
