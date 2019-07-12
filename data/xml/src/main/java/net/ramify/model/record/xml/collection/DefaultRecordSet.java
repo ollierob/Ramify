@@ -4,11 +4,13 @@ import net.ramify.model.date.DateRange;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
+import net.ramify.model.record.collection.RecordSetReference;
 import net.ramify.model.record.proto.RecordProto;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlTransient;
+import java.util.Set;
 
 @XmlTransient
 class DefaultRecordSet implements RecordSet {
@@ -21,6 +23,7 @@ class DefaultRecordSet implements RecordSet {
     private final PlaceId placeId;
     private final String title;
     private final String description;
+    private final Set<RecordSetReference> references;
 
     DefaultRecordSet(
             final RecordSetId id,
@@ -30,7 +33,8 @@ class DefaultRecordSet implements RecordSet {
             final DateRange date,
             final PlaceId placeId,
             final String title,
-            final String description) {
+            final String description,
+            final Set<RecordSetReference> references) {
         this.id = id;
         this.parentId = parentId;
         this.source = source;
@@ -39,6 +43,7 @@ class DefaultRecordSet implements RecordSet {
         this.placeId = placeId;
         this.title = title;
         this.description = description;
+        this.references = references;
     }
 
     @Nonnull
@@ -75,6 +80,12 @@ class DefaultRecordSet implements RecordSet {
     @Override
     public String description() {
         return description;
+    }
+
+    @Nonnull
+    @Override
+    public Set<RecordSetReference> references() {
+        return references;
     }
 
     @Nonnull

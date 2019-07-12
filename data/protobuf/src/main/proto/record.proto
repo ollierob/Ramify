@@ -5,6 +5,7 @@ option java_outer_classname = "RecordProto";
 
 import "date.proto";
 import "family.proto";
+import "link.proto";
 
 message Record {
 
@@ -23,6 +24,8 @@ message RecordSet {
     SourceType source = 4;
     RecordType type = 5;
     string parentId = 6;
+
+    repeated ExternalRecordReference externalReference = 10;
 
 }
 
@@ -57,5 +60,13 @@ enum RecordType {
     MEMBERSHIP = 24;
 
     MIXED = 99;
+
+}
+
+message ExternalRecordReference {
+
+    string reference = 1;
+    string archive = 2;
+    Link link = 3;
 
 }

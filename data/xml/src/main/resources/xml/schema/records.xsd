@@ -7,6 +7,8 @@
 
     <element name="recordSet" type="tns:xmlRecordSet"/>
 
+    <element name="recordSetReference" type="tns:xmlRecordSetReference"/>
+
     <element name="records" type="tns:records"/>
 
     <complexType name="xmlRecordSet">
@@ -14,6 +16,8 @@
         <sequence>
 
             <element form="qualified" minOccurs="0" name="description" type="xs:string"/>
+
+            <element maxOccurs="unbounded" minOccurs="0" ref="tns:recordSetReference"/>
 
             <element maxOccurs="unbounded" minOccurs="0" ref="tns:recordSet"/>
 
@@ -30,6 +34,16 @@
         <attribute name="source" type="tns:xmlRecordSetSource" use="required"/>
 
         <attribute name="type" type="tns:xmlRecordSetType" use="required"/>
+
+    </complexType>
+
+    <complexType name="xmlRecordSetReference">
+
+        <sequence/>
+
+        <attribute name="reference" type="xs:string" use="required"/>
+
+        <attribute name="archive" type="xs:string" use="required"/>
 
     </complexType>
 
@@ -53,9 +67,9 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="government"/>
-
             <enumeration value="church"/>
+
+            <enumeration value="government"/>
 
         </restriction>
 
@@ -65,25 +79,25 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="payment"/>
+            <enumeration value="membership"/>
+
+            <enumeration value="birth"/>
 
             <enumeration value="burial"/>
+
+            <enumeration value="residence"/>
+
+            <enumeration value="baptism"/>
+
+            <enumeration value="payment"/>
+
+            <enumeration value="mixed"/>
 
             <enumeration value="marriage"/>
 
             <enumeration value="census"/>
 
-            <enumeration value="baptism"/>
-
             <enumeration value="death"/>
-
-            <enumeration value="birth"/>
-
-            <enumeration value="mixed"/>
-
-            <enumeration value="membership"/>
-
-            <enumeration value="residence"/>
 
         </restriction>
 

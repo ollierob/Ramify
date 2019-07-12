@@ -4,7 +4,9 @@ import com.google.common.collect.Lists;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
+import net.ramify.model.record.collection.RecordSetReference;
 import net.ramify.model.record.xml.record.XmlRecord;
+import net.ramify.utils.collections.SetUtils;
 import net.ramify.utils.objects.Functions;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -14,6 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "recordSet")
 class XmlRecordSet {
@@ -40,6 +43,9 @@ class XmlRecordSet {
     private String description;
 
     @XmlElementRef
+    private List<XmlRecordSetReference> references;
+
+    @XmlElementRef
     private List<XmlRecordSet> children;
 
     Collection<RecordSet> build() {
@@ -55,12 +61,18 @@ class XmlRecordSet {
                 null, //TODO
                 new PlaceId(place),
                 title,
-                Functions.ifNonNull(description, String::trim));
+                Functions.ifNonNull(description, String::trim),
+                this.buildReferences());
         if (children == null) return Collections.singletonList(self);
         final var recordSets = Lists.<RecordSet>newArrayListWithExpectedSize(1 + 2 * children.size());
         recordSets.add(self);
         children.forEach(child -> recordSets.addAll(child.build(self.recordSetId())));
         return recordSets;
+    }
+
+    private Set<RecordSetReference> buildReferences() {
+        if (references == null) return Collections.emptySet();
+        return SetUtils.transform(references, XmlRecordSetReference::build);
     }
 
 }

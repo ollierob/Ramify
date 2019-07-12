@@ -11,6 +11,8 @@
             place="township:heptonstall"
             source="government"
             type="residence">
+        
+        <recordSetReference reference="HL/PO/JO/10/1/109/10" archive="Parliamentary Archives"/>
 
     </recordSet>
 

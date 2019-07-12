@@ -644,19 +644,19 @@
 
             <enumeration value="marriage"/>
 
+            <enumeration value="burial"/>
+
+            <enumeration value="baptism"/>
+
+            <enumeration value="accounts"/>
+
             <enumeration value="pewRents"/>
+
+            <enumeration value="membership"/>
 
             <enumeration value="minutes"/>
 
             <enumeration value="birth"/>
-
-            <enumeration value="accounts"/>
-
-            <enumeration value="burial"/>
-
-            <enumeration value="membership"/>
-
-            <enumeration value="baptism"/>
 
         </restriction>
 
