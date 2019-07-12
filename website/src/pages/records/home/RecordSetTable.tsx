@@ -34,6 +34,7 @@ const NoRecordsYet = (props: {}) => <>No records loaded yet.</>;
 
 const Columns: ColumnProps<RecordSet.AsObject>[] = [
     {
+        key: "name",
         title: "Name",
         dataIndex: "title",
         width: 300,
@@ -41,11 +42,13 @@ const Columns: ColumnProps<RecordSet.AsObject>[] = [
         sorter: (a, b) => a.title.localeCompare(b.title)
     },
     {
+        key: "date",
         title: "Date",
         render: (t, r) => <FormattedDateRange date={r.date} words={EmptyPlaceWords}/>,
         width: 150,
     },
     {
+        key: "description",
         title: "Description",
         dataIndex: "description",
         sorter: true

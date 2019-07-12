@@ -2,8 +2,7 @@
 
 <recordSets
         xmlns="http://ramify.net/records"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://ramify.net/records ../../../../../schema/records.xsd">
+        xmlns:d="http://ramify.net/dates">
 
     <recordSet
             id="census_1841_hebden_bridge"
@@ -11,6 +10,8 @@
             title="Hebden Bridge District 1841 Census"
             place="chapelry:heptonstall"
             source="government"
-            type="census"/>
+            type="census">
+        <d:year year="1841"/>
+    </recordSet>
 
 </recordSets>
