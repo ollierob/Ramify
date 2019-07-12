@@ -94,21 +94,9 @@
 
     <complexType name="xmlChurchRecordSetInfo">
 
-        <simpleContent>
+        <sequence/>
 
-            <extension base="xs:string">
-
-                <attribute name="id" type="xs:string" use="required"/>
-
-                <attribute name="type" type="tns:type" use="required"/>
-
-                <attribute name="startYear" type="xs:int" use="required"/>
-
-                <attribute name="endYear" type="xs:int" use="required"/>
-
-            </extension>
-
-        </simpleContent>
+        <attribute name="id" type="xs:string" use="required"/>
 
     </complexType>
 
@@ -637,29 +625,5 @@
         </sequence>
 
     </complexType>
-
-    <simpleType name="type">
-
-        <restriction base="xs:string">
-
-            <enumeration value="accounts"/>
-
-            <enumeration value="baptism"/>
-
-            <enumeration value="marriage"/>
-
-            <enumeration value="pewRents"/>
-
-            <enumeration value="minutes"/>
-
-            <enumeration value="membership"/>
-
-            <enumeration value="burial"/>
-
-            <enumeration value="birth"/>
-
-        </restriction>
-
-    </simpleType>
 
 </schema>

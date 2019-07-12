@@ -18,6 +18,10 @@ public class SetUtils {
         return transform(collection, transform, false, createSet);
     }
 
+    public static <F, T> Set<T> transformIgnoreNull(final Collection<F> collection, final Function<? super F, ? extends T> transform, final IntFunction<Set<T>> createSet) {
+        return transform(collection, transform, true, createSet);
+    }
+
     public static <F, T> Set<T> transformIgnoreNull(final Collection<F> collection, final Function<? super F, ? extends T> transform) {
         return transform(collection, transform, true, Sets::newHashSetWithExpectedSize);
     }

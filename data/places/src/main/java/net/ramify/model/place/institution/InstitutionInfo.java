@@ -7,6 +7,7 @@ import net.ramify.model.date.DateRange;
 import net.ramify.model.place.HasPlace;
 import net.ramify.model.place.institution.church.ChurchInfo;
 import net.ramify.model.place.proto.InstitutionProto;
+import net.ramify.model.record.collection.RecordSet;
 import net.ramify.utils.objects.Consumers;
 
 import javax.annotation.CheckForNull;
@@ -30,7 +31,7 @@ public interface InstitutionInfo extends HasPlace, BuildsProto<InstitutionProto.
     }
 
     @Nonnull
-    Set<? extends InstitutionRecordSetInfo> records();
+    Set<RecordSet> records();
 
     @Nonnull
     default InstitutionProto.Institution.Builder toProtoBuilder() {

@@ -1,12 +1,12 @@
 import * as React from "react";
-import {InstitutionRecordSet} from "../../../protobuf/generated/institution_pb";
 import {Place} from "../../../protobuf/generated/place_pb";
 import {Card} from "antd";
 import {FormattedDateRange} from "../../../components/date/FormattedDateRange";
 import {placeHref} from "../../../components/places/Place";
 import {placeTypeName} from "../../../components/places/PlaceType";
+import {RecordSet} from "../../../protobuf/generated/record_pb";
 
-export const RecordCards = (props: {records: ReadonlyArray<InstitutionRecordSet.AsObject>, alsoSee: ReadonlyArray<Place.AsObject>}) => {
+export const RecordCards = (props: {records: ReadonlyArray<RecordSet.AsObject>, alsoSee: ReadonlyArray<Place.AsObject>}) => {
     const records = props.records;
     if (!records || !records.length) return null;
     return <div className="institutionRecords">
@@ -15,11 +15,11 @@ export const RecordCards = (props: {records: ReadonlyArray<InstitutionRecordSet.
     </div>
 };
 
-const RecordCard = (props: {record: InstitutionRecordSet.AsObject}) => {
+const RecordCard = (props: {record: RecordSet.AsObject}) => {
     const record = props.record;
-    return <Card title={record.name} className="placeCard">
-        Available <FormattedDateRange date={record.covers}/>
-        {record.notes && <div className="notes">{record.notes}</div>}
+    return <Card title={record.title} className="placeCard">
+        Available <FormattedDateRange date={record.date}/>
+        {record.description && <div className="notes">{record.description}</div>}
     </Card>
 };
 

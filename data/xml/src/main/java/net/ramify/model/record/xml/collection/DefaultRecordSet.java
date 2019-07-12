@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import java.util.Set;
 
 @XmlTransient
-class DefaultRecordSet implements RecordSet {
+public class DefaultRecordSet implements RecordSet {
 
     private final RecordSetId id;
     private final RecordSetId parentId;
@@ -25,7 +25,7 @@ class DefaultRecordSet implements RecordSet {
     private final String description;
     private final Set<RecordSetReference> references;
 
-    DefaultRecordSet(
+    public DefaultRecordSet(
             final RecordSetId id,
             final RecordSetId parentId,
             final RecordProto.SourceType source,

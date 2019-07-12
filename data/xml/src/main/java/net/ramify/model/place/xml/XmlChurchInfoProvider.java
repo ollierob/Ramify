@@ -10,6 +10,7 @@ import net.ramify.model.place.institution.church.ChurchInfo;
 import net.ramify.model.place.institution.church.ChurchInfoProvider;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.xml.church.XmlChurchInfos;
+import net.ramify.model.record.provider.RecordSetProvider;
 import net.ramify.utils.file.FileTraverseUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,23 +65,39 @@ class XmlChurchInfoProvider implements ChurchInfoProvider {
         return new XmlChurchInfoProvider(ImmutableSetMultimap.copyOf(churches));
     }
 
-    static ChurchInfoProvider readChurchInfo(final JAXBContext context, final File root, final PlaceProvider placeProvider, final DateParser dateParser) throws JAXBException {
-        return readChurchInfo(context.createUnmarshaller(), root, placeProvider, dateParser);
+    static ChurchInfoProvider readChurchInfo(
+            final JAXBContext context,
+            final File root,
+            final PlaceProvider places,
+            final RecordSetProvider records,
+            final DateParser dateParser) throws JAXBException {
+        return readChurchInfo(context.createUnmarshaller(), root, places, records, dateParser);
     }
 
-    static ChurchInfoProvider readChurchInfo(final Unmarshaller unmarshaller, final File root, final PlaceProvider placeProvider, final DateParser dateParser) throws JAXBException {
+    static ChurchInfoProvider readChurchInfo(
+            final Unmarshaller unmarshaller,
+            final File root,
+            final PlaceProvider places,
+            final RecordSetProvider records,
+            final DateParser dateParser) {
         final var provider = new XmlChurchInfoProvider(HashMultimap.create());
-        FileTraverseUtils.traverseSubdirectories(root, file -> file.getName().contains("church") && file.getName().endsWith(".xml"), file -> readInfo(unmarshaller, file, provider, placeProvider, dateParser));
+        FileTraverseUtils.traverseSubdirectories(root, file -> file.getName().contains("church") && file.getName().endsWith(".xml"), file -> readInfo(unmarshaller, file, provider, places, records, dateParser));
         return provider.immutable();
     }
 
-    private static void readInfo(final Unmarshaller unmarshaller, final File file, final XmlChurchInfoProvider infoProvider, final PlaceProvider placeProvider, final DateParser dateParser) {
+    private static void readInfo(
+            final Unmarshaller unmarshaller,
+            final File file,
+            final XmlChurchInfoProvider infoProvider,
+            final PlaceProvider places,
+            final RecordSetProvider records,
+            final DateParser dateParser) {
         try {
             final var unmarshalled = unmarshaller.unmarshal(file);
             if (!(unmarshalled instanceof XmlChurchInfos)) return;
             final var info = (XmlChurchInfos) unmarshalled;
             final var startSize = infoProvider.size();
-            info.resolve(placeProvider, dateParser).forEach(infoProvider::add);
+            info.resolve(places, records, dateParser).forEach(infoProvider::add);
             final var endSize = infoProvider.size();
             logger.info("Read {} church infos from {}.", endSize - startSize, file);
         } catch (final JAXBException jex) {

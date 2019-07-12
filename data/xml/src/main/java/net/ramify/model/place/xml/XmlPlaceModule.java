@@ -14,6 +14,7 @@ import net.ramify.model.place.xml.church.XmlChurchInfos;
 import net.ramify.model.place.xml.description.XmlPlaceDescriptions;
 import net.ramify.model.place.xml.location.XmlPlacePositions;
 import net.ramify.model.place.xml.place.XmlPlaces;
+import net.ramify.model.record.provider.RecordSetProvider;
 
 import javax.annotation.Nonnull;
 import javax.inject.Named;
@@ -43,8 +44,13 @@ public class XmlPlaceModule extends PrivateModule {
 
     @Provides
     @Singleton
-    ChurchInfoProvider provideChurchProvider(final JAXBContext context, @Named("data") final File data, final PlaceProvider placeProvider, final DateParser dateParser) throws JAXBException {
-        return XmlChurchInfoProvider.readChurchInfo(context, data, placeProvider, dateParser);
+    ChurchInfoProvider provideChurchProvider(
+            final JAXBContext context,
+            @Named("data") final File data,
+            final PlaceProvider places,
+            final RecordSetProvider records,
+            final DateParser dateParser) throws JAXBException {
+        return XmlChurchInfoProvider.readChurchInfo(context, data, places, records, dateParser);
     }
 
     @Provides

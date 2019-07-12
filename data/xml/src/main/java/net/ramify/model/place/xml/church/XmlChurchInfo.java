@@ -12,9 +12,10 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.building.Church;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.institution.church.ChurchInfo;
-import net.ramify.model.place.institution.church.record.ChurchRecordSetInfo;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.xml.place.XmlPlace;
+import net.ramify.model.record.collection.RecordSet;
+import net.ramify.model.record.provider.RecordSetProvider;
 import net.ramify.utils.collections.SetUtils;
 import net.ramify.utils.objects.Functions;
 
@@ -73,20 +74,20 @@ public class XmlChurchInfo implements HasPlaceId {
     }
 
     @Nonnull
-    private Set<ChurchRecordSetInfo> recordSets(final DateParser parser) {
+    private Set<RecordSet> recordSets(final RecordSetProvider records) {
         if (recordSets == null) return Collections.emptySet();
-        return SetUtils.transform(recordSets, set -> set.build(parser), Sets::newLinkedHashSetWithExpectedSize);
+        return SetUtils.transformIgnoreNull(recordSets, set -> set.build(records), Sets::newLinkedHashSetWithExpectedSize);
     }
 
     @Nonnull
-    ChurchInfo resolve(final PlaceProvider placeProvider, final DateParser dateParser) {
+    ChurchInfo resolve(final PlaceProvider places, final RecordSetProvider records, final DateParser dateParser) {
         try {
             return new ResolvedChurchInfo(
-                    placeProvider.require(this.placeId(), Church.class),
+                    places.require(this.placeId(), Church.class),
                     denomination,
                     this.founded(dateParser),
                     this.closed(dateParser),
-                    this.recordSets(dateParser));
+                    this.recordSets(records));
         } catch (final Place.InvalidPlaceTypeException ex) {
             throw new IllegalArgumentException(ex);
         }

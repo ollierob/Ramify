@@ -5,6 +5,7 @@ option java_outer_classname = "InstitutionProto";
 
 import "place.proto";
 import "date.proto";
+import "record.proto";
 
 message InstitutionList {
 
@@ -18,15 +19,6 @@ message Institution {
     string type = 2;
     DateRange established = 3;
     DateRange closed = 4;
-    repeated InstitutionRecordSet recordSet = 5;
-
-}
-
-message InstitutionRecordSet {
-
-    string id = 1;
-    string name = 2;
-    DateRange covers = 3;
-    string notes = 4;
+    repeated RecordSet recordSet = 5;
 
 }

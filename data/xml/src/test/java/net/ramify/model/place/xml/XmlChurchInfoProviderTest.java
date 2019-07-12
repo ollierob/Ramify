@@ -5,6 +5,7 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.building.Church;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.xml.church.XmlChurchInfos;
+import net.ramify.model.record.provider.RecordSetProvider;
 import org.junit.jupiter.api.Test;
 
 import javax.xml.bind.JAXBContext;
@@ -25,20 +26,22 @@ class XmlChurchInfoProviderTest {
         final var data = new File(XmlPlaceProviderTest.class.getResource("/xml/data/england/west_yorkshire/morley/heptonstall").toURI());
         final var mockDateParser = mock(DateParser.class);
 
-        final var mockPlaceProvider = mock(PlaceProvider.class);
-        when(mockPlaceProvider.require(any(PlaceId.class), eq(Church.class))).thenAnswer(i -> {
+        final var mockPlaces = mock(PlaceProvider.class);
+        when(mockPlaces.require(any(PlaceId.class), eq(Church.class))).thenAnswer(i -> {
             final var church = mock(Church.class);
             when(church.placeId()).thenReturn(i.getArgument(0));
             return church;
         });
 
-        final var schemaFile = new File(XmlPlaceProviderTest.class.getResource("/xml/schema/schema1.xsd").toURI());
+        final var mockRecords = mock(RecordSetProvider.class);
+
+        final var schemaFile = new File(XmlPlaceProviderTest.class.getResource("/xml/schema/places.xsd").toURI());
         final var schema = SchemaFactory.newDefaultInstance().newSchema(schemaFile);
 
         final var unmarshaller = context.createUnmarshaller();
         unmarshaller.setSchema(schema);
 
-        final var provider = XmlChurchInfoProvider.readChurchInfo(unmarshaller, data, mockPlaceProvider, mockDateParser);
+        final var provider = XmlChurchInfoProvider.readChurchInfo(unmarshaller, data, mockPlaces, mockRecords, mockDateParser);
 
     }
 

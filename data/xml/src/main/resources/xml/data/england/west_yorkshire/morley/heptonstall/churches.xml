@@ -8,34 +8,32 @@
 
     <churchInfo id="heptonstall_st-thomas" denomination="Church of England">
         <d:foundedBefore date="1260"/>
-        <churchRecordSet id="heptonstall_st-thomas_baptisms" type="baptism" startYear="1599" endYear="1904"/>
-        <churchRecordSet id="heptonstall_st-thomas_marriages" type="marriage" startYear="1593" endYear="1986"/>
-        <churchRecordSet id="heptonstall_st-thomas_burials" type="burial" startYear="1593" endYear="1898"/>
-        <churchRecordSet id="heptonstall_st-thomas_pew_rents" type="pewRents" startYear="1796" endYear="1847"/>
+        <churchRecordSet id="heptonstall_st-thomas_baptisms"/>
+        <churchRecordSet id="heptonstall_st-thomas_marriages"/>
+        <churchRecordSet id="heptonstall_st-thomas_burials"/>
+        <churchRecordSet id="heptonstall_st-thomas_pew_rents"/>
     </churchInfo>
 
     <churchInfo id="slack-mt-zion" denomination="Baptist">
         <d:foundedIn year="1806"/>
         <d:closedIn year="1974"/>
-        <churchRecordSet id="slack_mt-zion_births" type="birth" startYear="1789" endYear="1837"/>
-        <churchRecordSet id="slack_mt-zion_burials" type="burial" startYear="1807" endYear="1847"/>
-        <churchRecordSet id="slack_mt-zion_members" type="membership" startYear="1842" endYear="1961"/>
-        <churchRecordSet id="slack_mt-zion_minutes" type="minutes" startYear="1807" endYear="1845"/>
+        <churchRecordSet id="slack_mt-zion_births"/>
+        <churchRecordSet id="slack_mt-zion_burials"/>
+        <churchRecordSet id="slack_mt-zion_members"/>
+        <churchRecordSet id="slack_mt-zion_minutes"/>
     </churchInfo>
 
     <churchInfo id="birchcliffe" denomination="Baptist">
         <d:foundedIn year="1763"/>
         <d:closedIn year="1974"/>
-        <churchRecordSet id="birchcliffe_births" type="birth" startYear="1785" endYear="1837"/>
-        <churchRecordSet id="birchcliffe_burials" type="burial" startYear="1816" endYear="1920">
-            The graveyard is split into four sections. The oldest was in use between 1813-1830.
-        </churchRecordSet>
+        <churchRecordSet id="birchcliffe_births"/>
+        <churchRecordSet id="birchcliffe_burials"/>
     </churchInfo>
 
     <churchInfo id="heptonstall_wesleyan" denomination="Methodist">
         <d:foundedIn year="1764"/>
-        <churchRecordSet id="heptonstall_wesleyan_baptisms" type="baptism" startYear="1798" endYear="1837"/>
-        <churchRecordSet id="heptonstall_wesleyan_minutes" type="minutes" startYear="1842" endYear="1880"/>
+        <churchRecordSet id="heptonstall_wesleyan_baptisms"/>
+        <churchRecordSet id="heptonstall_wesleyan_minutes"/>
     </churchInfo>
 
 </churchInfos>
