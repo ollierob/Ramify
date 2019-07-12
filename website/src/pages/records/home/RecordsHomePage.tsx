@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Card, Cascader, Input, Select} from "antd";
+import {Button, Card, Cascader, Input, Select} from "antd";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {Place} from "../../../protobuf/generated/place_pb";
 import {Flag} from "../../../components/images/Flag";
@@ -9,6 +9,7 @@ import {CascaderOptionType} from "antd/es/cascader";
 import {YearRange} from "../../../components/date/DateRange";
 import {Record, RecordSet} from "../../../protobuf/generated/record_pb";
 import RecordSetTable from "./RecordSetTable";
+import {DEFAULT_RECORD_LOADER} from "../../../components/records/RecordLoader";
 
 type Props = {}
 
@@ -23,6 +24,7 @@ type State = {
 export default class RecordsHomePage extends React.PureComponent<Props, State> {
 
     private readonly placeLoader = DEFAULT_PLACE_LOADER;
+    private readonly recordLoader = DEFAULT_RECORD_LOADER;
 
     constructor(props) {
         super(props);
@@ -35,6 +37,7 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
         };
         this.renderRange = this.renderRange.bind(this);
         this.loadLeafPlace = this.loadLeafPlace.bind(this);
+        this.doSearch = this.doSearch.bind(this);
     }
 
 
@@ -48,6 +51,7 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
                 Search by record name:
                 <br/>
                 <Input
+                    disabled
                     size="large"/>
             </div>
 
@@ -76,6 +80,15 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
                     onChange={selectedRange => this.setState({selectedRange})}
                     options={this.state.ranges}
                     displayRender={this.renderRange}/>
+            </div>
+
+            <div className="filter">
+                <Button
+                    size="large"
+                    onClick={this.doSearch}
+                    disabled={this.state.recordSets.loading}>
+                    Load records
+                </Button>
             </div>
 
             <div className="table">
@@ -116,6 +129,13 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
                     }))
                 }).then(() => this.setState(current => ({regions: [...current.regions]})));
         }
+    }
+
+    private doSearch() {
+        const options = {
+            place: this.state.selectedRegion.length ? this.state.selectedRegion[this.state.selectedRegion.length - 1] : null
+        };
+        asyncLoadData(options, this.recordLoader.loadRecordSets, recordSets => this.setState({recordSets}))
     }
 
 }
