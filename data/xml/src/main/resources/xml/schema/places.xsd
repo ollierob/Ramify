@@ -646,17 +646,17 @@
 
             <enumeration value="burial"/>
 
-            <enumeration value="baptism"/>
+            <enumeration value="birth"/>
 
             <enumeration value="accounts"/>
 
-            <enumeration value="pewRents"/>
-
-            <enumeration value="membership"/>
-
             <enumeration value="minutes"/>
 
-            <enumeration value="birth"/>
+            <enumeration value="pewRents"/>
+
+            <enumeration value="baptism"/>
+
+            <enumeration value="membership"/>
 
         </restriction>
 

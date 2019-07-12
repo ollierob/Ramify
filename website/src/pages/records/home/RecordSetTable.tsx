@@ -5,6 +5,7 @@ import {Loading} from "../../../components/Loading";
 import {Table} from "antd";
 import {ErrorMessage} from "../../../components/style/Error";
 import {ColumnProps} from "antd/es/table";
+import {EmptyPlaceWords, FormattedDateRange} from "../../../components/date/FormattedDateRange";
 
 type Props = {
     recordSets: AsyncData<ReadonlyArray<RecordSet.AsObject>>
@@ -38,6 +39,11 @@ const Columns: ColumnProps<RecordSet.AsObject>[] = [
         width: 300,
         defaultSortOrder: "ascend",
         sorter: (a, b) => a.title.localeCompare(b.title)
+    },
+    {
+        title: "Date",
+        render: (t, r) => <FormattedDateRange date={r.date} words={EmptyPlaceWords}/>,
+        width: 150,
     },
     {
         title: "Description",

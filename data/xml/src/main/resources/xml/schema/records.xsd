@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:ns1="http://ramify.net/dates"
         xmlns:tns="http://ramify.net/records"
         xmlns:xs="http://www.w3.org/2001/XMLSchema"
         targetNamespace="http://ramify.net/records"
         version="1.0">
+
+    <import namespace="http://ramify.net/dates" schemaLocation="dates.xsd"/>
 
     <element name="recordSet" type="tns:xmlRecordSet"/>
 
@@ -16,6 +19,8 @@
         <sequence>
 
             <element form="qualified" minOccurs="0" name="description" type="xs:string"/>
+
+            <element minOccurs="0" ref="ns1:year"/>
 
             <element maxOccurs="unbounded" minOccurs="0" ref="tns:recordSetReference"/>
 
@@ -67,9 +72,9 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="government"/>
-
             <enumeration value="church"/>
+
+            <enumeration value="government"/>
 
         </restriction>
 
@@ -79,21 +84,21 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="death"/>
-
-            <enumeration value="residence"/>
-
             <enumeration value="birth"/>
-
-            <enumeration value="baptism"/>
 
             <enumeration value="mixed"/>
 
-            <enumeration value="burial"/>
+            <enumeration value="residence"/>
+
+            <enumeration value="death"/>
+
+            <enumeration value="baptism"/>
+
+            <enumeration value="membership"/>
 
             <enumeration value="marriage"/>
 
-            <enumeration value="membership"/>
+            <enumeration value="burial"/>
 
             <enumeration value="census"/>
 

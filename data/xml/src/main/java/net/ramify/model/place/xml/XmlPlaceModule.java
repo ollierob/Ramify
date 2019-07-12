@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.inject.PrivateModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
+import net.ramify.model.date.XmlDateParser;
 import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.place.institution.church.ChurchInfoProvider;
 import net.ramify.model.place.position.PositionProvider;
@@ -21,7 +22,6 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.File;
 import java.net.URISyntaxException;
-import java.time.LocalDate;
 
 @XmlTransient
 public class XmlPlaceModule extends PrivateModule {
@@ -32,6 +32,7 @@ public class XmlPlaceModule extends PrivateModule {
         this.expose(PlaceProvider.class);
         this.expose(PositionProvider.class);
         this.expose(PlaceDescriptionProvider.class);
+        this.bind(DateParser.class).to(XmlDateParser.class);
     }
 
     @Provides
@@ -72,15 +73,6 @@ public class XmlPlaceModule extends PrivateModule {
         final var places = XmlPlaceModule.class.getResource("/xml/data");
         Preconditions.checkState(places != null, "Could not load XML data");
         return new File(places.toURI());
-    }
-
-    @Provides
-    @Singleton
-    DateParser provideDateParser() {
-        return date -> {
-            if (date.length() == 4) return LocalDate.of(Integer.parseInt(date), 1, 1);
-            return LocalDate.parse(date);
-        };
     }
 
 }

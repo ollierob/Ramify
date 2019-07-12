@@ -17,6 +17,8 @@
 
     <element name="xmlInYear" type="tns:xmlInYear"/>
 
+    <element name="year" type="tns:xmlInYear"/>
+
     <complexType name="xmlBeforeDate">
 
         <complexContent>

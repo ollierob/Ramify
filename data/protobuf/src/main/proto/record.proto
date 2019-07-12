@@ -24,6 +24,7 @@ message RecordSet {
     SourceType source = 4;
     RecordType type = 5;
     string parentId = 6;
+    DateRange date = 7;
 
     repeated ExternalRecordReference externalReference = 10;
 

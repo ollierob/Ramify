@@ -4,6 +4,8 @@ import com.google.common.base.Preconditions;
 import com.google.inject.PrivateModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
+import net.ramify.model.date.XmlDateParser;
+import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.place.xml.XmlPlaceModule;
 import net.ramify.model.record.provider.RecordSetProvider;
 import net.ramify.model.record.xml.collection.XmlRecordSets;
@@ -22,6 +24,7 @@ public class XmlRecordModule extends PrivateModule {
     @Override
     protected void configure() {
         this.expose(RecordSetProvider.class);
+        this.bind(DateParser.class).to(XmlDateParser.class);
     }
 
     @Provides
@@ -42,8 +45,8 @@ public class XmlRecordModule extends PrivateModule {
 
     @Provides
     @Singleton
-    RecordSetProvider provideRecordSetProvider(final JAXBContext context, @Named("data") final File data) throws JAXBException {
-        return XmlRecordSetProvider.readRecordsInDirectory(context, data);
+    RecordSetProvider provideRecordSetProvider(final JAXBContext context, @Named("data") final File data, final DateParser dateParser) throws JAXBException {
+        return XmlRecordSetProvider.readRecordsInDirectory(context, data, dateParser);
     }
 
 }

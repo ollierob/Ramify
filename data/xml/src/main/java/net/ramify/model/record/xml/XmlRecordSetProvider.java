@@ -3,6 +3,7 @@ package net.ramify.model.record.xml;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import net.ramify.model.AbstractMappedProvider;
+import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.record.collection.HasRecordSetId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
@@ -50,15 +51,15 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
                 .collect(Collectors.toSet());
     }
 
-    static RecordSetProvider readRecordsInDirectory(final JAXBContext context, final File root) throws JAXBException {
+    static RecordSetProvider readRecordsInDirectory(final JAXBContext context, final File root, final DateParser dateParser) throws JAXBException {
         final var provider = new XmlRecordSetProvider(Maps.newConcurrentMap());
         final var unmarshaller = context.createUnmarshaller();
-        FileTraverseUtils.traverseSubdirectories(root, file -> file.getName().endsWith(".xml") && file.getName().contains("record"), file -> readRecordsInFile(unmarshaller, file, provider));
+        FileTraverseUtils.traverseSubdirectories(root, file -> file.getName().endsWith(".xml") && file.getName().contains("record"), file -> readRecordsInFile(unmarshaller, file, dateParser, provider));
         logger.info("Loaded {} record sets from {}.", provider.size(), root);
         return new XmlRecordSetProvider(provider.immutableMap());
     }
 
-    private static void readRecordsInFile(final Unmarshaller unmarshaller, final File file, final XmlRecordSetProvider provider) {
+    private static void readRecordsInFile(final Unmarshaller unmarshaller, final File file, final DateParser dateParser, final XmlRecordSetProvider provider) {
         FileUtils.checkReadableFile(file);
         Preconditions.checkArgument(file.getName().endsWith(".xml"), "Not an XML file: %s", file);
         try {
@@ -66,7 +67,7 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
             final var unmarshalled = unmarshaller.unmarshal(file);
             if (!(unmarshalled instanceof XmlRecordSets)) return;
             final var records = (XmlRecordSets) unmarshalled;
-            provider.addAll(records.recordSets());
+            provider.addAll(records.recordSets(dateParser));
         } catch (final JAXBException jex) {
             logger.warn("Could not read records in file " + file + ": " + jex.getMessage());
         }
