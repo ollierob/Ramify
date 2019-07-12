@@ -1,10 +1,13 @@
 import * as React from "react";
 import {Date as DateProto, DateRange as DateRangeProto} from "../../protobuf/generated/date_pb";
 
-export const FormattedDateRange = (props: {date: DateRangeProto.AsObject, words?: PrefixWords}) => {
+export const FormattedYearRange = (props: {date: DateRangeProto.AsObject, words?: PrefixWords}) => <FormattedDateRange {...props} formatter={formatYear}/>
+
+export const FormattedDateRange = (props: {date: DateRangeProto.AsObject, words?: PrefixWords, formatter?: DateFormatter}) => {
     const date = props.date;
     if (!date) return null;
     const words = props.words || DefaultPrefixWords;
+    const format = props.formatter || formatYear;
     if (!date.earliest && !date.latest) return <>{words.unknown}</>;
     if (date.earliest && !date.latest) return <>{words.after} {format(date.earliest)}</>;
     if (!date.earliest && date.latest) return <>by {format(date.latest)}</>;
@@ -22,7 +25,7 @@ export const EmptyPlaceWords: PrefixWords = {
     in: "",
     unknown: null,
     after: ""
-}
+};
 
 const DefaultPrefixWords: PrefixWords = {
     in: "in ",
@@ -30,7 +33,9 @@ const DefaultPrefixWords: PrefixWords = {
     after: "after "
 };
 
-function format(date: DateProto.AsObject) {
+type DateFormatter = (date: DateProto.AsObject) => string | number;
+
+function formatYear(date: DateProto.AsObject) {
     return date.year;
 }
 
