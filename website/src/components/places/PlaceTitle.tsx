@@ -1,7 +1,7 @@
 import * as React from "react";
 import {Place, PlaceDescription} from "../../protobuf/generated/place_pb";
 import {placeTypeName} from "./PlaceType";
-import {PlaceLinks} from "./PlaceLinks";
+import {Links} from "../style/Links";
 import {isPlaceFavourite, PlaceFavouritesHandler} from "./PlaceFavourites";
 import {FavouritesIcon} from "../images/Icons";
 import {Flag} from "../images/Flag";
@@ -24,7 +24,7 @@ export const PlaceTitle = (props: {place: Place.AsObject, description: PlaceDesc
         <FavouritesIcon
             className={isFavourite && "favourite"}
             onClick={() => isFavourite ? props.removePlaceFavourite(place) : props.addPlaceFavourite(place)}/>
-        <PlaceLinks
+        <Links
             links={props.description && props.description.linkList}/>
     </>
 

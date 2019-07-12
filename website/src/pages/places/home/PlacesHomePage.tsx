@@ -6,7 +6,7 @@ import {Card} from "antd";
 import {DEFAULT_PLACE_LOADER} from "../../../components/places/PlaceLoader";
 import {Loading} from "../../../components/Loading";
 import {Flag} from "../../../components/images/Flag";
-import {placeHref} from "../../../components/places/Place";
+import {placeHref} from "../PlaceLinks";
 
 type Props = PlacesPageProps;
 

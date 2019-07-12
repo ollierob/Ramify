@@ -1,8 +1,8 @@
 import {Place, PlaceTypeMap} from "../../protobuf/generated/place_pb";
 import {SubMenu} from "../SubMenu";
 import * as React from "react";
-import {placeHref} from "../../components/places/Place";
 import {placeTypeName} from "../../components/places/PlaceType";
+import {placeHref} from "./PlaceLinks";
 
 export const PlaceBreadcrumb = (props: {loading: boolean, place: Place.AsObject}) => {
     return <SubMenu>

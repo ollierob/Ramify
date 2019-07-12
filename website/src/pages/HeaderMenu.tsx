@@ -1,9 +1,10 @@
 import * as React from "react";
 import {Icon, Menu} from "antd";
 import {FavouritesIcon, PeopleIcon, PlacesIcon, RecordsIcon, TreeIcon} from "../components/images/Icons";
-import {placeHref, PlaceList} from "../components/places/Place";
+import {PlaceList} from "../components/places/Place";
 import {Place} from "../protobuf/generated/place_pb";
 import {placeTypeName} from "../components/places/PlaceType";
+import {placeHref} from "./places/PlaceLinks";
 
 type Props = {
     active: string;

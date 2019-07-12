@@ -2,11 +2,9 @@ import * as React from "react";
 import {Card} from "antd";
 import {Place, PlaceDescription} from "../../../protobuf/generated/place_pb";
 import ChildPlaceCards from "../../../components/places/ChildPlaceCards";
-import {placeTypeName} from "../../../components/places/PlaceType";
-import {PlaceLinks} from "../../../components/places/PlaceLinks";
-import ReactMarkdown = require("react-markdown");
 import {PlaceTitle} from "../../../components/places/PlaceTitle";
 import {PlaceFavouritesHandler} from "../../../components/places/PlaceFavourites";
+import ReactMarkdown = require("react-markdown");
 
 type Props = PlaceFavouritesHandler & {
     place: Place.AsObject;

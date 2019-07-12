@@ -2,10 +2,10 @@ import * as React from "react";
 import {Place} from "../../protobuf/generated/place_pb";
 import {stringMultimap} from "../Maps";
 import {Card} from "antd";
-import {placeHref} from "./Place";
 import {PlaceType, placeTypeKey, placeTypeName, sortByPlaceName, sortByPlaceType} from "./PlaceType";
 import {Img} from "../style/Img";
 import {Loading} from "../Loading";
+import {placeHref} from "../../pages/places/PlaceLinks";
 
 type Props = {
     loading: boolean;

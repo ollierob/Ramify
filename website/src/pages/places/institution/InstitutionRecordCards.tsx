@@ -1,10 +1,11 @@
 import * as React from "react";
 import {Place} from "../../../protobuf/generated/place_pb";
 import {Card} from "antd";
-import {placeHref} from "../../../components/places/Place";
 import {placeTypeName} from "../../../components/places/PlaceType";
 import {RecordSet} from "../../../protobuf/generated/record_pb";
 import {FormattedYearRange} from "../../../components/date/FormattedDateRange";
+import {placeHref} from "../PlaceLinks";
+import {recordSetHref} from "../../records/RecordLinks";
 
 export const RecordCards = (props: {records: ReadonlyArray<RecordSet.AsObject>, alsoSee: ReadonlyArray<Place.AsObject>}) => {
     const records = props.records;
@@ -17,9 +18,11 @@ export const RecordCards = (props: {records: ReadonlyArray<RecordSet.AsObject>, 
 
 const RecordCard = (props: {record: RecordSet.AsObject}) => {
     const record = props.record;
-    return <Card title={record.title} className="placeCard">
+    return <Card
+        title={<a href={recordSetHref(record)}>{record.title}</a>}
+        className="placeCard">
         Available <FormattedYearRange date={record.date}/>
-        {record.description && <div className="notes">{record.description}</div>}
+        {record.description && <div className="notags">{record.description}</div>}
     </Card>
 };
 
