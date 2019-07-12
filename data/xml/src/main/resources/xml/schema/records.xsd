@@ -92,23 +92,23 @@
 
             <enumeration value="membership"/>
 
-            <enumeration value="residence"/>
-
-            <enumeration value="birth"/>
+            <enumeration value="death"/>
 
             <enumeration value="burial"/>
 
+            <enumeration value="mixed"/>
+
             <enumeration value="marriage"/>
+
+            <enumeration value="residence"/>
 
             <enumeration value="payment"/>
 
-            <enumeration value="death"/>
-
-            <enumeration value="mixed"/>
+            <enumeration value="baptism"/>
 
             <enumeration value="census"/>
 
-            <enumeration value="baptism"/>
+            <enumeration value="birth"/>
 
         </restriction>
 

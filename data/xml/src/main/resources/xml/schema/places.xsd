@@ -98,6 +98,8 @@
 
         <attribute name="id" type="xs:string" use="required"/>
 
+        <attribute name="title" type="xs:string"/>
+
     </complexType>
 
     <complexType name="churchInfos">

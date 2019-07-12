@@ -8,10 +8,10 @@
 
     <churchInfo id="heptonstall_st-thomas" denomination="Church of England">
         <d:foundedBefore date="1260"/>
-        <churchRecordSet id="heptonstall_st-thomas_baptisms"/>
-        <churchRecordSet id="heptonstall_st-thomas_marriages"/>
-        <churchRecordSet id="heptonstall_st-thomas_burials"/>
-        <churchRecordSet id="heptonstall_st-thomas_pew_rents"/>
+        <churchRecordSet id="heptonstall_st-thomas_baptisms" title="Baptisms"/>
+        <churchRecordSet id="heptonstall_st-thomas_marriages" title="Marriags"/>
+        <churchRecordSet id="heptonstall_st-thomas_burials" title="Burials"/>
+        <churchRecordSet id="heptonstall_st-thomas_pew_rents" title="Pew Rentals"/>
     </churchInfo>
 
     <churchInfo id="slack-mt-zion" denomination="Baptist">

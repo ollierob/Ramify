@@ -27,6 +27,10 @@
             <artifactId>date</artifactId>
         </dependency>
         <dependency>
+            <groupId>net.ramify</groupId>
+            <artifactId>records</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
         </dependency>
