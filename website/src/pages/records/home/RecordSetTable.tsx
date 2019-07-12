@@ -17,7 +17,6 @@ export default class RecordSetTable extends React.PureComponent<Props> {
 
         if (!this.props.recordSets.query) return <NoRecordsYet/>;
         if (this.props.recordSets.error) return <ErrorMessage message={this.props.recordSets.error}/>
-        if (this.props.recordSets.loading) return <Loading/>;
 
         const data: RecordSet.AsObject[] = this.props.recordSets.data ? [].concat(this.props.recordSets.data) : [];
 
@@ -46,7 +45,7 @@ const Columns: ColumnProps<RecordSet.AsObject>[] = [
         key: "date",
         title: "Date",
         render: (t, r) => <FormattedDateRange date={r.date} words={EmptyPlaceWords}/>,
-        width: 150,
+        width: 120,
     },
     {
         key: "description",

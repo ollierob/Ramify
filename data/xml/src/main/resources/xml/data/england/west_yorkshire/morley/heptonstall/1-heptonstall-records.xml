@@ -59,6 +59,33 @@
     </recordSet>
 
     <recordSet
+            id="heptonstall_wesleyan_baptisms"
+            title="Heptonstall Methodist Church Registers"
+            place="church:heptonstall_wesleyan"
+            source="church"
+            type="mixed">
+
+        <recordSet
+                id="heptonstall_wesleyan_baptisms"
+                title="Heptonstall Methodist Church Baptisms"
+                place="church:heptonstall_wesleyan"
+                source="church"
+                type="baptism">
+            <d:betweenYears start="1798" end="1837"/>
+        </recordSet>
+
+        <recordSet
+                id="heptonstall_wesleyan_minutes"
+                title="Heptonstall Methodist Church Meeting Minutes"
+                place="church:heptonstall_wesleyan"
+                source="church"
+                type="membership">
+            <d:betweenYears start="1842" end="1880"/>
+        </recordSet>
+
+    </recordSet>
+
+    <recordSet
             id="protestation_1642_heptonstall"
             title="Heptonstall 1642 Protestation Returns"
             place="township:heptonstall"
