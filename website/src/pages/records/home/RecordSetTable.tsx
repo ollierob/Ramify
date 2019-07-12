@@ -22,6 +22,7 @@ export default class RecordSetTable extends React.PureComponent<Props> {
         const data: RecordSet.AsObject[] = this.props.recordSets.data ? [].concat(this.props.recordSets.data) : [];
 
         return <Table
+            className="bordered"
             loading={this.props.recordSets.loading}
             dataSource={data}
             columns={Columns}/>;

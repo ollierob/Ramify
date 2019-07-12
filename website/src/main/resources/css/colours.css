@@ -5,3 +5,8 @@
 .yellow, .favourite {
     color: #ffe234 !important;
 }
+
+.bordered {
+    border: 1px solid #D7D7D7;
+    border-radius: 4px;
+}

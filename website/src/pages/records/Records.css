@@ -11,3 +11,7 @@
 .records .search input {
     width: 210px;
 }
+
+.records .table {
+    margin-top: 10px;
+}
