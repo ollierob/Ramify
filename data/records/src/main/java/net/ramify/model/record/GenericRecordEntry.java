@@ -65,7 +65,7 @@ public class GenericRecordEntry implements HasPersonId {
 
     @Nonnull
     public Person build(final Set<Event> events) {
-        return new GenericRecordPerson(id, name, gender, events);
+        return new GenericRecordPerson(id, name, gender, events, null);
     }
 
     @Nonnull

@@ -16,9 +16,9 @@
 
             <enumeration value="female"/>
 
-            <enumeration value="unknown"/>
-
             <enumeration value="male"/>
+
+            <enumeration value="unknown"/>
 
         </restriction>
 

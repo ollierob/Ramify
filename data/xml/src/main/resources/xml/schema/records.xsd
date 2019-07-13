@@ -105,9 +105,9 @@
 
                 <sequence/>
 
-                <attribute name="firstLastName" type="xs:string"/>
-
                 <attribute name="gender" type="ns2:xmlGender" use="required"/>
+
+                <attribute name="notes" type="xs:string"/>
 
             </extension>
 
@@ -149,25 +149,25 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="mixed"/>
-
-            <enumeration value="marriage"/>
+            <enumeration value="baptism"/>
 
             <enumeration value="membership"/>
-
-            <enumeration value="payment"/>
-
-            <enumeration value="census"/>
 
             <enumeration value="burial"/>
 
             <enumeration value="residence"/>
 
-            <enumeration value="birth"/>
+            <enumeration value="marriage"/>
+
+            <enumeration value="mixed"/>
+
+            <enumeration value="census"/>
 
             <enumeration value="death"/>
 
-            <enumeration value="baptism"/>
+            <enumeration value="payment"/>
+
+            <enumeration value="birth"/>
 
         </restriction>
 

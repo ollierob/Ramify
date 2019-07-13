@@ -75,7 +75,7 @@ function buildIndividualRecords(records: ReadonlyArray<Record.AsObject>): Indivi
 }
 
 function determineColumns(type: RecordType): ColumnProps<IndividualRecord>[] {
-    const columns = [NameColumn];
+    const columns = [NameColumn, NotesColumn];
     return columns;
 }
 
@@ -83,5 +83,12 @@ const NameColumn: ColumnProps<IndividualRecord> = {
     key: "name",
     title: "Name",
     dataIndex: "person.name.surname",
-    render: (t, r) => nameToString(r.person.name)
+    render: (t, r) => nameToString(r.person.name),
+    width: 200,
+};
+
+const NotesColumn: ColumnProps<IndividualRecord> = {
+    key: "notes",
+    title: "Notes",
+    dataIndex: "person.notes"
 };

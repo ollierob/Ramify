@@ -25,6 +25,9 @@ public class XmlResidenceRecord extends XmlRecord {
     @XmlAttribute(name = "gender", required = true)
     private XmlGender gender;
 
+    @XmlAttribute(name = "notes", required = false)
+    private String notes;
+
     ResidenceRecord build(final NameParser nameParser, final PlaceId placeId, final DateRange date) {
         final var id = this.recordId();
         final var person = this.person(nameParser, placeId, date);
@@ -36,7 +39,7 @@ public class XmlResidenceRecord extends XmlRecord {
         final var name = this.name(nameParser);
         final var gender = this.gender.gender();
         final var events = this.events(id, placeId, date);
-        return new GenericRecordPerson(id, name, gender, events);
+        return new GenericRecordPerson(id, name, gender, events, notes);
     }
 
     PersonId personId() {

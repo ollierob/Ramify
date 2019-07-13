@@ -10,6 +10,7 @@ message Person {
     string id = 1;
     Name name = 2;
     string gender = 3;
+    string notes = 4;
 
     repeated Event events = 10;
 
