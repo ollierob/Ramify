@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
         xmlns:ns1="http://ramify.net/dates"
+        xmlns:ns2="http://ramify.net/people"
         xmlns:tns="http://ramify.net/records"
         xmlns:xs="http://www.w3.org/2001/XMLSchema"
         targetNamespace="http://ramify.net/records"
         version="1.0">
 
     <import namespace="http://ramify.net/dates" schemaLocation="dates.xsd"/>
+
+    <import namespace="http://ramify.net/people" schemaLocation="people.xsd"/>
 
     <element name="recordSet" type="tns:xmlRecordSet"/>
 
@@ -90,6 +93,8 @@
 
                 <attribute name="firstLastName" type="xs:string"/>
 
+                <attribute name="gender" type="ns2:xmlGender" use="required"/>
+
             </extension>
 
         </complexContent>
@@ -112,25 +117,25 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="marriage"/>
-
-            <enumeration value="birth"/>
-
-            <enumeration value="membership"/>
-
-            <enumeration value="baptism"/>
-
-            <enumeration value="payment"/>
-
-            <enumeration value="residence"/>
-
             <enumeration value="burial"/>
-
-            <enumeration value="death"/>
 
             <enumeration value="census"/>
 
+            <enumeration value="baptism"/>
+
+            <enumeration value="death"/>
+
+            <enumeration value="payment"/>
+
+            <enumeration value="membership"/>
+
             <enumeration value="mixed"/>
+
+            <enumeration value="residence"/>
+
+            <enumeration value="marriage"/>
+
+            <enumeration value="birth"/>
 
         </restriction>
 

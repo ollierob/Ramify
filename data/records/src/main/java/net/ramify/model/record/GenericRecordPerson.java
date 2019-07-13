@@ -9,11 +9,11 @@ import net.ramify.model.person.name.Name;
 import javax.annotation.Nonnull;
 import java.util.Set;
 
-class GenericRecordPerson extends AbstractPerson {
+public class GenericRecordPerson extends AbstractPerson {
 
     private final Set<Event> events;
 
-    GenericRecordPerson(final PersonId id, final Name name, final Gender gender, final Set<Event> events) {
+    public GenericRecordPerson(final PersonId id, final Name name, final Gender gender, final Set<Event> events) {
         super(id, name, gender);
         this.events = events;
     }

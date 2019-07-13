@@ -10,4 +10,18 @@
 
     </complexType>
 
+    <simpleType name="xmlGender">
+
+        <restriction base="xs:string">
+
+            <enumeration value="female"/>
+
+            <enumeration value="unknown"/>
+
+            <enumeration value="male"/>
+
+        </restriction>
+
+    </simpleType>
+
 </schema>
