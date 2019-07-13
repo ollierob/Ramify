@@ -26,6 +26,7 @@
             id="protestation_1642_wry"
             parentId="protestation_1642"
             title="West Yorkshire Protestation Returns"
+            shortTitle="West Yorkshire"
             place="county:west_yorkshire"
             source="government"
             type="residence">

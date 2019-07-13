@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<recordSets
+        xmlns="http://ramify.net/records"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:d="http://ramify.net/dates"
+        xsi:schemaLocation="http://ramify.net/records ../../../../../schema/records.xsd http://ramify.net/dates ../../../../../schema/dates.xsd">
+
+    <recordSet
+            id="protestation_1642_wadsworth"
+            parentId="protestation_1642_wry_morley"
+            title="Wadsworth Protestation Returns"
+            shortTitle="Wadsworth"
+            place="township:wadsworth"
+            source="government"
+            type="residence">
+        <d:inYear year="1642"/>
+    </recordSet>
+
+</recordSets>

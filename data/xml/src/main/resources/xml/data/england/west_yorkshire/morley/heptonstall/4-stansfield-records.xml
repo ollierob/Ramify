@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<recordSets
+        xmlns="http://ramify.net/records"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:d="http://ramify.net/dates"
+        xsi:schemaLocation="http://ramify.net/records ../../../../../schema/records.xsd http://ramify.net/dates ../../../../../schema/dates.xsd">
+
+    <recordSet
+            id="protestation_1642_wry_stansfield"
+            parentId="protestation_1642_wry_morley"
+            title="Stansfield Protestation Returns"
+            shortTitle="Stansfield"
+            place="township:stansfield"
+            source="government"
+            type="residence">
+        <d:inYear year="1642"/>
+    </recordSet>
+
+    <recordSet
+            id="protestation_1642_wry_cross_stone"
+            parentId="protestation_1642_wry_morley"
+            title="Cross Stone Protestation Returns"
+            shortTitle="Cross Stone"
+            place="township:stansfield"
+            source="government"
+            type="residence">
+        <d:inYear year="1642"/>
+    </recordSet>
+
+</recordSets>
