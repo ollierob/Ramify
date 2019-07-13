@@ -19,6 +19,8 @@
 
     <element name="residence" type="tns:xmlResidenceRecord"/>
 
+    <element name="residenceRecords" type="tns:xmlResidenceRecords"/>
+
     <complexType name="xmlRecordSet">
 
         <sequence>
@@ -101,13 +103,41 @@
 
     </complexType>
 
+    <complexType abstract="true" name="xmlRecords">
+
+        <sequence/>
+
+    </complexType>
+
+    <complexType name="xmlResidenceRecords">
+
+        <complexContent>
+
+            <extension base="tns:xmlRecords">
+
+                <sequence>
+
+                    <element minOccurs="0" ref="ns1:inYear"/>
+
+                    <element maxOccurs="unbounded" minOccurs="0" ref="tns:residence"/>
+
+                </sequence>
+
+                <attribute name="placeId" type="xs:string"/>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
     <simpleType name="xmlRecordSetSource">
 
         <restriction base="xs:string">
 
-            <enumeration value="church"/>
-
             <enumeration value="government"/>
+
+            <enumeration value="church"/>
 
         </restriction>
 
@@ -117,25 +147,25 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="burial"/>
-
-            <enumeration value="census"/>
-
             <enumeration value="baptism"/>
 
             <enumeration value="death"/>
 
             <enumeration value="payment"/>
 
+            <enumeration value="mixed"/>
+
             <enumeration value="membership"/>
 
-            <enumeration value="mixed"/>
+            <enumeration value="census"/>
 
             <enumeration value="residence"/>
 
-            <enumeration value="marriage"/>
-
             <enumeration value="birth"/>
+
+            <enumeration value="burial"/>
+
+            <enumeration value="marriage"/>
 
         </restriction>
 

@@ -10,8 +10,10 @@ public enum XmlGender {
 
     @XmlEnumValue("male")
     MALE(Gender.MALE),
+
     @XmlEnumValue("female")
     FEMALE(Gender.FEMALE),
+
     @XmlEnumValue("unknown")
     UNKNOWN(Gender.UNKNOWN);
 
