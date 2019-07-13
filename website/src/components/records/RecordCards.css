@@ -18,3 +18,9 @@
     font-size: 1.25em;
     padding: 0;
 }
+
+.recordCards .groupCard {
+    display: inline-block;
+    border: 0;
+    vertical-align: top;
+}

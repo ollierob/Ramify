@@ -6,15 +6,32 @@ import {RecordSet} from "../../protobuf/generated/record_pb";
 import {FormattedYearRange} from "../date/FormattedDateRange";
 import {placeHref} from "../../pages/places/PlaceLinks";
 import {recordSetHref} from "../../pages/records/RecordLinks";
+import {stringMultimap} from "../Maps";
 import "./RecordCards.css";
 
-export const RecordCards = (props: {records: ReadonlyArray<RecordSet.AsObject>, alsoSee?: ReadonlyArray<Place.AsObject>}) => {
+export const RecordCards = (props: {records: ReadonlyArray<RecordSet.AsObject>, groupByParent?: boolean, alsoSee?: ReadonlyArray<Place.AsObject>}) => {
     const records = props.records;
     if (!records || !records.length) return null;
+    if (props.groupByParent && records.some(r => r.parent)) return <GroupedRecordCards {...props}/>;
     return <div className="recordCards">
         {records.map(record => <RecordCard record={record}/>)}
         {props.alsoSee && <AlsoSeeCard alsoSee={props.alsoSee}/>}
     </div>;
+};
+
+const GroupedRecordCards = (props: {records: ReadonlyArray<RecordSet.AsObject>, alsoSee?: ReadonlyArray<Place.AsObject>}) => {
+    const records = props.records;
+    const parentGroups = stringMultimap(records, record => record.parent ? record.parent.id : "");
+    return <div className="recordCards">
+        {Object.keys(parentGroups).map(group => <GroupRecordCard records={parentGroups[group]}/>)}
+    </div>;
+};
+
+const GroupRecordCard = (props: {records: ReadonlyArray<RecordSet.AsObject>}) => {
+    const parent = props.records[0].parent;
+    return <Card className="groupCard" title={<a href={recordSetHref(parent)}>{parent.title}</a>}>
+        {props.records.map(record => <RecordCard record={record}/>)}
+    </Card>;
 };
 
 const RecordCard = (props: {record: RecordSet.AsObject}) => {
@@ -26,7 +43,6 @@ const RecordCard = (props: {record: RecordSet.AsObject}) => {
         {record.description && <div className="notags">{record.description}</div>}
     </Card>;
 };
-
 
 const AlsoSeeCard = (props: {alsoSee: ReadonlyArray<Place.AsObject>}) => {
     const alsoSee = props.alsoSee;
