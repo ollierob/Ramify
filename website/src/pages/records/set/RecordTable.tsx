@@ -15,7 +15,8 @@ type Props = Partial<RecordPaginationHandler> & {
 }
 
 type State = {
-    data: IndividualRecord[]
+    data: IndividualRecord[];
+    columns: ColumnProps<IndividualRecord>[]
 }
 
 type IndividualRecord = {
@@ -28,7 +29,8 @@ export class RecordTable extends React.PureComponent<Props, State> {
     constructor(props) {
         super(props);
         this.state = {
-            data: []
+            data: buildIndividualRecords(props.records),
+            columns: determineColumns(this.props.type)
         };
     }
 
@@ -43,18 +45,15 @@ export class RecordTable extends React.PureComponent<Props, State> {
             <Table
                 loading={this.props.loading}
                 dataSource={data}
-                columns={Columns}/>
+                columns={this.state.columns}/>
 
         </>;
 
     }
 
-    componentDidMount() {
-        if (this.props.records)
-            this.setState({data: buildIndividualRecords(this.props.records)});
-    }
-
     componentDidUpdate(prevProps: Readonly<Props>) {
+        if (this.props.type != prevProps.type)
+            this.setState({columns: determineColumns(this.props.type)});
         if (this.props.records != prevProps.records)
             this.setState({data: buildIndividualRecords(this.props.records)});
     }
@@ -75,10 +74,13 @@ function buildIndividualRecords(records: ReadonlyArray<Record.AsObject>): Indivi
     return out;
 }
 
-const Columns: ColumnProps<IndividualRecord>[] = [
-    {
-        key: "name",
-        dataIndex: "person.name.surname",
-        render: (t, r) => nameToString(r.person.name)
-    }
-];
+function determineColumns(type: RecordType): ColumnProps<IndividualRecord>[] {
+    const columns = [NameColumn];
+    return columns;
+}
+
+const NameColumn: ColumnProps<IndividualRecord> = {
+    key: "name",
+    dataIndex: "person.name.surname",
+    render: (t, r) => nameToString(r.person.name)
+};
