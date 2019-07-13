@@ -24,3 +24,12 @@
     border: 0;
     vertical-align: top;
 }
+
+.recordCards .groupCard .ant-card-head {
+    padding: 0 8px;
+    font-size: 1em;
+}
+
+.recordCards .groupCard .ant-card-body {
+    padding: 8px;
+}

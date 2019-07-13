@@ -8,6 +8,7 @@ import {placeHref} from "../../pages/places/PlaceLinks";
 import {recordSetHref} from "../../pages/records/RecordLinks";
 import {stringMultimap} from "../Maps";
 import "./RecordCards.css";
+import {RecordsIcon} from "../images/Icons";
 
 export const RecordCards = (props: {records: ReadonlyArray<RecordSet.AsObject>, groupByParent?: boolean, alsoSee?: ReadonlyArray<Place.AsObject>}) => {
     const records = props.records;
@@ -28,9 +29,13 @@ const GroupedRecordCards = (props: {records: ReadonlyArray<RecordSet.AsObject>, 
 };
 
 const GroupRecordCard = (props: {records: ReadonlyArray<RecordSet.AsObject>}) => {
+    const children = <>{props.records.map(record => <RecordCard record={record}/>)}</>;
     const parent = props.records[0].parent;
-    return <Card className="groupCard" title={<a href={recordSetHref(parent)}>{parent.title}</a>}>
-        {props.records.map(record => <RecordCard record={record}/>)}
+    if (!parent) return children;
+    return <Card
+        className="groupCard"
+        title={<><RecordsIcon/> <a href={recordSetHref(parent)}>{parent.title}</a></>}>
+        {children}
     </Card>;
 };
 
