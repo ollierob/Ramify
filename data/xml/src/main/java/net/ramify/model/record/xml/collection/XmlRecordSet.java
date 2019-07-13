@@ -86,7 +86,7 @@ class XmlRecordSet implements HasRecordSetId {
                 title,
                 shortTitle,
                 Functions.ifNonNull(description, String::trim),
-                0,
+                this.size(), //TODO also include children
                 this.buildReferences());
         if (children == null) return Collections.singletonList(self);
         final var recordSets = Lists.<RecordSet>newArrayListWithExpectedSize(1 + 2 * children.size());
@@ -98,6 +98,11 @@ class XmlRecordSet implements HasRecordSetId {
     private Set<RecordSetReference> buildReferences() {
         if (references == null) return Collections.emptySet();
         return SetUtils.transform(references, XmlRecordSetReference::build);
+    }
+
+    private int size() {
+        if (records == null) return 0;
+        return records.stream().mapToInt(XmlRecords::size).sum();
     }
 
     @Nonnull

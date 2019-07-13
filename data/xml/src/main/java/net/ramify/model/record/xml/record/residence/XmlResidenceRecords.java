@@ -34,6 +34,11 @@ public class XmlResidenceRecords extends XmlRecords implements HasPlaceId {
     @XmlElementRef
     private List<XmlResidenceRecord> records;
 
+    @Override
+    public int size() {
+        return records.size();
+    }
+
     @Nonnull
     @Override
     public Collection<? extends ResidenceRecord> build(final NameParser nameParser, final DateParser dateParser) {

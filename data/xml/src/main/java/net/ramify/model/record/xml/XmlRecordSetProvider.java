@@ -39,7 +39,9 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
 
     private final SetMultimap<RecordSetId, RecordSet> parentChildren;
 
-    XmlRecordSetProvider(final Map<RecordSetId, RecordSet> recordSets, final SetMultimap<RecordSetId, RecordSet> parentChildren) {
+    XmlRecordSetProvider(
+            final Map<RecordSetId, RecordSet> recordSets,
+            final SetMultimap<RecordSetId, RecordSet> parentChildren) {
         super(recordSets);
         this.parentChildren = parentChildren;
     }
@@ -71,15 +73,18 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
         return new XmlRecordSetProvider(this.immutableMap(), ImmutableSetMultimap.copyOf(parentChildren));
     }
 
-    static RecordSetProvider readRecordsInDirectory(final JAXBContext context, final File root, final DateParser dateParser) throws JAXBException {
+    static RecordSetProvider readRecordsInDirectory(final JAXBContext context, final File root, final DateParser dateParser, final XmlRecordProvider recordProvider) throws JAXBException {
         final var provider = new XmlRecordSetProvider(Maps.newConcurrentMap(), HashMultimap.create());
         final var unmarshaller = context.createUnmarshaller();
-        FileTraverseUtils.traverseSubdirectories(root, file -> file.getName().endsWith(".xml") && file.getName().contains("record"), file -> readRecordsInFile(unmarshaller, file, dateParser, provider));
+        FileTraverseUtils.traverseSubdirectories(
+                root,
+                file -> file.getName().endsWith(".xml") && file.getPath().contains("record"),
+                file -> readRecordsInFile(unmarshaller, file, dateParser, provider, recordProvider));
         logger.info("Loaded {} record sets from {}.", provider.size(), root);
         return provider.immutable();
     }
 
-    private static void readRecordsInFile(final Unmarshaller unmarshaller, final File file, final DateParser dateParser, final XmlRecordSetProvider provider) {
+    private static void readRecordsInFile(final Unmarshaller unmarshaller, final File file, final DateParser dateParser, final XmlRecordSetProvider provider, final XmlRecordProvider recordProvider) {
         FileUtils.checkReadableFile(file);
         Preconditions.checkArgument(file.getName().endsWith(".xml"), "Not an XML file: %s", file);
         try {
@@ -87,7 +92,9 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
             final var unmarshalled = unmarshaller.unmarshal(file);
             if (!(unmarshalled instanceof XmlRecordSets)) return;
             final var records = (XmlRecordSets) unmarshalled;
-            provider.addAll(records.recordSets(provider, dateParser));
+            final var recordSets = records.recordSets(provider, dateParser);
+            provider.addAll(recordSets);
+            recordSets.forEach(rs -> recordProvider.add(rs.recordSetId(), file));
         } catch (final JAXBException jex) {
             logger.warn("Could not read records in file " + file + ": " + jex.getMessage());
         }

@@ -12,6 +12,8 @@ import java.util.Collection;
 @XmlSeeAlso({XmlResidenceRecords.class})
 public abstract class XmlRecords {
 
+    public abstract int size();
+
     @Nonnull
     public abstract Collection<? extends Record> build(NameParser nameParser, DateParser dateParser);
 

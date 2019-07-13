@@ -48,6 +48,8 @@ const RecordCard = (props: {record: RecordSet.AsObject, shortTitle?: boolean}) =
         title={<a href={recordSetHref(record)}>{title}</a>}
         className="recordCard">
         Available <FormattedYearRange date={record.date}/>
+        <br/>
+        {record.numrecords.toLocaleString()} records
         {record.description && <div className="notags">{record.description}</div>}
     </Card>;
 };

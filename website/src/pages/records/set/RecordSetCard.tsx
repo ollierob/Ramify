@@ -25,7 +25,7 @@ export default class RecordSetCard extends React.PureComponent<Props> {
 
         return <Card
             className="info"
-            title={<b>{recordSet.longtitle}</b>}>
+            title={<><b>{recordSet.longtitle}</b> <span className="unimportant">{recordSet.numrecords} records</span></>}>
 
             <PartOf
                 parent={recordSet.parent}/>
