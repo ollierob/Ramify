@@ -1,15 +1,18 @@
 import * as React from "react";
 import {CSSProperties} from "react";
-import {RecordSet} from "../../../protobuf/generated/record_pb";
+import {Record, RecordSet} from "../../../protobuf/generated/record_pb";
 import {Card} from "antd";
 import {recordSetHref} from "../RecordLinks";
 import {RecordCards} from "../../../components/records/RecordCards";
 import {NameAgeSearch} from "../../../components/search/NameAgeSearch";
 import {RecordSearchHandler} from "../../../components/search/RecordSearchHandler";
+import {RecordResults} from "./RecordResults";
+import {AsyncData} from "../../../components/fetch/AsyncData";
 
 type Props = RecordSearchHandler & {
     recordSet: Readonly<RecordSet.AsObject>
-    recordSetChildren: ReadonlyArray<RecordSet.AsObject>
+    recordSetChildren: ReadonlyArray<RecordSet.AsObject>;
+    searchResults: AsyncData<ReadonlyArray<Record.AsObject>>;
 }
 
 export default class RecordSetCard extends React.PureComponent<Props> {
@@ -35,6 +38,11 @@ export default class RecordSetCard extends React.PureComponent<Props> {
                 style={MarginBottom}/>
 
             <NameAgeSearch
+                disabled
+                {...this.props}
+                style={MarginBottom}/>
+
+            <RecordResults
                 {...this.props}/>
 
         </Card>;

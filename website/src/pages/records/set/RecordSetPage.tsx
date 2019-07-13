@@ -55,7 +55,8 @@ export default class RecordSetPage extends React.PureComponent<Props, State> {
                 recordSet={data}
                 recordSetChildren={this.state.recordSetChildren.data}
                 searching={this.state.searchResults.loading}
-                doSearch={this.search}/>
+                doSearch={this.search}
+                searchResults={this.state.searchResults}/>
 
         </div>;
 
