@@ -1,6 +1,7 @@
 package net.ramify.model.record.collection;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.record.Record;
@@ -8,7 +9,7 @@ import net.ramify.model.record.proto.RecordProto;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
-import java.util.Set;
+import java.util.Collection;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -32,8 +33,8 @@ public interface Records extends BuildsProto<RecordProto.RecordList> {
                 .build();
     }
 
-    static Records of(final Set<Record> records) {
-        final var immutable = ImmutableSet.copyOf(records);
+    static Records of(final Collection<Record> records) {
+        final var immutable = ImmutableList.copyOf(records);
         return immutable::stream;
     }
 

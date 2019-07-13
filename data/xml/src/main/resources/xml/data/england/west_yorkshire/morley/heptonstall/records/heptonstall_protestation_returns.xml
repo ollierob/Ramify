@@ -16,16 +16,19 @@
         <d:inYear year="1642"/>
 
         <residenceRecords>
-            <residence firstLastName="Robert Gilbody" gender="male"/>
-            <residence firstLastName="William Whitwhaw" gender="male"/>
-            <residence firstLastName="William Whitwhaw" gender="male"/>
-            <residence firstLastName="Thomas Greenwood" gender="male"/>
-            <residence firstLastName="John Greenwood" gender="male"/>
-            <residence firstLastName="Symon Greenwood" gender="male"/>
-            <residence firstLastName="Thomas Greenwood" gender="male"/>
-            <residence firstLastName="Ambrose Greenwood" gender="male"/>
-            <residence firstLastName="James Hodgson" gender="male"/>
-            <residence firstLastName="John Greenwood" gender="male"/>
+            <residence name="Robert Gilbody" gender="male"/>
+            <residence name="William Whitwhaw" gender="male"/>
+            <residence name="William Whitwhaw" gender="male"/>
+            <residence name="Thomas Greenwood" gender="male"/>
+            <residence name="John Greenwood" gender="male"/>
+            <residence name="Symon Greenwood" gender="male"/>
+            <residence name="Thomas Greenwood" gender="male"/>
+            <residence name="Ambrose Greenwood" gender="male"/>
+            <residence name="James Hodgson" gender="male"/>
+            <residence name="John Greenwood" gender="male"/>
+            <residence name="John Greenwood" gender="male"/>
+            <residence name="John Greenwood" gender="male"/>
+            <residence name="William Mitchell" gender="male"/>
         </residenceRecords>
 
     </recordSet>

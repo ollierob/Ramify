@@ -90,6 +90,7 @@ export default class RecordSetPage extends React.PureComponent<Props, State> {
         if (!id) return;
         asyncLoadData(id, this.recordLoader.loadRecordSet, recordSet => this.setState({recordSet}));
         asyncLoadData(id, this.recordLoader.loadChildRecordSets, children => this.setState({recordSetChildren: children}));
+        asyncLoadData(id, this.recordLoader.loadRecords, records => this.setState({records}));
     }
 
     private loadPlace(id: PlaceId) {

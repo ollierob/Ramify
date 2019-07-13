@@ -1,5 +1,6 @@
 package net.ramify.model.person.name;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.MoreObjects;
 import net.ramify.model.person.proto.PersonProto;
 
@@ -8,6 +9,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class ForenameSurname implements Name {
+
+    private static final Joiner JOIN_SPACES = Joiner.on(' ');
 
     private final String prefix;
     private final List<String> forenames;
@@ -28,7 +31,8 @@ public class ForenameSurname implements Name {
     @Nonnull
     @Override
     public String value() {
-        throw new UnsupportedOperationException(); //TODO
+        return (forenames.isEmpty() ? "" : JOIN_SPACES.join(forenames) + ' ')
+                + surname;
     }
 
     @Nonnull

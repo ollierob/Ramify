@@ -16,10 +16,10 @@
         <d:inYear year="1642"/>
 
         <residenceRecords>
-            <residence firstLastName="Robert Thomas" gender="male"/>
-            <residence firstLastName="Robert Thomas" gender="male"/>
-            <residence firstLastName="William Clayton" gender="male"/>
-            <residence firstLastName="Richard Hargreaves" gender="male"/>
+            <residence name="Robert Thomas" gender="male"/>
+            <residence name="Robert Thomas" gender="male"/>
+            <residence name="William Clayton" gender="male"/>
+            <residence name="Richard Hargreaves" gender="male"/>
         </residenceRecords>
 
     </recordSet>

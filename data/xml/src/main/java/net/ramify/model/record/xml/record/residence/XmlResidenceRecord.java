@@ -22,9 +22,6 @@ import java.util.UUID;
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "residence")
 public class XmlResidenceRecord extends XmlRecord {
 
-    @XmlAttribute(name = "firstLastName", required = false)
-    private String firstLastName;
-
     @XmlAttribute(name = "gender", required = true)
     private XmlGender gender;
 

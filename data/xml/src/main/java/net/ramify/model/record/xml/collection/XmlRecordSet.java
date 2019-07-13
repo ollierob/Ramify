@@ -1,7 +1,6 @@
 package net.ramify.model.record.xml.collection;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.date.xml.XmlBetweenYears;
 import net.ramify.model.date.xml.XmlDateRange;
@@ -129,9 +128,9 @@ class XmlRecordSet implements HasRecordSetId, HasPlaceId {
         return Functions.ifNonNull(parentId, RecordSetId::new);
     }
 
-    Set<Record> records(final NameParser nameParser, final DateParser dateParser) {
+    Collection<Record> records(final NameParser nameParser, final DateParser dateParser) {
         if (records == null) return Collections.emptySet();
-        final var records = Sets.<Record>newHashSet();
+        final var records = Lists.<Record>newArrayList();
         final var self = this.buildSelf(null, dateParser);
         this.records.forEach(record -> records.addAll(record.build(self, nameParser, dateParser)));
         return records;

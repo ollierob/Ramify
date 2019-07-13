@@ -13,6 +13,7 @@ import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -35,7 +36,7 @@ public class XmlRecordSets {
     }
 
     @Nonnull
-    public Set<Record> records(final RecordSetId id, final DateParser dateParser, final NameParser nameParser) {
+    public Collection<Record> records(final RecordSetId id, final DateParser dateParser, final NameParser nameParser) {
         final var targeRecordSet = Iterables.find(recordSets, set -> id.equals(set.recordSetId()));
         return targeRecordSet.records(nameParser, dateParser);
     }

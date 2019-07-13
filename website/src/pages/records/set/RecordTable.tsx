@@ -81,6 +81,7 @@ function determineColumns(type: RecordType): ColumnProps<IndividualRecord>[] {
 
 const NameColumn: ColumnProps<IndividualRecord> = {
     key: "name",
+    title: "Name",
     dataIndex: "person.name.surname",
     render: (t, r) => nameToString(r.person.name)
 };
