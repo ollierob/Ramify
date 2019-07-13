@@ -85,6 +85,7 @@ message RecordSearch {
 
     string firstName = 1;
     string lastName = 2;
+    uint32 age = 3;
 
     //Place
     string placeId = 10;
