@@ -30,7 +30,7 @@ export class RecordResults extends React.PureComponent<Props, State> {
     render() {
 
         return <Tabs
-            className="bordered"
+            className="records bordered"
             size="large"
             activeKey={this.state.activeTab}
             onChange={activeTab => this.setState({activeTab})}>

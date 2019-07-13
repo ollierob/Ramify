@@ -39,3 +39,7 @@
 .recordSet .info .parent {
     font-size: 1.2em;
 }
+
+.records.ant-tabs .ant-table-wrapper {
+    margin-top: -16px;
+}
