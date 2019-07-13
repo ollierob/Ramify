@@ -2,6 +2,7 @@ package net.ramify.model.record.xml.collection;
 
 import com.google.common.base.MoreObjects;
 import net.ramify.model.date.DateRange;
+import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
@@ -19,7 +20,7 @@ public class DefaultRecordSet implements RecordSet {
     private final RecordSetId id;
     private final RecordSet parent;
     private final RecordProto.SourceType source;
-    private final RecordProto.RecordType type;
+    private final EventProto.RecordType type;
     private final DateRange date;
     private final PlaceId placeId;
     private final String longTitle, shortTitle;
@@ -31,7 +32,7 @@ public class DefaultRecordSet implements RecordSet {
             final RecordSetId id,
             final RecordSet parent,
             final RecordProto.SourceType source,
-            final RecordProto.RecordType type,
+            final EventProto.RecordType type,
             final DateRange date,
             final PlaceId placeId,
             final String longTitle,

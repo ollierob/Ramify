@@ -6,6 +6,8 @@ import {RecordSetId, sortRecordSetByTitle} from "./RecordSet";
 
 export interface RecordLoader {
 
+    loadRecords(id: RecordSetId, options?: RecordOptions): Promise<ReadonlyArray<Record.AsObject>>
+
     loadRecordSet(id: RecordSetId): Promise<Readonly<RecordSet.AsObject>>
 
     loadRecordSets(options?: RecordSetOptions): Promise<ReadonlyArray<RecordSet.AsObject>>;
@@ -16,9 +18,15 @@ export interface RecordLoader {
 
 }
 
+type RecordOptions = {start?: number, limit?: number}
 type RecordSetOptions = {place?: PlaceId, limit?: number}
 
 class ProtoRecordLoader implements RecordLoader {
+
+    loadRecords(id: string, options: RecordOptions = {}) {
+        const url = "/records/in/" + id + queryParameters(options);
+        return protoGet(url, RecordList.deserializeBinary).then(readRecords);
+    }
 
     loadRecordSet(id: string) {
         return protoGet("/records/sets/" + id, RecordSet.deserializeBinary)

@@ -1,6 +1,6 @@
 package net.ramify.model.record.xml.collection;
 
-import net.ramify.model.record.proto.RecordProto;
+import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.record.xml.record.XmlRecord;
 
 import javax.annotation.Nonnull;
@@ -21,7 +21,7 @@ enum XmlRecordSetType {
     MARRIAGE,
 
     @XmlEnumValue("census")
-    CENSUS(RecordProto.RecordType.RESIDENCE),
+    CENSUS(EventProto.RecordType.RESIDENCE),
 
     @XmlEnumValue("membership")
     MEMBERSHIP,
@@ -41,18 +41,18 @@ enum XmlRecordSetType {
     @XmlEnumValue("mixed")
     MIXED;
 
-    private final RecordProto.RecordType type;
+    private final EventProto.RecordType type;
 
     XmlRecordSetType() {
         this(null);
     }
 
-    XmlRecordSetType(final RecordProto.RecordType type) {
-        this.type = type == null ? RecordProto.RecordType.valueOf(this.name()) : type;
+    XmlRecordSetType(final EventProto.RecordType type) {
+        this.type = type == null ? EventProto.RecordType.valueOf(this.name()) : type;
     }
 
     @Nonnull
-    RecordProto.RecordType type() {
+    EventProto.RecordType type() {
         return type;
     }
 

@@ -1,4 +1,4 @@
-import {RecordTypeMap, RecordType as RecordTypes} from "../../protobuf/generated/record_pb";
+import {RecordTypeMap, RecordType as RecordTypes} from "../../protobuf/generated/event_pb";
 
 export type RecordType = keyof RecordTypeMap;
 

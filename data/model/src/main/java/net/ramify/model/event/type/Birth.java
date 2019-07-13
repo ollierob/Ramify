@@ -1,5 +1,7 @@
 package net.ramify.model.event.type;
 
+import net.ramify.model.event.proto.EventProto;
+
 import javax.annotation.Nonnull;
 
 public interface Birth extends UniqueEvent {
@@ -14,5 +16,12 @@ public interface Birth extends UniqueEvent {
     default String title() {
         return "Birth";
     }
-    
+
+    @Nonnull
+    @Override
+    default EventProto.Event.Builder toProtoBuilder() {
+        return UniqueEvent.super.toProtoBuilder()
+                .setType(EventProto.RecordType.BIRTH);
+    }
+
 }

@@ -8,10 +8,12 @@ import {NameAgeSearch} from "../../../components/search/NameAgeSearch";
 import {RecordSearchHandler} from "../../../components/search/RecordSearchHandler";
 import {RecordResults} from "./RecordResults";
 import {AsyncData} from "../../../components/fetch/AsyncData";
+import {RecordPaginationHandler} from "../../../components/records/RecordPaginationHandler";
 
-type Props = RecordSearchHandler & {
+type Props = RecordPaginationHandler & RecordSearchHandler & {
     recordSet: Readonly<RecordSet.AsObject>
-    recordSetChildren: ReadonlyArray<RecordSet.AsObject>;
+    recordSetChildren: AsyncData<ReadonlyArray<RecordSet.AsObject>>;
+    records: AsyncData<ReadonlyArray<Record.AsObject>>
     searchResults: AsyncData<ReadonlyArray<Record.AsObject>>;
 }
 
@@ -20,7 +22,6 @@ export default class RecordSetCard extends React.PureComponent<Props> {
     render() {
 
         const recordSet = this.props.recordSet;
-        const children = this.props.recordSetChildren || [];
 
         return <Card
             className="info"
@@ -34,7 +35,7 @@ export default class RecordSetCard extends React.PureComponent<Props> {
 
             <RecordCards
                 shortTitle
-                records={children}
+                records={this.props.recordSetChildren.data}
                 style={MarginBottom}/>
 
             <NameAgeSearch
@@ -43,7 +44,8 @@ export default class RecordSetCard extends React.PureComponent<Props> {
                 style={MarginBottom}/>
 
             <RecordResults
-                {...this.props}/>
+                {...this.props}
+                records={this.props.records}/>
 
         </Card>;
 

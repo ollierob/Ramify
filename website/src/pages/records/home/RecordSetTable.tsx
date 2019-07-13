@@ -1,7 +1,6 @@
 import * as React from "react";
 import {AsyncData} from "../../../components/fetch/AsyncData";
 import {RecordSet} from "../../../protobuf/generated/record_pb";
-import {Loading} from "../../../components/Loading";
 import {Table} from "antd";
 import {ErrorMessage} from "../../../components/style/Error";
 import {ColumnProps} from "antd/es/table";

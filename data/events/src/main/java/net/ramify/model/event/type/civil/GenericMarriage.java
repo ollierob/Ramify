@@ -2,6 +2,7 @@ package net.ramify.model.event.type.civil;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.AbstractEvent;
+import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.event.type.LifeEvent;
 import net.ramify.model.person.PersonId;
 
@@ -17,6 +18,13 @@ public class GenericMarriage extends AbstractEvent<GenericMarriage> implements L
     @Override
     public String title() {
         return "Marriage";
+    }
+
+    @Nonnull
+    @Override
+    public EventProto.Event.Builder toProtoBuilder() {
+        return super.toProtoBuilder()
+                .setType(EventProto.RecordType.MARRIAGE);
     }
 
 }

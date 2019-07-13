@@ -2,13 +2,13 @@ package net.ramify.model.record.civil.uk;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.ExactDate;
+import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.GenericRecordEntry;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.civil.AbstractCivilRecord;
-import net.ramify.model.record.proto.RecordProto;
 import net.ramify.model.relationship.type.ChildParent;
 
 import javax.annotation.Nonnull;
@@ -61,7 +61,7 @@ public class GeneralRegisterBirth extends AbstractCivilRecord implements General
     }
 
     @Override
-    protected RecordProto.RecordType protoType() {
-        return RecordProto.RecordType.BIRTH;
+    protected EventProto.RecordType protoType() {
+        return EventProto.RecordType.BIRTH;
     }
 }

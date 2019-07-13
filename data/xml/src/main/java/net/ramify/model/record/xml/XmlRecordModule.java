@@ -8,6 +8,7 @@ import net.ramify.model.date.XmlDateParser;
 import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.place.xml.XmlPlaceModule;
 import net.ramify.model.record.provider.RecordSetProvider;
+import net.ramify.model.record.provider.RecordsProvider;
 import net.ramify.model.record.xml.collection.XmlRecordSets;
 
 import javax.annotation.Nonnull;
@@ -25,6 +26,8 @@ public class XmlRecordModule extends PrivateModule {
     protected void configure() {
         this.expose(RecordSetProvider.class);
         this.bind(DateParser.class).to(XmlDateParser.class);
+        this.bind(RecordsProvider.class).to(XmlRecordProvider.class);
+        this.expose(RecordsProvider.class);
     }
 
     @Provides

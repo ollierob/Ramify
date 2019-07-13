@@ -14,6 +14,7 @@ import RecordSetCard from "./RecordSetCard";
 type Props = RouteComponentProps<any>
 
 type State = {
+    records: AsyncData<ReadonlyArray<Record.AsObject>>
     recordSetId?: string;
     recordSet: AsyncData<RecordSet.AsObject>;
     recordSetPlace: AsyncData<PlaceBundle.AsObject>
@@ -29,6 +30,7 @@ export default class RecordSetPage extends React.PureComponent<Props, State> {
     constructor(props) {
         super(props);
         this.state = {
+            records: {},
             recordSet: {},
             recordSetPlace: {loading: true},
             recordSetChildren: {},
@@ -41,8 +43,8 @@ export default class RecordSetPage extends React.PureComponent<Props, State> {
 
         if (this.state.recordSet.loading) return <Loading/>;
 
-        const data = this.state.recordSet.data;
-        if (!data) return <ErrorMessage message="Unknown record set"/>;
+        const recordSet = this.state.recordSet.data;
+        if (!recordSet) return <ErrorMessage message="Unknown record set"/>;
 
         return <div className="recordSet leftRest">
 
@@ -52,8 +54,10 @@ export default class RecordSetPage extends React.PureComponent<Props, State> {
                 position={this.state.recordSetPlace.data && this.state.recordSetPlace.data.position}/>
 
             <RecordSetCard
-                recordSet={data}
-                recordSetChildren={this.state.recordSetChildren.data}
+                recordSet={recordSet}
+                recordSetChildren={this.state.recordSetChildren}
+                records={this.state.records}
+                paginate={null}
                 searching={this.state.searchResults.loading}
                 doSearch={this.search}
                 searchResults={this.state.searchResults}/>

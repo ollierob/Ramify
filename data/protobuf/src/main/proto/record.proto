@@ -6,6 +6,7 @@ option java_outer_classname = "RecordProto";
 import "date.proto";
 import "family.proto";
 import "link.proto";
+import "event.proto";
 
 message Record {
 
@@ -49,27 +50,6 @@ enum SourceType {
 
     GOVERNMENT_SOURCE = 0;
     CHURCH_SOURCE = 1;
-
-}
-
-enum RecordType {
-
-    BIRTH = 0;
-    BAPTISM = 1;
-
-    DEATH = 10;
-    BURIAL = 11;
-    WILL = 12;
-    PROBATE = 13;
-    MEMORIAL = 14;
-
-    MENTION = 20;
-    MARRIAGE = 21;
-    RESIDENCE = 22;
-    PAYMENT = 23;
-    MEMBERSHIP = 24;
-
-    MIXED = 99;
 
 }
 

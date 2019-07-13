@@ -11,11 +11,33 @@ message Event {
     string title = 1;
     DateRange date = 2;
     string placeId = 3;
+    RecordType type = 4;
 
 }
 
 message EventList {
 
     repeated Event event = 1;
+
+}
+
+enum RecordType {
+
+    BIRTH = 0;
+    BAPTISM = 1;
+
+    DEATH = 10;
+    BURIAL = 11;
+    WILL = 12;
+    PROBATE = 13;
+    MEMORIAL = 14;
+
+    MENTION = 20;
+    MARRIAGE = 21;
+    RESIDENCE = 22;
+    PAYMENT = 23;
+    MEMBERSHIP = 24;
+
+    MIXED = 99;
 
 }
