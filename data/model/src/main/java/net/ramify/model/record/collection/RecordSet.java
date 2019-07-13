@@ -32,6 +32,7 @@ public interface RecordSet extends HasTitleDescription, HasRecordSetId, HasDate,
                 .setTitle(this.title())
                 .setDescription(MoreObjects.firstNonNull(this.description(), ""))
                 .setParentId(Functions.ifNonNull(this.parentId(), RecordSetId::value, ""))
+                .setPlaceId(this.placeId().value())
                 .addAllExternalReference(Iterables.transform(this.references(), RecordSetReference::toProto));
         Consumers.ifNonNull(this.date(), date -> builder.setDate(date.toProto()));
         return builder;

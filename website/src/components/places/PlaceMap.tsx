@@ -1,10 +1,11 @@
 import * as React from "react";
 import {HasClass} from "../style/HasClass";
 import {Point, Position} from "../../protobuf/generated/location_pb";
-import {Map, Marker, Popup, TileLayer} from 'react-leaflet'
+import {Map, Marker, Popup, TileLayer} from 'react-leaflet';
 import {LatLngLiteral} from "leaflet";
 import {Loading} from "../Loading";
 import {Place, PlaceType} from "../../protobuf/generated/place_pb";
+import "./PlaceMap.css";
 
 require('leaflet/dist/leaflet.css');
 
@@ -43,7 +44,7 @@ export class PlaceMap extends React.PureComponent<Props> {
 
 function markerPoints(place: Place.AsObject, position: Position.AsObject): ReadonlyArray<MarkerPoint> {
     if (position.boundaryList.length) return [];
-    return [{point: position.center, label: place.name}]
+    return [{point: position.center, label: place.name}];
 }
 
 type MapProps = {
@@ -65,12 +66,12 @@ const MapComponent = (props: MapProps) => {
         {markers.map(marker => <Marker position={toLatLong(marker.point)}>
             <Popup>{marker.label}</Popup>
         </Marker>)}
-    </Map>
+    </Map>;
 
-}
+};
 
 function toLatLong(point: Point.AsObject): LatLngLiteral {
-    return {lat: point.latitude, lng: point.longitude}
+    return {lat: point.latitude, lng: point.longitude};
 }
 
 type MarkerPoint = {point: Point.AsObject, label: React.ReactNode}

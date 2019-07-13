@@ -16,6 +16,22 @@
     margin-top: 16px;
 }
 
-.recordSet .ant-card-head-title {
+.recordSet.leftRest .map {
+    position: absolute;
+    left: 0;
+    width: 290px;
+    height: 290px;
+    background-color: white;
+    border: 1px solid #D7D7D7;
+}
+
+.recordSet.leftRest .info {
+    position: absolute;
+    top: 0;
+    left: 300px;
+    right: 0;
+}
+
+.recordSet .info .ant-card-head-title {
     font-size: 1.5em;
 }
