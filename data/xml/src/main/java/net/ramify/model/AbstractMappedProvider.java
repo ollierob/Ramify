@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 
 import javax.annotation.CheckForNull;
 import javax.xml.bind.annotation.XmlTransient;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
@@ -34,7 +35,11 @@ public abstract class AbstractMappedProvider<K, V> implements Provider<K, V> {
         return map.size();
     }
 
-    public ImmutableMap<K, V> immutableMap() {
+    protected Map<K, V> map() {
+        return Collections.unmodifiableMap(map);
+    }
+
+    protected ImmutableMap<K, V> immutableMap() {
         return ImmutableMap.copyOf(map);
     }
 
