@@ -2,9 +2,7 @@
 
 <recordSets
         xmlns="http://ramify.net/records"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:d="http://ramify.net/dates"
-        xsi:schemaLocation="http://ramify.net/records ../../../../../schema/records.xsd http://ramify.net/dates ../../../../../schema/dates.xsd">
+        xmlns:d="http://ramify.net/dates">
 
     <recordSet
             id="protestation_1642_wadsworth"
@@ -14,7 +12,16 @@
             place="township:wadsworth"
             source="government"
             type="residence">
+
         <d:inYear year="1642"/>
+
+        <residenceRecords>
+            <residence firstLastName="Robert Thomas" gender="male"/>
+            <residence firstLastName="Robert Thomas" gender="male"/>
+            <residence firstLastName="William Clayton" gender="male"/>
+            <residence firstLastName="Richard Hargreaves" gender="male"/>
+        </residenceRecords>
+
     </recordSet>
 
 </recordSets>
