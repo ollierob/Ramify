@@ -1,4 +1,4 @@
-import {Message} from "google-protobuf";
+import {BinaryWriter, Message} from "google-protobuf";
 import {rethrowResponseError} from "./Fetch";
 
 type FetchOptions = {
@@ -7,7 +7,7 @@ type FetchOptions = {
     consumeHeader?: "string" | "protobuf";
 }
 
-export function protoFetch<T extends Message>(url: string, decode: (bytes: Uint8Array) => T, options: FetchOptions = {}): Promise<T> {
+export function protoGet<T extends Message>(url: string, decode: (bytes: Uint8Array) => T, options: FetchOptions = {}): Promise<T> {
     return new Promise<Response>((resolve, reject) => {
             setTimeout(() => reject(new Error("Timeout")), 120_000);
             fetch(url, {
@@ -26,6 +26,12 @@ export function protoFetch<T extends Message>(url: string, decode: (bytes: Uint8
         if (!array.byteLength) return null;
         return decode(array);
     });
+}
+
+export function protoPost<P extends Message, R extends Message>(url: string, entity: P, encode: (p: P, writer: BinaryWriter) => void, decode: (bytes: Uint8Array) => R): Promise<R> {
+    const writer = new BinaryWriter();
+    encode(entity, writer);
+    return protoGet(url, decode, {body: writer.getResultBuffer(), method: "POST", consumeHeader: "protobuf"});
 }
 
 function headers(options: FetchOptions): HeadersInit {

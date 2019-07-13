@@ -9,6 +9,7 @@ public class JaxrsModule extends AbstractModule {
         super.configure();
         this.bind(ProtobufCompatibleMessageBodyWriter.class);
         this.bind(ProtobufDirectMessageBodyWriter.class);
+        this.bind(ProtobufDirectMessageBodyReader.class);
         this.bind(ProtobufStringMessageBodyWriter.class);
         this.bind(CacheControlFilter.class);
         this.bind(DateRangeParamConverterProvider.class);

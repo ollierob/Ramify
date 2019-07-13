@@ -23,18 +23,19 @@ export default class RecordSetCard extends React.PureComponent<Props> {
             className="info"
             title={<b>{recordSet.longtitle}</b>}>
 
-            <PartOf parent={recordSet.parent}/>
+            <PartOf
+                parent={recordSet.parent}/>
 
-            <Description record={recordSet}/>
-
-            <NameSearch
-                {...this.props}
-                disabled
-                style={MarginBottom}/>
+            <Description
+                record={recordSet}/>
 
             <RecordCards
                 shortTitle
-                records={children}/>
+                records={children}
+                style={MarginBottom}/>
+
+            <NameSearch
+                {...this.props}/>
 
         </Card>;
 

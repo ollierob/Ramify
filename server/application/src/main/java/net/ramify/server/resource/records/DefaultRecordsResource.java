@@ -6,6 +6,8 @@ import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.RecordSets;
+import net.ramify.model.record.collection.Records;
+import net.ramify.model.record.proto.RecordProto;
 import net.ramify.model.record.provider.RecordSetProvider;
 
 import javax.annotation.CheckForNull;
@@ -52,5 +54,10 @@ public class DefaultRecordsResource implements RecordsResource {
     @Override
     public RecordSets children(final RecordSetId parentId) {
         return RecordSets.of(recordSets.children(parentId));
+    }
+
+    @Override
+    public Records search(final RecordProto.RecordSearch searchParameters) {
+        throw new UnsupportedOperationException(); //TODO
     }
 }

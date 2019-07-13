@@ -1,5 +1,5 @@
 import {PlaceId} from "./Place";
-import {protoFetch} from "../fetch/ProtoFetch";
+import {protoGet} from "../fetch/ProtoFetch";
 import {PlaceIdList} from "../../protobuf/generated/place_pb";
 import {Institution} from "../../protobuf/generated/institution_pb";
 
@@ -14,12 +14,12 @@ export interface ChurchLoader {
 class ProtoChurchLoader implements ChurchLoader {
 
     loadChurches(region: PlaceId) {
-        return protoFetch("/places/churches/in/" + region, PlaceIdList.deserializeBinary)
+        return protoGet("/places/churches/in/" + region, PlaceIdList.deserializeBinary)
             .then(l => l ? l.getIdList() : []);
     }
 
     loadChurch(id: PlaceId) {
-        return protoFetch("/places/churches/at/" + id, Institution.deserializeBinary)
+        return protoGet("/places/churches/at/" + id, Institution.deserializeBinary)
             .then(c => c ? c.toObject() : null);
     }
 

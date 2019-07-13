@@ -10,12 +10,13 @@ import {stringMultimap} from "../Maps";
 import "./RecordCards.css";
 import {RecordsIcon} from "../images/Icons";
 import {RecordType, recordTypeFromValue} from "./RecordType";
+import {HasClass} from "../style/HasClass";
 
-export const RecordCards = (props: {records: ReadonlyArray<RecordSet.AsObject>, groupByParent?: boolean, shortTitle?: boolean, alsoSee?: ReadonlyArray<Place.AsObject>}) => {
+export const RecordCards = (props: HasClass & {records: ReadonlyArray<RecordSet.AsObject>, groupByParent?: boolean, shortTitle?: boolean, alsoSee?: ReadonlyArray<Place.AsObject>}) => {
     const records = props.records;
     if (!records || !records.length) return null;
     if (props.groupByParent && records.some(r => r.parent)) return <GroupedRecordCards {...props}/>;
-    return <div className="recordCards">
+    return <div className="recordCards" style={props.style}>
         {records.map(record => <RecordCard record={record} shortTitle={props.shortTitle}/>)}
         {props.alsoSee && <AlsoSeeCard alsoSee={props.alsoSee}/>}
     </div>;

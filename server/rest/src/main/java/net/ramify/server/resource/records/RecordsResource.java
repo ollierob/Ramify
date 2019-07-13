@@ -5,12 +5,16 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.RecordSets;
+import net.ramify.model.record.collection.Records;
+import net.ramify.model.record.proto.RecordProto;
 import net.ramify.server.resource.RootResource;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -39,5 +43,10 @@ public interface RecordsResource extends RootResource {
     @GET
     @Path("sets/children/{id}")
     RecordSets children(@PathParam("id") RecordSetId parentId);
+
+    @POST
+    @Consumes({APPLICATION_PROTOBUF})
+    @Path("search")
+    Records search(RecordProto.RecordSearch searchParameters);
 
 }

@@ -1,7 +1,7 @@
-import {RecordSet, RecordSetList} from "../../protobuf/generated/record_pb";
+import {Record, RecordList, RecordSearch, RecordSet, RecordSetList} from "../../protobuf/generated/record_pb";
 import {PlaceId} from "../places/Place";
 import {queryParameters} from "../fetch/Fetch";
-import {protoFetch} from "../fetch/ProtoFetch";
+import {protoGet, protoPost} from "../fetch/ProtoFetch";
 import {RecordSetId, sortRecordSetByTitle} from "./RecordSet";
 
 export interface RecordLoader {
@@ -12,6 +12,8 @@ export interface RecordLoader {
 
     loadChildRecordSets(id: RecordSetId): Promise<ReadonlyArray<RecordSet.AsObject>>
 
+    submitSearch(search: RecordSearch): Promise<ReadonlyArray<Record.AsObject>>
+
 }
 
 type RecordSetOptions = {place?: PlaceId, limit?: number}
@@ -19,17 +21,21 @@ type RecordSetOptions = {place?: PlaceId, limit?: number}
 class ProtoRecordLoader implements RecordLoader {
 
     loadRecordSet(id: string) {
-        return protoFetch("/records/set/" + id, RecordSet.deserializeBinary)
+        return protoGet("/records/set/" + id, RecordSet.deserializeBinary)
             .then(s => s ? s.toObject() : null);
     }
 
     loadRecordSets(options) {
         const url = "/records/sets" + queryParameters(options);
-        return protoFetch(url, RecordSetList.deserializeBinary).then(readRecordSets);
+        return protoGet(url, RecordSetList.deserializeBinary).then(readRecordSets);
     }
 
     loadChildRecordSets(id: string): Promise<ReadonlyArray<RecordSet.AsObject>> {
-        return protoFetch("/records/sets/children/" + id, RecordSetList.deserializeBinary).then(readRecordSets);
+        return protoGet("/records/sets/children/" + id, RecordSetList.deserializeBinary).then(readRecordSets);
+    }
+
+    submitSearch(search: RecordSearch): Promise<ReadonlyArray<Record.AsObject>> {
+        return protoPost("/records/search", search, RecordSearch.serializeBinaryToWriter, RecordList.deserializeBinary).then(readRecords);
     }
 
 }
@@ -37,6 +43,11 @@ class ProtoRecordLoader implements RecordLoader {
 function readRecordSets(list: RecordSetList): RecordSet.AsObject[] {
     if (!list) return [];
     return list.getRecordsetList().map(l => l.toObject()).sort(sortRecordSetByTitle);
+}
+
+function readRecords(list: RecordList): Record.AsObject[] {
+    if (!list) return [];
+    return list.getRecordList().map(l => l.toObject());
 }
 
 export const DEFAULT_RECORD_LOADER: RecordLoader = new ProtoRecordLoader();

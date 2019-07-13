@@ -2,7 +2,7 @@ import * as React from "react";
 import {HasClass} from "../style/HasClass";
 import "./Search.css";
 import {Button, Form, Input} from "antd";
-import {ChangeEvent} from "react";
+import {ChangeEvent, FormEvent} from "react";
 import {LoadingIcon, SearchIcon} from "../images/Icons";
 import {RecordSearch} from "../../protobuf/generated/record_pb";
 import {RecordSearchHandler} from "./RecordSearchHandler";
@@ -71,7 +71,8 @@ export class NameSearch extends React.PureComponent<Props, State> {
 
     }
 
-    private doSubmit() {
+    private doSubmit(e: FormEvent<HTMLFormElement>) {
+        e.preventDefault();
         const search = new RecordSearch();
         search.setFirstname(this.state.firstName);
         search.setLastname(this.state.lastName);
