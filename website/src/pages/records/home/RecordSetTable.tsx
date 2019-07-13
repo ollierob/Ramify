@@ -7,6 +7,7 @@ import {ErrorMessage} from "../../../components/style/Error";
 import {ColumnProps} from "antd/es/table";
 import {EmptyPlaceWords, FormattedYearRange} from "../../../components/date/FormattedDateRange";
 import {recordSetHref} from "../RecordLinks";
+import {HasClass} from "../../../components/style/HasClass";
 
 type Props = {
     recordSets: AsyncData<ReadonlyArray<RecordSet.AsObject>>
@@ -31,17 +32,17 @@ export default class RecordSetTable extends React.PureComponent<Props> {
 
 }
 
-const NoRecordsYet = (props: {}) => <>No records loaded yet.</>;
+const NoRecordsYet = (props: HasClass) => <div {...props}>No records loaded yet.</div>;
 
 const Columns: ColumnProps<RecordSet.AsObject>[] = [
     {
         key: "name",
         title: "Name",
-        dataIndex: "title",
+        dataIndex: "longtitle",
         render: (t, r) => <a href={recordSetHref(r)}>{t}</a>,
         width: 300,
         defaultSortOrder: "ascend",
-        sorter: (a, b) => a.title.localeCompare(b.title)
+        sorter: (a, b) => a.longtitle.localeCompare(b.longtitle)
     },
     {
         key: "date",

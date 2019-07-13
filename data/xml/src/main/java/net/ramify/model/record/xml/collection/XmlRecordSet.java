@@ -39,6 +39,9 @@ class XmlRecordSet implements HasRecordSetId {
     @XmlAttribute(name = "title", required = true)
     private String title;
 
+    @XmlAttribute(name = "shortTitle", required = false)
+    private String shortTitle;
+
     @XmlAttribute(name = "place", required = true)
     private String place;
 
@@ -77,6 +80,7 @@ class XmlRecordSet implements HasRecordSetId {
                 Functions.ifNonNull(date, d -> d.resolve(dateParser)),
                 new PlaceId(place),
                 title,
+                shortTitle,
                 Functions.ifNonNull(description, String::trim),
                 this.buildReferences());
         if (children == null) return Collections.singletonList(self);

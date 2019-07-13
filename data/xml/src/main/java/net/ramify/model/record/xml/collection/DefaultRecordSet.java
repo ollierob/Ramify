@@ -1,5 +1,6 @@
 package net.ramify.model.record.xml.collection;
 
+import com.google.common.base.MoreObjects;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.collection.RecordSet;
@@ -21,7 +22,7 @@ public class DefaultRecordSet implements RecordSet {
     private final RecordProto.RecordType type;
     private final DateRange date;
     private final PlaceId placeId;
-    private final String title;
+    private final String longTitle, shortTitle;
     private final String description;
     private final Set<RecordSetReference> references;
 
@@ -32,7 +33,8 @@ public class DefaultRecordSet implements RecordSet {
             final RecordProto.RecordType type,
             final DateRange date,
             final PlaceId placeId,
-            final String title,
+            final String longTitle,
+            final String shortTitle,
             final String description,
             final Set<RecordSetReference> references) {
         this.id = id;
@@ -41,7 +43,8 @@ public class DefaultRecordSet implements RecordSet {
         this.type = type;
         this.date = date;
         this.placeId = placeId;
-        this.title = title;
+        this.longTitle = longTitle;
+        this.shortTitle = shortTitle;
         this.description = description;
         this.references = references;
     }
@@ -73,7 +76,7 @@ public class DefaultRecordSet implements RecordSet {
     @Nonnull
     @Override
     public String title() {
-        return title;
+        return longTitle;
     }
 
     @CheckForNull
@@ -92,6 +95,7 @@ public class DefaultRecordSet implements RecordSet {
     @Override
     public RecordProto.RecordSet.Builder toProtoBuilder(final boolean includeParent) {
         return RecordSet.super.toProtoBuilder(includeParent)
+                .setShortTitle(MoreObjects.firstNonNull(shortTitle, ""))
                 .setType(type)
                 .setSource(source);
     }

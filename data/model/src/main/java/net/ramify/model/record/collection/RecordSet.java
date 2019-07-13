@@ -28,7 +28,7 @@ public interface RecordSet extends HasTitleDescription, HasRecordSetId, HasDate,
     default RecordProto.RecordSet.Builder toProtoBuilder(final boolean includeParent) {
         final var builder = RecordProto.RecordSet.newBuilder()
                 .setId(this.recordSetId().value())
-                .setTitle(this.title())
+                .setLongTitle(this.title())
                 .setDescription(MoreObjects.firstNonNull(this.description(), ""))
                 .setPlaceId(this.placeId().value())
                 .addAllExternalReference(Iterables.transform(this.references(), RecordSetReference::toProto));

@@ -40,6 +40,8 @@
 
         <attribute name="title" type="xs:string" use="required"/>
 
+        <attribute name="shortTitle" type="xs:string"/>
+
         <attribute name="place" type="xs:string" use="required"/>
 
         <attribute name="source" type="tns:xmlRecordSetSource" use="required"/>
@@ -90,13 +92,13 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="membership"/>
-
-            <enumeration value="death"/>
-
-            <enumeration value="burial"/>
+            <enumeration value="baptism"/>
 
             <enumeration value="mixed"/>
+
+            <enumeration value="membership"/>
+
+            <enumeration value="census"/>
 
             <enumeration value="marriage"/>
 
@@ -104,9 +106,9 @@
 
             <enumeration value="payment"/>
 
-            <enumeration value="baptism"/>
+            <enumeration value="death"/>
 
-            <enumeration value="census"/>
+            <enumeration value="burial"/>
 
             <enumeration value="birth"/>
 

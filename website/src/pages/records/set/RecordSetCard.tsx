@@ -18,7 +18,7 @@ export default class RecordSetCard extends React.PureComponent<Props> {
 
         return <Card
             className="info"
-            title={<b>{recordSet.title}</b>}>
+            title={<b>{recordSet.longtitle}</b>}>
 
             <PartOf parent={recordSet.parent}/>
 
@@ -27,6 +27,7 @@ export default class RecordSetCard extends React.PureComponent<Props> {
             </div>
 
             <RecordCards
+                shortTitle
                 records={children}/>
 
         </Card>;
@@ -38,6 +39,6 @@ export default class RecordSetCard extends React.PureComponent<Props> {
 const PartOf = (props: {parent: RecordSet.AsObject}) => {
     if (!props.parent) return null;
     return <div className="parent">
-        Part of <a href={recordSetHref(props.parent)}>{props.parent.title}</a>
+        Part of <a href={recordSetHref(props.parent)}>{props.parent.longtitle}</a>
     </div>;
 };

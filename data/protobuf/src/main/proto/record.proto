@@ -19,13 +19,14 @@ message Record {
 message RecordSet {
 
     string id = 1;
-    string title = 2;
-    string description = 3;
-    SourceType source = 4;
-    RecordType type = 5;
-    RecordSet parent = 6;
-    DateRange date = 7;
-    string placeId = 8;
+    string longTitle = 2;
+    string shortTitle = 3;
+    string description = 4;
+    SourceType source = 5;
+    RecordType type = 6;
+    RecordSet parent = 7;
+    DateRange date = 8;
+    string placeId = 9;
 
     repeated ExternalRecordReference externalReference = 10;
 
