@@ -4,11 +4,11 @@ import "./Search.css";
 import {Button, Form, Input} from "antd";
 import {ChangeEvent} from "react";
 import {LoadingIcon, SearchIcon} from "../images/Icons";
+import {RecordSearch} from "../../protobuf/generated/record_pb";
+import {RecordSearchHandler} from "./RecordSearchHandler";
 
-type Props = HasClass & {
-    searching: boolean;
+type Props = HasClass & RecordSearchHandler & {
     disabled?: boolean;
-    doSearch: (firstName: string, lastName: string) => void;
 }
 
 type State = {
@@ -26,7 +26,6 @@ export class NameSearch extends React.PureComponent<Props, State> {
         this.state = {};
         this.doSubmit = this.doSubmit.bind(this);
     }
-
 
     render() {
 
@@ -73,7 +72,10 @@ export class NameSearch extends React.PureComponent<Props, State> {
     }
 
     private doSubmit() {
-        this.props.doSearch(this.state.firstName, this.state.lastName);
+        const search = new RecordSearch();
+        search.setFirstname(this.state.firstName);
+        search.setLastname(this.state.lastName);
+        this.props.doSearch(search);
     }
 
 }

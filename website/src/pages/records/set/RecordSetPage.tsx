@@ -1,6 +1,6 @@
 import * as React from "react";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
-import {RecordSet} from "../../../protobuf/generated/record_pb";
+import {RecordSearch, RecordSet} from "../../../protobuf/generated/record_pb";
 import {RouteComponentProps} from "react-router";
 import {DEFAULT_RECORD_LOADER} from "../../../components/records/RecordLoader";
 import {Loading} from "../../../components/Loading";
@@ -18,6 +18,7 @@ type State = {
     recordSet: AsyncData<RecordSet.AsObject>;
     recordSetPlace: AsyncData<PlaceBundle.AsObject>
     recordSetChildren: AsyncData<ReadonlyArray<RecordSet.AsObject>>
+    searching?: boolean;
 }
 
 export default class RecordSetPage extends React.PureComponent<Props, State> {
@@ -32,6 +33,7 @@ export default class RecordSetPage extends React.PureComponent<Props, State> {
             recordSetPlace: {loading: true},
             recordSetChildren: {}
         };
+        this.search = this.search.bind(this);
     }
 
     render() {
@@ -50,7 +52,9 @@ export default class RecordSetPage extends React.PureComponent<Props, State> {
 
             <RecordSetCard
                 recordSet={data}
-                recordSetChildren={this.state.recordSetChildren.data}/>
+                recordSetChildren={this.state.recordSetChildren.data}
+                searching={this.state.searching}
+                doSearch={this.search}/>
 
         </div>;
 
@@ -85,6 +89,12 @@ export default class RecordSetPage extends React.PureComponent<Props, State> {
     private loadPlace(id: PlaceId) {
         if (!id) return this.setState({recordSetPlace: {}});
         asyncLoadData(id, this.placeLoader.loadPlaceBundle, place => this.setState({recordSetPlace: place}));
+    }
+
+    private search(search: RecordSearch) {
+        if (this.state.recordSetId) search.setRecordid(this.state.recordSetId);
+        this.setState({searching: true});
+        //TODO
     }
 
 }

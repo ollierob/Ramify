@@ -1,12 +1,13 @@
 import * as React from "react";
+import {CSSProperties} from "react";
 import {RecordSet} from "../../../protobuf/generated/record_pb";
 import {Card} from "antd";
 import {recordSetHref} from "../RecordLinks";
 import {RecordCards} from "../../../components/records/RecordCards";
 import {NameSearch} from "../../../components/search/NameSearch";
-import {CSSProperties} from "react";
+import {RecordSearchHandler} from "../../../components/search/RecordSearchHandler";
 
-type Props = {
+type Props = RecordSearchHandler & {
     recordSet: Readonly<RecordSet.AsObject>
     recordSetChildren: ReadonlyArray<RecordSet.AsObject>
 }
@@ -27,9 +28,8 @@ export default class RecordSetCard extends React.PureComponent<Props> {
             <Description record={recordSet}/>
 
             <NameSearch
+                {...this.props}
                 disabled
-                searching={false}
-                doSearch={null}
                 style={MarginBottom}/>
 
             <RecordCards

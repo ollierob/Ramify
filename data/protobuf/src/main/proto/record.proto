@@ -80,3 +80,16 @@ message ExternalRecordReference {
     Link link = 3;
 
 }
+
+message RecordSearch {
+
+    string firstName = 1;
+    string lastName = 2;
+
+    //Place
+    string placeId = 10;
+
+    //Record
+    string recordId = 20;
+
+}
