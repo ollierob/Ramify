@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<recordSets
+        xmlns="http://ramify.net/records"
+        xmlns:d="http://ramify.net/dates">
+
+    <recordSet
+            id="protestation_1642"
+            title="Protestation Returns"
+            place="country:england"
+            source="government"
+            type="residence">
+        <d:inYear year="1642"/>
+        <recordSetReference reference="HL/PO/JO/10/1" archive="Parliamentary Archives"/>
+    </recordSet>
+
+</recordSets>

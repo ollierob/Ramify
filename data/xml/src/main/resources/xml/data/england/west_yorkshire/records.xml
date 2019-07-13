@@ -24,11 +24,13 @@
 
     <recordSet
             id="protestation_1642_wry"
+            parentId="protestation_1642"
             title="West Yorkshire Protestation Returns"
             place="county:west_yorkshire"
             source="government"
             type="residence">
         <d:inYear year="1642"/>
+        <recordSetReference reference="HL/PO/JO/10/1/109" archive="Parliamentary Archives"/>
     </recordSet>
 
 </recordSets>
