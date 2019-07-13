@@ -21,9 +21,8 @@ public class RenamedRecordSet extends DelegatedRecordSet {
 
     @Nonnull
     @Override
-    public RecordProto.RecordSet.Builder toProtoBuilder() {
-        return super.toProtoBuilder()
-                .setTitle(title);
+    public RecordProto.RecordSet.Builder toProtoBuilder(final boolean includeParent) {
+        return super.toProtoBuilder(includeParent).setTitle(title);
     }
 
 }

@@ -6,13 +6,17 @@ import net.ramify.model.date.xml.XmlBetweenYears;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlInYear;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.record.collection.HasRecordSetId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.RecordSetReference;
+import net.ramify.model.record.provider.RecordSetProvider;
 import net.ramify.model.record.xml.record.XmlRecord;
 import net.ramify.utils.collections.SetUtils;
 import net.ramify.utils.objects.Functions;
 
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
@@ -24,7 +28,7 @@ import java.util.List;
 import java.util.Set;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "recordSet")
-class XmlRecordSet {
+class XmlRecordSet implements HasRecordSetId {
 
     @XmlAttribute(name = "id", required = true)
     private String id;
@@ -59,14 +63,15 @@ class XmlRecordSet {
     @XmlElementRef
     private List<XmlRecordSet> children;
 
-    Collection<RecordSet> build(final DateParser dateParser) {
-        return this.build(parentId == null ? null : new RecordSetId(parentId), dateParser);
+    Collection<RecordSet> build(final RecordSetProvider recordSets, final DateParser dateParser) {
+        final var parent = Functions.ifNonNull(this.parentRecordSetId(), recordSets::require);
+        return this.build(parent, dateParser);
     }
 
-    Collection<RecordSet> build(final RecordSetId parentId, final DateParser dateParser) {
+    Collection<RecordSet> build(final RecordSet parent, final DateParser dateParser) {
         final var self = new DefaultRecordSet(
-                new RecordSetId(id),
-                parentId,
+                this.recordSetId(),
+                parent,
                 source.source(),
                 type.type(),
                 Functions.ifNonNull(date, d -> d.resolve(dateParser)),
@@ -77,13 +82,24 @@ class XmlRecordSet {
         if (children == null) return Collections.singletonList(self);
         final var recordSets = Lists.<RecordSet>newArrayListWithExpectedSize(1 + 2 * children.size());
         recordSets.add(self);
-        children.forEach(child -> recordSets.addAll(child.build(self.recordSetId(), dateParser)));
+        children.forEach(child -> recordSets.addAll(child.build(self, dateParser)));
         return recordSets;
     }
 
     private Set<RecordSetReference> buildReferences() {
         if (references == null) return Collections.emptySet();
         return SetUtils.transform(references, XmlRecordSetReference::build);
+    }
+
+    @Nonnull
+    @Override
+    public RecordSetId recordSetId() {
+        return new RecordSetId(id);
+    }
+
+    @CheckForNull
+    RecordSetId parentRecordSetId() {
+        return Functions.ifNonNull(parentId, RecordSetId::new);
     }
 
 }

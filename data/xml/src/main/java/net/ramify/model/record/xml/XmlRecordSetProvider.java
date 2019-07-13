@@ -67,7 +67,7 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
             final var unmarshalled = unmarshaller.unmarshal(file);
             if (!(unmarshalled instanceof XmlRecordSets)) return;
             final var records = (XmlRecordSets) unmarshalled;
-            provider.addAll(records.recordSets(dateParser));
+            provider.addAll(records.recordSets(provider, dateParser));
         } catch (final JAXBException jex) {
             logger.warn("Could not read records in file " + file + ": " + jex.getMessage());
         }

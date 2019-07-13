@@ -16,7 +16,7 @@ import java.util.Set;
 public class DefaultRecordSet implements RecordSet {
 
     private final RecordSetId id;
-    private final RecordSetId parentId;
+    private final RecordSet parent;
     private final RecordProto.SourceType source;
     private final RecordProto.RecordType type;
     private final DateRange date;
@@ -27,7 +27,7 @@ public class DefaultRecordSet implements RecordSet {
 
     public DefaultRecordSet(
             final RecordSetId id,
-            final RecordSetId parentId,
+            final RecordSet parent,
             final RecordProto.SourceType source,
             final RecordProto.RecordType type,
             final DateRange date,
@@ -36,7 +36,7 @@ public class DefaultRecordSet implements RecordSet {
             final String description,
             final Set<RecordSetReference> references) {
         this.id = id;
-        this.parentId = parentId;
+        this.parent = parent;
         this.source = source;
         this.type = type;
         this.date = date;
@@ -54,8 +54,8 @@ public class DefaultRecordSet implements RecordSet {
 
     @CheckForNull
     @Override
-    public RecordSetId parentId() {
-        return parentId;
+    public RecordSet parent() {
+        return parent;
     }
 
     @Nonnull
@@ -90,8 +90,8 @@ public class DefaultRecordSet implements RecordSet {
 
     @Nonnull
     @Override
-    public RecordProto.RecordSet.Builder toProtoBuilder() {
-        return RecordSet.super.toProtoBuilder()
+    public RecordProto.RecordSet.Builder toProtoBuilder(final boolean includeParent) {
+        return RecordSet.super.toProtoBuilder(includeParent)
                 .setType(type)
                 .setSource(source);
     }

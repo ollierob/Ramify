@@ -18,8 +18,8 @@ public abstract class DelegatedRecordSet implements RecordSet {
 
     @CheckForNull
     @Override
-    public RecordSetId parentId() {
-        return delegate.parentId();
+    public RecordSet parent() {
+        return delegate.parent();
     }
 
     @Nonnull
@@ -60,8 +60,8 @@ public abstract class DelegatedRecordSet implements RecordSet {
 
     @Nonnull
     @Override
-    public RecordProto.RecordSet.Builder toProtoBuilder() {
-        return delegate.toProtoBuilder();
+    public RecordProto.RecordSet.Builder toProtoBuilder(final boolean includeParent) {
+        return delegate.toProtoBuilder(includeParent);
     }
 
 }

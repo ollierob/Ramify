@@ -23,7 +23,7 @@ message RecordSet {
     string description = 3;
     SourceType source = 4;
     RecordType type = 5;
-    string parentId = 6;
+    RecordSet parent = 6;
     DateRange date = 7;
     string placeId = 8;
 

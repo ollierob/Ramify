@@ -3,6 +3,7 @@ package net.ramify.model.record.xml.collection;
 import com.google.common.collect.Sets;
 import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.record.collection.RecordSet;
+import net.ramify.model.record.provider.RecordSetProvider;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlElementRef;
@@ -22,10 +23,10 @@ public class XmlRecordSets {
     private List<XmlRecordSet> recordSets;
 
     @Nonnull
-    public Set<RecordSet> recordSets(final DateParser dateParser) {
-        if (recordSets == null) return Collections.emptySet();
+    public Set<RecordSet> recordSets(final RecordSetProvider recordSets, final DateParser dateParser) {
+        if (this.recordSets == null) return Collections.emptySet();
         final var sets = Sets.<RecordSet>newIdentityHashSet();
-        recordSets.forEach(rs -> sets.addAll(rs.build(dateParser)));
+        this.recordSets.forEach(rs -> sets.addAll(rs.build(recordSets, dateParser)));
         return sets;
     }
 
