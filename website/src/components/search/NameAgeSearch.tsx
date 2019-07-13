@@ -58,6 +58,7 @@ export class NameAgeSearch extends React.PureComponent<Props, State> {
                 <Form.Item>
                     <InputNumber
                         min={0}
+                        max={125}
                         maxLength={3}
                         size="large"
                         placeholder="Age"

@@ -89,7 +89,9 @@
 
     <recordSet
             id="protestation_1642_heptonstall"
-            title="Heptonstall 1642 Protestation Returns"
+            parentId="protestation_1642_wry_morley"
+            title="Heptonstall Protestation Returns"
+            shortTitle="Heptonstall"
             place="township:heptonstall"
             source="government"
             type="residence">

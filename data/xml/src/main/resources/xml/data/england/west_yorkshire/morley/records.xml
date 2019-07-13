@@ -25,4 +25,15 @@
 
     </recordSet>
 
+    <recordSet
+            id="protestation_1642_wry_morley"
+            parentId="protestation_1642_wry"
+            title="Morley Wapentake Protestation Returns"
+            shortTitle="Morley"
+            place="wapentake:morley"
+            source="government"
+            type="residence">
+        <d:inYear year="1642"/>
+    </recordSet>
+
 </recordSets>
