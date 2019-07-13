@@ -23,6 +23,8 @@
 
         <hamlet id="rawtonstall" name="Rawtonstall"/>
 
+        <mill id="winters" name="Winters"/>
+
     </township>
 
     <town id="todmorden">

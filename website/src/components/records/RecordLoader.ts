@@ -2,7 +2,7 @@ import {RecordSet, RecordSetList} from "../../protobuf/generated/record_pb";
 import {PlaceId} from "../places/Place";
 import {queryParameters} from "../fetch/Fetch";
 import {protoFetch} from "../fetch/ProtoFetch";
-import {RecordSetId} from "./RecordSet";
+import {RecordSetId, sortRecordSetByTitle} from "./RecordSet";
 
 export interface RecordLoader {
 
@@ -25,15 +25,18 @@ class ProtoRecordLoader implements RecordLoader {
 
     loadRecordSets(options) {
         const url = "/records/sets" + queryParameters(options);
-        return protoFetch(url, RecordSetList.deserializeBinary)
-            .then(l => l ? l.getRecordsetList().map(l => l.toObject()) : []);
+        return protoFetch(url, RecordSetList.deserializeBinary).then(readRecordSets);
     }
 
     loadChildRecordSets(id: string): Promise<ReadonlyArray<RecordSet.AsObject>> {
-        return protoFetch("/records/sets/children/" + id, RecordSetList.deserializeBinary)
-            .then(l => l ? l.getRecordsetList().map(l => l.toObject()) : []);
+        return protoFetch("/records/sets/children/" + id, RecordSetList.deserializeBinary).then(readRecordSets);
     }
 
+}
+
+function readRecordSets(list: RecordSetList): RecordSet.AsObject[] {
+    if (!list) return [];
+    return list.getRecordsetList().map(l => l.toObject()).sort(sortRecordSetByTitle);
 }
 
 export const DEFAULT_RECORD_LOADER: RecordLoader = new ProtoRecordLoader();

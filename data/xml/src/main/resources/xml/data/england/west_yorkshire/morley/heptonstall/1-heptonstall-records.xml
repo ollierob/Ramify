@@ -49,7 +49,8 @@
 
         <recordSet
                 id="heptonstall_st-thomas_pew_rents"
-                title="Heptonstall St. Thomas Pew Rents"
+                title="Heptonstall St. Thomas Pew Rentals"
+                shortTitle="Pew Rentals"
                 place="chapelry:heptonstall"
                 source="church"
                 type="membership">
@@ -77,6 +78,7 @@
         <recordSet
                 id="heptonstall_wesleyan_minutes"
                 title="Heptonstall Methodist Church Meeting Minutes"
+                shortTitle="Meeting Minutes"
                 place="church:heptonstall_wesleyan"
                 source="church"
                 type="membership">

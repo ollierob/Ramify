@@ -25,7 +25,7 @@ public class XmlRecordSets {
     @Nonnull
     public Set<RecordSet> recordSets(final RecordSetProvider recordSets, final DateParser dateParser) {
         if (this.recordSets == null) return Collections.emptySet();
-        final var sets = Sets.<RecordSet>newIdentityHashSet();
+        final var sets = Sets.<RecordSet>newLinkedHashSet();
         this.recordSets.forEach(rs -> sets.addAll(rs.build(recordSets, dateParser)));
         return sets;
     }

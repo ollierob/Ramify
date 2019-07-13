@@ -6,5 +6,6 @@
         xsi:schemaLocation="http://ramify.net/places ../../../../../schema/places.xsd">
 
     <placePoint id="church:shore" latitude="53.73595" longitude="-2.1314"/>
+    <placePoint id="mill:winters" latitude="53.73844" longitude="-2.04482"/>
 
 </placePositions>

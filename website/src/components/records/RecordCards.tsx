@@ -42,7 +42,7 @@ const GroupRecordCard = (props: {records: ReadonlyArray<RecordSet.AsObject>}) =>
 
 const RecordCard = (props: {record: RecordSet.AsObject, shortTitle?: boolean}) => {
     const record = props.record;
-    const title = props.shortTitle ? (record.shorttitle || ShortRecordTitles[recordTypeFromValue(record.type)]) : record.longtitle;
+    const title = props.shortTitle ? shortTitle(record) : record.longtitle;
     return <Card
         title={<a href={recordSetHref(record)}>{title}</a>}
         className="recordCard">
@@ -65,13 +65,21 @@ const AlsoSeeCard = (props: {alsoSee: ReadonlyArray<Place.AsObject>}) => {
     </Card>;
 };
 
+function shortTitle(record: RecordSet.AsObject): string {
+    if (record.shorttitle) return record.shorttitle;
+    const type = recordTypeFromValue(record.type);
+    if (type == "MIXED") return record.longtitle;
+    return ShortRecordTitles[type];
+
+}
+
 const ShortRecordTitles: { [key in RecordType] } = {
     BAPTISM: "Baptisms",
     BIRTH: "Births",
     BURIAL: "Burials",
     DEATH: "Deaths",
     MARRIAGE: "Marriages",
-    MEMBERSHIP: "Memberships",
+    MEMBERSHIP: "Membership",
     MEMORIAL: "Memorials",
     MENTION: "Mentions",
     MIXED: "Mixed",
