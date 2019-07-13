@@ -1,6 +1,6 @@
 .recordCards .recordCard {
     display: inline-block;
-    width: 200px;
+    min-width: 200px;
     vertical-align: top;
     border: 0;
 }
