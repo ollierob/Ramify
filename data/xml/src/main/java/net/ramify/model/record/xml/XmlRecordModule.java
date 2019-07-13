@@ -58,8 +58,8 @@ public class XmlRecordModule extends PrivateModule {
 
     @Provides
     @Singleton
-    XmlRecordProvider provideRecordProvider(final DateParser dateParser, final NameParser nameParser) {
-        return new XmlRecordProvider(Maps.newHashMap(), nameParser, dateParser);
+    XmlRecordProvider provideRecordProvider(final JAXBContext context, final DateParser dateParser, final NameParser nameParser) {
+        return new XmlRecordProvider(Maps.newHashMap(), context, nameParser, dateParser);
     }
 
 }

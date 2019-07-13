@@ -1,11 +1,15 @@
 package net.ramify.model.record.xml.collection;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.date.xml.XmlBetweenYears;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlInYear;
+import net.ramify.model.person.name.NameParser;
+import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.record.Record;
 import net.ramify.model.record.collection.HasRecordSetId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
@@ -29,7 +33,7 @@ import java.util.List;
 import java.util.Set;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "recordSet")
-class XmlRecordSet implements HasRecordSetId {
+class XmlRecordSet implements HasRecordSetId, HasPlaceId {
 
     @XmlAttribute(name = "id", required = true)
     private String id;
@@ -76,23 +80,32 @@ class XmlRecordSet implements HasRecordSetId {
     }
 
     Collection<RecordSet> build(final RecordSet parent, final DateParser dateParser) {
-        final var self = new DefaultRecordSet(
-                this.recordSetId(),
-                parent,
-                source.source(),
-                type.type(),
-                Functions.ifNonNull(date, d -> d.resolve(dateParser)),
-                new PlaceId(place),
-                title,
-                shortTitle,
-                Functions.ifNonNull(description, String::trim),
-                this.size(),
-                this.buildReferences());
+        final var self = this.buildSelf(parent, dateParser);
         if (children == null) return Collections.singletonList(self);
         final var recordSets = Lists.<RecordSet>newArrayListWithExpectedSize(1 + 2 * children.size());
         recordSets.add(self);
         children.forEach(child -> recordSets.addAll(child.build(self, dateParser)));
         return recordSets;
+    }
+
+    private RecordSet buildSelf(final RecordSet parent, final DateParser dateParser) {
+        return new DefaultRecordSet(
+                this.recordSetId(),
+                parent,
+                source.source(),
+                type.type(),
+                Functions.ifNonNull(date, d -> d.resolve(dateParser)),
+                placeId(),
+                title,
+                shortTitle,
+                Functions.ifNonNull(description, String::trim),
+                this.size(),
+                this.buildReferences());
+    }
+
+    @Override
+    public PlaceId placeId() {
+        return new PlaceId(place);
     }
 
     private Set<RecordSetReference> buildReferences() {
@@ -114,6 +127,14 @@ class XmlRecordSet implements HasRecordSetId {
     @CheckForNull
     RecordSetId parentRecordSetId() {
         return Functions.ifNonNull(parentId, RecordSetId::new);
+    }
+
+    Set<Record> records(final NameParser nameParser, final DateParser dateParser) {
+        if (records == null) return Collections.emptySet();
+        final var records = Sets.<Record>newHashSet();
+        final var self = this.buildSelf(null, dateParser);
+        this.records.forEach(record -> records.addAll(record.build(self, nameParser, dateParser)));
+        return records;
     }
 
 }

@@ -1,8 +1,12 @@
 package net.ramify.model.record.xml.collection;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import net.ramify.model.date.parse.DateParser;
+import net.ramify.model.person.name.NameParser;
+import net.ramify.model.record.Record;
 import net.ramify.model.record.collection.RecordSet;
+import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.provider.RecordSetProvider;
 
 import javax.annotation.Nonnull;
@@ -28,6 +32,12 @@ public class XmlRecordSets {
         final var sets = Sets.<RecordSet>newLinkedHashSet();
         this.recordSets.forEach(rs -> sets.addAll(rs.build(recordSets, dateParser)));
         return sets;
+    }
+
+    @Nonnull
+    public Set<Record> records(final RecordSetId id, final DateParser dateParser, final NameParser nameParser) {
+        final var targeRecordSet = Iterables.find(recordSets, set -> id.equals(set.recordSetId()));
+        return targeRecordSet.records(nameParser, dateParser);
     }
 
 }

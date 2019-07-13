@@ -105,7 +105,11 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
         return new XmlRecordSetProvider(this.immutableMap(), ImmutableSetMultimap.copyOf(parentChildren));
     }
 
-    static RecordSetProvider readRecordsInDirectory(final JAXBContext context, final File root, final DateParser dateParser, final XmlRecordProvider recordProvider) throws JAXBException {
+    static RecordSetProvider readRecordsInDirectory(
+            final JAXBContext context,
+            final File root,
+            final DateParser dateParser,
+            final XmlRecordProvider recordProvider) throws JAXBException {
         final var provider = new XmlRecordSetProvider(Maps.newConcurrentMap(), HashMultimap.create());
         final var unmarshaller = context.createUnmarshaller();
         FileTraverseUtils.traverseSubdirectories(
