@@ -17,6 +17,7 @@ type State = {
     recordSetId?: string;
     recordSet: AsyncData<RecordSet.AsObject>;
     recordSetPlace: AsyncData<PlaceBundle.AsObject>
+    recordSetChildren: AsyncData<ReadonlyArray<RecordSet.AsObject>>
 }
 
 export default class RecordSetPage extends React.PureComponent<Props, State> {
@@ -28,7 +29,8 @@ export default class RecordSetPage extends React.PureComponent<Props, State> {
         super(props);
         this.state = {
             recordSet: {},
-            recordSetPlace: {loading: true}
+            recordSetPlace: {loading: true},
+            recordSetChildren: {}
         };
     }
 
@@ -47,7 +49,8 @@ export default class RecordSetPage extends React.PureComponent<Props, State> {
                 position={this.state.recordSetPlace.data && this.state.recordSetPlace.data.position}/>
 
             <RecordSetCard
-                recordSet={data}/>
+                recordSet={data}
+                recordSetChildren={this.state.recordSetChildren.data}/>
 
         </div>;
 
@@ -76,6 +79,7 @@ export default class RecordSetPage extends React.PureComponent<Props, State> {
     private loadRecordSet(id: string) {
         if (!id) return;
         asyncLoadData(id, this.recordLoader.loadRecordSet, recordSet => this.setState({recordSet}));
+        asyncLoadData(id, this.recordLoader.loadChildRecordSets, children => this.setState({recordSetChildren: children}));
     }
 
     private loadPlace(id: PlaceId) {

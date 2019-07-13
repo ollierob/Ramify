@@ -48,4 +48,9 @@ public class DefaultRecordsResource implements RecordsResource {
     public RecordSet recordSet(final RecordSetId id) {
         return recordSets.get(id);
     }
+
+    @Override
+    public RecordSets children(final RecordSetId parentId) {
+        return RecordSets.of(recordSets.children(parentId));
+    }
 }

@@ -81,15 +81,6 @@
     max-width: 300px;
 }
 
-.institutionRecords .placeCard {
-    width: unset !important;
-    min-width: 200px;
-}
-
-.institutionRecords .placeCard .ant-card-head {
-    padding: 0 8px;
-}
-
 .typeDescription p {
     margin-bottom: 0;
 }

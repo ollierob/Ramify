@@ -17,7 +17,7 @@ export default class RecordSetTable extends React.PureComponent<Props> {
     render() {
 
         if (!this.props.recordSets.query) return <NoRecordsYet/>;
-        if (this.props.recordSets.error) return <ErrorMessage message={this.props.recordSets.error}/>
+        if (this.props.recordSets.error) return <ErrorMessage message={this.props.recordSets.error}/>;
 
         const data: RecordSet.AsObject[] = this.props.recordSets.data ? [].concat(this.props.recordSets.data) : [];
 

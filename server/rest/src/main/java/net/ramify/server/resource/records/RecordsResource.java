@@ -36,4 +36,8 @@ public interface RecordsResource extends RootResource {
     @Path("set/{id}")
     RecordSet recordSet(@PathParam("id") RecordSetId id);
 
+    @GET
+    @Path("sets/children/{id}")
+    RecordSets children(@PathParam("id") RecordSetId parentId);
+
 }

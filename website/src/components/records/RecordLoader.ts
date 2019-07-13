@@ -8,7 +8,9 @@ export interface RecordLoader {
 
     loadRecordSet(id: RecordSetId): Promise<Readonly<RecordSet.AsObject>>
 
-    loadRecordSets(options?: RecordSetOptions): Promise<ReadonlyArray<RecordSet.AsObject>>
+    loadRecordSets(options?: RecordSetOptions): Promise<ReadonlyArray<RecordSet.AsObject>>;
+
+    loadChildRecordSets(id: RecordSetId): Promise<ReadonlyArray<RecordSet.AsObject>>
 
 }
 
@@ -24,6 +26,11 @@ class ProtoRecordLoader implements RecordLoader {
     loadRecordSets(options) {
         const url = "/records/sets" + queryParameters(options);
         return protoFetch(url, RecordSetList.deserializeBinary)
+            .then(l => l ? l.getRecordsetList().map(l => l.toObject()) : []);
+    }
+
+    loadChildRecordSets(id: string): Promise<ReadonlyArray<RecordSet.AsObject>> {
+        return protoFetch("/records/sets/children/" + id, RecordSetList.deserializeBinary)
             .then(l => l ? l.getRecordsetList().map(l => l.toObject()) : []);
     }
 

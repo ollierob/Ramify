@@ -4,9 +4,9 @@ import {Card} from "antd";
 import {Institution} from "../../../protobuf/generated/institution_pb";
 import {HasClass} from "../../../components/style/HasClass";
 import {Place, PlaceDescription} from "../../../protobuf/generated/place_pb";
-import {RecordCards} from "./InstitutionRecordCards";
 import {PlaceTitle} from "../../../components/places/PlaceTitle";
 import {PlaceFavouritesHandler} from "../../../components/places/PlaceFavourites";
+import {RecordCards} from "../../../components/records/RecordCards";
 
 type Props = HasClass & PlaceFavouritesHandler & {
     place: Place.AsObject;
@@ -43,6 +43,6 @@ export const InstitutionInfo = (props: Props) => {
             records={institution.recordsetList}
             alsoSee={description && description.alsoseeList}/>}
 
-    </Card>
+    </Card>;
 
 };

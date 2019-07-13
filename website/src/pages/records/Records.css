@@ -35,3 +35,11 @@
 .recordSet .info .ant-card-head-title {
     font-size: 1.5em;
 }
+
+.recordSet .info .parent {
+    font-size: 1.2em;
+}
+
+.recordSet .recordCards {
+    margin-top: 12px;
+}

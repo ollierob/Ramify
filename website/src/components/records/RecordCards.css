@@ -1,0 +1,20 @@
+.recordCards .recordCard {
+    display: inline-block;
+    width: 200px;
+    vertical-align: top;
+    border: 0;
+}
+
+.recordCards .recordCard .ant-card-body {
+    padding: 8px !important;
+}
+
+.recordCards .recordCard .ant-card-head {
+    padding: 0 8px;
+    min-height: 38px;
+}
+
+.recordCards .recordCard .ant-card-head .ant-card-head-title {
+    font-size: 1.25em;
+    padding: 0;
+}

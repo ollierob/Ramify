@@ -24,6 +24,9 @@ public interface RecordSetProvider extends Provider<RecordSetId, RecordSet> {
     @Nonnull
     Set<RecordSet> matching(Predicate<? super RecordSet> predicate, int limit);
 
+    @Nonnull
+    Set<RecordSet> children(RecordSetId parentId);
+
     class UnknownRecordSetException extends RuntimeException {
 
         private final RecordSetId id;
