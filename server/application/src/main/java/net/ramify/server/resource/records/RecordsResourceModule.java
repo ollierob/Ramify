@@ -9,6 +9,7 @@ public class RecordsResourceModule extends AbstractModule {
         super.configure();
         this.bind(RecordsRouterResource.class);
         this.bind(DefaultRecordsResource.class);
+        this.bind(RecordSetResource.class).to(DefaultRecordSetResource.class);
     }
 
 }
