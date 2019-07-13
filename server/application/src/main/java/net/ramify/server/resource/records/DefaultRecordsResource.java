@@ -4,6 +4,7 @@ import net.ramify.model.date.DateRange;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.record.collection.RecordSet;
+import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.RecordSets;
 import net.ramify.model.record.provider.RecordSetProvider;
 
@@ -42,4 +43,9 @@ public class DefaultRecordsResource implements RecordsResource {
         return RecordSets.of(recordSets.matching(predicate, limit));
     }
 
+    @CheckForNull
+    @Override
+    public RecordSet recordSet(final RecordSetId id) {
+        return recordSets.get(id);
+    }
 }

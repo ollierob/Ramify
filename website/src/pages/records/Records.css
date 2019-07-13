@@ -15,3 +15,7 @@
 .records .table {
     margin-top: 16px;
 }
+
+.recordSet .ant-card-head-title {
+    font-size: 1.5em;
+}

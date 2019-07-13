@@ -2,8 +2,11 @@ import {RecordSet, RecordSetList} from "../../protobuf/generated/record_pb";
 import {PlaceId} from "../places/Place";
 import {queryParameters} from "../fetch/Fetch";
 import {protoFetch} from "../fetch/ProtoFetch";
+import {RecordSetId} from "./RecordSet";
 
 export interface RecordLoader {
+
+    loadRecordSet(id: RecordSetId): Promise<Readonly<RecordSet.AsObject>>
 
     loadRecordSets(options?: RecordSetOptions): Promise<ReadonlyArray<RecordSet.AsObject>>
 
@@ -12,6 +15,11 @@ export interface RecordLoader {
 type RecordSetOptions = {place?: PlaceId, limit?: number}
 
 class ProtoRecordLoader implements RecordLoader {
+
+    loadRecordSet(id: string) {
+        return protoFetch("/records/set/" + id, RecordSet.deserializeBinary)
+            .then(s => s ? s.toObject() : null);
+    }
 
     loadRecordSets(options) {
         const url = "/records/sets" + queryParameters(options);

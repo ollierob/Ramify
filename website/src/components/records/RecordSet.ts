@@ -1,0 +1,1 @@
+export type RecordSetId = string;

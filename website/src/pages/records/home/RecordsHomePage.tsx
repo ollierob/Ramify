@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Button, Card, Cascader, Input, Select} from "antd";
+import {Button, Card, Cascader, Input} from "antd";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {Place} from "../../../protobuf/generated/place_pb";
 import {Flag} from "../../../components/images/Flag";
@@ -7,7 +7,7 @@ import {PlaceId} from "../../../components/places/Place";
 import {DEFAULT_PLACE_LOADER} from "../../../components/places/PlaceLoader";
 import {CascaderOptionType} from "antd/es/cascader";
 import {YearRange} from "../../../components/date/DateRange";
-import {Record, RecordSet} from "../../../protobuf/generated/record_pb";
+import {RecordSet} from "../../../protobuf/generated/record_pb";
 import RecordSetTable from "./RecordSetTable";
 import {DEFAULT_RECORD_LOADER} from "../../../components/records/RecordLoader";
 

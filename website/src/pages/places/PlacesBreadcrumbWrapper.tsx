@@ -74,9 +74,7 @@ export default class PlacesBreadcrumbWrapper extends React.PureComponent<Props, 
         const location = this.props.location;
         if (!location) return;
         const search = new URLSearchParams(location.search);
-        this.setState({
-            placeId: search.get("place")
-        })
+        this.setState({placeId: search.get("place")})
     }
 
     private loadPlace(id: PlaceId) {
