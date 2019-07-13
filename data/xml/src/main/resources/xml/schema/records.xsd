@@ -39,6 +39,8 @@
 
             <element maxOccurs="unbounded" minOccurs="0" ref="tns:recordSet"/>
 
+            <element maxOccurs="unbounded" minOccurs="0" ref="tns:residenceRecords"/>
+
         </sequence>
 
         <attribute name="id" type="xs:string" use="required"/>
@@ -64,42 +66,6 @@
         <attribute name="reference" type="xs:string" use="required"/>
 
         <attribute name="archive" type="xs:string" use="required"/>
-
-    </complexType>
-
-    <complexType name="recordSets">
-
-        <sequence>
-
-            <element maxOccurs="unbounded" minOccurs="0" ref="tns:recordSet"/>
-
-        </sequence>
-
-    </complexType>
-
-    <complexType abstract="true" name="xmlRecord">
-
-        <sequence/>
-
-        <attribute name="name" type="xs:string"/>
-
-    </complexType>
-
-    <complexType name="xmlResidenceRecord">
-
-        <complexContent>
-
-            <extension base="tns:xmlRecord">
-
-                <sequence/>
-
-                <attribute name="firstLastName" type="xs:string"/>
-
-                <attribute name="gender" type="ns2:xmlGender" use="required"/>
-
-            </extension>
-
-        </complexContent>
 
     </complexType>
 
@@ -131,6 +97,42 @@
 
     </complexType>
 
+    <complexType name="xmlResidenceRecord">
+
+        <complexContent>
+
+            <extension base="tns:xmlRecord">
+
+                <sequence/>
+
+                <attribute name="firstLastName" type="xs:string"/>
+
+                <attribute name="gender" type="ns2:xmlGender" use="required"/>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
+    <complexType abstract="true" name="xmlRecord">
+
+        <sequence/>
+
+        <attribute name="name" type="xs:string"/>
+
+    </complexType>
+
+    <complexType name="recordSets">
+
+        <sequence>
+
+            <element maxOccurs="unbounded" minOccurs="0" ref="tns:recordSet"/>
+
+        </sequence>
+
+    </complexType>
+
     <simpleType name="xmlRecordSetSource">
 
         <restriction base="xs:string">
@@ -147,9 +149,17 @@
 
         <restriction base="xs:string">
 
+            <enumeration value="census"/>
+
+            <enumeration value="birth"/>
+
+            <enumeration value="marriage"/>
+
+            <enumeration value="burial"/>
+
             <enumeration value="baptism"/>
 
-            <enumeration value="death"/>
+            <enumeration value="residence"/>
 
             <enumeration value="payment"/>
 
@@ -157,15 +167,7 @@
 
             <enumeration value="membership"/>
 
-            <enumeration value="census"/>
-
-            <enumeration value="residence"/>
-
-            <enumeration value="birth"/>
-
-            <enumeration value="burial"/>
-
-            <enumeration value="marriage"/>
+            <enumeration value="death"/>
 
         </restriction>
 

@@ -12,6 +12,7 @@ import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.RecordSetReference;
 import net.ramify.model.record.provider.RecordSetProvider;
 import net.ramify.model.record.xml.record.XmlRecord;
+import net.ramify.model.record.xml.record.XmlRecords;
 import net.ramify.utils.collections.SetUtils;
 import net.ramify.utils.objects.Functions;
 
@@ -65,6 +66,9 @@ class XmlRecordSet implements HasRecordSetId {
 
     @XmlElementRef
     private List<XmlRecordSet> children;
+
+    @XmlElementRef
+    private List<XmlRecords> records;
 
     Collection<RecordSet> build(final RecordSetProvider recordSets, final DateParser dateParser) {
         final var parent = Functions.ifNonNull(this.parentRecordSetId(), recordSets::require);

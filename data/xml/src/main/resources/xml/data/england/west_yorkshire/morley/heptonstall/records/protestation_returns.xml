@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<recordSets
+        xmlns="http://ramify.net/records"
+        xmlns:d="http://ramify.net/dates">
+
+    <recordSet
+            id="protestation_1642_heptonstall"
+            parentId="protestation_1642_wry_morley"
+            title="Heptonstall Protestation Returns"
+            shortTitle="Heptonstall"
+            place="township:heptonstall"
+            source="government"
+            type="residence">
+
+        <d:inYear year="1642"/>
+
+        <residenceRecords>
+            <residence firstLastName="Robert Gilbody" gender="male"/>
+            <residence firstLastName="William Whitwhaw" gender="male"/>
+            <residence firstLastName="William Whitwhaw" gender="male"/>
+            <residence firstLastName="Thomas Greenwood" gender="male"/>
+            <residence firstLastName="John Greenwood" gender="male"/>
+            <residence firstLastName="Symon Greenwood" gender="male"/>
+            <residence firstLastName="Thomas Greenwood" gender="male"/>
+            <residence firstLastName="Ambrose Greenwood" gender="male"/>
+            <residence firstLastName="James Hodgson" gender="male"/>
+            <residence firstLastName="John Greenwood" gender="male"/>
+        </residenceRecords>
+
+    </recordSet>
+
+</recordSets>
