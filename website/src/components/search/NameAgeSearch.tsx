@@ -17,7 +17,7 @@ type State = {
     age?: number;
 }
 
-export class NameSearch extends React.PureComponent<Props, State> {
+export class NameAgeSearch extends React.PureComponent<Props, State> {
 
     private setFirstName = (e: ChangeEvent<HTMLInputElement>) => this.setState({firstName: e.target.value});
     private setLastName = (e: ChangeEvent<HTMLInputElement>) => this.setState({lastName: e.target.value});

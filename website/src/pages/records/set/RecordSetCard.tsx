@@ -4,7 +4,7 @@ import {RecordSet} from "../../../protobuf/generated/record_pb";
 import {Card} from "antd";
 import {recordSetHref} from "../RecordLinks";
 import {RecordCards} from "../../../components/records/RecordCards";
-import {NameSearch} from "../../../components/search/NameSearch";
+import {NameAgeSearch} from "../../../components/search/NameAgeSearch";
 import {RecordSearchHandler} from "../../../components/search/RecordSearchHandler";
 
 type Props = RecordSearchHandler & {
@@ -34,7 +34,7 @@ export default class RecordSetCard extends React.PureComponent<Props> {
                 records={children}
                 style={MarginBottom}/>
 
-            <NameSearch
+            <NameAgeSearch
                 {...this.props}/>
 
         </Card>;
