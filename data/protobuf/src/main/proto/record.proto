@@ -16,6 +16,12 @@ message Record {
 
 }
 
+message RecordList {
+
+    repeated Record record = 1;
+
+}
+
 message RecordSet {
 
     string id = 1;
@@ -27,8 +33,9 @@ message RecordSet {
     RecordSet parent = 7;
     DateRange date = 8;
     string placeId = 9;
+    uint32 numRecords = 10;
 
-    repeated ExternalRecordReference externalReference = 10;
+    repeated ExternalRecordReference externalReference = 20;
 
 }
 

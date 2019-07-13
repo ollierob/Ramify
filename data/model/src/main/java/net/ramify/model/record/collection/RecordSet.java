@@ -24,6 +24,8 @@ public interface RecordSet extends HasTitleDescription, HasRecordSetId, HasDate,
     @Nonnull
     Set<RecordSetReference> references();
 
+    int size();
+
     @Nonnull
     default RecordProto.RecordSet.Builder toProtoBuilder(final boolean includeParent) {
         final var builder = RecordProto.RecordSet.newBuilder()
@@ -31,6 +33,7 @@ public interface RecordSet extends HasTitleDescription, HasRecordSetId, HasDate,
                 .setLongTitle(this.title())
                 .setDescription(MoreObjects.firstNonNull(this.description(), ""))
                 .setPlaceId(this.placeId().value())
+                .setNumRecords(this.size())
                 .addAllExternalReference(Iterables.transform(this.references(), RecordSetReference::toProto));
         if (includeParent) Consumers.ifNonNull(this.parent(), parent -> builder.setParent(parent.toProto()));
         Consumers.ifNonNull(this.date(), date -> builder.setDate(date.toProto()));

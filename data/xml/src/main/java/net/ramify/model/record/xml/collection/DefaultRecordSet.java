@@ -24,6 +24,7 @@ public class DefaultRecordSet implements RecordSet {
     private final PlaceId placeId;
     private final String longTitle, shortTitle;
     private final String description;
+    private final int size;
     private final Set<RecordSetReference> references;
 
     public DefaultRecordSet(
@@ -36,6 +37,7 @@ public class DefaultRecordSet implements RecordSet {
             final String longTitle,
             final String shortTitle,
             final String description,
+            final int size,
             final Set<RecordSetReference> references) {
         this.id = id;
         this.parent = parent;
@@ -46,6 +48,7 @@ public class DefaultRecordSet implements RecordSet {
         this.longTitle = longTitle;
         this.shortTitle = shortTitle;
         this.description = description;
+        this.size = size;
         this.references = references;
     }
 
@@ -83,6 +86,11 @@ public class DefaultRecordSet implements RecordSet {
     @Override
     public String description() {
         return description;
+    }
+
+    @Override
+    public int size() {
+        return size;
     }
 
     @Nonnull

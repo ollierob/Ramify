@@ -82,6 +82,7 @@ class XmlRecordSet implements HasRecordSetId {
                 title,
                 shortTitle,
                 Functions.ifNonNull(description, String::trim),
+                0,
                 this.buildReferences());
         if (children == null) return Collections.singletonList(self);
         final var recordSets = Lists.<RecordSet>newArrayListWithExpectedSize(1 + 2 * children.size());

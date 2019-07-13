@@ -58,6 +58,11 @@ public abstract class DelegatedRecordSet implements RecordSet {
         return delegate.recordSetId();
     }
 
+    @Override
+    public int size() {
+        return delegate.size();
+    }
+
     @Nonnull
     @Override
     public RecordProto.RecordSet.Builder toProtoBuilder(final boolean includeParent) {

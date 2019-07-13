@@ -17,30 +17,26 @@ type Props = HasClass & {
     defaultZoom?: number;
 };
 
-export class PlaceMap extends React.PureComponent<Props> {
+export const PlaceMap = (props: Props) => {
 
-    render() {
+    return <div className={(props.className || "") + " map"} style={props.style}>
 
-        return <div className={(this.props.className || "") + " map"} style={this.props.style}>
+        {props.loading && <Loading/>}
 
-            {this.props.loading && <Loading/>}
+        {props.position && <MapComponent
+            {...props}
+            zoom={props.position.zoom || props.defaultZoom || defaultZoom(props.place)}
+            center={props.position.center}
+            markers={!props.area && markerPoints(props.place, props.position)}
+        />}
 
-            {this.props.position && <MapComponent
-                {...this.props}
-                zoom={this.props.position.zoom || this.props.defaultZoom || defaultZoom(this.props.place)}
-                center={this.props.position.center}
-                markers={!this.props.area && markerPoints(this.props.place, this.props.position)}
-            />}
-
-            {!this.props.position && <span className="unimportant" style={{padding: 4}}>
+        {!props.position && <span className="unimportant" style={{padding: 4}}>
                 No position information available.
             </span>}
 
-        </div>;
+    </div>;
 
-    }
-
-}
+};
 
 function markerPoints(place: Place.AsObject, position: Position.AsObject): ReadonlyArray<MarkerPoint> {
     if (position.boundaryList.length) return [];
