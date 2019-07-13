@@ -13,7 +13,7 @@ class GenericRecordPerson extends AbstractPerson {
 
     private final Set<Event> events;
 
-    GenericRecordPerson(PersonId id, Name name, Gender gender, Set<Event> events) {
+    GenericRecordPerson(final PersonId id, final Name name, final Gender gender, final Set<Event> events) {
         super(id, name, gender);
         this.events = events;
     }

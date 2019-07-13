@@ -6,12 +6,12 @@ import net.ramify.model.record.proto.RecordProto;
 
 import javax.annotation.Nonnull;
 
-public abstract class AbstractRecord implements Record {
+public abstract class ExactDateRecord implements Record {
 
     private final RecordId id;
     private final ExactDate date;
 
-    protected AbstractRecord(final RecordId id, final ExactDate date) {
+    protected ExactDateRecord(final RecordId id, final ExactDate date) {
         this.id = id;
         this.date = date;
     }

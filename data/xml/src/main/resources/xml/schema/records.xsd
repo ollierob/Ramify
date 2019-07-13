@@ -14,6 +14,8 @@
 
     <element name="recordSets" type="tns:recordSets"/>
 
+    <element name="residence" type="tns:xmlResidenceRecord"/>
+
     <complexType name="xmlRecordSet">
 
         <sequence>
@@ -74,6 +76,24 @@
 
         <sequence/>
 
+        <attribute name="name" type="xs:string"/>
+
+    </complexType>
+
+    <complexType name="xmlResidenceRecord">
+
+        <complexContent>
+
+            <extension base="tns:xmlRecord">
+
+                <sequence/>
+
+                <attribute name="firstLastName" type="xs:string"/>
+
+            </extension>
+
+        </complexContent>
+
     </complexType>
 
     <simpleType name="xmlRecordSetSource">
@@ -92,25 +112,25 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="baptism"/>
+            <enumeration value="marriage"/>
 
-            <enumeration value="mixed"/>
+            <enumeration value="birth"/>
 
             <enumeration value="membership"/>
 
-            <enumeration value="census"/>
-
-            <enumeration value="marriage"/>
-
-            <enumeration value="residence"/>
+            <enumeration value="baptism"/>
 
             <enumeration value="payment"/>
 
-            <enumeration value="death"/>
+            <enumeration value="residence"/>
 
             <enumeration value="burial"/>
 
-            <enumeration value="birth"/>
+            <enumeration value="death"/>
+
+            <enumeration value="census"/>
+
+            <enumeration value="mixed"/>
 
         </restriction>
 

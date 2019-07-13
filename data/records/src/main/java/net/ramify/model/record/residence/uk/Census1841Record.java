@@ -1,4 +1,4 @@
-package net.ramify.model.record.census.uk;
+package net.ramify.model.record.residence.uk;
 
 import com.google.common.collect.Sets;
 import net.ramify.model.date.DateRange;
@@ -15,7 +15,7 @@ import net.ramify.model.person.gender.Sex;
 import net.ramify.model.person.name.Name;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.RecordId;
-import net.ramify.model.record.census.CensusRecord;
+import net.ramify.model.record.residence.CensusRecord;
 import net.ramify.utils.collections.SetUtils;
 
 import javax.annotation.Nonnull;

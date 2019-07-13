@@ -1,15 +1,15 @@
-package net.ramify.model.record.census;
+package net.ramify.model.record.residence;
 
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.place.PlaceId;
-import net.ramify.model.record.AbstractRecord;
+import net.ramify.model.record.ExactDateRecord;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.type.ResidenceRecord;
 
 import javax.annotation.Nonnull;
 
-public abstract class CensusRecord extends AbstractRecord implements ResidenceRecord {
+public abstract class CensusRecord extends ExactDateRecord implements ResidenceRecord {
 
     private final PlaceId placeId;
 
