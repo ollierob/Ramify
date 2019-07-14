@@ -5,7 +5,6 @@ import {AsyncData} from "../../../components/fetch/AsyncData";
 import {Record, RecordSet} from "../../../protobuf/generated/record_pb";
 import {RecordTable} from "./RecordTable";
 import {RecordPaginationHandler} from "../../../components/records/RecordPaginationHandler";
-import {RecordType, recordTypeFromValue} from "../../../components/records/RecordType";
 
 type Props = RecordPaginationHandler & RecordSearchHandler & {
     recordSet: RecordSet.AsObject;
@@ -15,7 +14,6 @@ type Props = RecordPaginationHandler & RecordSearchHandler & {
 
 type State = {
     activeTab?: string;
-    type?: RecordType;
 }
 
 export class RecordResults extends React.PureComponent<Props, State> {
@@ -40,7 +38,6 @@ export class RecordResults extends React.PureComponent<Props, State> {
                 tab={"Records"}>
                 <RecordTable
                     {...this.props}
-                    type={this.state.type}
                     loading={this.props.records.loading}
                     records={this.props.records.data}/>
             </Tabs.TabPane>
@@ -57,7 +54,7 @@ export class RecordResults extends React.PureComponent<Props, State> {
                 tab={"Search results"}
                 disabled={!this.props.searchResults.query}>
                 <RecordTable
-                    type={this.state.type}
+                    recordSet={this.props.recordSet}
                     loading={this.props.searchResults.loading}
                     records={this.props.searchResults.data}/>
             </Tabs.TabPane>
@@ -70,9 +67,6 @@ export class RecordResults extends React.PureComponent<Props, State> {
 
         if (this.props.searchResults.loading && !prevProps.searchResults.loading && this.state.activeTab != "search")
             this.setState({activeTab: "search"});
-
-        if (this.props.recordSet != prevProps.recordSet)
-            this.setState({type: recordTypeFromValue(this.props.recordSet.type)});
 
     }
 
