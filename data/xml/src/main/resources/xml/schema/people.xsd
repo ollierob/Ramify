@@ -14,11 +14,11 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="female"/>
-
             <enumeration value="unknown"/>
 
             <enumeration value="male"/>
+
+            <enumeration value="female"/>
 
         </restriction>
 

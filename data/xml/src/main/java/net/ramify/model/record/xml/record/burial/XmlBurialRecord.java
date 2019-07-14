@@ -16,7 +16,8 @@ import net.ramify.model.event.type.death.GenericDeath;
 import net.ramify.model.event.type.residence.GenericResidence;
 import net.ramify.model.event.type.residence.Residence;
 import net.ramify.model.family.Family;
-import net.ramify.model.family.SinglePersonFamily;
+import net.ramify.model.family.FamilyBuilder;
+import net.ramify.model.family.xml.XmlRelationship;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
@@ -32,8 +33,11 @@ import net.ramify.utils.objects.Functions;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.time.Month;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "churchBurial")
@@ -57,6 +61,9 @@ public class XmlBurialRecord extends XmlRecord {
     @XmlElement(name = "deathDate", required = false, namespace = XmlDateRange.NAMESPACE)
     private XmlExactDate deathDate;
 
+    @XmlElementRef
+    private List<XmlRelationship> relationships;
+
     public BurialRecord build(final PlaceProvider places, final NameParser nameParser, final PlaceId placeId) {
         final var burialDate = ExactDate.on(year, Month.of(month), dayOfMonth);
         return new ChurchBurialRecord(
@@ -68,7 +75,9 @@ public class XmlBurialRecord extends XmlRecord {
 
     Family family(final PlaceProvider places, final NameParser nameParser, final ExactDate burialDate) {
         final var person = this.person(nameParser, burialDate, places);
-        return new SinglePersonFamily(person);
+        final var builder = new FamilyBuilder().addPerson(person);
+        if (relationships != null) relationships.forEach(relationship -> relationship.addRelationship(person, builder, nameParser, Collections.emptySet()));
+        return builder.build();
     }
 
     Person person(final NameParser nameParser, final ExactDate burialDate, final PlaceProvider places) {

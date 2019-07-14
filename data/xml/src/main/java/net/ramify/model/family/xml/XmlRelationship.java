@@ -1,6 +1,8 @@
 package net.ramify.model.family.xml;
 
 import net.ramify.model.event.Event;
+import net.ramify.model.family.FamilyBuilder;
+import net.ramify.model.person.HasPersonId;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.gender.Gender;
@@ -16,18 +18,18 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.Set;
 import java.util.UUID;
 
-@XmlSeeAlso({})
+@XmlSeeAlso({XmlFather.class})
 public abstract class XmlRelationship {
 
     @XmlAttribute(name = "name", required = false)
     private String name;
 
-    public Relationship relationship(final Person from, final NameParser nameParser, final Set<? extends Event> events) {
+    public void addRelationship(final Person from, final FamilyBuilder builder, final NameParser nameParser, final Set<? extends Event> events) {
         final var to = this.toPerson(nameParser, events);
-        return this.relationship(from, to);
+        builder.addRelationship(from, to, this::relationship);
     }
 
-    protected abstract Relationship relationship(Person from, Person to);
+    protected abstract Relationship relationship(HasPersonId from, HasPersonId to);
 
     protected abstract Gender gender();
 

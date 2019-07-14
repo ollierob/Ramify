@@ -24,6 +24,7 @@ public class FamilyBuilder {
     }
 
     public Family build() {
+        if (network.nodes().size() == 1) return new SinglePersonFamily(network.nodes().iterator().next());
         //FIXME lazily determine if directed
         return new NetworkedFamily(ImmutableNetwork.copyOf(network));
     }

@@ -2,6 +2,7 @@
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
         xmlns:ns1="http://ramify.net/dates"
         xmlns:ns2="http://ramify.net/people"
+        xmlns:ns3="http://ramify.net/families"
         xmlns:tns="http://ramify.net/records"
         xmlns:xs="http://www.w3.org/2001/XMLSchema"
         targetNamespace="http://ramify.net/records"
@@ -10,6 +11,8 @@
     <import namespace="http://ramify.net/dates" schemaLocation="dates.xsd"/>
 
     <import namespace="http://ramify.net/people" schemaLocation="people.xsd"/>
+
+    <import namespace="http://ramify.net/families" schemaLocation="families.xsd"/>
 
     <element name="burialRecords" type="tns:xmlBurialRecords"/>
 
@@ -163,6 +166,8 @@
 
                     <element minOccurs="0" ref="ns1:deathDate"/>
 
+                    <element maxOccurs="unbounded" minOccurs="0" ref="ns3:father"/>
+
                 </sequence>
 
                 <attribute name="age" type="xs:int"/>
@@ -207,25 +212,25 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="census"/>
-
-            <enumeration value="birth"/>
-
-            <enumeration value="membership"/>
-
-            <enumeration value="residence"/>
-
-            <enumeration value="baptism"/>
-
             <enumeration value="mixed"/>
-
-            <enumeration value="death"/>
 
             <enumeration value="marriage"/>
 
-            <enumeration value="burial"/>
+            <enumeration value="membership"/>
+
+            <enumeration value="census"/>
+
+            <enumeration value="residence"/>
+
+            <enumeration value="birth"/>
+
+            <enumeration value="death"/>
+
+            <enumeration value="baptism"/>
 
             <enumeration value="payment"/>
+
+            <enumeration value="burial"/>
 
         </restriction>
 
