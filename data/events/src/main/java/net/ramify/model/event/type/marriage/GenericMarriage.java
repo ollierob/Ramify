@@ -1,10 +1,9 @@
-package net.ramify.model.event.type.civil;
+package net.ramify.model.event.type.marriage;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.AbstractEvent;
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.event.type.LifeEvent;
-import net.ramify.model.event.type.Marriage;
 import net.ramify.model.person.PersonId;
 
 import javax.annotation.Nonnull;

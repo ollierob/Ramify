@@ -2,8 +2,8 @@ package net.ramify.model.record.civil.uk;
 
 import com.google.common.collect.Sets;
 import net.ramify.model.event.Event;
-import net.ramify.model.event.type.civil.GenericBirth;
-import net.ramify.model.event.type.civil.GenericDeath;
+import net.ramify.model.event.type.birth.GenericBirth;
+import net.ramify.model.event.type.death.GenericDeath;
 import net.ramify.model.occupation.Occupation;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;

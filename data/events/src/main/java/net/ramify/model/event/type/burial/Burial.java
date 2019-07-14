@@ -1,6 +1,9 @@
-package net.ramify.model.event.type;
+package net.ramify.model.event.type.burial;
 
 import net.ramify.model.event.proto.EventProto;
+import net.ramify.model.event.type.EventHandler;
+import net.ramify.model.event.type.PostDeathEvent;
+import net.ramify.model.event.type.UniqueEvent;
 
 import javax.annotation.Nonnull;
 

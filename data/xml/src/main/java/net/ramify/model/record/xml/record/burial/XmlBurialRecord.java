@@ -8,11 +8,11 @@ import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlExactDate;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.type.Birth;
-import net.ramify.model.event.type.Burial;
+import net.ramify.model.event.type.burial.Burial;
 import net.ramify.model.event.type.Death;
-import net.ramify.model.event.type.church.GenericChurchBurial;
-import net.ramify.model.event.type.civil.GenericBirth;
-import net.ramify.model.event.type.civil.GenericDeath;
+import net.ramify.model.event.type.burial.ChurchBurial;
+import net.ramify.model.event.type.birth.GenericBirth;
+import net.ramify.model.event.type.death.GenericDeath;
 import net.ramify.model.event.type.residence.GenericResidence;
 import net.ramify.model.event.type.residence.Residence;
 import net.ramify.model.family.Family;
@@ -101,7 +101,7 @@ public class XmlBurialRecord extends XmlRecord {
     }
 
     Burial burial(final PersonId personId, final ExactDate date) {
-        return new GenericChurchBurial(personId, date, Functions.ifNonNull(deathAge, Age::ofYears));
+        return new ChurchBurial(personId, date, Functions.ifNonNull(deathAge, Age::ofYears));
     }
 
 }

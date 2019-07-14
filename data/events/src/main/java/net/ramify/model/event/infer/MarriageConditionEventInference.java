@@ -2,7 +2,7 @@ package net.ramify.model.event.infer;
 
 import net.ramify.model.date.BeforeDate;
 import net.ramify.model.event.Event;
-import net.ramify.model.event.type.civil.GenericMarriage;
+import net.ramify.model.event.type.marriage.GenericMarriage;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.record.Record;
 

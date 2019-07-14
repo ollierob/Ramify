@@ -5,7 +5,7 @@ import com.google.common.collect.Multimap;
 import net.ramify.model.date.BeforeDate;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.infer.MarriageConditionEventInference;
-import net.ramify.model.event.type.civil.GenericDeath;
+import net.ramify.model.event.type.death.GenericDeath;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.record.Record;
 import net.ramify.model.relationship.Relationship;

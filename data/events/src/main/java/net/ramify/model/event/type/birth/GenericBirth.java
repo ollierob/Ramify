@@ -1,4 +1,4 @@
-package net.ramify.model.event.type.civil;
+package net.ramify.model.event.type.birth;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.AbstractEvent;

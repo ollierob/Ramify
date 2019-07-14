@@ -1,7 +1,8 @@
-package net.ramify.model.event.type;
+package net.ramify.model.event.type.marriage;
 
-import net.ramify.model.event.Event;
 import net.ramify.model.event.proto.EventProto;
+import net.ramify.model.event.type.EventHandler;
+import net.ramify.model.event.type.LifeEvent;
 
 import javax.annotation.Nonnull;
 

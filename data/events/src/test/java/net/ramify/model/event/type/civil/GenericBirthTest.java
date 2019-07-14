@@ -1,6 +1,7 @@
 package net.ramify.model.event.type.civil;
 
 import net.ramify.model.date.DateRange;
+import net.ramify.model.event.type.birth.GenericBirth;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.PlaceId;

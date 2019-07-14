@@ -4,7 +4,7 @@ import com.google.common.collect.Sets;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.Event;
-import net.ramify.model.event.type.civil.GenericBirth;
+import net.ramify.model.event.type.birth.GenericBirth;
 import net.ramify.model.event.type.residence.GenericResidence;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyOfUnknownRelationships;

@@ -1,7 +1,7 @@
 package net.ramify.model.record.civil.uk;
 
 import net.ramify.model.event.Event;
-import net.ramify.model.event.type.civil.GenericBirth;
+import net.ramify.model.event.type.birth.GenericBirth;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
