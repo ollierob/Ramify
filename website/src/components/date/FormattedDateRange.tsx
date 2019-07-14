@@ -1,7 +1,7 @@
 import * as React from "react";
-import {Date as DateProto, DateRange as DateRangeProto} from "../../protobuf/generated/date_pb";
+import {DateRange as DateRangeProto} from "../../protobuf/generated/date_pb";
 import {DateFormatter, DayMonthYearFormatter, MonthYearFormatter, YearFormatter} from "./DateFormatter";
-import {daysEqual, yearEquals} from "./DateRange";
+import {datesEqual, yearEquals} from "./DateRange";
 
 export const FormattedYearRange = (props: {date: DateRangeProto.AsObject, words?: PrefixWords}) => <FormattedDateRange {...props} accuracy="year"/>;
 
@@ -14,7 +14,7 @@ export const FormattedDateRange = (props: {date: DateRangeProto.AsObject, words?
     if (date.earliest && !date.latest) return <>{words.after} {format(date.earliest)}</>;
     if (!date.earliest && date.latest) return <>by {format(date.latest)}</>;
     if (props.accuracy == "year" && yearEquals(date.earliest, date.latest)) return <>{words.in}{format(date.earliest)}</>;
-    if (props.accuracy == "day" && daysEqual(date.earliest, date.latest)) return <>{words.on}{format(date.earliest)}</>;
+    if (datesEqual(date.earliest, date.latest)) return <>{words.on}{format(date.earliest)}</>;
     return <>{format(date.earliest)} - {format(date.latest)}</>;
 };
 
