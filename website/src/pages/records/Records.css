@@ -49,3 +49,7 @@
     padding: 8px;
     font-size: 18px;
 }
+
+.ant-table td.image {
+    width: 30px !important;
+}

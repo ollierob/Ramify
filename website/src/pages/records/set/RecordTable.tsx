@@ -1,14 +1,11 @@
 import * as React from "react";
 import {Record, RecordSet} from "../../../protobuf/generated/record_pb";
-import {Button, Icon, Table} from "antd";
+import {Table} from "antd";
 import {RecordPaginationHandler} from "../../../components/records/RecordPaginationHandler";
-import {ColumnProps} from "antd/es/table";
 import {Person} from "../../../protobuf/generated/person_pb";
-import {nameToString} from "../../../components/people/Name";
 import {Event} from "../../../protobuf/generated/event_pb";
 import {isBirthEvent, isBurialEvent, isDeathEvent, isResidenceEvent} from "../../../components/event/Event";
-import {FormattedDateRange, FormattedYearRange} from "../../../components/date/FormattedDateRange";
-import {PlaceContextMenu} from "../../../components/places/PlaceContextMenu";
+import {determineColumns, RecordColumn} from "./RecordTableColumns";
 
 type Props = Partial<RecordPaginationHandler> & {
     recordSet: RecordSet.AsObject;
@@ -21,7 +18,7 @@ type State = {
     columns: RecordColumn[]
 }
 
-type IndividualRecord = {
+export type IndividualRecord = {
     person: Person.AsObject;
     birth?: Event.AsObject;
     residence?: Event.AsObject;
@@ -36,7 +33,7 @@ export class RecordTable extends React.PureComponent<Props, State> {
         super(props);
         const properties = {};
         const data = buildIndividualRecords(props.records, properties);
-        const columns = determineColumns(properties);
+        const columns = determineColumns(props.recordSet, properties);
         this.state = {data, columns};
     }
 
@@ -57,14 +54,14 @@ export class RecordTable extends React.PureComponent<Props, State> {
         if (this.props.records != prevProps.records) {
             const properties = {};
             const data = buildIndividualRecords(this.props.records, properties);
-            const columns = determineColumns(properties);
+            const columns = determineColumns(this.props.recordSet, properties);
             this.setState({data, columns});
         }
     }
 
 }
 
-type RecordProperties = {
+export type RecordProperties = {
     hasBirth?: boolean;
     hasResidence?: boolean;
     hasDeath?: boolean;
@@ -94,75 +91,3 @@ function createRecord(person: Person.AsObject): IndividualRecord {
     record.burial = person.eventsList.find(isBurialEvent);
     return record;
 }
-
-function determineColumns(properties: RecordProperties): RecordColumn[] {
-    const columns = [ImageColumn, NameColumn];
-    if (properties.hasBirth) columns.push(BirthYearColumn);
-    if (properties.hasResidence && !properties.hasDeath && !properties.hasBurial) columns.push(ResidenceYearColumn);
-    if (properties.hasResidence) columns.push(ResidencePlaceColumn);
-    if (properties.hasDeath) columns.push(DeathDateColumn);
-    if (properties.hasBurial) columns.push(BurialDateColumn);
-    columns.push(NotesColumn);
-    return columns;
-}
-
-type RecordColumn = ColumnProps<IndividualRecord>;
-
-const ImageColumn: RecordColumn = {
-    key: "image",
-    dataIndex: "image",
-    render: t => <Button disabled={!t} title={t ? "View source image" : "No source image available"}><Icon type="file-image"/></Button>,
-    width: 30,
-};
-
-const NameColumn: RecordColumn = {
-    key: "name",
-    title: "Name",
-    dataIndex: "person.name.surname",
-    render: (t, r) => nameToString(r.person.name),
-    width: 200,
-};
-
-const NotesColumn: RecordColumn = {
-    key: "notes",
-    title: "Notes",
-    dataIndex: "person.notes"
-};
-
-const BirthYearColumn: RecordColumn = {
-    key: "birthDate",
-    title: "Birth date",
-    dataIndex: "birth.date",
-    render: (t, r) => r.birth && <FormattedYearRange date={r.birth.date}/>,
-    width: 120
-};
-
-const ResidenceYearColumn: RecordColumn = {
-    key: "residenceDate",
-    title: "Residence date",
-    render: (t, r) => r.residence && <FormattedYearRange date={r.residence.date}/>,
-    width: 120
-};
-
-const ResidencePlaceColumn: RecordColumn = {
-    key: "residencePlace",
-    title: "Residence",
-    render: (t, r) => r.residence && <PlaceContextMenu place={r.residence.place}/>,
-    width: 120
-};
-
-const DeathDateColumn: RecordColumn = {
-    key: "deathDate",
-    title: "Death date",
-    dataIndex: "death.date",
-    render: (t, r) => r.death && <FormattedDateRange date={r.death.date} accuracy="day"/>,
-    width: 120
-};
-
-const BurialDateColumn: RecordColumn = {
-    key: "burialDate",
-    title: "Burial date",
-    dataIndex: "burial.date",
-    render: (t, r) => r.burial && <FormattedDateRange date={r.burial.date} accuracy="day"/>,
-    width: 120
-};
