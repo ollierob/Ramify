@@ -20,6 +20,7 @@
         <d:betweenYears start="1813" end="1898"/>
 
         <burialRecords>
+            <churchBurial year="1813" month="1" day="20" name="Sally Jackson" age="12" gender="female" residence="town:hebden_bridge"/>
             <churchBurial year="1814" month="1" day="17" name="Jonathan Robertshaw" age="73" gender="male" residence="hamlet:widdop"/>
             <churchBurial year="1814" month="2" day="3" name="Martha Robertshaw" age="73" gender="male" residence="hamlet:widdop" notes="Widow"/>
         </burialRecords>

@@ -79,7 +79,7 @@ const ResidencePlaceColumn: RecordColumn = {
     key: "residencePlace",
     title: "Residence",
     render: (t, r) => r.residence && <PlaceContextMenu place={r.residence.place}/>,
-    width: 120
+    width: 200
 };
 
 const DeathDateColumn: RecordColumn = {
