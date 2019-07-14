@@ -132,6 +132,10 @@
                                 </fileSet>
                                 <fileSet>
                                     <sourceFile>src/main/resources/xml/schema/schema4.xsd</sourceFile>
+                                    <destinationFile>src/main/resources/xml/schema/families.xsd</destinationFile>
+                                </fileSet>
+                                <fileSet>
+                                    <sourceFile>src/main/resources/xml/schema/schema5.xsd</sourceFile>
                                     <destinationFile>src/main/resources/xml/schema/dates.xsd</destinationFile>
                                 </fileSet>
                             </fileSets>

@@ -13,10 +13,10 @@ import java.util.Set;
 
 public class GenericRecordPerson extends AbstractPerson {
 
-    private final Set<Event> events;
+    private final Set<? extends Event> events;
     private final String notes;
 
-    public GenericRecordPerson(final PersonId id, final Name name, final Gender gender, final Set<Event> events, final String notes) {
+    public GenericRecordPerson(final PersonId id, final Name name, final Gender gender, final Set<? extends Event> events, final String notes) {
         super(id, name, gender);
         this.events = events;
         this.notes = notes;

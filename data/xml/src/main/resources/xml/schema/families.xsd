@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:tns="http://ramify.net/families"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://ramify.net/families"
+        version="1.0">
+
+    <element name="father" type="tns:xmlFather"/>
+
+    <complexType name="xmlFamily">
+
+        <sequence/>
+
+    </complexType>
+
+    <complexType name="xmlFather">
+
+        <complexContent>
+
+            <extension base="tns:xmlRelationship">
+
+                <sequence/>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
+    <complexType abstract="true" name="xmlRelationship">
+
+        <sequence/>
+
+        <attribute name="name" type="xs:string"/>
+
+    </complexType>
+
+</schema>
