@@ -19,6 +19,7 @@
         <module>application</module>
         <module>rest</module>
         <module>authentication</module>
+        <module>xml</module>
     </modules>
 
     <properties>

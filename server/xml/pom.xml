@@ -68,7 +68,7 @@
                         <phase>package</phase>
                         <configuration>
                             <createJavaDocAnnotations>false</createJavaDocAnnotations>
-                            <outputDirectory>${xml.schema.dir}</outputDirectory>
+                            <outputDirectory>src/main/resources/xml/schema</outputDirectory>
                             <transformSchemas>
                                 <transformSchema>
                                     <uri>http://ramify.net/places</uri>
