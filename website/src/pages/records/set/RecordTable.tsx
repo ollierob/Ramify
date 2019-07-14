@@ -40,7 +40,7 @@ export class RecordTable extends React.PureComponent<Props, State> {
     render() {
 
         const data = this.state.data;
-        if (!data || !data.length) return <>No records found.</>;
+        if (!data || !data.length) return <div className="noData">No records found.</div>;
 
         return <Table
             loading={this.props.loading}

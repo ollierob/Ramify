@@ -43,3 +43,9 @@
 .records.ant-tabs .ant-table-wrapper {
     margin-top: -16px;
 }
+
+.records.ant-tabs .noData {
+    margin-top: -16px;
+    padding: 8px;
+    font-size: 18px;
+}
