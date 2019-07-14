@@ -118,8 +118,6 @@
 
                 <sequence/>
 
-                <attribute name="notes" type="xs:string"/>
-
             </extension>
 
         </complexContent>
@@ -218,25 +216,25 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="birth"/>
+            <enumeration value="residence"/>
+
+            <enumeration value="burial"/>
+
+            <enumeration value="mixed"/>
+
+            <enumeration value="payment"/>
+
+            <enumeration value="baptism"/>
+
+            <enumeration value="census"/>
 
             <enumeration value="marriage"/>
+
+            <enumeration value="birth"/>
 
             <enumeration value="membership"/>
 
             <enumeration value="death"/>
-
-            <enumeration value="census"/>
-
-            <enumeration value="burial"/>
-
-            <enumeration value="baptism"/>
-
-            <enumeration value="mixed"/>
-
-            <enumeration value="residence"/>
-
-            <enumeration value="payment"/>
 
         </restriction>
 

@@ -12,16 +12,12 @@ import net.ramify.model.record.residence.SinglePersonResidenceRecord;
 import net.ramify.model.record.type.ResidenceRecord;
 import net.ramify.model.record.xml.record.XmlRecord;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collections;
 import java.util.Set;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "residence")
 public class XmlResidenceRecord extends XmlRecord {
-
-    @XmlAttribute(name = "notes", required = false)
-    private String notes;
 
     public ResidenceRecord build(final NameParser nameParser, final Place place, final DateRange date) {
         final var id = this.recordId();
@@ -34,6 +30,7 @@ public class XmlResidenceRecord extends XmlRecord {
         final var name = this.name(nameParser);
         final var gender = this.gender();
         final var events = this.events(id, place, date);
+        final var notes = this.notes();
         return new GenericRecordPerson(id, name, gender, events, notes);
     }
 
