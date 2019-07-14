@@ -29,13 +29,18 @@ public class DefaultRecordSetResource implements RecordSetResource {
     @Nonnull
     @Override
     public RecordSets recordSets(
+            @CheckForNull final String name,
             @CheckForNull final PlaceId withinPlace,
             @CheckForNull final DateRange withinDate,
             final int limit) {
         Predicate<RecordSet> predicate = r -> true;
+        if (name != null) {
+            final var l = name.toLowerCase();
+            predicate = r -> r.title().toLowerCase().contains(l);
+        }
         if (withinPlace != null) {
             final var place = places.require(withinPlace);
-            predicate = r -> place.isParentOf(r.resolvePlace(places));
+            predicate = predicate.and(r -> place.isParentOf(r.resolvePlace(places)));
         }
         if (withinDate != null) {
             predicate = predicate.and(r -> r.date().intersects(withinDate));

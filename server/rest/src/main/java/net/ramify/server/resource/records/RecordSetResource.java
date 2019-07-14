@@ -25,6 +25,7 @@ public interface RecordSetResource extends Resource {
     @Nonnull
     @GET
     RecordSets recordSets(
+            @QueryParam("name") String name,
             @QueryParam("place") PlaceId withinPlace,
             @QueryParam("date") DateRange withinDate,
             @QueryParam("limit") @DefaultValue("20") int limit);

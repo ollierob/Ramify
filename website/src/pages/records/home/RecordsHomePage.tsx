@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Button, Card, Cascader, Input} from "antd";
+import {Button, Card, Cascader, Form, Input} from "antd";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {Place} from "../../../protobuf/generated/place_pb";
 import {Flag} from "../../../components/images/Flag";
@@ -10,6 +10,7 @@ import {YearRange} from "../../../components/date/DateRange";
 import {RecordSet} from "../../../protobuf/generated/record_pb";
 import RecordSetTable from "./RecordSetTable";
 import {DEFAULT_RECORD_LOADER} from "../../../components/records/RecordLoader";
+import {FormEvent} from "react";
 
 type Props = {}
 
@@ -18,7 +19,8 @@ type State = {
     regions: CascaderOptionType[];
     selectedRange: string[];
     ranges: CascaderOptionType[];
-    recordSets: AsyncData<ReadonlyArray<RecordSet.AsObject>>
+    recordSets: AsyncData<ReadonlyArray<RecordSet.AsObject>>;
+    recordName?: string;
 }
 
 export default class RecordsHomePage extends React.PureComponent<Props, State> {
@@ -47,49 +49,56 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
             className="records large"
             title={<>Records</>}>
 
-            <div className="search">
-                Search by record name:
-                <br/>
-                <Input
-                    disabled
-                    size="large"/>
-            </div>
+            <Form layout="inline" onSubmit={this.doSearch}>
 
-            <div className="filter">
-                Filter by record place:
-                <br/>
-                <Cascader
-                    placeholder="Matching all countries"
-                    size="large"
-                    changeOnSelect
-                    value={this.state.selectedRegion}
-                    onChange={selectedRegion => this.setState({selectedRegion})}
-                    options={this.state.regions}
-                    loadData={this.loadLeafPlace}
-                    displayRender={this.renderPlace}/>
-            </div>
+                <Form.Item className="search">
+                    Search by record name:
+                    <br/>
+                    <Input
+                        placeholder="Matching all record names"
+                        size="large"
+                        value={this.state.recordName}
+                        onChange={e => this.setState({recordName: e.target.value})}/>
+                </Form.Item>
 
-            <div className="filter">
-                Filter by record date:
-                <br/>
-                <Cascader
-                    placeholder="Matching all dates"
-                    size="large"
-                    changeOnSelect
-                    value={this.state.selectedRange}
-                    onChange={selectedRange => this.setState({selectedRange})}
-                    options={this.state.ranges}
-                    displayRender={this.renderRange}/>
-            </div>
+                <Form.Item className="filter">
+                    Filter by record place:
+                    <br/>
+                    <Cascader
+                        placeholder="Matching all places"
+                        size="large"
+                        changeOnSelect
+                        value={this.state.selectedRegion}
+                        onChange={selectedRegion => this.setState({selectedRegion})}
+                        options={this.state.regions}
+                        loadData={this.loadLeafPlace}
+                        displayRender={this.renderPlace}/>
+                </Form.Item>
 
-            <div className="filter">
-                <Button
-                    size="large"
-                    onClick={this.doSearch}
-                    disabled={this.state.recordSets.loading}>
-                    Load records
-                </Button>
-            </div>
+                <Form.Item className="filter">
+                    Filter by record date:
+                    <br/>
+                    <Cascader
+                        placeholder="Matching all dates"
+                        size="large"
+                        changeOnSelect
+                        value={this.state.selectedRange}
+                        onChange={selectedRange => this.setState({selectedRange})}
+                        options={this.state.ranges}
+                        displayRender={this.renderRange}/>
+                </Form.Item>
+
+                <Form.Item className="filter">
+                    <br/>
+                    <Button
+                        htmlType="submit"
+                        size="large"
+                        disabled={this.state.recordSets.loading}>
+                        Load records
+                    </Button>
+                </Form.Item>
+
+            </Form>
 
             <div className="table">
                 <RecordSetTable
@@ -131,9 +140,11 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
         }
     }
 
-    private doSearch() {
+    private doSearch(e: FormEvent<HTMLFormElement>) {
+        e.preventDefault();
         const options = {
-            place: this.state.selectedRegion.length ? this.state.selectedRegion[this.state.selectedRegion.length - 1] : null
+            place: this.state.selectedRegion.length ? this.state.selectedRegion[this.state.selectedRegion.length - 1] : null,
+            name: this.state.recordName,
         };
         asyncLoadData(options, this.recordLoader.loadRecordSets, recordSets => this.setState({recordSets}));
     }
