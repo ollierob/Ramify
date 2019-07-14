@@ -1,5 +1,6 @@
 package net.ramify.model.record.xml.record.burial;
 
+import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlExactDate;
 import net.ramify.model.family.Family;
 import net.ramify.model.person.name.NameParser;
@@ -24,7 +25,7 @@ public class XmlBurialRecord extends XmlRecord {
     @XmlAttribute(name = "residence", required = false)
     private String residence;
 
-    @XmlElement(name = "date", required = true)
+    @XmlElement(name = "date", required = true, namespace = XmlDateRange.NAMESPACE)
     private XmlExactDate burialDate;
 
     public BurialRecord build(final NameParser nameParser, final PlaceId placeId) {

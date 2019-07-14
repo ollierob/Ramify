@@ -21,7 +21,7 @@
 
         <burialRecords>
             <churchBurial name="Jonathan Robertshaw" gender="male">
-                <date year="1814" month="1" dayOfMonth="17"/>
+                <d:date year="1814" month="1" dayOfMonth="17"/>
             </churchBurial>
         </burialRecords>
 

@@ -159,13 +159,15 @@
 
                 <sequence>
 
-                    <element name="date" type="ns1:xmlExactDate"/>
+                    <element ref="ns1:date"/>
 
                 </sequence>
 
                 <attribute name="age" type="xs:int"/>
 
                 <attribute name="notes" type="xs:string"/>
+
+                <attribute name="residence" type="xs:string"/>
 
             </extension>
 
@@ -187,9 +189,9 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="government"/>
-
             <enumeration value="church"/>
+
+            <enumeration value="government"/>
 
         </restriction>
 
@@ -199,25 +201,25 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="burial"/>
-
-            <enumeration value="marriage"/>
-
-            <enumeration value="payment"/>
-
-            <enumeration value="mixed"/>
+            <enumeration value="census"/>
 
             <enumeration value="birth"/>
 
-            <enumeration value="residence"/>
+            <enumeration value="death"/>
 
-            <enumeration value="census"/>
+            <enumeration value="payment"/>
+
+            <enumeration value="baptism"/>
+
+            <enumeration value="burial"/>
 
             <enumeration value="membership"/>
 
-            <enumeration value="death"/>
+            <enumeration value="residence"/>
 
-            <enumeration value="baptism"/>
+            <enumeration value="marriage"/>
+
+            <enumeration value="mixed"/>
 
         </restriction>
 
