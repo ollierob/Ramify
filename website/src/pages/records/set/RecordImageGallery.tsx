@@ -1,10 +1,12 @@
 import * as React from "react";
 import {DEFAULT_RECORD_LOADER} from "../../../components/records/RecordLoader";
-import {RecordImageList, RecordSet} from "../../../protobuf/generated/record_pb";
+import {RecordImage, RecordImageList, RecordSet} from "../../../protobuf/generated/record_pb";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {RecordSetId} from "../../../components/records/RecordSet";
 import {Loading} from "../../../components/style/Loading";
 import {NoData} from "../../../components/style/NoData";
+import ImageGallery, {ReactImageGalleryItem} from 'react-image-gallery';
+import "react-image-gallery/styles/css/image-gallery.css";
 
 type Props = {
     recordSet: RecordSet.AsObject;
@@ -28,11 +30,15 @@ export default class RecordImageGallery extends React.PureComponent<Props, State
     render() {
 
         if (this.state.images.loading) return <Loading/>;
-        if (!this.state.images.data) return <NoData/>;
+
+        const data = this.state.images.data;
+        if (!data) return <NoData/>;
 
         return <>
 
-            {this.state.images.data.imageList.map(i => i.id).join(",")}
+            <ImageGallery
+                thumbnailPosition="top"
+                items={data.imageList.map(i => toImage(data.basepath, i))}/>
 
         </>;
 
@@ -53,4 +59,11 @@ export default class RecordImageGallery extends React.PureComponent<Props, State
         asyncLoadData(id, this.recordLoader.loadRecordImages, images => this.setState({images}));
     }
 
+}
+
+function toImage(basePath: string, image: RecordImage.AsObject): ReactImageGalleryItem {
+    return {
+        original: basePath + "/" + image.filename,
+        thumbnail: basePath + "/" + (image.thumbnail || image.filename)
+    };
 }

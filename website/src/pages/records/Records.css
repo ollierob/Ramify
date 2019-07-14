@@ -54,3 +54,13 @@
     padding: 16px 0 16px 16px;
     width: 30px !important;
 }
+
+.image-gallery-slides .image-gallery-image {
+    text-align: center !important;
+    background-color: black;
+}
+
+.image-gallery-slides .image-gallery-slide img {
+    height: 100% !important;
+    width: unset !important;
+}

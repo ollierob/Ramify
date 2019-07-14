@@ -7,7 +7,7 @@
     "antd": "^3.20.2",
     "google-protobuf": "^3.9.0",
     "leaflet": "^1.5.1",
-    "react-images": "^1.0.0",
+    "react-image-gallery": "^0.8.18",
     "react-leaflet": "^2.4.0",
     "react-markdown": "^4.1.0",
     "react-router-dom": "^5.0.1"
@@ -17,7 +17,7 @@
     "@types/node": "^12.6.2",
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
-    "@types/react-images": "^0.5.1",
+    "@types/react-image-gallery": "^0.8.3",
     "@types/react-leaflet": "^2.2.1",
     "@types/react-router-dom": "^4.3.4",
     "awesome-typescript-loader": "^5.2.1",
