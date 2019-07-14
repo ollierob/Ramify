@@ -5,25 +5,36 @@ import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.family.SinglePersonFamily;
+import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.civil.AbstractCivilRecord;
+import net.ramify.model.record.type.DeathRecord;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 
-public class GeneralRegisterDeath extends AbstractCivilRecord implements GeneralRegisterRecord {
+public class GeneralRegisterDeath extends AbstractCivilRecord implements GeneralRegisterRecord, DeathRecord {
 
+    private final PlaceId deathPlace;
     private final GeneralRegisterRecordDeathEntry deceased;
     private final GeneralRegisterRecordDeathInformant informant;
 
     public GeneralRegisterDeath(
             final RecordId id,
+            final PlaceId deathPlace,
             final ExactDate deathDate,
             @Nonnull final GeneralRegisterRecordDeathEntry deceased,
             @CheckForNull final GeneralRegisterRecordDeathInformant informant) {
         super(id, deathDate);
+        this.deathPlace = deathPlace;
         this.deceased = deceased;
         this.informant = informant;
+    }
+
+    @Nonnull
+    @Override
+    public PlaceId placeId() {
+        return deathPlace;
     }
 
     @Nonnull

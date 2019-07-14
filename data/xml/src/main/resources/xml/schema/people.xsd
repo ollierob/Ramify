@@ -14,9 +14,9 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="female"/>
-
             <enumeration value="male"/>
+
+            <enumeration value="female"/>
 
             <enumeration value="unknown"/>
 

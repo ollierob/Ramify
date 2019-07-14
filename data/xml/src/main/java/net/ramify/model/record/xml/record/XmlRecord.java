@@ -1,7 +1,9 @@
 package net.ramify.model.record.xml.record;
 
+import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.name.Name;
 import net.ramify.model.person.name.NameParser;
+import net.ramify.model.person.xml.XmlGender;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.xml.record.residence.XmlResidenceRecord;
 
@@ -18,6 +20,9 @@ public abstract class XmlRecord {
     @XmlAttribute(name = "name", required = false)
     private String name;
 
+    @XmlAttribute(name = "gender", required = true)
+    private XmlGender gender;
+
     @Nonnull
     protected Name name(final NameParser parser) {
         if (name != null) return parser.parse(name);
@@ -26,6 +31,10 @@ public abstract class XmlRecord {
 
     protected RecordId recordId() {
         return new RecordId(UUID.randomUUID().toString()); //FIXME
+    }
+
+    protected Gender gender() {
+        return gender.gender();
     }
 
 }

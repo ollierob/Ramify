@@ -9,12 +9,13 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.GenericRecordEntry;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.civil.AbstractCivilRecord;
+import net.ramify.model.record.type.BirthRecord;
 import net.ramify.model.relationship.type.ChildParent;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
 
-public class GeneralRegisterBirth extends AbstractCivilRecord implements GeneralRegisterRecord {
+public class GeneralRegisterBirth extends AbstractCivilRecord implements GeneralRegisterRecord, BirthRecord {
 
     private final GenericRecordEntry father;
     private final GenericRecordEntry mother;
@@ -64,4 +65,11 @@ public class GeneralRegisterBirth extends AbstractCivilRecord implements General
     protected EventProto.RecordType protoType() {
         return EventProto.RecordType.BIRTH;
     }
+
+    @Nonnull
+    @Override
+    public PlaceId placeId() {
+        return this.birthPlace();
+    }
+
 }

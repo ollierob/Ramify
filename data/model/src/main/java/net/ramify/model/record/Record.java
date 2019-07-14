@@ -6,11 +6,14 @@ import net.ramify.model.date.HasDate;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.collection.HasFamilies;
 import net.ramify.model.record.proto.RecordProto;
+import net.ramify.model.record.type.RecordHandler;
 import net.ramify.utils.objects.Castable;
 
 import javax.annotation.Nonnull;
 
 public interface Record extends HasRecordId, HasDate, HasFamilies, Castable<Record>, BuildsProto<RecordProto.Record> {
+
+    <R> R handleWith(@Nonnull RecordHandler<R> handler);
 
     @Nonnull
     default RecordProto.Record.Builder toProtoBuilder() {

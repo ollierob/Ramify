@@ -5,7 +5,7 @@ import net.ramify.model.record.SingleFamilyRecord;
 
 import javax.annotation.Nonnull;
 
-public interface ResidenceRecord extends SingleFamilyRecord, HasPlaceId {
+public interface BurialRecord extends SingleFamilyRecord, HasPlaceId {
 
     @Override
     default <R> R handleWith(@Nonnull RecordHandler<R> handler) {

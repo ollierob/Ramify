@@ -8,13 +8,14 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.GenericRecordEntry;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.civil.AbstractCivilRecord;
+import net.ramify.model.record.type.MarriageRecord;
 import net.ramify.model.relationship.type.ChildParent;
 import net.ramify.model.relationship.type.Married;
 import net.ramify.model.relationship.type.Unknown;
 
 import javax.annotation.Nonnull;
 
-public class GeneralRegisterMarriage extends AbstractCivilRecord implements GeneralRegisterRecord {
+public class GeneralRegisterMarriage extends AbstractCivilRecord implements GeneralRegisterRecord, MarriageRecord {
 
     private final PlaceId marriagePlace;
     private final GenericRecordEntry groom;
@@ -42,6 +43,12 @@ public class GeneralRegisterMarriage extends AbstractCivilRecord implements Gene
         this.brideFather = brideFather;
         this.firstWitness = firstWitness;
         this.secondWitness = secondWitness;
+    }
+
+    @Nonnull
+    @Override
+    public PlaceId placeId() {
+        return marriagePlace;
     }
 
     @Nonnull

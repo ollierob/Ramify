@@ -5,15 +5,15 @@ import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.family.Family;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.RecordId;
-import net.ramify.model.record.type.BaptismRecord;
+import net.ramify.model.record.type.BurialRecord;
 
 import javax.annotation.Nonnull;
 
-public class ChurchBaptismRecord extends AbstractChurchRecord implements BaptismRecord {
+public class ChurchBurialRecord extends AbstractChurchRecord implements BurialRecord {
 
     private final Family family;
 
-    public ChurchBaptismRecord(
+    public ChurchBurialRecord(
             final RecordId id,
             final ExactDate date,
             final PlaceId church,

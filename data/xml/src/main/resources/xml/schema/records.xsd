@@ -11,6 +11,10 @@
 
     <import namespace="http://ramify.net/people" schemaLocation="people.xsd"/>
 
+    <element name="burialRecords" type="tns:xmlBurialRecords"/>
+
+    <element name="churchBurial" type="tns:xmlBurialRecord"/>
+
     <element name="recordSet" type="tns:xmlRecordSet"/>
 
     <element name="recordSetReference" type="tns:xmlRecordSetReference"/>
@@ -39,7 +43,13 @@
 
             <element maxOccurs="unbounded" minOccurs="0" ref="tns:recordSet"/>
 
-            <element maxOccurs="unbounded" minOccurs="0" ref="tns:residenceRecords"/>
+            <choice maxOccurs="unbounded" minOccurs="0">
+
+                <element ref="tns:residenceRecords"/>
+
+                <element ref="tns:burialRecords"/>
+
+            </choice>
 
         </sequence>
 
@@ -105,8 +115,6 @@
 
                 <sequence/>
 
-                <attribute name="gender" type="ns2:xmlGender" use="required"/>
-
                 <attribute name="notes" type="xs:string"/>
 
             </extension>
@@ -120,6 +128,48 @@
         <sequence/>
 
         <attribute name="name" type="xs:string"/>
+
+        <attribute name="gender" type="ns2:xmlGender" use="required"/>
+
+    </complexType>
+
+    <complexType name="xmlBurialRecords">
+
+        <complexContent>
+
+            <extension base="tns:xmlRecords">
+
+                <sequence>
+
+                    <element maxOccurs="unbounded" minOccurs="0" ref="tns:churchBurial"/>
+
+                </sequence>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
+    <complexType name="xmlBurialRecord">
+
+        <complexContent>
+
+            <extension base="tns:xmlRecord">
+
+                <sequence>
+
+                    <element name="date" type="ns1:xmlExactDate"/>
+
+                </sequence>
+
+                <attribute name="age" type="xs:int"/>
+
+                <attribute name="notes" type="xs:string"/>
+
+            </extension>
+
+        </complexContent>
 
     </complexType>
 
@@ -149,25 +199,25 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="baptism"/>
-
-            <enumeration value="membership"/>
-
             <enumeration value="burial"/>
-
-            <enumeration value="residence"/>
 
             <enumeration value="marriage"/>
 
+            <enumeration value="payment"/>
+
             <enumeration value="mixed"/>
+
+            <enumeration value="birth"/>
+
+            <enumeration value="residence"/>
 
             <enumeration value="census"/>
 
+            <enumeration value="membership"/>
+
             <enumeration value="death"/>
 
-            <enumeration value="payment"/>
-
-            <enumeration value="birth"/>
+            <enumeration value="baptism"/>
 
         </restriction>
 

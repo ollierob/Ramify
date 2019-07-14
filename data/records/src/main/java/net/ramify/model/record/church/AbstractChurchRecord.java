@@ -1,11 +1,12 @@
 package net.ramify.model.record.church;
 
 import net.ramify.model.date.ExactDate;
+import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.ExactDateRecord;
 import net.ramify.model.record.RecordId;
 
-public abstract class AbstractChurchRecord extends ExactDateRecord {
+public abstract class AbstractChurchRecord extends ExactDateRecord implements HasPlaceId {
 
     private final PlaceId church;
 
@@ -17,7 +18,8 @@ public abstract class AbstractChurchRecord extends ExactDateRecord {
         this.church = church;
     }
 
-    PlaceId church() {
+    @Override
+    public PlaceId placeId() {
         return church;
     }
 

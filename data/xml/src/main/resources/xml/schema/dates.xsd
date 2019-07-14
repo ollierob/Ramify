@@ -21,6 +21,8 @@
 
     <element name="xmlBetweenYears" type="tns:xmlBetweenYears"/>
 
+    <element name="xmlExactDate" type="tns:xmlExactDate"/>
+
     <element name="xmlInYear" type="tns:xmlInYear"/>
 
     <complexType name="xmlBeforeDate">
@@ -54,6 +56,26 @@
                 <sequence/>
 
                 <attribute name="year" type="xs:int" use="required"/>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
+    <complexType name="xmlExactDate">
+
+        <complexContent>
+
+            <extension base="tns:xmlDateRange">
+
+                <sequence/>
+
+                <attribute name="year" type="xs:int" use="required"/>
+
+                <attribute name="month" type="xs:int" use="required"/>
+
+                <attribute name="dayOfMonth" type="xs:int" use="required"/>
 
             </extension>
 

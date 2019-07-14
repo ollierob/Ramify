@@ -5,10 +5,10 @@ import net.ramify.model.record.SingleFamilyRecord;
 
 import javax.annotation.Nonnull;
 
-public interface ResidenceRecord extends SingleFamilyRecord, HasPlaceId {
+public interface MarriageRecord extends SingleFamilyRecord, HasPlaceId {
 
     @Override
-    default <R> R handleWith(@Nonnull RecordHandler<R> handler) {
+    default <R> R handleWith(@Nonnull final RecordHandler<R> handler) {
         return handler.handle(this);
     }
 
