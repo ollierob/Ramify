@@ -1,7 +1,7 @@
 import * as React from "react";
 import {CSSProperties} from "react";
 import {Record, RecordSet} from "../../../protobuf/generated/record_pb";
-import {Card} from "antd";
+import {Card, Icon} from "antd";
 import {recordSetHref} from "../RecordLinks";
 import {RecordCards} from "../../../components/records/RecordCards";
 import {NameAgeSearch} from "../../../components/search/NameAgeSearch";
@@ -64,7 +64,7 @@ const Description = (props: {record: RecordSet.AsObject}) => {
 const PartOf = (props: {parent: RecordSet.AsObject}) => {
     if (!props.parent) return null;
     return <div className="parent" style={MarginBottom}>
-        Part of <a href={recordSetHref(props.parent)}>{props.parent.longtitle}</a>
+        <Icon type="up-square"/> Part of <a href={recordSetHref(props.parent)}>{props.parent.longtitle}</a>
     </div>;
 };
 

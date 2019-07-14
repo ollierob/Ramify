@@ -39,15 +39,6 @@
         </recordSet>
 
         <recordSet
-                id="heptonstall_st-thomas_burials"
-                title="Heptonstall St. Thomas Burials"
-                place="chapelry:heptonstall"
-                source="church"
-                type="burial">
-            <d:betweenYears start="1593" end="1898"/>
-        </recordSet>
-
-        <recordSet
                 id="heptonstall_st-thomas_pew_rents"
                 title="Heptonstall St. Thomas Pew Rentals"
                 shortTitle="Pew Rentals"
