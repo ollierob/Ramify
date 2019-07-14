@@ -10,10 +10,13 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("css")
 public class CssResource extends AbstractResource {
+
+    private static final MediaType MEDIA_TYPE = new MediaType("text", "css");
 
     @GET
     @Path("{file}")
@@ -25,7 +28,7 @@ public class CssResource extends AbstractResource {
         if (file.startsWith(".") || !file.endsWith(".css") || file.contains("/")) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        return this.readSessionResource(context.session(), "/css/" + file);
+        return this.readSessionResource(context.session(), "/css/" + file, MEDIA_TYPE);
     }
 
 }

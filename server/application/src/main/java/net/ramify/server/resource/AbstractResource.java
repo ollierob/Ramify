@@ -31,33 +31,33 @@ public abstract class AbstractResource implements Resource {
 
     protected Response readRouterResource(final UserSession session, final String bundleKey) {
         final var replacements = Collections.singletonMap("<!--%BUNDLEs%-->", bundleCache.computeIfAbsent(bundleKey, this::readBundles));
-        return this.readSessionResource(session, "/router.html", replacements);
+        return this.readSessionResource(session, "/router.html", replacements, MediaType.TEXT_HTML_TYPE);
     }
 
-    protected Response readSessionResource(final UserSession session, final String resource) {
-        return this.readSessionResource(session, resource, Collections.emptyMap());
+    protected Response readSessionResource(final UserSession session, final String resource, final MediaType mediaType) {
+        return this.readSessionResource(session, resource, Collections.emptyMap(), mediaType);
     }
 
-    protected Response readSessionResource(final UserSession session, final String resource, final Map<String, String> replacements) {
+    protected Response readSessionResource(final UserSession session, final String resource, final Map<String, String> replacements, final MediaType mediaType) {
         if (!session.permits(this)) {
             logger.warn("Session {} doesn't permit access to {} provided by {}, returning 404", session, resource, this);
             return notFound();
         }
-        return this.readOpenResource(resource, replacements);
+        return this.readOpenResource(resource, replacements, mediaType);
     }
 
-    private static Response notFound() {
+    protected static Response notFound() {
         return Response.status(404).build();
     }
 
-    private Response readOpenResource(final String resource, final Map<String, String> replacements) {
+    private Response readOpenResource(final String resource, final Map<String, String> replacements, final MediaType mediaType) {
         Preconditions.checkArgument(!resource.contains(".."));
         final var stream = this.getClass().getResourceAsStream(resource);
         if (stream == null) {
             logger.warn("Could not find resource {}", resource);
             return notFound();
         } else {
-            return Response.ok(performStreamReplacements(stream, replacements)).type(MediaType.TEXT_HTML).build();
+            return Response.ok(performStreamReplacements(stream, replacements)).type(mediaType).build();
         }
     }
 
@@ -79,9 +79,7 @@ public abstract class AbstractResource implements Resource {
     }
 
     private static InputStream performStreamReplacements(final InputStream in, final Map<String, String> replacements) {
-        if (replacements.isEmpty()) {
-            return in;
-        }
+        if (replacements.isEmpty()) return in;
         try {
             final var out = IOUtils.toString(in, Charset.defaultCharset());
             final var replaced = replacements.entrySet().stream().reduce(out, (current, replace) -> current.replace(replace.getKey(), replace.getValue()), String::concat);

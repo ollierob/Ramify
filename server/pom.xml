@@ -20,6 +20,7 @@
         <module>rest</module>
         <module>authentication</module>
         <module>xml</module>
+        <module>images</module>
     </modules>
 
     <properties>

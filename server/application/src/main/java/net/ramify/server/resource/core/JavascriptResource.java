@@ -11,9 +11,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.MediaType;
 
 @Path("js")
 public class JavascriptResource extends AbstractResource {
+
+    private static final MediaType MEDIA_TYPE = new MediaType("application", "javascript");
 
     @GET
     @Path("{file}")
@@ -25,7 +28,7 @@ public class JavascriptResource extends AbstractResource {
         if (file.startsWith(".") || !file.endsWith(".js") || file.contains("/")) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        return this.readSessionResource(context.session(), "/js/" + file);
+        return this.readSessionResource(context.session(), "/js/" + file, MEDIA_TYPE);
     }
 
 }
