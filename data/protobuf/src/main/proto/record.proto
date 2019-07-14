@@ -74,3 +74,18 @@ message RecordSearch {
     string recordId = 20;
 
 }
+
+message RecordImage {
+
+    string id = 1;
+    string filename = 2;
+    string thumbnail = 3;
+
+}
+
+message RecordImageList {
+
+    repeated RecordImage image = 1;
+    string basePath = 2;
+
+}

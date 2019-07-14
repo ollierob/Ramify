@@ -2,6 +2,7 @@ package net.ramify.server.resource.records;
 
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.Records;
+import net.ramify.model.record.image.RecordImages;
 import net.ramify.model.record.proto.RecordProto;
 import net.ramify.server.resource.RootResource;
 
@@ -35,5 +36,9 @@ public interface RecordsResource extends RootResource {
     @Consumes({APPLICATION_PROTOBUF})
     @Path("search")
     Records search(RecordProto.RecordSearch searchParameters);
+
+    @GET
+    @Path("images/{id}")
+    RecordImages images(@PathParam("id") RecordSetId id);
 
 }
