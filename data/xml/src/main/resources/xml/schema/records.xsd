@@ -80,6 +80,8 @@
 
         <attribute name="archive" type="xs:string" use="required"/>
 
+        <attribute name="link" type="xs:string"/>
+
     </complexType>
 
     <complexType abstract="true" name="xmlRecords">
@@ -204,9 +206,9 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="government"/>
-
             <enumeration value="church"/>
+
+            <enumeration value="government"/>
 
         </restriction>
 
@@ -216,25 +218,25 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="residence"/>
-
             <enumeration value="burial"/>
-
-            <enumeration value="mixed"/>
-
-            <enumeration value="payment"/>
-
-            <enumeration value="baptism"/>
-
-            <enumeration value="census"/>
-
-            <enumeration value="marriage"/>
-
-            <enumeration value="birth"/>
 
             <enumeration value="membership"/>
 
+            <enumeration value="payment"/>
+
+            <enumeration value="census"/>
+
+            <enumeration value="residence"/>
+
+            <enumeration value="birth"/>
+
+            <enumeration value="marriage"/>
+
+            <enumeration value="baptism"/>
+
             <enumeration value="death"/>
+
+            <enumeration value="mixed"/>
 
         </restriction>
 

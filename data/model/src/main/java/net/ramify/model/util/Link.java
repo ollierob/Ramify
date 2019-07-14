@@ -6,6 +6,7 @@ import net.ramify.model.util.proto.LinkProto;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import java.util.Objects;
 
 public interface Link extends BuildsProto<LinkProto.Link> {
 
@@ -26,6 +27,24 @@ public interface Link extends BuildsProto<LinkProto.Link> {
     @Override
     default LinkProto.Link toProto() {
         return this.toProtoBuilder().build();
+    }
+
+    static Link of(final String href, final String text) {
+        Objects.requireNonNull(href);
+        return new Link() {
+
+            @Nonnull
+            @Override
+            public String href() {
+                return href;
+            }
+
+            @CheckForNull
+            @Override
+            public String text() {
+                return text;
+            }
+        };
     }
 
 }
