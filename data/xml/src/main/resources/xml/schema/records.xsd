@@ -131,6 +131,8 @@
 
         <attribute name="gender" type="ns2:xmlGender" use="required"/>
 
+        <attribute name="notes" type="xs:string"/>
+
     </complexType>
 
     <complexType name="xmlBurialRecords">
@@ -159,15 +161,19 @@
 
                 <sequence>
 
-                    <element ref="ns1:date"/>
+                    <element minOccurs="0" ref="ns1:deathDate"/>
 
                 </sequence>
 
                 <attribute name="age" type="xs:int"/>
 
-                <attribute name="notes" type="xs:string"/>
-
                 <attribute name="residence" type="xs:string"/>
+
+                <attribute name="year" type="xs:int" use="required"/>
+
+                <attribute name="month" type="xs:int" use="required"/>
+
+                <attribute name="day" type="xs:int" use="required"/>
 
             </extension>
 
@@ -189,9 +195,9 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="church"/>
-
             <enumeration value="government"/>
+
+            <enumeration value="church"/>
 
         </restriction>
 
@@ -201,23 +207,23 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="census"/>
-
             <enumeration value="birth"/>
-
-            <enumeration value="death"/>
-
-            <enumeration value="payment"/>
-
-            <enumeration value="baptism"/>
-
-            <enumeration value="burial"/>
 
             <enumeration value="membership"/>
 
-            <enumeration value="residence"/>
+            <enumeration value="death"/>
 
             <enumeration value="marriage"/>
+
+            <enumeration value="census"/>
+
+            <enumeration value="payment"/>
+
+            <enumeration value="burial"/>
+
+            <enumeration value="baptism"/>
+
+            <enumeration value="residence"/>
 
             <enumeration value="mixed"/>
 

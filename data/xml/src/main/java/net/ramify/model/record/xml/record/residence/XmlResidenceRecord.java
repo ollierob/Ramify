@@ -16,7 +16,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collections;
 import java.util.Set;
-import java.util.UUID;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "residence")
 public class XmlResidenceRecord extends XmlRecord {
@@ -36,10 +35,6 @@ public class XmlResidenceRecord extends XmlRecord {
         final var gender = this.gender();
         final var events = this.events(id, placeId, date);
         return new GenericRecordPerson(id, name, gender, events, notes);
-    }
-
-    PersonId personId() {
-        return new PersonId(UUID.randomUUID().toString());
     }
 
     Set<Event> events(final PersonId personId, final PlaceId placeId, final DateRange date) {

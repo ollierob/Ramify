@@ -6,7 +6,8 @@ import {ColumnProps} from "antd/es/table";
 import {Person} from "../../../protobuf/generated/person_pb";
 import {nameToString} from "../../../components/people/Name";
 import {Event} from "../../../protobuf/generated/event_pb";
-import {isBirthEvent, isDeathEvent} from "../../../components/event/Event";
+import {isBirthEvent, isBurialEvent, isDeathEvent} from "../../../components/event/Event";
+import {FormattedDateRange, FormattedYearRange} from "../../../components/date/FormattedDateRange";
 
 type Props = Partial<RecordPaginationHandler> & {
     recordSet: RecordSet.AsObject;
@@ -61,7 +62,8 @@ export class RecordTable extends React.PureComponent<Props, State> {
 }
 
 type RecordProperties = {
-    hasAge?: boolean;
+    hasBirth?: boolean;
+    hasDeath?: boolean;
 }
 
 function buildIndividualRecords(records: ReadonlyArray<Record.AsObject>, properties: RecordProperties): IndividualRecord[] {
@@ -72,19 +74,23 @@ function buildIndividualRecords(records: ReadonlyArray<Record.AsObject>, propert
             family.personList.forEach(person => out.push(createRecord(person)));
         });
     });
-    properties.hasAge = out.some(r => r.birth);
+    properties.hasBirth = out.some(r => r.birth);
+    properties.hasDeath = out.some(r => r.death);
     return out;
 }
 
 function createRecord(person: Person.AsObject): IndividualRecord {
     const record: IndividualRecord = {person};
     record.birth = person.eventsList.find(isBirthEvent);
-    record.death = person.eventsList.find(isDeathEvent);
+    record.death = person.eventsList.find(isDeathEvent) || person.eventsList.find(isBurialEvent);
     return record;
 }
 
 function determineColumns(properties: RecordProperties): RecordColumn[] {
-    const columns = [ImageColumn, NameColumn, NotesColumn];
+    const columns = [ImageColumn, NameColumn];
+    if (properties.hasBirth) columns.push(BirthYearColumn);
+    if (properties.hasDeath) columns.push(DeathDateColumn);
+    columns.push(NotesColumn);
     return columns;
 }
 
@@ -109,4 +115,20 @@ const NotesColumn: RecordColumn = {
     key: "notes",
     title: "Notes",
     dataIndex: "person.notes"
+};
+
+const BirthYearColumn: RecordColumn = {
+    key: "birthDate",
+    title: "Birth date",
+    dataIndex: "birth.date",
+    render: (t, r) => r.birth && <FormattedYearRange date={r.birth.date}/>,
+    width: 120
+};
+
+const DeathDateColumn: RecordColumn = {
+    key: "deathDate",
+    title: "Death date",
+    dataIndex: "death.date",
+    render: (t, r) => r.death && <FormattedDateRange date={r.death.date} accuracy="day"/>,
+    width: 120
 };

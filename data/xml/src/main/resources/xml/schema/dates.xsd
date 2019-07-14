@@ -11,7 +11,7 @@
 
     <element name="closedIn" type="tns:xmlInYear"/>
 
-    <element name="date" type="tns:xmlExactDate"/>
+    <element name="deathDate" type="tns:xmlExactDate"/>
 
     <element name="foundedBefore" type="tns:xmlBeforeDate"/>
 
