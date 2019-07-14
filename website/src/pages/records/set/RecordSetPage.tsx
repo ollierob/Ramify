@@ -3,7 +3,7 @@ import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {Record, RecordSearch, RecordSet} from "../../../protobuf/generated/record_pb";
 import {RouteComponentProps} from "react-router";
 import {DEFAULT_RECORD_LOADER} from "../../../components/records/RecordLoader";
-import {Loading} from "../../../components/Loading";
+import {Loading} from "../../../components/style/Loading";
 import {DEFAULT_PLACE_LOADER} from "../../../components/places/PlaceLoader";
 import {PlaceBundle} from "../../../protobuf/generated/place_pb";
 import {ErrorMessage} from "../../../components/style/Error";

@@ -6,6 +6,7 @@ import {Person} from "../../../protobuf/generated/person_pb";
 import {Event} from "../../../protobuf/generated/event_pb";
 import {isBirthEvent, isBurialEvent, isDeathEvent, isResidenceEvent} from "../../../components/event/Event";
 import {determineColumns, RecordColumn} from "./RecordTableColumns";
+import {NoData} from "../../../components/style/NoData";
 
 type Props = Partial<RecordPaginationHandler> & {
     recordSet: RecordSet.AsObject;
@@ -41,7 +42,7 @@ export class RecordTable extends React.PureComponent<Props, State> {
     render() {
 
         const data = this.state.data;
-        if (!data || !data.length) return <div className="noData">No records found.</div>;
+        if (!data || !data.length) return <NoData/>;
 
         return <Table
             loading={this.props.loading}

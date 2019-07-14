@@ -5,6 +5,7 @@ import {AsyncData} from "../../../components/fetch/AsyncData";
 import {Record, RecordSet} from "../../../protobuf/generated/record_pb";
 import {RecordTable} from "./RecordTable";
 import {RecordPaginationHandler} from "../../../components/records/RecordPaginationHandler";
+import RecordImageGallery from "./RecordImageGallery";
 
 type Props = RecordPaginationHandler & RecordSearchHandler & {
     recordSet: RecordSet.AsObject;
@@ -44,9 +45,9 @@ export class RecordResults extends React.PureComponent<Props, State> {
 
             <Tabs.TabPane
                 key="images"
-                tab="Image browser"
-                disabled>
-
+                tab="Image browser">
+                <RecordImageGallery
+                    {...this.props}/>
             </Tabs.TabPane>
 
             <Tabs.TabPane

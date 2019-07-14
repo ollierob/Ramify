@@ -1,4 +1,4 @@
-import {Record, RecordList, RecordSearch, RecordSet, RecordSetList} from "../../protobuf/generated/record_pb";
+import {Record, RecordImageList, RecordList, RecordSearch, RecordSet, RecordSetList} from "../../protobuf/generated/record_pb";
 import {PlaceId} from "../places/Place";
 import {queryParameters} from "../fetch/Fetch";
 import {protoGet, protoPost} from "../fetch/ProtoFetch";
@@ -15,6 +15,8 @@ export interface RecordLoader {
     loadChildRecordSets(id: RecordSetId): Promise<ReadonlyArray<RecordSet.AsObject>>
 
     submitSearch(search: RecordSearch): Promise<ReadonlyArray<Record.AsObject>>
+
+    loadRecordImages(id: RecordSetId): Promise<RecordImageList.AsObject>
 
 }
 
@@ -44,6 +46,11 @@ class ProtoRecordLoader implements RecordLoader {
 
     submitSearch(search: RecordSearch): Promise<ReadonlyArray<Record.AsObject>> {
         return protoPost("/records/search", search, RecordSearch.serializeBinaryToWriter, RecordList.deserializeBinary).then(readRecords);
+    }
+
+    loadRecordImages(id: string): Promise<RecordImageList.AsObject> {
+        return protoGet("/records/images/" + id, RecordImageList.deserializeBinary)
+            .then(l => l ? l.toObject() : null);
     }
 
 }

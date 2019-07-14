@@ -4,7 +4,7 @@ import {stringMultimap} from "../Maps";
 import {Card} from "antd";
 import {PlaceType, placeTypeKey, placeTypeName, sortByPlaceName, sortByPlaceType} from "./PlaceType";
 import {Img} from "../style/Img";
-import {Loading} from "../Loading";
+import {Loading} from "../style/Loading";
 import {placeHref} from "../../pages/places/PlaceLinks";
 
 type Props = {

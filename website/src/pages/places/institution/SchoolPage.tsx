@@ -5,7 +5,7 @@ import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {InstitutionInfo} from "./InstitutionInfo";
 import {Institution} from "../../../protobuf/generated/institution_pb";
 import {PlaceMap} from "../../../components/places/PlaceMap";
-import {Loading} from "../../../components/Loading";
+import {Loading} from "../../../components/style/Loading";
 import {InstitutionPage} from "./InstitutionPage";
 import {PlaceId} from "../../../components/places/Place";
 

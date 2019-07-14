@@ -3,7 +3,7 @@ import {HasClass} from "../style/HasClass";
 import {Point, Position} from "../../protobuf/generated/location_pb";
 import {Map, Marker, Popup, TileLayer} from 'react-leaflet';
 import {LatLngLiteral} from "leaflet";
-import {Loading} from "../Loading";
+import {Loading} from "../style/Loading";
 import {Place, PlaceType} from "../../protobuf/generated/place_pb";
 import "./PlaceMap.css";
 

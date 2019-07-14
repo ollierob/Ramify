@@ -4,7 +4,7 @@ import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {Place} from "../../../protobuf/generated/place_pb";
 import {Card} from "antd";
 import {DEFAULT_PLACE_LOADER} from "../../../components/places/PlaceLoader";
-import {Loading} from "../../../components/Loading";
+import {Loading} from "../../../components/style/Loading";
 import {Flag} from "../../../components/images/Flag";
 import {placeHref} from "../PlaceLinks";
 

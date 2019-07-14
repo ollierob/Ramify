@@ -6,7 +6,7 @@ import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {Place} from "../../../protobuf/generated/place_pb";
 import {DEFAULT_PLACE_LOADER} from "../../../components/places/PlaceLoader";
 import {PlaceTypeDescription} from "../../../components/places/PlaceTypeDescription";
-import {Loading} from "../../../components/Loading";
+import {Loading} from "../../../components/style/Loading";
 
 type Props = PlacesPageProps;
 
