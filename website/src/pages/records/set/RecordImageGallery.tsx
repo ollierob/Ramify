@@ -2,11 +2,11 @@ import * as React from "react";
 import {DEFAULT_RECORD_LOADER} from "../../../components/records/RecordLoader";
 import {RecordImage, RecordImageList, RecordSet} from "../../../protobuf/generated/record_pb";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
-import {RecordSetId} from "../../../components/records/RecordSet";
 import {Loading} from "../../../components/style/Loading";
 import {NoData} from "../../../components/style/NoData";
 import ImageGallery, {ReactImageGalleryItem} from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
+import {RecordSetId} from "../../../components/records/RecordSet";
 
 type Props = {
     recordSet: RecordSet.AsObject;
@@ -66,4 +66,4 @@ function toImage(basePath: string, image: RecordImage.AsObject): ReactImageGalle
         original: basePath + "/" + image.filename,
         thumbnail: basePath + "/" + (image.thumbnail || image.filename)
     };
-}
+};
