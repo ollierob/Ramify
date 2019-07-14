@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<recordSets
+        xmlns="http://ramify.net/records"
+        xmlns:d="http://ramify.net/dates">
+
+    <recordSet
+            id="heptonstall_wesleyan_registers"
+            title="Heptonstall Methodist Church Registers"
+            place="church:heptonstall_wesleyan"
+            source="church"
+            type="mixed">
+
+        <recordSet
+                id="heptonstall_wesleyan_baptisms"
+                title="Heptonstall Methodist Church Baptisms"
+                shortTitle="Baptisms"
+                place="church:heptonstall_wesleyan"
+                source="church"
+                type="baptism">
+            <d:betweenYears start="1798" end="1946"/>
+            <recordSetReference reference="HB:29" archive="West Yorkshire Archive Services"/>
+        </recordSet>
+
+        <recordSet
+                id="heptonstall_wesleyan_minutes"
+                title="Heptonstall Methodist Church Meeting Minutes"
+                shortTitle="Meeting Minutes"
+                place="church:heptonstall_wesleyan"
+                source="church"
+                type="membership">
+            <d:betweenYears start="1842" end="1880"/>
+        </recordSet>
+
+    </recordSet>
+
+</recordSets>
