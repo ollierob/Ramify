@@ -2,8 +2,11 @@ package net.ramify.model.event.type.civil;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.AbstractEvent;
+import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.event.type.Death;
 import net.ramify.model.person.PersonId;
+
+import javax.annotation.Nonnull;
 
 public class GenericDeath extends AbstractEvent<GenericDeath> implements Death {
 
@@ -11,4 +14,9 @@ public class GenericDeath extends AbstractEvent<GenericDeath> implements Death {
         super(personId, date);
     }
 
+    @Nonnull
+    @Override
+    public EventProto.Event.Builder toProtoBuilder() {
+        return Death.super.toProtoBuilder();
+    }
 }

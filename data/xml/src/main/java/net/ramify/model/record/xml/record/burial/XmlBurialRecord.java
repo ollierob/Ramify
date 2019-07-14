@@ -15,12 +15,14 @@ import net.ramify.model.family.Family;
 import net.ramify.model.family.SinglePersonFamily;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
+import net.ramify.model.person.age.Age;
 import net.ramify.model.person.name.NameParser;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.GenericRecordPerson;
 import net.ramify.model.record.church.ChurchBurialRecord;
 import net.ramify.model.record.type.BurialRecord;
 import net.ramify.model.record.xml.record.XmlRecord;
+import net.ramify.utils.objects.Functions;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -89,7 +91,7 @@ public class XmlBurialRecord extends XmlRecord {
     }
 
     Burial burial(final PersonId personId, final ExactDate date) {
-        return new GenericChurchBurial(personId, date);
+        return new GenericChurchBurial(personId, date, Functions.ifNonNull(deathAge, Age::ofYears));
     }
 
 }

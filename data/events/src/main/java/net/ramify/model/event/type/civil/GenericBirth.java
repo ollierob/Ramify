@@ -2,6 +2,7 @@ package net.ramify.model.event.type.civil;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.AbstractEvent;
+import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.event.type.Birth;
 import net.ramify.model.person.PersonId;
 
@@ -20,6 +21,12 @@ public class GenericBirth extends AbstractEvent<GenericBirth> implements Birth {
     @Override
     public PersonId personId() {
         return personId;
+    }
+
+    @Nonnull
+    @Override
+    public EventProto.Event.Builder toProtoBuilder() {
+        return Birth.super.toProtoBuilder();
     }
 
 }

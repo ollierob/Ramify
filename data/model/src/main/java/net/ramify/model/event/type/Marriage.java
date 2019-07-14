@@ -5,7 +5,7 @@ import net.ramify.model.event.proto.EventProto;
 
 import javax.annotation.Nonnull;
 
-public interface LifeEvent extends Event {
+public interface Marriage extends LifeEvent {
 
     @Override
     default <R> R handleWith(final EventHandler<R> handler) {
@@ -14,7 +14,15 @@ public interface LifeEvent extends Event {
 
     @Nonnull
     @Override
-    default EventProto.Event.Builder toProtoBuilder() {
-        return Event.super.toProtoBuilder();
+    default String title() {
+        return "Marriage";
     }
+
+    @Nonnull
+    @Override
+    default EventProto.Event.Builder toProtoBuilder() {
+        return LifeEvent.super.toProtoBuilder()
+                .setType(EventProto.RecordType.MARRIAGE);
+    }
+
 }

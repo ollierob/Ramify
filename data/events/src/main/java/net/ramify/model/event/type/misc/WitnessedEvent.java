@@ -3,6 +3,7 @@ package net.ramify.model.event.type.misc;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.AbstractEvent;
 import net.ramify.model.event.Event;
+import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.event.type.LifeEvent;
 import net.ramify.model.person.PersonId;
 
@@ -21,6 +22,12 @@ public class WitnessedEvent<T extends Event> extends AbstractEvent<WitnessedEven
     @Override
     public String title() {
         return "Witness (" + observed.title() + ")";
+    }
+
+    @Nonnull
+    @Override
+    public EventProto.Event.Builder toProtoBuilder() {
+        return LifeEvent.super.toProtoBuilder().setType(EventProto.RecordType.MENTION);
     }
 
 }

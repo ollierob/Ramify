@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 
 import javax.annotation.Nonnull;
 import java.time.Period;
+import java.util.Optional;
 
 class PeriodBasedAge implements Age {
 
@@ -24,6 +25,12 @@ class PeriodBasedAge implements Age {
     @Override
     public Period upperBound() {
         return period;
+    }
+
+    @Nonnull
+    @Override
+    public Optional<Period> exact() {
+        return Optional.of(period);
     }
 
 }

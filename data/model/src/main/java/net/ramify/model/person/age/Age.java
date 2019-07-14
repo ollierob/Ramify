@@ -4,6 +4,7 @@ import net.ramify.model.date.DateRange;
 
 import javax.annotation.Nonnull;
 import java.time.Period;
+import java.util.Optional;
 
 public interface Age {
 
@@ -14,6 +15,9 @@ public interface Age {
 
     @Nonnull
     Period upperBound();
+
+    @Nonnull
+    Optional<Period> exact();
 
     default DateRange birthDate(final DateRange date) {
         final var latest = date.earliestInclusive().map(d -> d.minus(this.lowerBound()));
@@ -26,7 +30,7 @@ public interface Age {
     }
 
     static Age ofYears(final int years) {
-        return new PeriodBasedAge(Period.ofYears(years));
+        return exactly(Period.ofYears(years));
     }
 
     static Age between(final int minYears, final int maxYears) {

@@ -24,6 +24,7 @@ type IndividualRecord = {
     person: Person.AsObject;
     birth?: Event.AsObject;
     death?: Event.AsObject;
+    burial?: Event.AsObject;
     image?: string;
 }
 
@@ -64,6 +65,7 @@ export class RecordTable extends React.PureComponent<Props, State> {
 type RecordProperties = {
     hasBirth?: boolean;
     hasDeath?: boolean;
+    hasBurial?: boolean;
 }
 
 function buildIndividualRecords(records: ReadonlyArray<Record.AsObject>, properties: RecordProperties): IndividualRecord[] {
@@ -76,13 +78,15 @@ function buildIndividualRecords(records: ReadonlyArray<Record.AsObject>, propert
     });
     properties.hasBirth = out.some(r => r.birth);
     properties.hasDeath = out.some(r => r.death);
+    properties.hasBurial = out.some(r => r.burial);
     return out;
 }
 
 function createRecord(person: Person.AsObject): IndividualRecord {
     const record: IndividualRecord = {person};
     record.birth = person.eventsList.find(isBirthEvent);
-    record.death = person.eventsList.find(isDeathEvent) || person.eventsList.find(isBurialEvent);
+    record.death = person.eventsList.find(isDeathEvent);
+    record.burial = person.eventsList.find(isBurialEvent);
     return record;
 }
 
@@ -90,6 +94,7 @@ function determineColumns(properties: RecordProperties): RecordColumn[] {
     const columns = [ImageColumn, NameColumn];
     if (properties.hasBirth) columns.push(BirthYearColumn);
     if (properties.hasDeath) columns.push(DeathDateColumn);
+    if (properties.hasBurial) columns.push(BurialDateColumn);
     columns.push(NotesColumn);
     return columns;
 }
@@ -130,5 +135,13 @@ const DeathDateColumn: RecordColumn = {
     title: "Death date",
     dataIndex: "death.date",
     render: (t, r) => r.death && <FormattedDateRange date={r.death.date} accuracy="day"/>,
+    width: 120
+};
+
+const BurialDateColumn: RecordColumn = {
+    key: "burialDate",
+    title: "Burial date",
+    dataIndex: "burial.date",
+    render: (t, r) => r.burial && <FormattedDateRange date={r.burial.date} accuracy="day"/>,
     width: 120
 };

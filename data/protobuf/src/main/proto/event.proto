@@ -13,6 +13,8 @@ message Event {
     string placeId = 3;
     RecordType type = 4;
 
+    uint32 givenAge = 10;
+
 }
 
 message EventList {
