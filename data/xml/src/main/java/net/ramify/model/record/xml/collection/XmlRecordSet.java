@@ -8,6 +8,7 @@ import net.ramify.model.date.xml.XmlInYear;
 import net.ramify.model.person.name.NameParser;
 import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.record.Record;
 import net.ramify.model.record.collection.HasRecordSetId;
 import net.ramify.model.record.collection.RecordSet;
@@ -128,11 +129,11 @@ class XmlRecordSet implements HasRecordSetId, HasPlaceId {
         return Functions.ifNonNull(parentId, RecordSetId::new);
     }
 
-    Collection<Record> records(final NameParser nameParser, final DateParser dateParser) {
+    Collection<Record> records(final PlaceProvider places, final NameParser nameParser, final DateParser dateParser) {
         if (records == null) return Collections.emptySet();
         final var records = Lists.<Record>newArrayList();
         final var self = this.buildSelf(null, dateParser);
-        this.records.forEach(record -> records.addAll(record.build(self, nameParser, dateParser)));
+        this.records.forEach(record -> records.addAll(record.build(self, places, nameParser, dateParser)));
         return records;
     }
 

@@ -4,6 +4,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.person.name.NameParser;
+import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.record.Record;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
@@ -36,9 +37,9 @@ public class XmlRecordSets {
     }
 
     @Nonnull
-    public Collection<Record> records(final RecordSetId id, final DateParser dateParser, final NameParser nameParser) {
+    public Collection<Record> records(final RecordSetId id, final PlaceProvider places, final DateParser dateParser, final NameParser nameParser) {
         final var targeRecordSet = Iterables.find(recordSets, set -> id.equals(set.recordSetId()));
-        return targeRecordSet.records(nameParser, dateParser);
+        return targeRecordSet.records(places, nameParser, dateParser);
     }
 
 }

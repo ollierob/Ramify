@@ -5,6 +5,7 @@ import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlInYear;
 import net.ramify.model.person.name.NameParser;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.type.ResidenceRecord;
 import net.ramify.model.record.xml.record.XmlRecord;
@@ -44,6 +45,7 @@ public class XmlResidenceRecords extends XmlRecords {
     @Override
     public Collection<? extends ResidenceRecord> build(
             final RecordSet recordSet,
+            final PlaceProvider places,
             final NameParser nameParser,
             final DateParser dateParser) {
         final var placeId = Functions.ifNonNull(this.placeId, PlaceId::new, recordSet.placeId());

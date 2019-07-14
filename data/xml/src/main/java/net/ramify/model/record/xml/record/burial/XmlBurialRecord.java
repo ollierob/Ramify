@@ -1,6 +1,8 @@
 package net.ramify.model.record.xml.record.burial;
 
 import com.google.common.collect.Sets;
+import net.ramify.model.date.BeforeDate;
+import net.ramify.model.date.DateRange;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlExactDate;
@@ -11,6 +13,8 @@ import net.ramify.model.event.type.Death;
 import net.ramify.model.event.type.church.GenericChurchBurial;
 import net.ramify.model.event.type.civil.GenericBirth;
 import net.ramify.model.event.type.civil.GenericDeath;
+import net.ramify.model.event.type.residence.GenericResidence;
+import net.ramify.model.event.type.residence.Residence;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.SinglePersonFamily;
 import net.ramify.model.person.Person;
@@ -18,6 +22,7 @@ import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
 import net.ramify.model.person.name.NameParser;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.record.GenericRecordPerson;
 import net.ramify.model.record.church.ChurchBurialRecord;
 import net.ramify.model.record.type.BurialRecord;
@@ -51,39 +56,44 @@ public class XmlBurialRecord extends XmlRecord {
     @XmlElement(name = "deathDate", required = false, namespace = XmlDateRange.NAMESPACE)
     private XmlExactDate deathDate;
 
-    public BurialRecord build(final NameParser nameParser, final PlaceId placeId) {
+    public BurialRecord build(final PlaceProvider places, final NameParser nameParser, final PlaceId placeId) {
         final var burialDate = ExactDate.on(year, Month.of(month), dayOfMonth);
         return new ChurchBurialRecord(
                 this.recordId(),
                 burialDate,
                 placeId,
-                this.family(nameParser, burialDate));
+                this.family(places, nameParser, burialDate));
     }
 
-    Family family(final NameParser nameParser, final ExactDate burialDate) {
-        final var person = this.person(nameParser, burialDate);
+    Family family(final PlaceProvider places, final NameParser nameParser, final ExactDate burialDate) {
+        final var person = this.person(nameParser, burialDate, places);
         return new SinglePersonFamily(person);
     }
 
-    Person person(final NameParser nameParser, final ExactDate burialDate) {
+    Person person(final NameParser nameParser, final ExactDate burialDate, final PlaceProvider places) {
         final var personId = this.personId();
         return new GenericRecordPerson(
                 personId,
                 this.name(nameParser),
                 this.gender(),
-                this.events(personId, burialDate),
+                this.events(personId, burialDate, places),
                 this.notes());
     }
 
-    Set<Event> events(final PersonId personId, final ExactDate burialDate) {
+    Set<Event> events(final PersonId personId, final ExactDate burialDate, final PlaceProvider places) {
         final var events = Sets.<Event>newHashSet(this.burial(personId, burialDate));
         if (deathAge != null) events.add(this.birth(personId, burialDate, deathAge)); //FIXME use death date
         if (deathDate != null) events.add(this.death(personId, deathDate.resolve()));
+        if (residence != null) events.add(this.residence(personId, burialDate, new PlaceId(residence)));
         return events;
     }
 
     Birth birth(final PersonId personId, final ExactDate burialDate, final int deathAge) {
         return new GenericBirth(personId, burialDate.yearsAgo(deathAge));
+    }
+
+    Residence residence(final PersonId personId, final DateRange burialDate, final PlaceId placeId) {
+        return new GenericResidence(personId, BeforeDate.strictlyBefore(burialDate), placeId);
     }
 
     Death death(final PersonId personId, final ExactDate date) {

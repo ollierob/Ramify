@@ -7,6 +7,8 @@ import java.util.Optional;
 public class BeforeDate<D extends ChronoLocalDate> implements DateRange {
 
     public static DateRange strictlyBefore(final DateRange range) {
+        final var latest = range.latestInclusive();
+        if (latest.isPresent()) return strictlyBefore(latest.get());
         throw new UnsupportedOperationException(); //TODO
     }
 
