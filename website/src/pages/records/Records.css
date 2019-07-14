@@ -51,5 +51,6 @@
 }
 
 .ant-table td.image {
+    padding: 16px 0 16px 16px;
     width: 30px !important;
 }

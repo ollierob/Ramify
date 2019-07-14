@@ -71,8 +71,8 @@ const BirthYearColumn: RecordColumn = {
 const ResidenceYearColumn: RecordColumn = {
     key: "residenceDate",
     title: "Residence date",
-    render: (t, r) => r.residence && <FormattedYearRange date={r.residence.date}/>,
-    width: 120
+    render: (t, r) => r.residence && <FormattedYearRange date={r.residence.date} words={{in: ""}}/>,
+    width: 150
 };
 
 const ResidencePlaceColumn: RecordColumn = {
