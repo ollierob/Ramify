@@ -58,7 +58,7 @@ class XmlRecordProvider implements RecordsProvider {
             final var records = recordSets.records(id, places, dateParser, nameParser);
             return Records.of(records);
         } catch (final Exception ex) {
-            throw new RuntimeException("Error reading records from " + file, ex);
+            throw new RuntimeException("Error reading records for " + id + " from " + file, ex);
         }
     }
 

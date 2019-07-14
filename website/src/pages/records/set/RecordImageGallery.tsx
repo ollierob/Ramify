@@ -4,9 +4,8 @@ import {RecordImage, RecordImageList, RecordSet} from "../../../protobuf/generat
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {Loading} from "../../../components/style/Loading";
 import {NoData} from "../../../components/style/NoData";
-import ImageGallery, {ReactImageGalleryItem} from 'react-image-gallery';
-import "react-image-gallery/styles/css/image-gallery.css";
 import {RecordSetId} from "../../../components/records/RecordSet";
+import ImageGallery, {Image} from "../../../components/image/ImageGallery";
 
 type Props = {
     recordSet: RecordSet.AsObject;
@@ -37,8 +36,7 @@ export default class RecordImageGallery extends React.PureComponent<Props, State
         return <>
 
             <ImageGallery
-                thumbnailPosition="top"
-                items={data.imageList.map(i => toImage(data.basepath, i))}/>
+                images={data.imageList.map(i => toImage(data.basepath, i))}/>
 
         </>;
 
@@ -61,9 +59,9 @@ export default class RecordImageGallery extends React.PureComponent<Props, State
 
 }
 
-function toImage(basePath: string, image: RecordImage.AsObject): ReactImageGalleryItem {
+function toImage(basePath: string, image: RecordImage.AsObject): Image {
     return {
-        original: basePath + "/" + image.filename,
-        thumbnail: basePath + "/" + (image.thumbnail || image.filename)
+        src: basePath + "/" + image.filename,
+        thumbnailSrc: basePath + "/" + (image.thumbnail || image.filename)
     };
 };

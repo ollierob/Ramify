@@ -40,12 +40,11 @@
     font-size: 1.2em;
 }
 
-.records.ant-tabs .ant-table-wrapper {
-    margin-top: -16px;
+.records.ant-tabs .ant-tabs-bar.ant-tabs-top-bar {
+    margin: 0;
 }
 
 .records.ant-tabs .noData {
-    margin-top: -16px;
     padding: 8px;
     font-size: 18px;
 }

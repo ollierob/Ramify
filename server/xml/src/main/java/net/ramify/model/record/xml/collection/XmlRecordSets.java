@@ -39,6 +39,7 @@ public class XmlRecordSets {
     @Nonnull
     public Collection<Record> records(final RecordSetId id, final PlaceProvider places, final DateParser dateParser, final NameParser nameParser) {
         if (recordSets == null || recordSets.isEmpty()) return Collections.emptySet();
+        //FIXME descend into children
         final var targeRecordSet = Iterables.find(recordSets, set -> id.equals(set.recordSetId()));
         return targeRecordSet.records(places, nameParser, dateParser);
     }

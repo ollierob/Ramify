@@ -1,0 +1,17 @@
+.imageGallery .thumbnails {
+    overflow-x: hidden;
+}
+
+.imageGallery .thumbnails .thumbnail {
+    display: inline-block !important;
+    position: relative !important;
+    margin: 4px;
+}
+
+.imageGallery .thumbnails .thumbnail img {
+    max-height: 150px;
+}
+
+.imageGallery .image {
+    height: unset;
+}
