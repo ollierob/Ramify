@@ -6,8 +6,9 @@ import {ColumnProps} from "antd/es/table";
 import {Person} from "../../../protobuf/generated/person_pb";
 import {nameToString} from "../../../components/people/Name";
 import {Event} from "../../../protobuf/generated/event_pb";
-import {isBirthEvent, isBurialEvent, isDeathEvent} from "../../../components/event/Event";
+import {isBirthEvent, isBurialEvent, isDeathEvent, isResidenceEvent} from "../../../components/event/Event";
 import {FormattedDateRange, FormattedYearRange} from "../../../components/date/FormattedDateRange";
+import {PlaceContextMenu} from "../../../components/places/PlaceContextMenu";
 
 type Props = Partial<RecordPaginationHandler> & {
     recordSet: RecordSet.AsObject;
@@ -23,6 +24,7 @@ type State = {
 type IndividualRecord = {
     person: Person.AsObject;
     birth?: Event.AsObject;
+    residence?: Event.AsObject;
     death?: Event.AsObject;
     burial?: Event.AsObject;
     image?: string;
@@ -64,6 +66,7 @@ export class RecordTable extends React.PureComponent<Props, State> {
 
 type RecordProperties = {
     hasBirth?: boolean;
+    hasResidence?: boolean;
     hasDeath?: boolean;
     hasBurial?: boolean;
 }
@@ -77,6 +80,7 @@ function buildIndividualRecords(records: ReadonlyArray<Record.AsObject>, propert
         });
     });
     properties.hasBirth = out.some(r => r.birth);
+    properties.hasResidence = out.some(r => r.residence);
     properties.hasDeath = out.some(r => r.death);
     properties.hasBurial = out.some(r => r.burial);
     return out;
@@ -85,6 +89,7 @@ function buildIndividualRecords(records: ReadonlyArray<Record.AsObject>, propert
 function createRecord(person: Person.AsObject): IndividualRecord {
     const record: IndividualRecord = {person};
     record.birth = person.eventsList.find(isBirthEvent);
+    record.residence = person.eventsList.find(isResidenceEvent);
     record.death = person.eventsList.find(isDeathEvent);
     record.burial = person.eventsList.find(isBurialEvent);
     return record;
@@ -93,6 +98,8 @@ function createRecord(person: Person.AsObject): IndividualRecord {
 function determineColumns(properties: RecordProperties): RecordColumn[] {
     const columns = [ImageColumn, NameColumn];
     if (properties.hasBirth) columns.push(BirthYearColumn);
+    if (properties.hasResidence && !properties.hasDeath && !properties.hasBurial) columns.push(ResidenceYearColumn);
+    if (properties.hasResidence) columns.push(ResidencePlaceColumn);
     if (properties.hasDeath) columns.push(DeathDateColumn);
     if (properties.hasBurial) columns.push(BurialDateColumn);
     columns.push(NotesColumn);
@@ -127,6 +134,20 @@ const BirthYearColumn: RecordColumn = {
     title: "Birth date",
     dataIndex: "birth.date",
     render: (t, r) => r.birth && <FormattedYearRange date={r.birth.date}/>,
+    width: 120
+};
+
+const ResidenceYearColumn: RecordColumn = {
+    key: "residenceDate",
+    title: "Residence date",
+    render: (t, r) => r.residence && <FormattedYearRange date={r.residence.date}/>,
+    width: 120
+};
+
+const ResidencePlaceColumn: RecordColumn = {
+    key: "residencePlace",
+    title: "Residence",
+    render: (t, r) => r.residence && <PlaceContextMenu place={r.residence.place}/>,
     width: 120
 };
 
