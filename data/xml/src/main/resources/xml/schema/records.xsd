@@ -166,7 +166,13 @@
 
                     <element minOccurs="0" ref="ns1:deathDate"/>
 
-                    <element maxOccurs="unbounded" minOccurs="0" ref="ns3:father"/>
+                    <choice maxOccurs="unbounded" minOccurs="0">
+
+                        <element ref="ns3:father"/>
+
+                        <element ref="ns3:mother"/>
+
+                    </choice>
 
                 </sequence>
 
@@ -212,25 +218,25 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="mixed"/>
+            <enumeration value="birth"/>
 
             <enumeration value="marriage"/>
 
             <enumeration value="membership"/>
 
+            <enumeration value="death"/>
+
             <enumeration value="census"/>
 
-            <enumeration value="residence"/>
-
-            <enumeration value="birth"/>
-
-            <enumeration value="death"/>
+            <enumeration value="burial"/>
 
             <enumeration value="baptism"/>
 
-            <enumeration value="payment"/>
+            <enumeration value="mixed"/>
 
-            <enumeration value="burial"/>
+            <enumeration value="residence"/>
+
+            <enumeration value="payment"/>
 
         </restriction>
 

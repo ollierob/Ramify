@@ -7,6 +7,8 @@
 
     <element name="father" type="tns:xmlFather"/>
 
+    <element name="mother" type="tns:xmlMother"/>
+
     <complexType name="xmlFamily">
 
         <sequence/>
@@ -32,6 +34,20 @@
         <sequence/>
 
         <attribute name="name" type="xs:string"/>
+
+    </complexType>
+
+    <complexType name="xmlMother">
+
+        <complexContent>
+
+            <extension base="tns:xmlRelationship">
+
+                <sequence/>
+
+            </extension>
+
+        </complexContent>
 
     </complexType>
 

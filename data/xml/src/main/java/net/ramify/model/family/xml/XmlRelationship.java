@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.Set;
 import java.util.UUID;
 
-@XmlSeeAlso({XmlFather.class})
+@XmlSeeAlso({XmlFather.class, XmlMother.class})
 public abstract class XmlRelationship {
 
     @XmlAttribute(name = "name", required = false)
