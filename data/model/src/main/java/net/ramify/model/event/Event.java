@@ -9,6 +9,7 @@ import net.ramify.model.event.type.EventHandler;
 import net.ramify.model.event.type.LifeEvent;
 import net.ramify.model.event.type.PostDeathEvent;
 import net.ramify.model.person.HasPersonId;
+import net.ramify.model.place.HasPlace;
 import net.ramify.utils.objects.Castable;
 
 import javax.annotation.Nonnull;
@@ -41,9 +42,11 @@ public interface Event extends HasPersonId, Castable<Event>, BuildsProto<EventPr
 
     @Nonnull
     default EventProto.Event.Builder toProtoBuilder() {
-        return EventProto.Event.newBuilder()
+        final var builder = EventProto.Event.newBuilder()
                 .setTitle(this.title())
                 .setDate(this.date().toProto());
+        HasPlace.place(this).ifPresent(place -> builder.setPlace(place.toProto()));
+        return builder;
     }
 
     @Nonnull

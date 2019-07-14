@@ -4,27 +4,27 @@ import net.ramify.model.date.DateRange;
 import net.ramify.model.event.AbstractEvent;
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.person.PersonId;
-import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.Place;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
 
 public class GenericResidence extends AbstractEvent<GenericResidence> implements Residence {
 
-    private final PlaceId placeId;
+    private final Place place;
 
     public GenericResidence(
             @Nonnull final PersonId personId,
             @Nonnull final DateRange date,
-            @Nonnull final PlaceId placeId) {
+            @Nonnull final Place place) {
         super(personId, date);
-        this.placeId = Objects.requireNonNull(placeId);
+        this.place = Objects.requireNonNull(place);
     }
 
     @Nonnull
     @Override
-    public PlaceId placeId() {
-        return placeId;
+    public Place place() {
+        return place;
     }
 
     @Nonnull

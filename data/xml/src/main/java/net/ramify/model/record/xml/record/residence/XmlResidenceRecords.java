@@ -48,9 +48,9 @@ public class XmlResidenceRecords extends XmlRecords {
             final PlaceProvider places,
             final NameParser nameParser,
             final DateParser dateParser) {
-        final var placeId = Functions.ifNonNull(this.placeId, PlaceId::new, recordSet.placeId());
+        final var place = places.require(Functions.ifNonNull(this.placeId, PlaceId::new, recordSet.placeId()));
         final var date = Functions.ifNonNull(this.date, d -> d.resolve(dateParser), recordSet.date());
-        return ListUtils.eagerlyTransform(records, record -> record.build(nameParser, placeId, date));
+        return ListUtils.eagerlyTransform(records, record -> record.build(nameParser, place, date));
     }
 
 }

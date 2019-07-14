@@ -12,7 +12,7 @@ import net.ramify.model.person.AbstractPerson;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.gender.Sex;
 import net.ramify.model.person.name.Name;
-import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.Place;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.residence.CensusRecord;
 import net.ramify.utils.collections.SetUtils;
@@ -29,8 +29,8 @@ public class Register1939Record extends CensusRecord {
 
     private final List<Register1939Entry> entries;
 
-    public Register1939Record(final RecordId id, final PlaceId placeId, final List<Register1939Entry> entries) {
-        super(id, CENSUS_DATE, placeId);
+    public Register1939Record(final RecordId id, final Place place, final List<Register1939Entry> entries) {
+        super(id, CENSUS_DATE, place);
         this.entries = entries;
     }
 
@@ -68,14 +68,14 @@ public class Register1939Record extends CensusRecord {
         }
 
         Register1939Person build(final Register1939Record record) {
-            return new Register1939Person(id, name, gender, record.placeId(), ExactDate.on(birthDate), occupation);
+            return new Register1939Person(id, name, gender, record.place(), ExactDate.on(birthDate), occupation);
         }
 
     }
 
     public static class Register1939Person extends AbstractPerson {
 
-        private final PlaceId residence;
+        private final Place residence;
         private final ExactDate birthDate;
         private final Occupation occupation;
 
@@ -83,7 +83,7 @@ public class Register1939Record extends CensusRecord {
                 final PersonId id,
                 final Name name,
                 final Sex gender,
-                final PlaceId residence,
+                final Place residence,
                 final ExactDate birthDate,
                 final Occupation occupation) {
             super(id, name, gender);

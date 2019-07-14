@@ -5,7 +5,7 @@ import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
-import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.Place;
 import net.ramify.model.record.GenericRecordEntry;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.civil.AbstractCivilRecord;
@@ -20,7 +20,7 @@ public class GeneralRegisterBirth extends AbstractCivilRecord implements General
     private final GenericRecordEntry father;
     private final GenericRecordEntry mother;
     private final GeneralRegisterRecordBirthEntry child;
-    private final PlaceId birthPlace;
+    private final Place birthPlace;
 
     public GeneralRegisterBirth(
             final RecordId id,
@@ -28,7 +28,7 @@ public class GeneralRegisterBirth extends AbstractCivilRecord implements General
             final GeneralRegisterRecordBirthEntry child,
             final GenericRecordEntry father,
             final GenericRecordEntry mother,
-            final PlaceId birthPlace) {
+            final Place birthPlace) {
         super(id, birthDate);
         this.father = father;
         this.mother = mother;
@@ -40,7 +40,7 @@ public class GeneralRegisterBirth extends AbstractCivilRecord implements General
         return this.date();
     }
 
-    PlaceId birthPlace() {
+    Place birthPlace() {
         return birthPlace;
     }
 
@@ -68,7 +68,7 @@ public class GeneralRegisterBirth extends AbstractCivilRecord implements General
 
     @Nonnull
     @Override
-    public PlaceId placeId() {
+    public Place place() {
         return this.birthPlace();
     }
 

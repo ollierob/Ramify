@@ -5,7 +5,7 @@ import net.ramify.model.date.DateRange;
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.event.type.misc.EventWithPlace;
 import net.ramify.model.person.PersonId;
-import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.Place;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
@@ -34,7 +34,7 @@ public abstract class AbstractEvent<T extends AbstractEvent<T>> implements Event
 
     @Nonnull
     @CheckReturnValue
-    public Event with(final PlaceId place) {
+    public Event with(final Place place) {
         if (place == null) return this.self();
         return new EventWithPlace<>(this.self(), place);
     }

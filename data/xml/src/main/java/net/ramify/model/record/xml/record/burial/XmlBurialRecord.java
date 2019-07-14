@@ -8,10 +8,10 @@ import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlExactDate;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.type.Birth;
-import net.ramify.model.event.type.burial.Burial;
 import net.ramify.model.event.type.Death;
-import net.ramify.model.event.type.burial.ChurchBurial;
 import net.ramify.model.event.type.birth.GenericBirth;
+import net.ramify.model.event.type.burial.Burial;
+import net.ramify.model.event.type.burial.ChurchBurial;
 import net.ramify.model.event.type.death.GenericDeath;
 import net.ramify.model.event.type.residence.GenericResidence;
 import net.ramify.model.event.type.residence.Residence;
@@ -21,6 +21,7 @@ import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
 import net.ramify.model.person.name.NameParser;
+import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.record.GenericRecordPerson;
@@ -84,7 +85,7 @@ public class XmlBurialRecord extends XmlRecord {
         final var events = Sets.<Event>newHashSet(this.burial(personId, burialDate));
         if (deathAge != null) events.add(this.birth(personId, burialDate, deathAge)); //FIXME use death date
         if (deathDate != null) events.add(this.death(personId, deathDate.resolve()));
-        if (residence != null) events.add(this.residence(personId, burialDate, new PlaceId(residence)));
+        if (residence != null) events.add(this.residence(personId, burialDate, places.require(new PlaceId(residence))));
         return events;
     }
 
@@ -92,8 +93,8 @@ public class XmlBurialRecord extends XmlRecord {
         return new GenericBirth(personId, burialDate.yearsAgo(deathAge));
     }
 
-    Residence residence(final PersonId personId, final DateRange burialDate, final PlaceId placeId) {
-        return new GenericResidence(personId, BeforeDate.strictlyBefore(burialDate), placeId);
+    Residence residence(final PersonId personId, final DateRange burialDate, final Place place) {
+        return new GenericResidence(personId, BeforeDate.strictlyBefore(burialDate), place);
     }
 
     Death death(final PersonId personId, final ExactDate date) {

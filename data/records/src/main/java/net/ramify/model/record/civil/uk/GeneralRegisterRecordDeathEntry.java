@@ -10,7 +10,7 @@ import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
 import net.ramify.model.person.gender.Sex;
 import net.ramify.model.person.name.Name;
-import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.Place;
 import net.ramify.model.record.GenericRecordEntry;
 
 import javax.annotation.CheckForNull;
@@ -25,7 +25,7 @@ public class GeneralRegisterRecordDeathEntry extends GenericRecordEntry {
             @Nonnull final PersonId id,
             @Nonnull final Name name,
             @Nonnull final Sex gender,
-            @CheckForNull final PlaceId deathPlace,
+            @CheckForNull final Place deathPlace,
             @CheckForNull final Occupation occupation,
             @CheckForNull final Age age) {
         super(id, name, gender, deathPlace, occupation, age, true);

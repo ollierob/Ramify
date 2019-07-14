@@ -2,11 +2,11 @@ package net.ramify.model.event.type.residence;
 
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.event.type.LifeEvent;
-import net.ramify.model.place.HasPlaceId;
+import net.ramify.model.place.HasPlace;
 
 import javax.annotation.Nonnull;
 
-public interface Residence extends LifeEvent, HasPlaceId {
+public interface Residence extends LifeEvent, HasPlace {
 
     @Nonnull
     @Override

@@ -14,7 +14,7 @@ import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
 import net.ramify.model.person.gender.Sex;
 import net.ramify.model.person.name.Name;
-import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.Place;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -26,7 +26,7 @@ public class GenericRecordEntry implements HasPersonId {
     private final Name name;
     private final Sex gender;
     private final Occupation occupation;
-    private final PlaceId residence;
+    private final Place residence;
     private final Age age;
     final boolean predeceased;
 
@@ -34,7 +34,7 @@ public class GenericRecordEntry implements HasPersonId {
             @Nonnull final PersonId id,
             @Nonnull final Name name,
             @Nonnull final Sex gender,
-            @CheckForNull final PlaceId residence,
+            @CheckForNull final Place residence,
             @CheckForNull final Occupation occupation,
             @CheckForNull final Age age,
             final boolean predeceased) {
@@ -54,7 +54,7 @@ public class GenericRecordEntry implements HasPersonId {
     }
 
     @CheckForNull
-    public PlaceId residence() {
+    public Place residence() {
         return residence;
     }
 

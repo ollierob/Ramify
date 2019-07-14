@@ -14,7 +14,7 @@ import net.ramify.model.person.age.Age;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.gender.Sex;
 import net.ramify.model.person.name.Name;
-import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.Place;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.residence.CensusRecord;
 import net.ramify.model.relationship.Relationship;
@@ -33,8 +33,12 @@ public class Census1851Record extends CensusRecord {
     private final Census1851Head head;
     private final List<Census1851Resident> residents;
 
-    public Census1851Record(final RecordId id, final PlaceId placeId, final Census1851Head head, final List<Census1851Resident> residents) {
-        super(id, CENSUS_DATE, placeId);
+    public Census1851Record(
+            final RecordId id,
+            final Place place,
+            final Census1851Head head,
+            final List<Census1851Resident> residents) {
+        super(id, CENSUS_DATE, place);
         this.head = head;
         this.residents = residents;
     }
@@ -58,7 +62,7 @@ public class Census1851Record extends CensusRecord {
         private final RelationshipToHead relationshipToHead;
         private final MarriageConditionEventInference condition;
         private final Period age;
-        private final PlaceId birthPlace;
+        private final Place birthPlace;
 
         protected Census1851Entry(
                 final PersonId id,
@@ -67,7 +71,7 @@ public class Census1851Record extends CensusRecord {
                 final RelationshipToHead relationshipToHead,
                 final MarriageConditionEventInference condition,
                 final Period age,
-                final PlaceId birthPlace) {
+                final Place birthPlace) {
             this.id = id;
             this.name = name;
             this.sex = sex;
@@ -86,7 +90,7 @@ public class Census1851Record extends CensusRecord {
                     id,
                     name,
                     sex,
-                    record.placeId(),
+                    record.place(),
                     relationshipToHead.relationship(record.headId(), id),
                     Age.exactly(age).birthDate(CENSUS_DATE),
                     birthPlace,
@@ -103,7 +107,7 @@ public class Census1851Record extends CensusRecord {
                 final Sex sex,
                 final MarriageConditionEventInference condition,
                 final Period age,
-                final PlaceId birthPlace) {
+                final Place birthPlace) {
             super(id, name, sex, (a, b) -> null, condition, age, birthPlace);
         }
 
@@ -118,7 +122,7 @@ public class Census1851Record extends CensusRecord {
                 final RelationshipToHead relationshipToHead,
                 final MarriageConditionEventInference condition,
                 final Period age,
-                final PlaceId birthPlace) {
+                final Place birthPlace) {
             super(id, name, sex, Objects.requireNonNull(relationshipToHead), condition, age, birthPlace);
         }
 
@@ -126,9 +130,9 @@ public class Census1851Record extends CensusRecord {
 
     public static class Census1851Person extends AbstractPerson {
 
-        private final PlaceId residencePlace;
+        private final Place residencePlace;
         private final DateRange birthDate;
-        private final PlaceId birthPlace;
+        private final Place birthPlace;
         private final Relationship relationshipToHead;
         private final Set<? extends Event> extraEvents;
 
@@ -136,10 +140,10 @@ public class Census1851Record extends CensusRecord {
                 final PersonId id,
                 final Name name,
                 final Gender gender,
-                final PlaceId residencePlace,
+                final Place residencePlace,
                 final Relationship relationshipToHead,
                 final DateRange birthDate,
-                final PlaceId birthPlace,
+                final Place birthPlace,
                 final Set<? extends Event> extraEvents) {
             super(id, name, gender);
             this.residencePlace = residencePlace;

@@ -6,7 +6,7 @@ import net.ramify.model.event.type.residence.GenericResidence;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.name.NameParser;
-import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.Place;
 import net.ramify.model.record.GenericRecordPerson;
 import net.ramify.model.record.residence.SinglePersonResidenceRecord;
 import net.ramify.model.record.type.ResidenceRecord;
@@ -23,22 +23,22 @@ public class XmlResidenceRecord extends XmlRecord {
     @XmlAttribute(name = "notes", required = false)
     private String notes;
 
-    public ResidenceRecord build(final NameParser nameParser, final PlaceId placeId, final DateRange date) {
+    public ResidenceRecord build(final NameParser nameParser, final Place place, final DateRange date) {
         final var id = this.recordId();
-        final var person = this.person(nameParser, placeId, date);
-        return new SinglePersonResidenceRecord(id, placeId, person, date);
+        final var person = this.person(nameParser, place, date);
+        return new SinglePersonResidenceRecord(id, place, person, date);
     }
 
-    Person person(final NameParser nameParser, final PlaceId placeId, final DateRange date) {
+    Person person(final NameParser nameParser, final Place place, final DateRange date) {
         final var id = this.personId();
         final var name = this.name(nameParser);
         final var gender = this.gender();
-        final var events = this.events(id, placeId, date);
+        final var events = this.events(id, place, date);
         return new GenericRecordPerson(id, name, gender, events, notes);
     }
 
-    Set<Event> events(final PersonId personId, final PlaceId placeId, final DateRange date) {
-        return Collections.singleton(new GenericResidence(personId, date, placeId));
+    Set<Event> events(final PersonId personId, final Place place, final DateRange date) {
+        return Collections.singleton(new GenericResidence(personId, date, place));
     }
 
 }

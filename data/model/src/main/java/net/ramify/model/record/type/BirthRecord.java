@@ -1,11 +1,11 @@
 package net.ramify.model.record.type;
 
-import net.ramify.model.place.HasPlaceId;
+import net.ramify.model.place.HasPlace;
 import net.ramify.model.record.SingleFamilyRecord;
 
 import javax.annotation.Nonnull;
 
-public interface BirthRecord extends SingleFamilyRecord, HasPlaceId {
+public interface BirthRecord extends SingleFamilyRecord, HasPlace {
 
     @Override
     default <R> R handleWith(@Nonnull RecordHandler<R> handler) {

@@ -1,31 +1,24 @@
 package net.ramify.model.event.type.misc;
 
 import net.ramify.model.event.Event;
-import net.ramify.model.event.proto.EventProto;
-import net.ramify.model.place.HasPlaceId;
-import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.HasPlace;
+import net.ramify.model.place.Place;
 
 import javax.annotation.Nonnull;
 
-public class EventWithPlace<E extends Event> extends ComposedEvent<E> implements HasPlaceId {
+public class EventWithPlace<E extends Event> extends ComposedEvent<E> implements HasPlace {
 
-    private final PlaceId placeId;
+    private final Place place;
 
-    public EventWithPlace(final E delegate, final PlaceId placeId) {
+    public EventWithPlace(final E delegate, final Place place) {
         super(delegate);
-        this.placeId = placeId;
+        this.place = place;
     }
 
     @Nonnull
     @Override
-    public PlaceId placeId() {
-        return placeId;
+    public Place place() {
+        return place;
     }
 
-    @Nonnull
-    @Override
-    public EventProto.Event.Builder toProtoBuilder() {
-        return super.toProtoBuilder()
-                .setPlaceId(placeId.value());
-    }
 }
