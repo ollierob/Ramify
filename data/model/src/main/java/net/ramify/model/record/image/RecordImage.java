@@ -12,6 +12,9 @@ public interface RecordImage extends BuildsProto<RecordProto.RecordImage> {
     @Nonnull
     String id();
 
+    @CheckForNull
+    String group();
+
     @Nonnull
     String filename();
 
@@ -23,6 +26,7 @@ public interface RecordImage extends BuildsProto<RecordProto.RecordImage> {
     default RecordProto.RecordImage toProto() {
         return RecordProto.RecordImage.newBuilder()
                 .setId(this.id())
+                .setGroup(MoreObjects.firstNonNull(this.group(), ""))
                 .setFilename(this.filename())
                 .setThumbnail(MoreObjects.firstNonNull(this.thumbnailPath(), ""))
                 .build();

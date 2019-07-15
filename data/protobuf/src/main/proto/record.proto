@@ -78,8 +78,9 @@ message RecordSearch {
 message RecordImage {
 
     string id = 1;
-    string filename = 2;
-    string thumbnail = 3;
+    string group = 2;
+    string filename = 3;
+    string thumbnail = 4;
 
 }
 

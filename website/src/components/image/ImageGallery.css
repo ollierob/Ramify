@@ -1,5 +1,9 @@
-.imageGallery .thumbnails {
+.imageGallery .thumbnails.inline {
     overflow-x: hidden;
+}
+
+.imageGallery .thumbnails.blocks {
+
 }
 
 .imageGallery .thumbnails .thumbnail {
@@ -12,6 +16,27 @@
     max-height: 150px;
 }
 
-.imageGallery .image {
-    height: unset;
+.imageGallery.ant-modal {
+    top: 32px;
+}
+
+.imageGallery .magnifier {
+    height: calc(100vh - 280px)
+}
+
+.imageGallery .magnifier img.base {
+    max-height: 100%;
+    cursor: zoom-in;
+}
+
+.imageGallery .magnifier div.magnified {
+    position: absolute;
+    top: 0;
+}
+
+.imageGallery .magnifier img.magnified {
+    cursor: move;
+    position: absolute;
+    top: 0;
+    left: 0;
 }

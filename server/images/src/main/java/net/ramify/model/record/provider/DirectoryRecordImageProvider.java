@@ -48,6 +48,12 @@ class DirectoryRecordImageProvider implements RecordImageProvider {
             return id;
         }
 
+        @CheckForNull
+        @Override
+        public String group() {
+            return null;
+        }
+
         @Nonnull
         @Override
         public String filename() {
