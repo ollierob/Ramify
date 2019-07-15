@@ -36,10 +36,10 @@
     left: 0;
     width: 100%;
     overflow: hidden;
+    cursor: move;
 }
 
 .imageGallery .magnifier img.magnified {
-    cursor: move;
     position: absolute;
     top: 0;
     left: 0;
