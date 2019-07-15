@@ -95,15 +95,23 @@ const ImageModal = (props: {visible: boolean, images: ReadonlyArray<Image>, clos
 
 };
 
-class Magnifier extends React.Component<{image: Image, visible: boolean}, {mouseX?: number, mouseY?: number, magnified?: boolean}> {
+type MagnifierProps = {
+    image: Image
+    visible: boolean
+}
+
+class Magnifier extends React.Component<MagnifierProps, {mouseX?: number, mouseY?: number, magnified?: boolean}> {
 
     private onMouseMove = (e: MouseEvent<HTMLDivElement>) => this.setState({mouseX: e.pageX, mouseY: e.pageY});
     private onZoomIn = () => this.setState({magnified: true});
-    private onZoomOut = () => this.setState({magnified: false});
+
+    private mouseDown: Date;
 
     constructor(props) {
         super(props);
         this.state = {};
+        this.onMagnifiedMouseDown = this.onMagnifiedMouseDown.bind(this);
+        this.onMagnifiedMouseUp = this.onMagnifiedMouseUp.bind(this);
     }
 
     render() {
@@ -127,7 +135,8 @@ class Magnifier extends React.Component<{image: Image, visible: boolean}, {mouse
                     src={image.src}
                     className="magnified"
                     style={{transform: "translate(" + this.translateX() + "px, " + this.translateY() + "px"}}
-                    onClick={this.onZoomOut}/>
+                    onMouseDown={this.onMagnifiedMouseDown}
+                    onMouseUp={this.onMagnifiedMouseUp}/>
             </div>}
 
         </div>;
@@ -135,15 +144,31 @@ class Magnifier extends React.Component<{image: Image, visible: boolean}, {mouse
     }
 
     private translateX(): number {
-        return this.state.mouseX; //FIXME
+        return this.state.mouseX - 200; //FIXME
     }
 
     private translateY(): number {
-        return this.state.mouseY;
+        return this.state.mouseY - 200;
     }
 
-    componentDidUpdate() {
-        if (!this.props.visible && this.state.magnified)
+    private onMagnifiedMouseDown() {
+        this.mouseDown = new Date();
+    }
+
+    private onMagnifiedMouseUp() {
+        if (!this.mouseDown) return this.zoomOut();
+        const msMouseDown = new Date().getTime() - this.mouseDown.getTime();
+        if (msMouseDown < 250) return this.zoomOut();
+        //Pan
+    }
+
+    private zoomOut() {
+        this.mouseDown = null;
+        this.setState({magnified: false});
+    }
+
+    componentDidUpdate(prevProps: Readonly<MagnifierProps>) {
+        if (this.props.image != prevProps.image || (!this.props.visible && this.state.magnified))
             this.setState({magnified: false});
     }
 
