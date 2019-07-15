@@ -34,6 +34,7 @@ export class Magnifier extends React.Component<Props, State> {
         const {magnified} = this.state;
 
         //TODO adapt https://github.com/AdamRisberg/react-image-magnifiers/blob/master/src/MagnifierRenderer.js
+        //TODO or use https://github.com/ajainarayanan/react-pan-zoom
 
         return <div className="magnifier" onMouseMove={this.onMouseMove}>
 
