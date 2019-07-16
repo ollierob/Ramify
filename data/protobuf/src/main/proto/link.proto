@@ -11,6 +11,7 @@ message Link {
 
     enum Type {
         WIKIPEDIA = 0;
+        WYAS = 1;
     }
 
 }
