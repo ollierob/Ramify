@@ -30,17 +30,18 @@ public class ImageResource extends AbstractResource {
     }
 
     @GET
-    @Path("records/{id}/{file}")
+    @Path("records/{id}/{group}/{file}")
     @Cached(maxAgeDays = 1)
     @Produces("image/*")
     public Response recordImage(
             @Context final UserSessionContext context,
             @PathParam("id") final RecordSetId id,
+            @PathParam("group") final String group,
             @PathParam("file") final String filename) {
         if (filename.startsWith(".") || !filename.endsWith(".jpg") || filename.contains("/")) return notFound();
         final var recordSet = recordSets.get(id);
         if (recordSet == null) return notFound();
-        return this.readSessionResource(context.session(), "/images/records/" + id.value() + "/" + filename, JPG);
+        return this.readSessionResource(context.session(), "/images/records/" + id.value() + '/' + (group == null ? "" : group + '/') + filename, JPG);
     }
 
 }

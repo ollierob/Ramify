@@ -1,12 +1,14 @@
 import * as React from "react";
 import "./ImageGallery.css";
-import {Modal} from "antd";
+import {Card, Modal} from "antd";
 import {Magnifier} from "./ImageMagnifier";
+import {stringMultimap} from "../Maps";
 
 export type Image = {
     src: string;
     thumbnailSrc?: string;
     alt?: string;
+    group: string;
 }
 
 type Props = {
@@ -16,6 +18,7 @@ type Props = {
 type State = {
     selected: Image;
     modal?: boolean;
+    imageGroups: ImageGroups;
 }
 
 export default class ImageGallery extends React.PureComponent<Props, State> {
@@ -26,7 +29,8 @@ export default class ImageGallery extends React.PureComponent<Props, State> {
     constructor(props) {
         super(props);
         this.state = {
-            selected: props.images.length ? props.images[0] : null
+            selected: props.images.length ? props.images[0] : null,
+            imageGroups: buildImageGroups(props.images)
         };
     }
 
@@ -38,12 +42,12 @@ export default class ImageGallery extends React.PureComponent<Props, State> {
             <Thumbnails
                 select={this.doSelect}
                 selected={this.state.selected}
-                images={this.props.images}
+                images={this.state.imageGroups}
                 mode="blocks"/>
 
             <ImageModal
                 visible={this.state.modal}
-                images={this.props.images}
+                images={this.state.imageGroups}
                 close={this.doClose}
                 selected={this.state.selected}
                 select={this.doSelect}/>
@@ -59,9 +63,21 @@ type SelectorProps = {
     select: (image: Image) => void;
 }
 
-const Thumbnails = (props: {images: ReadonlyArray<Image>, mode: "blocks" | "inline"} & SelectorProps) => {
+const Thumbnails = (props: {images: ImageGroups, mode: "blocks" | "inline"} & SelectorProps) => {
+    const groups = Object.keys(props.images);
+    if (!groups.length) return null;
+    const firstGroup = groups[0];
+    const useCards = props.mode == "blocks" && (groups.length > 1 || !!firstGroup);
     return <div className={"thumbnails " + props.mode}>
-        {props.images.map(image => <Thumbnail {...props} image={image}/>)}
+        {useCards && Object.keys(props.images).map(group => {
+            const images = props.images[group];
+            return <Card className="card" title={group || "Thumbnails"} size="small">
+                {images.map(image => <Thumbnail {...props} image={image}/>)}
+            </Card>;
+        })}
+        {!useCards && <>
+            {props.images[firstGroup].map(image => <Thumbnail {...props} image={image}/>)}
+        </>}
     </div>;
 };
 
@@ -74,7 +90,7 @@ const Thumbnail = (props: {image: Image} & SelectorProps) => {
     </div>;
 };
 
-const ImageModal = (props: {visible: boolean, images: ReadonlyArray<Image>, close: () => void} & SelectorProps) => {
+const ImageModal = (props: {visible: boolean, images: ImageGroups, close: () => void} & SelectorProps) => {
 
     return <Modal
         {...props}
@@ -95,3 +111,8 @@ const ImageModal = (props: {visible: boolean, images: ReadonlyArray<Image>, clos
 
 };
 
+type ImageGroups = {[group: string]: ReadonlyArray<Image>}
+
+function buildImageGroups(images: ReadonlyArray<Image>): ImageGroups {
+    return stringMultimap(images, image => image.group);
+}

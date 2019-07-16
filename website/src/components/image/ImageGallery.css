@@ -16,6 +16,10 @@
     max-height: 150px;
 }
 
+.imageGallery .thumbnails .card {
+    border: 0;
+}
+
 .imageGallery.ant-modal {
     top: 32px;
 }

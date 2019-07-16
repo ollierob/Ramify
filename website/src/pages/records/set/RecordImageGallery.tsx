@@ -62,6 +62,7 @@ export default class RecordImageGallery extends React.PureComponent<Props, State
 function toImage(basePath: string, image: RecordImage.AsObject): Image {
     return {
         src: basePath + "/" + image.filename,
-        thumbnailSrc: basePath + "/" + (image.thumbnail || image.filename)
+        thumbnailSrc: basePath + "/" + (image.thumbnail || image.filename),
+        group: image.group
     };
 };
