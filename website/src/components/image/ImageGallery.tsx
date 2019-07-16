@@ -64,7 +64,7 @@ type SelectorProps = {
 }
 
 const Thumbnails = (props: {images: ImageGroups, mode: "blocks" | "inline"} & SelectorProps) => {
-    const groups = Object.keys(props.images);
+    const groups = Object.keys(props.images).sort();
     if (!groups.length) return null;
     const firstGroup = groups[0];
     const useCards = props.mode == "blocks" && (groups.length > 1 || !!firstGroup);
