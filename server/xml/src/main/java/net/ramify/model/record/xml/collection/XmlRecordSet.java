@@ -30,6 +30,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "recordSet")
@@ -135,6 +137,12 @@ class XmlRecordSet implements HasRecordSetId, HasPlaceId {
         final var self = this.buildSelf(null, dateParser);
         this.records.forEach(record -> records.addAll(record.build(self, places, nameParser, dateParser)));
         return records;
+    }
+
+    Optional<XmlRecordSet> find(final RecordSetId id) {
+        if (this.id.equals(id.value())) return Optional.of(this);
+        if (children == null || children.isEmpty()) return Optional.empty();
+        return children.stream().map(child -> child.find(id).orElse(null)).filter(Objects::nonNull).findAny();
     }
 
 }

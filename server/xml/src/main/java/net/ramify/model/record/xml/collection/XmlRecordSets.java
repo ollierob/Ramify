@@ -1,6 +1,5 @@
 package net.ramify.model.record.xml.collection;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.person.name.NameParser;
@@ -17,6 +16,7 @@ import javax.xml.bind.annotation.XmlType;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import static net.ramify.model.record.xml.record.XmlRecord.NAMESPACE;
@@ -39,9 +39,12 @@ public class XmlRecordSets {
     @Nonnull
     public Collection<Record> records(final RecordSetId id, final PlaceProvider places, final DateParser dateParser, final NameParser nameParser) {
         if (recordSets == null || recordSets.isEmpty()) return Collections.emptySet();
-        //FIXME descend into children
-        final var targeRecordSet = Iterables.find(recordSets, set -> id.equals(set.recordSetId()));
-        return targeRecordSet.records(places, nameParser, dateParser);
+        return recordSets.stream()
+                .map(set -> set.find(id).orElse(null))
+                .filter(Objects::nonNull)
+                .findAny()
+                .map(target -> target.records(places, nameParser, dateParser))
+                .orElseGet(Collections::emptySet);
     }
 
 }
