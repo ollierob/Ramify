@@ -34,10 +34,16 @@ public abstract class DelegatedRecordSet implements RecordSet {
         return delegate.date();
     }
 
-    @Nonnull
     @Override
-    public PlaceId placeId() {
-        return delegate.placeId();
+    @CheckForNull
+    public PlaceId createdBy() {
+        return delegate.createdBy();
+    }
+
+    @Override
+    @Nonnull
+    public PlaceId covers() {
+        return delegate.covers();
     }
 
     @Nonnull

@@ -9,7 +9,7 @@
             parentId="protestation_1642_wry_morley"
             title="Wadsworth Protestation Returns"
             shortTitle="Wadsworth"
-            place="township:wadsworth"
+            coversPlaceId="township:wadsworth"
             source="government"
             type="residence">
 

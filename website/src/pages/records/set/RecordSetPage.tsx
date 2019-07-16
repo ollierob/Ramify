@@ -10,6 +10,7 @@ import {ErrorMessage} from "../../../components/style/Error";
 import {PlaceId} from "../../../components/places/Place";
 import {PlaceMap} from "../../../components/places/PlaceMap";
 import RecordSetCard from "./RecordSetCard";
+import {PlaceInfo} from "../../../components/places/PlaceInfo";
 
 type Props = RouteComponentProps<any>
 
@@ -17,7 +18,8 @@ type State = {
     records: AsyncData<ReadonlyArray<Record.AsObject>>
     recordSetId?: string;
     recordSet: AsyncData<RecordSet.AsObject>;
-    recordSetPlace: AsyncData<PlaceBundle.AsObject>
+    recordSetCoversPlace: AsyncData<PlaceBundle.AsObject>
+    recordSetSource: AsyncData<PlaceBundle.AsObject>
     recordSetChildren: AsyncData<ReadonlyArray<RecordSet.AsObject>>
     searchResults: AsyncData<ReadonlyArray<Record.AsObject>>;
 }
@@ -32,7 +34,8 @@ export default class RecordSetPage extends React.PureComponent<Props, State> {
         this.state = {
             records: {},
             recordSet: {},
-            recordSetPlace: {loading: true},
+            recordSetCoversPlace: {loading: true},
+            recordSetSource: {loading: true},
             recordSetChildren: {},
             searchResults: {}
         };
@@ -46,12 +49,18 @@ export default class RecordSetPage extends React.PureComponent<Props, State> {
         const recordSet = this.state.recordSet.data;
         if (!recordSet) return <ErrorMessage message="Unknown record set"/>;
 
+        //TODO place map should show both source and coverage of record set
         return <div className="recordSet leftRest">
 
             <PlaceMap
-                loading={this.state.recordSetPlace.loading}
-                place={this.state.recordSetPlace.data && this.state.recordSetPlace.data.place}
-                position={this.state.recordSetPlace.data && this.state.recordSetPlace.data.position}/>
+                loading={this.state.recordSetCoversPlace.loading}
+                place={this.state.recordSetCoversPlace.data && this.state.recordSetCoversPlace.data.place}
+                position={this.state.recordSetCoversPlace.data && this.state.recordSetCoversPlace.data.position}/>
+
+            <PlaceInfo
+                loading={this.state.recordSetCoversPlace.loading}
+                description={this.state.recordSetCoversPlace.data && this.state.recordSetCoversPlace.data.description}
+                place={this.state.recordSetCoversPlace.data && this.state.recordSetCoversPlace.data.place}/>
 
             <RecordSetCard
                 recordSet={recordSet}
@@ -76,7 +85,7 @@ export default class RecordSetPage extends React.PureComponent<Props, State> {
         if (this.state.recordSetId != prevState.recordSetId)
             this.loadRecordSet(this.state.recordSetId);
         if (this.state.recordSet.data && this.state.recordSet.data != prevState.recordSet.data)
-            this.loadPlace(this.state.recordSet.data.placeid);
+            this.loadPlace(this.state.recordSet.data.coversplaceid, this.state.recordSet.data.creatorplaceid);
     }
 
     private readLocation() {
@@ -93,9 +102,11 @@ export default class RecordSetPage extends React.PureComponent<Props, State> {
         asyncLoadData(id, this.recordLoader.loadRecords, records => this.setState({records}));
     }
 
-    private loadPlace(id: PlaceId) {
-        if (!id) return this.setState({recordSetPlace: {}});
-        asyncLoadData(id, this.placeLoader.loadPlaceBundle, place => this.setState({recordSetPlace: place}));
+    private loadPlace(covers: PlaceId, source: PlaceId) {
+        if (covers) asyncLoadData(covers, this.placeLoader.loadPlaceBundle, place => this.setState({recordSetCoversPlace: place}));
+        else this.setState({recordSetCoversPlace: {}});
+        if (source) asyncLoadData(source, this.placeLoader.loadPlaceBundle, place => this.setState({recordSetSource: place}));
+        else this.setState({recordSetSource: {}});
     }
 
     private search(search: RecordSearch) {

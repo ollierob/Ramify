@@ -25,6 +25,15 @@
     border: 1px solid #D7D7D7;
 }
 
+.recordSet.leftRest .placeInfo {
+    position: absolute;
+    left: 0;
+    top: 300px;
+    width: 290px;
+    background-color: white;
+    border: 1px solid #D7D7D7;
+}
+
 .recordSet.leftRest .info {
     position: absolute;
     top: 0;

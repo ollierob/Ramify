@@ -64,7 +64,9 @@
 
         <attribute name="shortTitle" type="xs:string"/>
 
-        <attribute name="place" type="xs:string" use="required"/>
+        <attribute name="creatorPlace" type="xs:string"/>
+
+        <attribute name="coversPlaceId" type="xs:string"/>
 
         <attribute name="source" type="tns:xmlRecordSetSource" use="required"/>
 
@@ -206,9 +208,9 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="government"/>
-
             <enumeration value="church"/>
+
+            <enumeration value="government"/>
 
         </restriction>
 
@@ -220,23 +222,23 @@
 
             <enumeration value="membership"/>
 
-            <enumeration value="residence"/>
-
-            <enumeration value="census"/>
-
-            <enumeration value="payment"/>
-
-            <enumeration value="death"/>
-
             <enumeration value="mixed"/>
 
             <enumeration value="birth"/>
 
+            <enumeration value="census"/>
+
+            <enumeration value="residence"/>
+
             <enumeration value="burial"/>
+
+            <enumeration value="marriage"/>
+
+            <enumeration value="payment"/>
 
             <enumeration value="baptism"/>
 
-            <enumeration value="marriage"/>
+            <enumeration value="death"/>
 
         </restriction>
 

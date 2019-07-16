@@ -9,7 +9,7 @@
             parentId="protestation_1642_wry_morley"
             title="Heptonstall Protestation Returns"
             shortTitle="Heptonstall"
-            place="township:heptonstall"
+            coversPlaceId="township:heptonstall"
             source="government"
             type="residence">
 

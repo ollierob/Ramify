@@ -2,3 +2,11 @@
     width: 100%;
     height: 100%;
 }
+
+.placeInfo .ant-card-head {
+    padding: 0 12px;
+}
+
+.placeInfo .ant-card-body {
+    padding: 12px;
+}

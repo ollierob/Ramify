@@ -7,7 +7,7 @@
     <recordSet
             id="protestation_1642"
             title="Protestation Returns"
-            place="country:england"
+            coversPlaceId="country:england"
             source="government"
             type="residence">
         <d:inYear year="1642"/>

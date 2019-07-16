@@ -22,7 +22,8 @@ public class DefaultRecordSet implements RecordSet {
     private final RecordProto.SourceType source;
     private final EventProto.RecordType type;
     private final DateRange date;
-    private final PlaceId placeId;
+    private final PlaceId creatorPlaceId;
+    private final PlaceId coversPlaceId;
     private final String longTitle, shortTitle;
     private final String description;
     private final int size;
@@ -34,8 +35,9 @@ public class DefaultRecordSet implements RecordSet {
             final RecordProto.SourceType source,
             final EventProto.RecordType type,
             final DateRange date,
-            final PlaceId placeId,
             final String longTitle,
+            final PlaceId creatorPlaceId,
+            final PlaceId coversPlaceId,
             final String shortTitle,
             final String description,
             final int size,
@@ -45,7 +47,8 @@ public class DefaultRecordSet implements RecordSet {
         this.source = source;
         this.type = type;
         this.date = date;
-        this.placeId = placeId;
+        this.creatorPlaceId = creatorPlaceId;
+        this.coversPlaceId = coversPlaceId;
         this.longTitle = longTitle;
         this.shortTitle = shortTitle;
         this.description = description;
@@ -71,10 +74,16 @@ public class DefaultRecordSet implements RecordSet {
         return date;
     }
 
+    @CheckForNull
+    @Override
+    public PlaceId createdBy() {
+        return creatorPlaceId;
+    }
+
     @Nonnull
     @Override
-    public PlaceId placeId() {
-        return placeId;
+    public PlaceId covers() {
+        return coversPlaceId;
     }
 
     @Nonnull

@@ -9,7 +9,8 @@
             parentId="heptonstall_st-thomas_registers"
             title="Heptonstall St. Thomas Burials (1593 - 1812)"
             shortTitle="Burials (to 1813)"
-            place="chapelry:heptonstall"
+            creatorPlace="church:heptonstall_st-thomas"
+            coversPlaceId="chapelry:heptonstall"
             source="church"
             type="burial">
 

@@ -8,7 +8,7 @@
             id="census_1841_wry_morley"
             parentId="census_1841_wry"
             title="Morley Wapentake 1841 Census"
-            place="wapentake:morley"
+            coversPlaceId="wapentake:morley"
             source="government"
             type="census">
 
@@ -17,7 +17,7 @@
         <recordSet
                 id="census_1841_wry_halifax"
                 title="Halifax Parish 1841 Census"
-                place="parish:halifax"
+                coversPlaceId="parish:halifax"
                 source="government"
                 type="census">
             <d:inYear year="1841"/>
@@ -30,7 +30,7 @@
             parentId="protestation_1642_wry"
             title="Morley Wapentake Protestation Returns"
             shortTitle="Morley"
-            place="wapentake:morley"
+            coversPlaceId="wapentake:morley"
             source="government"
             type="residence">
         <d:inYear year="1642"/>

@@ -10,7 +10,8 @@
             id="heptonstall_st-thomas_registers"
             parentId="wry_coe_registers"
             title="Heptonstall St. Thomas Registers"
-            place="chapelry:heptonstall"
+            creatorPlace="church:heptonstall_st-thomas"
+            coversPlaceId="chapelry:heptonstall"
             source="church"
             type="mixed">
 
@@ -23,7 +24,6 @@
         <recordSet
                 id="heptonstall_st-thomas_baptisms"
                 title="Heptonstall St. Thomas Baptisms"
-                place="chapelry:heptonstall"
                 source="church"
                 type="baptism">
             <d:betweenYears start="1599" end="1904"/>
@@ -32,7 +32,6 @@
         <recordSet
                 id="heptonstall_st-thomas_marriages"
                 title="Heptonstall St. Thomas Marriages"
-                place="chapelry:heptonstall"
                 source="church"
                 type="marriage">
             <d:betweenYears start="1593" end="1986"/>
@@ -42,7 +41,6 @@
                 id="heptonstall_st-thomas_pew_rents"
                 title="Heptonstall St. Thomas Pew Rentals"
                 shortTitle="Pew Rentals"
-                place="chapelry:heptonstall"
                 source="church"
                 type="membership">
             <d:betweenYears start="1796" end="1847"/>

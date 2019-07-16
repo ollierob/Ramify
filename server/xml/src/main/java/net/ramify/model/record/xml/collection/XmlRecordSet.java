@@ -6,7 +6,6 @@ import net.ramify.model.date.xml.XmlBetweenYears;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlInYear;
 import net.ramify.model.person.name.NameParser;
-import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.record.Record;
@@ -35,7 +34,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "recordSet")
-class XmlRecordSet implements HasRecordSetId, HasPlaceId {
+class XmlRecordSet implements HasRecordSetId {
 
     @XmlAttribute(name = "id", required = true)
     private String id;
@@ -49,8 +48,11 @@ class XmlRecordSet implements HasRecordSetId, HasPlaceId {
     @XmlAttribute(name = "shortTitle", required = false)
     private String shortTitle;
 
-    @XmlAttribute(name = "place", required = true)
-    private String place;
+    @XmlAttribute(name = "creatorPlace", required = false)
+    private String creatorPlaceId;
+
+    @XmlAttribute(name = "coversPlaceId", required = false)
+    private String coversPlaceId;
 
     @XmlAttribute(name = "source", required = true)
     private XmlRecordSetSource source;
@@ -90,24 +92,31 @@ class XmlRecordSet implements HasRecordSetId, HasPlaceId {
         return recordSets;
     }
 
-    private RecordSet buildSelf(final RecordSet parent, final DateParser dateParser) {
+    private RecordSet buildSelf(@CheckForNull final RecordSet parent, final DateParser dateParser) {
         return new DefaultRecordSet(
                 this.recordSetId(),
                 parent,
                 source.source(),
                 type.type(),
                 Functions.ifNonNull(date, d -> d.resolve(dateParser)),
-                placeId(),
                 title,
+                this.creatorPlaceId(parent),
+                this.coversPlaceId(parent),
                 shortTitle,
                 Functions.ifNonNull(description, String::trim),
                 this.size(),
                 this.buildReferences());
     }
 
-    @Override
-    public PlaceId placeId() {
-        return new PlaceId(place);
+    @CheckForNull
+    PlaceId creatorPlaceId(@CheckForNull final RecordSet parent) {
+        if (creatorPlaceId != null) return new PlaceId(creatorPlaceId);
+        return Functions.ifNonNull(parent, RecordSet::createdBy);
+    }
+
+    PlaceId coversPlaceId(final RecordSet parent) {
+        if (coversPlaceId != null) return new PlaceId(coversPlaceId);
+        return Functions.ifNonNull(parent, RecordSet::covers);
     }
 
     private Set<RecordSetReference> buildReferences() {

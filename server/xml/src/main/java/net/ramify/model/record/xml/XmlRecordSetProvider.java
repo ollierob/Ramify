@@ -133,6 +133,8 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
             recordSets.forEach(rs -> recordProvider.add(rs.recordSetId(), file));
         } catch (final JAXBException jex) {
             logger.warn("Could not read records in file " + file + ": " + jex.getMessage());
+        } catch (final Exception ex) {
+            throw new RuntimeException("Error reading records in file " + file, ex);
         }
     }
 

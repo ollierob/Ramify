@@ -33,8 +33,10 @@ message RecordSet {
     RecordType type = 6;
     RecordSet parent = 7;
     DateRange date = 8;
-    string placeId = 9;
-    uint32 numRecords = 10;
+    uint32 numRecords = 9;
+
+    string creatorPlaceId = 10;
+    string coversPlaceId = 11;
 
     repeated ExternalRecordReference externalReference = 20;
 

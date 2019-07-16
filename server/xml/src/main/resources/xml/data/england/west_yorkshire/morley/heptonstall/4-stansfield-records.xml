@@ -11,7 +11,7 @@
             parentId="protestation_1642_wry_morley"
             title="Stansfield Protestation Returns"
             shortTitle="Stansfield"
-            place="township:stansfield"
+            coversPlaceId="township:stansfield"
             source="government"
             type="residence">
         <d:inYear year="1642"/>
@@ -22,7 +22,7 @@
             parentId="protestation_1642_wry_morley"
             title="Cross Stone Protestation Returns"
             shortTitle="Cross Stone"
-            place="township:stansfield"
+            coversPlaceId="township:stansfield"
             source="government"
             type="residence">
         <d:inYear year="1642"/>
