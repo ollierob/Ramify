@@ -62,6 +62,8 @@
 
     <element name="wikipediaLink" type="tns:xmlWikipediaLink"/>
 
+    <element name="wyasLink" type="tns:xmlWyasLink"/>
+
     <complexType name="xmlChurchInfo">
 
         <sequence>
@@ -140,13 +142,33 @@
 
     </complexType>
 
+    <complexType name="xmlWyasLink">
+
+        <complexContent>
+
+            <extension base="tns:xmlLink">
+
+                <sequence/>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
     <complexType name="xmlPlaceDescription">
 
         <sequence>
 
             <element maxOccurs="unbounded" minOccurs="0" ref="tns:alsoSee"/>
 
-            <element maxOccurs="unbounded" minOccurs="0" ref="tns:wikipediaLink"/>
+            <choice maxOccurs="unbounded" minOccurs="0">
+
+                <element ref="tns:wikipediaLink"/>
+
+                <element ref="tns:wyasLink"/>
+
+            </choice>
 
             <element form="qualified" name="description" type="xs:string"/>
 

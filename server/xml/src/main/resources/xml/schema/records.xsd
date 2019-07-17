@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
         xmlns:ns1="http://ramify.net/dates"
-        xmlns:ns2="http://ramify.net/people"
-        xmlns:ns3="http://ramify.net/families"
+        xmlns:ns2="http://ramify.net/places"
+        xmlns:ns3="http://ramify.net/people"
+        xmlns:ns4="http://ramify.net/families"
         xmlns:tns="http://ramify.net/records"
         xmlns:xs="http://www.w3.org/2001/XMLSchema"
         targetNamespace="http://ramify.net/records"
         version="1.0">
 
     <import namespace="http://ramify.net/dates" schemaLocation="dates.xsd"/>
+
+    <import namespace="http://ramify.net/places" schemaLocation="places.xsd"/>
 
     <import namespace="http://ramify.net/people" schemaLocation="people.xsd"/>
 
@@ -76,13 +79,17 @@
 
     <complexType name="xmlRecordSetReference">
 
-        <sequence/>
+        <choice>
+
+            <element ref="ns2:wikipediaLink"/>
+
+            <element ref="ns2:wyasLink"/>
+
+        </choice>
 
         <attribute name="reference" type="xs:string" use="required"/>
 
         <attribute name="archive" type="xs:string" use="required"/>
-
-        <attribute name="link" type="xs:string"/>
 
     </complexType>
 
@@ -134,7 +141,7 @@
 
         <attribute name="name" type="xs:string"/>
 
-        <attribute name="gender" type="ns2:xmlGender" use="required"/>
+        <attribute name="gender" type="ns3:xmlGender" use="required"/>
 
         <attribute name="notes" type="xs:string"/>
 
@@ -170,9 +177,9 @@
 
                     <choice maxOccurs="unbounded" minOccurs="0">
 
-                        <element ref="ns3:father"/>
+                        <element ref="ns4:father"/>
 
-                        <element ref="ns3:mother"/>
+                        <element ref="ns4:mother"/>
 
                     </choice>
 
@@ -208,9 +215,9 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="church"/>
-
             <enumeration value="government"/>
+
+            <enumeration value="church"/>
 
         </restriction>
 
@@ -222,23 +229,23 @@
 
             <enumeration value="membership"/>
 
-            <enumeration value="mixed"/>
+            <enumeration value="payment"/>
 
             <enumeration value="birth"/>
 
-            <enumeration value="census"/>
-
-            <enumeration value="residence"/>
+            <enumeration value="baptism"/>
 
             <enumeration value="burial"/>
 
             <enumeration value="marriage"/>
 
-            <enumeration value="payment"/>
-
-            <enumeration value="baptism"/>
-
             <enumeration value="death"/>
+
+            <enumeration value="mixed"/>
+
+            <enumeration value="census"/>
+
+            <enumeration value="residence"/>
 
         </restriction>
 

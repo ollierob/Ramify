@@ -2,7 +2,8 @@
 
 <recordSets
         xmlns="http://ramify.net/records"
-        xmlns:d="http://ramify.net/dates">
+        xmlns:d="http://ramify.net/dates"
+        xmlns:p="http://ramify.net/places">
 
     <recordSet
             id="heptonstall_wesleyan_registers"
@@ -19,10 +20,9 @@
                 source="church"
                 type="baptism">
             <d:betweenYears start="1798" end="1946"/>
-            <recordSetReference
-                    reference="HB:29"
-                    archive="West Yorkshire Archive Services"
-                    link="https://www.catalogue.wyjs.org.uk/CalmView/Record.aspx?src=CalmView.Catalog&amp;id=CC00679%2f5%2f1%2f1"/>
+            <recordSetReference reference="HB:29" archive="West Yorkshire Archive Services">
+                <p:wyasLink href="https://www.catalogue.wyjs.org.uk/CalmView/Record.aspx?src=CalmView.Catalog&amp;id=CC00679%2f5"/>
+            </recordSetReference>
         </recordSet>
 
         <recordSet

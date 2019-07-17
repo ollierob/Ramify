@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "alsoSee")
-class XmlAlsoSeeId {
+public class XmlAlsoSeeId {
 
     @XmlAttribute(name = "id", required = true)
     private String id;

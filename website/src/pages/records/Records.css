@@ -45,8 +45,12 @@
     font-size: 1.5em;
 }
 
-.recordSet .info .parent {
+.recordSet .info {
     font-size: 1.2em;
+}
+
+.recordSet .info .references .image {
+    vertical-align: middle;
 }
 
 .records.ant-tabs .ant-tabs-bar.ant-tabs-top-bar {

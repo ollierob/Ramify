@@ -2,9 +2,7 @@
 
 <recordSets
         xmlns="http://ramify.net/records"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:d="http://ramify.net/dates"
-        xsi:schemaLocation="http://ramify.net/records ../../../../../schema/records.xsd http://ramify.net/dates ../../../../../schema/dates.xsd">
+        xmlns:d="http://ramify.net/dates">
 
     <recordSet
             id="heptonstall_st-thomas_registers"
@@ -35,15 +33,6 @@
                 source="church"
                 type="marriage">
             <d:betweenYears start="1593" end="1986"/>
-        </recordSet>
-
-        <recordSet
-                id="heptonstall_st-thomas_pew_rents"
-                title="Heptonstall St. Thomas Pew Rentals"
-                shortTitle="Pew Rentals"
-                source="church"
-                type="membership">
-            <d:betweenYears start="1796" end="1847"/>
         </recordSet>
 
     </recordSet>

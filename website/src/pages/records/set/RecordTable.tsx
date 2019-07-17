@@ -33,7 +33,7 @@ export class RecordTable extends React.PureComponent<Props, State> {
     constructor(props) {
         super(props);
         const properties = {};
-        const data = buildIndividualRecords(props.records, properties);
+        const data = buildIndividualRecords(props.references, properties);
         const columns = determineColumns(props.recordSet, properties);
         this.state = {data, columns};
     }

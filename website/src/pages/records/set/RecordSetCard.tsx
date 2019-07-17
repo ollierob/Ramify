@@ -1,6 +1,6 @@
 import * as React from "react";
 import {CSSProperties} from "react";
-import {Record, RecordSet} from "../../../protobuf/generated/record_pb";
+import {ExternalRecordReference, Record, RecordSet} from "../../../protobuf/generated/record_pb";
 import {Card, Icon} from "antd";
 import {recordSetHref} from "../RecordLinks";
 import {RecordCards} from "../../../components/records/RecordCards";
@@ -9,6 +9,7 @@ import {RecordSearchHandler} from "../../../components/search/RecordSearchHandle
 import {RecordResults} from "./RecordResults";
 import {AsyncData} from "../../../components/fetch/AsyncData";
 import {RecordPaginationHandler} from "../../../components/records/RecordPaginationHandler";
+import {Link} from "../../../components/style/Links";
 
 type Props = RecordPaginationHandler & RecordSearchHandler & {
     recordSet: Readonly<RecordSet.AsObject>
@@ -29,6 +30,9 @@ export default class RecordSetCard extends React.PureComponent<Props> {
 
             <PartOf
                 parent={recordSet.parent}/>
+
+            <References
+                references={recordSet.externalreferenceList}/>
 
             <Description
                 record={recordSet}/>
@@ -66,6 +70,24 @@ const PartOf = (props: {parent: RecordSet.AsObject}) => {
     return <div className="parent" style={MarginBottom}>
         <Icon type="up-square"/> Part of <a href={recordSetHref(props.parent)}>{props.parent.longtitle}</a>
     </div>;
+};
+
+const References = (props: {references: ReadonlyArray<ExternalRecordReference.AsObject>}) => {
+    const references = props.references;
+    if (!references || !references.length) return null;
+    return <div className="references" style={MarginBottom}>
+        <Icon type="book"/> This record is held at
+        {references.map(ref => <> <Reference reference={ref}/></>)}
+    </div>;
+};
+
+const Reference = (props: {reference: ExternalRecordReference.AsObject}) => {
+    const reference = props.reference;
+    if (!reference) return null;
+    const c = <>{reference.archive} ({reference.reference})</>;
+    return <>
+        {reference.link ? <Link link={reference.link}>{c}</Link> : c}
+    </>;
 };
 
 const MarginBottom: CSSProperties = {marginBottom: 16};
