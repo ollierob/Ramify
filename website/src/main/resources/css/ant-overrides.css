@@ -5,3 +5,7 @@
 .ant-menu-submenu a {
     color: unset;
 }
+
+.ant-menu-submenu.ant-menu-submenu-open a {
+    color: #B72F17;
+}
