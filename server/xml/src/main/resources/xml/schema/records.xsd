@@ -80,6 +80,8 @@
 
             <choice minOccurs="0">
 
+                <element ref="ns2:textLink"/>
+
                 <element ref="ns2:wikipediaLink"/>
 
                 <element ref="ns2:wyasLink"/>
@@ -228,25 +230,25 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="census"/>
-
-            <enumeration value="burial"/>
+            <enumeration value="baptism"/>
 
             <enumeration value="marriage"/>
 
             <enumeration value="birth"/>
 
-            <enumeration value="membership"/>
+            <enumeration value="census"/>
 
-            <enumeration value="residence"/>
+            <enumeration value="membership"/>
 
             <enumeration value="payment"/>
 
+            <enumeration value="burial"/>
+
             <enumeration value="mixed"/>
 
-            <enumeration value="death"/>
+            <enumeration value="residence"/>
 
-            <enumeration value="baptism"/>
+            <enumeration value="death"/>
 
         </restriction>
 

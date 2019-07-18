@@ -6,7 +6,7 @@ import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
-@XmlSeeAlso({XmlWikipediaLink.class, XmlWyasLink.class})
+@XmlSeeAlso({XmlTextLink.class, XmlWikipediaLink.class})
 public abstract class XmlLink implements Link {
 
     @XmlAttribute(name = "href", required = true)

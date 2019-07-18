@@ -52,6 +52,8 @@
 
     <element name="state" type="tns:xmlState"/>
 
+    <element name="textLink" type="tns:xmlTextLink"/>
+
     <element name="town" type="tns:xmlTown"/>
 
     <element name="township" type="tns:xmlTownship"/>
@@ -128,7 +130,7 @@
 
     </complexType>
 
-    <complexType name="xmlWikipediaLink">
+    <complexType name="xmlTextLink">
 
         <complexContent>
 
@@ -136,13 +138,15 @@
 
                 <sequence/>
 
+                <attribute name="text" type="xs:string" use="required"/>
+
             </extension>
 
         </complexContent>
 
     </complexType>
 
-    <complexType name="xmlWyasLink">
+    <complexType name="xmlWikipediaLink">
 
         <complexContent>
 
@@ -163,6 +167,8 @@
             <element maxOccurs="unbounded" minOccurs="0" ref="tns:alsoSee"/>
 
             <choice maxOccurs="unbounded" minOccurs="0">
+
+                <element ref="tns:textLink"/>
 
                 <element ref="tns:wikipediaLink"/>
 
@@ -185,6 +191,20 @@
             <element maxOccurs="unbounded" minOccurs="0" ref="tns:placeDescription"/>
 
         </sequence>
+
+    </complexType>
+
+    <complexType name="xmlWyasLink">
+
+        <complexContent>
+
+            <extension base="tns:xmlLink">
+
+                <sequence/>
+
+            </extension>
+
+        </complexContent>
 
     </complexType>
 
