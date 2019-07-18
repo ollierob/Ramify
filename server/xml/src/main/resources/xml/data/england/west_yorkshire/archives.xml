@@ -2,7 +2,7 @@
 
 <archives xmlns="http://ramify.net/places">
 
-    <archive id="wyas" name="West Yorkshire Archive Services">
+    <archive id="wyas" name="West Yorkshire Archive Services" iconHref="/images/links/wyas.png">
         <textLink href="https://www.wyjs.org.uk/archive-service/" text="WYAS"/>
     </archive>
 

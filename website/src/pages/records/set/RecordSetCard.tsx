@@ -85,9 +85,11 @@ const References = (props: {references: ReadonlyArray<ExternalRecordReference.As
 const Reference = (props: {reference: ExternalRecordReference.AsObject}) => {
     const reference = props.reference;
     if (!reference) return null;
-    const c = <>{reference.archive.name} ({reference.reference})</>;
+    const item = <>(reference {reference.reference})</>;
     return <>
-        {reference.link ? <Link link={reference.link}>{c}</Link> : c}
+        <Link link={reference.archive.website} iconPath={reference.archive.icon} newWindow>{reference.archive.name}</Link>
+        {" "}
+        {reference.link ? <Link link={reference.link} newWindow>{item}</Link> : item}
     </>;
 };
 

@@ -1,5 +1,6 @@
 package net.ramify.model.record.archive;
 
+import com.google.common.base.MoreObjects;
 import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.record.HasTitleDescription;
 import net.ramify.model.record.proto.ArchiveProto;
@@ -20,12 +21,14 @@ public class Archive implements HasArchiveId, HasTitleDescription, BuildsProto<A
     private final String name;
     private final String description;
     private final Link website;
+    private final String iconHref;
 
-    public Archive(final ArchiveId id, final String name, final String description, final Link website) {
+    public Archive(final ArchiveId id, final String name, final String description, final Link website, final String iconHref) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.website = website;
+        this.iconHref = iconHref;
     }
 
     @Nonnull
@@ -57,7 +60,8 @@ public class Archive implements HasArchiveId, HasTitleDescription, BuildsProto<A
         return ArchiveProto.Archive.newBuilder()
                 .setId(id.value())
                 .setName(name)
-                .setWebsite(website.toProto());
+                .setWebsite(website.toProto())
+                .setIcon(MoreObjects.firstNonNull(iconHref, ""));
     }
 
 }

@@ -228,25 +228,25 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="birth"/>
-
-            <enumeration value="baptism"/>
-
-            <enumeration value="death"/>
+            <enumeration value="census"/>
 
             <enumeration value="residence"/>
 
-            <enumeration value="payment"/>
+            <enumeration value="birth"/>
 
             <enumeration value="burial"/>
 
+            <enumeration value="death"/>
+
             <enumeration value="mixed"/>
 
-            <enumeration value="membership"/>
-
-            <enumeration value="census"/>
-
             <enumeration value="marriage"/>
+
+            <enumeration value="baptism"/>
+
+            <enumeration value="payment"/>
+
+            <enumeration value="membership"/>
 
         </restriction>
 

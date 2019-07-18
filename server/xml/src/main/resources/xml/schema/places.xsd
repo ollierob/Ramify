@@ -82,6 +82,8 @@
 
         <attribute name="name" type="xs:string" use="required"/>
 
+        <attribute name="iconHref" type="xs:string"/>
+
     </complexType>
 
     <complexType name="xmlTextLink">

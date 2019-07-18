@@ -21,6 +21,9 @@ public class XmlArchive implements HasArchiveId {
     @XmlAttribute(name = "name", required = true)
     private String name;
 
+    @XmlAttribute(name = "iconHref")
+    private String iconHref;
+
     @XmlElement(namespace = XmlPlace.NAMESPACE, name = "description")
     private String description;
 
@@ -33,7 +36,8 @@ public class XmlArchive implements HasArchiveId {
                 this.archiveId(),
                 name,
                 description,
-                link);
+                link,
+                iconHref);
     }
 
     @Nonnull

@@ -11,12 +11,12 @@ export const Links = (props: {links: ReadonlyArray<LinkProto.AsObject>}) => {
     </div>;
 };
 
-export const Link = (props: {link: LinkProto.AsObject, children?: React.ReactNode, newWindow?: boolean}) => {
+export const Link = (props: {link: LinkProto.AsObject, iconPath?: string, children?: React.ReactNode, newWindow?: boolean}) => {
     const link = props.link;
     if (!link) return null;
-    const icon = linkIcon(link);
+    const icon = (props.iconPath && <img src={props.iconPath} className="image"/>) || linkIcon(link);
     return <a href={link.href} target={props.newWindow ? "_blank" : "_self"}>
-        {icon || <Icon type="link"/>}
+        {icon}
         {props.children && <> {props.children}</>}
     </a>;
 };
