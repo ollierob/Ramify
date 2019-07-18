@@ -2,7 +2,7 @@ import * as React from "react";
 import {Place} from "../../protobuf/generated/place_pb";
 import {Card} from "antd";
 import {placeTypeName} from "../places/PlaceType";
-import {RecordSet} from "../../protobuf/generated/record_pb";
+import {ExternalRecordReference, RecordSet} from "../../protobuf/generated/record_pb";
 import {FormattedYearRange} from "../date/FormattedDateRange";
 import {placeHref} from "../../pages/places/PlaceLinks";
 import {recordSetHref} from "../../pages/records/RecordLinks";
@@ -11,6 +11,7 @@ import "./RecordCards.css";
 import {RecordsIcon} from "../images/Icons";
 import {RecordType, recordTypeFromValue} from "./RecordType";
 import {HasClass} from "../style/HasClass";
+import {Link} from "../style/Links";
 
 export const RecordCards = (props: HasClass & {records: ReadonlyArray<RecordSet.AsObject>, groupByParent?: boolean, shortTitle?: boolean, alsoSee?: ReadonlyArray<Place.AsObject>}) => {
     const records = props.records;
@@ -47,11 +48,20 @@ const RecordCard = (props: {record: RecordSet.AsObject, shortTitle?: boolean}) =
     return <Card
         title={<a href={recordSetHref(record)}>{title}</a>}
         className="recordCard">
+        {record.externalreferenceList.length == 1 && <RecordReference reference={record.externalreferenceList[0]}/>}
         Available <FormattedYearRange date={record.date}/>
         <br/>
         {record.numrecords.toLocaleString()} records
         {record.description && <div className="notags">{record.description}</div>}
     </Card>;
+};
+
+const RecordReference = (props: {reference: ExternalRecordReference.AsObject}) => {
+    return <div className="reference">
+        <Link link={props.reference.link} iconPath={props.reference.archive.icon} newWindow>
+            {props.reference.reference}
+        </Link>
+    </div>;
 };
 
 const AlsoSeeCard = (props: {alsoSee: ReadonlyArray<Place.AsObject>}) => {
