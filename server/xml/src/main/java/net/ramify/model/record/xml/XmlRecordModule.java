@@ -11,7 +11,6 @@ import net.ramify.model.person.XmlNameParser;
 import net.ramify.model.person.name.NameParser;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.xml.XmlPlaceModule;
-import net.ramify.model.record.archive.ArchiveProvider;
 import net.ramify.model.record.provider.RecordSetProvider;
 import net.ramify.model.record.provider.RecordsProvider;
 import net.ramify.model.record.xml.collection.XmlRecordSets;
@@ -62,12 +61,6 @@ public class XmlRecordModule extends PrivateModule {
     @Singleton
     XmlRecordProvider provideRecordProvider(final JAXBContext context, final PlaceProvider places, final RecordContext recordContext) {
         return new XmlRecordProvider(Maps.newHashMap(), context, places, recordContext);
-    }
-
-    @Provides
-    @Singleton
-    ArchiveProvider archiveProvider() {
-        return id -> null; //FIXME
     }
 
 }

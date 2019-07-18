@@ -27,6 +27,10 @@ public abstract class AbstractMappedProvider<K, V> implements Provider<K, V> {
         return map.keySet();
     }
 
+    protected void put(final K key, final V value) {
+        this.map.put(key, value);
+    }
+
     protected void putAll(final Map<? extends K, ? extends V> map) {
         this.map.putAll(map);
     }
