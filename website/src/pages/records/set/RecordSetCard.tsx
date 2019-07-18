@@ -33,7 +33,7 @@ export default class RecordSetCard extends React.PureComponent<Props> {
                 parent={recordSet.parent}/>
 
             <References
-                references={recordSet.externalreferenceList}/>
+                references={recordSet.externalreferenceList.length ? recordSet.externalreferenceList : recordSet.parent && recordSet.parent.externalreferenceList}/>
 
             <Description
                 record={recordSet}/>
