@@ -13,6 +13,8 @@
             source="church"
             type="mixed">
 
+        <recordSetReference reference="UC" archive="West Yorkshire Archive Services"/>
+
         <recordSet
                 id="heptonstall_wesleyan_baptisms"
                 title="Heptonstall Methodist Church Baptisms"

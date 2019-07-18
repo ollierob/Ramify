@@ -18,7 +18,7 @@ class XmlRecordSetReference {
     @XmlAttribute(name = "archive", required = true)
     private String archive;
 
-    @XmlElementRef
+    @XmlElementRef(required = false)
     private XmlLink link;
 
     @Nonnull

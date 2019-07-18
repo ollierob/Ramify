@@ -10,11 +10,8 @@
         version="1.0">
 
     <import namespace="http://ramify.net/dates" schemaLocation="dates.xsd"/>
-
     <import namespace="http://ramify.net/places" schemaLocation="places.xsd"/>
-
     <import namespace="http://ramify.net/people" schemaLocation="people.xsd"/>
-
     <import namespace="http://ramify.net/families" schemaLocation="families.xsd"/>
 
     <element name="burialRecords" type="tns:xmlBurialRecords"/>
@@ -79,13 +76,17 @@
 
     <complexType name="xmlRecordSetReference">
 
-        <choice>
+        <sequence>
 
-            <element ref="ns2:wikipediaLink"/>
+            <choice minOccurs="0">
 
-            <element ref="ns2:wyasLink"/>
+                <element ref="ns2:wikipediaLink"/>
 
-        </choice>
+                <element ref="ns2:wyasLink"/>
+
+            </choice>
+
+        </sequence>
 
         <attribute name="reference" type="xs:string" use="required"/>
 
@@ -229,21 +230,21 @@
 
             <enumeration value="membership"/>
 
-            <enumeration value="payment"/>
+            <enumeration value="census"/>
 
             <enumeration value="birth"/>
 
-            <enumeration value="baptism"/>
+            <enumeration value="payment"/>
+
+            <enumeration value="death"/>
 
             <enumeration value="burial"/>
 
             <enumeration value="marriage"/>
 
-            <enumeration value="death"/>
-
             <enumeration value="mixed"/>
 
-            <enumeration value="census"/>
+            <enumeration value="baptism"/>
 
             <enumeration value="residence"/>
 

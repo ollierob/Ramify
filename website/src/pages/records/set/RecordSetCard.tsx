@@ -46,7 +46,6 @@ export default class RecordSetCard extends React.PureComponent<Props> {
             <PersonSearch
                 disabled
                 {...this.props}
-                showAge={!isBirthOrBaptismRecord(this.props.recordSet)}
                 style={MarginBottom}/>
 
             <RecordResults
