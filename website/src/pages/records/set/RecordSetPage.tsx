@@ -58,6 +58,7 @@ export default class RecordSetPage extends React.PureComponent<Props, State> {
                 position={this.state.recordSetCoversPlace.data && this.state.recordSetCoversPlace.data.position}/>
 
             <PlaceInfo
+                preTitle={<>These records relate to<br/></>}
                 loading={this.state.recordSetCoversPlace.loading}
                 description={this.state.recordSetCoversPlace.data && this.state.recordSetCoversPlace.data.description}
                 place={this.state.recordSetCoversPlace.data && this.state.recordSetCoversPlace.data.place}/>

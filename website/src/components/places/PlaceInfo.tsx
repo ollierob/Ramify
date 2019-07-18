@@ -9,6 +9,7 @@ type Props = HasClass & {
     loading: boolean;
     place: Place.AsObject;
     description: PlaceDescription.AsObject;
+    preTitle?: React.ReactNode;
 }
 
 export const PlaceInfo = (props: Props) => {
@@ -19,7 +20,7 @@ export const PlaceInfo = (props: Props) => {
     return <Card
         className={"placeInfo " + (props.className || "")}
         style={props.style}
-        title={<PlaceContextMenu place={props.place}/>}>
+        title={<>{props.preTitle}<PlaceContextMenu place={props.place}/></>}>
 
         {props.description.description || <i>No description available.</i>}
 
