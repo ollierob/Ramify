@@ -1,10 +1,8 @@
 package net.ramify.model.record.xml.record;
 
-import net.ramify.model.date.parse.DateParser;
-import net.ramify.model.person.name.NameParser;
-import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.record.Record;
 import net.ramify.model.record.collection.RecordSet;
+import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.burial.XmlBurialRecords;
 import net.ramify.model.record.xml.record.residence.XmlResidenceRecords;
 
@@ -20,8 +18,6 @@ public abstract class XmlRecords {
     @Nonnull
     public abstract Collection<? extends Record> build(
             RecordSet recordSet,
-            PlaceProvider places,
-            NameParser nameParser,
-            DateParser dateParser);
+            RecordContext context);
 
 }

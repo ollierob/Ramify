@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+option java_package = "net.ramify.model.record.proto";
+option java_outer_classname = "ArchiveProto";
+
+import "link.proto";
+
+message Archive {
+
+    string id = 1;
+    string name = 2;
+    Link website = 3;
+
+}

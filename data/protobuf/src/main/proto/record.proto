@@ -7,6 +7,7 @@ import "date.proto";
 import "family.proto";
 import "link.proto";
 import "event.proto";
+import "archive.proto";
 
 message Record {
 
@@ -58,7 +59,7 @@ enum SourceType {
 message ExternalRecordReference {
 
     string reference = 1;
-    string archive = 2;
+    Archive archive = 2;
     Link link = 3;
 
 }

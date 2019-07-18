@@ -1,10 +1,8 @@
 package net.ramify.model.record.xml.record.burial;
 
-import net.ramify.model.date.parse.DateParser;
-import net.ramify.model.person.name.NameParser;
-import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.type.BurialRecord;
+import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlRecord;
 import net.ramify.model.record.xml.record.XmlRecords;
 import net.ramify.utils.collections.ListUtils;
@@ -30,10 +28,8 @@ public class XmlBurialRecords extends XmlRecords {
     @Override
     public Collection<? extends BurialRecord> build(
             final RecordSet recordSet,
-            final PlaceProvider places,
-            final NameParser nameParser,
-            final DateParser dateParser) {
-        return ListUtils.eagerlyTransform(records, record -> record.build(places, nameParser, recordSet.placeId()));
+            final RecordContext context) {
+        return ListUtils.eagerlyTransform(records, record -> record.build(recordSet.placeId(), context));
     }
 
 }

@@ -1,11 +1,9 @@
 package net.ramify.model.record.xml.collection;
 
 import com.google.common.collect.Lists;
-import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.date.xml.XmlBetweenYears;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlInYear;
-import net.ramify.model.person.name.NameParser;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.record.Record;
@@ -14,6 +12,7 @@ import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.RecordSetReference;
 import net.ramify.model.record.provider.RecordSetProvider;
+import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlRecord;
 import net.ramify.model.record.xml.record.XmlRecords;
 import net.ramify.utils.collections.SetUtils;
@@ -78,34 +77,34 @@ class XmlRecordSet implements HasRecordSetId {
     @XmlElementRef
     private List<XmlRecords> records;
 
-    Collection<RecordSet> build(final RecordSetProvider recordSets, final DateParser dateParser) {
+    Collection<RecordSet> build(final RecordSetProvider recordSets, final RecordContext context) {
         final var parent = Functions.ifNonNull(this.parentRecordSetId(), recordSets::require);
-        return this.build(parent, dateParser);
+        return this.build(parent, context);
     }
 
-    Collection<RecordSet> build(final RecordSet parent, final DateParser dateParser) {
-        final var self = this.buildSelf(parent, dateParser);
+    Collection<RecordSet> build(final RecordSet parent, final RecordContext context) {
+        final var self = this.buildSelf(parent, context);
         if (children == null) return Collections.singletonList(self);
         final var recordSets = Lists.<RecordSet>newArrayListWithExpectedSize(1 + 2 * children.size());
         recordSets.add(self);
-        children.forEach(child -> recordSets.addAll(child.build(self, dateParser)));
+        children.forEach(child -> recordSets.addAll(child.build(self, context)));
         return recordSets;
     }
 
-    private RecordSet buildSelf(@CheckForNull final RecordSet parent, final DateParser dateParser) {
+    private RecordSet buildSelf(@CheckForNull final RecordSet parent, final RecordContext context) {
         return new DefaultRecordSet(
                 this.recordSetId(),
                 parent,
                 source.source(),
                 type.type(),
-                Functions.ifNonNull(date, d -> d.resolve(dateParser)),
+                Functions.ifNonNull(date, d -> d.resolve(context.dateParser())),
                 title,
                 this.creatorPlaceId(parent),
                 this.coversPlaceId(parent),
                 shortTitle,
                 Functions.ifNonNull(description, String::trim),
                 this.size(),
-                this.buildReferences());
+                this.buildReferences(context));
     }
 
     @CheckForNull
@@ -119,9 +118,9 @@ class XmlRecordSet implements HasRecordSetId {
         return Functions.ifNonNull(parent, RecordSet::covers);
     }
 
-    private Set<RecordSetReference> buildReferences() {
+    private Set<RecordSetReference> buildReferences(final RecordContext context) {
         if (references == null) return Collections.emptySet();
-        return SetUtils.transform(references, XmlRecordSetReference::build);
+        return SetUtils.transform(references, ref -> ref.build(context.archives()));
     }
 
     private int size() {
@@ -140,11 +139,11 @@ class XmlRecordSet implements HasRecordSetId {
         return Functions.ifNonNull(parentId, RecordSetId::new);
     }
 
-    Collection<Record> records(final PlaceProvider places, final NameParser nameParser, final DateParser dateParser) {
+    Collection<Record> records(final PlaceProvider places, final RecordContext context) {
         if (records == null) return Collections.emptySet();
         final var records = Lists.<Record>newArrayList();
-        final var self = this.buildSelf(null, dateParser);
-        this.records.forEach(record -> records.addAll(record.build(self, places, nameParser, dateParser)));
+        final var self = this.buildSelf(null, context);
+        this.records.forEach(record -> records.addAll(record.build(self, context)));
         return records;
     }
 

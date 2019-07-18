@@ -16,7 +16,7 @@ public interface Provider<K, V> {
 
     @Nonnull
     default V require(final K key) {
-        return this.requireOrThrow(key, k -> new NullPointerException());
+        return this.requireOrThrow(key, k -> new NullPointerException("Not found for key: " + key));
     }
 
     @Nonnull

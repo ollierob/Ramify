@@ -34,7 +34,7 @@
             source="government"
             type="residence">
         <d:inYear year="1642"/>
-        <recordSetReference reference="HL/PO/JO/10/1/109/10" archive="Parliamentary Archives"/>
+        <recordSetReference reference="HL/PO/JO/10/1/109/10" archiveId="parliament"/>
     </recordSet>
 
 </recordSets>

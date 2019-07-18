@@ -1,13 +1,12 @@
 package net.ramify.model.record.xml.collection;
 
 import com.google.common.collect.Sets;
-import net.ramify.model.date.parse.DateParser;
-import net.ramify.model.person.name.NameParser;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.record.Record;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.provider.RecordSetProvider;
+import net.ramify.model.record.xml.RecordContext;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlElementRef;
@@ -29,21 +28,21 @@ public class XmlRecordSets {
     private List<XmlRecordSet> recordSets;
 
     @Nonnull
-    public Set<RecordSet> recordSets(final RecordSetProvider recordSets, final DateParser dateParser) {
+    public Set<RecordSet> recordSets(final RecordSetProvider recordSets, final RecordContext context) {
         if (this.recordSets == null) return Collections.emptySet();
         final var sets = Sets.<RecordSet>newLinkedHashSet();
-        this.recordSets.forEach(rs -> sets.addAll(rs.build(recordSets, dateParser)));
+        this.recordSets.forEach(rs -> sets.addAll(rs.build(recordSets, context)));
         return sets;
     }
 
     @Nonnull
-    public Collection<Record> records(final RecordSetId id, final PlaceProvider places, final DateParser dateParser, final NameParser nameParser) {
+    public Collection<Record> records(final RecordSetId id, final PlaceProvider places, final RecordContext context) {
         if (recordSets == null || recordSets.isEmpty()) return Collections.emptySet();
         return recordSets.stream()
                 .map(set -> set.find(id).orElse(null))
                 .filter(Objects::nonNull)
                 .findAny()
-                .map(target -> target.records(places, nameParser, dateParser))
+                .map(target -> target.records(places, context))
                 .orElseGet(Collections::emptySet);
     }
 

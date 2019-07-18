@@ -90,7 +90,7 @@
 
         <attribute name="reference" type="xs:string" use="required"/>
 
-        <attribute name="archive" type="xs:string" use="required"/>
+        <attribute name="archiveId" type="xs:string" use="required"/>
 
     </complexType>
 
@@ -228,25 +228,25 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="membership"/>
-
             <enumeration value="census"/>
-
-            <enumeration value="birth"/>
-
-            <enumeration value="payment"/>
-
-            <enumeration value="death"/>
 
             <enumeration value="burial"/>
 
             <enumeration value="marriage"/>
 
-            <enumeration value="mixed"/>
+            <enumeration value="birth"/>
 
-            <enumeration value="baptism"/>
+            <enumeration value="membership"/>
 
             <enumeration value="residence"/>
+
+            <enumeration value="payment"/>
+
+            <enumeration value="mixed"/>
+
+            <enumeration value="death"/>
+
+            <enumeration value="baptism"/>
 
         </restriction>
 

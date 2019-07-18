@@ -1,6 +1,8 @@
 package net.ramify.model.record.xml.collection;
 
 import net.ramify.model.place.xml.description.XmlLink;
+import net.ramify.model.record.archive.ArchiveId;
+import net.ramify.model.record.archive.ArchiveProvider;
 import net.ramify.model.record.collection.RecordSetReference;
 import net.ramify.model.record.xml.record.XmlRecord;
 
@@ -15,17 +17,17 @@ class XmlRecordSetReference {
     @XmlAttribute(name = "reference", required = true)
     private String reference;
 
-    @XmlAttribute(name = "archive", required = true)
-    private String archive;
+    @XmlAttribute(name = "archiveId", required = true)
+    private String archiveId;
 
     @XmlElementRef(required = false)
     private XmlLink link;
 
     @Nonnull
-    RecordSetReference build() {
+    RecordSetReference build(final ArchiveProvider archives) {
         return new DefaultRecordSetReference(
                 reference,
-                archive,
+                archives.require(new ArchiveId(archiveId)),
                 link);
     }
 

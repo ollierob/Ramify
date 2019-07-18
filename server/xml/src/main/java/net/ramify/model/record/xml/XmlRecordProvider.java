@@ -1,7 +1,5 @@
 package net.ramify.model.record.xml;
 
-import net.ramify.model.date.parse.DateParser;
-import net.ramify.model.person.name.NameParser;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.Records;
@@ -28,20 +26,17 @@ class XmlRecordProvider implements RecordsProvider {
     private final Map<RecordSetId, File> xmlFiles;
     private final JAXBContext context;
     private final PlaceProvider places;
-    private final NameParser nameParser;
-    private final DateParser dateParser;
+    private final RecordContext recordContext;
 
     XmlRecordProvider(
             final Map<RecordSetId, File> xmlFiles,
             final JAXBContext context,
             final PlaceProvider places,
-            final NameParser nameParser,
-            final DateParser dateParser) {
+            final RecordContext recordContext) {
         this.xmlFiles = xmlFiles;
         this.context = context;
         this.places = places;
-        this.nameParser = nameParser;
-        this.dateParser = dateParser;
+        this.recordContext = recordContext;
     }
 
     @CheckForNull
@@ -55,7 +50,7 @@ class XmlRecordProvider implements RecordsProvider {
         logger.info("Reading records for {} in {}", id, file);
         try {
             final var recordSets = (XmlRecordSets) context.createUnmarshaller().unmarshal(file);
-            final var records = recordSets.records(id, places, dateParser, nameParser);
+            final var records = recordSets.records(id, places, recordContext);
             return Records.of(records);
         } catch (final Exception ex) {
             throw new RuntimeException("Error reading records for " + id + " from " + file, ex);

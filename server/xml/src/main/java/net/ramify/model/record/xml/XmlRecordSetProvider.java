@@ -8,7 +8,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
 import net.ramify.model.AbstractMappedProvider;
-import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.record.collection.HasRecordSetId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
@@ -106,21 +105,21 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
     }
 
     static RecordSetProvider readRecordsInDirectory(
-            final JAXBContext context,
+            final JAXBContext jaxbContext,
             final File root,
-            final DateParser dateParser,
-            final XmlRecordProvider recordProvider) throws JAXBException {
+            final XmlRecordProvider recordProvider,
+            final RecordContext recordContext) throws JAXBException {
         final var provider = new XmlRecordSetProvider(Maps.newConcurrentMap(), HashMultimap.create());
-        final var unmarshaller = context.createUnmarshaller();
+        final var unmarshaller = jaxbContext.createUnmarshaller();
         FileTraverseUtils.traverseSubdirectories(
                 root,
                 file -> file.getName().endsWith(".xml") && file.getPath().contains("record"),
-                file -> readRecordsInFile(unmarshaller, file, dateParser, provider, recordProvider));
+                file -> readRecordsInFile(unmarshaller, file, provider, recordProvider, recordContext));
         logger.info("Loaded {} record sets from {}.", provider.size(), root);
         return provider.immutable();
     }
 
-    private static void readRecordsInFile(final Unmarshaller unmarshaller, final File file, final DateParser dateParser, final XmlRecordSetProvider provider, final XmlRecordProvider recordProvider) {
+    private static void readRecordsInFile(final Unmarshaller unmarshaller, final File file, final XmlRecordSetProvider provider, final XmlRecordProvider recordProvider, final RecordContext context) {
         FileUtils.checkReadableFile(file);
         Preconditions.checkArgument(file.getName().endsWith(".xml"), "Not an XML file: %s", file);
         try {
@@ -128,7 +127,7 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
             final var unmarshalled = unmarshaller.unmarshal(file);
             if (!(unmarshalled instanceof XmlRecordSets)) return;
             final var records = (XmlRecordSets) unmarshalled;
-            final var recordSets = records.recordSets(provider, dateParser);
+            final var recordSets = records.recordSets(provider, context);
             provider.addAll(recordSets);
             recordSets.forEach(rs -> recordProvider.add(rs.recordSetId(), file));
         } catch (final JAXBException jex) {

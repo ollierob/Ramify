@@ -28,6 +28,7 @@ import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.record.GenericRecordPerson;
 import net.ramify.model.record.church.ChurchBurialRecord;
 import net.ramify.model.record.type.BurialRecord;
+import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlRecord;
 import net.ramify.utils.objects.Functions;
 
@@ -64,19 +65,19 @@ public class XmlBurialRecord extends XmlRecord {
     @XmlElementRef
     private List<XmlRelationship> relationships;
 
-    public BurialRecord build(final PlaceProvider places, final NameParser nameParser, final PlaceId placeId) {
+    public BurialRecord build(final PlaceId placeId, final RecordContext context) {
         final var burialDate = ExactDate.on(year, Month.of(month), dayOfMonth);
         return new ChurchBurialRecord(
                 this.recordId(),
                 burialDate,
                 placeId,
-                this.family(places, nameParser, burialDate));
+                this.family(burialDate, context));
     }
 
-    Family family(final PlaceProvider places, final NameParser nameParser, final ExactDate burialDate) {
-        final var person = this.person(nameParser, burialDate, places);
+    Family family(final ExactDate burialDate, final RecordContext context) {
+        final var person = this.person(context.nameParser(), burialDate, context.places());
         final var builder = new FamilyBuilder().addPerson(person);
-        if (relationships != null) relationships.forEach(relationship -> relationship.addRelationship(person, builder, nameParser, Collections.emptySet()));
+        if (relationships != null) relationships.forEach(relationship -> relationship.addRelationship(person, builder, context.nameParser(), Collections.emptySet()));
         return builder.build();
     }
 
