@@ -2,7 +2,7 @@
 
 <archives xmlns="http://ramify.net/places">
 
-    <archive id="parliament" name="Parliamentary Archives">
+    <archive id="parliament" name="Parliamentary Archives" iconHref="/images/links/parliament.svg">
         <textLink href="https://archives.parliament.uk" text="Parliamentary Archives"/>
     </archive>
 

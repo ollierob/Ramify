@@ -53,7 +53,7 @@ body {
 
 .image {
     height: 1em;
-    vertical-align: inherit;
+    vertical-align: middle;
 }
 
 .flag {

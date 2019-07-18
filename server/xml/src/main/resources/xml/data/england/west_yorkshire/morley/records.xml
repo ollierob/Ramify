@@ -2,7 +2,8 @@
 
 <recordSets
         xmlns="http://ramify.net/records"
-        xmlns:d="http://ramify.net/dates">
+        xmlns:d="http://ramify.net/dates"
+        xmlns:p="http://ramify.net/places">
 
     <recordSet
             id="census_1841_wry_morley"
@@ -34,7 +35,9 @@
             source="government"
             type="residence">
         <d:inYear year="1642"/>
-        <recordSetReference reference="HL/PO/JO/10/1/109/10" archiveId="parliament"/>
+        <recordSetReference reference="HL/PO/JO/10/1/109/10" archiveId="parliament">
+            <p:textLink href="https://digitalarchive.parliament.uk/HL/PO/JO/10/1/109/10" text="Catalogue"/>
+        </recordSetReference>
     </recordSet>
 
 </recordSets>

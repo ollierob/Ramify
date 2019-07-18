@@ -51,7 +51,7 @@ const RecordCard = (props: {record: RecordSet.AsObject, shortTitle?: boolean}) =
         Available <FormattedYearRange date={record.date}/>
         <br/>
         {record.numrecords.toLocaleString()} records
-        {record.externalreferenceList.length == 1 && <RecordReference reference={record.externalreferenceList[0]}/>}
+        {record.externalreferenceList.map(ref => <RecordReference reference={ref}/>)}
         {record.description && <div className="notags">{record.description}</div>}
     </Card>;
 };
