@@ -48,10 +48,10 @@ const RecordCard = (props: {record: RecordSet.AsObject, shortTitle?: boolean}) =
     return <Card
         title={<a href={recordSetHref(record)}>{title}</a>}
         className="recordCard">
-        {record.externalreferenceList.length == 1 && <RecordReference reference={record.externalreferenceList[0]}/>}
         Available <FormattedYearRange date={record.date}/>
         <br/>
         {record.numrecords.toLocaleString()} records
+        {record.externalreferenceList.length == 1 && <RecordReference reference={record.externalreferenceList[0]}/>}
         {record.description && <div className="notags">{record.description}</div>}
     </Card>;
 };
