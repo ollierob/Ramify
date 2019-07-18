@@ -4,12 +4,13 @@ import {ExternalRecordReference, Record, RecordSet} from "../../../protobuf/gene
 import {Card, Icon} from "antd";
 import {recordSetHref} from "../RecordLinks";
 import {RecordCards} from "../../../components/records/RecordCards";
-import {NameAgeSearch} from "../../../components/search/NameAgeSearch";
+import {PersonSearch} from "../../../components/search/PersonSearch";
 import {RecordSearchHandler} from "../../../components/search/RecordSearchHandler";
 import {RecordResults} from "./RecordResults";
 import {AsyncData} from "../../../components/fetch/AsyncData";
 import {RecordPaginationHandler} from "../../../components/records/RecordPaginationHandler";
 import {Link} from "../../../components/style/Links";
+import {isBirthOrBaptismRecord} from "../../../components/records/RecordType";
 
 type Props = RecordPaginationHandler & RecordSearchHandler & {
     recordSet: Readonly<RecordSet.AsObject>
@@ -42,9 +43,10 @@ export default class RecordSetCard extends React.PureComponent<Props> {
                 records={this.props.recordSetChildren.data}
                 style={MarginBottom}/>
 
-            <NameAgeSearch
+            <PersonSearch
                 disabled
                 {...this.props}
+                showAge={!isBirthOrBaptismRecord(this.props.recordSet)}
                 style={MarginBottom}/>
 
             <RecordResults

@@ -9,6 +9,7 @@ import {RecordSearchHandler} from "./RecordSearchHandler";
 
 type Props = HasClass & RecordSearchHandler & {
     disabled?: boolean;
+    showAge?: boolean;
 }
 
 type State = {
@@ -17,7 +18,7 @@ type State = {
     age?: number;
 }
 
-export class NameAgeSearch extends React.PureComponent<Props, State> {
+export class PersonSearch extends React.PureComponent<Props, State> {
 
     private setFirstName = (e: ChangeEvent<HTMLInputElement>) => this.setState({firstName: e.target.value});
     private setLastName = (e: ChangeEvent<HTMLInputElement>) => this.setState({lastName: e.target.value});
@@ -55,7 +56,7 @@ export class NameAgeSearch extends React.PureComponent<Props, State> {
                         onChange={this.setLastName}/>
                 </Form.Item>
 
-                <Form.Item>
+                {this.props.showAge && <Form.Item>
                     <InputNumber
                         min={0}
                         max={125}
@@ -64,7 +65,7 @@ export class NameAgeSearch extends React.PureComponent<Props, State> {
                         placeholder="Age"
                         value={this.state.age}
                         onChange={this.setAge}/>
-                </Form.Item>
+                </Form.Item>}
 
                 <Form.Item>
                     <Button
