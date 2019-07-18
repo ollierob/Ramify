@@ -21,6 +21,7 @@ type State = {
     recordSetCoversPlace: AsyncData<PlaceBundle.AsObject>
     recordSetSource: AsyncData<PlaceBundle.AsObject>
     recordSetChildren: AsyncData<ReadonlyArray<RecordSet.AsObject>>
+    search: RecordSearch;
     searchResults: AsyncData<ReadonlyArray<Record.AsObject>>;
 }
 
@@ -32,6 +33,7 @@ export default class RecordSetPage extends React.PureComponent<Props, State> {
     constructor(props) {
         super(props);
         this.state = {
+            search: null, //TOOO read page hash
             records: {},
             recordSet: {},
             recordSetCoversPlace: {loading: true},
@@ -64,10 +66,12 @@ export default class RecordSetPage extends React.PureComponent<Props, State> {
                 place={this.state.recordSetCoversPlace.data && this.state.recordSetCoversPlace.data.place}/>
 
             <RecordSetCard
+                {...this.props}
                 recordSet={recordSet}
                 recordSetChildren={this.state.recordSetChildren}
                 records={this.state.records}
                 paginate={null}
+                search={this.state.search}
                 searching={this.state.searchResults.loading}
                 doSearch={this.search}
                 searchResults={this.state.searchResults}/>

@@ -1,4 +1,5 @@
 import * as React from "react";
+import {FormEvent} from "react";
 import {Button, Card, Cascader, Form, Input} from "antd";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {Place} from "../../../protobuf/generated/place_pb";
@@ -9,8 +10,8 @@ import {CascaderOptionType} from "antd/es/cascader";
 import {YearRange} from "../../../components/date/DateRange";
 import {RecordSet} from "../../../protobuf/generated/record_pb";
 import RecordSetTable from "./RecordSetTable";
-import {DEFAULT_RECORD_LOADER} from "../../../components/records/RecordLoader";
-import {FormEvent} from "react";
+import {DEFAULT_RECORD_LOADER, RecordSetOptions} from "../../../components/records/RecordLoader";
+import {QueryMap, readPageHash, updatePageHash} from "../../../components/Page";
 
 type Props = {}
 
@@ -30,12 +31,14 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
 
     constructor(props) {
         super(props);
+        const hash = readPageHash();
         this.state = {
             selectedRegion: [],
             regions: [],
             selectedRange: [],
             ranges: generateYearRanges(),
-            recordSets: {}
+            recordSets: {},
+            recordName: hash["searchName"]
         };
         this.renderRange = this.renderRange.bind(this);
         this.loadLeafPlace = this.loadLeafPlace.bind(this);
@@ -142,11 +145,12 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
 
     private doSearch(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        const options = {
+        const options: RecordSetOptions = {
             place: this.state.selectedRegion.length ? this.state.selectedRegion[this.state.selectedRegion.length - 1] : null,
             name: this.state.recordName,
         };
         asyncLoadData(options, this.recordLoader.loadRecordSets, recordSets => this.setState({recordSets}));
+        updatePageHash(searchHash(options));
     }
 
 }
@@ -188,4 +192,12 @@ function generateYearRanges(): CascaderOptionType[] {
 
 function yearRange(from: number, to: number): YearRange {
     return {from, to};
+}
+
+function searchHash(options: RecordSetOptions): QueryMap {
+    return {
+        base: "search",
+        searchName: options.name,
+        searchPlace: options.place,
+    };
 }

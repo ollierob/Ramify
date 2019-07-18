@@ -10,9 +10,9 @@ import {RecordResults} from "./RecordResults";
 import {AsyncData} from "../../../components/fetch/AsyncData";
 import {RecordPaginationHandler} from "../../../components/records/RecordPaginationHandler";
 import {Link} from "../../../components/style/Links";
-import {isBirthOrBaptismRecord} from "../../../components/records/RecordType";
+import {RouteComponentProps} from "react-router";
 
-type Props = RecordPaginationHandler & RecordSearchHandler & {
+type Props = RecordPaginationHandler & RecordSearchHandler & RouteComponentProps<any> & {
     recordSet: Readonly<RecordSet.AsObject>
     recordSetChildren: AsyncData<ReadonlyArray<RecordSet.AsObject>>;
     records: AsyncData<ReadonlyArray<Record.AsObject>>

@@ -1,6 +1,6 @@
 import {Sorter} from "./Sort";
 
-export type StringMap<T> = {[k: string]: T}
+export type StringMap<T = string> = {[k: string]: T}
 
 export function stringMap<T>(objects: ReadonlyArray<T>, toKey: (t: T) => string): StringMap<T> {
     if (!objects || !objects.length) return {};

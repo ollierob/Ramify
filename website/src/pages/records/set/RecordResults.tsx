@@ -7,7 +7,7 @@ import {RecordTable} from "./RecordTable";
 import {RecordPaginationHandler} from "../../../components/records/RecordPaginationHandler";
 import RecordImageGallery from "./RecordImageGallery";
 
-type Props = RecordPaginationHandler & RecordSearchHandler & {
+type Props = RecordPaginationHandler & {
     recordSet: RecordSet.AsObject;
     records: AsyncData<ReadonlyArray<Record.AsObject>>;
     searchResults: AsyncData<ReadonlyArray<Record.AsObject>>;

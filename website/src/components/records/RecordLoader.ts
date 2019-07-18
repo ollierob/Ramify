@@ -21,7 +21,7 @@ export interface RecordLoader {
 }
 
 type RecordOptions = {start?: number, limit?: number}
-type RecordSetOptions = {name?: string, place?: PlaceId, limit?: number}
+export type RecordSetOptions = {name?: string, place?: PlaceId, limit?: number}
 
 class ProtoRecordLoader implements RecordLoader {
 
