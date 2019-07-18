@@ -77,7 +77,7 @@ const References = (props: {references: ReadonlyArray<ExternalRecordReference.As
     const references = props.references;
     if (!references || !references.length) return null;
     return <div className="references" style={MarginBottom}>
-        <Icon type="book"/> This record is held at
+        <Icon type="book"/> These records are held at
         {references.map(ref => <> <Reference reference={ref}/></>)}
     </div>;
 };
@@ -85,7 +85,7 @@ const References = (props: {references: ReadonlyArray<ExternalRecordReference.As
 const Reference = (props: {reference: ExternalRecordReference.AsObject}) => {
     const reference = props.reference;
     if (!reference) return null;
-    const c = <>{reference.archive} ({reference.reference})</>;
+    const c = <>{reference.archive.name} ({reference.reference})</>;
     return <>
         {reference.link ? <Link link={reference.link}>{c}</Link> : c}
     </>;

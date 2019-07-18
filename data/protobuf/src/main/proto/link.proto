@@ -10,8 +10,8 @@ message Link {
     Type type = 3;
 
     enum Type {
-        WIKIPEDIA = 0;
-        WYAS = 1;
+        NONE = 0;
+        WIKIPEDIA = 1;
     }
 
 }
