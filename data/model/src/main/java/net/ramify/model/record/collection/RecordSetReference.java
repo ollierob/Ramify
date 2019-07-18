@@ -10,6 +10,9 @@ import net.ramify.utils.objects.Consumers;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 
+/**
+ * @see Archive
+ */
 public interface RecordSetReference extends HasArchive, BuildsProto<RecordProto.ExternalRecordReference> {
 
     @Nonnull

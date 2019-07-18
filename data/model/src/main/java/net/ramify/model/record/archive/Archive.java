@@ -9,6 +9,11 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 
+/**
+ * Any holder of records.
+ *
+ * @see net.ramify.model.record.collection.RecordSetReference
+ */
 public class Archive implements HasArchiveId, HasTitleDescription, BuildsProto<ArchiveProto.Archive> {
 
     private final ArchiveId id;
