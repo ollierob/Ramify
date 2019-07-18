@@ -84,8 +84,6 @@
 
                 <element ref="ns2:wikipediaLink"/>
 
-                <element ref="ns2:wyasLink"/>
-
             </choice>
 
         </sequence>
@@ -218,9 +216,9 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="government"/>
-
             <enumeration value="church"/>
+
+            <enumeration value="government"/>
 
         </restriction>
 
@@ -230,15 +228,13 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="baptism"/>
-
-            <enumeration value="marriage"/>
-
             <enumeration value="birth"/>
 
-            <enumeration value="census"/>
+            <enumeration value="baptism"/>
 
-            <enumeration value="membership"/>
+            <enumeration value="death"/>
+
+            <enumeration value="residence"/>
 
             <enumeration value="payment"/>
 
@@ -246,9 +242,11 @@
 
             <enumeration value="mixed"/>
 
-            <enumeration value="residence"/>
+            <enumeration value="membership"/>
 
-            <enumeration value="death"/>
+            <enumeration value="census"/>
+
+            <enumeration value="marriage"/>
 
         </restriction>
 

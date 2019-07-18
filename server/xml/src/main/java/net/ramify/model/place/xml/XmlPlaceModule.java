@@ -10,6 +10,7 @@ import net.ramify.model.place.institution.church.ChurchInfoProvider;
 import net.ramify.model.place.position.PositionProvider;
 import net.ramify.model.place.provider.PlaceDescriptionProvider;
 import net.ramify.model.place.provider.PlaceProvider;
+import net.ramify.model.place.xml.archives.XmlArchives;
 import net.ramify.model.place.xml.church.XmlChurchInfos;
 import net.ramify.model.place.xml.description.XmlPlaceDescriptions;
 import net.ramify.model.place.xml.location.XmlPlacePositions;
@@ -39,7 +40,7 @@ public class XmlPlaceModule extends PrivateModule {
     @Provides
     @Singleton
     JAXBContext providePlaceContext() throws JAXBException {
-        return JAXBContext.newInstance(XmlPlaces.class, XmlChurchInfos.class, XmlPlacePositions.class, XmlPlaceDescriptions.class);
+        return JAXBContext.newInstance(XmlPlaces.class, XmlChurchInfos.class, XmlPlacePositions.class, XmlPlaceDescriptions.class, XmlArchives.class);
     }
 
     @Provides

@@ -10,6 +10,10 @@
 
     <element name="alsoSee" type="tns:xmlAlsoSeeId"/>
 
+    <element name="archive" type="tns:xmlArchive"/>
+
+    <element name="archives" type="tns:archives"/>
+
     <element name="chapelry" type="tns:xmlChapelry"/>
 
     <element name="church" type="tns:xmlChurch"/>
@@ -64,7 +68,69 @@
 
     <element name="wikipediaLink" type="tns:xmlWikipediaLink"/>
 
-    <element name="wyasLink" type="tns:xmlWyasLink"/>
+    <complexType name="xmlArchive">
+
+        <sequence>
+
+            <element form="qualified" minOccurs="0" name="description" type="xs:string"/>
+
+            <element ref="tns:textLink"/>
+
+        </sequence>
+
+        <attribute name="id" type="xs:string" use="required"/>
+
+        <attribute name="name" type="xs:string" use="required"/>
+
+    </complexType>
+
+    <complexType name="xmlTextLink">
+
+        <complexContent>
+
+            <extension base="tns:xmlLink">
+
+                <sequence/>
+
+                <attribute name="text" type="xs:string" use="required"/>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
+    <complexType abstract="true" name="xmlLink">
+
+        <sequence/>
+
+        <attribute name="href" type="xs:string" use="required"/>
+
+    </complexType>
+
+    <complexType name="xmlWikipediaLink">
+
+        <complexContent>
+
+            <extension base="tns:xmlLink">
+
+                <sequence/>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
+    <complexType name="archives">
+
+        <sequence>
+
+            <element maxOccurs="unbounded" minOccurs="0" ref="tns:archive"/>
+
+        </sequence>
+
+    </complexType>
 
     <complexType name="xmlChurchInfo">
 
@@ -122,44 +188,6 @@
 
     </complexType>
 
-    <complexType abstract="true" name="xmlLink">
-
-        <sequence/>
-
-        <attribute name="href" type="xs:string" use="required"/>
-
-    </complexType>
-
-    <complexType name="xmlTextLink">
-
-        <complexContent>
-
-            <extension base="tns:xmlLink">
-
-                <sequence/>
-
-                <attribute name="text" type="xs:string" use="required"/>
-
-            </extension>
-
-        </complexContent>
-
-    </complexType>
-
-    <complexType name="xmlWikipediaLink">
-
-        <complexContent>
-
-            <extension base="tns:xmlLink">
-
-                <sequence/>
-
-            </extension>
-
-        </complexContent>
-
-    </complexType>
-
     <complexType name="xmlPlaceDescription">
 
         <sequence>
@@ -171,8 +199,6 @@
                 <element ref="tns:textLink"/>
 
                 <element ref="tns:wikipediaLink"/>
-
-                <element ref="tns:wyasLink"/>
 
             </choice>
 
@@ -191,20 +217,6 @@
             <element maxOccurs="unbounded" minOccurs="0" ref="tns:placeDescription"/>
 
         </sequence>
-
-    </complexType>
-
-    <complexType name="xmlWyasLink">
-
-        <complexContent>
-
-            <extension base="tns:xmlLink">
-
-                <sequence/>
-
-            </extension>
-
-        </complexContent>
 
     </complexType>
 

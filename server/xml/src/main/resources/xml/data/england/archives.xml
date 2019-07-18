@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<archives xmlns="http://ramify.net/places">
+
+    <archive id="parliament" name="Parliamentary Archives">
+        <textLink href="https://archives.parliament.uk" text="Parliamentary Archives"/>
+    </archive>
+
+</archives>

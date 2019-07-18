@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<archives xmlns="http://ramify.net/places">
+
+    <archive id="wyas" name="West Yorkshire Archive Services">
+        <textLink href="https://www.wyjs.org.uk/archive-service/" text="WYAS"/>
+    </archive>
+
+</archives>
