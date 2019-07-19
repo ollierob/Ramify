@@ -1,7 +1,7 @@
 .recordCards .recordCard {
     display: inline-block;
     min-width: 200px;
-    max-width: 300px;
+    max-width: 350px;
     vertical-align: top;
     border: 0;
 }
