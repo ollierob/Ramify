@@ -12,6 +12,7 @@ import net.ramify.model.record.proto.RecordProto;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlTransient;
+import java.util.Objects;
 import java.util.Set;
 
 @XmlTransient
@@ -46,7 +47,7 @@ public class DefaultRecordSet implements RecordSet {
         this.parent = parent;
         this.source = source;
         this.type = type;
-        this.date = date;
+        this.date = Objects.requireNonNull(date);
         this.creatorPlaceId = creatorPlaceId;
         this.coversPlaceId = coversPlaceId;
         this.longTitle = longTitle;

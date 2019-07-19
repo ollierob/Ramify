@@ -50,7 +50,7 @@ class XmlRecordProvider implements RecordsProvider {
         logger.info("Reading records for {} in {}", id, file);
         try {
             final var recordSets = (XmlRecordSets) context.createUnmarshaller().unmarshal(file);
-            final var records = recordSets.records(id, places, recordContext);
+            final var records = recordSets.records(id, recordContext);
             return Records.of(records);
         } catch (final Exception ex) {
             throw new RuntimeException("Error reading records for " + id + " from " + file, ex);

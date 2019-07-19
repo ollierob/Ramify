@@ -2,8 +2,7 @@
 
 <recordSets
         xmlns="http://ramify.net/records"
-        xmlns:d="http://ramify.net/dates"
-        xmlns:p="http://ramify.net/places">
+        xmlns:d="http://ramify.net/dates">
 
     <recordSet
             id="heptonstall_manor"
@@ -18,12 +17,12 @@
 
         <recordSet
                 id="heptonstall_manor_rentals"
-                title="Heptonstall Manor Rentals"
+                title="Heptonstall Manor Rental (1439)"
                 shortTitle="Rentals"
                 source="manor"
                 type="residence">
 
-            <d:inYear year="1429"/>
+            <d:inYear year="1439"/>
 
             <residenceRecords placeId="township:heptonstall">
                 <residence name="Thomas Mitchell" gender="male" placeId="farmstead:high_greenwood"/>

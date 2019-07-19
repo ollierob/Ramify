@@ -2,7 +2,7 @@ import {Record, RecordImageList, RecordList, RecordSearch, RecordSet, RecordSetL
 import {PlaceId} from "../places/Place";
 import {queryParameters} from "../fetch/Fetch";
 import {protoGet, protoPost} from "../fetch/ProtoFetch";
-import {RecordSetId, sortRecordSetByTitle} from "./RecordSet";
+import {RecordSetId, sortRecordSetByEarliestDate, sortRecordSetByTitle} from "./RecordSet";
 
 export interface RecordLoader {
 
@@ -57,7 +57,7 @@ class ProtoRecordLoader implements RecordLoader {
 
 function readRecordSets(list: RecordSetList): RecordSet.AsObject[] {
     if (!list) return [];
-    return list.getRecordsetList().map(l => l.toObject()).sort(sortRecordSetByTitle);
+    return list.getRecordsetList().map(l => l.toObject()).sort(sortRecordSetByEarliestDate);
 }
 
 function readRecords(list: RecordList): Record.AsObject[] {

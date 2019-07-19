@@ -1,7 +1,6 @@
 package net.ramify.model.record.xml.collection;
 
 import com.google.common.collect.Sets;
-import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.record.Record;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
@@ -36,13 +35,13 @@ public class XmlRecordSets {
     }
 
     @Nonnull
-    public Collection<Record> records(final RecordSetId id, final PlaceProvider places, final RecordContext context) {
-        if (recordSets == null || recordSets.isEmpty()) return Collections.emptySet();
-        return recordSets.stream()
+    public Collection<Record> records(final RecordSetId id, final RecordContext context) {
+        if (this.recordSets == null || this.recordSets.isEmpty()) return Collections.emptySet();
+        return this.recordSets.stream()
                 .map(set -> set.find(id).orElse(null))
                 .filter(Objects::nonNull)
                 .findAny()
-                .map(target -> target.records(places, context))
+                .map(target -> target.records(context))
                 .orElseGet(Collections::emptySet);
     }
 

@@ -14,6 +14,7 @@ import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlRecord;
 import net.ramify.utils.objects.Functions;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collections;
@@ -25,11 +26,16 @@ public class XmlResidenceRecord extends XmlRecord {
     @XmlAttribute(name = "placeId", required = false)
     private String placeId;
 
+    @Nonnull
     public LifeEventRecord build(final Place parentPlace, final DateRange date, final RecordContext context) {
         final var recordId = this.recordId();
-        final var place = Functions.ifNonNull(placeId, id -> context.places().require(new PlaceId(id)), parentPlace);
-        final var person = this.person(place, date, context);
-        return new SinglePersonLifeEventRecord(recordId, person, date);
+        try {
+            final var place = Functions.ifNonNull(placeId, id -> context.places().require(new PlaceId(id)), parentPlace);
+            final var person = this.person(place, date, context);
+            return new SinglePersonLifeEventRecord(recordId, person, date);
+        } catch (final Exception ex) {
+            throw new RuntimeException("Error building residence record for " + recordId, ex);
+        }
     }
 
     Person person(final Place place, final DateRange date, final RecordContext context) {

@@ -13,7 +13,48 @@
             source="manor"
             type="mixed">
 
-        <d:betweenYears start="1429" end="1626"/>
+        <d:betweenYears start="1439" end="1849"/>
+
+        <recordSet
+                id="halifax_manor_rental_1439"
+                title="Halifax Manor Rental (1439)"
+                shortTitle="Rental"
+                source="manor"
+                type="residence">
+
+            <d:inYear year="1439"/>
+
+            <residenceRecords placeId="parish:halifax">
+                <residence gender="male" name="Robert Miller"/>
+                <residence gender="male" name="Thomas Mauncell"/>
+                <residence gender="male" name="William Otes"/>
+                <residence gender="male" name="John Otes" notes="Glover"/>
+                <residence gender="male" name="John Smithson"/>
+            </residenceRecords>
+
+        </recordSet>
+
+        <recordSet
+                id="halifax_manor_rolls_1570-1625"
+                title="Halifax Manor Court Rolls (1570 - 1625)"
+                shortTitle="Court Rolls"
+                source="manor"
+                type="mixed">
+
+            <d:betweenYears start="1570" end="1625"/>
+
+        </recordSet>
+
+        <recordSet
+                id="halifax_manor_tourn"
+                title="Halifax Manor Tourn"
+                shortTitle="Tourn"
+                source="manor"
+                type="residence">
+
+            <d:betweenYears start="1275" end="1600"/>
+
+        </recordSet>
 
     </recordSet>
 

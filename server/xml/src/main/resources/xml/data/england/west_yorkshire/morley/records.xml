@@ -49,4 +49,13 @@
 
     </recordSet>
 
+    <recordSet
+            id="wry_morley_poll_tax_1379"
+            parentId="wry_poll_tax_1379"
+            title="Morley Wapentake Poll Tax Returns (1379)"
+            coversPlaceId="wapentake:morley"
+            shortTitle="Morley"
+            source="government"
+            type="residence"/>
+
 </recordSets>

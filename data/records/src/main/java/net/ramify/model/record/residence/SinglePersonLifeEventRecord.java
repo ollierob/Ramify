@@ -8,6 +8,7 @@ import net.ramify.model.record.RecordId;
 import net.ramify.model.record.type.LifeEventRecord;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 
 public class SinglePersonLifeEventRecord implements LifeEventRecord {
 
@@ -19,9 +20,9 @@ public class SinglePersonLifeEventRecord implements LifeEventRecord {
             final RecordId recordId,
             final Person person,
             final DateRange date) {
-        this.recordId = recordId;
-        this.person = person;
-        this.date = date;
+        this.recordId = Objects.requireNonNull(recordId);
+        this.person = Objects.requireNonNull(person);
+        this.date = Objects.requireNonNull(date);
     }
 
     @Nonnull

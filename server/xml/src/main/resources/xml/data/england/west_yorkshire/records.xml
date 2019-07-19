@@ -20,7 +20,9 @@
             shortTitle="West Yorkshire"
             coversPlaceId="county:west_yorkshire"
             source="church"
-            type="mixed"/>
+            type="mixed">
+        <d:betweenYears start="1700" end="1900"/>
+    </recordSet>
 
     <recordSet
             id="census_1841_wry"
@@ -49,6 +51,18 @@
             title="Manor of Wakefield"
             coversPlaceId="manor:wakefield"
             source="manor"
-            type="mixed"/>
+            type="mixed">
+        <d:betweenYears start="1275" end="1925"/>
+    </recordSet>
+
+    <recordSet
+            id="wry_poll_tax_1379"
+            title="West Yorkshire Poll Tax Returns (1379)"
+            coversPlaceId="county:west_yorkshire"
+            shortTitle="West Yorkshire"
+            source="government"
+            type="residence">
+        <d:inYear year="1379"/>
+    </recordSet>
 
 </recordSets>

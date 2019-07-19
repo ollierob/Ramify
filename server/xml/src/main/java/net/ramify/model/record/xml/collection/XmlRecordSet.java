@@ -1,11 +1,12 @@
 package net.ramify.model.record.xml.collection;
 
 import com.google.common.collect.Lists;
+import net.ramify.model.date.DateRange;
+import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.date.xml.XmlBetweenYears;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlInYear;
 import net.ramify.model.place.PlaceId;
-import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.record.Record;
 import net.ramify.model.record.collection.HasRecordSetId;
 import net.ramify.model.record.collection.RecordSet;
@@ -101,7 +102,7 @@ class XmlRecordSet implements HasRecordSetId {
                 parent,
                 source.source(),
                 type.type(),
-                Functions.ifNonNull(date, d -> d.resolve(context.dateParser())),
+                this.date(parent, context.dateParser()),
                 title,
                 this.creatorPlaceId(parent),
                 this.coversPlaceId(parent),
@@ -109,6 +110,12 @@ class XmlRecordSet implements HasRecordSetId {
                 Functions.ifNonNull(description, String::trim),
                 this.size(),
                 this.buildReferences(context));
+    }
+
+    DateRange date(final RecordSet parent, final DateParser dateParser) {
+        if (date != null) return date.resolve(dateParser);
+        if (parent != null) return parent.date();
+        return null;
     }
 
     @CheckForNull
@@ -143,10 +150,10 @@ class XmlRecordSet implements HasRecordSetId {
         return Functions.ifNonNull(parentId, RecordSetId::new);
     }
 
-    Collection<Record> records(final PlaceProvider places, final RecordContext context) {
+    Collection<Record> records(final RecordContext context) {
         if (records == null) return Collections.emptySet();
         final var records = Lists.<Record>newArrayList();
-        final var self = this.buildSelf(null, context);
+        final var self = this.buildSelf(null, context); //FIXME null parent as record sets may not yet have been generated
         this.records.forEach(record -> records.addAll(record.build(self, context)));
         return records;
     }

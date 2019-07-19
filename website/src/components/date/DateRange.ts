@@ -18,3 +18,17 @@ export function daysEqual(d1: DateProto.AsObject, d2: DateProto.AsObject): boole
 export function datesEqual(d1: DateProto.AsObject, d2: DateProto.AsObject): boolean {
     return yearEquals(d1, d2) && monthsEqual(d1, d2) && daysEqual(d1, d2);
 }
+
+export function sortDateByEarliest(d1: DateRangeProto.AsObject, d2: DateRangeProto.AsObject): number {
+    if (!d1 && !d2) return 0;
+    if (!d1) return +1;
+    if (!d2) return -1;
+    return sortDates(d1.earliest || d1.latest, d2.earliest || d2.latest);
+}
+
+export function sortDates(d1: DateProto.AsObject, d2: DateProto.AsObject): number {
+    if (!d1 && !d2) return 0;
+    if (d1.year != d2.year) return d1.year - d2.year;
+    if (d1.month != d2.month) return d1.month - d2.month;
+    return d1.day - d2.day;
+}
