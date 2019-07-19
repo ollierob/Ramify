@@ -1,6 +1,6 @@
 import * as React from "react";
 import {Icon, Menu} from "antd";
-import {FavouritesIcon, PeopleIcon, PlacesIcon, RecordsIcon, TreeIcon} from "../components/images/Icons";
+import {FavouritesIcon, PeopleIcon, PlacesIcon, RecordsIcon, SearchIcon, TreeIcon} from "../components/images/Icons";
 import {PlaceList} from "../components/places/Place";
 import {Place} from "../protobuf/generated/place_pb";
 import {placeTypeName} from "../components/places/PlaceType";
@@ -26,7 +26,10 @@ export default class HeaderMenu extends React.PureComponent<Props> {
             <Menu.Item key="people">
                 <PeopleIcon/> People
             </Menu.Item>
-            <Menu.SubMenu key="places" title={<a href="/places"><PlacesIcon/> Places</a>}>
+            <Menu.SubMenu title={<><PlacesIcon/> Places</>}>
+                <Menu.Item key="places">
+                    <a href="/places"><SearchIcon/> Directory</a>
+                </Menu.Item>
                 <Menu.SubMenu title={<><FavouritesIcon/> Favourites</>}>
                     {!favourites.length && <Menu.Item disabled>No favourite places.</Menu.Item>}
                     {favourites.map(h => <Menu.Item key={h.id}><PlaceMenuItem place={h}/></Menu.Item>)}
@@ -49,5 +52,5 @@ const PlaceMenuItem = (props: {place: Place.AsObject}) => {
     const place = props.place;
     return <a href={placeHref(place)}>
         {place.name} ({placeTypeName(place.type)})
-    </a>
+    </a>;
 };
