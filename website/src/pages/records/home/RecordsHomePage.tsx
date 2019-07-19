@@ -116,6 +116,8 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
     componentDidMount() {
         this.placeLoader.loadCountries()
             .then(countries => this.setState({regions: generateCountryOptions(countries)}));
+        if (this.state.recordName || this.state.selectedRegion.length)
+            this.doSearch();
     }
 
     private renderPlace(places: PlaceId[]): React.ReactNode {
@@ -144,8 +146,8 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
         }
     }
 
-    private doSearch(e: FormEvent<HTMLFormElement>) {
-        e.preventDefault();
+    private doSearch(e?: FormEvent<HTMLFormElement>) {
+        if (e) e.preventDefault();
         const options: RecordSetOptions = {
             place: this.state.selectedRegion.length ? this.state.selectedRegion[this.state.selectedRegion.length - 1] : null,
             name: this.state.recordName,

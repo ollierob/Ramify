@@ -23,6 +23,7 @@ export default class RecordSetTable extends React.PureComponent<Props> {
 
         return <Table
             className="bordered"
+            style={{tableLayout: "fixed"}}
             loading={this.props.recordSets.loading}
             dataSource={data}
             columns={Columns}/>;
@@ -42,6 +43,13 @@ const Columns: ColumnProps<RecordSet.AsObject>[] = [
         width: 300,
         defaultSortOrder: "ascend",
         sorter: (a, b) => a.longtitle.localeCompare(b.longtitle)
+    },
+    {
+        key: "numRecords",
+        title: "Records",
+        render: (t, r) => r.numrecords.toLocaleString(),
+        sorter: (a, b) => a.numrecords - b.numrecords,
+        width: 100
     },
     {
         key: "date",
