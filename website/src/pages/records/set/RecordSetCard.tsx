@@ -12,6 +12,9 @@ import {RecordPaginationHandler} from "../../../components/records/RecordPaginat
 import {Link} from "../../../components/style/Links";
 import {RouteComponentProps} from "react-router";
 import {Loading} from "../../../components/style/Loading";
+import {stringMultimap} from "../../../components/Maps";
+import {RecordSetReferences} from "../../../components/records/RecordSetReference";
+import {joinComponents} from "../../../components/Components";
 
 type Props = RecordPaginationHandler & RecordSearchHandler & RouteComponentProps<any> & {
     loading: boolean;
@@ -85,21 +88,12 @@ const PartOf = (props: {parent: RecordSet.AsObject}) => {
 const References = (props: {references: ReadonlyArray<ExternalRecordReference.AsObject>}) => {
     const references = props.references;
     if (!references || !references.length) return null;
+    const archiveGroupings = stringMultimap(references, ref => ref.archive.id);
     return <div className="references" style={MarginBottom}>
         <Icon type="book"/> These records are held at
-        {references.map(ref => <> <Reference reference={ref}/></>)}
-    </div>;
-};
-
-const Reference = (props: {reference: ExternalRecordReference.AsObject}) => {
-    const reference = props.reference;
-    if (!reference) return null;
-    const item = <>(reference {reference.reference})</>;
-    return <>
-        <Link link={reference.archive.website} iconPath={reference.archive.icon} newWindow>{reference.archive.name}</Link>
         {" "}
-        {reference.link ? <Link link={reference.link} newWindow>{item}</Link> : item}
-    </>;
+        {joinComponents(Object.values(archiveGroupings).map(refs => <RecordSetReferences archive={refs[0].archive} references={refs}/>), " and ")}
+    </div>;
 };
 
 const MarginBottom: CSSProperties = {marginBottom: 16};
