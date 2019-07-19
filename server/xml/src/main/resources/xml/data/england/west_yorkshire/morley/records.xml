@@ -36,7 +36,10 @@
             type="residence">
         <d:inYear year="1642"/>
         <recordSetReference reference="HL/PO/JO/10/1/109/10" archiveId="parliament">
-            <p:textLink href="https://digitalarchive.parliament.uk/HL/PO/JO/10/1/109/10" text="Catalogue"/>
+            <p:textLink href="https://archives.parliament.uk/collections/getrecord/GB61_HL_PO_JO_10_1_109_10" text="Catalogue"/>
+        </recordSetReference>
+        <recordSetReference reference="HL/PO/JO/10/1/109/11" archiveId="parliament">
+            <p:textLink href="https://archives.parliament.uk/collections/getrecord/GB61_HL_PO_JO_10_1_109_11" text="Catalogue"/>
         </recordSetReference>
     </recordSet>
 
