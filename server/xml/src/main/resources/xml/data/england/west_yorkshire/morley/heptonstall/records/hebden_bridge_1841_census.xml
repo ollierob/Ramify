@@ -158,6 +158,48 @@
 
         </recordSet>
 
+        <recordSet
+                id="census_1841_hebden_bridge_district_23"
+                title="Hebden Bridge 1841 Census (District 23)"
+                shortTitle="District 23"
+                coversPlaceId="township:heptonstall"
+                source="government"
+                type="census">
+
+            <description>Properties lying along the Hebden Beck river.</description>
+
+            <d:inYear year="1841"/>
+
+        </recordSet>
+
+        <recordSet
+                id="census_1841_hebden_bridge_district_24"
+                title="Hebden Bridge 1841 Census (District 24)"
+                shortTitle="District 24"
+                coversPlaceId="township:heptonstall"
+                source="government"
+                type="census">
+
+            <description>Houses along Smithy Lane, between Slack and Colden.</description>
+
+            <d:inYear year="1841"/>
+
+        </recordSet>
+
+        <recordSet
+                id="census_1841_hebden_bridge_district_25"
+                title="Hebden Bridge 1841 Census (District 25)"
+                shortTitle="District 25"
+                coversPlaceId="township:heptonstall"
+                source="government"
+                type="census">
+
+            <description>Houses along Edge Lane, west of Slack.</description>
+
+            <d:inYear year="1841"/>
+
+        </recordSet>
+
     </recordSet>
 
 </recordSets>
