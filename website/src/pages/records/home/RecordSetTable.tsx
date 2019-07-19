@@ -40,7 +40,7 @@ const Columns: ColumnProps<RecordSet.AsObject>[] = [
         title: "Name",
         dataIndex: "longtitle",
         render: (t, r) => <a href={recordSetHref(r)}>{t}</a>,
-        width: 300,
+        width: 350,
         defaultSortOrder: "ascend",
         sorter: (a, b) => a.longtitle.localeCompare(b.longtitle)
     },
