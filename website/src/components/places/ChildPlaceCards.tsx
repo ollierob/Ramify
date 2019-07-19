@@ -83,7 +83,7 @@ const AlsoSeeCard = (props: {places: ReadonlyArray<Place.AsObject>}) => {
         title={<>Also see</>}>
         <ul>
             {places.map(place => <li>
-                <a href={placeHref(place)}>{place.name}</a> ({placeTypeName(place.type)})
+                <a href={placeHref(place)}>{place.name}</a> {placeTypeName(place.type)}
             </li>)}
         </ul>
     </Card>

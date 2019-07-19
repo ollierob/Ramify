@@ -39,7 +39,9 @@
             <d:betweenYears start="1842" end="1880"/>
 
             <mentionRecords>
+                <d:inYear year="1843"/>
                 <mention name="James Draper" gender="male"/>
+                <mention name="William Greenwood" gender="male"/>
             </mentionRecords>
 
         </recordSet>
