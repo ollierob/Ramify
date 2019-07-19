@@ -35,7 +35,9 @@
                 shortTitle="Meeting Minutes"
                 source="church"
                 type="membership">
+
             <d:betweenYears start="1842" end="1880"/>
+
         </recordSet>
 
     </recordSet>

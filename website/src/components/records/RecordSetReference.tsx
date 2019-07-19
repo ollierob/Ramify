@@ -1,7 +1,6 @@
 import * as React from "react";
 import {ExternalRecordReference} from "../../protobuf/generated/record_pb";
 import {Archive} from "../../protobuf/generated/archive_pb";
-import {Link} from "../style/Links";
 import {Icon, Popover} from "antd";
 import {RecordsIcon} from "../images/Icons";
 

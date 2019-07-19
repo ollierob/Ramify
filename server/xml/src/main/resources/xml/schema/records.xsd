@@ -114,7 +114,7 @@
 
                 </sequence>
 
-                <attribute name="placeId" type="xs:string"/>
+                <attribute name="placeId" type="xs:string" use="required"/>
 
             </extension>
 
@@ -129,6 +129,8 @@
             <extension base="tns:xmlRecord">
 
                 <sequence/>
+
+                <attribute name="placeId" type="xs:string"/>
 
             </extension>
 
@@ -216,9 +218,9 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="church"/>
-
             <enumeration value="government"/>
+
+            <enumeration value="church"/>
 
         </restriction>
 
@@ -228,25 +230,25 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="census"/>
+            <enumeration value="baptism"/>
+
+            <enumeration value="burial"/>
+
+            <enumeration value="membership"/>
 
             <enumeration value="residence"/>
 
             <enumeration value="birth"/>
 
-            <enumeration value="burial"/>
-
-            <enumeration value="death"/>
+            <enumeration value="census"/>
 
             <enumeration value="mixed"/>
 
             <enumeration value="marriage"/>
 
-            <enumeration value="baptism"/>
-
             <enumeration value="payment"/>
 
-            <enumeration value="membership"/>
+            <enumeration value="death"/>
 
         </restriction>
 

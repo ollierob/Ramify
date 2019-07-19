@@ -23,7 +23,7 @@ import java.util.List;
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "residenceRecords")
 public class XmlResidenceRecords extends XmlRecords {
 
-    @XmlAttribute(name = "placeId", required = false)
+    @XmlAttribute(name = "placeId", required = true)
     private String placeId;
 
     @XmlElements({
@@ -46,7 +46,7 @@ public class XmlResidenceRecords extends XmlRecords {
             final RecordContext context) {
         final var place = context.places().require(Functions.ifNonNull(this.placeId, PlaceId::new, recordSet.placeId()));
         final var date = Functions.ifNonNull(this.date, d -> d.resolve(context.dateParser()), recordSet.date());
-        return ListUtils.eagerlyTransform(records, record -> record.build(context.nameParser(), place, date));
+        return ListUtils.eagerlyTransform(records, record -> record.build(place, date, context));
     }
 
 }
