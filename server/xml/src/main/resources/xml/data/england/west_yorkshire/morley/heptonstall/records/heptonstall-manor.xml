@@ -10,7 +10,7 @@
             parentId="halifax_manor"
             title="Heptonstall Manor"
             coversPlaceId="manor:heptonstall"
-            creatorPlace="manor:heptonstall"
+            creatorPlace="village:heptonstall"
             source="manor"
             type="mixed">
 
@@ -35,7 +35,7 @@
                 shortTitle="Court Rolls"
                 source="manor"
                 type="mixed">
-            
+
             <d:betweenYears start="1769" end="1896"/>
 
         </recordSet>

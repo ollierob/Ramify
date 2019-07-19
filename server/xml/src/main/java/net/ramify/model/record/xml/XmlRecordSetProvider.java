@@ -65,9 +65,9 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
     public Set<RecordSet> matching(final Predicate<? super RecordSet> predicate, final int limit, final boolean onlyParents) {
         final var matching = this.keys()
                 .stream()
-                .limit(limit)
                 .map(this::get)
                 .filter(predicate)
+                .limit(limit)
                 .collect(Collectors.toSet());
         if (!onlyParents) return matching;
         final var ids = SetUtils.transform(matching, RecordSet::recordSetId);

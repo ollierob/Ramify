@@ -46,6 +46,7 @@ message RecordSet {
 message RecordSetList {
 
     repeated RecordSet recordSet = 1;
+    bool truncated = 2;
 
 }
 

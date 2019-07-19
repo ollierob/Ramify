@@ -5,11 +5,19 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://ramify.net/places ../../../../../schema/places.xsd">
 
+    <placeDescription id="manor:heptonstall">
+        <alsoSee id="township:heptonstall"/>
+        <description>
+            Heptonstall manor was separated from Halifax in 1626.
+        </description>
+    </placeDescription>
+
     <placeDescription id="township:heptonstall">
         <alsoSee id="township:stansfield"/>
         <alsoSee id="township:wadsworth"/>
         <alsoSee id="township:erringden"/>
         <alsoSee id="township:langfield"/>
+        <alsoSee id="manor:heptonstall"/>
         <description>
             Heptonstall township, centered on the village, encompassed part of Hebden Bridge and the lands along Widdop
             road and Edge Lane. Its border with Stansfield township lay along the Colden Water.
