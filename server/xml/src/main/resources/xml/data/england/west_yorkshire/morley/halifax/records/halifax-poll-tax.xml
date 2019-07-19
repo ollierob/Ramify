@@ -15,6 +15,11 @@
 
         <d:inYear year="1379"/>
 
+        <residenceRecords placeId="manor:halifax">
+            <residence gender="male" name="William son of Henry"/>
+            <residence gender="male" name="William Shaw"/>
+        </residenceRecords>
+
         <residenceRecords placeId="township:wadsworth">
             <residence gender="male" name="Robert Wadsworth" notes="Merchant"/>
             <residence gender="male" name="John Mitchell"/>
