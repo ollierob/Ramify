@@ -36,7 +36,7 @@ export default class RecordSetCard extends React.PureComponent<Props> {
 
         return <Card
             className="info"
-            title={recordSet ? <><b>{recordSet.longtitle}</b> <span className="unimportant">{recordSet.numrecords} records</span></> : <Loading/>}>
+            title={recordSet ? <>Records of <b>{recordSet.longtitle}</b> <span className="unimportant">{recordSet.numrecords} records</span></> : <Loading/>}>
 
             {recordSet && <>
                 <PartOf
