@@ -9,6 +9,7 @@
             id="census_1841_wry_morley"
             parentId="census_1841_wry"
             title="Morley Wapentake 1841 Census"
+            shortTitle="Morley"
             coversPlaceId="wapentake:morley"
             source="government"
             type="census">
@@ -18,6 +19,7 @@
         <recordSet
                 id="census_1841_wry_halifax"
                 title="Halifax Parish 1841 Census"
+                shortTitle="Halifax Parish"
                 coversPlaceId="parish:halifax"
                 source="government"
                 type="census">
@@ -34,13 +36,17 @@
             coversPlaceId="wapentake:morley"
             source="government"
             type="residence">
+
         <d:inYear year="1642"/>
+
         <recordSetReference reference="HL/PO/JO/10/1/109/10" archiveId="parliament">
             <p:textLink href="https://archives.parliament.uk/collections/getrecord/GB61_HL_PO_JO_10_1_109_10" text="Catalogue"/>
         </recordSetReference>
+
         <recordSetReference reference="HL/PO/JO/10/1/109/11" archiveId="parliament">
             <p:textLink href="https://archives.parliament.uk/collections/getrecord/GB61_HL_PO_JO_10_1_109_11" text="Catalogue"/>
         </recordSetReference>
+
     </recordSet>
 
 </recordSets>

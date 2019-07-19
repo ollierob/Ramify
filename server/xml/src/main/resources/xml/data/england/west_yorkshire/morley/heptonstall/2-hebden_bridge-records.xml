@@ -8,10 +8,13 @@
             id="census_1841_hebden_bridge"
             parentId="census_1841_wry_halifax"
             title="Hebden Bridge District 1841 Census"
+            shortTitle="Hebden Bridge District"
             coversPlaceId="chapelry:heptonstall"
             source="government"
             type="census">
+
         <d:inYear year="1841"/>
+
     </recordSet>
 
 </recordSets>
