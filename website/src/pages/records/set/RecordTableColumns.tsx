@@ -62,6 +62,7 @@ const NameColumn: RecordColumn = {
             <div className="small unimportant">{r.person.name.original}</div>
         </>}
     </>,
+    sorter: (r1, r2) => nameToString(r1.person.name).localeCompare(nameToString(r2.person.name)),
     width: 200,
 };
 
@@ -106,7 +107,8 @@ const BurialDateColumn: RecordColumn = {
 const NotesColumn: RecordColumn = {
     key: "notes",
     title: "Notes",
-    dataIndex: "person.notes"
+    dataIndex: "person.notes",
+    sorter: (r1, r2) => (r1.person.notes || "").localeCompare(r2.person.notes || "")
 };
 
 const DefaultColumns: ReadonlyArray<RecordColumn> = [ImageColumn, NameColumn];
