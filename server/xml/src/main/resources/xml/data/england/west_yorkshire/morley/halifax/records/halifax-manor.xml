@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<recordSets
+        xmlns="http://ramify.net/records"
+        xmlns:d="http://ramify.net/dates"
+        xmlns:p="http://ramify.net/places">
+
+    <recordSet
+            id="halifax_manor"
+            title="Halifax Manor"
+            coversPlaceId="parish:halifax"
+            creatorPlace="parish:halifax"
+            source="manor"
+            type="mixed">
+
+        <d:betweenYears start="1570" end="1626"/>
+
+    </recordSet>
+
+</recordSets>

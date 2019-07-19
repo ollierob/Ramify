@@ -3,7 +3,11 @@
 <archives xmlns="http://ramify.net/places">
 
     <archive id="wyas" name="West Yorkshire Archive Services" iconHref="/images/links/wyas.png">
-        <textLink href="https://www.wyjs.org.uk/archive-service/" text="WYAS"/>
+        <textLink href="https://www.wyjs.org.uk/archive-service/" text="Website"/>
+    </archive>
+
+    <archive id="yas" name="Yorkshire Archaeological and Historical Society">
+        <textLink href="https://www.yas.org.uk/" text="Website"/>
     </archive>
 
 </archives>

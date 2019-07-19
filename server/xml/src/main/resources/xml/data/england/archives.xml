@@ -8,4 +8,8 @@
         <textLink href="https://archives.parliament.uk" text="Parliamentary Archives"/>
     </archive>
 
+    <archive id="nots_archives" name="Nottinghamshire Archives">
+        <textLink href="https://www.inspireculture.org.uk/heritage/archives/visiting-archives/" text="Website"/>
+    </archive>
+
 </archives>

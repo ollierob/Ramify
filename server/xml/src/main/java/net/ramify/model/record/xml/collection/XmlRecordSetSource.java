@@ -14,8 +14,12 @@ enum XmlRecordSetSource {
 
     @XmlEnumValue("government")
     GOVERNMENT(RecordProto.SourceType.GOVERNMENT_SOURCE),
+
     @XmlEnumValue("church")
-    CHURCH(RecordProto.SourceType.CHURCH_SOURCE);
+    CHURCH(RecordProto.SourceType.CHURCH_SOURCE),
+
+    @XmlEnumValue("manor")
+    MANOR(RecordProto.SourceType.MANOR_SOURCE);
 
     private final RecordProto.SourceType source;
 

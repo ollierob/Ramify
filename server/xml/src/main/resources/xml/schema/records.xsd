@@ -264,6 +264,8 @@
 
             <enumeration value="government"/>
 
+            <enumeration value="manor"/>
+
         </restriction>
 
     </simpleType>
@@ -272,25 +274,25 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="residence"/>
-
-            <enumeration value="death"/>
-
-            <enumeration value="marriage"/>
-
-            <enumeration value="membership"/>
+            <enumeration value="mixed"/>
 
             <enumeration value="baptism"/>
 
             <enumeration value="birth"/>
 
+            <enumeration value="marriage"/>
+
             <enumeration value="census"/>
+
+            <enumeration value="residence"/>
 
             <enumeration value="burial"/>
 
-            <enumeration value="mixed"/>
-
             <enumeration value="payment"/>
+
+            <enumeration value="membership"/>
+
+            <enumeration value="death"/>
 
         </restriction>
 

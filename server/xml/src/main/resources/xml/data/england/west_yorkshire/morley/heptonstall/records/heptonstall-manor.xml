@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<recordSets
+        xmlns="http://ramify.net/records"
+        xmlns:d="http://ramify.net/dates"
+        xmlns:p="http://ramify.net/places">
+
+    <recordSet
+            id="heptonstall_manor"
+            parentId="halifax_manor"
+            title="Heptonstall Manor"
+            coversPlaceId="manor:heptonstall"
+            creatorPlace="manor:heptonstall"
+            source="manor"
+            type="mixed">
+
+        <d:betweenYears start="1651" end="1896"/>
+
+        <recordSet
+                id="heptonstall_manor_1651-1769"
+                title="Heptonstall Manor Court Rolls (1651 - 1769)"
+                shortTitle="Court Rolls (1651 - 1769)"
+                source="manor"
+                type="mixed">
+
+            <recordSetReference archiveId="nots_archives" reference="DDSR/1/7/1"/>
+            <recordSetReference archiveId="yas" reference="MD90"/>
+
+        </recordSet>
+
+        <recordSet
+                id="heptonstall_manor_rolls_1769-1896"
+                title="Heptonstall Manor Court Rolls (1769 - 1896)"
+                shortTitle="Court Rolls (1769 - 1896)"
+                source="manor"
+                type="mixed">
+
+        </recordSet>
+
+    </recordSet>
+
+</recordSets>
