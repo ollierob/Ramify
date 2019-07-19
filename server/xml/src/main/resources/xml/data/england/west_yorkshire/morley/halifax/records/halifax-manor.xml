@@ -16,17 +16,6 @@
         <d:betweenYears start="1439" end="1849"/>
 
         <recordSet
-                id="halifax_manor_tourn"
-                title="Halifax Manor Tourn"
-                shortTitle="Tourn"
-                source="manor"
-                type="residence">
-
-            <d:betweenYears start="1275" end="1600"/>
-
-        </recordSet>
-
-        <recordSet
                 id="halifax_manor_rental_1439"
                 title="Halifax Manor Rental (1439)"
                 shortTitle="Rental"

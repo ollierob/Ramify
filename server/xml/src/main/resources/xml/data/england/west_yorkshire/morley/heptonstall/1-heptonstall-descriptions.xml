@@ -30,6 +30,7 @@
     <placeDescription id="village:heptonstall">
         <alsoSee id="town:hebden_bridge"/>
         <alsoSee id="township:heptonstall"/>
+        <alsoSee id="manor:heptonstall"/>
         <wikipediaLink href="https://en.wikipedia.org/wiki/Heptonstall"/>
         <description>
             The village of Heptonstall sits on the hilltop above Hebden Bridge.
