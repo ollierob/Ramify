@@ -2,7 +2,8 @@ import * as React from "react";
 import {ExternalRecordReference} from "../../protobuf/generated/record_pb";
 import {Archive} from "../../protobuf/generated/archive_pb";
 import {Link} from "../style/Links";
-import {Popover} from "antd";
+import {Icon, Popover} from "antd";
+import {RecordsIcon} from "../images/Icons";
 
 export const RecordSetReferences = (props: {archive: Archive.AsObject, references: ReadonlyArray<ExternalRecordReference.AsObject>}) => {
     const archive = props.archive;
@@ -20,13 +21,17 @@ const PopoverContent = (props: {archive: Archive.AsObject, references: ReadonlyA
     const archive = props.archive;
     return <>
         <div>
-            <Link link={archive.website} iconPath={archive.icon} newWindow>Archive website</Link>
+            <a href={archive.website.href} target="_blank">
+                <Icon type="export"/> Archive website
+            </a>
         </div>
         <div>
-            References:
+            <RecordsIcon/> References:
         </div>
         <ul>
-            {references.map(r => <li>{r.reference}</li>)}
+            {references.map(r => <li>
+                {r.reference}
+            </li>)}
         </ul>
     </>;
 };

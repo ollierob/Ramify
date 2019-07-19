@@ -6,6 +6,7 @@
     color: unset;
 }
 
-.ant-menu-submenu.ant-menu-submenu-open a {
-    color: #B72F17;
+.ant-popover .ant-popover-inner-content {
+    font-size: 16px;
+    padding: 12px;
 }
