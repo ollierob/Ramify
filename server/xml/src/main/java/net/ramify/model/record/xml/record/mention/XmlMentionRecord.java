@@ -6,10 +6,11 @@ import net.ramify.model.date.DateRange;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.type.death.GenericDeath;
 import net.ramify.model.event.type.misc.Flourished;
+import net.ramify.model.family.SinglePersonFamily;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.record.GenericRecordPerson;
-import net.ramify.model.record.residence.SinglePersonLifeEventRecord;
+import net.ramify.model.record.residence.GenericLifeEventRecord;
 import net.ramify.model.record.type.LifeEventRecord;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlRecord;
@@ -32,10 +33,10 @@ public class XmlMentionRecord extends XmlRecord {
     public LifeEventRecord buildRecord(final DateRange parentDate, final RecordContext context) {
         final var recordId = this.recordId();
         final var date = parentDate; //TODO also encode here
-        final var person = this.person(date, context);
-        return new SinglePersonLifeEventRecord(
+        final var family = new SinglePersonFamily(this.person(date, context));
+        return new GenericLifeEventRecord(
                 recordId,
-                person,
+                family,
                 date);
     }
 

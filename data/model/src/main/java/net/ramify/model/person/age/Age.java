@@ -17,11 +17,15 @@ public interface Age {
     Period upperBound();
 
     @Nonnull
-    Optional<Period> exact();
+    default Optional<Period> exact() {
+        final var lower = this.lowerBound().normalized();
+        final var upper = this.upperBound().normalized();
+        return lower.equals(upper) ? Optional.of(upper) : Optional.empty();
+    }
 
     default DateRange birthDate(final DateRange date) {
-        final var latest = date.earliestInclusive().map(d -> d.minus(this.lowerBound()));
-        final var earliest = date.latestInclusive().map(d -> d.plus(this.upperBound()));
+        final var earliest = date.earliestInclusive().map(d -> d.minus(this.upperBound()));
+        final var latest = date.latestInclusive().map(d -> d.minus(this.lowerBound()));
         return new AgeDateRange(earliest, latest);
     }
 
@@ -30,12 +34,16 @@ public interface Age {
     }
 
     static Age ofYears(final int years) {
-        return exactly(Period.ofYears(years));
+        return new RoundedDownAge(years);
     }
 
     static Age between(final int minYears, final int maxYears) {
         if (minYears > maxYears) return between(maxYears, minYears);
         throw new UnsupportedOperationException(); //TODO
+    }
+
+    static DateRange birthDate(final int age, final DateRange date) {
+        return Age.ofYears(age).birthDate(date);
     }
 
 }

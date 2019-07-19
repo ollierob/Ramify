@@ -37,7 +37,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.time.Month;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -77,7 +76,7 @@ public class XmlBurialRecord extends XmlRecord {
     Family family(final ExactDate burialDate, final RecordContext context) {
         final var person = this.person(context.nameParser(), burialDate, context.places());
         final var builder = new FamilyBuilder().addPerson(person);
-        if (relationships != null) relationships.forEach(relationship -> relationship.addRelationship(person, builder, context.nameParser(), Collections.emptySet()));
+        if (relationships != null) relationships.forEach(relationship -> relationship.addRelationship(person, builder, context.nameParser(), burialDate));
         return builder.build();
     }
 

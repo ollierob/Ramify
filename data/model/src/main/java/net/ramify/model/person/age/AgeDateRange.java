@@ -18,12 +18,12 @@ class AgeDateRange implements DateRange {
     @Nonnull
     @Override
     public Optional<? extends ChronoLocalDate> earliestInclusive() {
-        throw new UnsupportedOperationException(); //TODO
+        return earliest;
     }
 
     @Nonnull
     @Override
     public Optional<? extends ChronoLocalDate> latestInclusive() {
-        throw new UnsupportedOperationException(); //TODO
+        return latest;
     }
 }

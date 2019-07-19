@@ -29,8 +29,7 @@ export function determineColumns(recordSet: RecordSet.AsObject, properties: Reco
 function genericColumns(properties: RecordProperties) {
     const columns: RecordColumn[] = [];
     if (properties.hasBirth) columns.push(BirthYearColumn);
-    if (properties.hasResidence && !properties.hasDeath && !properties.hasBurial) columns.push(ResidenceYearColumn);
-    if (properties.hasResidence) columns.push(ResidencePlaceColumn);
+    if (properties.hasResidence) columns.push(ResidenceYearColumn, ResidencePlaceColumn);
     if (properties.hasDeath) columns.push(DeathDateColumn);
     if (properties.hasBurial) columns.push(BurialDateColumn);
     return columns;

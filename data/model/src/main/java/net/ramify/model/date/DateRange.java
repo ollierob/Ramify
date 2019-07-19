@@ -32,6 +32,10 @@ public interface DateRange extends BuildsProto<DateProto.DateRange> {
                 && this.latestInclusive().map(DateRange::covariant).orElse(LocalDate.MAX).compareTo(date) >= 0;
     }
 
+    default DateRange minusYears(final int years) {
+        return this.minus(Period.ofYears(years));
+    }
+
     default DateRange minus(final Period period) {
         throw new UnsupportedOperationException(); //TODO
     }

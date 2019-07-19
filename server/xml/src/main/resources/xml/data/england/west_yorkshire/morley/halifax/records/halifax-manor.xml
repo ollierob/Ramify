@@ -16,6 +16,17 @@
         <d:betweenYears start="1439" end="1849"/>
 
         <recordSet
+                id="halifax_manor_tourn"
+                title="Halifax Manor Tourn"
+                shortTitle="Tourn"
+                source="manor"
+                type="residence">
+
+            <d:betweenYears start="1275" end="1600"/>
+
+        </recordSet>
+
+        <recordSet
                 id="halifax_manor_rental_1439"
                 title="Halifax Manor Rental (1439)"
                 shortTitle="Rental"
@@ -35,6 +46,29 @@
         </recordSet>
 
         <recordSet
+                id="halifax_manor_tithes_1536"
+                title="Halifax Manor Tithes (1536)"
+                shortTitle="Tithes"
+                source="manor"
+                type="residence">
+
+            <d:inYear year="1536"/>
+
+            <residenceRecords placeId="township:heptonstall">
+                <residence gender="male" name="Thomas Greenwood" notes="6s/1d for lands in Heptonstall"/>
+                <residence gender="male" name="Thomas Sutcliffe" notes="1s/7d for lands in Heptonstall and Sowerby"/>
+                <residence gender="male" name="Robert Bentley" notes="4d for lands in Heptonstall"/>
+                <residence gender="male" name="Richard Robertshaw" notes="2s/5d for ands in Heptonstall"/>
+            </residenceRecords>
+
+            <residenceRecords placeId="township:wadsworth">
+                <residence gender="male" name="Richard Mitchell" notes="18d for lands in Wadsworth"/>
+                <residence gender="male" name="William Walker" notes="22d for lands in Wadsworth"/>
+            </residenceRecords>
+
+        </recordSet>
+
+        <recordSet
                 id="halifax_manor_rolls_1570-1625"
                 title="Halifax Manor Court Rolls (1570 - 1625)"
                 shortTitle="Court Rolls"
@@ -46,13 +80,14 @@
         </recordSet>
 
         <recordSet
-                id="halifax_manor_tourn"
-                title="Halifax Manor Tourn"
-                shortTitle="Tourn"
+                id="halifax_manor_rolls_1700s"
+                title="Halifax Manor Court Rolls (1712 - 1804)"
+                shortTitle="Court Rolls"
                 source="manor"
-                type="residence">
+                type="mixed">
 
-            <d:betweenYears start="1275" end="1600"/>
+            <d:betweenYears start="1712" end="1804"/>
+            <recordSetReference reference="DB/143/1-3" archiveId="wyas"/>
 
         </recordSet>
 

@@ -7,10 +7,10 @@ export const PlaceContextMenu = (props: {place: Place.AsObject}) => {
 
     if (!props.place) return null;
 
-    return <>
+    return <span className="place">
         <a href={placeHref(props.place)}>{props.place.name}</a>
         {" "}
-        <span className="unimportant">{placeTypeName(props.place.type)}</span>
-    </>;
+        <span className="type unimportant">{placeTypeName(props.place.type)}</span>
+    </span>;
 
 };

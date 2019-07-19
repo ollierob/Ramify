@@ -156,6 +156,8 @@
 
         <attribute name="notes" type="xs:string"/>
 
+        <attribute name="age" type="xs:int"/>
+
     </complexType>
 
     <complexType name="xmlResidenceRecord">
@@ -164,7 +166,17 @@
 
             <extension base="tns:xmlRecord">
 
-                <sequence/>
+                <sequence>
+
+                    <choice maxOccurs="unbounded" minOccurs="0">
+
+                        <element ref="ns4:father"/>
+
+                        <element ref="ns4:mother"/>
+
+                    </choice>
+
+                </sequence>
 
                 <attribute name="placeId" type="xs:string"/>
 
@@ -264,11 +276,11 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="manor"/>
-
             <enumeration value="government"/>
 
             <enumeration value="church"/>
+
+            <enumeration value="manor"/>
 
         </restriction>
 
@@ -280,9 +292,11 @@
 
             <enumeration value="membership"/>
 
-            <enumeration value="payment"/>
-
             <enumeration value="residence"/>
+
+            <enumeration value="marriage"/>
+
+            <enumeration value="census"/>
 
             <enumeration value="birth"/>
 
@@ -290,13 +304,11 @@
 
             <enumeration value="death"/>
 
-            <enumeration value="census"/>
-
-            <enumeration value="burial"/>
+            <enumeration value="payment"/>
 
             <enumeration value="baptism"/>
 
-            <enumeration value="marriage"/>
+            <enumeration value="burial"/>
 
         </restriction>
 

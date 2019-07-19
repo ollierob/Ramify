@@ -12,10 +12,17 @@
     width: 210px;
 }
 
+/*Table*/
 .records .table {
     margin-top: 16px;
 }
 
+.records .table .place .type {
+    display: block;
+    font-size: 0.8em;
+}
+
+/*General layout*/
 .recordSet.leftRest .map {
     position: absolute;
     left: 0;

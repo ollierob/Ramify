@@ -2,7 +2,8 @@
 
 <recordSets
         xmlns="http://ramify.net/records"
-        xmlns:d="http://ramify.net/dates">
+        xmlns:d="http://ramify.net/dates"
+        xmlns:f="http://ramify.net/families">
 
     <recordSet
             id="heptonstall_manor"
@@ -50,6 +51,16 @@
             <d:betweenYears start="1651" end="1769"/>
             <recordSetReference archiveId="nots_archives" reference="DDSR/1/7/1"/>
             <recordSetReference archiveId="yas" reference="MD90"/>
+
+            <residenceRecords placeId="manor:heptonstall">
+                <d:inYear year="1652"/>
+                <residence gender="male" name="John Robertshaw">
+                    <f:father name="Richard Robertshaw" deceased="true"/>
+                </residence>
+                <residence gender="male" name="Richard Robertshaw" age="12">
+                    <f:father name="John Robertshaw" deceased="true"/>
+                </residence>
+            </residenceRecords>
 
         </recordSet>
 

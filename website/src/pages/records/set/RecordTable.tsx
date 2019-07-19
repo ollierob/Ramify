@@ -45,6 +45,7 @@ export class RecordTable extends React.PureComponent<Props, State> {
         if (!data || !data.length) return <NoData/>;
 
         return <Table
+            className="table"
             loading={this.props.loading}
             dataSource={data}
             columns={this.state.columns}/>;

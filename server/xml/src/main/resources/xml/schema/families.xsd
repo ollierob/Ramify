@@ -35,6 +35,8 @@
 
         <attribute name="name" type="xs:string"/>
 
+        <attribute name="deceased" type="xs:boolean"/>
+
     </complexType>
 
     <complexType name="xmlMother">
