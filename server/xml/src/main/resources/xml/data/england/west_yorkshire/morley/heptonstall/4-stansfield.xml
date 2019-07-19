@@ -23,7 +23,9 @@
 
         <hamlet id="rawtonstall" name="Rawtonstall"/>
 
-        <mill id="winters" name="Winters"/>
+        <hamlet id="winters" name="Winters">
+            <mill id="winters" name="Winters"/>
+        </hamlet>
 
     </township>
 

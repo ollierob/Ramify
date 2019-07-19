@@ -502,6 +502,10 @@
 
                         <element ref="tns:church"/>
 
+                        <element ref="tns:mill"/>
+
+                        <element ref="tns:inn"/>
+
                         <element ref="tns:farmstead"/>
 
                     </choice>
