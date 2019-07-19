@@ -8,6 +8,7 @@ import net.ramify.model.person.age.Age;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.name.Name;
 import net.ramify.model.person.name.NameParser;
+import net.ramify.model.person.xml.XmlAge;
 import net.ramify.model.person.xml.XmlGender;
 import net.ramify.model.person.xml.XmlName;
 import net.ramify.model.record.RecordId;
@@ -39,6 +40,9 @@ public abstract class XmlPersonRecord extends XmlRecord {
     @XmlElementRef(required = false)
     private XmlName complexName;
 
+    @XmlElementRef(required = false)
+    private XmlAge complexAge;
+
     @Nonnull
     protected Name name(final NameParser parser) {
         if (complexName != null) return complexName.build(parser);
@@ -64,6 +68,7 @@ public abstract class XmlPersonRecord extends XmlRecord {
 
     @CheckForNull
     protected Period age() {
+        if (complexAge != null) return complexAge.age();
         return Functions.ifNonNull(age, Period::ofYears);
     }
 

@@ -5,7 +5,35 @@
         targetNamespace="http://ramify.net/people"
         version="1.0">
 
+    <element name="exactAge" type="tns:xmlExactAge"/>
+
     <element name="nameTranscription" type="tns:xmlNameTranscription"/>
+
+    <complexType abstract="true" name="xmlAge">
+
+        <sequence/>
+
+    </complexType>
+
+    <complexType name="xmlExactAge">
+
+        <complexContent>
+
+            <extension base="tns:xmlAge">
+
+                <sequence/>
+
+                <attribute name="years" type="xs:int" use="required"/>
+
+                <attribute name="months" type="xs:int" use="required"/>
+
+                <attribute name="days" type="xs:int" use="required"/>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
 
     <complexType abstract="true" name="xmlName">
 
@@ -41,11 +69,11 @@
 
         <restriction base="xs:string">
 
+            <enumeration value="male"/>
+
             <enumeration value="unknown"/>
 
             <enumeration value="female"/>
-
-            <enumeration value="male"/>
 
         </restriction>
 

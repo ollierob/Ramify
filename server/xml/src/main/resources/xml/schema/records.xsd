@@ -158,6 +158,8 @@
 
                     <element minOccurs="0" ref="ns3:nameTranscription"/>
 
+                    <element minOccurs="0" ref="ns3:exactAge"/>
+
                 </sequence>
 
                 <attribute name="name" type="xs:string"/>
@@ -380,9 +382,9 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="manor"/>
-
             <enumeration value="church"/>
+
+            <enumeration value="manor"/>
 
             <enumeration value="government"/>
 
@@ -394,25 +396,25 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="membership"/>
-
-            <enumeration value="death"/>
-
             <enumeration value="burial"/>
-
-            <enumeration value="residence"/>
-
-            <enumeration value="census"/>
-
-            <enumeration value="payment"/>
-
-            <enumeration value="mixed"/>
 
             <enumeration value="marriage"/>
 
+            <enumeration value="membership"/>
+
+            <enumeration value="residence"/>
+
             <enumeration value="birth"/>
 
+            <enumeration value="payment"/>
+
             <enumeration value="baptism"/>
+
+            <enumeration value="mixed"/>
+
+            <enumeration value="census"/>
+
+            <enumeration value="death"/>
 
         </restriction>
 

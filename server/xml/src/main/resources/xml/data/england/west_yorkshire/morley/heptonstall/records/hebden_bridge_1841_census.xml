@@ -2,7 +2,8 @@
 
 <recordSets
         xmlns="http://ramify.net/records"
-        xmlns:d="http://ramify.net/dates">
+        xmlns:d="http://ramify.net/dates"
+        xmlns:p="http://ramify.net/people">
 
     <recordSet
             id="census_1841_hebden_bridge"
@@ -39,6 +40,10 @@
 
                 <census1841England place="hamlet:walshaw">
                     <entry gender="male" name="Jonas Crabtree" age="50"/>
+                    <entry gender="female" name="Betty Crabtree" age="25"/>
+                    <entry gender="female" name="Lucy Crabtree">
+                        <p:exactAge years="0" months="5" days="0"/>
+                    </entry>
                 </census1841England>
 
             </censusRecords>
