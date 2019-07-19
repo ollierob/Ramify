@@ -18,6 +18,7 @@ import java.util.List;
 public class XmlTown extends XmlPlace {
 
     @XmlElementRefs({
+            @XmlElementRef(type = XmlStreet.class),
             @XmlElementRef(type = XmlChurch.class),
             @XmlElementRef(type = XmlMill.class),
             @XmlElementRef(type = XmlSchool.class),

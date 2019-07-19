@@ -18,6 +18,7 @@
             <inn id="union_cross" name="Union Cross"/>
             <inn id="white_horse" name="White Horse"/>
             <inn id="white_lion" name="White Lion"/>
+            <street id="heptonstall_north_side" name="North Side"/>
         </village>
 
         <church id="cross_lanes" name="Cross Lanes"/>

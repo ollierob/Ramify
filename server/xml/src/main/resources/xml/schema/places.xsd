@@ -56,6 +56,8 @@
 
     <element name="state" type="tns:xmlState"/>
 
+    <element name="street" type="tns:xmlStreet"/>
+
     <element name="textLink" type="tns:xmlTextLink"/>
 
     <element name="town" type="tns:xmlTown"/>
@@ -416,6 +418,8 @@
 
                     <choice maxOccurs="unbounded" minOccurs="0">
 
+                        <element ref="tns:street"/>
+
                         <element ref="tns:church"/>
 
                         <element ref="tns:mill"/>
@@ -427,6 +431,20 @@
                     </choice>
 
                 </sequence>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
+    <complexType name="xmlStreet">
+
+        <complexContent>
+
+            <extension base="tns:xmlPlace">
+
+                <sequence/>
 
             </extension>
 
@@ -541,6 +559,8 @@
                 <sequence>
 
                     <choice maxOccurs="unbounded" minOccurs="0">
+
+                        <element ref="tns:street"/>
 
                         <element ref="tns:church"/>
 
@@ -657,6 +677,8 @@
                 <element ref="tns:township"/>
 
                 <element ref="tns:village"/>
+
+                <element ref="tns:street"/>
 
                 <element ref="tns:church"/>
 

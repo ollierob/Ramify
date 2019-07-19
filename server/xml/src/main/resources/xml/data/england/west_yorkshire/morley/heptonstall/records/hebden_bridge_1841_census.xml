@@ -156,6 +156,21 @@
 
             <d:inYear year="1841"/>
 
+            <censusRecords censusPlace="township:heptonstall">
+                <census1841England place="street:heptonstall_north_side">
+                    <entry gender="male" name="William Robertshaw" age="30" notes="Worsted weaver"/>
+                    <entry gender="female" name="Hannah Robertshaw" age="30" notes="Worsted weaver"/>
+                    <entry gender="male" name="Barker Dobson" age="11"/>
+                </census1841England>
+                <census1841England place="street:heptonstall_north_side">
+                    <entry gender="male" name="William Thomas" age="50" notes="Shoemaker"/>
+                    <entry gender="female" name="Mary Thomas" age="55"/>
+                    <entry gender="male" name="James Robertshaw" age="20" notes="Shoemaker"/>
+                    <entry gender="male" name="William Howarth" age="20" notes="Shoemaker"/>
+                    <entry gender="male" name="Abraham Robertshaw" age="15" notes="Shoemaker"/>
+                </census1841England>
+            </censusRecords>
+
         </recordSet>
 
         <recordSet

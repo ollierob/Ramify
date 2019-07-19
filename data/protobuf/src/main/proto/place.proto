@@ -39,6 +39,7 @@ enum PlaceType {
     TOWN = 60;
     VILLAGE = 61;
     HAMLET = 62;
+    STREET = 63;
 
     //
     MANOR = 70;

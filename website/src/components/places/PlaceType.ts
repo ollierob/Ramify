@@ -27,6 +27,7 @@ const PlaceTypeInfo: { [key in PlaceType]: PlaceInfo } = {
     RAPE: {s: "Rape"},
     SCHOOL: {s: "School"},
     STATE: {s: "State"},
+    STREET: {s: "Street"},
     TOWN: {s: "Town"},
     TOWNSHIP: {s: "Township"},
     VILLAGE: {s: "Village"},
