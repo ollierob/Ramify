@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<recordSets
+        xmlns="http://ramify.net/records"
+        xmlns:d="http://ramify.net/dates">
+
+    <recordSet
+            id="heptonstall_township_poor"
+            parentId="heptonstall_township"
+            title="Heptonstall Overseer Of The Poor"
+            shortTitle="Overseer of the Poor"
+            source="government"
+            type="mixed">
+
+        <d:betweenYears start="1716" end="1799"/>
+
+        <recordSetReference reference="HPC/A:1-5" archiveId="wyas"/>
+
+        <residenceRecords placeId="township:heptonstall">
+            <d:inYear year="1716"/>
+            <residence gender="male" name="John Wadsworth"/>
+            <residence gender="male" name="John Robertshaw" notes="Paid 6s."/>
+        </residenceRecords>
+
+        <residenceRecords placeId="township:heptonstall">
+            <d:inYear year="1717"/>
+            <residence gender="male" name="John Crowther"/>
+            <residence gender="male" name="John Shackleton"/>
+        </residenceRecords>
+
+    </recordSet>
+
+</recordSets>

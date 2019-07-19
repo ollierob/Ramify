@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<recordSets
+        xmlns="http://ramify.net/records"
+        xmlns:d="http://ramify.net/dates">
+
+    <recordSet
+            id="heptonstall_township"
+            title="Heptonstall Township"
+            coversPlaceId="township:heptonstall"
+            source="government"
+            type="mixed">
+
+        <description>Local government records.</description>
+
+        <d:betweenYears start="1672" end="1942"/>
+
+        <recordSetReference reference="HPC/A" archiveId="wyas"/>
+
+    </recordSet>
+
+</recordSets>
