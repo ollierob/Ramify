@@ -2,7 +2,8 @@
 
 <recordSets
         xmlns="http://ramify.net/records"
-        xmlns:d="http://ramify.net/dates">
+        xmlns:d="http://ramify.net/dates"
+        xmlns:p="http://ramify.net/people">
 
     <recordSet
             id="halifax_poll_tax_1379"
@@ -17,7 +18,9 @@
 
         <residenceRecords placeId="manor:halifax">
             <residence gender="male" name="William son of Henry"/>
-            <residence gender="male" name="William Shaw"/>
+            <residence gender="male">
+                <p:nameTranscription original="Willelmus del Schagh" assumed="William Shaw"/>
+            </residence>
         </residenceRecords>
 
         <residenceRecords placeId="township:wadsworth">
@@ -35,6 +38,17 @@
             <residence gender="male" name="Richard Shore"/>
             <residence gender="male" name="Richard Coke"/>
             <residence gender="male" name="William Schirwynd"/>
+        </residenceRecords>
+
+        <residenceRecords placeId="township:stansfield">
+            <residence gender="male" name="John Shore" notes="Merchant"/>
+            <residence gender="male" name="William Stansfield" notes="Merchant"/>
+            <residence gender="male" notes="Merchant">
+                <p:nameTranscription original="Johannes de Estwode" assumed="John Eastwood"/>
+            </residence>
+            <residence gender="male">
+                <p:nameTranscription original="Adam de Schore" assumed="Adam Shore"/>
+            </residence>
         </residenceRecords>
 
     </recordSet>

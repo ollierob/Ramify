@@ -23,4 +23,6 @@ message Name {
     string prefix = 3;
     string suffix = 4;
 
+    string original = 10;
+
 }

@@ -57,7 +57,12 @@ const NameColumn: RecordColumn = {
     key: "name",
     title: "Name",
     dataIndex: "person.name.surname",
-    render: (t, r) => nameToString(r.person.name),
+    render: (t, r) => <>
+        {nameToString(r.person.name)}
+        {r.person.name.original && <>
+            <div className="small unimportant">{r.person.name.original}</div>
+        </>}
+    </>,
     width: 200,
 };
 

@@ -1,3 +1,7 @@
+.small {
+    font-size: .8em;
+}
+
 .gray, .unimportant, .background {
     color: #AAAAAA;
 }

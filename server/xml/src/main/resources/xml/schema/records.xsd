@@ -144,7 +144,11 @@
 
     <complexType abstract="true" name="xmlRecord">
 
-        <sequence/>
+        <sequence>
+
+            <element minOccurs="0" ref="ns3:nameTranscription"/>
+
+        </sequence>
 
         <attribute name="name" type="xs:string"/>
 
@@ -260,11 +264,11 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="church"/>
+            <enumeration value="manor"/>
 
             <enumeration value="government"/>
 
-            <enumeration value="manor"/>
+            <enumeration value="church"/>
 
         </restriction>
 
@@ -274,25 +278,25 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="mixed"/>
-
-            <enumeration value="baptism"/>
-
-            <enumeration value="birth"/>
-
-            <enumeration value="marriage"/>
-
-            <enumeration value="census"/>
-
-            <enumeration value="residence"/>
-
-            <enumeration value="burial"/>
+            <enumeration value="membership"/>
 
             <enumeration value="payment"/>
 
-            <enumeration value="membership"/>
+            <enumeration value="residence"/>
+
+            <enumeration value="birth"/>
+
+            <enumeration value="mixed"/>
 
             <enumeration value="death"/>
+
+            <enumeration value="census"/>
+
+            <enumeration value="burial"/>
+
+            <enumeration value="baptism"/>
+
+            <enumeration value="marriage"/>
 
         </restriction>
 

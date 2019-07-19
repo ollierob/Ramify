@@ -1,8 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:tns="http://ramify.net/people"
         xmlns:xs="http://www.w3.org/2001/XMLSchema"
         targetNamespace="http://ramify.net/people"
         version="1.0">
+
+    <element name="nameTranscription" type="tns:xmlNameTranscription"/>
+
+    <complexType abstract="true" name="xmlName">
+
+        <sequence/>
+
+    </complexType>
+
+    <complexType name="xmlNameTranscription">
+
+        <complexContent>
+
+            <extension base="tns:xmlName">
+
+                <sequence/>
+
+                <attribute name="original" type="xs:string" use="required"/>
+
+                <attribute name="assumed" type="xs:string" use="required"/>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
 
     <complexType name="xmlPerson">
 
@@ -14,11 +41,11 @@
 
         <restriction base="xs:string">
 
+            <enumeration value="unknown"/>
+
             <enumeration value="female"/>
 
             <enumeration value="male"/>
-
-            <enumeration value="unknown"/>
 
         </restriction>
 

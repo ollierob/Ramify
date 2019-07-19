@@ -5,11 +5,13 @@ import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.name.Name;
 import net.ramify.model.person.name.NameParser;
 import net.ramify.model.person.xml.XmlGender;
+import net.ramify.model.person.xml.XmlName;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.xml.record.residence.XmlResidenceRecord;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.UUID;
 
@@ -18,17 +20,21 @@ public abstract class XmlRecord {
 
     public static final String NAMESPACE = "http://ramify.net/records";
 
-    @XmlAttribute(name = "name", required = false)
+    @XmlAttribute(name = "name")
     private String name;
 
     @XmlAttribute(name = "gender", required = true)
     private XmlGender gender;
 
-    @XmlAttribute(name = "notes", required = false)
+    @XmlAttribute(name = "notes")
     private String notes;
+
+    @XmlElementRef(required = false)
+    private XmlName complexName;
 
     @Nonnull
     protected Name name(final NameParser parser) {
+        if (complexName != null) return complexName.build(parser);
         if (name != null) return parser.parse(name);
         throw new UnsupportedOperationException(); //TODO add extra naming elements
     }
