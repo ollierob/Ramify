@@ -9,7 +9,6 @@ import {RecordSearchHandler} from "../../../components/search/RecordSearchHandle
 import {RecordResults} from "./RecordResults";
 import {AsyncData} from "../../../components/fetch/AsyncData";
 import {RecordPaginationHandler} from "../../../components/records/RecordPaginationHandler";
-import {Link} from "../../../components/style/Links";
 import {RouteComponentProps} from "react-router";
 import {Loading} from "../../../components/style/Loading";
 import {stringMultimap} from "../../../components/Maps";

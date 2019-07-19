@@ -3,7 +3,7 @@ import {HasClass} from "../style/HasClass";
 import "./Search.css";
 import {Button, Form, Input, InputNumber} from "antd";
 import {ChangeEvent, FormEvent} from "react";
-import {LoadingIcon, SearchIcon} from "../images/Icons";
+import {CancelIcon, LoadingIcon, SearchIcon} from "../images/Icons";
 import {RecordSearch} from "../../protobuf/generated/record_pb";
 import {RecordSearchHandler} from "./RecordSearchHandler";
 
@@ -27,6 +27,7 @@ export class PersonSearch extends React.PureComponent<Props, State> {
         super(props);
         this.state = {};
         this.doSubmit = this.doSubmit.bind(this);
+        this.clearSearch = this.clearSearch.bind(this);
     }
 
     render() {
@@ -79,6 +80,15 @@ export class PersonSearch extends React.PureComponent<Props, State> {
                     </Button>
                 </Form.Item>
 
+                <Form.Item>
+                    <Button
+                        size="large"
+                        onClick={this.clearSearch}
+                        disabled={this.props.disabled}>
+                        <CancelIcon/> Clear
+                    </Button>
+                </Form.Item>
+
             </Form>
 
         </div>;
@@ -92,6 +102,10 @@ export class PersonSearch extends React.PureComponent<Props, State> {
         if (this.state.lastName) search.setLastname(this.state.lastName);
         if (this.state.age != null) search.setAge(this.state.age);
         this.props.doSearch(search);
+    }
+
+    private clearSearch() {
+        this.setState({firstName: null, lastName: null, age: null});
     }
 
 }
