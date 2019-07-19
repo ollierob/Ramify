@@ -22,7 +22,7 @@
                 source="government"
                 type="census">
 
-            <description>The north west corner of Wadsworth township.</description>
+            <description>The area around Widdop in Wadsworth.</description>
 
         </recordSet>
 
@@ -109,6 +109,48 @@
                 type="census">
 
             <description>The area of Hebden Bridge at the bottom of Heptonstall road.</description>
+
+            <d:inYear year="1841"/>
+
+        </recordSet>
+
+        <recordSet
+                id="census_1841_hebden_bridge_district_20"
+                title="Hebden Bridge 1841 Census (District 20)"
+                shortTitle="District 20"
+                coversPlaceId="township:heptonstall"
+                source="government"
+                type="census">
+
+            <description>The area around Lumb Road and Slack.</description>
+
+            <d:inYear year="1841"/>
+
+        </recordSet>
+
+        <recordSet
+                id="census_1841_hebden_bridge_district_21"
+                title="Hebden Bridge 1841 Census (District 21)"
+                shortTitle="District 21"
+                coversPlaceId="village:heptonstall"
+                source="government"
+                type="census">
+
+            <description>Houses in Heptonstall that lie on the south side of the road.</description>
+
+            <d:inYear year="1841"/>
+
+        </recordSet>
+
+        <recordSet
+                id="census_1841_hebden_bridge_district_22"
+                title="Hebden Bridge 1841 Census (District 22)"
+                shortTitle="District 22"
+                coversPlaceId="village:heptonstall"
+                source="government"
+                type="census">
+
+            <description>Houses in Heptonstall that lie on the north side of the road.</description>
 
             <d:inYear year="1841"/>
 
