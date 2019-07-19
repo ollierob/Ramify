@@ -10,8 +10,7 @@
         <d:foundedBefore date="1260"/>
         <churchRecordSet id="heptonstall_st-thomas_baptisms"/>
         <churchRecordSet id="heptonstall_st-thomas_marriages"/>
-        <churchRecordSet id="heptonstall_st-thomas_burials-1593"/>
-        <churchRecordSet id="heptonstall_st-thomas_burials-1813"/>
+        <churchRecordSet id="heptonstall_st-thomas_burials"/>
         <churchRecordSet id="heptonstall_st-thomas_pew_rents"/>
     </churchInfo>
 

@@ -22,6 +22,7 @@
         <recordSet
                 id="heptonstall_st-thomas_baptisms"
                 title="Heptonstall St. Thomas Baptisms"
+                shortTitle="Baptisms"
                 source="church"
                 type="baptism">
             <d:betweenYears start="1599" end="1904"/>
@@ -30,9 +31,19 @@
         <recordSet
                 id="heptonstall_st-thomas_marriages"
                 title="Heptonstall St. Thomas Marriages"
+                shortTitle="Marriages"
                 source="church"
                 type="marriage">
             <d:betweenYears start="1593" end="1986"/>
+        </recordSet>
+
+        <recordSet
+                id="heptonstall_st-thomas_burials"
+                title="Heptonstall St. Thomas Burials"
+                shortTitle="Burials"
+                source="church"
+                type="marriage">
+            <d:betweenYears start="1593" end="1898"/>
         </recordSet>
 
     </recordSet>

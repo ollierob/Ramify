@@ -21,7 +21,7 @@ public class FileTraverseUtils {
         Preconditions.checkArgument(directory.canRead(), "Not a readable directory: %s", directory);
         //First read files
         final var files = MoreObjects.firstNonNull(directory.listFiles(filter), EMPTY_FILES);
-        Arrays.sort(files);
+        Arrays.sort(files, FileUtils::naturalSort);
         for (final var file : files) {
             if (file.isFile()) reader.accept(file);
         }

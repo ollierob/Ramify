@@ -15,7 +15,7 @@
 
         <d:inYear year="1642"/>
 
-        <residenceRecords>
+        <residenceRecords placeId="township:heptonstall">
             <residence name="Robert Gilbody" gender="male" notes="Minister"/>
             <residence name="William Whitwhaw" gender="male"/>
             <residence name="William Whitwhaw" gender="male"/>

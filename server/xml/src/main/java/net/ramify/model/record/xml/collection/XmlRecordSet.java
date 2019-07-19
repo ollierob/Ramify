@@ -78,8 +78,12 @@ class XmlRecordSet implements HasRecordSetId {
     private List<XmlRecords> records;
 
     Collection<RecordSet> build(final RecordSetProvider recordSets, final RecordContext context) {
-        final var parent = Functions.ifNonNull(this.parentRecordSetId(), recordSets::require);
-        return this.build(parent, context);
+        try {
+            final var parent = Functions.ifNonNull(this.parentRecordSetId(), recordSets::require);
+            return this.build(parent, context);
+        } catch (final Exception ex) {
+            throw new RuntimeException("Error building record set " + id, ex);
+        }
     }
 
     Collection<RecordSet> build(final RecordSet parent, final RecordContext context) {
