@@ -16,6 +16,10 @@
 
     <element name="burialRecords" type="tns:xmlBurialRecords"/>
 
+    <element name="census1841England" type="tns:xmlEngland1841CensusRecord"/>
+
+    <element name="censusRecords" type="tns:xmlCensusRecords"/>
+
     <element name="churchBurial" type="tns:xmlBurialRecord"/>
 
     <element name="mention" type="tns:xmlMentionRecord"/>
@@ -57,6 +61,8 @@
                 <element ref="tns:residenceRecords"/>
 
                 <element ref="tns:burialRecords"/>
+
+                <element ref="tns:censusRecords"/>
 
             </choice>
 
@@ -130,7 +136,7 @@
 
         <complexContent>
 
-            <extension base="tns:xmlRecord">
+            <extension base="tns:xmlPersonRecord">
 
                 <sequence/>
 
@@ -142,21 +148,35 @@
 
     </complexType>
 
+    <complexType abstract="true" name="xmlPersonRecord">
+
+        <complexContent>
+
+            <extension base="tns:xmlRecord">
+
+                <sequence>
+
+                    <element minOccurs="0" ref="ns3:nameTranscription"/>
+
+                </sequence>
+
+                <attribute name="name" type="xs:string"/>
+
+                <attribute name="gender" type="ns3:xmlGender" use="required"/>
+
+                <attribute name="notes" type="xs:string"/>
+
+                <attribute name="age" type="xs:int"/>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
     <complexType abstract="true" name="xmlRecord">
 
-        <sequence>
-
-            <element minOccurs="0" ref="ns3:nameTranscription"/>
-
-        </sequence>
-
-        <attribute name="name" type="xs:string"/>
-
-        <attribute name="gender" type="ns3:xmlGender" use="required"/>
-
-        <attribute name="notes" type="xs:string"/>
-
-        <attribute name="age" type="xs:int"/>
+        <sequence/>
 
     </complexType>
 
@@ -164,7 +184,7 @@
 
         <complexContent>
 
-            <extension base="tns:xmlRecord">
+            <extension base="tns:xmlPersonRecord">
 
                 <sequence>
 
@@ -230,7 +250,7 @@
 
         <complexContent>
 
-            <extension base="tns:xmlRecord">
+            <extension base="tns:xmlPersonRecord">
 
                 <sequence>
 
@@ -262,6 +282,90 @@
 
     </complexType>
 
+    <complexType name="xmlCensusRecords">
+
+        <complexContent>
+
+            <extension base="tns:xmlRecords">
+
+                <sequence>
+
+                    <element maxOccurs="unbounded" minOccurs="0" ref="tns:census1841England"/>
+
+                </sequence>
+
+                <attribute name="censusPlace" type="xs:string" use="required"/>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
+    <complexType abstract="true" name="xmlCensusRecord">
+
+        <complexContent>
+
+            <extension base="tns:xmlPlaceRecord">
+
+                <sequence/>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
+    <complexType abstract="true" name="xmlPlaceRecord">
+
+        <complexContent>
+
+            <extension base="tns:xmlRecord">
+
+                <sequence/>
+
+                <attribute name="place" type="xs:string" use="required"/>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
+    <complexType name="xmlEngland1841CensusRecord">
+
+        <complexContent>
+
+            <extension base="tns:xmlCensusRecord">
+
+                <sequence>
+
+                    <element form="qualified" maxOccurs="unbounded" minOccurs="0" name="entry" type="tns:census1841EnglandEntry"/>
+
+                </sequence>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
+    <complexType name="census1841EnglandEntry">
+
+        <complexContent>
+
+            <extension base="tns:xmlPersonRecord">
+
+                <sequence/>
+
+                <attribute name="bornInCounty" type="xs:boolean"/>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
     <complexType name="recordSets">
 
         <sequence>
@@ -276,11 +380,11 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="government"/>
+            <enumeration value="manor"/>
 
             <enumeration value="church"/>
 
-            <enumeration value="manor"/>
+            <enumeration value="government"/>
 
         </restriction>
 
@@ -292,23 +396,23 @@
 
             <enumeration value="membership"/>
 
-            <enumeration value="residence"/>
+            <enumeration value="death"/>
 
-            <enumeration value="marriage"/>
+            <enumeration value="burial"/>
+
+            <enumeration value="residence"/>
 
             <enumeration value="census"/>
 
-            <enumeration value="birth"/>
+            <enumeration value="payment"/>
 
             <enumeration value="mixed"/>
 
-            <enumeration value="death"/>
+            <enumeration value="marriage"/>
 
-            <enumeration value="payment"/>
+            <enumeration value="birth"/>
 
             <enumeration value="baptism"/>
-
-            <enumeration value="burial"/>
 
         </restriction>
 

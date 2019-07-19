@@ -11,12 +11,10 @@ import net.ramify.model.family.FamilyOfUnknownRelationships;
 import net.ramify.model.person.AbstractPerson;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
-import net.ramify.model.person.gender.Sex;
+import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.name.Name;
 import net.ramify.model.place.HasPlace;
 import net.ramify.model.place.Place;
-import net.ramify.model.place.PlaceId;
-import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.residence.CensusRecord;
 import net.ramify.utils.collections.SetUtils;
@@ -32,16 +30,13 @@ public class Census1841Record extends CensusRecord implements HasPlace {
     public static final ExactDate CENSUS_DATE = ExactDate.on(1841, Month.JUNE, 6);
 
     private final List<Census1841Entry> entries;
-    private final PlaceProvider places;
 
     public Census1841Record(
             final RecordId id,
             final Place place,
-            final List<Census1841Entry> entries,
-            final PlaceProvider places) {
+            final List<Census1841Entry> entries) {
         super(id, CENSUS_DATE, place);
         this.entries = entries;
-        this.places = places;
     }
 
     @Nonnull
@@ -71,19 +66,19 @@ public class Census1841Record extends CensusRecord implements HasPlace {
         private final PersonId id;
         private final Name name;
         private final Period age;
-        private final Sex sex;
-        private final PlaceId birthPlace;
+        private final Gender gender;
+        private final Place birthPlace;
 
-        public Census1841Entry(final PersonId id, final Name name, final Period age, final Sex sex, final PlaceId birthPlace) {
+        public Census1841Entry(final PersonId id, final Name name, final Period age, final Gender gender, final Place birthPlace) {
             this.id = id;
             this.name = name;
             this.age = age;
-            this.sex = sex;
+            this.gender = gender;
             this.birthPlace = birthPlace;
         }
 
         Census1841Person build(final Census1841Record record) {
-            return new Census1841Person(id, name, sex, record.place(), record.inferBirthDate(age), record.places.require(birthPlace));
+            return new Census1841Person(id, name, gender, record.place(), record.inferBirthDate(age), birthPlace);
         }
 
     }
@@ -97,11 +92,11 @@ public class Census1841Record extends CensusRecord implements HasPlace {
         Census1841Person(
                 final PersonId id,
                 final Name name,
-                final Sex sex,
+                final Gender gender,
                 final Place residencePlace,
                 final DateRange birthDate,
                 final Place birthPlace) {
-            super(id, name, sex);
+            super(id, name, gender);
             this.residencePlace = residencePlace;
             this.birthPlace = birthPlace;
             this.birthDate = birthDate;

@@ -13,6 +13,7 @@ import net.ramify.model.record.GenericRecordPerson;
 import net.ramify.model.record.residence.GenericLifeEventRecord;
 import net.ramify.model.record.type.LifeEventRecord;
 import net.ramify.model.record.xml.RecordContext;
+import net.ramify.model.record.xml.record.XmlPersonRecord;
 import net.ramify.model.record.xml.record.XmlRecord;
 
 import javax.annotation.OverridingMethodsMustInvokeSuper;
@@ -21,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Set;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "mention")
-public class XmlMentionRecord extends XmlRecord {
+public class XmlMentionRecord extends XmlPersonRecord {
 
     @XmlAttribute(name = "deceased")
     private Boolean deceased;

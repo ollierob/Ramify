@@ -29,6 +29,7 @@ import net.ramify.model.record.GenericRecordPerson;
 import net.ramify.model.record.church.ChurchBurialRecord;
 import net.ramify.model.record.type.BurialRecord;
 import net.ramify.model.record.xml.RecordContext;
+import net.ramify.model.record.xml.record.XmlPersonRecord;
 import net.ramify.model.record.xml.record.XmlRecord;
 import net.ramify.utils.objects.Functions;
 
@@ -41,7 +42,7 @@ import java.util.List;
 import java.util.Set;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "churchBurial")
-public class XmlBurialRecord extends XmlRecord {
+public class XmlBurialRecord extends XmlPersonRecord {
 
     @XmlAttribute(name = "age", required = false)
     private Integer deathAge;

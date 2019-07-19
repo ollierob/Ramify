@@ -39,7 +39,8 @@ public interface Age {
 
     static Age between(final int minYears, final int maxYears) {
         if (minYears > maxYears) return between(maxYears, minYears);
-        throw new UnsupportedOperationException(); //TODO
+        if (minYears == maxYears) return exactly(Period.ofYears(minYears));
+        return new PeriodBasedAge(Period.ofYears(minYears), Period.ofYears(maxYears));
     }
 
     static DateRange birthDate(final int age, final DateRange date) {

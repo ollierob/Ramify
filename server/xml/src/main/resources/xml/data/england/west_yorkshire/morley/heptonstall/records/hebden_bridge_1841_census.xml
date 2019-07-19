@@ -13,7 +13,38 @@
             source="government"
             type="census">
 
-        <d:inYear year="1841"/>
+        <recordSet
+                id="census_1841_hebden_bridge_district_1"
+                title="Hebden Bridge 1841 Census (District 1)"
+                shortTitle="District 1"
+                coversPlaceId="township:wadsworth"
+                source="government"
+                type="census">
+
+            <description>The north west corner of Wadsworth township.</description>
+
+        </recordSet>
+
+        <recordSet
+                id="census_1841_hebden_bridge_district_2"
+                title="Hebden Bridge 1841 Census (District 2)"
+                shortTitle="District 2"
+                coversPlaceId="township:wadsworth"
+                source="government"
+                type="census">
+
+            <d:inYear year="1841"/>
+
+            <censusRecords censusPlace="county:west_yorkshire">
+
+                <census1841England place="hamlet:walshaw">
+                    <entry gender="male" name="Jonas Crabtree" age="50"/>
+                </census1841England>
+
+            </censusRecords>
+
+
+        </recordSet>
 
     </recordSet>
 
