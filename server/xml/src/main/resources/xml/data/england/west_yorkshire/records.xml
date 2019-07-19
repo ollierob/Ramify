@@ -44,4 +44,11 @@
         <recordSetReference reference="HL/PO/JO/10/1/109" archiveId="parliament"/>
     </recordSet>
 
+    <recordSet
+            id="wakefield_manor"
+            title="Manor of Wakefield"
+            coversPlaceId="manor:wakefield"
+            source="manor"
+            type="mixed"/>
+
 </recordSets>
