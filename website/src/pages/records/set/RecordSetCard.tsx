@@ -80,7 +80,7 @@ const Description = (props: {record: RecordSet.AsObject}) => {
 const PartOf = (props: {parent: RecordSet.AsObject}) => {
     if (!props.parent) return null;
     return <div className="parent" style={MarginBottom}>
-        <Icon type="up-square"/> Part of <a href={recordSetHref(props.parent)}>{props.parent.longtitle}</a>
+        <Icon type="up-square"/> Part of the records of <a href={recordSetHref(props.parent)}>{props.parent.longtitle}</a>
     </div>;
 };
 
