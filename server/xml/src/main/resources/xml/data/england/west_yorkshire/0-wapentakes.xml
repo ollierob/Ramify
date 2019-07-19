@@ -7,10 +7,21 @@
 
     <county id="west_yorkshire">
 
+        <wapentake id="ewcross" name="Ewcross"/>
+        <wapentake id="staincliffe_west" name="Staincliffe (West Division)"/>
+        <wapentake id="staincliffe_east" name="Staincliffe (East Division)"/>
+        <wapentake id="claro_lower" name="Claro (Lower Division)"/>
+        <wapentake id="claro_upper" name="Claro (Upper Division)"/>
+        <wapentake id="skyrack_lower" name="Skyrack (Lower Division)"/>
+        <wapentake id="skyrack_upper" name="Skyrack (Upper Division)"/>
+        <wapentake id="strafforth_lower" name="Strafforth and Tickhill (Lower Division)"/>
+        <wapentake id="strafforth_upper" name="Strafforth and Tickhill (Upper Division)"/>
         <wapentake id="agbrigg" name="Agbrigg"/>
         <wapentake id="morley" name="Morley"/>
+        <wapentake id="staincross" name="Staincross"/>
+        <wapentake id="barkston_ash" name="Barkston Ash"/>
+        <wapentake id="osgoldcross" name="Osgoldcross"/>
 
     </county>
-
 
 </places>

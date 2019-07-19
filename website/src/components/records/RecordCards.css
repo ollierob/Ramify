@@ -17,7 +17,7 @@
 
 .recordCards .recordCard .ant-card-head .ant-card-head-title {
     font-size: 1.25em;
-    padding: 0;
+    padding: 0 12px 0 0;
 }
 
 .recordCards .groupCard {
