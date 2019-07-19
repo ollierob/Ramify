@@ -48,6 +48,69 @@
 
             </censusRecords>
 
+        </recordSet>
+
+        <recordSet
+                id="census_1841_hebden_bridge_district_3"
+                title="Hebden Bridge 1841 Census (District 3)"
+                shortTitle="District 3"
+                coversPlaceId="township:wadsworth"
+                source="government"
+                type="census">
+
+            <d:inYear year="1841"/>
+
+        </recordSet>
+
+        <recordSet
+                id="census_1841_hebden_bridge_district_4"
+                title="Hebden Bridge 1841 Census (District 4)"
+                shortTitle="District 4"
+                coversPlaceId="township:wadsworth"
+                source="government"
+                type="census">
+
+            <d:inYear year="1841"/>
+
+        </recordSet>
+
+        <recordSet
+                id="census_1841_hebden_bridge_district_13"
+                title="Hebden Bridge 1841 Census (District 13)"
+                shortTitle="District 13"
+                coversPlaceId="township:erringden"
+                source="government"
+                type="census">
+
+            <d:inYear year="1841"/>
+
+        </recordSet>
+
+        <recordSet
+                id="census_1841_hebden_bridge_district_18"
+                title="Hebden Bridge 1841 Census (District 18)"
+                shortTitle="District 18"
+                coversPlaceId="town:hebden_bridge"
+                source="government"
+                type="census">
+
+            <description>The Hangingroyd area of Hebden Bridge.</description>
+
+            <d:inYear year="1841"/>
+
+        </recordSet>
+
+        <recordSet
+                id="census_1841_hebden_bridge_district_19"
+                title="Hebden Bridge 1841 Census (District 19)"
+                shortTitle="District 19"
+                coversPlaceId="town:hebden_bridge"
+                source="government"
+                type="census">
+
+            <description>The area of Hebden Bridge at the bottom of Heptonstall road.</description>
+
+            <d:inYear year="1841"/>
 
         </recordSet>
 
