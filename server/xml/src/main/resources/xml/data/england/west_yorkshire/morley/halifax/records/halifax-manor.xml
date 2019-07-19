@@ -2,8 +2,7 @@
 
 <recordSets
         xmlns="http://ramify.net/records"
-        xmlns:d="http://ramify.net/dates"
-        xmlns:p="http://ramify.net/places">
+        xmlns:d="http://ramify.net/dates">
 
     <recordSet
             id="halifax_manor"
@@ -14,7 +13,7 @@
             source="manor"
             type="mixed">
 
-        <d:betweenYears start="1570" end="1626"/>
+        <d:betweenYears start="1429" end="1626"/>
 
     </recordSet>
 

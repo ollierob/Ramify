@@ -17,6 +17,17 @@
         <d:betweenYears start="1651" end="1896"/>
 
         <recordSet
+                id="heptonstall_manor_rentals"
+                title="Heptonstall Manor Rentals"
+                shortTitle="Rentals"
+                source="manor"
+                type="residence">
+
+            <d:inYear year="1429"/>
+
+        </recordSet>
+
+        <recordSet
                 id="heptonstall_manor_1651-1769"
                 title="Heptonstall Manor Court Rolls (1651 - 1769)"
                 shortTitle="Court Rolls"
