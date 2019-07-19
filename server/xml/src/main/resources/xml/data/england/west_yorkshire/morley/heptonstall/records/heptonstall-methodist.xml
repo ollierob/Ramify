@@ -38,6 +38,10 @@
 
             <d:betweenYears start="1842" end="1880"/>
 
+            <mentionRecords>
+                <mention name="James Draper" gender="male"/>
+            </mentionRecords>
+
         </recordSet>
 
     </recordSet>
