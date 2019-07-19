@@ -7,9 +7,9 @@ import {Popover} from "antd";
 export const RecordSetReferences = (props: {archive: Archive.AsObject, references: ReadonlyArray<ExternalRecordReference.AsObject>}) => {
     const archive = props.archive;
     if (!archive) return null;
-    return <Popover title="Records" content={<PopoverContent {...props}/>} placement="bottomLeft">
+    return <Popover content={<PopoverContent {...props}/>} placement="bottomLeft">
         <a>
-            {archive.name}
+            {archive.icon && <><img src={archive.icon} className="image" alt={archive.name}/> </>} {archive.name}
         </a>
     </Popover>;
 };
