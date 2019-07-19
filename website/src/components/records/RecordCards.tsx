@@ -12,12 +12,13 @@ import {RecordsIcon} from "../images/Icons";
 import {RecordType, recordTypeFromValue} from "./RecordType";
 import {HasClass} from "../style/HasClass";
 import {Link} from "../style/Links";
+import {Loading} from "../style/Loading";
 
-export const RecordCards = (props: HasClass & {records: ReadonlyArray<RecordSet.AsObject>, groupByParent?: boolean, shortTitle?: boolean, alsoSee?: ReadonlyArray<Place.AsObject>}) => {
-    const records = props.records;
-    if (!records || !records.length) return null;
+export const RecordCards = (props: HasClass & {loading?: boolean, records: ReadonlyArray<RecordSet.AsObject>, groupByParent?: boolean, shortTitle?: boolean, alsoSee?: ReadonlyArray<Place.AsObject>}) => {
+    const records = props.records || [];
     if (props.groupByParent && records.some(r => r.parent)) return <GroupedRecordCards {...props}/>;
     return <div className="recordCards" style={props.style}>
+        {props.loading && <Loading/>}
         {records.map(record => <RecordCard record={record} shortTitle={props.shortTitle}/>)}
         {props.alsoSee && <AlsoSeeCard alsoSee={props.alsoSee}/>}
     </div>;

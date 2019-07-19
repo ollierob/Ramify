@@ -18,11 +18,11 @@ public interface RecordSetProvider extends Provider<RecordSetId, RecordSet> {
 
     @Nonnull
     default Set<RecordSet> all(final int limit) {
-        return this.matching(r -> true, limit);
+        return this.matching(r -> true, limit, false);
     }
 
     @Nonnull
-    Set<RecordSet> matching(Predicate<? super RecordSet> predicate, int limit);
+    Set<RecordSet> matching(Predicate<? super RecordSet> predicate, int limit, boolean onlyParents);
 
     @Nonnull
     Set<RecordSet> children(RecordSetId parentId);

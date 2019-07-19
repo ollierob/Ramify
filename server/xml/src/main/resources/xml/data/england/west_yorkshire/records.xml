@@ -7,6 +7,7 @@
     <recordSet
             id="wry_coe_registers"
             title="West Yorkshire Church of England Registers"
+            shortTitle="West Yorkshire"
             coversPlaceId="county:west_yorkshire"
             source="church"
             type="mixed">
@@ -14,8 +15,17 @@
     </recordSet>
 
     <recordSet
+            id="wry_nc_registers"
+            title="West Yorkshire Non-Conformist Church Registers"
+            shortTitle="West Yorkshire"
+            coversPlaceId="county:west_yorkshire"
+            source="church"
+            type="mixed"/>
+
+    <recordSet
             id="census_1841_wry"
             title="West Yorkshire 1841 Census"
+            shortTitle="West Yorkshire 1841"
             coversPlaceId="county:west_yorkshire"
             source="government"
             type="census">

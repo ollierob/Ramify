@@ -7,22 +7,27 @@ import {Place} from "../../../protobuf/generated/place_pb";
 import {DEFAULT_PLACE_LOADER} from "../../../components/places/PlaceLoader";
 import {PlaceTypeDescription} from "../../../components/places/PlaceTypeDescription";
 import {Loading} from "../../../components/style/Loading";
+import {DEFAULT_RECORD_LOADER} from "../../../components/records/RecordLoader";
+import {RecordSet} from "../../../protobuf/generated/record_pb";
 
 type Props = PlacesPageProps;
 
 type State = {
     children: AsyncData<ReadonlyArray<Place.AsObject>>
+    placeRecords: AsyncData<ReadonlyArray<RecordSet.AsObject>>
 }
 
 export default class AreaPage extends React.PureComponent<Props, State> {
 
     private readonly placeLoader = DEFAULT_PLACE_LOADER;
+    private readonly recordLoader = DEFAULT_RECORD_LOADER;
 
     constructor(props: Props) {
         super(props);
         this.state = {
-            children: {}
-        }
+            children: {},
+            placeRecords: {}
+        };
     }
 
     render() {
@@ -48,7 +53,8 @@ export default class AreaPage extends React.PureComponent<Props, State> {
                 loadingChildren={this.state.children.loading}
                 childPlaces={this.state.children.data}
                 place={bundle.place}
-                description={bundle.description}/>
+                description={bundle.description}
+                records={this.state.placeRecords}/>
 
         </div>;
 
@@ -60,8 +66,10 @@ export default class AreaPage extends React.PureComponent<Props, State> {
 
     componentDidUpdate(prevProps: Props) {
 
-        if (this.props.placeId != prevProps.placeId)
+        if (this.props.placeId != prevProps.placeId) {
             this.loadChildren(this.props.placeId);
+            this.loadRecords(this.props.placeId);
+        }
 
     }
 
@@ -71,6 +79,14 @@ export default class AreaPage extends React.PureComponent<Props, State> {
             id,
             id => this.placeLoader.loadChildren(id), //Let server determine best max depth
             children => this.setState({children}));
+    }
+
+    private loadRecords(id = this.props.placeId) {
+        if (!id) return;
+        asyncLoadData(
+            id,
+            id => this.recordLoader.loadRecordSets({place: id, onlyParents: true}),
+            placeRecords => this.setState({placeRecords}));
     }
 
 }

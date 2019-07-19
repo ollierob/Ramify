@@ -32,6 +32,7 @@ public class DefaultRecordSetResource implements RecordSetResource {
             @CheckForNull final String name,
             @CheckForNull final PlaceId withinPlace,
             @CheckForNull final DateRange withinDate,
+            final boolean onlyParents,
             final int limit) {
         Predicate<RecordSet> predicate = r -> true;
         if (name != null) {
@@ -45,7 +46,7 @@ public class DefaultRecordSetResource implements RecordSetResource {
         if (withinDate != null) {
             predicate = predicate.and(r -> r.date().intersects(withinDate));
         }
-        return RecordSets.of(recordSets.matching(predicate, limit));
+        return RecordSets.of(recordSets.matching(predicate, limit, onlyParents));
     }
 
     @CheckForNull

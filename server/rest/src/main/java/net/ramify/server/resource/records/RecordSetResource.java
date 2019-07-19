@@ -28,6 +28,7 @@ public interface RecordSetResource extends Resource {
             @QueryParam("name") String name,
             @QueryParam("place") PlaceId withinPlace,
             @QueryParam("date") DateRange withinDate,
+            @QueryParam("onlyParents") @DefaultValue("false") boolean onlyParents,
             @QueryParam("limit") @DefaultValue("20") int limit);
 
     @CheckForNull

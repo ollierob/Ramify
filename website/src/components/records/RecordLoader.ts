@@ -21,7 +21,7 @@ export interface RecordLoader {
 }
 
 type RecordOptions = {start?: number, limit?: number}
-export type RecordSetOptions = {name?: string, place?: PlaceId, limit?: number}
+export type RecordSetOptions = {name?: string, place?: PlaceId, limit?: number, onlyParents?: boolean}
 
 class ProtoRecordLoader implements RecordLoader {
 
@@ -35,7 +35,7 @@ class ProtoRecordLoader implements RecordLoader {
             .then(s => s ? s.toObject() : null);
     }
 
-    loadRecordSets(options) {
+    loadRecordSets(options: RecordSetOptions) {
         const url = "/records/sets" + queryParameters(options);
         return protoGet(url, RecordSetList.deserializeBinary).then(readRecordSets);
     }
