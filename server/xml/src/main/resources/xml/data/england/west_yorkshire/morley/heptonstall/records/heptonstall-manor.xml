@@ -25,6 +25,20 @@
 
             <d:inYear year="1429"/>
 
+            <residenceRecords placeId="township:heptonstall">
+                <residence name="Thomas Mitchell" gender="male" placeId="farmstead:high_greenwood"/>
+                <residence name="John Greenwood" gender="male" placeId="farmstead:greenwood_lee"/>
+                <residence name="John Mitchell" gender="male"/>
+                <residence name="Richard Greenwood" gender="male"/>
+                <residence name="William Greenwood" gender="male"/>
+                <residence name="Henry Sutcliffe" gender="male"/>
+                <residence name="Robert Sutcliffe" gender="male"/>
+                <residence name="John Pickles" gender="male"/>
+                <residence name="John Ackroyd" gender="male"/>
+                <residence name="Robert Walker" gender="male"/>
+                <residence name="Joan Stansfield" gender="female"/>
+            </residenceRecords>
+
         </recordSet>
 
         <recordSet
