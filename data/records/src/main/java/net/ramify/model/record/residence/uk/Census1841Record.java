@@ -1,5 +1,6 @@
 package net.ramify.model.record.residence.uk;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Sets;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.ExactDate;
@@ -13,6 +14,7 @@ import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.name.Name;
+import net.ramify.model.person.proto.PersonProto;
 import net.ramify.model.place.HasPlace;
 import net.ramify.model.place.Place;
 import net.ramify.model.record.RecordId;
@@ -67,18 +69,20 @@ public class Census1841Record extends CensusRecord implements HasPlace {
         private final Name name;
         private final Period age;
         private final Gender gender;
+        private final String occupation;
         private final Place birthPlace;
 
-        public Census1841Entry(final PersonId id, final Name name, final Period age, final Gender gender, final Place birthPlace) {
+        public Census1841Entry(final PersonId id, final Name name, final Period age, final Gender gender, final String occupation, final Place birthPlace) {
             this.id = id;
             this.name = name;
             this.age = age;
             this.gender = gender;
+            this.occupation = occupation;
             this.birthPlace = birthPlace;
         }
 
         Census1841Person build(final Census1841Record record) {
-            return new Census1841Person(id, name, gender, record.place(), record.inferBirthDate(age), birthPlace);
+            return new Census1841Person(id, name, gender, record.place(), record.inferBirthDate(age), birthPlace, occupation);
         }
 
     }
@@ -88,6 +92,7 @@ public class Census1841Record extends CensusRecord implements HasPlace {
         private final Place residencePlace;
         private final Place birthPlace;
         private final DateRange birthDate;
+        private final String occupation;
 
         Census1841Person(
                 final PersonId id,
@@ -95,11 +100,13 @@ public class Census1841Record extends CensusRecord implements HasPlace {
                 final Gender gender,
                 final Place residencePlace,
                 final DateRange birthDate,
-                final Place birthPlace) {
+                final Place birthPlace,
+                final String occupation) {
             super(id, name, gender);
             this.residencePlace = residencePlace;
             this.birthPlace = birthPlace;
             this.birthDate = birthDate;
+            this.occupation = occupation;
         }
 
         @Nonnull
@@ -110,6 +117,11 @@ public class Census1841Record extends CensusRecord implements HasPlace {
                     new GenericResidence(this.personId(), CENSUS_DATE, residencePlace));
         }
 
+        @Nonnull
+        @Override
+        public PersonProto.Person.Builder toProtoBuilder() {
+            return super.toProtoBuilder().setNotes(MoreObjects.firstNonNull(occupation, ""));
+        }
     }
 
 }

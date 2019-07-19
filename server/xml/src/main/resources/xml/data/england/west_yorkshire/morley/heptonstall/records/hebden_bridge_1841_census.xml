@@ -169,6 +169,11 @@
                     <entry gender="male" name="William Howarth" age="20" notes="Shoemaker"/>
                     <entry gender="male" name="Abraham Robertshaw" age="15" notes="Shoemaker"/>
                 </census1841England>
+                <census1841England place="street:heptonstall_north_side">
+                    <entry gender="male" name="Archibald Robertshaw" age="59" notes="Carpenter"/>
+                    <entry gender="female" name="Ann Robertshaw" age="55"/>
+                    <entry gender="male" name="Jeremiah Robertshaw" age="21"/>
+                </census1841England>
             </censusRecords>
 
         </recordSet>
