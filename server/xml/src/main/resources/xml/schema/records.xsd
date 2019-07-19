@@ -18,6 +18,10 @@
 
     <element name="churchBurial" type="tns:xmlBurialRecord"/>
 
+    <element name="mention" type="tns:xmlMentionRecord"/>
+
+    <element name="mentionRecords" type="tns:xmlMentionRecords"/>
+
     <element name="recordSet" type="tns:xmlRecordSet"/>
 
     <element name="recordSetReference" type="tns:xmlRecordSetReference"/>
@@ -47,6 +51,8 @@
             <element maxOccurs="unbounded" minOccurs="0" ref="tns:recordSet"/>
 
             <choice maxOccurs="unbounded" minOccurs="0">
+
+                <element ref="tns:mentionRecords"/>
 
                 <element ref="tns:residenceRecords"/>
 
@@ -100,7 +106,7 @@
 
     </complexType>
 
-    <complexType name="xmlResidenceRecords">
+    <complexType name="xmlMentionRecords">
 
         <complexContent>
 
@@ -110,15 +116,41 @@
 
                     <element minOccurs="0" ref="ns1:inYear"/>
 
-                    <element maxOccurs="unbounded" minOccurs="0" ref="tns:residence"/>
+                    <element maxOccurs="unbounded" minOccurs="0" ref="tns:mention"/>
 
                 </sequence>
-
-                <attribute name="placeId" type="xs:string" use="required"/>
 
             </extension>
 
         </complexContent>
+
+    </complexType>
+
+    <complexType name="xmlMentionRecord">
+
+        <complexContent>
+
+            <extension base="tns:xmlRecord">
+
+                <sequence/>
+
+                <attribute name="deceased" type="xs:boolean"/>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
+    <complexType abstract="true" name="xmlRecord">
+
+        <sequence/>
+
+        <attribute name="name" type="xs:string"/>
+
+        <attribute name="gender" type="ns3:xmlGender" use="required"/>
+
+        <attribute name="notes" type="xs:string"/>
 
     </complexType>
 
@@ -138,15 +170,25 @@
 
     </complexType>
 
-    <complexType abstract="true" name="xmlRecord">
+    <complexType name="xmlResidenceRecords">
 
-        <sequence/>
+        <complexContent>
 
-        <attribute name="name" type="xs:string"/>
+            <extension base="tns:xmlRecords">
 
-        <attribute name="gender" type="ns3:xmlGender" use="required"/>
+                <sequence>
 
-        <attribute name="notes" type="xs:string"/>
+                    <element minOccurs="0" ref="ns1:inYear"/>
+
+                    <element maxOccurs="unbounded" minOccurs="0" ref="tns:residence"/>
+
+                </sequence>
+
+                <attribute name="placeId" type="xs:string" use="required"/>
+
+            </extension>
+
+        </complexContent>
 
     </complexType>
 
@@ -230,25 +272,25 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="baptism"/>
+            <enumeration value="census"/>
 
             <enumeration value="burial"/>
 
             <enumeration value="membership"/>
 
+            <enumeration value="payment"/>
+
+            <enumeration value="death"/>
+
             <enumeration value="residence"/>
-
-            <enumeration value="birth"/>
-
-            <enumeration value="census"/>
 
             <enumeration value="mixed"/>
 
             <enumeration value="marriage"/>
 
-            <enumeration value="payment"/>
+            <enumeration value="baptism"/>
 
-            <enumeration value="death"/>
+            <enumeration value="birth"/>
 
         </restriction>
 

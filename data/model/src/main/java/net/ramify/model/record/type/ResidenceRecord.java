@@ -8,7 +8,7 @@ import javax.annotation.Nonnull;
 public interface ResidenceRecord extends SingleFamilyRecord, HasPlace {
 
     @Override
-    default <R> R handleWith(@Nonnull RecordHandler<R> handler) {
+    default <R> R handleWith(@Nonnull final RecordHandler<R> handler) {
         return handler.handle(this);
     }
 
