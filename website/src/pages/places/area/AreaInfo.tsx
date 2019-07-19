@@ -34,13 +34,13 @@ export const AreaInfo = (props: Props) => {
                 source={description.description}/>
             : <div className="description">No description available.</div>}
 
-        <Card title="Records" bordered={false}>
+        <Card className="records" title="Records" bordered={false}>
             <RecordCards
                 loading={props.records.loading}
                 records={props.records.data}/>
         </Card>
 
-        <Card title="Places" bordered={false}>
+        <Card className="places" title="Places" bordered={false}>
             <ChildPlaceCards
                 {...props}
                 alsoSeePlaces={description && description.alsoseeList}

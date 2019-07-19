@@ -49,7 +49,10 @@
 
 .info .description {
     font-size: 1.2em;
-    margin-bottom: 2em;
+}
+
+.info .records .ant-card-head, .info .places .ant-card-head {
+    padding: 0;
 }
 
 .placeCard {
