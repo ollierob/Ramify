@@ -74,7 +74,7 @@
 
             <element form="qualified" minOccurs="0" name="description" type="xs:string"/>
 
-            <element ref="tns:textLink"/>
+            <element minOccurs="0" ref="tns:textLink"/>
 
         </sequence>
 

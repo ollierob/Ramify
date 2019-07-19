@@ -2,6 +2,8 @@
 
 <archives xmlns="http://ramify.net/places">
 
+    <archive id="private" name="Private collection"/>
+
     <archive id="parliament" name="Parliamentary Archives" iconHref="/images/links/parliament.svg">
         <textLink href="https://archives.parliament.uk" text="Parliamentary Archives"/>
     </archive>

@@ -50,7 +50,7 @@ const ImageColumn: RecordColumn = {
     className: "image",
     dataIndex: "image",
     render: t => <Button disabled={!t} title={t ? "View source image" : "No source image available"}><Icon type="file-search"/></Button>,
-    width: 30,
+    width: 40,
 };
 
 const NameColumn: RecordColumn = {

@@ -5,6 +5,7 @@ import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.record.HasTitleDescription;
 import net.ramify.model.record.proto.ArchiveProto;
 import net.ramify.model.util.Link;
+import net.ramify.utils.objects.Consumers;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -16,6 +17,8 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
  * @see net.ramify.model.record.collection.RecordSetReference
  */
 public class Archive implements HasArchiveId, HasTitleDescription, BuildsProto<ArchiveProto.Archive> {
+
+    public static final Archive PRIVATE = new Archive(ArchiveId.PRIVATE, "Privately held", null, null, null);
 
     private final ArchiveId id;
     private final String name;
@@ -57,11 +60,13 @@ public class Archive implements HasArchiveId, HasTitleDescription, BuildsProto<A
 
     @OverridingMethodsMustInvokeSuper
     protected ArchiveProto.Archive.Builder toProtoBuilder() {
-        return ArchiveProto.Archive.newBuilder()
+        final var builder = ArchiveProto.Archive.newBuilder()
                 .setId(id.value())
                 .setName(name)
-                .setWebsite(website.toProto())
-                .setIcon(MoreObjects.firstNonNull(iconHref, ""));
+                .setIcon(MoreObjects.firstNonNull(iconHref, ""))
+                .setPrivate(id.equals(ArchiveId.PRIVATE));
+        Consumers.ifNonNull(website, link -> builder.setWebsite(link.toProto()));
+        return builder;
     }
 
 }

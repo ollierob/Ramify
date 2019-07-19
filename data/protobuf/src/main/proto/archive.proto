@@ -11,5 +11,6 @@ message Archive {
     string name = 2;
     Link website = 3;
     string icon = 4;
+    bool private = 5;
 
 }

@@ -27,7 +27,7 @@ public class XmlArchive implements HasArchiveId {
     @XmlElement(namespace = XmlPlace.NAMESPACE, name = "description")
     private String description;
 
-    @XmlElementRef
+    @XmlElementRef(required = false)
     private XmlTextLink link;
 
     @Nonnull

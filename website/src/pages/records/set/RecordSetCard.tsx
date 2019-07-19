@@ -90,9 +90,11 @@ const References = (props: {references: ReadonlyArray<ExternalRecordReference.As
     if (!references || !references.length) return null;
     const archiveGroupings = stringMultimap(references, ref => ref.archive.id);
     return <div className="references" style={MarginBottom}>
-        <Icon type="book"/> These records are held at
+        <Icon type="book"/> These records are held
         {" "}
-        {joinComponents(Object.values(archiveGroupings).map(refs => <RecordSetReferences archive={refs[0].archive} references={refs}/>), " and ")}
+        {joinComponents(Object.values(archiveGroupings).map(refs => <>
+            {refs[0].archive.pb_private ? "in a private collection" : <>at <RecordSetReferences archive={refs[0].archive} references={refs}/></>}
+        </>), " and ")}
     </div>;
 };
 

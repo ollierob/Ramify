@@ -260,9 +260,9 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="government"/>
-
             <enumeration value="church"/>
+
+            <enumeration value="government"/>
 
         </restriction>
 
@@ -272,25 +272,25 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="census"/>
-
-            <enumeration value="burial"/>
-
-            <enumeration value="membership"/>
-
-            <enumeration value="payment"/>
+            <enumeration value="residence"/>
 
             <enumeration value="death"/>
 
-            <enumeration value="residence"/>
-
-            <enumeration value="mixed"/>
-
             <enumeration value="marriage"/>
+
+            <enumeration value="membership"/>
 
             <enumeration value="baptism"/>
 
             <enumeration value="birth"/>
+
+            <enumeration value="census"/>
+
+            <enumeration value="burial"/>
+
+            <enumeration value="mixed"/>
+
+            <enumeration value="payment"/>
 
         </restriction>
 

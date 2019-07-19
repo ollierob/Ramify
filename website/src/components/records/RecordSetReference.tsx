@@ -7,6 +7,7 @@ import {RecordsIcon} from "../images/Icons";
 export const RecordSetReferences = (props: {archive: Archive.AsObject, references: ReadonlyArray<ExternalRecordReference.AsObject>}) => {
     const archive = props.archive;
     if (!archive) return null;
+    if (archive.pb_private) return <>Private collection</>;
     return <Popover content={<PopoverContent {...props}/>} placement="bottomLeft">
         <a>
             {archive.icon && <><img src={archive.icon} className="image" alt={archive.name}/> </>} {archive.name}
