@@ -10,6 +10,10 @@ public interface Name extends BuildsProto<PersonProto.Name> {
     @Nonnull
     String value();
 
+    default boolean contains(final String name) {
+        return this.value().contains(name);
+    }
+
     default boolean isUnknown() {
         if (this == UNKNOWN) return true;
         final var value = this.value();

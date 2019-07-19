@@ -37,7 +37,12 @@ public class XmlNameTranscription extends XmlName {
         @Nonnull
         @Override
         public String value() {
-            return original;
+            return assumed.value();
+        }
+
+        @Override
+        public boolean contains(final String name) {
+            return assumed.contains(name) || original.toLowerCase().contains(name);
         }
 
         @Nonnull
