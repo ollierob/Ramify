@@ -2,7 +2,6 @@ package net.ramify.model.record.collection;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
 import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.record.Record;
 import net.ramify.model.record.proto.RecordProto;
@@ -22,7 +21,7 @@ public interface Records extends BuildsProto<RecordProto.RecordList> {
     @CheckReturnValue
     default Records paginate(final int start, final int max) {
         Preconditions.checkArgument(start == 0);
-        return () -> this.records().limit(max);
+        return () -> this.records().skip(start).limit(max);
     }
 
     @Nonnull

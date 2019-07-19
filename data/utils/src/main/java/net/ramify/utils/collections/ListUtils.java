@@ -1,5 +1,7 @@
 package net.ramify.utils.collections;
 
+import com.google.common.collect.Lists;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -26,6 +28,14 @@ public class ListUtils {
             out.add(transform.apply(list.get(i)));
         }
         return out;
+    }
+
+    public static <T> List<T> prefix(final T element, final Collection<? extends T> rest) {
+        if (rest.isEmpty()) return Collections.singletonList(element);
+        final var list = Lists.<T>newArrayListWithExpectedSize(1 + rest.size());
+        list.add(element);
+        list.addAll(rest);
+        return list;
     }
 
 }

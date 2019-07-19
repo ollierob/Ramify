@@ -29,6 +29,7 @@ public interface RecordsResource extends RootResource {
     @Path("in/{id}")
     Records in(
             @PathParam("id") RecordSetId id,
+            @QueryParam("children") boolean includeChildren,
             @QueryParam("start") int start,
             @QueryParam("limit") @DefaultValue("50") int limit);
 

@@ -7,11 +7,16 @@ import net.ramify.model.record.proto.RecordProto;
 
 import javax.annotation.Nonnull;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public interface RecordSets extends BuildsProto<RecordProto.RecordSetList> {
 
     @Nonnull
     Set<RecordSet> recordSets();
+
+    default Stream<RecordSetId> recordSetIds() {
+        return this.recordSets().stream().map(HasRecordSetId::recordSetId);
+    }
 
     @Nonnull
     @Override
