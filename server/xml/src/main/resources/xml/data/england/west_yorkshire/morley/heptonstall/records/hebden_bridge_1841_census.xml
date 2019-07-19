@@ -34,6 +34,8 @@
                 source="government"
                 type="census">
 
+            <description>The north eastern corner of Wadsworth.</description>
+
             <d:inYear year="1841"/>
 
             <censusRecords censusPlace="county:west_yorkshire">

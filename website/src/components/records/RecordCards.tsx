@@ -21,12 +21,16 @@ type Props = HasClass & {
     shortTitle?: boolean
     alsoSee?: ReadonlyArray<Place.AsObject>;
     noPlacesMessage?: React.ReactNode
+    fixedWidth?: boolean;
 }
 
 export const RecordCards = (props: Props) => {
     const records = props.records || [];
     if (props.groupByParent && records.some(r => r.parent)) return <GroupedRecordCards {...props}/>;
-    return <div className="recordCards" style={props.style}>
+
+    return <div
+        className={"recordCards" + (props.fixedWidth ? " fixedWidth" : "")}
+        style={props.style}>
         {props.loading && <Loading/>}
         {records.map(record => <RecordCard record={record} shortTitle={props.shortTitle}/>)}
         {!props.loading && !records.length && props.noPlacesMessage}
@@ -97,7 +101,7 @@ function shortTitle(record: RecordSet.AsObject): string {
 
 }
 
-const ShortRecordTitles: { [key in RecordType] } = {
+const ShortRecordTitles: { [key in RecordType]: string } = {
     UNSPECIFIED: "Miscellaneous",
     BAPTISM: "Baptisms",
     BIRTH: "Births",

@@ -50,13 +50,15 @@ export default class RecordSetCard extends React.PureComponent<Props> {
             </>}
 
             <RecordCards
+                {...this.props}
+                fixedWidth={this.useFixedWidthCards()}
                 shortTitle
                 records={this.props.recordSetChildren.data}
                 style={MarginBottom}/>
 
             <PersonSearch
-                disabled
                 {...this.props}
+                disabled
                 style={MarginBottom}/>
 
             <RecordResults
@@ -65,6 +67,12 @@ export default class RecordSetCard extends React.PureComponent<Props> {
 
         </Card>;
 
+    }
+
+    private useFixedWidthCards(): boolean {
+        const children = this.props.recordSetChildren.data;
+        if (!children || !children.length) return false;
+        return children.every(c => (c.shorttitle || c.longtitle).length < 32);
     }
 
 }

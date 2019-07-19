@@ -6,6 +6,10 @@
     border: 0;
 }
 
+.recordCards.fixedWidth .recordCard {
+    width: 250px;
+}
+
 .recordCards .recordCard .ant-card-body {
     padding: 8px !important;
 }
