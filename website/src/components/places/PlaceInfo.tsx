@@ -15,14 +15,14 @@ type Props = HasClass & {
 export const PlaceInfo = (props: Props) => {
 
     if (props.loading) return <Loading/>;
-    if (!props.place || !props.description) return null;
+    if (!props.place) return null;
 
     return <Card
         className={"placeInfo " + (props.className || "")}
         style={props.style}
         title={<>{props.preTitle}<PlaceContextMenu place={props.place}/></>}>
 
-        {props.description.description || <i>No description available.</i>}
+        {props.description && props.description.description || <i>No description available.</i>}
 
     </Card>;
 
