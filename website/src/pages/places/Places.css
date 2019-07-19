@@ -51,6 +51,10 @@
     font-size: 1.2em;
 }
 
+.info .records .ant-card-head-title, .info .places .ant-card-head-title {
+    padding: 8px 0;
+}
+
 .info .records .ant-card-head, .info .places .ant-card-head {
     padding: 0;
 }
