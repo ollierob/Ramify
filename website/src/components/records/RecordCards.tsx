@@ -14,12 +14,22 @@ import {HasClass} from "../style/HasClass";
 import {Link} from "../style/Links";
 import {Loading} from "../style/Loading";
 
-export const RecordCards = (props: HasClass & {loading?: boolean, records: ReadonlyArray<RecordSet.AsObject>, groupByParent?: boolean, shortTitle?: boolean, alsoSee?: ReadonlyArray<Place.AsObject>}) => {
+type Props = HasClass & {
+    loading?: boolean
+    records: ReadonlyArray<RecordSet.AsObject>
+    groupByParent?: boolean
+    shortTitle?: boolean
+    alsoSee?: ReadonlyArray<Place.AsObject>;
+    noPlacesMessage?: React.ReactNode
+}
+
+export const RecordCards = (props: Props) => {
     const records = props.records || [];
     if (props.groupByParent && records.some(r => r.parent)) return <GroupedRecordCards {...props}/>;
     return <div className="recordCards" style={props.style}>
         {props.loading && <Loading/>}
         {records.map(record => <RecordCard record={record} shortTitle={props.shortTitle}/>)}
+        {!props.loading && !records.length && props.noPlacesMessage}
         {props.alsoSee && <AlsoSeeCard alsoSee={props.alsoSee}/>}
     </div>;
 };

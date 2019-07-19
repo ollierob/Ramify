@@ -8,6 +8,7 @@ import ReactMarkdown = require("react-markdown");
 import {RecordCards} from "../../../components/records/RecordCards";
 import {RecordSet} from "../../../protobuf/generated/record_pb";
 import {AsyncData} from "../../../components/fetch/AsyncData";
+import {NoData} from "../../../components/style/NoData";
 
 type Props = PlaceFavouritesHandler & {
     place: Place.AsObject;
@@ -37,7 +38,8 @@ export const AreaInfo = (props: Props) => {
         <Card className="records" title="Records" bordered={false}>
             <RecordCards
                 loading={props.records.loading}
-                records={props.records.data}/>
+                records={props.records.data}
+                noPlacesMessage={<>No records specific to this place have been registered.</>}/>
         </Card>
 
         <Card className="places" title="Places" bordered={false}>
