@@ -46,12 +46,9 @@ export default class RecordSetPage extends React.PureComponent<Props, State> {
 
     render() {
 
-        if (this.state.recordSet.loading) return <Loading/>;
-
         const recordSet = this.state.recordSet.data;
-        if (!recordSet) return <ErrorMessage message="Unknown record set"/>;
+        if (!recordSet && !this.state.recordSet.loading) return <ErrorMessage message="Unknown record set"/>;
 
-        //TODO place map should show both source and coverage of record set
         return <div className="recordSet leftRest">
 
             <PlaceMap
@@ -67,6 +64,7 @@ export default class RecordSetPage extends React.PureComponent<Props, State> {
 
             <RecordSetCard
                 {...this.props}
+                loading={this.state.recordSet.loading}
                 recordSet={recordSet}
                 recordSetChildren={this.state.recordSetChildren}
                 records={this.state.records}

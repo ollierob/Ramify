@@ -1,5 +1,4 @@
 import * as React from "react";
-import {RecordSearchHandler} from "../../../components/search/RecordSearchHandler";
 import {Tabs} from "antd";
 import {AsyncData} from "../../../components/fetch/AsyncData";
 import {Record, RecordSet} from "../../../protobuf/generated/record_pb";

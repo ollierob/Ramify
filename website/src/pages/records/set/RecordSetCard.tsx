@@ -11,8 +11,10 @@ import {AsyncData} from "../../../components/fetch/AsyncData";
 import {RecordPaginationHandler} from "../../../components/records/RecordPaginationHandler";
 import {Link} from "../../../components/style/Links";
 import {RouteComponentProps} from "react-router";
+import {Loading} from "../../../components/style/Loading";
 
 type Props = RecordPaginationHandler & RecordSearchHandler & RouteComponentProps<any> & {
+    loading: boolean;
     recordSet: Readonly<RecordSet.AsObject>
     recordSetChildren: AsyncData<ReadonlyArray<RecordSet.AsObject>>;
     records: AsyncData<ReadonlyArray<Record.AsObject>>
@@ -21,22 +23,29 @@ type Props = RecordPaginationHandler & RecordSearchHandler & RouteComponentProps
 
 export default class RecordSetCard extends React.PureComponent<Props> {
 
+    constructor(props) {
+        super(props);
+    }
+
+
     render() {
 
         const recordSet = this.props.recordSet;
 
         return <Card
             className="info"
-            title={<><b>{recordSet.longtitle}</b> <span className="unimportant">{recordSet.numrecords} records</span></>}>
+            title={recordSet ? <><b>{recordSet.longtitle}</b> <span className="unimportant">{recordSet.numrecords} records</span></> : <Loading/>}>
 
-            <PartOf
-                parent={recordSet.parent}/>
+            {recordSet && <>
+                <PartOf
+                    parent={recordSet.parent}/>
 
-            <References
-                references={recordSet.externalreferenceList.length ? recordSet.externalreferenceList : recordSet.parent && recordSet.parent.externalreferenceList}/>
+                <References
+                    references={recordSet.externalreferenceList.length ? recordSet.externalreferenceList : recordSet.parent && recordSet.parent.externalreferenceList}/>
 
-            <Description
-                record={recordSet}/>
+                <Description
+                    record={recordSet}/>
+            </>}
 
             <RecordCards
                 shortTitle

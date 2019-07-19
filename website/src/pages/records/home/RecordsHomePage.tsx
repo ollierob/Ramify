@@ -11,7 +11,8 @@ import {YearRange} from "../../../components/date/DateRange";
 import {RecordSet} from "../../../protobuf/generated/record_pb";
 import RecordSetTable from "./RecordSetTable";
 import {DEFAULT_RECORD_LOADER, RecordSetOptions} from "../../../components/records/RecordLoader";
-import {QueryMap, readPageHash, updatePageHash} from "../../../components/Page";
+import {readPageHash, updatePageHash} from "../../../components/Page";
+import {hashToRecordSearch, recordSearchToHash} from "../../../components/search/RecordSearchHandler";
 
 type Props = {}
 
@@ -31,14 +32,14 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
 
     constructor(props) {
         super(props);
-        const hash = readPageHash();
+        const options = hashToRecordSearch(readPageHash());
         this.state = {
             selectedRegion: [],
             regions: [],
             selectedRange: [],
             ranges: generateYearRanges(),
             recordSets: {},
-            recordName: hash["searchName"]
+            recordName: options.name
         };
         this.renderRange = this.renderRange.bind(this);
         this.loadLeafPlace = this.loadLeafPlace.bind(this);
@@ -150,7 +151,7 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
             name: this.state.recordName,
         };
         asyncLoadData(options, this.recordLoader.loadRecordSets, recordSets => this.setState({recordSets}));
-        updatePageHash(searchHash(options));
+        updatePageHash(recordSearchToHash(options));
     }
 
 }
@@ -192,12 +193,4 @@ function generateYearRanges(): CascaderOptionType[] {
 
 function yearRange(from: number, to: number): YearRange {
     return {from, to};
-}
-
-function searchHash(options: RecordSetOptions): QueryMap {
-    return {
-        base: "search",
-        searchName: options.name,
-        searchPlace: options.place,
-    };
 }

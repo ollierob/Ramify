@@ -11,6 +11,7 @@ import {recordTypeFromValue} from "../../../components/records/RecordType";
 export type RecordColumn = ColumnProps<IndividualRecord>;
 
 export function determineColumns(recordSet: RecordSet.AsObject, properties: RecordProperties): RecordColumn[] {
+    if (!recordSet) return [];
     const type = recordTypeFromValue(recordSet.type);
     const columns = [...DefaultColumns];
     switch (type) {
