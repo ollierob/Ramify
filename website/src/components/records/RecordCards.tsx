@@ -87,6 +87,7 @@ function shortTitle(record: RecordSet.AsObject): string {
 }
 
 const ShortRecordTitles: { [key in RecordType] } = {
+    UNSPECIFIED: "Miscellaneous",
     BAPTISM: "Baptisms",
     BIRTH: "Births",
     BURIAL: "Burials",

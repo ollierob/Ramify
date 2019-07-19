@@ -6,7 +6,7 @@ public interface RecordHandler<R> {
 
     R handle(BaptismRecord baptism);
 
-    R handle(ResidenceRecord residence);
+    R handle(LifeEventRecord residence);
 
     R handle(MarriageRecord marriage);
 
