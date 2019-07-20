@@ -7,4 +7,18 @@
         <description>Calderdale Metropolitan Borough was formed in 1974 from a number of urban and rural districts.</description>
     </placeDescription>
 
+    <placeDescription id="ruraldistrict:hepton">
+        <laterBecame id="civilparish:heptonstall"/>
+        <laterBecame id="civilparish:wadsworth"/>
+        <laterBecame id="civilparish:erringden"/>
+        <laterBecame id="civilparish:blackshaw"/>
+        <alsoSee id="metropolitanborough:calderdale"/>
+        <description>Hepton Rural District existed between 1894 - 1974.</description>
+    </placeDescription>
+    
+    <placeDescription id="civilparish:blackshaw">
+        <alsoSee id="village:blackshaw_head"/>
+        <description>Blackshaw civil parish contains Blackshaw Head and the surrounding area.</description>
+    </placeDescription>
+
 </placeDescriptions>

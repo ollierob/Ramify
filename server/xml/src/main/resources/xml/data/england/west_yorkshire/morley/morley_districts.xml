@@ -8,13 +8,21 @@
         <urbanDistrict id="hebden_royd" name="Hebden Royd"/>
 
         <metropolitanBorough id="calderdale" name="Calderdale">
-
             <civilParish id="hebden_royd" name="Hebden Royd"/>
             <civilParish id="heptonstall" name="Heptonstall"/>
             <civilParish id="todmorden" name="Todmorden"/>
             <civilParish id="wadsworth" name="Wadsworth"/>
-
+            <civilParish id="erringden" name="Erringden"/>
+            <civilParish id="blackshaw" name="Blackshaw"/>
         </metropolitanBorough>
+
+        <metropolitanBorough id="bradford" name="Bradford"/>
+
+        <metropolitanBorough id="kirklees" name="Kirklees"/>
+
+        <metropolitanBorough id="wakefield" name="Wakefield"/>
+
+        <metropolitanBorough id="leeds" name="Leeds"/>
 
     </county>
 

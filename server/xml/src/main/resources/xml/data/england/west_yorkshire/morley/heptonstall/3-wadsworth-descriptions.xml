@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<placeDescriptions
-        xmlns="http://ramify.net/places"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://ramify.net/places ../../../../../schema/places.xsd">
+<placeDescriptions xmlns="http://ramify.net/places">
 
     <placeDescription id="township:wadsworth">
+        <laterBecame id="ruraldistrict:hepton"/>
+        <laterBecame id="civilparish:wadsworth"/>
         <alsoSee id="township:stansfield"/>
         <alsoSee id="township:heptonstall"/>
         <alsoSee id="township:erringden"/>

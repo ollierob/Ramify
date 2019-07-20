@@ -20,11 +20,4 @@
         </description>
     </placeDescription>
 
-    <placeDescription id="ruraldistrict:hepton">
-        <laterBecame id="civilparish:heptonstall"/>
-        <laterBecame id="civilparish:wadsworth"/>
-        <alsoSee id="metropolitanborough:calderdale"/>
-        <description>Hepton Rural District existed between 1894 - 1974.</description>
-    </placeDescription>
-
 </placeDescriptions>
