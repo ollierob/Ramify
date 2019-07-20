@@ -24,6 +24,8 @@
 
     <element name="churchRecordSet" type="tns:xmlChurchRecordSetInfo"/>
 
+    <element name="civilParish" type="tns:xmlCivilParish"/>
+
     <element name="country" type="tns:xmlCountry"/>
 
     <element name="county" type="tns:xmlCounty"/>
@@ -39,6 +41,8 @@
     <element name="inn" type="tns:xmlInn"/>
 
     <element name="manor" type="tns:xmlManor"/>
+
+    <element name="metropolitanBorough" type="tns:xmlMetropolitanBorough"/>
 
     <element name="mill" type="tns:xmlMill"/>
 
@@ -56,6 +60,8 @@
 
     <element name="places" type="tns:places"/>
 
+    <element name="ruralDistrict" type="tns:xmlRuralDistrict"/>
+
     <element name="school" type="tns:xmlSchool"/>
 
     <element name="state" type="tns:xmlState"/>
@@ -67,6 +73,8 @@
     <element name="town" type="tns:xmlTown"/>
 
     <element name="township" type="tns:xmlTownship"/>
+
+    <element name="urbanDistrict" type="tns:xmlUrbanDistrict"/>
 
     <element name="village" type="tns:xmlVillage"/>
 
@@ -321,6 +329,12 @@
                         <element ref="tns:manor"/>
 
                         <element ref="tns:wapentake"/>
+
+                        <element ref="tns:metropolitanBorough"/>
+
+                        <element ref="tns:urbanDistrict"/>
+
+                        <element ref="tns:ruralDistrict"/>
 
                     </choice>
 
@@ -686,6 +700,84 @@
 
     </complexType>
 
+    <complexType name="xmlMetropolitanBorough">
+
+        <complexContent>
+
+            <extension base="tns:xmlPlace">
+
+                <sequence>
+
+                    <element maxOccurs="unbounded" minOccurs="0" ref="tns:civilParish"/>
+
+                </sequence>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
+    <complexType name="xmlCivilParish">
+
+        <complexContent>
+
+            <extension base="tns:xmlPlace">
+
+                <sequence>
+
+                    <choice maxOccurs="unbounded" minOccurs="0">
+
+                        <element ref="tns:town"/>
+
+                        <element ref="tns:village"/>
+
+                    </choice>
+
+                </sequence>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
+    <complexType name="xmlUrbanDistrict">
+
+        <complexContent>
+
+            <extension base="tns:xmlPlace">
+
+                <sequence>
+
+                    <element maxOccurs="unbounded" minOccurs="0" ref="tns:civilParish"/>
+
+                </sequence>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
+    <complexType name="xmlRuralDistrict">
+
+        <complexContent>
+
+            <extension base="tns:xmlPlace">
+
+                <sequence>
+
+                    <element maxOccurs="unbounded" minOccurs="0" ref="tns:civilParish"/>
+
+                </sequence>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
     <complexType name="xmlState">
 
         <complexContent>
@@ -741,6 +833,14 @@
                 <element ref="tns:graveship"/>
 
                 <element ref="tns:wapentake"/>
+
+                <element ref="tns:metropolitanBorough"/>
+
+                <element ref="tns:civilParish"/>
+
+                <element ref="tns:urbanDistrict"/>
+
+                <element ref="tns:ruralDistrict"/>
 
                 <element ref="tns:state"/>
 

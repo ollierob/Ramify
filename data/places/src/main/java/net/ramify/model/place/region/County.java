@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.proto.PlaceProto;
+import net.ramify.model.place.region.district.District;
 import net.ramify.model.place.region.manor.Manor;
 import net.ramify.model.place.settlement.City;
 import net.ramify.model.place.type.Region;
@@ -14,7 +15,7 @@ import java.util.Set;
 
 public class County extends AbstractRegion {
 
-    private static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(Manor.class, Parish.class, City.class, Hundred.class);
+    private static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(Manor.class, Parish.class, City.class, Hundred.class, District.class);
 
     private final Region parent;
     private final String iso;

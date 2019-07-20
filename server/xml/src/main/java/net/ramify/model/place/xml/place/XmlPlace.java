@@ -8,6 +8,7 @@ import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.xml.place.settlement.XmlTown;
 import net.ramify.utils.objects.Functions;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
@@ -54,7 +55,8 @@ public abstract class XmlPlace implements HasPlaceId {
         try {
             final var self = this.place(placeProvider, parent);
             addPlace.accept(self);
-            this.children().forEach(child -> child.addPlaces(placeProvider, self, addPlace));
+            final var children = this.children();
+            if (children != null) children.forEach(child -> child.addPlaces(placeProvider, self, addPlace));
         } catch (final Place.InvalidPlaceTypeException | RuntimeException rex) {
             throw new RuntimeException("Error reading " + this, rex);
         }
@@ -67,6 +69,7 @@ public abstract class XmlPlace implements HasPlaceId {
     @Nonnull
     protected abstract Place place(Place parent) throws Place.InvalidPlaceTypeException;
 
+    @CheckForNull
     protected abstract Collection<XmlPlace> children();
 
     @Override

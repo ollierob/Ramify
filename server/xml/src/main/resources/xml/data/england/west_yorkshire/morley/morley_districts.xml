@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<places xmlns="http://ramify.net/places">
+
+    <county id="west_yorkshire">
+
+        <metropolitanBorough id="calderdale" name="Calderdale">
+
+            <civilParish id="hebden_royd" name="Hebden Royd"/>
+
+        </metropolitanBorough>
+
+    </county>
+
+</places>

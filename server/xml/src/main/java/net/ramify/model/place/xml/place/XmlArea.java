@@ -8,11 +8,11 @@ import net.ramify.model.place.type.Region;
 import javax.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
-abstract class XmlArea<P extends Region> extends XmlPlace {
+public abstract class XmlArea<P extends Region> extends XmlPlace {
 
     private final Class<P> type;
 
-    XmlArea(final Class<P> type) {
+    protected XmlArea(final Class<P> type) {
         this.type = type;
     }
 

@@ -65,15 +65,15 @@
 
     </complexType>
 
-    <simpleType name="xmlGender">
+    <simpleType name="xmimportlGender">
 
         <restriction base="xs:string">
-
-            <enumeration value="male"/>
 
             <enumeration value="unknown"/>
 
             <enumeration value="female"/>
+
+            <enumeration value="male"/>
 
         </restriction>
 

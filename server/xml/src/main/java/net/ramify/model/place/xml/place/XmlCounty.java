@@ -5,6 +5,9 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.County;
+import net.ramify.model.place.xml.place.district.XmlMetropolitanBorough;
+import net.ramify.model.place.xml.place.district.XmlRuralDistrict;
+import net.ramify.model.place.xml.place.district.XmlUrbanDistrict;
 import net.ramify.model.place.xml.place.manor.XmlManor;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -22,7 +25,10 @@ class XmlCounty extends XmlPlace {
     @XmlElementRefs({
             @XmlElementRef(type = XmlParish.class),
             @XmlElementRef(type = XmlManor.class),
-            @XmlElementRef(type = XmlWapentake.class)
+            @XmlElementRef(type = XmlWapentake.class),
+            @XmlElementRef(type = XmlMetropolitanBorough.class),
+            @XmlElementRef(type = XmlUrbanDistrict.class),
+            @XmlElementRef(type = XmlRuralDistrict.class)
     })
     private List<XmlPlace> children;
 

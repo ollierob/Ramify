@@ -1,7 +1,6 @@
-<places
-        xmlns="http://ramify.net/places"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://ramify.net/places ../../../../../schema/places.xsd">
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<places xmlns="http://ramify.net/places">
 
     <township id="stansfield">
 
