@@ -25,6 +25,8 @@ function linkIcon(link: LinkProto.AsObject): React.ReactNode {
     switch (link.type) {
         case TypeMapValues.WIKIPEDIA:
             return <img src="/images/links/wikipedia.png" className="image" alt="Wikipedia"/>;
+        case TypeMapValues.NATIONAL_ARCHIVES:
+            return <img src="/images/links/national_archives.png" className="image" alt="National Archives"/>;
         default:
             return null;
     }

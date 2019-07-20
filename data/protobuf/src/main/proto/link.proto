@@ -12,6 +12,7 @@ message Link {
     enum Type {
         NONE = 0;
         WIKIPEDIA = 1;
+        NATIONAL_ARCHIVES = 2;
     }
 
 }

@@ -96,6 +96,8 @@
 
                 <element ref="ns2:wikipediaLink"/>
 
+                <element ref="ns2:nationalArchivesLink"/>
+
             </choice>
 
         </sequence>
@@ -382,11 +384,11 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="church"/>
-
             <enumeration value="government"/>
 
             <enumeration value="manor"/>
+
+            <enumeration value="church"/>
 
         </restriction>
 
@@ -396,25 +398,25 @@
 
         <restriction base="xs:string">
 
-            <enumeration value="baptism"/>
+            <enumeration value="residence"/>
+
+            <enumeration value="birth"/>
+
+            <enumeration value="census"/>
 
             <enumeration value="membership"/>
+
+            <enumeration value="payment"/>
+
+            <enumeration value="baptism"/>
+
+            <enumeration value="death"/>
 
             <enumeration value="burial"/>
 
             <enumeration value="marriage"/>
 
-            <enumeration value="birth"/>
-
-            <enumeration value="death"/>
-
-            <enumeration value="census"/>
-
-            <enumeration value="residence"/>
-
             <enumeration value="mixed"/>
-
-            <enumeration value="payment"/>
 
         </restriction>
 

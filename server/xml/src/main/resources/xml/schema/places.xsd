@@ -42,6 +42,8 @@
 
     <element name="mill" type="tns:xmlMill"/>
 
+    <element name="nationalArchivesLink" type="tns:xmlNationalArchivesLink"/>
+
     <element name="parish" type="tns:xmlParish"/>
 
     <element name="placeDescription" type="tns:xmlPlaceDescription"/>
@@ -115,6 +117,20 @@
     </complexType>
 
     <complexType name="xmlWikipediaLink">
+
+        <complexContent>
+
+            <extension base="tns:xmlLink">
+
+                <sequence/>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
+    <complexType name="xmlNationalArchivesLink">
 
         <complexContent>
 
@@ -205,6 +221,8 @@
                 <element ref="tns:textLink"/>
 
                 <element ref="tns:wikipediaLink"/>
+
+                <element ref="tns:nationalArchivesLink"/>
 
             </choice>
 
