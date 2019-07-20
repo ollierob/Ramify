@@ -16,15 +16,23 @@ import java.util.stream.Collectors;
 @Singleton
 public class DefaultRecordsResource implements RecordsResource {
 
+    private static final int DEFAULT_LIMIT = 1000;
+
     private final RecordsProvider records;
     private final RecordSetResource recordSets;
     private final RecordImageProvider imageProvider;
+    private final RecordSearch search;
 
     @Inject
-    DefaultRecordsResource(final RecordSetResource recordSets, final RecordsProvider records, final RecordImageProvider imageProvider) {
+    DefaultRecordsResource(
+            final RecordSetResource recordSets,
+            final RecordsProvider records,
+            final RecordImageProvider imageProvider,
+            final RecordSearch search) {
         this.recordSets = recordSets;
         this.records = records;
         this.imageProvider = imageProvider;
+        this.search = search;
     }
 
     @Override
@@ -44,9 +52,17 @@ public class DefaultRecordsResource implements RecordsResource {
         return new AggregateRecords(ListUtils.prefix(parent, children));
     }
 
+    private Records allRecords() {
+        return new AggregateRecords(records.all());
+    }
+
     @Override
     public Records search(final RecordProto.RecordSearch searchParameters) {
-        throw new UnsupportedOperationException(); //TODO
+        final var recordSetId = searchParameters.getRecordSetId();
+        final var records = recordSetId.isEmpty()
+                ? this.allRecords()
+                : this.parentAndChildRecords(new RecordSetId(recordSetId));
+        return search.search(records, searchParameters);
     }
 
     @Override

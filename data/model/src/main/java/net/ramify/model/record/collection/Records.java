@@ -9,6 +9,7 @@ import net.ramify.model.record.proto.RecordProto;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 import java.util.Collection;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -30,6 +31,11 @@ public interface Records extends BuildsProto<RecordProto.RecordList> {
         return RecordProto.RecordList.newBuilder()
                 .addAllRecord(this.records().map(Record::toProto).collect(Collectors.toList()))
                 .build();
+    }
+
+    @CheckReturnValue
+    default Records filter(final Predicate<? super Record> predicate) {
+        return () -> this.records().filter(predicate);
     }
 
     static Records of(final Collection<Record> records) {

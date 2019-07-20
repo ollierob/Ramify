@@ -77,7 +77,7 @@ message RecordSearch {
     string placeId = 10;
 
     //Record
-    string recordId = 20;
+    string recordSetId = 20;
 
 }
 

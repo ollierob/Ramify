@@ -1,5 +1,6 @@
 package net.ramify.model.place;
 
+import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.utils.objects.Castable;
 
 import javax.annotation.Nonnull;
@@ -14,6 +15,13 @@ public interface HasPlace extends HasPlaceId {
     @Override
     default PlaceId placeId() {
         return this.place().placeId();
+    }
+
+    @Nonnull
+    @Override
+    @Deprecated
+    default Place resolvePlace(final PlaceProvider lookup) {
+        return this.place();
     }
 
     static Optional<Place> place(final Object object) {

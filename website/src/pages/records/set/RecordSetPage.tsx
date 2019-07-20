@@ -113,7 +113,7 @@ export default class RecordSetPage extends React.PureComponent<Props, State> {
     }
 
     private search(search: RecordSearch) {
-        if (this.state.recordSetId) search.setRecordid(this.state.recordSetId);
+        if (this.state.recordSetId) search.setRecordsetid(this.state.recordSetId);
         asyncLoadData(search, this.recordLoader.submitSearch, searchResults => this.setState({searchResults}));
     }
 

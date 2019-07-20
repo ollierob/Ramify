@@ -1,5 +1,6 @@
 package net.ramify.model.record.xml;
 
+import com.google.common.collect.Collections2;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.Records;
@@ -11,10 +12,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import javax.inject.Singleton;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.File;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 
 @XmlTransient
@@ -61,4 +65,9 @@ class XmlRecordProvider implements RecordsProvider {
         xmlFiles.put(id, file);
     }
 
+    @Nonnull
+    @Override
+    public Collection<Records> all() {
+        return Collections.unmodifiableCollection(Collections2.transform(xmlFiles.keySet(), this::get));
+    }
 }

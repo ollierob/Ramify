@@ -60,7 +60,6 @@ export default class RecordSetCard extends React.PureComponent<Props> {
 
             <PersonSearch
                 {...this.props}
-                disabled
                 style={MarginBottom}/>
 
             <RecordResults
