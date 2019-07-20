@@ -13,6 +13,14 @@
 }
 
 /*Table*/
+.records .table {
+    margin-top: 16px;
+}
+
+.records .ant-tabs-tabpane .table {
+    margin-top: 0;
+}
+
 .records .table .place .type {
     display: block;
     font-size: 0.8em;
