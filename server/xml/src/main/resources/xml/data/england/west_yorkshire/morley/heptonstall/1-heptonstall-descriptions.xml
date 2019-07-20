@@ -15,6 +15,7 @@
     </placeDescription>
 
     <placeDescription id="township:heptonstall">
+        <laterBecame id="ruraldistrict:hepton"/>
         <alsoSee id="township:stansfield"/>
         <alsoSee id="township:wadsworth"/>
         <alsoSee id="township:erringden"/>

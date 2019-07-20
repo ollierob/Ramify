@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Card} from "antd";
+import {Alert, Card, Icon} from "antd";
 import {Place, PlaceDescription} from "../../../protobuf/generated/place_pb";
 import ChildPlaceCards from "../../../components/places/ChildPlaceCards";
 import {PlaceTitle} from "../../../components/places/PlaceTitle";
@@ -9,6 +9,8 @@ import {RecordCards} from "../../../components/records/RecordCards";
 import {RecordSet} from "../../../protobuf/generated/record_pb";
 import {AsyncData} from "../../../components/fetch/AsyncData";
 import {NoData} from "../../../components/style/NoData";
+import {PlaceContextMenu} from "../../../components/places/PlaceContextMenu";
+import {joinComponents} from "../../../components/Components";
 
 type Props = PlaceFavouritesHandler & {
     place: Place.AsObject;
@@ -28,6 +30,8 @@ export const PlaceInfo = (props: Props) => {
     return <Card
         className="info"
         title={<PlaceTitle {...props}/>}>
+
+        {place.defunct && <DefunctWarning description={description}/>}
 
         {description
             ? <ReactMarkdown
@@ -53,4 +57,16 @@ export const PlaceInfo = (props: Props) => {
 
     </Card>;
 
+};
+
+const DefunctWarning = (props: {description: PlaceDescription.AsObject}) => {
+    const laterBecame = props.description ? props.description.laterbecameList : [];
+    return <Alert
+        type="warning"
+        className="defunct"
+        showIcon
+        message={<>This place no longer exists.</>}
+        description={laterBecame.length > 0 && <>
+            It later became part of {joinComponents(laterBecame.map(p => <PlaceContextMenu place={p} showType/>), ", ")}
+        </>}/>;
 };

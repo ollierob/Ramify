@@ -20,7 +20,7 @@ export const PlaceInfo = (props: Props) => {
     return <Card
         className={"placeInfo " + (props.className || "")}
         style={props.style}
-        title={<>{props.preTitle}<PlaceContextMenu place={props.place}/></>}>
+        title={<>{props.preTitle}<PlaceContextMenu place={props.place} showType/></>}>
 
         {props.description && props.description.description || <i>No description available.</i>}
 
