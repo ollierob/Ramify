@@ -57,6 +57,11 @@
 
         <hamlet id="colden" name="Colden"/>
 
+        <mill id="gibson" name="Gibson"/>
+        <mill id="robertshaw" name="Robertshaw Nether"/>
+        <mill id="upper_lumb" name="Upper Lumb"/>
+        <mill id="lower_lumb" name="Lower Lumb"/>
+
     </township>
 
 </places>
