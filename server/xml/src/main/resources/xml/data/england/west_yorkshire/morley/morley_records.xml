@@ -69,4 +69,18 @@
         <d:betweenYears start="1781" end="1832"/>
     </recordSet>
 
+    <recordSet
+            id="wry_morley_subsidy_rolls"
+            parentId="wry_subsidy_rolls"
+            title="Morley Wapentake Subsidy Rolls"
+            shortTitle="Morley"
+            coversPlaceId="wapentake:morley"
+            source="government"
+            type="mixed">
+        <d:betweenYears start="1300" end="1700"/>
+        <recordSetReference reference="E179/207/141" archiveId="national_archives">
+            <p:nationalArchivesLink href="http://www.nationalarchives.gov.uk/e179/details.asp?piece_id=23888&amp;doc_id=18866&amp;doc_ref=E179/207/141"/>
+        </recordSetReference>
+    </recordSet>
+
 </recordSets>

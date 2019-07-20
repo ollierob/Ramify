@@ -5,7 +5,6 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 
 import javax.annotation.Nonnull;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -46,7 +45,7 @@ public interface PlaceProvider extends Provider<PlaceId, Place> {
         private final PlaceId placeId;
 
         public UnknownPlaceException(final PlaceId placeId) {
-            super(Objects.toString(placeId));
+            super("Unknown place: " + placeId);
             this.placeId = placeId;
         }
 

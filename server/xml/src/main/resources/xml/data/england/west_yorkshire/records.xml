@@ -85,4 +85,13 @@
         <d:betweenYears start="1781" end="1832"/>
     </recordSet>
 
+    <recordSet
+            id="wry_subsidy_rolls"
+            title="West Yorkshire Subsidy Rolls"
+            coversPlaceId="county:west_yorkshire"
+            source="government"
+            type="mixed">
+        <d:betweenYears start="1500" end="1700"/>
+    </recordSet>
+
 </recordSets>

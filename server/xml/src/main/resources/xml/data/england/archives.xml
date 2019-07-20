@@ -11,5 +11,9 @@
     <archive id="nots_archives" name="Nottinghamshire Archives">
         <textLink href="https://www.inspireculture.org.uk/heritage/archives/visiting-archives/" text="Website"/>
     </archive>
+    
+    <archive id="national_archives" name="National Archives">
+        <textLink href="https://discovery.nationalarchives.gov.uk/" text="Discovery"/>
+    </archive>
 
 </archives>
