@@ -20,12 +20,13 @@ export default class HeaderMenu extends React.PureComponent<Props> {
         const favourites = this.props.placeFavourites;
 
         return <Menu mode="horizontal" selectedKeys={[this.props.active]} className="menu">
-            <Menu.Item key="trees">
-                <TreeIcon/> Trees
-            </Menu.Item>
-            <Menu.Item key="people">
-                <PeopleIcon/> People
-            </Menu.Item>
+
+            <Menu.SubMenu title={<><TreeIcon/> People</>}>
+                <Menu.ItemGroup title={<>Trees</>}>
+                    <Menu.Item disabled>No trees yet.</Menu.Item>
+                </Menu.ItemGroup>
+            </Menu.SubMenu>
+
             <Menu.SubMenu title={<><PlacesIcon/> Places</>}>
                 <Menu.Item key="places">
                     <a href="/places"><SearchIcon/> Directory</a>
@@ -39,11 +40,13 @@ export default class HeaderMenu extends React.PureComponent<Props> {
                     {history.map(h => <Menu.Item key={h.id}><PlaceMenuItem place={h}/></Menu.Item>)}
                 </Menu.SubMenu>
             </Menu.SubMenu>
+
             <Menu.SubMenu title={<><RecordsIcon/> Records</>}>
                 <Menu.Item key="searchRecords">
                     <a href="/records"><SearchIcon/> Search</a>
                 </Menu.Item>
             </Menu.SubMenu>
+            
         </Menu>;
 
     }
