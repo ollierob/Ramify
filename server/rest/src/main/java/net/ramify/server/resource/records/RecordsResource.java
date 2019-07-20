@@ -1,7 +1,7 @@
 package net.ramify.server.resource.records;
 
+import net.ramify.model.record.collection.IndividualRecords;
 import net.ramify.model.record.collection.RecordSetId;
-import net.ramify.model.record.collection.Records;
 import net.ramify.model.record.image.RecordImages;
 import net.ramify.model.record.proto.RecordProto;
 import net.ramify.server.resource.RootResource;
@@ -27,7 +27,7 @@ public interface RecordsResource extends RootResource {
 
     @GET
     @Path("in/{id}")
-    Records in(
+    IndividualRecords in(
             @PathParam("id") RecordSetId id,
             @QueryParam("children") boolean includeChildren,
             @QueryParam("start") int start,
@@ -36,7 +36,7 @@ public interface RecordsResource extends RootResource {
     @POST
     @Consumes({APPLICATION_PROTOBUF})
     @Path("search")
-    Records search(RecordProto.RecordSearch searchParameters);
+    IndividualRecords search(RecordProto.RecordSearch searchParameters);
 
     @GET
     @Path("images/{id}")

@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Record, RecordSet} from "../../../protobuf/generated/record_pb";
+import {IndividualRecord, Record, RecordSet} from "../../../protobuf/generated/record_pb";
 import {Table} from "antd";
 import {RecordPaginationHandler} from "../../../components/records/RecordPaginationHandler";
 import {Person} from "../../../protobuf/generated/person_pb";
@@ -11,22 +11,23 @@ import {NoData} from "../../../components/style/NoData";
 type Props = Partial<RecordPaginationHandler> & {
     recordSet: RecordSet.AsObject;
     loading: boolean;
-    records: ReadonlyArray<Record.AsObject>
+    records: ReadonlyArray<IndividualRecord.AsObject>
     showRecordSet?: boolean;
 }
 
 type State = {
-    data: IndividualRecord[];
+    data: TableRow[];
     columns: RecordColumn[]
 }
 
-export type IndividualRecord = {
+export type TableRow = {
     person: Person.AsObject;
     birth?: Event.AsObject;
     residence?: Event.AsObject;
     death?: Event.AsObject;
     burial?: Event.AsObject;
     image?: string;
+    recordSetId?: string;
 }
 
 export class RecordTable extends React.PureComponent<Props, State> {
@@ -71,14 +72,10 @@ export type RecordProperties = {
     hasBurial?: boolean;
 }
 
-function buildIndividualRecords(records: ReadonlyArray<Record.AsObject>, properties: RecordProperties): IndividualRecord[] {
+function buildIndividualRecords(records: ReadonlyArray<IndividualRecord.AsObject>, properties: RecordProperties): TableRow[] {
     if (!records || !records.length) return [];
-    const out: IndividualRecord[] = [];
-    records.forEach(record => {
-        record.familyList.forEach(family => {
-            family.personList.forEach(person => out.push(createRecord(person)));
-        });
-    });
+    const out: TableRow[] = [];
+    records.forEach(record => out.push(createRecord(record)));
     properties.hasBirth = out.some(r => r.birth);
     properties.hasResidence = out.some(r => r.residence);
     properties.hasDeath = out.some(r => r.death);
@@ -86,9 +83,10 @@ function buildIndividualRecords(records: ReadonlyArray<Record.AsObject>, propert
     return out;
 }
 
-function createRecord(person: Person.AsObject): IndividualRecord {
-    //TODO include record set
-    const out: IndividualRecord = {person};
+function createRecord(record: IndividualRecord.AsObject): TableRow {
+    //TODO include resolved record set
+    const person = record.person;
+    const out: TableRow = {person, recordSetId: record.recordsetid};
     out.birth = person.eventsList.find(isBirthEvent);
     out.residence = person.eventsList.find(isResidenceEvent);
     out.death = person.eventsList.find(isDeathEvent);

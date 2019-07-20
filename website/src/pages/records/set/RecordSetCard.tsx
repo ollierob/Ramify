@@ -1,6 +1,6 @@
 import * as React from "react";
 import {CSSProperties} from "react";
-import {ExternalRecordReference, Record, RecordSet} from "../../../protobuf/generated/record_pb";
+import {ExternalRecordReference, IndividualRecord, Record, RecordSet} from "../../../protobuf/generated/record_pb";
 import {Card, Icon} from "antd";
 import {recordSetHref} from "../RecordLinks";
 import {RecordCards} from "../../../components/records/RecordCards";
@@ -19,8 +19,8 @@ type Props = RecordPaginationHandler & RecordSearchHandler & RouteComponentProps
     loading: boolean;
     recordSet: Readonly<RecordSet.AsObject>
     recordSetChildren: AsyncData<ReadonlyArray<RecordSet.AsObject>>;
-    records: AsyncData<ReadonlyArray<Record.AsObject>>
-    searchResults: AsyncData<ReadonlyArray<Record.AsObject>>;
+    records: AsyncData<ReadonlyArray<IndividualRecord.AsObject>>
+    searchResults: AsyncData<ReadonlyArray<IndividualRecord.AsObject>>;
 }
 
 export default class RecordSetCard extends React.PureComponent<Props> {

@@ -1,6 +1,7 @@
 package net.ramify.server.resource.records;
 
 import net.ramify.model.record.collection.AggregateRecords;
+import net.ramify.model.record.collection.IndividualRecords;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.Records;
 import net.ramify.model.record.image.RecordImages;
@@ -41,9 +42,9 @@ public class DefaultRecordsResource implements RecordsResource {
     }
 
     @Override
-    public Records in(final RecordSetId id, final boolean includeChildren, final int start, final int limit) {
+    public IndividualRecords in(final RecordSetId id, final boolean includeChildren, final int start, final int limit) {
         final var records = includeChildren ? this.parentAndChildRecords(id) : this.records.require(id);
-        return records.paginate(start, limit);
+        return records.individualRecords().paginate(start, limit);
     }
 
     private Records parentAndChildRecords(final RecordSetId id) {
@@ -57,7 +58,7 @@ public class DefaultRecordsResource implements RecordsResource {
     }
 
     @Override
-    public Records search(final RecordProto.RecordSearch searchParameters) {
+    public IndividualRecords search(final RecordProto.RecordSearch searchParameters) {
         final var recordSetId = searchParameters.getRecordSetId();
         final var records = recordSetId.isEmpty()
                 ? this.allRecords()

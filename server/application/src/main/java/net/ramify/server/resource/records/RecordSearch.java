@@ -1,12 +1,12 @@
 package net.ramify.server.resource.records;
 
 import com.google.common.collect.Iterables;
-import net.ramify.model.person.Person;
 import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.provider.PlaceProvider;
-import net.ramify.model.record.Record;
+import net.ramify.model.record.IndividualRecord;
+import net.ramify.model.record.collection.IndividualRecords;
 import net.ramify.model.record.collection.Records;
 import net.ramify.model.record.proto.RecordProto;
 
@@ -24,32 +24,32 @@ class RecordSearch {
         this.places = places;
     }
 
-    Records search(final Records source, final RecordProto.RecordSearch search) {
-        return source.filter(this.searchTest(search));
+    IndividualRecords search(final Records source, final RecordProto.RecordSearch search) {
+        return source.individualRecords().filter(this.searchTest(search));
     }
 
-    private Predicate<Record> searchTest(final RecordProto.RecordSearch search) {
+    private Predicate<IndividualRecord> searchTest(final RecordProto.RecordSearch search) {
         final var place = search.getPlaceId().isEmpty() ? null : places.require(new PlaceId(search.getPlaceId()));
         //TODO also age/DOB search
         return record -> this.testPlace(record, place)
                 && this.testName(record, search.getFirstName(), search.getLastName());
     }
 
-    private boolean testPlace(final Record record, final Place place) {
-        if (place == null) return true;
+    private boolean testPlace(final IndividualRecord record, final Place searchPlace) {
+        if (searchPlace == null) return true;
         if (record instanceof HasPlaceId) {
             final var recordPlace = ((HasPlaceId) record).resolvePlace(places);
-            return place.isParentOf(recordPlace);
+            return searchPlace.isParentOf(recordPlace);
         }
-        return false;
+        final var places = record.places();
+        return Iterables.any(places, searchPlace::isParentOf);
     }
 
-    private boolean testName(final Record record, final String firstName, final String lastName) {
-        return Iterables.any(record.people(), person -> this.testPerson(person, firstName, lastName));
-    }
-
-    private boolean testPerson(final Person person, final String firstName, final String lastName) {
-        return person.name().contains(firstName) || person.name().contains(lastName);
+    private boolean testName(final IndividualRecord record, final String firstName, final String lastName) {
+        if (firstName.isBlank() && lastName.isBlank()) return true;
+        final var name = record.person().name();
+        return (firstName.isBlank() || name.contains(firstName))
+                && (lastName.isBlank() || name.contains(lastName));
     }
 
 }

@@ -11,7 +11,7 @@ public interface Name extends BuildsProto<PersonProto.Name> {
     String value();
 
     default boolean contains(final String name) {
-        return this.value().contains(name);
+        return this.value().toLowerCase().contains(name.toLowerCase());
     }
 
     default boolean isUnknown() {

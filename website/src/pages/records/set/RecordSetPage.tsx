@@ -1,6 +1,6 @@
 import * as React from "react";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
-import {Record, RecordSearch, RecordSet} from "../../../protobuf/generated/record_pb";
+import {IndividualRecord, Record, RecordSearch, RecordSet} from "../../../protobuf/generated/record_pb";
 import {RouteComponentProps} from "react-router";
 import {DEFAULT_RECORD_LOADER} from "../../../components/records/RecordLoader";
 import {Loading} from "../../../components/style/Loading";
@@ -15,14 +15,14 @@ import {PlaceInfo} from "../../../components/places/PlaceInfo";
 type Props = RouteComponentProps<any>
 
 type State = {
-    records: AsyncData<ReadonlyArray<Record.AsObject>>
+    records: AsyncData<ReadonlyArray<IndividualRecord.AsObject>>
     recordSetId?: string;
     recordSet: AsyncData<RecordSet.AsObject>;
     recordSetCoversPlace: AsyncData<PlaceBundle.AsObject>
     recordSetSource: AsyncData<PlaceBundle.AsObject>
     recordSetChildren: AsyncData<ReadonlyArray<RecordSet.AsObject>>
     search: RecordSearch;
-    searchResults: AsyncData<ReadonlyArray<Record.AsObject>>;
+    searchResults: AsyncData<ReadonlyArray<IndividualRecord.AsObject>>;
 }
 
 export default class RecordSetPage extends React.PureComponent<Props, State> {

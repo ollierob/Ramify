@@ -1,6 +1,5 @@
 package net.ramify.model.record.collection;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.record.Record;
@@ -19,13 +18,6 @@ public interface Records extends BuildsProto<RecordProto.RecordList> {
     Stream<? extends Record> records();
 
     @Nonnull
-    @CheckReturnValue
-    default Records paginate(final int start, final int max) {
-        Preconditions.checkArgument(start == 0);
-        return () -> this.records().skip(start).limit(max);
-    }
-
-    @Nonnull
     @Override
     default RecordProto.RecordList toProto() {
         return RecordProto.RecordList.newBuilder()
@@ -36,6 +28,11 @@ public interface Records extends BuildsProto<RecordProto.RecordList> {
     @CheckReturnValue
     default Records filter(final Predicate<? super Record> predicate) {
         return () -> this.records().filter(predicate);
+    }
+
+    @Nonnull
+    default IndividualRecords individualRecords() {
+        return () -> this.records().flatMap(Record::individualRecords);
     }
 
     static Records of(final Collection<Record> records) {

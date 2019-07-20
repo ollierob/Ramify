@@ -5,10 +5,10 @@ import {Button, Icon} from "antd";
 import {nameToString} from "../../../components/people/Name";
 import {FormattedDateRange, FormattedYearRange} from "../../../components/date/FormattedDateRange";
 import {PlaceContextMenu} from "../../../components/places/PlaceContextMenu";
-import {IndividualRecord, RecordProperties} from "./RecordTable";
+import {TableRow, RecordProperties} from "./RecordTable";
 import {recordTypeFromValue} from "../../../components/records/RecordType";
 
-export type RecordColumn = ColumnProps<IndividualRecord>;
+export type RecordColumn = ColumnProps<TableRow>;
 
 export function determineColumns(recordSet: RecordSet.AsObject, properties: RecordProperties, showRecordSet?: boolean): RecordColumn[] {
     if (!recordSet) return [];

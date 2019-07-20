@@ -5,6 +5,7 @@ import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.record.IndividualRecord;
 import net.ramify.model.record.proto.RecordProto;
 
+import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
@@ -20,6 +22,16 @@ public interface IndividualRecords extends BuildsProto<RecordProto.IndividualRec
 
     @Nonnull
     Stream<? extends IndividualRecord> records();
+
+    @CheckReturnValue
+    default IndividualRecords paginate(final int start, final int limit) {
+        return () -> this.records().skip(start).limit(limit);
+    }
+
+    @CheckReturnValue
+    default IndividualRecords filter(final Predicate<? super IndividualRecord> predicate) {
+        return () -> this.records().filter(predicate);
+    }
 
     @Nonnull
     @Override
