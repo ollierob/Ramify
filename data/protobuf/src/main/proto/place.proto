@@ -41,7 +41,7 @@ enum PlaceType {
     HAMLET = 62;
     STREET = 63;
 
-    //
+    //Manors
     MANOR = 70;
     GRAVESHIP = 71;
 
@@ -53,6 +53,7 @@ enum PlaceType {
     SCHOOL = 104;
     MILL = 105;
     INN = 106;
+    GRAVEYARD = 107;
 
 }
 

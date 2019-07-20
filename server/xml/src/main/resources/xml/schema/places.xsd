@@ -32,6 +32,8 @@
 
     <element name="graveship" type="tns:xmlGraveship"/>
 
+    <element name="graveyard" type="tns:xmlGraveyard"/>
+
     <element name="hamlet" type="tns:xmlHamlet"/>
 
     <element name="inn" type="tns:xmlInn"/>
@@ -428,6 +430,8 @@
 
                         <element ref="tns:inn"/>
 
+                        <element ref="tns:graveyard"/>
+
                     </choice>
 
                 </sequence>
@@ -508,6 +512,20 @@
 
     </complexType>
 
+    <complexType name="xmlGraveyard">
+
+        <complexContent>
+
+            <extension base="tns:xmlPlace">
+
+                <sequence/>
+
+            </extension>
+
+        </complexContent>
+
+    </complexType>
+
     <complexType name="xmlHamlet">
 
         <complexContent>
@@ -569,6 +587,8 @@
                         <element ref="tns:school"/>
 
                         <element ref="tns:inn"/>
+
+                        <element ref="tns:graveyard"/>
 
                     </choice>
 
@@ -687,6 +707,8 @@
                 <element ref="tns:school"/>
 
                 <element ref="tns:inn"/>
+
+                <element ref="tns:graveyard"/>
 
                 <element ref="tns:hamlet"/>
 

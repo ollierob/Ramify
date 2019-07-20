@@ -22,7 +22,8 @@ public class XmlTown extends XmlPlace {
             @XmlElementRef(type = XmlChurch.class),
             @XmlElementRef(type = XmlMill.class),
             @XmlElementRef(type = XmlSchool.class),
-            @XmlElementRef(type = XmlInn.class)
+            @XmlElementRef(type = XmlInn.class),
+            @XmlElementRef(type = XmlGraveyard.class)
     })
     private List<XmlPlace> children;
 
