@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<recordSets
+        xmlns="http://ramify.net/records"
+        xmlns:d="http://ramify.net/dates"
+        xmlns:p="http://ramify.net/people">
+
+    <recordSet
+            id="wadsworth_subsidy_rolls"
+            parentId="wry_morley_subsidy_rolls"
+            title="Wadsworth Lay Subsidies"
+            shortTitle="Wadsworth"
+            coversPlaceId="township:wadsworth"
+            source="government"
+            type="residence">
+
+        <d:betweenYears start="1332" end="1642"/>
+
+        <residenceRecords placeId="township:wadsworth">
+            <d:inYear year="1332"/>
+            <residence gender="male" notes="2s/4d tax">
+                <p:nameTranscription original="Rob'to del Shagh" assumed="Robert Shaw"/>
+            </residence>
+            <residence gender="male" notes="2s tax">
+                <p:nameTranscription original="Ric's de Waddesworth" assumed="Richard Wadsworth"/>
+            </residence>
+        </residenceRecords>
+
+    </recordSet>
+
+</recordSets>
