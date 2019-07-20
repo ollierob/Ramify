@@ -7,7 +7,7 @@ import {placeHref} from "./PlaceLinks";
 export const PlaceBreadcrumb = (props: {loading: boolean, place: Place.AsObject}) => {
     return <SubMenu>
         {props.place && <Hierarchy {...props}/>}
-    </SubMenu>
+    </SubMenu>;
 };
 
 const Hierarchy = (props: {place: Place.AsObject}) => {
@@ -18,7 +18,7 @@ const Hierarchy = (props: {place: Place.AsObject}) => {
 
     return <div className="places">
         {hierarchy.map((place, i) => <Breadcrumb place={place} separator={i < hierarchy.length - 1}/>)}
-    </div>
+    </div>;
 
 
 };
@@ -31,7 +31,7 @@ function listHierarchy(place: Place.AsObject, max: number): ReadonlyArray<Place.
     }
     list = list.reverse();
     if (list.length <= max + 1) return list;
-    return [list[0], null].concat(list.slice(list.length - max))
+    return [list[0], null].concat(list.slice(list.length - max));
 }
 
 const Breadcrumb = (props: {place: Place.AsObject, separator: boolean}) => {
@@ -39,18 +39,17 @@ const Breadcrumb = (props: {place: Place.AsObject, separator: boolean}) => {
     const place = props.place;
     if (!place) return <> ... &raquo; </>;
 
+    const type = placeTypeName(place.type);
+    const prefix = !place.name.endsWith(type);
+
     return <>
         <span className="place">
-        {typeBreadcrumb(place.type)}
+            {prefix && <>{type} of </>}
             <a href={placeHref(place)}>
                 <b>{place.name}</b>
             </a>
         </span>
         {props.separator && " » "}
-    </>
+    </>;
 
 };
-
-function typeBreadcrumb(type: PlaceTypeMap[keyof PlaceTypeMap]) {
-    return placeTypeName(type) + " of ";
-}
