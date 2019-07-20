@@ -34,7 +34,7 @@ public class XmlCensusRecords extends XmlRecords {
     public Collection<? extends CensusRecord> build(final RecordSet recordSet, final RecordContext context) {
         if (records == null) return Collections.emptyList();
         final var censusPlace = context.places().require(new PlaceId(this.censusPlace));
-        return ListUtils.eagerlyTransform(records, record -> record.build(context, censusPlace));
+        return ListUtils.eagerlyTransform(records, record -> record.build(context, censusPlace, recordSet));
     }
 
 }

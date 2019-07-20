@@ -10,6 +10,7 @@ type Props = RecordPaginationHandler & {
     recordSet: RecordSet.AsObject;
     records: AsyncData<ReadonlyArray<Record.AsObject>>;
     searchResults: AsyncData<ReadonlyArray<Record.AsObject>>;
+    showRecordSet?: boolean;
 }
 
 type State = {
@@ -54,7 +55,7 @@ export class RecordResults extends React.PureComponent<Props, State> {
                 tab={"Search results"}
                 disabled={!this.props.searchResults.query}>
                 <RecordTable
-                    recordSet={this.props.recordSet}
+                    {...this.props}
                     loading={this.props.searchResults.loading}
                     records={this.props.searchResults.data}/>
             </Tabs.TabPane>

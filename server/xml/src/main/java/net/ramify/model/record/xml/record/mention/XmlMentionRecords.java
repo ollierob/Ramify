@@ -40,7 +40,7 @@ public class XmlMentionRecords extends XmlRecords {
             final RecordSet recordSet,
             final RecordContext context) {
         final var date = Functions.ifNonNull(this.date, d -> d.resolve(context.dateParser()), recordSet.date());
-        return ListUtils.eagerlyTransform(records, record -> record.buildRecord(date, context));
+        return ListUtils.eagerlyTransform(records, record -> record.buildRecord(date, context, recordSet));
     }
 
 }

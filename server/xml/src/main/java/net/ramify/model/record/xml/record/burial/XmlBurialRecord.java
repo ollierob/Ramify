@@ -27,6 +27,7 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.record.GenericRecordPerson;
 import net.ramify.model.record.church.ChurchBurialRecord;
+import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.type.BurialRecord;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlPersonRecord;
@@ -65,10 +66,11 @@ public class XmlBurialRecord extends XmlPersonRecord {
     @XmlElementRef
     private List<XmlRelationship> relationships;
 
-    public BurialRecord build(final PlaceId placeId, final RecordContext context) {
+    public BurialRecord build(final PlaceId placeId, final RecordContext context, final RecordSet recordSet) {
         final var burialDate = ExactDate.on(year, Month.of(month), dayOfMonth);
         return new ChurchBurialRecord(
                 this.recordId(),
+                recordSet.recordSetId(),
                 burialDate,
                 placeId,
                 this.family(burialDate, context));

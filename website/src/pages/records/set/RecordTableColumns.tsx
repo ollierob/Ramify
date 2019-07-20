@@ -10,7 +10,7 @@ import {recordTypeFromValue} from "../../../components/records/RecordType";
 
 export type RecordColumn = ColumnProps<IndividualRecord>;
 
-export function determineColumns(recordSet: RecordSet.AsObject, properties: RecordProperties): RecordColumn[] {
+export function determineColumns(recordSet: RecordSet.AsObject, properties: RecordProperties, showRecordSet?: boolean): RecordColumn[] {
     if (!recordSet) return [];
     const type = recordTypeFromValue(recordSet.type);
     const columns = [...DefaultColumns];
@@ -102,6 +102,12 @@ const BurialDateColumn: RecordColumn = {
     dataIndex: "burial.date",
     render: (t, r) => r.burial && <FormattedDateRange date={r.burial.date} accuracy="day"/>,
     width: 120
+};
+
+const RecordSetColumn: RecordColumn = {
+    key: "recordSet",
+    title: "Record set",
+    dataIndex: "record.title"
 };
 
 const NotesColumn: RecordColumn = {

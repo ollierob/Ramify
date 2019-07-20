@@ -29,7 +29,7 @@ public class XmlBurialRecords extends XmlRecords {
     public Collection<? extends BurialRecord> build(
             final RecordSet recordSet,
             final RecordContext context) {
-        return ListUtils.eagerlyTransform(records, record -> record.build(recordSet.placeId(), context));
+        return ListUtils.eagerlyTransform(records, record -> record.build(recordSet.createdBy(), context, recordSet));
     }
 
 }

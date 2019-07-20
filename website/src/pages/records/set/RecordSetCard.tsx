@@ -39,6 +39,7 @@ export default class RecordSetCard extends React.PureComponent<Props> {
             title={recordSet ? <>Records of <b>{recordSet.longtitle}</b> <span className="unimportant">{recordSet.numrecords} records</span></> : <Loading/>}>
 
             {recordSet && <>
+
                 <PartOf
                     parent={recordSet.parent}/>
 
@@ -47,6 +48,7 @@ export default class RecordSetCard extends React.PureComponent<Props> {
 
                 <Description
                     record={recordSet}/>
+
             </>}
 
             <RecordCards
@@ -63,7 +65,8 @@ export default class RecordSetCard extends React.PureComponent<Props> {
 
             <RecordResults
                 {...this.props}
-                records={this.props.records}/>
+                records={this.props.records}
+                showRecordSet={this.props.recordSetChildren.data && this.props.recordSetChildren.data.length > 0}/>
 
         </Card>;
 

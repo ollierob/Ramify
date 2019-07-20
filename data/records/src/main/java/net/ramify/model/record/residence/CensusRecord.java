@@ -6,6 +6,7 @@ import net.ramify.model.place.HasPlace;
 import net.ramify.model.place.Place;
 import net.ramify.model.record.ExactDateRecord;
 import net.ramify.model.record.RecordId;
+import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.type.LifeEventRecord;
 
 import javax.annotation.Nonnull;
@@ -14,8 +15,12 @@ public abstract class CensusRecord extends ExactDateRecord implements LifeEventR
 
     private final Place place;
 
-    protected CensusRecord(final RecordId id, final ExactDate date, final Place place) {
-        super(id, date);
+    protected CensusRecord(
+            final RecordId id,
+            final RecordSetId recordSetId,
+            final ExactDate date,
+            final Place place) {
+        super(id, recordSetId, date);
         this.place = place;
     }
 

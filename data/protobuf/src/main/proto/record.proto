@@ -15,6 +15,7 @@ message Record {
     DateRange date = 2;
     repeated Family family = 3;
     RecordType type = 4;
+    string recordSetId = 5;
 
 }
 

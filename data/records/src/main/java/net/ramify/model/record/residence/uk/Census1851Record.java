@@ -16,6 +16,7 @@ import net.ramify.model.person.gender.Sex;
 import net.ramify.model.person.name.Name;
 import net.ramify.model.place.Place;
 import net.ramify.model.record.RecordId;
+import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.residence.CensusRecord;
 import net.ramify.model.relationship.Relationship;
 
@@ -35,10 +36,11 @@ public class Census1851Record extends CensusRecord {
 
     public Census1851Record(
             final RecordId id,
+            final RecordSetId recordSetId,
             final Place place,
             final Census1851Head head,
             final List<Census1851Resident> residents) {
-        super(id, CENSUS_DATE, place);
+        super(id, recordSetId, CENSUS_DATE, place);
         this.head = head;
         this.residents = residents;
     }

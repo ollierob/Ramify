@@ -3,6 +3,7 @@ package net.ramify.model.record.xml.record.census.england;
 import com.google.common.base.MoreObjects;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.region.County;
+import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.residence.uk.Census1841Record;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlPersonRecord;
@@ -24,11 +25,11 @@ public class XmlEngland1841CensusRecord extends XmlCensusRecord {
     private List<Individual> individuals;
 
     @Override
-    protected Census1841Record build(final RecordContext context, final Place censusPlace) {
+    protected Census1841Record build(final RecordContext context, final Place censusPlace, final RecordSet recordSet) {
         final var id = this.recordId();
         final var place = this.place(context.places());
         final var entries = this.entries(context, censusPlace);
-        return new Census1841Record(id, place, entries);
+        return new Census1841Record(id, recordSet.recordSetId(), place, entries);
     }
 
     List<Census1841Record.Census1841Entry> entries(final RecordContext context, final Place censusPlace) {

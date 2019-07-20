@@ -12,6 +12,7 @@ type Props = Partial<RecordPaginationHandler> & {
     recordSet: RecordSet.AsObject;
     loading: boolean;
     records: ReadonlyArray<Record.AsObject>
+    showRecordSet?: boolean;
 }
 
 type State = {
@@ -34,7 +35,7 @@ export class RecordTable extends React.PureComponent<Props, State> {
         super(props);
         const properties = {};
         const data = buildIndividualRecords(props.references, properties);
-        const columns = determineColumns(props.recordSet, properties);
+        const columns = determineColumns(props.recordSet, properties, props.showRecordSet);
         this.state = {data, columns};
     }
 
@@ -56,7 +57,7 @@ export class RecordTable extends React.PureComponent<Props, State> {
         if (this.props.records != prevProps.records) {
             const properties = {};
             const data = buildIndividualRecords(this.props.records, properties);
-            const columns = determineColumns(this.props.recordSet, properties);
+            const columns = determineColumns(this.props.recordSet, properties, this.props.showRecordSet);
             this.setState({data, columns});
         }
     }
@@ -86,10 +87,11 @@ function buildIndividualRecords(records: ReadonlyArray<Record.AsObject>, propert
 }
 
 function createRecord(person: Person.AsObject): IndividualRecord {
-    const record: IndividualRecord = {person};
-    record.birth = person.eventsList.find(isBirthEvent);
-    record.residence = person.eventsList.find(isResidenceEvent);
-    record.death = person.eventsList.find(isDeathEvent);
-    record.burial = person.eventsList.find(isBurialEvent);
-    return record;
+    //TODO include record set
+    const out: IndividualRecord = {person};
+    out.birth = person.eventsList.find(isBirthEvent);
+    out.residence = person.eventsList.find(isResidenceEvent);
+    out.death = person.eventsList.find(isDeathEvent);
+    out.burial = person.eventsList.find(isBurialEvent);
+    return out;
 }

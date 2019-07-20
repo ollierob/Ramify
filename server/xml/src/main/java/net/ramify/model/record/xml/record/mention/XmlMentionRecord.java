@@ -10,6 +10,7 @@ import net.ramify.model.family.SinglePersonFamily;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.record.GenericRecordPerson;
+import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.residence.GenericLifeEventRecord;
 import net.ramify.model.record.type.LifeEventRecord;
 import net.ramify.model.record.xml.RecordContext;
@@ -31,12 +32,13 @@ public class XmlMentionRecord extends XmlPersonRecord {
         return Boolean.TRUE.equals(deceased);
     }
 
-    public LifeEventRecord buildRecord(final DateRange parentDate, final RecordContext context) {
+    public LifeEventRecord buildRecord(final DateRange parentDate, final RecordContext context, final RecordSet recordSet) {
         final var recordId = this.recordId();
         final var date = parentDate; //TODO also encode here
         final var family = new SinglePersonFamily(this.person(date, context));
         return new GenericLifeEventRecord(
                 recordId,
+                recordSet.recordSetId(),
                 family,
                 date);
     }

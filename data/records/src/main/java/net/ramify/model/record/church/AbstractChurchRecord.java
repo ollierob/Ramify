@@ -5,6 +5,7 @@ import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.ExactDateRecord;
 import net.ramify.model.record.RecordId;
+import net.ramify.model.record.collection.RecordSetId;
 
 public abstract class AbstractChurchRecord extends ExactDateRecord implements HasPlaceId {
 
@@ -12,9 +13,10 @@ public abstract class AbstractChurchRecord extends ExactDateRecord implements Ha
 
     protected AbstractChurchRecord(
             final RecordId id,
+            final RecordSetId recordSetId,
             final ExactDate date,
             final PlaceId church) {
-        super(id, date);
+        super(id, recordSetId, date);
         this.church = church;
     }
 

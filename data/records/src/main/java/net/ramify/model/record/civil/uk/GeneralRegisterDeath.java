@@ -8,6 +8,7 @@ import net.ramify.model.family.SinglePersonFamily;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.civil.AbstractCivilRecord;
+import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.type.DeathRecord;
 
 import javax.annotation.CheckForNull;
@@ -21,11 +22,12 @@ public class GeneralRegisterDeath extends AbstractCivilRecord implements General
 
     public GeneralRegisterDeath(
             final RecordId id,
+            final RecordSetId recordSetId,
             final PlaceId deathPlace,
             final ExactDate deathDate,
             @Nonnull final GeneralRegisterRecordDeathEntry deceased,
             @CheckForNull final GeneralRegisterRecordDeathInformant informant) {
-        super(id, deathDate);
+        super(id, recordSetId, deathDate);
         this.deathPlace = deathPlace;
         this.deceased = deceased;
         this.informant = informant;

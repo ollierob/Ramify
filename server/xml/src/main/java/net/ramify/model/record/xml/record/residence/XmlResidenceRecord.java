@@ -12,6 +12,7 @@ import net.ramify.model.person.PersonId;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.GenericRecordPerson;
+import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.residence.GenericLifeEventRecord;
 import net.ramify.model.record.type.LifeEventRecord;
 import net.ramify.model.record.xml.RecordContext;
@@ -37,13 +38,13 @@ public class XmlResidenceRecord extends XmlPersonRecord {
     private List<XmlRelationship> relationships;
 
     @Nonnull
-    public LifeEventRecord build(final Place parentPlace, final DateRange date, final RecordContext context) {
+    public LifeEventRecord build(final Place parentPlace, final DateRange date, final RecordContext context, final RecordSet recordSet) {
         final var recordId = this.recordId();
         try {
             final var place = Functions.ifNonNull(placeId, id -> context.places().require(new PlaceId(id)), parentPlace);
             final var person = this.person(place, date, context);
             final var family = this.family(person, date, context);
-            return new GenericLifeEventRecord(recordId, family, date);
+            return new GenericLifeEventRecord(recordId, recordSet.recordSetId(), family, date);
         } catch (final Exception ex) {
             throw new RuntimeException("Error building residence record for " + recordId, ex);
         }

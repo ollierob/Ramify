@@ -18,6 +18,7 @@ import net.ramify.model.person.proto.PersonProto;
 import net.ramify.model.place.HasPlace;
 import net.ramify.model.place.Place;
 import net.ramify.model.record.RecordId;
+import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.residence.CensusRecord;
 import net.ramify.utils.collections.SetUtils;
 
@@ -35,9 +36,10 @@ public class Census1841Record extends CensusRecord implements HasPlace {
 
     public Census1841Record(
             final RecordId id,
+            final RecordSetId recordSetId,
             final Place place,
             final List<Census1841Entry> entries) {
-        super(id, CENSUS_DATE, place);
+        super(id, recordSetId, CENSUS_DATE, place);
         this.entries = entries;
     }
 
