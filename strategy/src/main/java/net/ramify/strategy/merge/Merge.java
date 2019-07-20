@@ -5,7 +5,6 @@ import java.util.Optional;
 
 /**
  * @param <T>
- * @see net.ramify.strategy.join.Join
  */
 public interface Merge<T> {
 

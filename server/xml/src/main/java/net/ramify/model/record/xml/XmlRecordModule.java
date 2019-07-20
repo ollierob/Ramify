@@ -31,6 +31,7 @@ public class XmlRecordModule extends PrivateModule {
         this.expose(RecordSetProvider.class);
         this.bind(DateParser.class).to(XmlDateParser.class);
         this.bind(NameParser.class).to(XmlNameParser.class);
+        this.expose(NameParser.class);
         this.bind(RecordsProvider.class).to(XmlRecordProvider.class);
         this.expose(RecordsProvider.class);
     }

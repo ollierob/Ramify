@@ -1,6 +1,8 @@
 package net.ramify.server.resource.records;
 
 import com.google.common.collect.Iterables;
+import net.ramify.model.person.name.Name;
+import net.ramify.model.person.name.NameParser;
 import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
@@ -9,7 +11,9 @@ import net.ramify.model.record.IndividualRecord;
 import net.ramify.model.record.collection.IndividualRecords;
 import net.ramify.model.record.collection.Records;
 import net.ramify.model.record.proto.RecordProto;
+import net.ramify.strategy.match.name.NameMatch;
 
+import javax.annotation.CheckForNull;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.function.Predicate;
@@ -18,10 +22,14 @@ import java.util.function.Predicate;
 class RecordSearch {
 
     private final PlaceProvider places;
+    private final NameMatch<Name> nameMatch;
+    private final NameParser nameParser;
 
     @Inject
-    RecordSearch(final PlaceProvider places) {
+    RecordSearch(final PlaceProvider places, final NameMatch<Name> nameMatch, final NameParser nameParser) {
         this.places = places;
+        this.nameMatch = nameMatch;
+        this.nameParser = nameParser;
     }
 
     IndividualRecords search(final Records source, final RecordProto.RecordSearch search) {
@@ -29,10 +37,22 @@ class RecordSearch {
     }
 
     private Predicate<IndividualRecord> searchTest(final RecordProto.RecordSearch search) {
-        final var place = search.getPlaceId().isEmpty() ? null : places.require(new PlaceId(search.getPlaceId()));
+        final var place = this.searchPlace(search);
+        final var name = this.searchName(search);
         //TODO also age/DOB search
         return record -> this.testPlace(record, place)
-                && this.testName(record, search.getFirstName(), search.getLastName());
+                && this.testName(record, name);
+    }
+
+    private Name searchName(final RecordProto.RecordSearch search) {
+        final var first = search.getFirstName();
+        final var last = search.getLastName();
+        return first.isBlank() && last.isBlank() ? null : nameParser.parse(first + " " + last);
+    }
+
+    @CheckForNull
+    private Place searchPlace(final RecordProto.RecordSearch search) {
+        return search.getPlaceId().isEmpty() ? null : places.require(new PlaceId(search.getPlaceId()));
     }
 
     private boolean testPlace(final IndividualRecord record, final Place searchPlace) {
@@ -45,11 +65,8 @@ class RecordSearch {
         return Iterables.any(places, searchPlace::isParentOf);
     }
 
-    private boolean testName(final IndividualRecord record, final String firstName, final String lastName) {
-        if (firstName.isBlank() && lastName.isBlank()) return true;
-        final var name = record.person().name();
-        return (firstName.isBlank() || name.contains(firstName))
-                && (lastName.isBlank() || name.contains(lastName));
+    private boolean testName(final IndividualRecord record, final Name searchName) {
+        return searchName == null || nameMatch.match(record.person().name(), searchName);
     }
 
 }

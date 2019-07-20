@@ -29,10 +29,15 @@ public class ForenameSurname implements Name {
     }
 
     @Nonnull
+    public String surname() {
+        return surname;
+    }
+
+    @Nonnull
     @Override
     public String value() {
-        return (forenames.isEmpty() ? "" : JOIN_SPACES.join(forenames) + ' ')
-                + surname;
+        return ((forenames.isEmpty() ? "" : JOIN_SPACES.join(forenames) + ' ')
+                + surname).trim();
     }
 
     @Nonnull
