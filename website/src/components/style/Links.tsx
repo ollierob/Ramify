@@ -7,7 +7,7 @@ export const Links = (props: {links: ReadonlyArray<LinkProto.AsObject>}) => {
     const links = props.links;
     if (!links || !links.length) return null;
     return <div className="links">
-        {links.map(link => <Link link={link}/>)}
+        {links.map(link => <Link link={link} newWindow/>)}
     </div>;
 };
 

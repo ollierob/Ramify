@@ -34,7 +34,7 @@ export class PersonSearch extends React.PureComponent<Props, State> {
 
         return <div className={"search " + (this.props.className || "")} style={this.props.style}>
 
-            Search for a person:
+            Search for a person within these records:
 
             <Form layout="inline" onSubmit={this.doSubmit}>
 
@@ -57,23 +57,11 @@ export class PersonSearch extends React.PureComponent<Props, State> {
                 </Form.Item>
 
                 <Form.Item>
-                    <InputNumber
-                        min={0}
-                        max={125}
-                        maxLength={3}
-                        width={120}
-                        size="large"
-                        placeholder="Age or birth year"
-                        value={this.state.age}
-                        onChange={this.setAge}/>
-                </Form.Item>
-
-                <Form.Item>
                     <Button
                         type="primary"
                         htmlType="submit"
                         size="large"
-                        disabled={this.props.disabled || this.props.searching}>
+                        disabled={this.props.disabled || this.props.searching || this.isEmptySearch()}>
                         {this.props.searching
                             ? <><LoadingIcon/> Searching</>
                             : <><SearchIcon/> Search</>}
@@ -106,6 +94,12 @@ export class PersonSearch extends React.PureComponent<Props, State> {
 
     private clearSearch() {
         this.setState({firstName: null, lastName: null, age: null});
+    }
+
+    private isEmptySearch() {
+        return this.state.firstName == null
+            && this.state.lastName == null
+            && this.state.age == null;
     }
 
 }

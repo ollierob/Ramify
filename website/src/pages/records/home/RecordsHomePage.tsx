@@ -51,7 +51,7 @@ export default class RecordsHomePage extends React.PureComponent<Props, State> {
 
         return <Card
             className="records large"
-            title={<>Records</>}>
+            title={<>Record Sets</>}>
 
             <Form layout="inline" onSubmit={this.doSearch}>
 

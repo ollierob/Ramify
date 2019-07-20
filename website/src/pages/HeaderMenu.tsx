@@ -46,7 +46,7 @@ export default class HeaderMenu extends React.PureComponent<Props> {
                     <a href="/records"><SearchIcon/> Search</a>
                 </Menu.Item>
             </Menu.SubMenu>
-            
+
         </Menu>;
 
     }
