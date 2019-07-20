@@ -57,6 +57,7 @@
 }
 
 .info .defunct {
+    display: inline-block;
     margin-bottom: 12px;
 }
 

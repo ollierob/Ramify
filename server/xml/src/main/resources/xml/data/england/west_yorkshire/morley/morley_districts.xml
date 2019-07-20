@@ -5,7 +5,7 @@
     <county id="west_yorkshire">
 
         <ruralDistrict id="hepton" name="Hepton"/>
-        <urbanDistrict id="hebden" name="Hebden"/>
+        <urbanDistrict id="hebden_royd" name="Hebden Royd"/>
 
         <metropolitanBorough id="calderdale" name="Calderdale">
 
