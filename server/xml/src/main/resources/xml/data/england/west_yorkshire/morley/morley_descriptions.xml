@@ -9,6 +9,7 @@
 
     <placeDescription id="urbandistrict:hebden_royd">
         <laterBecame id="civilparish:hebden_royd"/>
+        <alsoSee id="town:hebden_bridge"/>
         <description>Hebden Royd Urban District ...</description>
     </placeDescription>
 
