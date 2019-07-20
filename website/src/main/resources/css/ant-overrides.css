@@ -14,3 +14,7 @@
 .ant-pagination-item-link .anticon {
     margin-top: 0.75em;
 }
+
+.ant-table-pagination.ant-pagination {
+    margin: 16px !important;
+}
