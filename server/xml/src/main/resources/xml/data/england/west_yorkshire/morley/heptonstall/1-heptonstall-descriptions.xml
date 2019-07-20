@@ -21,6 +21,7 @@
         <alsoSee id="township:langfield"/>
         <alsoSee id="manor:heptonstall"/>
         <alsoSee id="chapelry:heptonstall"/>
+        <alsoSee id="civilparish:heptonstall"/>
         <description>
             Heptonstall township, centered on the village, encompassed part of Hebden Bridge and the lands along Widdop
             road and Edge Lane. Its border with Stansfield township lay along the Colden Water.
@@ -31,6 +32,7 @@
         <alsoSee id="town:hebden_bridge"/>
         <alsoSee id="township:heptonstall"/>
         <alsoSee id="manor:heptonstall"/>
+        <alsoSee id="civilparish:heptonstall"/>
         <wikipediaLink href="https://en.wikipedia.org/wiki/Heptonstall"/>
         <description>
             The village of Heptonstall sits on the hilltop above Hebden Bridge.
@@ -77,6 +79,11 @@
             A grammar school was founded at Heptonstall by the will of the Rev. Charles Greenwood, lord of the manor of
             Heptonstall, in 1642.
         </description>
+    </placeDescription>
+
+    <placeDescription id="civilparish:heptonstall">
+        <alsoSee id="village:heptonstall"/>
+        <description>The civil parish encompassing Heptonstall and its locale.</description>
     </placeDescription>
 
 </placeDescriptions>

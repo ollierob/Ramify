@@ -19,5 +19,10 @@
             Much of the manor was *in waste*, likely as a consequence of William's Harrying of the North.
         </description>
     </placeDescription>
+    
+    <placeDescription id="ruraldistrict:hepton">
+        <alsoSee id="metropolitanborough:calderdale"/>
+        <description>Hepton Rural District existed between 1894 - 1974.</description>
+    </placeDescription>
 
 </placeDescriptions>

@@ -71,11 +71,18 @@ const TypeCard = (props: {type: PlaceType, places: ReadonlyArray<Place.AsObject>
         className="placeCard"
         title={<><Img src={"/images/" + props.type.toLowerCase() + ".svg"}/> {placeTypeName(props.type, true)}</>}>
         <ul>
-            {places.map(place => <li>
-                <a href={placeHref(place)}>{place.name}</a>
-            </li>)}
+            {places.map(place => <li><PlaceLink place={place}/></li>)}
         </ul>
     </Card>;
+};
+
+const PlaceLink = (props: {place: Readonly<Place.AsObject>, showType?: boolean}) => {
+    if (!props.place) return null;
+    const link = <>
+        <a href={placeHref(props.place)}>{props.place.name}</a>
+        {props.showType && <> {placeTypeName(props.place.type)}</>}
+    </>;
+    return props.place.defunct ? <i>{link}</i> : link;
 };
 
 const AlsoSeeCard = (props: {places: ReadonlyArray<Place.AsObject>}) => {
@@ -85,9 +92,7 @@ const AlsoSeeCard = (props: {places: ReadonlyArray<Place.AsObject>}) => {
         className="placeCard"
         title={<>Also see</>}>
         <ul>
-            {places.map(place => <li>
-                <a href={placeHref(place)}>{place.name}</a> {placeTypeName(place.type)}
-            </li>)}
+            {places.map(place => <li><PlaceLink place={place} showType/></li>)}
         </ul>
     </Card>;
 };
