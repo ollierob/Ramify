@@ -11,6 +11,7 @@ type Props = {
     loading: boolean;
     childPlaces: ReadonlyArray<Place.AsObject>
     alsoSeePlaces: ReadonlyArray<Place.AsObject>
+    noPlacesMessage?: React.ReactNode;
 }
 
 type State = {
@@ -23,20 +24,22 @@ export default class ChildPlaceCards extends React.PureComponent<Props, State> {
         super(props);
         this.state = {
             groupedPlaces: {}
-        }
+        };
     }
 
     render() {
 
         if (this.props.loading) return <Loading/>; //TODO
 
+        const keys = Object.keys(this.state.groupedPlaces);
+
         return <div className="childPlaces">
 
-            {Object.keys(this.state.groupedPlaces)
-                .sort(sortByPlaceType)
-                .map(type => <TypeCard type={type as PlaceType} places={this.state.groupedPlaces[type]}/>)}
+            {keys.sort(sortByPlaceType).map(type => <TypeCard type={type as PlaceType} places={this.state.groupedPlaces[type]}/>)}
 
-            {this.props.alsoSeePlaces && <AlsoSeeCard places={this.props.alsoSeePlaces}/>}
+            <AlsoSeeCard places={this.props.alsoSeePlaces}/>
+
+            {!keys.length && !this.props.alsoSeePlaces && <>{this.props.noPlacesMessage}</>}
 
         </div>;
 
@@ -48,13 +51,13 @@ export default class ChildPlaceCards extends React.PureComponent<Props, State> {
 
     componentDidUpdate(prevProps: Readonly<Props>) {
         if (this.props.childPlaces != prevProps.childPlaces)
-            this.group(this.props.childPlaces)
+            this.group(this.props.childPlaces);
     }
 
     private group(places: ReadonlyArray<Place.AsObject>) {
         if (!places) return;
         const grouped = stringMultimap(places, place => placeTypeKey(place.type), sortByPlaceName);
-        this.setState({groupedPlaces: grouped})
+        this.setState({groupedPlaces: grouped});
     }
 
 }
@@ -72,7 +75,7 @@ const TypeCard = (props: {type: PlaceType, places: ReadonlyArray<Place.AsObject>
                 <a href={placeHref(place)}>{place.name}</a>
             </li>)}
         </ul>
-    </Card>
+    </Card>;
 };
 
 const AlsoSeeCard = (props: {places: ReadonlyArray<Place.AsObject>}) => {
@@ -86,5 +89,5 @@ const AlsoSeeCard = (props: {places: ReadonlyArray<Place.AsObject>}) => {
                 <a href={placeHref(place)}>{place.name}</a> {placeTypeName(place.type)}
             </li>)}
         </ul>
-    </Card>
+    </Card>;
 };

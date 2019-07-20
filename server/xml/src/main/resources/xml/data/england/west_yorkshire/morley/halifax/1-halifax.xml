@@ -9,6 +9,8 @@
 
         <church id="halifax-st-johns" name="St John's"/>
 
+        <graveyard id="lister_lane" name="Lister Lane"/>
+
     </town>
 
 </places>

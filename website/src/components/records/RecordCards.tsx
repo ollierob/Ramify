@@ -20,7 +20,7 @@ type Props = HasClass & {
     groupByParent?: boolean
     shortTitle?: boolean
     alsoSee?: ReadonlyArray<Place.AsObject>;
-    noPlacesMessage?: React.ReactNode
+    noRecordsMessage?: React.ReactNode
     fixedWidth?: boolean;
 }
 
@@ -33,7 +33,7 @@ export const RecordCards = (props: Props) => {
         style={props.style}>
         {props.loading && <Loading/>}
         {records.map(record => <RecordCard record={record} shortTitle={props.shortTitle}/>)}
-        {!props.loading && !records.length && props.noPlacesMessage}
+        {!props.loading && !records.length && props.noRecordsMessage}
         {props.alsoSee && <AlsoSeeCard alsoSee={props.alsoSee}/>}
     </div>;
 };

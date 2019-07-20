@@ -39,14 +39,15 @@ export const AreaInfo = (props: Props) => {
             <RecordCards
                 loading={props.records.loading}
                 records={props.records.data}
-                noPlacesMessage={<>No records specific to this place have been registered.</>}/>
+                noRecordsMessage={<>No records specific to this place have been registered.</>}/>
         </Card>
 
         <Card className="places" title="Places" bordered={false}>
             <ChildPlaceCards
                 {...props}
                 alsoSeePlaces={description && description.alsoseeList}
-                loading={props.loadingChildren}/>
+                loading={props.loadingChildren}
+                noPlacesMessage={<>No further places within this area have been registered.</>}/>
         </Card>
 
     </Card>;
