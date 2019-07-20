@@ -39,9 +39,11 @@ export default class HeaderMenu extends React.PureComponent<Props> {
                     {history.map(h => <Menu.Item key={h.id}><PlaceMenuItem place={h}/></Menu.Item>)}
                 </Menu.SubMenu>
             </Menu.SubMenu>
-            <Menu.Item key="records">
-                <a href="/records"><RecordsIcon/> Records</a>
-            </Menu.Item>
+            <Menu.SubMenu title={<><RecordsIcon/> Records</>}>
+                <Menu.Item key="searchRecords">
+                    <a href="/records"><SearchIcon/> Search</a>
+                </Menu.Item>
+            </Menu.SubMenu>
         </Menu>;
 
     }
