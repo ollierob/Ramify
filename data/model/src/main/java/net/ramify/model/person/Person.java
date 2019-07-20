@@ -10,7 +10,13 @@ import net.ramify.model.person.proto.PersonProto;
 
 import javax.annotation.Nonnull;
 
-public interface Person extends HasName, HasGender, HasPersonEvents, BuildsProto<PersonProto.Person> {
+public interface Person extends HasPerson, HasName, HasGender, HasPersonEvents, BuildsProto<PersonProto.Person> {
+
+    @Override
+    @Deprecated
+    default Person person() {
+        return this;
+    }
 
     @Nonnull
     default PersonProto.Person.Builder toProtoBuilder() {

@@ -11,8 +11,14 @@ import net.ramify.model.record.type.RecordHandler;
 import net.ramify.utils.objects.Castable;
 
 import javax.annotation.Nonnull;
+import java.util.stream.Stream;
 
 public interface Record extends HasRecordId, HasRecordSetId, HasDate, HasFamilies, Castable<Record>, BuildsProto<RecordProto.Record> {
+
+    @Nonnull
+    default Stream<? extends IndividualRecord> individualRecords() {
+        return this.people().stream().map(person -> IndividualRecord.of(this, person));
+    }
 
     <R> R handleWith(@Nonnull RecordHandler<R> handler);
 

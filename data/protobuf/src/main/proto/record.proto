@@ -8,6 +8,7 @@ import "family.proto";
 import "link.proto";
 import "event.proto";
 import "archive.proto";
+import "person.proto";
 
 message Record {
 
@@ -22,6 +23,21 @@ message Record {
 message RecordList {
 
     repeated Record record = 1;
+
+}
+
+message IndividualRecord {
+
+    Person person = 1;
+    DateRange date = 2;
+    RecordType type = 3;
+    string recordSetId = 4;
+
+}
+
+message IndividualRecordList {
+
+    repeated IndividualRecord record = 1;
 
 }
 
