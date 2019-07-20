@@ -7,10 +7,4 @@
         <description>Calderdale Metropolitan Borough was formed in 1974 from a number of urban and rural districts.</description>
     </placeDescription>
 
-    <placeDescription id="urbandistrict:hebden_royd">
-        <laterBecame id="civilparish:hebden_royd"/>
-        <alsoSee id="town:hebden_bridge"/>
-        <description>Hebden Royd Urban District ...</description>
-    </placeDescription>
-
 </placeDescriptions>

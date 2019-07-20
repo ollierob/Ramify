@@ -17,4 +17,15 @@
         </description>
     </placeDescription>
 
+    <placeDescription id="urbandistrict:hebden_royd">
+        <laterBecame id="civilparish:hebden_royd"/>
+        <alsoSee id="town:hebden_bridge"/>
+        <description>Hebden Royd Urban District ...</description>
+    </placeDescription>
+
+    <placeDescription id="civilparish:hebden_royd">
+        <alsoSee id="town:hebden_bridge"/>
+        <description>Hebden Royd Civil Parish was formed from Hebden Royd Urban District in 1974.</description>
+    </placeDescription>
+
 </placeDescriptions>
