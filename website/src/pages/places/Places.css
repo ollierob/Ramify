@@ -93,6 +93,8 @@
 }
 
 .info .links {
+    position: absolute;
+    right: 0;
     display: inline-block;
     margin-left: 16px;
 }
