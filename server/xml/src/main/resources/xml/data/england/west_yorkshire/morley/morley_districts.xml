@@ -14,6 +14,7 @@
             <civilParish id="wadsworth" name="Wadsworth"/>
             <civilParish id="erringden" name="Erringden"/>
             <civilParish id="blackshaw" name="Blackshaw"/>
+            <civilParish id="ripponden" name="Ripponden"/>
         </metropolitanBorough>
 
         <metropolitanBorough id="bradford" name="Bradford"/>
