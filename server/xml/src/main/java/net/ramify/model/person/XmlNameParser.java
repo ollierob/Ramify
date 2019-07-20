@@ -22,9 +22,15 @@ public class XmlNameParser implements NameParser {
         if (name.indexOf(',') >= 0) throw new UnsupportedOperationException();
         name = name.trim();
         final var split = SPLIT_SPACE.splitToList(name);
-        if (split.size() == 1) return new ForenameSurname(null, name);
-        if (split.size() >= 2) return new ForenameSurname(null, split.subList(0, split.size() - 1), split.get(split.size() - 1), null);
-        throw new UnsupportedOperationException();
+        switch (split.size()) {
+            case 1:
+                if (name.length() <= 2) return new ForenameSurname(name, null);
+                return new ForenameSurname(null, name);
+            case 2:
+                return new ForenameSurname(split.get(0), split.get(1));
+            default:
+                return new ForenameSurname(null, split.subList(0, split.size() - 1), split.get(split.size() - 1), null);
+        }
     }
 
 }

@@ -27,6 +27,7 @@ public class ForenameSurnameMatcher implements NameMatch<ForenameSurname> {
     private boolean matchSurname(final ForenameSurname n1, final ForenameSurname n2) {
         final var s1 = n1.surname().toLowerCase();
         final var s2 = n2.surname().toLowerCase();
+        if (s1.isBlank() || s2.isBlank()) return true;
         return s1.length() > s2.length() ? s1.contains(s2) : s2.contains(s1);
     }
 

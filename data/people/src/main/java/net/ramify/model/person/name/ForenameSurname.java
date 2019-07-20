@@ -25,13 +25,15 @@ public class ForenameSurname implements Name {
     public ForenameSurname(final String prefix, final List<String> forenames, final String surname, final String suffix) {
         this.prefix = prefix;
         this.forenames = forenames;
-        this.surname = surname;
+        this.surname = MoreObjects.firstNonNull(surname, "");
         this.suffix = suffix;
     }
 
+    @Nonnull
     public List<Character> initials(final boolean includeSurname) {
         final var initials = Lists.<Character>newArrayList();
-        forenames.forEach(f -> initials.add(f.charAt(0)));
+        forenames.forEach(f -> initials.add(Character.toUpperCase(f.charAt(0))));
+        if (includeSurname && !surname.isEmpty()) initials.add(surname.charAt(0));
         return initials;
     }
 
