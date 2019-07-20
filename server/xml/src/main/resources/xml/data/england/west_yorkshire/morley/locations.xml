@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <placePositions
-        xmlns="http://ramify.net/places"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://ramify.net/places ../../../../schema/places.xsd">
+        xmlns="http://ramify.net/places">
 
+    <placePoint id="wapentake:morley" latitude="53.73" longitude="-1.85" zoom="9"/>
     <placePoint id="parish:halifax" latitude="53.73" longitude="-1.85" zoom="10"/>
 
 </placePositions>

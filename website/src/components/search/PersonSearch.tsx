@@ -34,7 +34,7 @@ export class PersonSearch extends React.PureComponent<Props, State> {
 
         return <div className={"search " + (this.props.className || "")} style={this.props.style}>
 
-            Search for a person within these records:
+            Search for people within these records:
 
             <Form layout="inline" onSubmit={this.doSubmit}>
 
@@ -97,9 +97,9 @@ export class PersonSearch extends React.PureComponent<Props, State> {
     }
 
     private isEmptySearch() {
-        return this.state.firstName == null
-            && this.state.lastName == null
-            && this.state.age == null;
+        return !this.state.firstName
+            && !this.state.lastName
+            && !this.state.age;
     }
 
 }
