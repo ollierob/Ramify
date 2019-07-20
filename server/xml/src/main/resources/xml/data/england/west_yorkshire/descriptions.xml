@@ -5,9 +5,15 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://ramify.net/places ../../../schema/places.xsd">
 
+    <placeDescription id="county:west_yorkshire">
+        <wikipediaLink href="https://en.wikipedia.org/wiki/West_Yorkshire"/>
+        <description>West Yorkshire, formerly the West Riding of Yorkshire, ...</description>
+    </placeDescription>
+
     <placeDescription id="manor:wakefield">
         <alsoSee id="manor:pontefract"/>
         <nationalArchivesLink href="https://discovery.nationalarchives.gov.uk/details/c/F244618"/>
+        <wikipediaLink href="https://en.wikipedia.org/wiki/Wakefield"/>
         <description>
             The Manor of Wakefield was first mentioned in Domesday Book in 1086.
             Much of the manor was *in waste*, likely as a consequence of William's Harrying of the North.

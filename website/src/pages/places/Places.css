@@ -97,6 +97,11 @@
     margin-left: 16px;
 }
 
+.info .links .ant-tag {
+    font-size: 14px;
+    padding: 4px;
+}
+
 .info .links img {
     height: 1em;
 }

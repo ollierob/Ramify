@@ -1,13 +1,13 @@
 import * as React from "react";
 import {Link as LinkProto} from "../../protobuf/generated/link_pb";
-import {Icon} from "antd";
+import {Icon, Tag} from "antd";
 import TypeMapValues = LinkProto.Type;
 
-export const Links = (props: {links: ReadonlyArray<LinkProto.AsObject>}) => {
+export const LinkTags = (props: {links: ReadonlyArray<LinkProto.AsObject>}) => {
     const links = props.links;
     if (!links || !links.length) return null;
     return <div className="links">
-        {links.map(link => <Link link={link} newWindow/>)}
+        {links.map(link => <Tag><Link link={link} newWindow>{link.text}</Link></Tag>)}
     </div>;
 };
 
