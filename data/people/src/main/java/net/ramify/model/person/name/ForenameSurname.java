@@ -2,6 +2,7 @@ package net.ramify.model.person.name;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.MoreObjects;
+import com.google.common.collect.Lists;
 import net.ramify.model.person.proto.PersonProto;
 
 import javax.annotation.Nonnull;
@@ -18,7 +19,7 @@ public class ForenameSurname implements Name {
     private final String suffix;
 
     public ForenameSurname(final String forename, final String surname) {
-        this(null, Collections.singletonList(forename), surname, null);
+        this(null, forename == null || forename.isBlank() ? Collections.emptyList() : Collections.singletonList(forename), surname, null);
     }
 
     public ForenameSurname(final String prefix, final List<String> forenames, final String surname, final String suffix) {
@@ -26,6 +27,12 @@ public class ForenameSurname implements Name {
         this.forenames = forenames;
         this.surname = surname;
         this.suffix = suffix;
+    }
+
+    public List<Character> initials(final boolean includeSurname) {
+        final var initials = Lists.<Character>newArrayList();
+        forenames.forEach(f -> initials.add(f.charAt(0)));
+        return initials;
     }
 
     @Nonnull
@@ -48,5 +55,10 @@ public class ForenameSurname implements Name {
                 .addAllForename(forenames)
                 .setSurname(surname)
                 .setSuffix(MoreObjects.firstNonNull(suffix, ""));
+    }
+
+    @Override
+    public String toString() {
+        return this.value();
     }
 }
