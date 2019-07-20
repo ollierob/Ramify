@@ -6,6 +6,7 @@
 
     <recordSet
             id="heptonstall_township"
+            parentId="wry_townships"
             title="Heptonstall Township"
             coversPlaceId="township:heptonstall"
             source="government"

@@ -65,4 +65,14 @@
         <d:inYear year="1379"/>
     </recordSet>
 
+    <recordSet
+            id="wry_townships"
+            title="West Yorkshire Township Records"
+            shortTitle="West Yorkshire"
+            coversPlaceId="county:west_yorkshire"
+            source="government"
+            type="mixed">
+        <d:betweenYears start="1600" end="1850"/>
+        </recordSet>
+
 </recordSets>
