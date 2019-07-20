@@ -2,6 +2,7 @@ package net.ramify.model.place.region;
 
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.proto.PlaceProto;
 
 import javax.annotation.CheckForNull;
@@ -45,6 +46,10 @@ public class Country extends AbstractRegion {
     @Override
     public Optional<String> iso() {
         return Optional.of(iso);
+    }
+
+    public boolean isDefunct(final Class<? extends Place> placeType) {
+        return false;
     }
 
     @Nonnull

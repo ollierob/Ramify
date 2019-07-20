@@ -1,5 +1,7 @@
 package net.ramify.model.place;
 
+import net.ramify.model.place.region.Country;
+
 import javax.annotation.Nonnull;
 import java.util.Objects;
 
@@ -23,6 +25,11 @@ public abstract class AbstractPlace implements Place {
     @Override
     public String name() {
         return name;
+    }
+
+    @Override
+    public boolean isDefunct() {
+        return DefunctPlaces.isDefunct(this, this.find(Country.class).orElse(null));
     }
 
 }

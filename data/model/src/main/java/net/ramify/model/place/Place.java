@@ -57,6 +57,10 @@ public interface Place extends HasPlaceId, Castable<Place>, BuildsProto<PlacePro
         return Collections.emptySet();
     }
 
+    default boolean isDefunct() {
+        return false;
+    }
+
     <R> R handleWith(@Nonnull PlaceHandler<R> handler);
 
     @Nonnull
@@ -67,7 +71,8 @@ public interface Place extends HasPlaceId, Castable<Place>, BuildsProto<PlacePro
         final var builder = PlaceProto.Place.newBuilder()
                 .setId(this.placeId().value())
                 .setName(this.name())
-                .setType(this.protoType());
+                .setType(this.protoType())
+                .setDefunct(this.isDefunct());
         if (includeParent) Consumers.ifNonNull(this.parent(), parent -> builder.setParent(parent.toProto()));
         this.iso().ifPresent(builder::setIso);
         return builder;
