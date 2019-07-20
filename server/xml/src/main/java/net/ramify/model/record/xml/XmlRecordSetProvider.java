@@ -63,17 +63,37 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
     @Nonnull
     @Override
     public Set<RecordSet> matching(final Predicate<? super RecordSet> predicate, final int limit, final boolean onlyParents) {
-        final var matching = this.keys()
-                .stream()
+
+        final var keys = this.keys();
+
+        if (!onlyParents) return keys.stream()
                 .map(this::get)
                 .filter(predicate)
                 .limit(limit)
                 .collect(Collectors.toSet());
-        if (!onlyParents) return matching;
-        final var ids = SetUtils.transform(matching, RecordSet::recordSetId);
-        final var copy = Sets.newHashSet(matching);
-        copy.removeIf(s -> s.parent() != null && ids.contains(s.parent().recordSetId()));
-        return copy;
+
+        final var matching = Maps.<RecordSetId, RecordSet>newHashMap();
+
+        for (final var key : keys) {
+
+            final var record = this.get(key);
+            if (record == null) continue;
+            if (!predicate.test(record)) continue;
+            if (containsAnyParent(matching.keySet(), record)) continue;
+
+            matching.put(record.recordSetId(), record);
+            if (matching.size() >= limit) break;
+
+        }
+
+        return Sets.newHashSet(matching.values());
+
+    }
+
+    private static boolean containsAnyParent(final Set<RecordSetId> ids, final RecordSet recordSet) {
+        if (recordSet == null) return false;
+        if (ids.contains(recordSet.recordSetId())) return true;
+        return containsAnyParent(ids, recordSet.parent());
     }
 
     @Nonnull
@@ -114,7 +134,7 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
             final File root,
             final XmlRecordProvider recordProvider,
             final RecordContext recordContext) throws JAXBException {
-        final var provider = new XmlRecordSetProvider(Maps.newConcurrentMap(), HashMultimap.create());
+        final var provider = new XmlRecordSetProvider(Maps.newLinkedHashMap(), HashMultimap.create());
         final var unmarshaller = jaxbContext.createUnmarshaller();
         FileTraverseUtils.traverseSubdirectories(
                 root,
