@@ -10,3 +10,7 @@
 .ant-table-body table {
     table-layout: fixed;
 }
+
+.ant-pagination-item-link .anticon {
+    margin-top: 0.75em;
+}
