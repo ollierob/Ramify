@@ -8,8 +8,6 @@
 
     <import namespace="http://ramify.net/dates" schemaLocation="dates.xsd"/>
 
-    <element name="alsoSee" type="tns:xmlAlsoSeeId"/>
-
     <element name="archive" type="tns:xmlArchive"/>
 
     <element name="archives" type="tns:archives"/>
@@ -210,19 +208,13 @@
 
     </complexType>
 
-    <complexType name="xmlAlsoSeeId">
-
-        <sequence/>
-
-        <attribute name="id" type="xs:string" use="required"/>
-
-    </complexType>
-
     <complexType name="xmlPlaceDescription">
 
         <sequence>
 
-            <element maxOccurs="unbounded" minOccurs="0" ref="tns:alsoSee"/>
+            <element form="qualified" maxOccurs="unbounded" minOccurs="0" name="laterBecame" type="tns:placeId"/>
+
+            <element form="qualified" maxOccurs="unbounded" minOccurs="0" name="alsoSee" type="tns:placeId"/>
 
             <choice maxOccurs="unbounded" minOccurs="0">
 
@@ -237,6 +229,14 @@
             <element form="qualified" name="description" type="xs:string"/>
 
         </sequence>
+
+        <attribute name="id" type="xs:string" use="required"/>
+
+    </complexType>
+
+    <complexType name="placeId">
+
+        <sequence/>
 
         <attribute name="id" type="xs:string" use="required"/>
 

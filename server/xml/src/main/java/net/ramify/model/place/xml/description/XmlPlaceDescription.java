@@ -24,8 +24,11 @@ class XmlPlaceDescription {
     @XmlAttribute(name = "id", required = true)
     private String id;
 
-    @XmlElementRef
-    private List<XmlAlsoSeeId> alsoSee;
+    @XmlElement(name = "laterBecame", namespace = XmlPlace.NAMESPACE)
+    private List<XmlPlaceId> laterBecame;
+
+    @XmlElement(name = "alsoSee", namespace = XmlPlace.NAMESPACE)
+    private List<XmlPlaceId> alsoSee;
 
     @XmlElementRef
     private List<XmlLink> links;
@@ -39,19 +42,27 @@ class XmlPlaceDescription {
     }
 
     @Nonnull
-    PlaceDescription description(final PlaceProvider placeProvider) {
+    PlaceDescription description(final PlaceProvider places) {
         return new ResolvedPlaceDescription(
                 this.placeId(),
                 description.trim(),
-                this.alsoSee(placeProvider),
+                this.alsoSee(places),
+                this.laterBecame(places),
                 this.links());
     }
 
     @Nonnull
-    private Set<Place> alsoSee(final PlaceProvider placeProvider) {
+    private Set<Place> alsoSee(final PlaceProvider places) {
         return this.alsoSee == null
                 ? Collections.emptySet()
-                : SetUtils.transformIgnoreNull(this.alsoSee, id -> placeProvider.get(id.placeId()));
+                : SetUtils.transformIgnoreNull(this.alsoSee, id -> places.get(id.placeId()));
+    }
+
+    @Nonnull
+    private Set<Place> laterBecame(final PlaceProvider places) {
+        return this.laterBecame == null
+                ? Collections.emptySet()
+                : SetUtils.transformIgnoreNull(this.laterBecame, id -> places.get(id.placeId()));
     }
 
     @Nonnull

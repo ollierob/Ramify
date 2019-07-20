@@ -17,6 +17,9 @@ public interface PlaceDescription extends HasPlaceId, BuildsProto<PlaceProto.Pla
     Set<Place> alsoSee();
 
     @Nonnull
+    Set<Place> laterBecame();
+
+    @Nonnull
     Set<Link> links();
 
     @Nonnull
@@ -25,8 +28,9 @@ public interface PlaceDescription extends HasPlaceId, BuildsProto<PlaceProto.Pla
         return PlaceProto.PlaceDescription.newBuilder()
                 .setDescription(this.description())
                 .addAllAlsoSee(Iterables.transform(this.alsoSee(), p -> p.toProto(false)))
+                .addAllLaterBecame(Iterables.transform(this.laterBecame(), p -> p.toProto(false)))
                 .addAllLink(Iterables.transform(this.links(), Link::toProto))
                 .build();
     }
-
+    
 }

@@ -4,15 +4,15 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.xml.place.XmlPlace;
 
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "alsoSee")
-public class XmlAlsoSeeId {
+@XmlType(namespace = XmlPlace.NAMESPACE, name = "placeId")
+public class XmlPlaceId {
 
     @XmlAttribute(name = "id", required = true)
     private String id;
 
-    PlaceId placeId() {
+    public PlaceId placeId() {
         return new PlaceId(id);
     }
 

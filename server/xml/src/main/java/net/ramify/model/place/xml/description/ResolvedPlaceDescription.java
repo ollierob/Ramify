@@ -15,16 +15,19 @@ class ResolvedPlaceDescription implements PlaceDescription {
     private final PlaceId placeId;
     private final String description;
     private final Set<Place> alsoSee;
+    private final Set<Place> laterBecame;
     private final Set<Link> links;
 
     ResolvedPlaceDescription(
             final PlaceId placeId,
             final String description,
             final Set<Place> alsoSee,
+            final Set<Place> laterBecame,
             final Set<Link> links) {
         this.placeId = placeId;
         this.description = description;
         this.alsoSee = alsoSee;
+        this.laterBecame = laterBecame;
         this.links = links;
     }
 
@@ -48,8 +51,14 @@ class ResolvedPlaceDescription implements PlaceDescription {
 
     @Nonnull
     @Override
+    public Set<Place> laterBecame() {
+        return laterBecame;
+    }
+
+    @Nonnull
+    @Override
     public Set<Link> links() {
         return links;
     }
-    
+
 }

@@ -77,6 +77,7 @@ message PlaceDescription {
     string description = 1;
     repeated Place alsoSee = 2;
     repeated Link link = 3;
+    repeated Place laterBecame = 4;
 
 }
 
