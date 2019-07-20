@@ -36,7 +36,7 @@ export class RecordResults extends React.PureComponent<Props, State> {
 
             <Tabs.TabPane
                 key="records"
-                tab={"Records"}>
+                tab={"Record browser"}>
                 <RecordTable
                     {...this.props}
                     loading={this.props.records.loading}

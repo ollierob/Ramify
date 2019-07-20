@@ -73,6 +73,16 @@
             source="government"
             type="mixed">
         <d:betweenYears start="1600" end="1850"/>
-        </recordSet>
+    </recordSet>
+
+    <recordSet
+            id="wry_land_tax"
+            title="West Yorkshire Land Tax"
+            shortTitle="West Yorkshire"
+            coversPlaceId="county:west_yorkshire"
+            source="government"
+            type="mixed">
+        <d:betweenYears start="1781" end="1832"/>
+    </recordSet>
 
 </recordSets>

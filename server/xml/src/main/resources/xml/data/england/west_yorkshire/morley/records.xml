@@ -58,4 +58,15 @@
             source="government"
             type="residence"/>
 
+    <recordSet
+            id="wry_morley_land_tax"
+            parentId="wry_land_tax"
+            title="Morley Wapentake Land Tax"
+            shortTitle="Morley"
+            coversPlaceId="wapentake:morley"
+            source="government"
+            type="mixed">
+        <d:betweenYears start="1781" end="1832"/>
+    </recordSet>
+
 </recordSets>

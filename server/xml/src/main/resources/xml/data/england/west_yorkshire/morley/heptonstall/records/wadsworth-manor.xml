@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<recordSets
+        xmlns="http://ramify.net/records"
+        xmlns:d="http://ramify.net/dates"
+        xmlns:f="http://ramify.net/families">
+
+    <recordSet
+            id="wadsworth_manor"
+            parentId="wakefield_manor"
+            title="Wadsworth Manor"
+            source="manor"
+            type="mixed">
+
+        <d:betweenYears start="1326" end="1817"/>
+
+    </recordSet>
+
+</recordSets>

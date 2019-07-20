@@ -17,4 +17,9 @@
         </description>
     </placeDescription>
 
+    <placeDescription id="manor:wadsworth">
+        <nationalArchivesLink href="https://discovery.nationalarchives.gov.uk/details/c/F244171"/>
+        <description>Wadsworth manor ...</description>
+    </placeDescription>
+
 </placeDescriptions>
