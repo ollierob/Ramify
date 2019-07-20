@@ -5,6 +5,7 @@ import net.ramify.model.event.AbstractEvent;
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
+import net.ramify.utils.objects.Consumers;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -22,7 +23,8 @@ public class ChurchBurial extends AbstractEvent<ChurchBurial> implements Burial 
     @Nonnull
     @Override
     public EventProto.Event.Builder toProtoBuilder() {
-        return Burial.super.toProtoBuilder()
-                .setGivenAge(age.exact().map(Period::getYears).orElse(0));
+        final var builder = Burial.super.toProtoBuilder();
+        Consumers.ifNonNull(age, a -> builder.setGivenAge(a.exact().map(Period::getYears).orElse(0)));
+        return builder;
     }
 }

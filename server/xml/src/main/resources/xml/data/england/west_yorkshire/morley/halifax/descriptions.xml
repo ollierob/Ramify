@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<placeDescriptions xmlns="http://ramify.net/places">
+
+    <placeDescription id="town:halifax">
+        <wikipediaLink href="https://en.wikipedia.org/wiki/Halifax,_West_Yorkshire"/>
+        <description>Halifax ...</description>
+    </placeDescription>
+
+</placeDescriptions>

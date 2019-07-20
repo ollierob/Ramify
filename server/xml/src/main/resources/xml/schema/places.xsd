@@ -562,6 +562,8 @@
 
                         <element ref="tns:farmstead"/>
 
+                        <element ref="tns:graveyard"/>
+
                     </choice>
 
                 </sequence>

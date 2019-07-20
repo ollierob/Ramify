@@ -21,7 +21,8 @@ public class XmlHamlet extends XmlPlace {
             @XmlElementRef(type = XmlChurch.class),
             @XmlElementRef(type = XmlMill.class),
             @XmlElementRef(type = XmlInn.class),
-            @XmlElementRef(type = XmlFarmstead.class)
+            @XmlElementRef(type = XmlFarmstead.class),
+            @XmlElementRef(type = XmlGraveyard.class)
     })
     private List<XmlPlace> children;
 

@@ -30,6 +30,7 @@
             <farmstead id="popples_side" name="Popples Side"/>
             <farmstead id="black_dyke" name="Black Dyke"/>
             <farmstead id="learings" name="Learings"/>
+            <graveyard id="slack_baptist" name="Slack Baptist"/>
         </hamlet>
 
         <farmstead id="stones_hey_gate" name="Stones Hey Gate"/>
