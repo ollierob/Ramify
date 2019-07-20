@@ -4,9 +4,14 @@
 
     <county id="west_yorkshire">
 
+        <ruralDistrict id="hepton" name="Hepton"/>
+        <urbanDistrict id="hebden" name="Hebden"/>
+
         <metropolitanBorough id="calderdale" name="Calderdale">
 
             <civilParish id="hebden_royd" name="Hebden Royd"/>
+            <civilParish id="heptonstall" name="Heptonstall"/>
+            <civilParish id="todmorden" name="Todmorden"/>
 
         </metropolitanBorough>
 
