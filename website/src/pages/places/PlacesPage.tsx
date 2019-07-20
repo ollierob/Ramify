@@ -5,13 +5,14 @@ import BasePage from "../BasePage";
 import PlacesHomePage from "./home/PlacesHomePage";
 import ChurchPage from "./institution/ChurchPage";
 import PlacesBreadcrumbWrapper from "./PlacesBreadcrumbWrapper";
-import "./Places.css"
+import "./Places.css";
 import {PlaceId, PlaceList} from "../../components/places/Place";
 import {Place, PlaceBundle} from "../../protobuf/generated/place_pb";
 import AreaPage from "./area/AreaPage";
 import SchoolPage from "./institution/SchoolPage";
 import {addPlaceFavourite, getPlaceFavourites, PlaceFavouritesHandler, removePlaceFavourite} from "../../components/places/PlaceFavourites";
 import {addPlaceHistory, getPlaceHistory} from "../../components/places/PlaceHistory";
+import BuildingPage from "./building/BuildingPage";
 
 type State = {
     history: PlaceList;
@@ -41,6 +42,7 @@ class PlacesPage extends BasePage<State> {
             <Switch>
                 <Route path="/church" component={this.breadcrumb(ChurchPage)}/>
                 <Route path="/school" component={this.breadcrumb(SchoolPage)}/>
+                <Route path="/farmstead" component={this.breadcrumb(BuildingPage)}/>
                 <Route exact path="/" component={this.breadcrumb(PlacesHomePage, true)}/>
                 <Route path="*" component={this.breadcrumb(AreaPage)}/>
             </Switch>
@@ -65,7 +67,7 @@ class PlacesPage extends BasePage<State> {
             addPlaceHistory={this.addPlaceHistory}
             placeFavourites={this.state.favourites}
             addPlaceFavourite={this.addPlaceFavourite}
-            removePlaceFavourite={this.removePlaceFavourite}/>
+            removePlaceFavourite={this.removePlaceFavourite}/>;
     }
 
     private addPlaceHistory(place: Place.AsObject) {

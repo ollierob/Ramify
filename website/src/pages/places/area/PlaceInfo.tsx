@@ -13,12 +13,12 @@ import {NoData} from "../../../components/style/NoData";
 type Props = PlaceFavouritesHandler & {
     place: Place.AsObject;
     description: PlaceDescription.AsObject;
-    childPlaces: ReadonlyArray<Place.AsObject>
-    loadingChildren: boolean;
-    records: AsyncData<ReadonlyArray<RecordSet.AsObject>>;
+    childPlaces?: ReadonlyArray<Place.AsObject>
+    loadingChildren?: boolean;
+    records?: AsyncData<ReadonlyArray<RecordSet.AsObject>>;
 }
 
-export const AreaInfo = (props: Props) => {
+export const PlaceInfo = (props: Props) => {
 
     const place = props.place;
     if (!place) return null;
@@ -35,20 +35,21 @@ export const AreaInfo = (props: Props) => {
                 source={description.description}/>
             : <div className="description">No description available.</div>}
 
-        <Card className="records" title="Records" bordered={false}>
+        {props.records && <Card className="records" title="Records" bordered={false}>
             <RecordCards
                 loading={props.records.loading}
                 records={props.records.data}
                 noRecordsMessage={<>No records specific to this place have been registered.</>}/>
-        </Card>
+        </Card>}
 
-        <Card className="places" title="Places" bordered={false}>
+        {props.childPlaces && <Card className="places" title="Places" bordered={false}>
             <ChildPlaceCards
                 {...props}
+                childPlaces={props.childPlaces}
                 alsoSeePlaces={description && description.alsoseeList}
                 loading={props.loadingChildren}
                 noPlacesMessage={<>No further places within this area have been registered.</>}/>
-        </Card>
+        </Card>}
 
     </Card>;
 
