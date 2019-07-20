@@ -2,16 +2,19 @@ package net.ramify.model.person.name;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.MoreObjects;
+import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import net.ramify.model.person.proto.PersonProto;
 
 import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class ForenameSurname implements Name {
 
     private static final Joiner JOIN_SPACES = Joiner.on(' ');
+    private static final Splitter SPLIT_SPACES = Splitter.on(Pattern.compile("\\s+"));
 
     private final String prefix;
     private final List<String> forenames;
@@ -19,7 +22,7 @@ public class ForenameSurname implements Name {
     private final String suffix;
 
     public ForenameSurname(final String forename, final String surname) {
-        this(null, forename == null || forename.isBlank() ? Collections.emptyList() : Collections.singletonList(forename), surname, null);
+        this(null, forename == null || forename.isBlank() ? Collections.emptyList() : SPLIT_SPACES.splitToList(forename), surname, null);
     }
 
     public ForenameSurname(final String prefix, final List<String> forenames, final String surname, final String suffix) {

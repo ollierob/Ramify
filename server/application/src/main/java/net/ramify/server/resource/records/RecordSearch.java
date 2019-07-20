@@ -1,6 +1,7 @@
 package net.ramify.server.resource.records;
 
 import com.google.common.collect.Iterables;
+import net.ramify.model.person.name.ForenameSurname;
 import net.ramify.model.person.name.Name;
 import net.ramify.model.person.name.NameParser;
 import net.ramify.model.place.HasPlaceId;
@@ -47,7 +48,10 @@ class RecordSearch {
     private Name searchName(final RecordProto.RecordSearch search) {
         final var first = search.getFirstName();
         final var last = search.getLastName();
-        return first.isBlank() && last.isBlank() ? null : nameParser.parse(first + " " + last);
+        if (first.isBlank() && last.isBlank()) return null;
+        if (first.isBlank()) return new ForenameSurname(null, last);
+        if (last.isBlank()) return new ForenameSurname(first, null);
+        return nameParser.parse(first + ' ' + last);
     }
 
     @CheckForNull
