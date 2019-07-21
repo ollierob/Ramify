@@ -22,14 +22,17 @@ export default class HeaderMenu extends React.PureComponent<Props> {
         return <Menu mode="horizontal" selectedKeys={[this.props.active]} className="menu">
 
             <Menu.SubMenu title={<><TreeIcon/> People</>}>
-                <Menu.ItemGroup title={<>Trees</>}>
+                <Menu.Item>
+                    <SearchIcon/> Person search
+                </Menu.Item>
+                <Menu.ItemGroup title={<><TreeIcon/> Trees</>}>
                     <Menu.Item disabled>No trees yet.</Menu.Item>
                 </Menu.ItemGroup>
             </Menu.SubMenu>
 
             <Menu.SubMenu title={<><PlacesIcon/> Places</>}>
                 <Menu.Item key="places">
-                    <a href="/places"><SearchIcon/> Directory</a>
+                    <a href="/places"><SearchIcon/> Place search</a>
                 </Menu.Item>
                 <Menu.SubMenu title={<><FavouritesIcon/> Favourites</>}>
                     {!favourites.length && <Menu.Item disabled>No favourite places.</Menu.Item>}
@@ -43,7 +46,7 @@ export default class HeaderMenu extends React.PureComponent<Props> {
 
             <Menu.SubMenu title={<><RecordsIcon/> Records</>}>
                 <Menu.Item key="searchRecords">
-                    <a href="/records"><SearchIcon/> Search</a>
+                    <a href="/records"><SearchIcon/> Record search</a>
                 </Menu.Item>
             </Menu.SubMenu>
 
