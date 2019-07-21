@@ -21,4 +21,9 @@
         <description>Blackshaw civil parish contains Blackshaw Head and the surrounding area.</description>
     </placeDescription>
 
+    <placeDescription id="civilparish:wadsworth">
+        <alsoSee id="township:wadsworth"/>
+        <description>Wadsworth civil parish contains Old Town and the surrounding area.</description>
+    </placeDescription>
+
 </placeDescriptions>

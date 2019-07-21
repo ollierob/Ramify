@@ -65,7 +65,7 @@ const DefunctWarning = (props: {description: PlaceDescription.AsObject}) => {
         type="warning"
         className="defunct"
         showIcon
-        message={<>This place no longer exists.</>}
+        message={<>This place is historic.</>}
         description={laterBecame.length > 0 && <>
             It later became part of {joinComponents(laterBecame.map(p => <PlaceContextMenu place={p} showType/>), ", ")}
         </>}/>;
