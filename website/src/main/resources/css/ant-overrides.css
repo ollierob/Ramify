@@ -18,3 +18,7 @@
 .ant-table-pagination.ant-pagination {
     margin: 16px !important;
 }
+
+.ant-menu-item-group .ant-menu-item-group-title .anticon {
+    margin-right: 10px;
+}
