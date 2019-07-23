@@ -10,3 +10,9 @@ message Relationship {
     bool directed = 3;
 
 }
+
+message RelationshipList {
+
+    repeated Relationship relationship = 1;
+
+}

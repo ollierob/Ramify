@@ -1,5 +1,13 @@
 package net.ramify.server.resource.people;
 
-public interface PeopleResource {
+import net.ramify.server.resource.RootResource;
+
+import javax.ws.rs.Path;
+
+@Path("people")
+public interface PeopleResource extends RootResource {
+
+    @Path("trees")
+    FamilyTreeResource trees();
 
 }
