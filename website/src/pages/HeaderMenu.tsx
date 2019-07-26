@@ -22,8 +22,8 @@ export default class HeaderMenu extends React.PureComponent<Props> {
         return <Menu mode="horizontal" selectedKeys={[this.props.active]} className="menu">
 
             <Menu.SubMenu title={<><TreeIcon/> People</>}>
-                <Menu.Item>
-                    <SearchIcon/> Person search
+                <Menu.Item key="peopleSearch">
+                    <a href="/people#/search"><SearchIcon/> Person search</a>
                 </Menu.Item>
                 <Menu.ItemGroup title={<><TreeIcon/> Trees</>}>
                     <Menu.Item disabled>No trees yet.</Menu.Item>

@@ -1,17 +1,18 @@
-import BasePage from "../BasePage";
 import * as ReactDOM from "react-dom";
 import * as React from "react";
+import {Route, Switch} from "react-router";
+import {HashRouter} from "react-router-dom";
+import PeopleSearchPage from "./search/PeopleSearchPage";
 
-type State = {}
+class PeoplePage extends React.PureComponent {
 
-class PeoplePage extends BasePage<any, State> {
-
-    active() {
-        return "";
-    }
-
-    body() {
-        return undefined;
+    render() {
+        return <HashRouter>
+            <Switch>
+                <Route exact path="/" component={PeopleSearchPage}/>
+                <Route path="/search" component={PeopleSearchPage}/>
+            </Switch>
+        </HashRouter>;
     }
 
 }
