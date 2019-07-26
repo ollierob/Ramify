@@ -26,6 +26,7 @@
 
     <recordSet
             id="census_1841_wry"
+            parentId="england_census_1841"
             title="West Yorkshire 1841 Census"
             shortTitle="West Yorkshire 1841"
             coversPlaceId="county:west_yorkshire"

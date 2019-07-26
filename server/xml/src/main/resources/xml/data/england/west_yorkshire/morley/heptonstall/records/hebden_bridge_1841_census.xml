@@ -8,34 +8,35 @@
     <recordSet
             id="census_1841_hebden_bridge"
             parentId="census_1841_wry_halifax"
-            title="Hebden Bridge District Census (1841)"
+            title="Hebden Bridge District 1841 Census"
             shortTitle="Hebden Bridge District"
             coversPlaceId="chapelry:heptonstall"
             source="government"
             type="census">
 
+        <d:inYear year="1841"/>
+
         <recordSet
                 id="census_1841_hebden_bridge_district_1"
-                title="Hebden Bridge Census (1841, District 1)"
+                title="Hebden Bridge 1841 Census (District 1)"
                 shortTitle="District 1"
                 coversPlaceId="township:wadsworth"
                 source="government"
                 type="census">
 
-            <description>The area around Widdop in Wadsworth.</description>
+            <description>The north western corner of Wadsworth.</description>
 
         </recordSet>
 
         <recordSet
                 id="census_1841_hebden_bridge_district_2"
-                title="Hebden Bridge Census (1841, District 2)"
+                title="Hebden Bridge 1841 Census (District 2)"
                 shortTitle="District 2"
                 coversPlaceId="township:wadsworth"
                 source="government"
                 type="census">
 
             <description>The north eastern corner of Wadsworth.</description>
-
             <d:inYear year="1841"/>
 
             <censusRecords censusPlace="county:west_yorkshire">
@@ -54,7 +55,7 @@
 
         <recordSet
                 id="census_1841_hebden_bridge_district_3"
-                title="Hebden Bridge Census (1841, District 3)"
+                title="Hebden Bridge 1841 Census (District 3)"
                 shortTitle="District 3"
                 coversPlaceId="township:wadsworth"
                 source="government"
@@ -66,7 +67,7 @@
 
         <recordSet
                 id="census_1841_hebden_bridge_district_4"
-                title="Hebden Bridge Census (1841, District 4)"
+                title="Hebden Bridge 1841 Census (District 4)"
                 shortTitle="District 4"
                 coversPlaceId="township:wadsworth"
                 source="government"
@@ -78,7 +79,7 @@
 
         <recordSet
                 id="census_1841_hebden_bridge_district_13"
-                title="Hebden Bridge Census (1841, District 13)"
+                title="Hebden Bridge 1841 Census (District 13)"
                 shortTitle="District 13"
                 coversPlaceId="township:erringden"
                 source="government"
@@ -90,7 +91,7 @@
 
         <recordSet
                 id="census_1841_hebden_bridge_district_18"
-                title="Hebden Bridge Census (1841, District 18)"
+                title="Hebden Bridge 1841 Census (District 18)"
                 shortTitle="District 18"
                 coversPlaceId="town:hebden_bridge"
                 source="government"
@@ -98,13 +99,11 @@
 
             <description>The Hangingroyd area of Hebden Bridge.</description>
 
-            <d:inYear year="1841"/>
-
         </recordSet>
 
         <recordSet
                 id="census_1841_hebden_bridge_district_19"
-                title="Hebden Bridge Census (1841, District 19)"
+                title="Hebden Bridge 1841 Census (District 19)"
                 shortTitle="District 19"
                 coversPlaceId="town:hebden_bridge"
                 source="government"
@@ -112,13 +111,11 @@
 
             <description>The area of Hebden Bridge at the bottom of Heptonstall road.</description>
 
-            <d:inYear year="1841"/>
-
         </recordSet>
 
         <recordSet
                 id="census_1841_hebden_bridge_district_20"
-                title="Hebden Bridge Census (1841, District 20)"
+                title="Hebden Bridge 1841 Census (District 20)"
                 shortTitle="District 20"
                 coversPlaceId="township:heptonstall"
                 source="government"
@@ -126,13 +123,11 @@
 
             <description>The area around Lumb Road and Slack.</description>
 
-            <d:inYear year="1841"/>
-
         </recordSet>
 
         <recordSet
                 id="census_1841_hebden_bridge_district_21"
-                title="Hebden Bridge Census (1841, District 21)"
+                title="Hebden Bridge 1841 Census (District 21)"
                 shortTitle="District 21"
                 coversPlaceId="village:heptonstall"
                 source="government"
@@ -146,7 +141,7 @@
 
         <recordSet
                 id="census_1841_hebden_bridge_district_22"
-                title="Hebden Bridge Census (1841, District 22)"
+                title="Hebden Bridge 1841 Census (District 22)"
                 shortTitle="District 22"
                 coversPlaceId="village:heptonstall"
                 source="government"
@@ -180,7 +175,7 @@
 
         <recordSet
                 id="census_1841_hebden_bridge_district_23"
-                title="Hebden Bridge Census (1841, District 23)"
+                title="Hebden Bridge 1841 Census (District 23)"
                 shortTitle="District 23"
                 coversPlaceId="township:heptonstall"
                 source="government"
@@ -194,7 +189,7 @@
 
         <recordSet
                 id="census_1841_hebden_bridge_district_24"
-                title="Hebden Bridge Census (1841, District 24)"
+                title="Hebden Bridge 1841 Census (District 24)"
                 shortTitle="District 24"
                 coversPlaceId="township:heptonstall"
                 source="government"
@@ -202,21 +197,17 @@
 
             <description>Houses along Smithy Lane, between Slack and Colden.</description>
 
-            <d:inYear year="1841"/>
-
         </recordSet>
 
         <recordSet
                 id="census_1841_hebden_bridge_district_25"
-                title="Hebden Bridge Census (1841, District 25)"
+                title="Hebden Bridge 1841 Census (District 25)"
                 shortTitle="District 25"
                 coversPlaceId="township:heptonstall"
                 source="government"
                 type="census">
 
             <description>Houses along Edge Lane, west of Slack.</description>
-
-            <d:inYear year="1841"/>
 
         </recordSet>
 

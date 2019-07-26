@@ -14,4 +14,13 @@
         <recordSetReference reference="HL/PO/JO/10/1" archiveId="parliament"/>
     </recordSet>
 
+    <recordSet
+            id="england_census_1841"
+            title="England 1841 Census"
+            coversPlaceId="country:england"
+            source="government"
+            type="residence">
+        <d:inYear year="1841"/>
+    </recordSet>
+
 </recordSets>
