@@ -26,7 +26,7 @@ type State = {
     recordName?: string;
 }
 
-export default class RecordsHomePage extends BasePage<Props, State> {
+export default class RecordSearchPage extends BasePage<Props, State> {
 
     private readonly placeLoader = DEFAULT_PLACE_LOADER;
     private readonly recordLoader = DEFAULT_RECORD_LOADER;

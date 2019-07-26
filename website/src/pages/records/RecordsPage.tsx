@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import {HashRouter, Route, Switch} from "react-router-dom";
-import RecordsHomePage from "./home/RecordsHomePage";
+import RecordSearchPage from "./search/RecordSearchPage";
 import RecordSetPage from "./set/RecordSetPage";
 import "./Records.css";
 
@@ -10,8 +10,8 @@ class RecordsPage extends React.PureComponent {
     render() {
         return <HashRouter>
             <Switch>
-                <Route exact path="/" component={RecordsHomePage}/>
-                <Route path="/search" component={RecordsHomePage}/>
+                <Route exact path="/" component={RecordSearchPage}/>
+                <Route path="/search" component={RecordSearchPage}/>
                 <Route path="/set" component={RecordSetPage}/>
             </Switch>
         </HashRouter>;
