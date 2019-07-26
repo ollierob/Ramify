@@ -49,7 +49,7 @@ const ImageColumn: RecordColumn = {
     className: "image",
     dataIndex: "image",
     render: t => <Button disabled={!t} title={t ? "View source image" : "No source image available"}><Icon type="file-search"/></Button>,
-    width: 40,
+    width: 48,
 };
 
 const NameColumn: RecordColumn = {
