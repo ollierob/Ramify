@@ -6,7 +6,7 @@ import {AsyncData, asyncLoadData} from "../../components/fetch/AsyncData";
 import {DEFAULT_PLACE_LOADER} from "../../components/places/PlaceLoader";
 import {PlaceBreadcrumb} from "./PlaceBreadcrumb";
 import {PlacesPageProps} from "./PlacesPage";
-import {addPlaceHistory, PlaceHistoryHandler} from "../../components/places/PlaceHistory";
+import {PlaceHistoryHandler} from "../../components/places/PlaceHistory";
 import {PlaceFavouritesHandler} from "../../components/places/PlaceFavourites";
 
 type Props = RouteComponentProps<any> & PlaceFavouritesHandler & PlaceHistoryHandler & {

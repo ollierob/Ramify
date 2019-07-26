@@ -19,7 +19,7 @@ type State = {
     favourites: PlaceList;
 }
 
-class PlacesPage extends BasePage<State> {
+class PlacesPage extends BasePage<any, State> {
 
     constructor(props) {
         super(props);

@@ -4,7 +4,7 @@ import * as React from "react";
 
 type State = {}
 
-class PeoplePage extends BasePage<State> {
+class PeoplePage extends BasePage<any, State> {
 
     active() {
         return "";

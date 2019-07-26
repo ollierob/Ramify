@@ -11,6 +11,7 @@ import {PlaceId} from "../../../components/places/Place";
 import {PlaceMap} from "../../../components/places/PlaceMap";
 import RecordSetCard from "./RecordSetCard";
 import {PlaceInfo} from "../../../components/places/PlaceInfo";
+import BasePage from "../../BasePage";
 
 type Props = RouteComponentProps<any>
 
@@ -25,7 +26,7 @@ type State = {
     searchResults: AsyncData<ReadonlyArray<IndividualRecord.AsObject>>;
 }
 
-export default class RecordSetPage extends React.PureComponent<Props, State> {
+export default class RecordSetPage extends BasePage<Props, State> {
 
     private readonly recordLoader = DEFAULT_RECORD_LOADER;
     private readonly placeLoader = DEFAULT_PLACE_LOADER;
@@ -44,12 +45,16 @@ export default class RecordSetPage extends React.PureComponent<Props, State> {
         this.search = this.search.bind(this);
     }
 
-    render() {
+    active(): string {
+        return "";
+    }
+
+    body() {
 
         const recordSet = this.state.recordSet.data;
         if (!recordSet && !this.state.recordSet.loading) return <ErrorMessage message="Unknown record set"/>;
 
-        return <div className="recordSet leftRest">
+        return <div className="content recordSet leftRest">
 
             <PlaceMap
                 loading={this.state.recordSetCoversPlace.loading}
