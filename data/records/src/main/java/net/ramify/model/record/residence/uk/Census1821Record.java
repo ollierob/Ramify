@@ -54,15 +54,21 @@ public class Census1821Record extends CensusRecord implements HasPlace {
 
     private void enumerate(final Person head, final FamilyBuilder builder) {
 
-        if (ageCounts.size() == 1) {
-            final var entry = ageCounts.row(head.gender()).entrySet().iterator().next();
-            if (entry.getValue() == 1) {
-                builder.addPerson(this.agedPerson(head, entry.getKey()));
-                return;
+        boolean addedHead = false;
+
+        final var withHeadGender = ageCounts.row(head.gender()).entrySet();
+        if (withHeadGender.size() == 1) {
+
+            final var only = withHeadGender.iterator().next();
+            if (only.getValue() == 1) {
+                builder.addPerson(this.agedPerson(head, only.getKey()));
+                addedHead = true;
+                if (ageCounts.size() == 1) return;
             }
+
         }
 
-        builder.addPerson(head);
+        if (!addedHead) builder.addPerson(head);
 
         //TODO detect single 18+ residence with same gender
         //final var withHeadGender = ageCounts.row(head.gender());
