@@ -18,32 +18,6 @@
         <d:betweenYears start="1651" end="1896"/>
 
         <recordSet
-                id="heptonstall_manor_rentals"
-                title="Heptonstall Manor Rental (1439)"
-                shortTitle="Rentals"
-                source="manor"
-                type="residence">
-
-            <d:inYear year="1439"/>
-
-            <residenceRecords placeId="township:heptonstall">
-                <residence name="Thomas Mitchell" gender="male" placeId="farmstead:high_greenwood" notes="Holds lands at Heghegrenewodde"/>
-                <residence name="John Greenwood" gender="male" placeId="farmstead:greenwood_lee" notes="Holds lands at Grenewodlee, Gloghehous, Gyllotroide, Roberd Shaghe, Heptonstall"/>
-                <residence name="John Mitchell" gender="male" notes="Holds lands at Hevereldshaghe"/>
-                <residence name="Richard Greenwood" gender="male" notes="Holds lands at Coldenynge, Walkerwyfynge"/>
-                <residence name="William Greenwood" gender="male" notes="Holds lands at Leyrynge, Esthap More, waste"/>
-                <residence name="Richard Greenwood" gender="male" notes="Holds lands in Heptonstall"/>
-                <residence name="Henry Sutcliffe" gender="male" notes="Holds lands in Heptonstall"/>
-                <residence name="Robert Sutcliffe" gender="male" notes="Holds lands at Appultreleghe"/>
-                <residence name="John Pickles" gender="male" notes="Holds lands in Heptonstall"/>
-                <residence name="John Ackroyd" gender="male" notes="Holds lands at Baggeroide"/>
-                <residence name="Robert Walker" gender="male" notes="Holds messauge with croft in Heptonstall"/>
-                <residence name="Joan Stansfield" gender="female" notes="Holds lands and tenements in Heptonstall"/>
-            </residenceRecords>
-
-        </recordSet>
-
-        <recordSet
                 id="heptonstall_manor_1651-1769"
                 title="Heptonstall Manor Court Rolls (1651 - 1769)"
                 shortTitle="Court Rolls"

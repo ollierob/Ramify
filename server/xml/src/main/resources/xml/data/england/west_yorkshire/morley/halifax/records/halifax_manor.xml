@@ -12,7 +12,7 @@
             source="manor"
             type="mixed">
 
-        <d:betweenYears start="1429" end="1804"/>
+        <d:betweenYears start="1651" end="1804"/>
 
         <recordSet
                 id="halifax_manor_rolls_1700s"
