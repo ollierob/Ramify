@@ -16,11 +16,22 @@
 
     <recordSet
             id="england_census_1821"
+            nextId="england_census_1831"
             title="England 1821 Census"
             coversPlaceId="country:england"
             source="government"
             type="residence">
         <d:inYear year="1821"/>
+    </recordSet>
+
+    <recordSet
+            id="england_census_1831"
+            nextId="england_census_1841"
+            title="England 1831 Census"
+            coversPlaceId="country:england"
+            source="government"
+            type="residence">
+        <d:inYear year="1831"/>
     </recordSet>
 
     <recordSet
