@@ -33,12 +33,12 @@ class XmlRecordSetRelativesProvider extends AbstractMappedProvider<RecordSetId, 
 
     void add(final DefaultRecordSet recordSet) {
         final var lazy = workingSet.computeIfAbsent(recordSet.recordSetId(), LazyRelationships::new);
-        //Add parent
-        Consumers.ifNonNull(recordSet.parentId(), lazy::setParent);
-        Consumers.ifNonNull(recordSet.nextId(), lazy::setNext);
-        Consumers.ifNonNull(recordSet.previousId(), lazy::setPrevious);
-        //Add as child
+        Consumers.ifNonNull(recordSet.nextId(), nextId -> {
+            lazy.setNext(nextId);
+            workingSet.computeIfAbsent(nextId, LazyRelationships::new).setPrevious(recordSet.recordSetId());
+        });
         Consumers.ifNonNull(recordSet.parentId(), parentId -> {
+            lazy.setParent(parentId);
             final var parentLazy = workingSet.computeIfAbsent(parentId, LazyRelationships::new);
             parentLazy.addChild(recordSet.recordSetId());
         });

@@ -42,6 +42,9 @@ class XmlRecordSet implements HasRecordSetId {
     @XmlAttribute(name = "parentId", required = false)
     private String parentId;
 
+    @XmlAttribute(name = "nextId", required = false)
+    private String nextId;
+
     @XmlAttribute(name = "title", required = true)
     private String title;
 
@@ -87,7 +90,7 @@ class XmlRecordSet implements HasRecordSetId {
         }
     }
 
-    Collection<DefaultRecordSet> build(final RecordSet parent, final RecordContext context) {
+    private Collection<DefaultRecordSet> build(final RecordSet parent, final RecordContext context) {
         final var self = this.buildSelf(parent, context);
         if (children == null) return Collections.singletonList(self);
         final var recordSets = Lists.<DefaultRecordSet>newArrayListWithExpectedSize(1 + 2 * children.size());
@@ -110,8 +113,7 @@ class XmlRecordSet implements HasRecordSetId {
                 this.size(),
                 this.buildReferences(context),
                 Functions.ifNonNull(parent, HasRecordSetId::recordSetId),
-                null,
-                null);
+                Functions.ifNonNull(nextId, RecordSetId::new));
     }
 
     DateRange date(final RecordSet parent, final DateParser dateParser) {

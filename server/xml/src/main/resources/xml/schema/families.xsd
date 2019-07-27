@@ -1,56 +1,56 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema"
+<xs:schema xmlns="http://www.w3.org/2001/XMLSchema"
         xmlns:tns="http://ramify.net/families"
         xmlns:xs="http://www.w3.org/2001/XMLSchema"
         targetNamespace="http://ramify.net/families"
         version="1.0">
 
-    <element name="father" type="tns:xmlFather"/>
+    <xs:element name="father" type="tns:xmlFather"/>
 
-    <element name="mother" type="tns:xmlMother"/>
+    <xs:element name="mother" type="tns:xmlMother"/>
 
-    <complexType name="xmlFamily">
+    <xs:complexType name="xmlFamily">
 
-        <sequence/>
+        <xs:sequence/>
 
-    </complexType>
+    </xs:complexType>
 
-    <complexType name="xmlFather">
+    <xs:complexType name="xmlFather">
 
-        <complexContent>
+        <xs:complexContent>
 
-            <extension base="tns:xmlRelationship">
+            <xs:extension base="tns:xmlRelationship">
 
-                <sequence/>
+                <xs:sequence/>
 
-            </extension>
+            </xs:extension>
 
-        </complexContent>
+        </xs:complexContent>
 
-    </complexType>
+    </xs:complexType>
 
-    <complexType abstract="true" name="xmlRelationship">
+    <xs:complexType abstract="true" name="xmlRelationship">
 
-        <sequence/>
+        <xs:sequence/>
 
-        <attribute name="name" type="xs:string"/>
+        <xs:attribute name="name" type="xs:string"/>
 
-        <attribute name="deceased" type="xs:boolean"/>
+        <xs:attribute name="deceased" type="xs:boolean"/>
 
-    </complexType>
+    </xs:complexType>
 
-    <complexType name="xmlMother">
+    <xs:complexType name="xmlMother">
 
-        <complexContent>
+        <xs:complexContent>
 
-            <extension base="tns:xmlRelationship">
+            <xs:extension base="tns:xmlRelationship">
 
-                <sequence/>
+                <xs:sequence/>
 
-            </extension>
+            </xs:extension>
 
-        </complexContent>
+        </xs:complexContent>
 
-    </complexType>
+    </xs:complexType>
 
-</schema>
+</xs:schema>

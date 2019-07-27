@@ -20,7 +20,6 @@
     <properties>
         <maven.compiler.source>12</maven.compiler.source>
         <maven.compiler.target>12</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <guice.version>4.2.2</guice.version>
         <slf4j.version>1.7.25</slf4j.version>
     </properties>

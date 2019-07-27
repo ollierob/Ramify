@@ -1,82 +1,82 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema"
+<xs:schema xmlns="http://www.w3.org/2001/XMLSchema"
         xmlns:tns="http://ramify.net/people"
         xmlns:xs="http://www.w3.org/2001/XMLSchema"
         targetNamespace="http://ramify.net/people"
         version="1.0">
 
-    <element name="exactAge" type="tns:xmlExactAge"/>
+    <xs:element name="exactAge" type="tns:xmlExactAge"/>
 
-    <element name="nameTranscription" type="tns:xmlNameTranscription"/>
+    <xs:element name="nameTranscription" type="tns:xmlNameTranscription"/>
 
-    <complexType abstract="true" name="xmlAge">
+    <xs:complexType abstract="true" name="xmlAge">
 
-        <sequence/>
+        <xs:sequence/>
 
-    </complexType>
+    </xs:complexType>
 
-    <complexType name="xmlExactAge">
+    <xs:complexType name="xmlExactAge">
 
-        <complexContent>
+        <xs:complexContent>
 
-            <extension base="tns:xmlAge">
+            <xs:extension base="tns:xmlAge">
 
-                <sequence/>
+                <xs:sequence/>
 
-                <attribute name="years" type="xs:int" use="required"/>
+                <xs:attribute name="years" type="xs:int" use="required"/>
 
-                <attribute name="months" type="xs:int" use="required"/>
+                <xs:attribute name="months" type="xs:int" use="required"/>
 
-                <attribute name="days" type="xs:int" use="required"/>
+                <xs:attribute name="days" type="xs:int" use="required"/>
 
-            </extension>
+            </xs:extension>
 
-        </complexContent>
+        </xs:complexContent>
 
-    </complexType>
+    </xs:complexType>
 
-    <complexType abstract="true" name="xmlName">
+    <xs:complexType abstract="true" name="xmlName">
 
-        <sequence/>
+        <xs:sequence/>
 
-    </complexType>
+    </xs:complexType>
 
-    <complexType name="xmlNameTranscription">
+    <xs:complexType name="xmlNameTranscription">
 
-        <complexContent>
+        <xs:complexContent>
 
-            <extension base="tns:xmlName">
+            <xs:extension base="tns:xmlName">
 
-                <sequence/>
+                <xs:sequence/>
 
-                <attribute name="original" type="xs:string" use="required"/>
+                <xs:attribute name="original" type="xs:string" use="required"/>
 
-                <attribute name="assumed" type="xs:string" use="required"/>
+                <xs:attribute name="assumed" type="xs:string" use="required"/>
 
-            </extension>
+            </xs:extension>
 
-        </complexContent>
+        </xs:complexContent>
 
-    </complexType>
+    </xs:complexType>
 
-    <complexType name="xmlPerson">
+    <xs:complexType name="xmlPerson">
 
-        <sequence/>
+        <xs:sequence/>
 
-    </complexType>
+    </xs:complexType>
 
-    <simpleType name="xmimportlGender">
+    <xs:simpleType name="xmlGender">
 
-        <restriction base="xs:string">
+        <xs:restriction base="xs:string">
 
-            <enumeration value="unknown"/>
+            <xs:enumeration value="female"/>
 
-            <enumeration value="female"/>
+            <xs:enumeration value="unknown"/>
 
-            <enumeration value="male"/>
+            <xs:enumeration value="male"/>
 
-        </restriction>
+        </xs:restriction>
 
-    </simpleType>
+    </xs:simpleType>
 
-</schema>
+</xs:schema>

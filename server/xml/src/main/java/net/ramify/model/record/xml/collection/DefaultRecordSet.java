@@ -28,7 +28,7 @@ public class DefaultRecordSet implements RecordSet {
     private final String description;
     private final int size;
     private final Set<RecordSetReference> references;
-    private final RecordSetId parent, previous, next;
+    private final RecordSetId parent, next;
 
     DefaultRecordSet(
             final RecordSetId id,
@@ -43,7 +43,6 @@ public class DefaultRecordSet implements RecordSet {
             final int size,
             final Set<RecordSetReference> references,
             final RecordSetId parent,
-            final RecordSetId previous,
             final RecordSetId next) {
         this.id = id;
         this.source = source;
@@ -57,7 +56,6 @@ public class DefaultRecordSet implements RecordSet {
         this.size = size;
         this.references = references;
         this.parent = parent;
-        this.previous = previous;
         this.next = next;
     }
 
@@ -108,14 +106,12 @@ public class DefaultRecordSet implements RecordSet {
         return references;
     }
 
+    @CheckForNull
     public RecordSetId parentId() {
         return parent;
     }
 
-    public RecordSetId previousId() {
-        return previous;
-    }
-
+    @CheckForNull
     public RecordSetId nextId() {
         return next;
     }
