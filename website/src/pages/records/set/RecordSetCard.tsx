@@ -1,6 +1,6 @@
 import * as React from "react";
 import {CSSProperties} from "react";
-import {ExternalRecordReference, IndividualRecord, Record, RecordSet} from "../../../protobuf/generated/record_pb";
+import {ExternalRecordReference, IndividualRecord, Record, RecordSet, RecordSetRelatives} from "../../../protobuf/generated/record_pb";
 import {Card, Icon} from "antd";
 import {recordSetHref} from "../RecordLinks";
 import {RecordCards} from "../../../components/records/RecordCards";
@@ -18,7 +18,7 @@ import {joinComponents} from "../../../components/Components";
 type Props = RecordPaginationHandler & RecordSearchHandler & RouteComponentProps<any> & {
     loading: boolean;
     recordSet: Readonly<RecordSet.AsObject>
-    recordSetChildren: AsyncData<ReadonlyArray<RecordSet.AsObject>>;
+    recordSetRelatives: AsyncData<RecordSetRelatives.AsObject>;
     records: AsyncData<ReadonlyArray<IndividualRecord.AsObject>>
     searchResults: AsyncData<ReadonlyArray<IndividualRecord.AsObject>>;
 }
@@ -33,6 +33,7 @@ export default class RecordSetCard extends React.PureComponent<Props> {
     render() {
 
         const recordSet = this.props.recordSet;
+        const relatives: RecordSetRelatives.AsObject = this.props.recordSetRelatives.data || {childList: []};
 
         return <Card
             className="info"
@@ -41,10 +42,10 @@ export default class RecordSetCard extends React.PureComponent<Props> {
             {recordSet && <>
 
                 <PartOf
-                    parent={recordSet.parent}/>
+                    parent={relatives.parent}/>
 
                 <References
-                    references={recordSet.externalreferenceList.length ? recordSet.externalreferenceList : recordSet.parent && recordSet.parent.externalreferenceList}/>
+                    references={recordSet.externalreferenceList.length ? recordSet.externalreferenceList : relatives.parent && relatives.parent.externalreferenceList}/>
 
                 <Description
                     record={recordSet}/>
@@ -55,7 +56,7 @@ export default class RecordSetCard extends React.PureComponent<Props> {
                 {...this.props}
                 fixedWidth={this.useFixedWidthCards()}
                 shortTitle
-                records={this.props.recordSetChildren.data}
+                records={relatives.childList}
                 style={MarginBottom}/>
 
             <PersonSearch
@@ -65,16 +66,16 @@ export default class RecordSetCard extends React.PureComponent<Props> {
             <RecordResults
                 {...this.props}
                 records={this.props.records}
-                showRecordSet={this.props.recordSetChildren.data && this.props.recordSetChildren.data.length > 0}/>
+                showRecordSet={relatives.childList.length > 0}/>
 
         </Card>;
 
     }
 
     private useFixedWidthCards(): boolean {
-        const children = this.props.recordSetChildren.data;
-        if (!children || !children.length) return false;
-        return children.every(c => (c.shorttitle || c.longtitle).length < 32);
+        const relatives = this.props.recordSetRelatives.data;
+        if (!relatives || !relatives.childList.length) return false;
+        return relatives.childList.every(c => (c.shorttitle || c.longtitle).length < 32);
     }
 
 }

@@ -5,8 +5,10 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
+import net.ramify.model.record.collection.RecordSetRelatives;
 import net.ramify.model.record.collection.RecordSets;
 import net.ramify.model.record.provider.RecordSetProvider;
+import net.ramify.model.record.provider.RecordSetRelativesProvider;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -18,11 +20,13 @@ import java.util.function.Predicate;
 public class DefaultRecordSetResource implements RecordSetResource {
 
     private final RecordSetProvider recordSets;
+    private final RecordSetRelativesProvider relatives;
     private final PlaceProvider places;
 
     @Inject
-    DefaultRecordSetResource(final RecordSetProvider recordSets, final PlaceProvider places) {
+    DefaultRecordSetResource(final RecordSetProvider recordSets, final RecordSetRelativesProvider relatives, final PlaceProvider places) {
         this.recordSets = recordSets;
+        this.relatives = relatives;
         this.places = places;
     }
 
@@ -56,8 +60,8 @@ public class DefaultRecordSetResource implements RecordSetResource {
     }
 
     @Override
-    public RecordSets children(final RecordSetId parentId) {
-        return RecordSets.of(recordSets.children(parentId));
+    public RecordSetRelatives relatives(final RecordSetId parentId) {
+        return relatives.maybeGet(parentId).orElse(RecordSetRelatives.NONE);
     }
 
 }

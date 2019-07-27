@@ -1,9 +1,8 @@
 import * as React from "react";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
-import {IndividualRecord, Record, RecordSearch, RecordSet} from "../../../protobuf/generated/record_pb";
+import {IndividualRecord, RecordSearch, RecordSet, RecordSetRelatives} from "../../../protobuf/generated/record_pb";
 import {RouteComponentProps} from "react-router";
 import {DEFAULT_RECORD_LOADER} from "../../../components/records/RecordLoader";
-import {Loading} from "../../../components/style/Loading";
 import {DEFAULT_PLACE_LOADER} from "../../../components/places/PlaceLoader";
 import {PlaceBundle} from "../../../protobuf/generated/place_pb";
 import {ErrorMessage} from "../../../components/style/Error";
@@ -21,7 +20,7 @@ type State = {
     recordSet: AsyncData<RecordSet.AsObject>;
     recordSetCoversPlace: AsyncData<PlaceBundle.AsObject>
     recordSetSource: AsyncData<PlaceBundle.AsObject>
-    recordSetChildren: AsyncData<ReadonlyArray<RecordSet.AsObject>>
+    recordSetRelatives: AsyncData<RecordSetRelatives.AsObject>
     search: RecordSearch;
     searchResults: AsyncData<ReadonlyArray<IndividualRecord.AsObject>>;
 }
@@ -39,7 +38,7 @@ export default class RecordSetPage extends BasePage<Props, State> {
             recordSet: {},
             recordSetCoversPlace: {loading: true},
             recordSetSource: {loading: true},
-            recordSetChildren: {},
+            recordSetRelatives: {},
             searchResults: {}
         };
         this.search = this.search.bind(this);
@@ -71,7 +70,7 @@ export default class RecordSetPage extends BasePage<Props, State> {
                 {...this.props}
                 loading={this.state.recordSet.loading}
                 recordSet={recordSet}
-                recordSetChildren={this.state.recordSetChildren}
+                recordSetRelatives={this.state.recordSetRelatives}
                 records={this.state.records}
                 paginate={null}
                 search={this.state.search}
@@ -106,7 +105,7 @@ export default class RecordSetPage extends BasePage<Props, State> {
     private loadRecordSet(id: string) {
         if (!id) return;
         asyncLoadData(id, this.recordLoader.loadRecordSet, recordSet => this.setState({recordSet}));
-        asyncLoadData(id, this.recordLoader.loadChildRecordSets, children => this.setState({recordSetChildren: children}));
+        asyncLoadData(id, this.recordLoader.loadRecordSetRelatives, recordSetRelatives => this.setState({recordSetRelatives}));
         asyncLoadData(id, id => this.recordLoader.loadRecords(id, {children: true, limit: 100}), records => this.setState({records}));
     }
 

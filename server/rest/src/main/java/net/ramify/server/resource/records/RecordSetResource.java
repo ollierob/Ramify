@@ -4,6 +4,7 @@ import net.ramify.model.date.DateRange;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
+import net.ramify.model.record.collection.RecordSetRelatives;
 import net.ramify.model.record.collection.RecordSets;
 import net.ramify.server.resource.Resource;
 
@@ -36,8 +37,9 @@ public interface RecordSetResource extends Resource {
     @Path("{id}")
     RecordSet recordSet(@PathParam("id") RecordSetId id);
 
+    @Nonnull
     @GET
-    @Path("children/{id}")
-    RecordSets children(@PathParam("id") RecordSetId parentId);
+    @Path("relatives/{id}")
+    RecordSetRelatives relatives(@PathParam("id") RecordSetId parentId);
 
 }

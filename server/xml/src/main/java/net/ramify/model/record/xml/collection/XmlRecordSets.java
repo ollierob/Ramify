@@ -2,7 +2,6 @@ package net.ramify.model.record.xml.collection;
 
 import com.google.common.collect.Sets;
 import net.ramify.model.record.Record;
-import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.provider.RecordSetProvider;
 import net.ramify.model.record.xml.RecordContext;
@@ -27,9 +26,9 @@ public class XmlRecordSets {
     private List<XmlRecordSet> recordSets;
 
     @Nonnull
-    public Set<RecordSet> recordSets(final RecordSetProvider recordSets, final RecordContext context) {
+    public Set<DefaultRecordSet> recordSets(final RecordSetProvider recordSets, final RecordContext context) {
         if (this.recordSets == null) return Collections.emptySet();
-        final var sets = Sets.<RecordSet>newLinkedHashSet();
+        final var sets = Sets.<DefaultRecordSet>newLinkedHashSet();
         this.recordSets.forEach(rs -> sets.addAll(rs.build(recordSets, context)));
         return sets;
     }

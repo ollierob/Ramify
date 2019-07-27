@@ -12,7 +12,6 @@ import net.ramify.model.record.collection.HasRecordSetId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.RecordSetReference;
-import net.ramify.model.record.collection.RecordSetRelatives;
 import net.ramify.model.record.provider.RecordSetProvider;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlRecord;
@@ -79,7 +78,7 @@ class XmlRecordSet implements HasRecordSetId {
     @XmlElementRef
     private List<XmlRecords> records;
 
-    Collection<RecordSet> build(final RecordSetProvider recordSets, final RecordContext context) {
+    Collection<DefaultRecordSet> build(final RecordSetProvider recordSets, final RecordContext context) {
         try {
             final var parent = Functions.ifNonNull(this.parentRecordSetId(), recordSets::require);
             return this.build(parent, context);
@@ -88,16 +87,16 @@ class XmlRecordSet implements HasRecordSetId {
         }
     }
 
-    Collection<RecordSet> build(final RecordSet parent, final RecordContext context) {
+    Collection<DefaultRecordSet> build(final RecordSet parent, final RecordContext context) {
         final var self = this.buildSelf(parent, context);
         if (children == null) return Collections.singletonList(self);
-        final var recordSets = Lists.<RecordSet>newArrayListWithExpectedSize(1 + 2 * children.size());
+        final var recordSets = Lists.<DefaultRecordSet>newArrayListWithExpectedSize(1 + 2 * children.size());
         recordSets.add(self);
         children.forEach(child -> recordSets.addAll(child.build(self, context)));
         return recordSets;
     }
 
-    private RecordSet buildSelf(@CheckForNull final RecordSet parent, final RecordContext context) {
+    private DefaultRecordSet buildSelf(@CheckForNull final RecordSet parent, final RecordContext context) {
         return new DefaultRecordSet(
                 this.recordSetId(),
                 source.source(),
@@ -110,7 +109,9 @@ class XmlRecordSet implements HasRecordSetId {
                 Functions.ifNonNull(description, String::trim),
                 this.size(),
                 this.buildReferences(context),
-                this.relatives(parent));
+                Functions.ifNonNull(parent, HasRecordSetId::recordSetId),
+                null,
+                null);
     }
 
     DateRange date(final RecordSet parent, final DateParser dateParser) {
@@ -138,13 +139,6 @@ class XmlRecordSet implements HasRecordSetId {
     private int size() {
         if (records == null) return 0;
         return records.stream().mapToInt(XmlRecords::size).sum();
-    }
-
-    private RecordSetRelatives relatives(final RecordSet parent) {
-        return new DefaultRecordSetRelatives(
-                Functions.ifNonNull(parent, HasRecordSetId::recordSetId),
-                null,
-                null);
     }
 
     @Nonnull

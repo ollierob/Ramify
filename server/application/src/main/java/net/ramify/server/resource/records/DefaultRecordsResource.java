@@ -49,7 +49,7 @@ public class DefaultRecordsResource implements RecordsResource {
 
     private Records parentAndChildRecords(final RecordSetId id) {
         final var parent = this.records.require(id);
-        final var children = this.recordSets().children(id).recordSetIds().map(this.records::require).collect(Collectors.toList());
+        final var children = this.recordSets().relatives(id).childIds().map(records::require).collect(Collectors.toList());
         return new AggregateRecords(ListUtils.prefix(parent, children));
     }
 

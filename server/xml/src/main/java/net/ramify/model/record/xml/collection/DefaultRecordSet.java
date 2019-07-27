@@ -7,7 +7,6 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.RecordSetReference;
-import net.ramify.model.record.collection.RecordSetRelatives;
 import net.ramify.model.record.proto.RecordProto;
 
 import javax.annotation.CheckForNull;
@@ -29,9 +28,9 @@ public class DefaultRecordSet implements RecordSet {
     private final String description;
     private final int size;
     private final Set<RecordSetReference> references;
-    private final RecordSetRelatives relatives;
+    private final RecordSetId parent, previous, next;
 
-    public DefaultRecordSet(
+    DefaultRecordSet(
             final RecordSetId id,
             final RecordProto.SourceType source,
             final EventProto.RecordType type,
@@ -42,7 +41,10 @@ public class DefaultRecordSet implements RecordSet {
             final String shortTitle,
             final String description,
             final int size,
-            final Set<RecordSetReference> references, RecordSetRelatives relatives) {
+            final Set<RecordSetReference> references,
+            final RecordSetId parent,
+            final RecordSetId previous,
+            final RecordSetId next) {
         this.id = id;
         this.source = source;
         this.type = type;
@@ -54,7 +56,9 @@ public class DefaultRecordSet implements RecordSet {
         this.description = description;
         this.size = size;
         this.references = references;
-        this.relatives = relatives;
+        this.parent = parent;
+        this.previous = previous;
+        this.next = next;
     }
 
     @Nonnull
@@ -104,10 +108,16 @@ public class DefaultRecordSet implements RecordSet {
         return references;
     }
 
-    @CheckForNull
-    @Override
-    public RecordSetRelatives relatives() {
-        return relatives;
+    public RecordSetId parentId() {
+        return parent;
+    }
+
+    public RecordSetId previousId() {
+        return previous;
+    }
+
+    public RecordSetId nextId() {
+        return next;
     }
 
     @Nonnull

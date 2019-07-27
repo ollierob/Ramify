@@ -37,9 +37,6 @@ public interface RecordSet extends HasTitleDescription, HasRecordSetId, HasDate,
     int size();
 
     @Nonnull
-    RecordSetRelatives relatives();
-
-    @Nonnull
     default RecordProto.RecordSet.Builder toProtoBuilder() {
         final var builder = RecordProto.RecordSet.newBuilder()
                 .setId(this.recordSetId().value())

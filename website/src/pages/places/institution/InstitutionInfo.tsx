@@ -40,7 +40,7 @@ export const InstitutionInfo = (props: Props) => {
         {props.children}
 
         {institution && <RecordCards
-            groupByParent
+            //groupByParent
             records={institution.recordsetList}
             alsoSee={description && description.alsoseeList}/>}
 

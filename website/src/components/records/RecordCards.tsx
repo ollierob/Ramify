@@ -2,11 +2,10 @@ import * as React from "react";
 import {Place} from "../../protobuf/generated/place_pb";
 import {Card} from "antd";
 import {placeTypeName} from "../places/PlaceType";
-import {ExternalRecordReference, RecordSet} from "../../protobuf/generated/record_pb";
+import {ExternalRecordReference, RecordSet, RecordSetRelatives} from "../../protobuf/generated/record_pb";
 import {FormattedYearRange} from "../date/FormattedDateRange";
 import {placeHref} from "../../pages/places/PlaceLinks";
 import {recordSetHref} from "../../pages/records/RecordLinks";
-import {stringMultimap} from "../Maps";
 import "./RecordCards.css";
 import {RecordsIcon} from "../images/Icons";
 import {RecordType, recordTypeFromValue} from "./RecordType";
@@ -17,7 +16,8 @@ import {Loading} from "../style/Loading";
 type Props = HasClass & {
     loading?: boolean
     records: ReadonlyArray<RecordSet.AsObject>
-    groupByParent?: boolean
+    //relatives?: ReadonlyArray<RecordSetRelatives.AsObject>
+    //groupByParent?: boolean
     shortTitle?: boolean
     alsoSee?: ReadonlyArray<Place.AsObject>;
     noRecordsMessage?: React.ReactNode
@@ -25,8 +25,9 @@ type Props = HasClass & {
 }
 
 export const RecordCards = (props: Props) => {
+
     const records = props.records || [];
-    if (props.groupByParent && records.some(r => r.parent)) return <GroupedRecordCards {...props}/>;
+    //if (props.groupByParent && props.relatives && props.relatives.length) return <GroupedRecordCards {...props}/>;
 
     return <div
         className={"recordCards" + (props.fixedWidth ? " fixedWidth" : "")}
@@ -36,19 +37,22 @@ export const RecordCards = (props: Props) => {
         {!props.loading && !records.length && props.noRecordsMessage}
         {props.alsoSee && <AlsoSeeCard alsoSee={props.alsoSee}/>}
     </div>;
+
 };
 
-const GroupedRecordCards = (props: {records: ReadonlyArray<RecordSet.AsObject>, alsoSee?: ReadonlyArray<Place.AsObject>}) => {
-    const records = props.records;
-    const parentGroups = stringMultimap(records, record => record.parent ? record.parent.id : "");
-    return <div className="recordCards">
-        {Object.keys(parentGroups).map(group => <GroupRecordCard records={parentGroups[group]}/>)}
-    </div>;
-};
+// const GroupedRecordCards = (props: {records: ReadonlyArray<RecordSet.AsObject>, alsoSee?: ReadonlyArray<Place.AsObject>}) => {
+//     const records = props.records;
+//     const parentGroups: CardGrouping[] = [];
+//     return <div className="recordCards">
+//         {Object.keys(parentGroups).map(group => <GroupRecordCard records={parentGroups[group]}/>)}
+//     </div>;
+// };
 
-const GroupRecordCard = (props: {records: ReadonlyArray<RecordSet.AsObject>}) => {
+type CardGrouping = {records: ReadonlyArray<RecordSet.AsObject>, relatives: RecordSetRelatives.AsObject}
+
+const GroupRecordCard = (props: {records: ReadonlyArray<RecordSet.AsObject>, relatives: RecordSetRelatives.AsObject}) => {
     const children = <>{props.records.map(record => <RecordCard record={record} shortTitle/>)}</>;
-    const parent = props.records[0].parent;
+    const parent = props.relatives && props.relatives.parent;
     if (!parent) return children;
     return <Card
         className="groupCard"

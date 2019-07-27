@@ -1,11 +1,8 @@
 package net.ramify.model.record.xml;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSetMultimap;
 import com.google.common.collect.Maps;
-import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
 import net.ramify.model.AbstractMappedProvider;
 import net.ramify.model.record.collection.HasRecordSetId;
@@ -13,9 +10,9 @@ import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.ResizedRecordSet;
 import net.ramify.model.record.provider.RecordSetProvider;
+import net.ramify.model.record.xml.collection.DefaultRecordSet;
 import net.ramify.model.record.xml.collection.XmlRecordSets;
 import net.ramify.utils.collections.MapUtils;
-import net.ramify.utils.collections.SetUtils;
 import net.ramify.utils.file.FileTraverseUtils;
 import net.ramify.utils.file.FileUtils;
 import org.slf4j.Logger;
@@ -28,7 +25,6 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.File;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -38,26 +34,16 @@ import java.util.stream.Collectors;
 class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet> implements RecordSetProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(XmlRecordSetProvider.class);
+    private final XmlRecordSetRelativesProvider relatives;
 
-    private final SetMultimap<RecordSetId, RecordSetId> parentChildren;
-
-    XmlRecordSetProvider(
-            final Map<RecordSetId, RecordSet> recordSets,
-            final SetMultimap<RecordSetId, RecordSetId> parentChildren) {
+    XmlRecordSetProvider(final Map<RecordSetId, RecordSet> recordSets, final XmlRecordSetRelativesProvider relatives) {
         super(recordSets);
-        this.parentChildren = parentChildren;
+        this.relatives = relatives;
     }
 
-    void addAll(final Collection<RecordSet> recordSets) {
+    void addAll(final Collection<DefaultRecordSet> recordSets) {
         super.putAll(MapUtils.toMapLastKey(recordSets, HasRecordSetId::recordSetId));
-        recordSets.forEach(this::addParent);
-    }
-
-    private void addParent(final RecordSet recordSet) {
-        final var parentId = recordSet.relatives().parent();
-        if (parentId == null) return;
-        parentChildren.put(parentId, recordSet.recordSetId());
-        this.addParent(this.require(parentId));
+        recordSets.forEach(relatives::add);
     }
 
     @Nonnull
@@ -79,7 +65,7 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
             final var record = this.get(key);
             if (record == null) continue;
             if (!predicate.test(record)) continue;
-            if (this.containsAnyParent(matching.keySet(), record)) continue;
+            if (relatives.containsAnyParent(matching.keySet(), record.recordSetId())) continue;
 
             matching.put(record.recordSetId(), record);
             if (matching.size() >= limit) break;
@@ -90,51 +76,29 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
 
     }
 
-    private boolean containsAnyParent(final Set<RecordSetId> ids, final RecordSet recordSet) {
-        if (recordSet == null) return false;
-        if (ids.contains(recordSet.recordSetId())) return true;
-        return containsAnyParent(ids, this.require(recordSet.relatives().parent()));
-    }
-
-    @Nonnull
-    @Override
-    public Set<RecordSet> children(final RecordSetId parentId) {
-        return Collections.unmodifiableSet(SetUtils.transform(parentChildren.get(parentId), this::require));
-    }
-
-    private Set<RecordSet> allChildren(final RecordSetId parentId) {
-        final var childIds = parentChildren.get(parentId);
-        if (childIds.isEmpty()) return Collections.emptySet();
-        final var set = Sets.<RecordSet>newHashSet();
-        childIds.forEach(childId -> {
-            set.add(this.require(childId));
-            set.addAll(this.allChildren(childId));
-        });
-        return set;
-    }
-
     @Override
     protected ImmutableMap<RecordSetId, RecordSet> immutableMap() {
-        return ImmutableMap.copyOf(Maps.transformValues(this.map(), set -> new ResizedRecordSet(set, this.determineSize(set.recordSetId()))));
+        return ImmutableMap.copyOf(Maps.transformValues(this.map(), set -> new ResizedRecordSet(set, this.determineSize(set))));
     }
 
-    private int determineSize(final RecordSetId id) {
-        final var size = this.require(id).size();
-        final var childSize = this.allChildren(id).stream().mapToInt(RecordSet::size).sum();
+    private int determineSize(final RecordSet set) {
+        final var size = this.require(set.recordSetId()).size();
+        final var childSize = relatives.allChildren(set).stream().mapToInt(RecordSet::size).sum();
         return size + childSize;
     }
 
     @Nonnull
     RecordSetProvider immutable() {
-        return new XmlRecordSetProvider(this.immutableMap(), ImmutableSetMultimap.copyOf(parentChildren));
+        return new XmlRecordSetProvider(this.immutableMap(), relatives);
     }
 
     static RecordSetProvider readRecordsInDirectory(
             final JAXBContext jaxbContext,
             final File root,
             final XmlRecordProvider recordProvider,
+            final XmlRecordSetRelativesProvider relatives,
             final RecordContext recordContext) throws JAXBException {
-        final var provider = new XmlRecordSetProvider(Maps.newLinkedHashMap(), HashMultimap.create());
+        final var provider = new XmlRecordSetProvider(Maps.newLinkedHashMap(), relatives);
         final var unmarshaller = jaxbContext.createUnmarshaller();
         FileTraverseUtils.traverseSubdirectories(
                 root,
