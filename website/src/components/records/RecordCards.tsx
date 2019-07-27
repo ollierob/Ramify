@@ -12,6 +12,7 @@ import {RecordType, recordTypeFromValue} from "./RecordType";
 import {HasClass} from "../style/HasClass";
 import {Link} from "../style/Links";
 import {Loading} from "../style/Loading";
+import {sortRecordSetByDateThenTitle} from "./RecordSet";
 
 type Props = HasClass & {
     loading?: boolean
@@ -26,7 +27,7 @@ type Props = HasClass & {
 
 export const RecordCards = (props: Props) => {
 
-    const records = props.records || [];
+    const records = [...props.records].sort(sortRecordSetByDateThenTitle);
     //if (props.groupByParent && props.relatives && props.relatives.length) return <GroupedRecordCards {...props}/>;
 
     return <div
@@ -51,13 +52,14 @@ export const RecordCards = (props: Props) => {
 type CardGrouping = {records: ReadonlyArray<RecordSet.AsObject>, relatives: RecordSetRelatives.AsObject}
 
 const GroupRecordCard = (props: {records: ReadonlyArray<RecordSet.AsObject>, relatives: RecordSetRelatives.AsObject}) => {
-    const children = <>{props.records.map(record => <RecordCard record={record} shortTitle/>)}</>;
+    const children = [...props.records].sort(sortRecordSetByDateThenTitle);
+    const cards = <>{children.map(record => <RecordCard record={record} shortTitle/>)}</>;
     const parent = props.relatives && props.relatives.parent;
-    if (!parent) return children;
+    if (!parent) return cards;
     return <Card
         className="groupCard"
         title={<><RecordsIcon/> <a href={recordSetHref(parent)}>{parent.longtitle}</a></>}>
-        {children}
+        {cards}
     </Card>;
 };
 
