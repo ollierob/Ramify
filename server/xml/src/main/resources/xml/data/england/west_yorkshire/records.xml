@@ -86,6 +86,7 @@
 
     <recordSet
             id="census_1821_wry"
+            nextId="census_1831_wry"
             parentId="england_census_1821"
             title="West Yorkshire 1821 Census"
             shortTitle="West Yorkshire"
@@ -93,6 +94,18 @@
             source="government"
             type="census">
         <d:inYear year="1841"/>
+    </recordSet>
+
+    <recordSet
+            id="census_1831_wry"
+            nextId="census_1841_wry"
+            parentId="england_census_1831"
+            title="West Yorkshire 1831 Census"
+            shortTitle="West Yorkshire"
+            coversPlaceId="county:west_yorkshire"
+            source="government"
+            type="census">
+        <d:inYear year="1831"/>
     </recordSet>
 
     <recordSet
