@@ -6,29 +6,6 @@
         xmlns:p="http://ramify.net/places">
 
     <recordSet
-            id="census_1841_wry_morley"
-            parentId="census_1841_wry"
-            title="Morley Wapentake 1841 Census"
-            shortTitle="Morley"
-            coversPlaceId="wapentake:morley"
-            source="government"
-            type="census">
-
-        <d:inYear year="1841"/>
-
-        <recordSet
-                id="census_1841_wry_halifax"
-                title="Halifax Parish 1841 Census"
-                shortTitle="Halifax Parish"
-                coversPlaceId="parish:halifax"
-                source="government"
-                type="census">
-            <d:inYear year="1841"/>
-        </recordSet>
-
-    </recordSet>
-
-    <recordSet
             id="protestation_1642_wry_morley"
             parentId="protestation_1642_wry"
             title="Morley Wapentake Protestation Returns"
@@ -81,6 +58,52 @@
         <recordSetReference reference="E179/207/141" archiveId="national_archives">
             <p:nationalArchivesLink href="http://www.nationalarchives.gov.uk/e179/details.asp?piece_id=23888&amp;doc_id=18866&amp;doc_ref=E179/207/141"/>
         </recordSetReference>
+    </recordSet>
+
+    <recordSet
+            id="census_1841_wry_morley"
+            parentId="census_1841_wry"
+            title="Morley Wapentake 1841 Census"
+            shortTitle="Morley"
+            coversPlaceId="wapentake:morley"
+            source="government"
+            type="census">
+
+        <d:inYear year="1841"/>
+
+        <recordSet
+                id="census_1841_wry_halifax"
+                title="Halifax Parish 1841 Census"
+                shortTitle="Halifax Parish"
+                coversPlaceId="parish:halifax"
+                source="government"
+                type="census">
+            <d:inYear year="1841"/>
+        </recordSet>
+
+    </recordSet>
+
+    <recordSet
+            id="census_1851_wry_morley"
+            parentId="census_1851_wry"
+            title="Morley Wapentake 1851 Census"
+            shortTitle="Morley"
+            coversPlaceId="wapentake:morley"
+            source="government"
+            type="census">
+
+        <d:inYear year="1841"/>
+
+        <recordSet
+                id="census_1851_wry_halifax"
+                title="Halifax Parish 1851 Census"
+                shortTitle="Halifax Parish"
+                coversPlaceId="parish:halifax"
+                source="government"
+                type="census">
+            <d:inYear year="1851"/>
+        </recordSet>
+
     </recordSet>
 
 </recordSets>

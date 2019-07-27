@@ -61,7 +61,7 @@
                 source="government"
                 type="census">
 
-            <description>The area around Pecket Well.</description>
+            <description>The area around Pecket Well in Wadsworth.</description>
             <d:inYear year="1841"/>
 
         </recordSet>
@@ -86,7 +86,7 @@
                 source="government"
                 type="census">
 
-            <description>The area along the old Keighley road.</description>
+            <description>The area along the old Keighley road in Wadsworth.</description>
             <d:inYear year="1841"/>
 
         </recordSet>
@@ -99,7 +99,7 @@
                 source="government"
                 type="census">
 
-            <description>The area around Old Town.</description>
+            <description>The area around Old Town in Wadsworth.</description>
             <d:inYear year="1841"/>
 
         </recordSet>

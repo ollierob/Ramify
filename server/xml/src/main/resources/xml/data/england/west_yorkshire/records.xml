@@ -106,4 +106,15 @@
         <d:inYear year="1841"/>
     </recordSet>
 
+    <recordSet
+            id="census_1851_wry"
+            parentId="england_census_1851"
+            title="West Yorkshire 1851 Census"
+            shortTitle="West Yorkshire"
+            coversPlaceId="county:west_yorkshire"
+            source="government"
+            type="census">
+        <d:inYear year="1851"/>
+    </recordSet>
+
 </recordSets>
