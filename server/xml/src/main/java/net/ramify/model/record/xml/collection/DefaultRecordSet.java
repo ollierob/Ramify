@@ -7,6 +7,7 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.RecordSetReference;
+import net.ramify.model.record.collection.RecordSetRelatives;
 import net.ramify.model.record.proto.RecordProto;
 
 import javax.annotation.CheckForNull;
@@ -19,7 +20,6 @@ import java.util.Set;
 public class DefaultRecordSet implements RecordSet {
 
     private final RecordSetId id;
-    private final RecordSet parent;
     private final RecordProto.SourceType source;
     private final EventProto.RecordType type;
     private final DateRange date;
@@ -29,10 +29,10 @@ public class DefaultRecordSet implements RecordSet {
     private final String description;
     private final int size;
     private final Set<RecordSetReference> references;
+    private final RecordSetRelatives relatives;
 
     public DefaultRecordSet(
             final RecordSetId id,
-            final RecordSet parent,
             final RecordProto.SourceType source,
             final EventProto.RecordType type,
             final DateRange date,
@@ -42,9 +42,8 @@ public class DefaultRecordSet implements RecordSet {
             final String shortTitle,
             final String description,
             final int size,
-            final Set<RecordSetReference> references) {
+            final Set<RecordSetReference> references, RecordSetRelatives relatives) {
         this.id = id;
-        this.parent = parent;
         this.source = source;
         this.type = type;
         this.date = Objects.requireNonNull(date, "date");
@@ -55,18 +54,13 @@ public class DefaultRecordSet implements RecordSet {
         this.description = description;
         this.size = size;
         this.references = references;
+        this.relatives = relatives;
     }
 
     @Nonnull
     @Override
     public RecordSetId recordSetId() {
         return id;
-    }
-
-    @CheckForNull
-    @Override
-    public RecordSet parent() {
-        return parent;
     }
 
     @Nonnull
@@ -110,12 +104,19 @@ public class DefaultRecordSet implements RecordSet {
         return references;
     }
 
+    @CheckForNull
+    @Override
+    public RecordSetRelatives relatives() {
+        return relatives;
+    }
+
     @Nonnull
     @Override
-    public RecordProto.RecordSet.Builder toProtoBuilder(final boolean includeParent) {
-        return RecordSet.super.toProtoBuilder(includeParent)
+    public RecordProto.RecordSet.Builder toProtoBuilder() {
+        return RecordSet.super.toProtoBuilder()
                 .setShortTitle(MoreObjects.firstNonNull(shortTitle, ""))
                 .setType(type)
                 .setSource(source);
     }
+
 }

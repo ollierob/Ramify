@@ -54,10 +54,10 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
     }
 
     private void addParent(final RecordSet recordSet) {
-        final var parent = recordSet.parent();
-        if (parent == null) return;
-        parentChildren.put(parent.recordSetId(), recordSet.recordSetId());
-        this.addParent(parent);
+        final var parentId = recordSet.relatives().parent();
+        if (parentId == null) return;
+        parentChildren.put(parentId, recordSet.recordSetId());
+        this.addParent(this.require(parentId));
     }
 
     @Nonnull
@@ -79,7 +79,7 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
             final var record = this.get(key);
             if (record == null) continue;
             if (!predicate.test(record)) continue;
-            if (containsAnyParent(matching.keySet(), record)) continue;
+            if (this.containsAnyParent(matching.keySet(), record)) continue;
 
             matching.put(record.recordSetId(), record);
             if (matching.size() >= limit) break;
@@ -90,10 +90,10 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
 
     }
 
-    private static boolean containsAnyParent(final Set<RecordSetId> ids, final RecordSet recordSet) {
+    private boolean containsAnyParent(final Set<RecordSetId> ids, final RecordSet recordSet) {
         if (recordSet == null) return false;
         if (ids.contains(recordSet.recordSetId())) return true;
-        return containsAnyParent(ids, recordSet.parent());
+        return containsAnyParent(ids, this.require(recordSet.relatives().parent()));
     }
 
     @Nonnull

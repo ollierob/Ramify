@@ -12,6 +12,7 @@ import net.ramify.model.record.collection.HasRecordSetId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.RecordSetReference;
+import net.ramify.model.record.collection.RecordSetRelatives;
 import net.ramify.model.record.provider.RecordSetProvider;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlRecord;
@@ -99,7 +100,6 @@ class XmlRecordSet implements HasRecordSetId {
     private RecordSet buildSelf(@CheckForNull final RecordSet parent, final RecordContext context) {
         return new DefaultRecordSet(
                 this.recordSetId(),
-                parent,
                 source.source(),
                 type.type(),
                 this.date(parent, context.dateParser()),
@@ -109,7 +109,8 @@ class XmlRecordSet implements HasRecordSetId {
                 shortTitle,
                 Functions.ifNonNull(description, String::trim),
                 this.size(),
-                this.buildReferences(context));
+                this.buildReferences(context),
+                this.relatives(parent));
     }
 
     DateRange date(final RecordSet parent, final DateParser dateParser) {
@@ -137,6 +138,13 @@ class XmlRecordSet implements HasRecordSetId {
     private int size() {
         if (records == null) return 0;
         return records.stream().mapToInt(XmlRecords::size).sum();
+    }
+
+    private RecordSetRelatives relatives(final RecordSet parent) {
+        return new DefaultRecordSetRelatives(
+                Functions.ifNonNull(parent, HasRecordSetId::recordSetId),
+                null,
+                null);
     }
 
     @Nonnull

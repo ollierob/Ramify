@@ -19,9 +19,6 @@ import java.util.Set;
  */
 public interface RecordSet extends HasTitleDescription, HasRecordSetId, HasDate, HasPlaceId, BuildsProto<RecordProto.RecordSet> {
 
-    @CheckForNull
-    RecordSet parent();
-
     @Nonnull
     Set<RecordSetReference> references();
 
@@ -40,7 +37,10 @@ public interface RecordSet extends HasTitleDescription, HasRecordSetId, HasDate,
     int size();
 
     @Nonnull
-    default RecordProto.RecordSet.Builder toProtoBuilder(final boolean includeParent) {
+    RecordSetRelatives relatives();
+
+    @Nonnull
+    default RecordProto.RecordSet.Builder toProtoBuilder() {
         final var builder = RecordProto.RecordSet.newBuilder()
                 .setId(this.recordSetId().value())
                 .setLongTitle(this.title())
@@ -48,7 +48,6 @@ public interface RecordSet extends HasTitleDescription, HasRecordSetId, HasDate,
                 .setCoversPlaceId(this.covers().value())
                 .setNumRecords(this.size())
                 .addAllExternalReference(Iterables.transform(this.references(), RecordSetReference::toProto));
-        if (includeParent) Consumers.ifNonNull(this.parent(), parent -> builder.setParent(parent.toProto()));
         Consumers.ifNonNull(this.createdBy(), place -> builder.setCreatorPlaceId(place.value()));
         Consumers.ifNonNull(this.date(), date -> builder.setDate(date.toProto()));
         return builder;
@@ -57,7 +56,7 @@ public interface RecordSet extends HasTitleDescription, HasRecordSetId, HasDate,
     @Nonnull
     @Override
     default RecordProto.RecordSet toProto() {
-        return this.toProtoBuilder(true).build();
+        return this.toProtoBuilder().build();
     }
 
 }

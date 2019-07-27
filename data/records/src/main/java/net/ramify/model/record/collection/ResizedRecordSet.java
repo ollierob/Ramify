@@ -19,8 +19,8 @@ public class ResizedRecordSet extends DelegatedRecordSet {
 
     @Nonnull
     @Override
-    public RecordProto.RecordSet.Builder toProtoBuilder(boolean includeParent) {
-        return super.toProtoBuilder(includeParent).setNumRecords(size);
+    public RecordProto.RecordSet.Builder toProtoBuilder() {
+        return super.toProtoBuilder().setNumRecords(size);
     }
 
 }

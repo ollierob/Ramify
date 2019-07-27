@@ -16,12 +16,6 @@ public abstract class DelegatedRecordSet implements RecordSet {
         this.delegate = delegate;
     }
 
-    @CheckForNull
-    @Override
-    public RecordSet parent() {
-        return delegate.parent();
-    }
-
     @Nonnull
     @Override
     public Set<RecordSetReference> references() {
@@ -69,10 +63,16 @@ public abstract class DelegatedRecordSet implements RecordSet {
         return delegate.size();
     }
 
+    @CheckForNull
+    @Override
+    public RecordSetRelatives relatives() {
+        return delegate.relatives();
+    }
+
     @Nonnull
     @Override
-    public RecordProto.RecordSet.Builder toProtoBuilder(final boolean includeParent) {
-        return delegate.toProtoBuilder(includeParent);
+    public RecordProto.RecordSet.Builder toProtoBuilder() {
+        return delegate.toProtoBuilder();
     }
 
 }
