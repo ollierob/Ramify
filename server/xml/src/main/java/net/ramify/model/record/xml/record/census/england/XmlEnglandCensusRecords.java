@@ -14,7 +14,8 @@ public class XmlEnglandCensusRecords extends XmlCensusRecords {
 
     @XmlElements({
             @XmlElement(name = "entry1821byAge", type = XmlEngland1821ByAgeCensusRecord.class, namespace = XmlRecord.NAMESPACE),
-            @XmlElement(name = "entry1841", type = XmlEngland1841CensusRecord.class, namespace = XmlRecord.NAMESPACE)
+            @XmlElement(name = "entry1841", type = XmlEngland1841CensusRecord.class, namespace = XmlRecord.NAMESPACE),
+            @XmlElement(name = "entry1851", type = XmlEngland1851CensusRecord.class, namespace = XmlRecord.NAMESPACE)
     })
     private List<XmlCensusRecord> records;
 

@@ -16,12 +16,18 @@
         <d:inYear year="1821"/>
 
         <englandCensus censusPlace="township:stansfield">
+
             <entry1821byAge malesFiveToTen="1" malesThirtyToForty="1">
                 <head gender="male" name="Henry Lord"/>
             </entry1821byAge>
             <entry1821byAge malesFortyToFifty="1">
                 <head gender="male" name="George Stansfield"/>
             </entry1821byAge>
+
+            <entry1821byAge malesFiveToTen="2" malesThirtyToForty="1">
+                <head gender="male" name="John Robertshaw"/>
+            </entry1821byAge>
+            
         </englandCensus>
 
     </recordSet>

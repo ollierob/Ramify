@@ -1,6 +1,5 @@
 package net.ramify.model.record.xml.record.residence;
 
-import com.google.common.collect.Sets;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.type.residence.GenericResidence;
@@ -16,7 +15,6 @@ import net.ramify.model.record.type.LifeEventRecord;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlPersonRecord;
 import net.ramify.model.record.xml.record.XmlRecord;
-import net.ramify.utils.objects.Consumers;
 import net.ramify.utils.objects.Functions;
 
 import javax.annotation.Nonnull;
@@ -53,9 +51,8 @@ public class XmlResidenceRecord extends XmlPersonRecord {
     }
 
     protected Set<Event> events(final PersonId personId, final Place place, final DateRange date) {
-        final var events = Sets.<Event>newHashSet();
+        final var events = super.events(personId, date);
         events.add(new GenericResidence(personId, date, place));
-        Consumers.ifNonNull(this.birth(personId, date), events::add);
         return events;
     }
 

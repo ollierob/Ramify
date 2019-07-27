@@ -5,12 +5,37 @@ import org.junit.jupiter.api.Test;
 
 import javax.annotation.Nonnull;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.chrono.ChronoLocalDate;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class AgeTest {
+
+    @Test
+    void testContains() {
+
+        final var age = Age.between(10, 15);
+        assertFalse(age.isSame(Period.ofYears(9)));
+        assertTrue(age.isSame(Period.ofYears(10)));
+        assertTrue(age.isSame(Period.ofYears(12)));
+        assertTrue(age.isSame(Period.ofYears(15)));
+        assertFalse(age.isSame(Period.ofYears(16)));
+
+    }
+
+    @Test
+    void testSameOrOlderThan() {
+
+        final var p = Period.ofYears(16);
+
+        assertFalse(Age.ofYears(2).isSameOrOlderThan(p));
+        assertFalse(Age.between(10, 15).isSameOrOlderThan(p));
+        assertTrue(Age.between(15, 20).isSameOrOlderThan(p));
+        assertTrue(Age.between(20, 25).isSameOrOlderThan(p));
+
+    }
 
     @Test
     void testBirthDate() {

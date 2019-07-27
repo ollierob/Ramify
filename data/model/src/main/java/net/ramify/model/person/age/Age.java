@@ -6,6 +6,8 @@ import javax.annotation.Nonnull;
 import java.time.Period;
 import java.util.Optional;
 
+import static net.ramify.utils.time.PeriodUtils.approximateCompare;
+
 public interface Age {
 
     Age ZERO = exactly(Period.ZERO);
@@ -27,6 +29,15 @@ public interface Age {
         final var earliest = date.earliestInclusive().map(d -> d.minus(this.upperBound()));
         final var latest = date.latestInclusive().map(d -> d.minus(this.lowerBound()));
         return new AgeDateRange(earliest, latest);
+    }
+
+    default boolean isSame(final Period period) {
+        return approximateCompare(this.lowerBound(), period) <= 0
+                && approximateCompare(period, this.upperBound()) <= 0;
+    }
+
+    default boolean isSameOrOlderThan(final Period period) {
+        return approximateCompare(period, this.upperBound()) <= 0;
     }
 
     static Age exactly(final Period period) {

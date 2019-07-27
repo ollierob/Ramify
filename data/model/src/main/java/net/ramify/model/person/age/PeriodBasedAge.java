@@ -48,4 +48,9 @@ class PeriodBasedAge implements Age {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "[" + lower + ":" + upper + "]";
+    }
+
 }
