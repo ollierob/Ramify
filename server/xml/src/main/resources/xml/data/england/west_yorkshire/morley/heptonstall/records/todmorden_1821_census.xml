@@ -27,7 +27,11 @@
             <entry1821byAge malesFiveToTen="2" malesThirtyToForty="1">
                 <head gender="male" name="John Robertshaw"/>
             </entry1821byAge>
-            
+
+            <entry1821byAge malesSixtyToSeventy="1">
+                <head gender="male" name="John Robertshaw"/>
+            </entry1821byAge>
+
         </englandCensus>
 
     </recordSet>

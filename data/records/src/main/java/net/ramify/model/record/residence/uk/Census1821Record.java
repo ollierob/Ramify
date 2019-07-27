@@ -73,9 +73,6 @@ public class Census1821Record extends CensusRecord implements HasPlace {
             builder.addPerson(head);
         }
 
-        //TODO detect single 18+ residence with same gender
-        //final var withHeadGender = ageCounts.row(head.gender());
-
         for (final var cell : ageCounts.cellSet()) {
             for (int i = 0; i < cell.getValue(); i++) {
                 final var gender = cell.getRowKey();

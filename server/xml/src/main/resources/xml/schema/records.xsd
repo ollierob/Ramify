@@ -155,7 +155,7 @@
 
     </xs:complexType>
 
-    <xs:complexType abstract="true" name="xmlPersonRecord">
+    <xs:complexType name="xmlPersonRecord">
 
         <xs:complexContent>
 
@@ -317,6 +317,8 @@
 
                         <xs:element form="qualified" name="entry1841" type="tns:censusEngland1841"/>
 
+                        <xs:element form="qualified" name="entry1851" type="tns:censusEngland1851"/>
+
                     </xs:choice>
 
                 </xs:sequence>
@@ -349,7 +351,13 @@
 
                 <xs:attribute name="malesFortyToFifty" type="xs:int"/>
 
+                <xs:attribute name="malesFiftyToSixty" type="xs:int"/>
+
+                <xs:attribute name="malesSixtyToSeventy" type="xs:int"/>
+
                 <xs:attribute name="femalesUnderFive" type="xs:int"/>
+
+                <xs:attribute name="femalesFiveToTen" type="xs:int"/>
 
             </xs:extension>
 
@@ -421,6 +429,26 @@
 
     </xs:complexType>
 
+    <xs:complexType name="censusEngland1851">
+
+        <xs:complexContent>
+
+            <xs:extension base="tns:xmlCensusRecord">
+
+                <xs:choice>
+
+                    <xs:element ref="tns:residence"/>
+
+                    <xs:element ref="tns:familyResidence"/>
+
+                </xs:choice>
+
+            </xs:extension>
+
+        </xs:complexContent>
+
+    </xs:complexType>
+
     <xs:complexType name="recordSets">
 
         <xs:sequence>
@@ -461,9 +489,9 @@
 
             <xs:enumeration value="manor"/>
 
-            <xs:enumeration value="church"/>
-
             <xs:enumeration value="government"/>
+
+            <xs:enumeration value="church"/>
 
         </xs:restriction>
 
@@ -473,25 +501,25 @@
 
         <xs:restriction base="xs:string">
 
+            <xs:enumeration value="census"/>
+
+            <xs:enumeration value="baptism"/>
+
             <xs:enumeration value="mixed"/>
 
             <xs:enumeration value="birth"/>
 
-            <xs:enumeration value="census"/>
-
             <xs:enumeration value="death"/>
+
+            <xs:enumeration value="residence"/>
+
+            <xs:enumeration value="payment"/>
 
             <xs:enumeration value="burial"/>
 
             <xs:enumeration value="membership"/>
 
-            <xs:enumeration value="payment"/>
-
             <xs:enumeration value="marriage"/>
-
-            <xs:enumeration value="residence"/>
-
-            <xs:enumeration value="baptism"/>
 
         </xs:restriction>
 
