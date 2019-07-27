@@ -10,6 +10,7 @@ import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
+import net.ramify.model.person.PersonWithAdditionalEvents;
 import net.ramify.model.person.age.Age;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.name.Name;
@@ -47,14 +48,21 @@ public class Census1821Record extends CensusRecord implements HasPlace {
     @Override
     public Family family() {
         final var builder = new FamilyBuilder();
-        builder.addPerson(head);
         this.enumerate(head, builder);
         return builder.build();
     }
 
     private void enumerate(final Person head, final FamilyBuilder builder) {
 
-        if (ageCounts.size() == 1) return;
+        if (ageCounts.size() == 1) {
+            final var entry = ageCounts.row(head.gender()).entrySet().iterator().next();
+            if (entry.getValue() == 1) {
+                builder.addPerson(this.agedPerson(head, entry.getKey()));
+                return;
+            }
+        }
+
+        builder.addPerson(head);
 
         //TODO detect single 18+ residence with same gender
         //final var withHeadGender = ageCounts.row(head.gender());
@@ -74,6 +82,11 @@ public class Census1821Record extends CensusRecord implements HasPlace {
         final var birth = new GenericBirth(id, age.birthDate(CENSUS_DATE));
         final var residence = new GenericResidence(id, CENSUS_DATE, this.place());
         return new GenericRecordPerson(id, Name.UNKNOWN, gender, ImmutableSet.of(birth, residence), "Anonymous");
+    }
+
+    private Person agedPerson(final Person base, final Age age) {
+        final var birth = new GenericBirth(base.personId(), age.birthDate(CENSUS_DATE));
+        return new PersonWithAdditionalEvents(base, birth);
     }
 
 }

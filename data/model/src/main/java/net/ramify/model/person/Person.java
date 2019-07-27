@@ -9,8 +9,15 @@ import net.ramify.model.person.name.HasName;
 import net.ramify.model.person.proto.PersonProto;
 
 import javax.annotation.Nonnull;
+import java.util.Set;
 
 public interface Person extends HasPerson, HasName, HasGender, HasPersonEvents, BuildsProto<PersonProto.Person> {
+
+    @Override
+    PersonId personId();
+
+    @Override
+    Set<? extends Event> events();
 
     @Override
     @Deprecated

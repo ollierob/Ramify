@@ -26,7 +26,10 @@ public class XmlEngland1821ByAgeCensusRecord extends XmlCensusRecord {
     static final Age UNDER_FIVE = Age.between(Period.ZERO, Period.of(5, 0, -1));
     static final Age FIVE_TO_TEN = Age.between(Period.ofYears(5), Period.of(10, 0, -1));
     static final Age TEN_TO_FIFTEEN = Age.between(Period.ofYears(10), Period.of(15, 0, -1));
+    static final Age FIFTEEN_TO_TWENTY = Age.between(Period.ofYears(15), Period.of(20, 0, -1));
+    static final Age TWENTY_TO_THIRTY = Age.between(Period.ofYears(20), Period.of(30, 0, -1));
     static final Age THIRTY_TO_FORTY = Age.between(Period.ofYears(30), Period.of(40, 0, -1));
+    static final Age FORTY_TO_FIFTY = Age.between(Period.ofYears(40), Period.of(50, 0, -1));
 
     @XmlElement(name = "head", required = true, namespace = XmlRecord.NAMESPACE)
     private XmlResidenceRecord head;
@@ -42,6 +45,9 @@ public class XmlEngland1821ByAgeCensusRecord extends XmlCensusRecord {
 
     @XmlAttribute(name = "malesThirtyToForty")
     private Integer malesThirtyToForty;
+
+    @XmlAttribute(name = "malesFortyToFifty")
+    private Integer malesFortyToFifty;
 
     @XmlAttribute(name = "femalesUnderFive")
     private Integer femalesUnderFive;
@@ -72,6 +78,7 @@ public class XmlEngland1821ByAgeCensusRecord extends XmlCensusRecord {
         Consumers.ifNonNull(malesFiveToTen, count -> table.put(Gender.MALE, FIVE_TO_TEN, count));
         Consumers.ifNonNull(malesTenToFifteen, count -> table.put(Gender.MALE, TEN_TO_FIFTEEN, count));
         Consumers.ifNonNull(malesThirtyToForty, count -> table.put(Gender.MALE, THIRTY_TO_FORTY, count));
+        Consumers.ifNonNull(malesFortyToFifty, count -> table.put(Gender.MALE, FORTY_TO_FIFTY, count));
         Consumers.ifNonNull(femalesUnderFive, count -> table.put(Gender.FEMALE, UNDER_FIVE, count));
         return table;
     }

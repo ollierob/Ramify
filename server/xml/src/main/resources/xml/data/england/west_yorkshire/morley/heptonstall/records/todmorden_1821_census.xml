@@ -19,6 +19,9 @@
             <entry1821byAge malesFiveToTen="1" malesThirtyToForty="1">
                 <head gender="male" name="Henry Lord"/>
             </entry1821byAge>
+            <entry1821byAge malesFortyToFifty="1">
+                <head gender="male" name="George Stansfield"/>
+            </entry1821byAge>
         </englandCensus>
 
     </recordSet>
