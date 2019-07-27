@@ -1,6 +1,6 @@
 import * as React from "react";
 import {CSSProperties} from "react";
-import {ExternalRecordReference, IndividualRecord, Record, RecordSet, RecordSetRelatives} from "../../../protobuf/generated/record_pb";
+import {ExternalRecordReference, IndividualRecord, RecordSet, RecordSetRelatives} from "../../../protobuf/generated/record_pb";
 import {Card, Icon} from "antd";
 import {recordSetHref} from "../RecordLinks";
 import {RecordCards} from "../../../components/records/RecordCards";

@@ -1,7 +1,6 @@
 package net.ramify.model.record.xml;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import net.ramify.model.AbstractMappedProvider;
@@ -15,9 +14,11 @@ import net.ramify.model.record.xml.collection.XmlRecordSets;
 import net.ramify.utils.collections.MapUtils;
 import net.ramify.utils.file.FileTraverseUtils;
 import net.ramify.utils.file.FileUtils;
+import net.ramify.utils.objects.Functions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -76,20 +77,23 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
 
     }
 
-    @Override
-    protected ImmutableMap<RecordSetId, RecordSet> immutableMap() {
-        return ImmutableMap.copyOf(Maps.transformValues(this.map(), set -> new ResizedRecordSet(set, this.determineSize(set))));
-    }
-
-    private int determineSize(final RecordSet set) {
-        final var size = this.require(set.recordSetId()).size();
-        final var childSize = relatives.allChildren(set).stream().mapToInt(RecordSet::size).sum();
-        return size + childSize;
-    }
-
     @Nonnull
     RecordSetProvider immutable() {
-        return new XmlRecordSetProvider(this.immutableMap(), relatives);
+        return new XmlRecordSetProvider(this.immutableMap(), relatives) {
+
+            @CheckForNull
+            @Override
+            public RecordSet get(RecordSetId key) {
+                return Functions.ifNonNull(super.get(key), this::computeSize);
+            }
+
+            RecordSet computeSize(@Nonnull final RecordSet set) {
+                final var children = relatives.allChildren(set.recordSetId());
+                final var size = set.size() + (children.isEmpty() ? 0 : children.stream().mapToInt(RecordSet::size).sum());
+                return new ResizedRecordSet(set, size);
+            }
+
+        };
     }
 
     static RecordSetProvider readRecordsInDirectory(
