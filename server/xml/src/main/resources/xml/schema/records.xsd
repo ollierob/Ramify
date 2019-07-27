@@ -340,6 +340,10 @@
 
                 <xs:attribute name="malesFiveToTen" type="xs:int"/>
 
+                <xs:attribute name="malesTenToFifteen" type="xs:int"/>
+
+                <xs:attribute name="malesThirtyToForty" type="xs:int"/>
+
                 <xs:attribute name="femalesUnderFive" type="xs:int"/>
 
             </xs:extension>
@@ -450,11 +454,11 @@
 
         <xs:restriction base="xs:string">
 
-            <xs:enumeration value="church"/>
-
             <xs:enumeration value="government"/>
 
             <xs:enumeration value="manor"/>
+
+            <xs:enumeration value="church"/>
 
         </xs:restriction>
 
@@ -464,25 +468,25 @@
 
         <xs:restriction base="xs:string">
 
-            <xs:enumeration value="baptism"/>
-
-            <xs:enumeration value="census"/>
+            <xs:enumeration value="residence"/>
 
             <xs:enumeration value="death"/>
 
-            <xs:enumeration value="mixed"/>
-
-            <xs:enumeration value="birth"/>
-
-            <xs:enumeration value="membership"/>
+            <xs:enumeration value="burial"/>
 
             <xs:enumeration value="payment"/>
 
-            <xs:enumeration value="residence"/>
+            <xs:enumeration value="mixed"/>
+
+            <xs:enumeration value="membership"/>
+
+            <xs:enumeration value="birth"/>
 
             <xs:enumeration value="marriage"/>
 
-            <xs:enumeration value="burial"/>
+            <xs:enumeration value="census"/>
+
+            <xs:enumeration value="baptism"/>
 
         </xs:restriction>
 

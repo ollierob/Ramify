@@ -46,11 +46,11 @@ public class Census1821Record extends CensusRecord implements HasPlace {
     public Family family() {
         final var builder = new FamilyBuilder();
         builder.addPerson(head);
-        this.enumerate(builder);
+        this.enumerate(head, builder);
         return builder.build();
     }
 
-    private void enumerate(final FamilyBuilder builder) {
+    private void enumerate(final Person head, final FamilyBuilder builder) {
         for (final var cell : ageCounts.cellSet()) {
             for (int i = 0; i < cell.getValue(); i++) {
                 builder.addRelationship(head, this.anonymousPerson(cell.getRowKey(), cell.getColumnKey()), RelationshipFactory.UNKNOWN);

@@ -14,6 +14,7 @@ import net.ramify.model.record.xml.record.census.XmlCensusRecord;
 import net.ramify.model.record.xml.record.residence.XmlResidenceRecord;
 import net.ramify.utils.objects.Consumers;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
@@ -24,6 +25,8 @@ public class XmlEngland1821ByAgeCensusRecord extends XmlCensusRecord {
 
     static final Age UNDER_FIVE = Age.between(Period.ZERO, Period.of(5, 0, -1));
     static final Age FIVE_TO_TEN = Age.between(Period.ofYears(5), Period.of(10, 0, -1));
+    static final Age TEN_TO_FIFTEEN = Age.between(Period.ofYears(10), Period.of(15, 0, -1));
+    static final Age THIRTY_TO_FORTY = Age.between(Period.ofYears(30), Period.of(40, 0, -1));
 
     @XmlElement(name = "head", required = true, namespace = XmlRecord.NAMESPACE)
     private XmlResidenceRecord head;
@@ -34,12 +37,18 @@ public class XmlEngland1821ByAgeCensusRecord extends XmlCensusRecord {
     @XmlAttribute(name = "malesFiveToTen")
     private Integer malesFiveToTen;
 
+    @XmlAttribute(name = "malesTenToFifteen")
+    private Integer malesTenToFifteen;
+
+    @XmlAttribute(name = "malesThirtyToForty")
+    private Integer malesThirtyToForty;
+
     @XmlAttribute(name = "femalesUnderFive")
     private Integer femalesUnderFive;
 
     @Override
     protected int size() {
-        return 1;
+        return this.ageCounts().values().stream().mapToInt(i -> i).sum();
     }
 
     @Override
@@ -56,10 +65,13 @@ public class XmlEngland1821ByAgeCensusRecord extends XmlCensusRecord {
                 ageCounts);
     }
 
+    @Nonnull
     private Table<Gender, Age, Integer> ageCounts() {
         final var table = HashBasedTable.<Gender, Age, Integer>create();
         Consumers.ifNonNull(malesUnderFive, count -> table.put(Gender.MALE, UNDER_FIVE, count));
         Consumers.ifNonNull(malesFiveToTen, count -> table.put(Gender.MALE, FIVE_TO_TEN, count));
+        Consumers.ifNonNull(malesTenToFifteen, count -> table.put(Gender.MALE, TEN_TO_FIFTEEN, count));
+        Consumers.ifNonNull(malesThirtyToForty, count -> table.put(Gender.MALE, THIRTY_TO_FORTY, count));
         Consumers.ifNonNull(femalesUnderFive, count -> table.put(Gender.FEMALE, UNDER_FIVE, count));
         return table;
     }

@@ -2,8 +2,7 @@
 
 <recordSets
         xmlns="http://ramify.net/records"
-        xmlns:d="http://ramify.net/dates"
-        xmlns:p="http://ramify.net/people">
+        xmlns:d="http://ramify.net/dates">
 
     <recordSet
             id="census_1821_todmorden"
@@ -17,7 +16,7 @@
         <d:inYear year="1821"/>
 
         <englandCensus censusPlace="township:stansfield">
-            <entry1821byAge malesFiveToTen="1">
+            <entry1821byAge malesFiveToTen="1" malesThirtyToForty="1">
                 <head gender="male" name="Henry Lord"/>
             </entry1821byAge>
         </englandCensus>
