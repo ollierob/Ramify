@@ -84,9 +84,9 @@ public class Census1821Record extends CensusRecord implements HasPlace {
         return new GenericRecordPerson(id, Name.UNKNOWN, gender, ImmutableSet.of(birth, residence), "Anonymous");
     }
 
-    private Person agedPerson(final Person base, final Age age) {
-        final var birth = new GenericBirth(base.personId(), age.birthDate(CENSUS_DATE));
-        return new PersonWithAdditionalEvents(base, birth);
+    private Person agedPerson(final Person person, final Age age) {
+        final var birth = new GenericBirth(person.personId(), age.birthDate(CENSUS_DATE));
+        return new PersonWithAdditionalEvents(person, birth);
     }
 
 }
