@@ -5,10 +5,10 @@
         xmlns:d="http://ramify.net/dates">
 
     <recordSet
-            id="census_1821_todmorden"
+            id="census_1821_stansfield"
             parentId="census_1821_wry_halifax"
-            title="Todmorden District 1821 Census"
-            shortTitle="Todmorden District"
+            title="Stansfield 1821 Census"
+            shortTitle="Stansfield"
             coversPlaceId="township:stansfield"
             source="government"
             type="census">

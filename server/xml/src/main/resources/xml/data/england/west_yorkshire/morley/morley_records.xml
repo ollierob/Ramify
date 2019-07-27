@@ -77,6 +77,7 @@
                 title="Halifax Parish 1821 Census"
                 shortTitle="Halifax Parish"
                 coversPlaceId="parish:halifax"
+                nextId="census_1831_wry_halifax"
                 source="government"
                 type="census">
             <d:inYear year="1821"/>
@@ -95,6 +96,17 @@
             type="census">
 
         <d:inYear year="1831"/>
+
+        <recordSet
+                id="census_1831_wry_halifax"
+                title="Halifax Parish 1831 Census"
+                shortTitle="Halifax"
+                coversPlaceId="parish:halifax"
+                nextId="census_1841_wry_halifax"
+                source="government"
+                type="census">
+            <d:inYear year="1831"/>
+        </recordSet>
 
     </recordSet>
 
