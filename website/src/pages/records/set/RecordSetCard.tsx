@@ -41,8 +41,8 @@ export default class RecordSetCard extends React.PureComponent<Props> {
 
             {recordSet && <>
 
-                <PartOf
-                    parent={relatives.parent}/>
+                <Relatives
+                    relatives={relatives}/>
 
                 <References
                     references={recordSet.externalreferenceList.length ? recordSet.externalreferenceList : relatives.parent && relatives.parent.externalreferenceList}/>
@@ -88,11 +88,20 @@ const Description = (props: {record: RecordSet.AsObject}) => {
     </div>;
 };
 
-const PartOf = (props: {parent: RecordSet.AsObject}) => {
-    if (!props.parent) return null;
-    return <div className="parent" style={MarginBottom}>
-        <Icon type="up-square"/> Part of the records of <a href={recordSetHref(props.parent)}>{props.parent.longtitle}</a>
-    </div>;
+const Relatives = (props: {relatives: RecordSetRelatives.AsObject}) => {
+    let relatives = props.relatives;
+    if (!relatives) return null;
+    return <>
+        {relatives.parent && <div className="relationship parent" style={MarginBottom}>
+            <Icon type="up-square"/> Part of the records of <a href={recordSetHref(relatives.parent)}>{relatives.parent.longtitle}</a>
+        </div>}
+        {relatives.previous && <div className="relationship previous" style={MarginBottom}>
+            <Icon type="left-square"/> Previous in series was <a href={recordSetHref(relatives.previous)}>{relatives.previous.longtitle}</a>
+        </div>}
+        {relatives.next && <div className="relationship next" style={MarginBottom}>
+            <Icon type="right-square"/> Next in series is <a href={recordSetHref(relatives.next)}>{relatives.next.longtitle}</a>
+        </div>}
+    </>;
 };
 
 const References = (props: {references: ReadonlyArray<ExternalRecordReference.AsObject>}) => {
