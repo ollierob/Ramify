@@ -19,6 +19,7 @@ import net.ramify.model.record.RecordId;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.residence.CensusRecord;
 import net.ramify.model.relationship.Relationship;
+import net.ramify.model.relationship.RelationshipFactory;
 
 import javax.annotation.Nonnull;
 import java.time.Month;
@@ -61,7 +62,7 @@ public class Census1851Record extends CensusRecord {
         private final PersonId id;
         private final Name name;
         private final Sex sex;
-        private final RelationshipToHead relationshipToHead;
+        private final RelationshipFactory relationshipToHead;
         private final MarriageConditionEventInference condition;
         private final Period age;
         private final Place birthPlace;
@@ -70,7 +71,7 @@ public class Census1851Record extends CensusRecord {
                 final PersonId id,
                 final Name name,
                 final Sex sex,
-                final RelationshipToHead relationshipToHead,
+                final RelationshipFactory relationshipToHead,
                 final MarriageConditionEventInference condition,
                 final Period age,
                 final Place birthPlace) {
@@ -93,7 +94,7 @@ public class Census1851Record extends CensusRecord {
                     name,
                     sex,
                     record.place(),
-                    relationshipToHead.relationship(record.headId(), id),
+                    relationshipToHead.relationshipBetween(record.headId(), id),
                     Age.exactly(age).birthDate(CENSUS_DATE),
                     birthPlace,
                     condition.inferEvents(id, record));
@@ -121,7 +122,7 @@ public class Census1851Record extends CensusRecord {
                 final PersonId id,
                 final Name name,
                 final Sex sex,
-                final RelationshipToHead relationshipToHead,
+                final RelationshipFactory relationshipToHead,
                 final MarriageConditionEventInference condition,
                 final Period age,
                 final Place birthPlace) {
