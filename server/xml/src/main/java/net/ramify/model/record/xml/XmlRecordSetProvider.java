@@ -7,18 +7,15 @@ import net.ramify.model.AbstractMappedProvider;
 import net.ramify.model.record.collection.HasRecordSetId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
-import net.ramify.model.record.collection.ResizedRecordSet;
 import net.ramify.model.record.provider.RecordSetProvider;
 import net.ramify.model.record.xml.collection.DefaultRecordSet;
 import net.ramify.model.record.xml.collection.XmlRecordSets;
 import net.ramify.utils.collections.MapUtils;
 import net.ramify.utils.file.FileTraverseUtils;
 import net.ramify.utils.file.FileUtils;
-import net.ramify.utils.objects.Functions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -35,6 +32,7 @@ import java.util.stream.Collectors;
 class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet> implements RecordSetProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(XmlRecordSetProvider.class);
+
     private final XmlRecordSetRelativesProvider relatives;
 
     XmlRecordSetProvider(final Map<RecordSetId, RecordSet> recordSets, final XmlRecordSetRelativesProvider relatives) {
@@ -79,21 +77,7 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
 
     @Nonnull
     RecordSetProvider immutable() {
-        return new XmlRecordSetProvider(this.immutableMap(), relatives) {
-
-            @CheckForNull
-            @Override
-            public RecordSet get(RecordSetId key) {
-                return Functions.ifNonNull(super.get(key), this::computeSize);
-            }
-
-            RecordSet computeSize(@Nonnull final RecordSet set) {
-                final var children = relatives.allChildren(set.recordSetId());
-                final var size = set.size() + (children.isEmpty() ? 0 : children.stream().mapToInt(RecordSet::size).sum());
-                return new ResizedRecordSet(set, size);
-            }
-
-        };
+        return new XmlRecordSetProvider(this.immutableMap(), relatives);
     }
 
     static RecordSetProvider readRecordsInDirectory(

@@ -61,6 +61,7 @@
                 source="government"
                 type="census">
 
+            <description>The area around Pecket Well.</description>
             <d:inYear year="1841"/>
 
         </recordSet>
@@ -73,6 +74,32 @@
                 source="government"
                 type="census">
 
+            <d:inYear year="1841"/>
+
+        </recordSet>
+
+        <recordSet
+                id="census_1841_hebden_bridge_district_5"
+                title="Hebden Bridge 1841 Census (District 5)"
+                shortTitle="District 5"
+                coversPlaceId="township:wadsworth"
+                source="government"
+                type="census">
+
+            <description>The area along the old Keighley road.</description>
+            <d:inYear year="1841"/>
+
+        </recordSet>
+
+        <recordSet
+                id="census_1841_hebden_bridge_district_6"
+                title="Hebden Bridge 1841 Census (District 6)"
+                shortTitle="District 6"
+                coversPlaceId="township:wadsworth"
+                source="government"
+                type="census">
+
+            <description>The area around Old Town.</description>
             <d:inYear year="1841"/>
 
         </recordSet>
