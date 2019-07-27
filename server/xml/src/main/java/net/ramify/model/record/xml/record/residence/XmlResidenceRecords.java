@@ -23,7 +23,7 @@ import java.util.List;
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "residenceRecords")
 public class XmlResidenceRecords extends XmlRecords {
 
-    @XmlAttribute(name = "placeId", required = true)
+    @XmlAttribute(name = "placeId", required = false)
     private String placeId;
 
     @XmlElements({

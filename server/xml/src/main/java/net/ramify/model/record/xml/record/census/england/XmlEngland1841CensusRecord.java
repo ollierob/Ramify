@@ -14,11 +14,10 @@ import net.ramify.utils.collections.ListUtils;
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
-@XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "census1841England")
+@XmlType(namespace = XmlRecord.NAMESPACE, name = "censusEngland1841")
 public class XmlEngland1841CensusRecord extends XmlCensusRecord {
 
     @XmlElement(type = Individual.class, name = "entry", namespace = XmlRecord.NAMESPACE)
@@ -27,7 +26,7 @@ public class XmlEngland1841CensusRecord extends XmlCensusRecord {
     @Override
     protected Census1841Record build(final RecordContext context, final Place censusPlace, final RecordSet recordSet) {
         final var id = this.recordId();
-        final var place = this.place(context.places());
+        final var place = MoreObjects.firstNonNull(this.place(context.places()), censusPlace);
         final var entries = this.entries(context, censusPlace);
         return new Census1841Record(id, recordSet.recordSetId(), place, entries);
     }

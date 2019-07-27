@@ -16,6 +16,12 @@
 
         <d:inYear year="1821"/>
 
+        <englandCensus censusPlace="township:stansfield">
+            <entry1821byAge malesFiveToTen="1">
+                <head gender="male" name="Henry Lord"/>
+            </entry1821byAge>
+        </englandCensus>
+
     </recordSet>
 
 </recordSets>

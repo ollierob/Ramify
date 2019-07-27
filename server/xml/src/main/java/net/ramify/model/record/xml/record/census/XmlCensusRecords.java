@@ -4,37 +4,37 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.residence.CensusRecord;
 import net.ramify.model.record.xml.RecordContext;
-import net.ramify.model.record.xml.record.XmlRecord;
 import net.ramify.model.record.xml.record.XmlRecords;
+import net.ramify.model.record.xml.record.census.england.XmlEnglandCensusRecords;
 import net.ramify.utils.collections.ListUtils;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-@XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "censusRecords")
-public class XmlCensusRecords extends XmlRecords {
+@XmlSeeAlso({XmlEnglandCensusRecords.class})
+public abstract class XmlCensusRecords extends XmlRecords {
 
     @XmlAttribute(name = "censusPlace", required = true)
-    private String censusPlace;
-
-    @XmlElementRef
-    private List<XmlCensusRecord> records;
+    private String censusArea;
 
     @Override
     public int size() {
-        if (records == null) return 0;
-        return records.stream().mapToInt(XmlCensusRecord::size).sum();
+        return this.records().stream().mapToInt(XmlCensusRecord::size).sum();
     }
 
     @Override
     public Collection<? extends CensusRecord> build(final RecordSet recordSet, final RecordContext context) {
-        if (records == null) return Collections.emptyList();
-        final var censusPlace = context.places().require(new PlaceId(this.censusPlace));
-        return ListUtils.eagerlyTransform(records, record -> record.build(context, censusPlace, recordSet));
+        final var records = this.records();
+        if (records.isEmpty()) return Collections.emptyList();
+        final var censusArea = context.places().require(new PlaceId(this.censusArea));
+        return ListUtils.eagerlyTransform(records, record -> record.build(context, censusArea, recordSet));
     }
+
+    @Nonnull
+    protected abstract List<XmlCensusRecord> records();
 
 }

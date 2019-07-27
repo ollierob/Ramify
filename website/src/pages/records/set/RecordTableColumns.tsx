@@ -56,12 +56,15 @@ const NameColumn: RecordColumn = {
     key: "name",
     title: "Name",
     dataIndex: "person.name.surname",
-    render: (t, r) => <>
-        {nameToString(r.person.name)}
-        {r.person.name.original && <>
-            <div className="small unimportant">{r.person.name.original}</div>
-        </>}
-    </>,
+    render: (t, r) => {
+        if (!r.person.name) return <span className="unimportant">Unknown</span>;
+        return <>
+            {nameToString(r.person.name)}
+            {r.person.name.original && <>
+                <div className="small unimportant">{r.person.name.original}</div>
+            </>}
+        </>;
+    },
     sorter: (r1, r2) => nameToString(r1.person.name).localeCompare(nameToString(r2.person.name)),
     width: 200,
 };

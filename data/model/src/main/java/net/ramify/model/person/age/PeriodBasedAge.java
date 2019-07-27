@@ -14,9 +14,10 @@ class PeriodBasedAge implements Age {
     }
 
     PeriodBasedAge(final Period lower, final Period upper) {
-        Preconditions.checkArgument(!lower.isNegative(), "Cannot have a negative age: %s", lower);
-        this.lower = lower;
-        this.upper = upper;
+        Preconditions.checkArgument(lower.getYears() >= 0, "Cannot have a negative age: %s", lower);
+        Preconditions.checkArgument(upper.getYears() >= 0, "Cannot have a negative age: %s", upper);
+        this.lower = lower.normalized();
+        this.upper = upper.normalized();
     }
 
     @Nonnull
@@ -29,6 +30,22 @@ class PeriodBasedAge implements Age {
     @Override
     public Period upperBound() {
         return upper;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PeriodBasedAge that = (PeriodBasedAge) o;
+        if (!lower.equals(that.lower)) return false;
+        return upper.equals(that.upper);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = lower.hashCode();
+        result = 31 * result + upper.hashCode();
+        return result;
     }
 
 }

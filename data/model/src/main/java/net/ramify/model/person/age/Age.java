@@ -43,6 +43,10 @@ public interface Age {
         return new PeriodBasedAge(Period.ofYears(minYears), Period.ofYears(maxYears));
     }
 
+    static Age between(final Period min, final Period max) {
+        return new PeriodBasedAge(min, max);
+    }
+
     static DateRange birthDate(final int age, final DateRange date) {
         return Age.ofYears(age).birthDate(date);
     }

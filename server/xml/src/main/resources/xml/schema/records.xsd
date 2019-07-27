@@ -16,11 +16,11 @@
 
     <xs:element name="burialRecords" type="tns:xmlBurialRecords"/>
 
-    <xs:element name="census1841England" type="tns:xmlEngland1841CensusRecord"/>
-
-    <xs:element name="censusRecords" type="tns:xmlCensusRecords"/>
-
     <xs:element name="churchBurial" type="tns:xmlBurialRecord"/>
+
+    <xs:element name="englandCensus" type="tns:xmlEnglandCensusRecords"/>
+
+    <xs:element name="familyResidence" type="tns:xmlFamilyResidenceRecord"/>
 
     <xs:element name="mention" type="tns:xmlMentionRecord"/>
 
@@ -62,7 +62,7 @@
 
                 <xs:element ref="tns:burialRecords"/>
 
-                <xs:element ref="tns:censusRecords"/>
+                <xs:element ref="tns:englandCensus"/>
 
             </xs:choice>
 
@@ -192,17 +192,7 @@
 
             <xs:extension base="tns:xmlPersonRecord">
 
-                <xs:sequence>
-
-                    <xs:choice maxOccurs="unbounded" minOccurs="0">
-
-                        <xs:element ref="ns4:father"/>
-
-                        <xs:element ref="ns4:mother"/>
-
-                    </xs:choice>
-
-                </xs:sequence>
+                <xs:sequence/>
 
                 <xs:attribute name="placeId" type="xs:string"/>
 
@@ -222,11 +212,17 @@
 
                     <xs:element minOccurs="0" ref="ns1:inYear"/>
 
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:residence"/>
+                    <xs:choice maxOccurs="unbounded" minOccurs="0">
+
+                        <xs:element ref="tns:residence"/>
+
+                        <xs:element ref="tns:familyResidence"/>
+
+                    </xs:choice>
 
                 </xs:sequence>
 
-                <xs:attribute name="placeId" type="xs:string" use="required"/>
+                <xs:attribute name="placeId" type="xs:string"/>
 
             </xs:extension>
 
@@ -288,19 +284,63 @@
 
     </xs:complexType>
 
-    <xs:complexType name="xmlCensusRecords">
+    <xs:complexType abstract="true" name="xmlCensusRecords">
 
         <xs:complexContent>
 
             <xs:extension base="tns:xmlRecords">
 
+                <xs:sequence/>
+
+                <xs:attribute name="censusPlace" type="xs:string" use="required"/>
+
+            </xs:extension>
+
+        </xs:complexContent>
+
+    </xs:complexType>
+
+    <xs:complexType name="xmlEnglandCensusRecords">
+
+        <xs:complexContent>
+
+            <xs:extension base="tns:xmlCensusRecords">
+
                 <xs:sequence>
 
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:census1841England"/>
+                    <xs:choice maxOccurs="unbounded" minOccurs="0">
+
+                        <xs:element form="qualified" name="entry1821byAge" type="tns:censusEngland1821ByAge"/>
+
+                        <xs:element form="qualified" name="entry1841" type="tns:censusEngland1841"/>
+
+                    </xs:choice>
 
                 </xs:sequence>
 
-                <xs:attribute name="censusPlace" type="xs:string" use="required"/>
+            </xs:extension>
+
+        </xs:complexContent>
+
+    </xs:complexType>
+
+    <xs:complexType name="censusEngland1821ByAge">
+
+        <xs:complexContent>
+
+            <xs:extension base="tns:xmlCensusRecord">
+
+                <xs:sequence>
+
+                    <xs:element form="qualified" name="head" type="tns:xmlResidenceRecord"/>
+
+                </xs:sequence>
+
+                <xs:attribute name="malesUnderFive" type="xs:int"/>
+
+                <xs:attribute name="malesFiveToTen" type="xs:int"/>
+
+                <xs:attribute name="femalesUnderFive" type="xs:int"/>
 
             </xs:extension>
 
@@ -330,7 +370,7 @@
 
                 <xs:sequence/>
 
-                <xs:attribute name="place" type="xs:string" use="required"/>
+                <xs:attribute name="place" type="xs:string"/>
 
             </xs:extension>
 
@@ -338,7 +378,7 @@
 
     </xs:complexType>
 
-    <xs:complexType name="xmlEngland1841CensusRecord">
+    <xs:complexType name="censusEngland1841">
 
         <xs:complexContent>
 
@@ -382,13 +422,37 @@
 
     </xs:complexType>
 
+    <xs:complexType name="xmlFamilyResidenceRecord">
+
+        <xs:complexContent>
+
+            <xs:extension base="tns:xmlResidenceRecord">
+
+                <xs:sequence>
+
+                    <xs:choice maxOccurs="unbounded" minOccurs="0">
+
+                        <xs:element ref="ns4:father"/>
+
+                        <xs:element ref="ns4:mother"/>
+
+                    </xs:choice>
+
+                </xs:sequence>
+
+            </xs:extension>
+
+        </xs:complexContent>
+
+    </xs:complexType>
+
     <xs:simpleType name="xmlRecordSetSource">
 
         <xs:restriction base="xs:string">
 
-            <xs:enumeration value="government"/>
-
             <xs:enumeration value="church"/>
+
+            <xs:enumeration value="government"/>
 
             <xs:enumeration value="manor"/>
 
@@ -400,25 +464,25 @@
 
         <xs:restriction base="xs:string">
 
-            <xs:enumeration value="marriage"/>
-
-            <xs:enumeration value="membership"/>
-
-            <xs:enumeration value="residence"/>
-
-            <xs:enumeration value="burial"/>
-
-            <xs:enumeration value="death"/>
-
             <xs:enumeration value="baptism"/>
 
-            <xs:enumeration value="payment"/>
+            <xs:enumeration value="census"/>
+
+            <xs:enumeration value="death"/>
 
             <xs:enumeration value="mixed"/>
 
             <xs:enumeration value="birth"/>
 
-            <xs:enumeration value="census"/>
+            <xs:enumeration value="membership"/>
+
+            <xs:enumeration value="payment"/>
+
+            <xs:enumeration value="residence"/>
+
+            <xs:enumeration value="marriage"/>
+
+            <xs:enumeration value="burial"/>
 
         </xs:restriction>
 
