@@ -17,6 +17,7 @@ public class FamilyBuilder {
     }
 
     public FamilyBuilder addRelationship(final Person from, final Person to, final RelationshipFactory relationship) {
+        if (from == to) return this;
         network.addNode(from);
         network.addNode(to);
         network.addEdge(from, to, relationship.relationshipBetween(from, to));

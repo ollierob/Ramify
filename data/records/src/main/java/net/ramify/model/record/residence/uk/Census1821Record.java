@@ -1,5 +1,6 @@
 package net.ramify.model.record.residence.uk;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Table;
 import net.ramify.model.date.ExactDate;
@@ -38,6 +39,7 @@ public class Census1821Record extends CensusRecord implements HasPlace {
             final Table<Gender, Age, Integer> ageCounts) {
         super(id, recordSetId, CENSUS_DATE, place);
         this.head = head;
+        Preconditions.checkArgument(!ageCounts.isEmpty());
         this.ageCounts = ageCounts;
     }
 
@@ -51,11 +53,20 @@ public class Census1821Record extends CensusRecord implements HasPlace {
     }
 
     private void enumerate(final Person head, final FamilyBuilder builder) {
+
+        if (ageCounts.size() == 1) return;
+
+        //TODO detect single 18+ residence with same gender
+        //final var withHeadGender = ageCounts.row(head.gender());
+
         for (final var cell : ageCounts.cellSet()) {
             for (int i = 0; i < cell.getValue(); i++) {
-                builder.addRelationship(head, this.anonymousPerson(cell.getRowKey(), cell.getColumnKey()), RelationshipFactory.UNKNOWN);
+                final var gender = cell.getRowKey();
+                final var age = cell.getColumnKey();
+                builder.addRelationship(head, this.anonymousPerson(gender, age), RelationshipFactory.UNKNOWN);
             }
         }
+
     }
 
     private Person anonymousPerson(final Gender gender, final Age age) {

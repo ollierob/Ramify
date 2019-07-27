@@ -64,4 +64,13 @@ public class IterableUtils {
                 .collect(Collectors.toSet());
     }
 
+    public static int integerSum(final Iterable<? extends Number> iterable) {
+        if (iterable instanceof Collection && ((Collection<?>) iterable).isEmpty()) return 0;
+        int sum = 0;
+        for (final var n : iterable) {
+            sum += n.intValue();
+        }
+        return sum;
+    }
+
 }
