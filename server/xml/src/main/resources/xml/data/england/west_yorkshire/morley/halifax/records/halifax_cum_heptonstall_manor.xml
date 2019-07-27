@@ -5,15 +5,17 @@
         xmlns:d="http://ramify.net/dates">
 
     <recordSet
-            id="halifax_manor"
+            id="halifax_cum_heptonstall_manor"
             parentId="wakefield_manor"
-            title="Halifax Manor"
+            title="Halifax-cum-Heptonstall Manor"
+            shortTitle="Halifax-cum-Heptonstall"
+            nextId="halifax_manor"
             coversPlaceId="parish:halifax"
             creatorPlace="parish:halifax"
             source="manor"
             type="mixed">
 
-        <d:betweenYears start="1439" end="1849"/>
+        <d:betweenYears start="1439" end="1651"/>
 
         <recordSet
                 id="halifax_manor_rental_1439"
@@ -65,18 +67,6 @@
                 type="mixed">
 
             <d:betweenYears start="1570" end="1625"/>
-
-        </recordSet>
-
-        <recordSet
-                id="halifax_manor_rolls_1700s"
-                title="Halifax Manor Court Rolls (1712 - 1804)"
-                shortTitle="Court Rolls"
-                source="manor"
-                type="mixed">
-
-            <d:betweenYears start="1712" end="1804"/>
-            <recordSetReference reference="DB/143/1-3" archiveId="wyas"/>
 
         </recordSet>
 

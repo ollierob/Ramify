@@ -7,8 +7,9 @@
 
     <recordSet
             id="heptonstall_manor"
-            parentId="halifax_manor"
+            parentId="wakefield_manor"
             title="Heptonstall Manor"
+            shortTitle="Heptonstall Manor"
             coversPlaceId="manor:heptonstall"
             creatorPlace="village:heptonstall"
             source="manor"

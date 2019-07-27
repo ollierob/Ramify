@@ -6,9 +6,9 @@
 
     <recordSet
             id="halifax_manor_tourn"
-            parentId="halifax_manor"
-            title="Halifax Manor Tourn"
-            shortTitle="Tourn"
+            parentId="wakefield_manor"
+            title="Halifax Tourn"
+            shortTitle="Halifax Tourn"
             source="manor"
             type="residence">
 
