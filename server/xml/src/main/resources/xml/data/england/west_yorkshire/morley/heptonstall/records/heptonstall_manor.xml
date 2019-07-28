@@ -15,6 +15,7 @@
             source="manor"
             type="mixed">
 
+        <nextRecord id="heptonstall_township"/>
         <d:betweenYears start="1651" end="1896"/>
 
         <recordSet
@@ -30,12 +31,12 @@
 
             <residenceRecords placeId="manor:heptonstall">
                 <d:inYear year="1652"/>
-                <residence gender="male" name="John Robertshaw">
+                <familyResidence gender="male" name="John Robertshaw">
                     <f:father name="Richard Robertshaw" deceased="true"/>
-                </residence>
-                <residence gender="male" name="Richard Robertshaw" age="12">
+                </familyResidence>
+                <familyResidence gender="male" name="Richard Robertshaw" age="12">
                     <f:father name="John Robertshaw" deceased="true"/>
-                </residence>
+                </familyResidence>
             </residenceRecords>
 
         </recordSet>

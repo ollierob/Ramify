@@ -9,6 +9,7 @@
             id="wadsworth_manor"
             parentId="wakefield_manor"
             title="Wadsworth Manor"
+            coversPlaceId="manor:wadsworth"
             source="manor"
             type="mixed">
 

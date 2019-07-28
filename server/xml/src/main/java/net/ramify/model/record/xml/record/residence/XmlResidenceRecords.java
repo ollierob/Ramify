@@ -36,7 +36,7 @@ public class XmlResidenceRecords extends XmlRecords {
 
     @Override
     public int size() {
-        return records.size();
+        return records == null ? 0 : records.size();
     }
 
     @Nonnull
