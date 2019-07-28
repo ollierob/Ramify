@@ -6,9 +6,9 @@ import {RecordSetId, sortRecordSetByDateThenTitle} from "./RecordSet";
 
 export interface RecordLoader {
 
-    loadRecords(id: RecordSetId, options?: RecordOptions): Promise<ReadonlyArray<IndividualRecord.AsObject>>
+    loadRecords(id: RecordSetId, options?: RecordOptions): Promise<ReadonlyArray<EnrichedRecord>>
 
-    submitSearch(search: RecordSearch): Promise<ReadonlyArray<IndividualRecord.AsObject>>
+    submitSearch(search: RecordSearch): Promise<ReadonlyArray<EnrichedRecord>>
 
     loadRecordSet(id: RecordSetId): Promise<Readonly<RecordSet.AsObject>>
 
@@ -22,6 +22,7 @@ export interface RecordLoader {
 
 type RecordOptions = {start?: number, limit?: number, children?: boolean}
 export type RecordSetOptions = {name?: string, place?: PlaceId, limit?: number, onlyParents?: boolean}
+export type EnrichedRecord = IndividualRecord.AsObject & {recordSet: RecordSet.AsObject};
 
 class ProtoRecordLoader implements RecordLoader {
 
@@ -63,9 +64,10 @@ function readRecordSets(list: RecordSetList): RecordSet.AsObject[] {
     return list.getRecordsetList().map(l => l.toObject()).sort(sortRecordSetByDateThenTitle);
 }
 
-function readRecords(list: IndividualRecordList): IndividualRecord.AsObject[] {
+function readRecords(list: IndividualRecordList): EnrichedRecord[] {
     if (!list) return [];
-    return list.getRecordList().map(l => l.toObject());
+    const recordSets = list.getRecordsetsMap();
+    return list.getRecordList().map(l => l.toObject()).map<EnrichedRecord>(o => ({...o, recordSet: recordSets.get(o.recordsetid).toObject()}));
 }
 
 export const DEFAULT_RECORD_LOADER: RecordLoader = new ProtoRecordLoader();

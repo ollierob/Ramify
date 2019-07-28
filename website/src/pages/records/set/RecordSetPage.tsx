@@ -1,8 +1,8 @@
 import * as React from "react";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
-import {IndividualRecord, RecordSearch, RecordSet, RecordSetRelatives} from "../../../protobuf/generated/record_pb";
+import {RecordSearch, RecordSet, RecordSetRelatives} from "../../../protobuf/generated/record_pb";
 import {RouteComponentProps} from "react-router";
-import {DEFAULT_RECORD_LOADER} from "../../../components/records/RecordLoader";
+import {DEFAULT_RECORD_LOADER, EnrichedRecord} from "../../../components/records/RecordLoader";
 import {DEFAULT_PLACE_LOADER} from "../../../components/places/PlaceLoader";
 import {PlaceBundle} from "../../../protobuf/generated/place_pb";
 import {ErrorMessage} from "../../../components/style/Error";
@@ -15,14 +15,14 @@ import BasePage from "../../BasePage";
 type Props = RouteComponentProps<any>
 
 type State = {
-    records: AsyncData<ReadonlyArray<IndividualRecord.AsObject>>
+    records: AsyncData<ReadonlyArray<EnrichedRecord>>
     recordSetId?: string;
     recordSet: AsyncData<RecordSet.AsObject>;
     recordSetCoversPlace: AsyncData<PlaceBundle.AsObject>
     recordSetSource: AsyncData<PlaceBundle.AsObject>
     recordSetRelatives: AsyncData<RecordSetRelatives.AsObject>
     search: RecordSearch;
-    searchResults: AsyncData<ReadonlyArray<IndividualRecord.AsObject>>;
+    searchResults: AsyncData<ReadonlyArray<EnrichedRecord>>;
 }
 
 export default class RecordSetPage extends BasePage<Props, State> {

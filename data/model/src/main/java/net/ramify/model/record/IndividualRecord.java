@@ -5,13 +5,13 @@ import net.ramify.model.date.DateRange;
 import net.ramify.model.date.HasDate;
 import net.ramify.model.person.HasPerson;
 import net.ramify.model.person.Person;
-import net.ramify.model.record.collection.HasRecordSetId;
-import net.ramify.model.record.collection.RecordSetId;
+import net.ramify.model.record.collection.HasRecordSet;
+import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.proto.RecordProto;
 
 import javax.annotation.Nonnull;
 
-public interface IndividualRecord extends HasPerson, HasDate, HasRecordSetId, BuildsProto<RecordProto.IndividualRecord> {
+public interface IndividualRecord extends HasPerson, HasDate, HasRecordSet, BuildsProto<RecordProto.IndividualRecord> {
 
     @Nonnull
     default RecordProto.IndividualRecord.Builder toProtoBuilder() {
@@ -41,8 +41,8 @@ public interface IndividualRecord extends HasPerson, HasDate, HasRecordSetId, Bu
 
             @Nonnull
             @Override
-            public RecordSetId recordSetId() {
-                return record.recordSetId();
+            public RecordSet recordSet() {
+                return record.recordSet();
             }
 
             @Nonnull

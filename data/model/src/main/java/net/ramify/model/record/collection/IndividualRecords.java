@@ -38,7 +38,7 @@ public interface IndividualRecords extends BuildsProto<RecordProto.IndividualRec
     default RecordProto.IndividualRecordList toProto() {
         final var builder = RecordProto.IndividualRecordList.newBuilder();
         try (final var stream = this.records()) {
-            stream.forEach(r -> builder.addRecord(r.toProto()));
+            stream.forEach(r -> builder.addRecord(r.toProto()).putRecordSets(r.recordSetId().value(), r.recordSet().toProto()));
         }
         return builder.build();
     }

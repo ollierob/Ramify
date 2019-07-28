@@ -1,6 +1,6 @@
 import * as React from "react";
 import {CSSProperties} from "react";
-import {ExternalRecordReference, IndividualRecord, RecordSet, RecordSetRelatives} from "../../../protobuf/generated/record_pb";
+import {ExternalRecordReference, RecordSet, RecordSetRelatives} from "../../../protobuf/generated/record_pb";
 import {Card, Icon} from "antd";
 import {recordSetHref} from "../RecordLinks";
 import {RecordCards} from "../../../components/records/RecordCards";
@@ -14,13 +14,14 @@ import {Loading} from "../../../components/style/Loading";
 import {stringMultimap} from "../../../components/Maps";
 import {RecordSetReferences} from "../../../components/records/RecordSetReference";
 import {joinComponents} from "../../../components/Components";
+import {EnrichedRecord} from "../../../components/records/RecordLoader";
 
 type Props = RecordPaginationHandler & RecordSearchHandler & RouteComponentProps<any> & {
     loading: boolean;
     recordSet: Readonly<RecordSet.AsObject>
     recordSetRelatives: AsyncData<RecordSetRelatives.AsObject>;
-    records: AsyncData<ReadonlyArray<IndividualRecord.AsObject>>
-    searchResults: AsyncData<ReadonlyArray<IndividualRecord.AsObject>>;
+    records: AsyncData<ReadonlyArray<EnrichedRecord>>
+    searchResults: AsyncData<ReadonlyArray<EnrichedRecord>>;
 }
 
 export default class RecordSetCard extends React.PureComponent<Props> {
@@ -28,7 +29,6 @@ export default class RecordSetCard extends React.PureComponent<Props> {
     constructor(props) {
         super(props);
     }
-
 
     render() {
 

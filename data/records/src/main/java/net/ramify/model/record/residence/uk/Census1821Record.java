@@ -20,7 +20,7 @@ import net.ramify.model.place.HasPlace;
 import net.ramify.model.place.Place;
 import net.ramify.model.record.GenericRecordPerson;
 import net.ramify.model.record.RecordId;
-import net.ramify.model.record.collection.RecordSetId;
+import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.residence.CensusRecord;
 import net.ramify.model.relationship.RelationshipFactory;
 
@@ -39,11 +39,11 @@ public class Census1821Record extends CensusRecord implements HasPlace {
 
     public Census1821Record(
             final RecordId id,
-            final RecordSetId recordSetId,
+            final RecordSet recordSet,
             final Place place,
             final Person head,
             final Table<Gender, Age, Integer> ageCounts) {
-        super(id, recordSetId, CENSUS_DATE, place);
+        super(id, recordSet, CENSUS_DATE, place);
         this.head = head;
         Preconditions.checkArgument(!ageCounts.isEmpty());
         this.ageCounts = ageCounts;

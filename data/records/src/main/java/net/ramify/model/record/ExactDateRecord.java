@@ -2,7 +2,7 @@ package net.ramify.model.record;
 
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.proto.EventProto;
-import net.ramify.model.record.collection.RecordSetId;
+import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.proto.RecordProto;
 
 import javax.annotation.Nonnull;
@@ -11,15 +11,15 @@ public abstract class ExactDateRecord implements Record {
 
     private final RecordId id;
     private final ExactDate date;
-    private final RecordSetId recordSetId;
+    private final RecordSet recordSet;
 
     protected ExactDateRecord(
             final RecordId id,
-            final RecordSetId recordSetId,
+            final RecordSet recordSet,
             final ExactDate date) {
         this.id = id;
         this.date = date;
-        this.recordSetId = recordSetId;
+        this.recordSet = recordSet;
     }
 
     @Nonnull
@@ -30,8 +30,8 @@ public abstract class ExactDateRecord implements Record {
 
     @Nonnull
     @Override
-    public RecordSetId recordSetId() {
-        return recordSetId;
+    public RecordSet recordSet() {
+        return recordSet;
     }
 
     @Nonnull

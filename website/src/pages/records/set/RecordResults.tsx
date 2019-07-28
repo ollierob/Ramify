@@ -1,15 +1,16 @@
 import * as React from "react";
 import {Tabs} from "antd";
 import {AsyncData} from "../../../components/fetch/AsyncData";
-import {IndividualRecord, Record, RecordSet} from "../../../protobuf/generated/record_pb";
+import {RecordSet} from "../../../protobuf/generated/record_pb";
 import {RecordTable} from "./RecordTable";
 import {RecordPaginationHandler} from "../../../components/records/RecordPaginationHandler";
 import RecordImageGallery from "./RecordImageGallery";
+import {EnrichedRecord} from "../../../components/records/RecordLoader";
 
 type Props = RecordPaginationHandler & {
     recordSet: RecordSet.AsObject;
-    records: AsyncData<ReadonlyArray<IndividualRecord.AsObject>>;
-    searchResults: AsyncData<ReadonlyArray<IndividualRecord.AsObject>>;
+    records: AsyncData<ReadonlyArray<EnrichedRecord>>;
+    searchResults: AsyncData<ReadonlyArray<EnrichedRecord>>;
     showRecordSet?: boolean;
 }
 

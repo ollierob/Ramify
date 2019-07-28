@@ -5,7 +5,7 @@ import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.date.HasDate;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.collection.HasFamilies;
-import net.ramify.model.record.collection.HasRecordSetId;
+import net.ramify.model.record.collection.HasRecordSet;
 import net.ramify.model.record.proto.RecordProto;
 import net.ramify.model.record.type.RecordHandler;
 import net.ramify.utils.objects.Castable;
@@ -13,7 +13,7 @@ import net.ramify.utils.objects.Castable;
 import javax.annotation.Nonnull;
 import java.util.stream.Stream;
 
-public interface Record extends HasRecordId, HasRecordSetId, HasDate, HasFamilies, Castable<Record>, BuildsProto<RecordProto.Record> {
+public interface Record extends HasRecordId, HasRecordSet, HasDate, HasFamilies, Castable<Record>, BuildsProto<RecordProto.Record> {
 
     @Nonnull
     default Stream<? extends IndividualRecord> individualRecords() {

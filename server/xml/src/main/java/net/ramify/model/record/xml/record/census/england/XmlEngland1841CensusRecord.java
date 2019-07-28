@@ -28,7 +28,7 @@ public class XmlEngland1841CensusRecord extends XmlCensusRecord {
         final var id = this.recordId();
         final var place = MoreObjects.firstNonNull(this.place(context.places()), censusPlace);
         final var entries = this.entries(context, censusPlace);
-        return new Census1841Record(id, recordSet.recordSetId(), place, entries);
+        return new Census1841Record(id, recordSet, place, entries);
     }
 
     List<Census1841Record.Census1841Entry> entries(final RecordContext context, final Place censusPlace) {

@@ -34,7 +34,7 @@ public class XmlMentionRecord extends XmlPersonRecord {
         final var family = new SinglePersonFamily(this.person(date, context));
         return new GenericLifeEventRecord(
                 recordId,
-                recordSet.recordSetId(),
+                recordSet,
                 family,
                 date);
     }

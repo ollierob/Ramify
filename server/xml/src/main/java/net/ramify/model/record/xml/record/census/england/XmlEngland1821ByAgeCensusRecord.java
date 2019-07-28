@@ -76,7 +76,7 @@ public class XmlEngland1821ByAgeCensusRecord extends XmlCensusRecord {
         final var ageCounts = this.ageCounts();
         return new Census1821Record(
                 id,
-                recordSet.recordSetId(),
+                recordSet,
                 place,
                 head,
                 ageCounts);

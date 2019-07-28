@@ -20,6 +20,7 @@ export function determineColumns(recordSet: RecordSet.AsObject, properties: Reco
             break;
         default:
             columns.push(...genericColumns(properties));
+            if (showRecordSet) columns.push(RecordSetColumn);
             break;
     }
     columns.push(NotesColumn);
@@ -110,7 +111,8 @@ const BurialDateColumn: RecordColumn = {
 const RecordSetColumn: RecordColumn = {
     key: "recordSet",
     title: "Record set",
-    dataIndex: "record.title"
+    render: (t, r) => r.record.recordSet && r.record.recordSet.longtitle,
+    width: 200
 };
 
 const NotesColumn: RecordColumn = {

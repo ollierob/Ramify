@@ -35,7 +35,7 @@ public class XmlResidenceRecord extends XmlPersonRecord {
             final var place = Functions.ifNonNull(placeId, id -> context.places().require(new PlaceId(id)), parentPlace);
             final var person = this.person(place, date, context);
             final var family = this.family(person, place, date, context).build();
-            return new GenericLifeEventRecord(recordId, recordSet.recordSetId(), family, date);
+            return new GenericLifeEventRecord(recordId, recordSet, family, date);
         } catch (final Exception ex) {
             throw new RuntimeException("Error building residence record for " + recordId, ex);
         }

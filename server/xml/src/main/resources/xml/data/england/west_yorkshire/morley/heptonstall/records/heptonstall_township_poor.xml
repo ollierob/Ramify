@@ -9,6 +9,7 @@
             parentId="heptonstall_township"
             title="Heptonstall Overseer Of The Poor"
             shortTitle="Overseer of the Poor"
+            coversPlaceId="township:heptonstall"
             source="government"
             type="mixed">
 

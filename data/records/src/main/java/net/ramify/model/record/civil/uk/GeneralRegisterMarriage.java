@@ -8,7 +8,7 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.GenericRecordEntry;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.civil.AbstractCivilRecord;
-import net.ramify.model.record.collection.RecordSetId;
+import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.type.MarriageRecord;
 import net.ramify.model.relationship.type.ChildParent;
 import net.ramify.model.relationship.type.Married;
@@ -28,7 +28,7 @@ public class GeneralRegisterMarriage extends AbstractCivilRecord implements Gene
 
     public GeneralRegisterMarriage(
             final RecordId id,
-            final RecordSetId recordSetId,
+            final RecordSet recordSet,
             final ExactDate date,
             final PlaceId marriagePlace,
             final GenericRecordEntry groom,
@@ -37,7 +37,7 @@ public class GeneralRegisterMarriage extends AbstractCivilRecord implements Gene
             final GenericRecordEntry brideFather,
             final GenericRecordEntry firstWitness,
             final GenericRecordEntry secondWitness) {
-        super(id, recordSetId, date);
+        super(id, recordSet, date);
         this.marriagePlace = marriagePlace;
         this.groom = groom;
         this.bride = bride;

@@ -7,11 +7,12 @@ import {Event} from "../../../protobuf/generated/event_pb";
 import {isBirthEvent, isBurialEvent, isDeathEvent, isResidenceEvent} from "../../../components/event/Event";
 import {determineColumns, RecordColumn} from "./RecordTableColumns";
 import {NoData} from "../../../components/style/NoData";
+import {EnrichedRecord} from "../../../components/records/RecordLoader";
 
 type Props = Partial<RecordPaginationHandler> & {
     recordSet: RecordSet.AsObject;
     loading: boolean;
-    records: ReadonlyArray<IndividualRecord.AsObject>
+    records: ReadonlyArray<EnrichedRecord>
     showRecordSet?: boolean;
 }
 
@@ -27,7 +28,7 @@ export type TableRow = {
     death?: Event.AsObject;
     burial?: Event.AsObject;
     image?: string;
-    recordSetId?: string;
+    record: EnrichedRecord;
 }
 
 export class RecordTable extends React.PureComponent<Props, State> {
@@ -72,7 +73,7 @@ export type RecordProperties = {
     hasBurial?: boolean;
 }
 
-function buildIndividualRecords(records: ReadonlyArray<IndividualRecord.AsObject>, properties: RecordProperties): TableRow[] {
+function buildIndividualRecords(records: ReadonlyArray<EnrichedRecord>, properties: RecordProperties): TableRow[] {
     if (!records || !records.length) return [];
     const out: TableRow[] = [];
     records.forEach(record => out.push(createRecord(record)));
@@ -83,10 +84,10 @@ function buildIndividualRecords(records: ReadonlyArray<IndividualRecord.AsObject
     return out;
 }
 
-function createRecord(record: IndividualRecord.AsObject): TableRow {
+function createRecord(record: EnrichedRecord): TableRow {
     //TODO include resolved record set
     const person = record.person;
-    const out: TableRow = {person, recordSetId: record.recordsetid};
+    const out: TableRow = {person, record};
     out.birth = person.eventsList.find(isBirthEvent);
     out.residence = person.eventsList.find(isResidenceEvent);
     out.death = person.eventsList.find(isDeathEvent);

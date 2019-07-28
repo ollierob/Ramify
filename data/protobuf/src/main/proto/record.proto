@@ -38,6 +38,7 @@ message IndividualRecord {
 message IndividualRecordList {
 
     repeated IndividualRecord record = 1;
+    map<string, RecordSet> recordSets = 2;
 
 }
 

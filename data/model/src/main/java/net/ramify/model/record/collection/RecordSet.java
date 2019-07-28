@@ -17,7 +17,16 @@ import java.util.Set;
 /**
  *
  */
-public interface RecordSet extends HasTitleDescription, HasRecordSetId, HasDate, HasPlaceId, BuildsProto<RecordProto.RecordSet> {
+public interface RecordSet extends HasTitleDescription, HasRecordSet, HasDate, HasPlaceId, BuildsProto<RecordProto.RecordSet> {
+
+    @Nonnull
+    @Override
+    default RecordSet recordSet() {
+        return this;
+    }
+
+    @Override
+    RecordSetId recordSetId();
 
     @Nonnull
     Set<RecordSetReference> references();

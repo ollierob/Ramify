@@ -70,7 +70,7 @@ public class XmlBurialRecord extends XmlPersonRecord {
         final var burialDate = ExactDate.on(year, Month.of(month), dayOfMonth);
         return new ChurchBurialRecord(
                 this.recordId(),
-                recordSet.recordSetId(),
+                recordSet,
                 burialDate,
                 placeId,
                 this.family(burialDate, context));
