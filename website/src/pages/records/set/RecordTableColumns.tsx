@@ -20,10 +20,10 @@ export function determineColumns(recordSet: RecordSet.AsObject, properties: Reco
             break;
         default:
             columns.push(...genericColumns(properties));
-            if (showRecordSet) columns.push(RecordSetColumn);
             break;
     }
     columns.push(NotesColumn);
+    if (showRecordSet) columns.push(RecordSetColumn);
     return columns;
 }
 
