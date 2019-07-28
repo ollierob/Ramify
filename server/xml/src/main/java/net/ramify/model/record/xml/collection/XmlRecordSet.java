@@ -42,19 +42,16 @@ class XmlRecordSet implements HasRecordSetId {
     @XmlAttribute(name = "parentId", required = false)
     private String parentId;
 
-    @XmlAttribute(name = "nextId", required = false)
-    private String nextId;
-
     @XmlAttribute(name = "title", required = true)
     private String title;
 
-    @XmlAttribute(name = "shortTitle", required = false)
+    @XmlAttribute(name = "shortTitle")
     private String shortTitle;
 
-    @XmlAttribute(name = "creatorPlace", required = false)
+    @XmlAttribute(name = "creatorPlace")
     private String creatorPlaceId;
 
-    @XmlAttribute(name = "coversPlaceId", required = false)
+    @XmlAttribute(name = "coversPlaceId")
     private String coversPlaceId;
 
     @XmlAttribute(name = "source", required = true)
@@ -63,8 +60,11 @@ class XmlRecordSet implements HasRecordSetId {
     @XmlAttribute(name = "type", required = true)
     private XmlRecordSetType type;
 
-    @XmlElement(namespace = XmlRecord.NAMESPACE, name = "description", required = false)
+    @XmlElement(namespace = XmlRecord.NAMESPACE, name = "description")
     private String description;
+
+    @XmlElement(name = "nextRecord", namespace = XmlRecord.NAMESPACE)
+    private List<XmlRecordSetId> nextIds;
 
     @XmlElements({
             @XmlElement(name = "inYear", type = XmlInYear.class, namespace = XmlDateRange.NAMESPACE),
@@ -113,7 +113,7 @@ class XmlRecordSet implements HasRecordSetId {
                 this.size(),
                 this.buildReferences(context),
                 Functions.ifNonNull(parent, HasRecordSetId::recordSetId),
-                Functions.ifNonNull(nextId, RecordSetId::new));
+                this.nextIds());
     }
 
     DateRange date(final RecordSet parent, final DateParser dateParser) {
@@ -136,6 +136,11 @@ class XmlRecordSet implements HasRecordSetId {
     private Set<RecordSetReference> buildReferences(final RecordContext context) {
         if (references == null) return Collections.emptySet();
         return SetUtils.transform(references, ref -> ref.build(context.archives()));
+    }
+
+    private Set<RecordSetId> nextIds() {
+        if (nextIds == null) return Collections.emptySet();
+        return SetUtils.transform(nextIds, XmlRecordSetId::recordSetId);
     }
 
     private int size() {

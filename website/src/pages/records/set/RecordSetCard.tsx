@@ -33,7 +33,7 @@ export default class RecordSetCard extends React.PureComponent<Props> {
     render() {
 
         const recordSet = this.props.recordSet;
-        const relatives: RecordSetRelatives.AsObject = this.props.recordSetRelatives.data || {childList: []};
+        const relatives: RecordSetRelatives.AsObject = this.props.recordSetRelatives.data || {childList: [], nextList: []};
 
         return <Card
             className="info"
@@ -98,10 +98,20 @@ const Relatives = (props: {relatives: RecordSetRelatives.AsObject}) => {
         {relatives.previous && <div className="relationship previous" style={MarginBottom}>
             <Icon type="left-square"/> Previous in series was <a href={recordSetHref(relatives.previous)}>{relatives.previous.longtitle}</a>
         </div>}
-        {relatives.next && <div className="relationship next" style={MarginBottom}>
-            <Icon type="right-square"/> Next in series is <a href={recordSetHref(relatives.next)}>{relatives.next.longtitle}</a>
-        </div>}
+        <NextRelatives next={relatives.nextList}/>
     </>;
+};
+
+const NextRelatives = (props: {next: ReadonlyArray<RecordSet.AsObject>}) => {
+    const next = props.next;
+    if (!next || !next.length) return null;
+    return <div className="relationship next" style={MarginBottom}>
+        <Icon type="right-square"/>
+        {" "}
+        Next in series {next.length > 1 ? "are" : "is"}
+        {" "}
+        {joinComponents(next.map(n => <a href={recordSetHref(n)}>{n.longtitle}</a>), " and ")}
+    </div>;
 };
 
 const References = (props: {references: ReadonlyArray<ExternalRecordReference.AsObject>}) => {

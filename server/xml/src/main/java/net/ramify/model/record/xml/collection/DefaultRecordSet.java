@@ -28,7 +28,8 @@ public class DefaultRecordSet implements RecordSet {
     private final String description;
     private final int size;
     private final Set<RecordSetReference> references;
-    private final RecordSetId parent, next;
+    private final RecordSetId parent;
+    private final Set<RecordSetId> next;
 
     DefaultRecordSet(
             final RecordSetId id,
@@ -43,7 +44,7 @@ public class DefaultRecordSet implements RecordSet {
             final int size,
             final Set<RecordSetReference> references,
             final RecordSetId parent,
-            final RecordSetId next) {
+            final Set<RecordSetId> next) {
         this.id = id;
         this.source = source;
         this.type = type;
@@ -112,7 +113,7 @@ public class DefaultRecordSet implements RecordSet {
     }
 
     @CheckForNull
-    public RecordSetId nextId() {
+    public Set<RecordSetId> nextIds() {
         return next;
     }
 

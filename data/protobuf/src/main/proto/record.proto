@@ -70,7 +70,7 @@ message RecordSetRelatives {
 
     RecordSet parent = 1;
     RecordSet previous = 2;
-    RecordSet next = 3;
+    repeated RecordSet next = 3;
     repeated RecordSet child = 4;
 
 }

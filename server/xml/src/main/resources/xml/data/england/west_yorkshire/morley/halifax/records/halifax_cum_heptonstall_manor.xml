@@ -9,12 +9,13 @@
             parentId="wakefield_manor"
             title="Halifax-cum-Heptonstall Manor"
             shortTitle="Halifax-cum-Heptonstall"
-            nextId="halifax_manor"
             coversPlaceId="parish:halifax"
             creatorPlace="parish:halifax"
             source="manor"
             type="mixed">
 
+        <nextRecord id="halifax_manor"/>
+        <nextRecord id="heptonstall_manor"/>
         <d:betweenYears start="1439" end="1651"/>
 
         <recordSet

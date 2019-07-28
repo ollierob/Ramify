@@ -16,21 +16,21 @@
 
     <recordSet
             id="england_census_1821"
-            nextId="england_census_1831"
             title="England 1821 Census"
             coversPlaceId="country:england"
             source="government"
             type="residence">
+        <nextRecord id="england_census_1831"/>
         <d:inYear year="1821"/>
     </recordSet>
 
     <recordSet
             id="england_census_1831"
-            nextId="england_census_1841"
             title="England 1831 Census"
             coversPlaceId="country:england"
             source="government"
             type="residence">
+        <nextRecord id="england_census_1841"/>
         <d:inYear year="1831"/>
     </recordSet>
 
@@ -39,8 +39,8 @@
             title="England 1841 Census"
             coversPlaceId="country:england"
             source="government"
-            type="residence"
-            nextId="england_census_1851">
+            type="residence">
+        <nextRecord id="england_census_1851"/>
         <d:inYear year="1841"/>
     </recordSet>
 

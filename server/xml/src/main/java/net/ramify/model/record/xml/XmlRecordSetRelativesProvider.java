@@ -33,8 +33,8 @@ class XmlRecordSetRelativesProvider extends AbstractMappedProvider<RecordSetId, 
 
     void add(final DefaultRecordSet recordSet) {
         final var lazy = workingSet.computeIfAbsent(recordSet.recordSetId(), LazyRelationships::new);
-        Consumers.ifNonNull(recordSet.nextId(), nextId -> {
-            lazy.setNext(nextId);
+        recordSet.nextIds().forEach(nextId -> {
+            lazy.addNext(nextId);
             workingSet.computeIfAbsent(nextId, LazyRelationships::new).setPrevious(recordSet.recordSetId());
         });
         Consumers.ifNonNull(recordSet.parentId(), parentId -> {
@@ -56,7 +56,8 @@ class XmlRecordSetRelativesProvider extends AbstractMappedProvider<RecordSetId, 
     private static class LazyRelationships {
 
         private final RecordSetId id;
-        private RecordSetId parentId, nextId, previousId;
+        private RecordSetId parentId, previousId;
+        private final Set<RecordSetId> nextIds = Sets.newHashSet();
         private final Set<RecordSetId> childIds = Sets.newHashSet();
 
         LazyRelationships(final RecordSetId id) {
@@ -67,8 +68,8 @@ class XmlRecordSetRelativesProvider extends AbstractMappedProvider<RecordSetId, 
             this.parentId = id;
         }
 
-        void setNext(final RecordSetId id) {
-            this.nextId = id;
+        void addNext(final RecordSetId id) {
+            this.nextIds.add(id);
         }
 
         void setPrevious(final RecordSetId id) {
@@ -82,7 +83,7 @@ class XmlRecordSetRelativesProvider extends AbstractMappedProvider<RecordSetId, 
         RecordSetRelatives build(final RecordSetProvider recordSets) {
             return new DefaultRecordSetRelatives(
                     Functions.ifNonNull(parentId, recordSets::require),
-                    Functions.ifNonNull(nextId, recordSets::require),
+                    ImmutableSet.copyOf(SetUtils.transform(nextIds, recordSets::require)),
                     Functions.ifNonNull(previousId, recordSets::require),
                     ImmutableSet.copyOf(SetUtils.transform(childIds, recordSets::require)));
         }
@@ -92,10 +93,10 @@ class XmlRecordSetRelativesProvider extends AbstractMappedProvider<RecordSetId, 
     @XmlTransient
     private static class DefaultRecordSetRelatives implements RecordSetRelatives {
 
-        private final RecordSet parent, next, previous;
-        private final Set<RecordSet> children;
+        private final RecordSet parent, previous;
+        private final Set<RecordSet> next, children;
 
-        DefaultRecordSetRelatives(RecordSet recordSet, RecordSet next, RecordSet previous, Set<RecordSet> children) {
+        DefaultRecordSetRelatives(RecordSet recordSet, Set<RecordSet> next, RecordSet previous, Set<RecordSet> children) {
             parent = recordSet;
             this.next = next;
             this.previous = previous;
@@ -110,7 +111,7 @@ class XmlRecordSetRelativesProvider extends AbstractMappedProvider<RecordSetId, 
 
         @CheckForNull
         @Override
-        public RecordSet next() {
+        public Set<RecordSet> next() {
             return next;
         }
 

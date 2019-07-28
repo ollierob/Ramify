@@ -15,8 +15,8 @@ public interface RecordSetRelatives extends BuildsProto<RecordProto.RecordSetRel
     @CheckForNull
     RecordSet parent();
 
-    @CheckForNull
-    RecordSet next();
+    @Nonnull
+    Set<RecordSet> next();
 
     @CheckForNull
     RecordSet previous();
@@ -33,7 +33,7 @@ public interface RecordSetRelatives extends BuildsProto<RecordProto.RecordSetRel
     default RecordProto.RecordSetRelatives.Builder toProtoBuilder() {
         final var builder = RecordProto.RecordSetRelatives.newBuilder();
         Consumers.ifNonNull(this.parent(), parent -> builder.setParent(parent.toProto()));
-        Consumers.ifNonNull(this.next(), parent -> builder.setNext(parent.toProto()));
+        this.next().forEach(next -> builder.addNext(next.toProto()));
         Consumers.ifNonNull(this.previous(), parent -> builder.setPrevious(parent.toProto()));
         this.children().forEach(child -> builder.addChild(child.toProto()));
         return builder;
@@ -55,8 +55,8 @@ public interface RecordSetRelatives extends BuildsProto<RecordProto.RecordSetRel
 
         @CheckForNull
         @Override
-        public RecordSet next() {
-            return null;
+        public Set<RecordSet> next() {
+            return Collections.emptySet();
         }
 
         @CheckForNull

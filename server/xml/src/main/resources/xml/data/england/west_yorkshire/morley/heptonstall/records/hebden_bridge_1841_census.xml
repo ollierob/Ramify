@@ -7,7 +7,6 @@
 
     <recordSet
             id="census_1841_hebden_bridge"
-            nextId="census_1851_hebden_bridge"
             parentId="census_1841_wry_halifax"
             title="Hebden Bridge District 1841 Census"
             shortTitle="Hebden Bridge District"
@@ -15,6 +14,7 @@
             source="government"
             type="census">
 
+        <nextRecord id="census_1851_hebden_bridge"/>
         <d:inYear year="1841"/>
 
         <recordSet

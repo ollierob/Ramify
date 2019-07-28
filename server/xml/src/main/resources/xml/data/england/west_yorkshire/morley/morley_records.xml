@@ -62,7 +62,6 @@
 
     <recordSet
             id="census_1821_wry_morley"
-            nextId="census_1831_wry_morley"
             parentId="census_1821_wry"
             title="Morley Wapentake 1821 Census"
             shortTitle="Morley"
@@ -70,6 +69,7 @@
             source="government"
             type="census">
 
+        <nextRecord id="census_1831_wry_morley"/>
         <d:inYear year="1821"/>
 
         <recordSet
@@ -77,17 +77,18 @@
                 title="Halifax Parish 1821 Census"
                 shortTitle="Halifax Parish"
                 coversPlaceId="parish:halifax"
-                nextId="census_1831_wry_halifax"
                 source="government"
                 type="census">
+
+            <nextRecord id="census_1831_wry_halifax"/>
             <d:inYear year="1821"/>
+            
         </recordSet>
 
     </recordSet>
 
     <recordSet
             id="census_1831_wry_morley"
-            nextId="census_1841_wry_morley"
             parentId="census_1831_wry"
             title="Morley Wapentake 1831 Census"
             shortTitle="Morley"
@@ -95,6 +96,7 @@
             source="government"
             type="census">
 
+        <nextRecord id="census_1841_wry_morley"/>
         <d:inYear year="1831"/>
 
         <recordSet
@@ -102,9 +104,9 @@
                 title="Halifax Parish 1831 Census"
                 shortTitle="Halifax"
                 coversPlaceId="parish:halifax"
-                nextId="census_1841_wry_halifax"
                 source="government"
                 type="census">
+            <nextRecord id="census_1841_wry_halifax"/>
             <d:inYear year="1831"/>
         </recordSet>
 
@@ -112,7 +114,6 @@
 
     <recordSet
             id="census_1841_wry_morley"
-            nextId="census_1851_wry_morley"
             parentId="census_1841_wry"
             title="Morley Wapentake 1841 Census"
             shortTitle="Morley"
@@ -120,6 +121,7 @@
             source="government"
             type="census">
 
+        <nextRecord id="census_1851_wry_morley"/>
         <d:inYear year="1841"/>
 
         <recordSet
