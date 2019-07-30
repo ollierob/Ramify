@@ -9,6 +9,7 @@
             parentId="wakefield_manor"
             title="Halifax Tourn"
             shortTitle="Halifax Tourn"
+            coversPlaceId="parish:halifax"
             source="manor"
             type="residence">
 

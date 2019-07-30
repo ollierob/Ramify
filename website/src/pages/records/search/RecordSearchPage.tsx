@@ -21,7 +21,6 @@ type State = {
     selectedRegion: PlaceId[];
     regions: CascaderOptionType[];
     selectedRange: string[];
-    ranges: CascaderOptionType[];
     recordSets: AsyncData<ReadonlyArray<RecordSet.AsObject>>;
     recordName?: string;
 }
@@ -38,7 +37,6 @@ export default class RecordSearchPage extends BasePage<Props, State> {
             selectedRegion: [],
             regions: [],
             selectedRange: [],
-            ranges: generateYearRanges(),
             recordSets: {},
             recordName: options.name
         };
@@ -93,7 +91,7 @@ export default class RecordSearchPage extends BasePage<Props, State> {
                             changeOnSelect
                             value={this.state.selectedRange}
                             onChange={selectedRange => this.setState({selectedRange})}
-                            options={this.state.ranges}
+                            options={YearRanges}
                             displayRender={this.renderRange}/>
                     </Form.Item>
 
@@ -174,9 +172,11 @@ function generateCountryOptions(countries: ReadonlyArray<Place.AsObject>): Casca
     }));
 }
 
+const YearRanges = generateYearRanges();
+
 function generateYearRanges(): CascaderOptionType[] {
     const options: CascaderOptionType[] = [];
-    for (let century = 1400; century <= 1900; century += 100) {
+    for (let century = 1300; century <= 1900; century += 100) {
         const centuryEnd = century + 100;
         const centuryOption: CascaderOptionType = {
             label: century + "s",
