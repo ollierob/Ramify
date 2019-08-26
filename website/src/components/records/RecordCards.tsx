@@ -20,12 +20,14 @@ type Props = HasClass & {
     //relatives?: ReadonlyArray<RecordSetRelatives.AsObject>
     //groupByParent?: boolean
     shortTitle?: boolean
-    alsoSee?: ReadonlyArray<Place.AsObject>;
+    alsoSee?: ReadonlyArray<Place.AsObject>
     noRecordsMessage?: React.ReactNode
     fixedWidth?: boolean;
 }
 
 export const RecordCards = (props: Props) => {
+
+    if (!props.records) return null;
 
     const records = [...props.records].sort(sortRecordSetByDateThenTitle);
     //if (props.groupByParent && props.relatives && props.relatives.length) return <GroupedRecordCards {...props}/>;
