@@ -40,11 +40,11 @@ export default class RecordSetCard extends React.PureComponent<Props> {
 
             {recordSet && <>
 
-                <Creator
-                    place={this.props.creatorPlace}/>
-
                 <Relatives
                     relatives={relatives}/>
+
+                <Creator
+                    place={this.props.creatorPlace}/>
 
                 <References
                     references={recordSet.externalreferenceList.length ? recordSet.externalreferenceList : relatives.parent && relatives.parent.externalreferenceList}/>

@@ -38,3 +38,8 @@
 .recordCards .groupCard .ant-card-body {
     padding: 8px 24px;
 }
+
+.recordSetReferences ul {
+    padding-left: 24px;
+    margin-bottom: 0;
+}

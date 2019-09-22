@@ -3,6 +3,7 @@ import {ExternalRecordReference} from "../../protobuf/generated/record_pb";
 import {Archive} from "../../protobuf/generated/archive_pb";
 import {Icon, Popover} from "antd";
 import {RecordsIcon} from "../images/Icons";
+import {CSSProperties} from "react";
 
 export const RecordSetReferences = (props: {archive: Archive.AsObject, references: ReadonlyArray<ExternalRecordReference.AsObject>}) => {
     const archive = props.archive;
@@ -19,8 +20,8 @@ const PopoverContent = (props: {archive: Archive.AsObject, references: ReadonlyA
     const references = props.references;
     if (!references || !references.length) return null;
     const archive = props.archive;
-    return <>
-        <div>
+    return <div className="recordSetReferences">
+        <div style={MarginBottom}>
             <a href={archive.website.href} target="_blank">
                 <Icon type="export"/> Archive website
             </a>
@@ -33,6 +34,8 @@ const PopoverContent = (props: {archive: Archive.AsObject, references: ReadonlyA
                 {r.reference}
             </li>)}
         </ul>
-    </>;
+    </div>;
 };
+
+const MarginBottom: CSSProperties = {marginBottom: 4};
 
