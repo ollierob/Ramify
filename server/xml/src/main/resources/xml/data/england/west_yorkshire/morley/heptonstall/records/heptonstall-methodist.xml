@@ -14,20 +14,19 @@
             source="church"
             type="mixed">
 
-        <recordSetReference archiveId="wyas" reference="UC">
-            <p:textLink href="https://www.catalogue.wyjs.org.uk/calmview/Record.aspx?src=CalmView.Catalog&amp;id=CC01603%2f1" text="Catalogue"/>
-        </recordSetReference>
-
         <recordSet
                 id="heptonstall_wesleyan_baptisms"
                 title="Heptonstall Methodist Church Baptisms"
                 shortTitle="Baptisms"
                 source="church"
                 type="baptism">
+
             <d:betweenYears start="1798" end="1946"/>
+
             <recordSetReference archiveId="wyas" reference="HB:29">
                 <p:textLink href="https://www.catalogue.wyjs.org.uk/CalmView/Record.aspx?src=CalmView.Catalog&amp;id=CC00679%2f5" text="Catalogue"/>
             </recordSetReference>
+
         </recordSet>
 
         <recordSet

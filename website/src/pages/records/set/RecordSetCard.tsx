@@ -15,6 +15,8 @@ import {stringMultimap} from "../../../components/Maps";
 import {RecordSetReferences} from "../../../components/records/RecordSetReference";
 import {joinComponents} from "../../../components/Components";
 import {EnrichedRecord} from "../../../components/records/RecordLoader";
+import {PlaceBundle} from "../../../protobuf/generated/place_pb";
+import {PlaceContextMenu} from "../../../components/places/PlaceContextMenu";
 
 type Props = RecordPaginationHandler & RecordSearchHandler & RouteComponentProps<any> & {
     loading: boolean;
@@ -22,13 +24,10 @@ type Props = RecordPaginationHandler & RecordSearchHandler & RouteComponentProps
     recordSetRelatives: AsyncData<RecordSetRelatives.AsObject>;
     records: AsyncData<ReadonlyArray<EnrichedRecord>>
     searchResults: AsyncData<ReadonlyArray<EnrichedRecord>>;
+    creatorPlace: AsyncData<Readonly<PlaceBundle.AsObject>>
 }
 
 export default class RecordSetCard extends React.PureComponent<Props> {
-
-    constructor(props) {
-        super(props);
-    }
 
     render() {
 
@@ -40,6 +39,9 @@ export default class RecordSetCard extends React.PureComponent<Props> {
             title={recordSet ? <>Records of <b>{recordSet.longtitle}</b> <span className="unimportant">{recordSet.numrecords} records</span></> : <Loading/>}>
 
             {recordSet && <>
+
+                <Creator
+                    place={this.props.creatorPlace}/>
 
                 <Relatives
                     relatives={relatives}/>
@@ -85,6 +87,14 @@ const Description = (props: {record: RecordSet.AsObject}) => {
     if (!description) return null;
     return <div className="description" style={MarginBottom}>
         {description}
+    </div>;
+};
+
+const Creator = (props: {place: AsyncData<Readonly<PlaceBundle.AsObject>>}) => {
+    const place = props.place.data;
+    if (!place || !place.place) return null;
+    return <div className="relationship place" style={MarginBottom}>
+        <Icon type="edit"/> These records were created by <PlaceContextMenu place={place.place} showType/>
     </div>;
 };
 

@@ -76,7 +76,8 @@ export default class RecordSetPage extends BasePage<Props, State> {
                 search={this.state.search}
                 searching={this.state.searchResults.loading}
                 doSearch={this.search}
-                searchResults={this.state.searchResults}/>
+                searchResults={this.state.searchResults}
+                creatorPlace={this.state.recordSetSource}/>
 
         </div>;
 

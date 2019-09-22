@@ -94,4 +94,25 @@ public interface DateRange extends BuildsProto<DateProto.DateRange> {
 
     };
 
+    DateRange NEVER = new DateRange() {
+
+        @Nonnull
+        @Override
+        public Optional<? extends ChronoLocalDate> earliestInclusive() {
+            return Optional.empty();
+        }
+
+        @Nonnull
+        @Override
+        public Optional<? extends ChronoLocalDate> latestInclusive() {
+            return Optional.empty();
+        }
+
+        @Override
+        public boolean contains(final ChronoLocalDate date) {
+            return false;
+        }
+
+    };
+
 }
