@@ -36,10 +36,15 @@ public class ImageResource extends AbstractResource {
     public Response generalImage(
             @Context final UserSessionContext context,
             @PathParam("file") final String filename) {
-        if (filename.startsWith(".") || filename.contains("/")) return notFound();
-        if (filename.endsWith(".jpg")) return this.readSessionResource(context.session(), "/images/" + filename, JPG);
-        if (filename.endsWith(".png")) return this.readSessionResource(context.session(), "/images/" + filename, PNG);
-        return notFound();
+        if (filename.startsWith(".") || filename.contains("/") || filename.length() < 5) return notFound();
+        switch (filename.substring(filename.length() - 3)) {
+            case "jpg":
+                return this.readSessionResource(context.session(), "/images/" + filename, JPG);
+            case "png":
+                return this.readSessionResource(context.session(), "/images/" + filename, PNG);
+            default:
+                return notFound();
+        }
     }
 
     @GET
