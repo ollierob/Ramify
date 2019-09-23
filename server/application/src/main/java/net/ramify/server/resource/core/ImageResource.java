@@ -20,13 +20,26 @@ import javax.ws.rs.core.Response;
 @Path("images")
 public class ImageResource extends AbstractResource {
 
-    private static final MediaType JPG = new MediaType("image", "jpge");
+    private static final MediaType JPG = new MediaType("image", "jpg");
+    private static final MediaType PNG = new MediaType("image", "png");
 
     private final RecordSetProvider recordSets;
 
     @Inject
     ImageResource(final RecordSetProvider recordSets) {
         this.recordSets = recordSets;
+    }
+
+    @GET
+    @Path("{file}")
+    @Produces("image/*")
+    public Response generalImage(
+            @Context final UserSessionContext context,
+            @PathParam("file") final String filename) {
+        if (filename.startsWith(".") || filename.contains("/")) return notFound();
+        if (filename.endsWith(".jpg")) return this.readSessionResource(context.session(), "/images/" + filename, JPG);
+        if (filename.endsWith(".png")) return this.readSessionResource(context.session(), "/images/" + filename, PNG);
+        return notFound();
     }
 
     @GET

@@ -91,10 +91,9 @@ const Description = (props: {record: RecordSet.AsObject}) => {
 };
 
 const Creator = (props: {place: AsyncData<Readonly<PlaceBundle.AsObject>>}) => {
-    const place = props.place.data;
-    if (!place || !place.place) return null;
+    const place = props.place;
     return <div className="relationship place" style={MarginBottom}>
-        <Icon type="edit"/> These records were created by <PlaceContextMenu place={place.place} showType/>
+        <Icon type="edit"/> These records were created by <PlaceContextMenu place={place.data && place.data.place} loading={place.loading} showType/>
     </div>;
 };
 
