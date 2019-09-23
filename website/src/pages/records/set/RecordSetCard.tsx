@@ -4,7 +4,6 @@ import {ExternalRecordReference, RecordSet, RecordSetRelatives} from "../../../p
 import {Card, Icon} from "antd";
 import {recordSetHref} from "../RecordLinks";
 import {RecordCards} from "../../../components/records/RecordCards";
-import {PersonSearch} from "../../../components/search/PersonSearch";
 import {RecordSearchHandler} from "../../../components/search/RecordSearchHandler";
 import {RecordResults} from "./RecordResults";
 import {AsyncData} from "../../../components/fetch/AsyncData";
@@ -59,10 +58,6 @@ export default class RecordSetCard extends React.PureComponent<Props> {
                 fixedWidth={this.useFixedWidthCards()}
                 shortTitle
                 records={relatives.childList}
-                style={MarginBottom}/>
-
-            <PersonSearch
-                {...this.props}
                 style={MarginBottom}/>
 
             <RecordResults

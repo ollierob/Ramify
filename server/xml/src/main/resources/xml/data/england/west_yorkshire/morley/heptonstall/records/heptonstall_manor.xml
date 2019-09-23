@@ -11,7 +11,7 @@
             title="Heptonstall Manor"
             shortTitle="Heptonstall Manor"
             coversPlaceId="manor:heptonstall"
-            creatorPlace="village:heptonstall"
+            creatorPlace="manor:heptonstall"
             source="manor"
             type="mixed">
 

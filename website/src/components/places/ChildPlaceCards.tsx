@@ -37,7 +37,9 @@ export default class ChildPlaceCards extends React.PureComponent<Props, State> {
 
             {keys.sort(sortByPlaceType).map(type => <TypeCard type={type as PlaceType} places={this.state.groupedPlaces[type]}/>)}
 
-            <AlsoSeeCard places={this.props.alsoSeePlaces}/>
+            <AlsoSee
+                asCard={keys.length > 0}
+                places={this.props.alsoSeePlaces}/>
 
             {!keys.length && !this.props.alsoSeePlaces && <>{this.props.noPlacesMessage}</>}
 
@@ -85,14 +87,20 @@ const PlaceLink = (props: {place: Readonly<Place.AsObject>, showType?: boolean})
     return props.place.defunct ? <i>{link}</i> : link;
 };
 
-const AlsoSeeCard = (props: {places: ReadonlyArray<Place.AsObject>}) => {
+const AlsoSee = (props: {places: ReadonlyArray<Place.AsObject>, asCard: boolean}) => {
+
     const places = props.places;
     if (!places || !places.length) return null;
-    return <Card
+    const links = <ul>
+        {places.map(place => <li><PlaceLink place={place} showType/></li>)}
+    </ul>;
+
+    if (props.asCard) return <Card
         className="placeCard"
         title={<>Also see</>}>
-        <ul>
-            {places.map(place => <li><PlaceLink place={place} showType/></li>)}
-        </ul>
+        {links}
     </Card>;
+
+    return links;
+
 };

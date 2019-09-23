@@ -32,11 +32,10 @@ export const PlaceInfo = (props: Props) => {
 
         {place.defunct && <DefunctWarning description={description}/>}
 
-        {description
-            ? <ReactMarkdown
-                className="description"
+        {description && <Card className="description" title="Description" bordered={false}>
+            <ReactMarkdown
                 source={description.description}/>
-            : <div className="description">No description available.</div>}
+        </Card>}
 
         {props.childPlaces && <Card className="places" title="Places" bordered={false}>
             <ChildPlaceCards
@@ -59,13 +58,18 @@ export const PlaceInfo = (props: Props) => {
 };
 
 const DefunctWarning = (props: {description: PlaceDescription.AsObject}) => {
+
     const laterBecame = props.description ? props.description.laterbecameList : [];
+
+    const description = laterBecame.length > 0
+        ? <>It later became part of {joinComponents(laterBecame.map(p => <PlaceContextMenu place={p} showType/>), ", ")}</>
+        : <>It no longer exists</>;
+
     return <Alert
         type="warning"
         className="defunct"
         showIcon
-        message={<>This place is historic.</>}
-        description={laterBecame.length > 0 && <>
-            It later became part of {joinComponents(laterBecame.map(p => <PlaceContextMenu place={p} showType/>), ", ")}
-        </>}/>;
+        message={<>This place is historic</>}
+        description={description}/>;
+
 };

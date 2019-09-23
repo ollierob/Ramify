@@ -40,6 +40,7 @@
             id="wakefield_manor"
             title="Manor of Wakefield"
             coversPlaceId="manor:wakefield"
+            creatorPlace="manor:wakefield"
             source="manor"
             type="mixed">
         <d:betweenYears start="1275" end="1925"/>
