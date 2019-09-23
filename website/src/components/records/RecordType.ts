@@ -19,3 +19,25 @@ export function isBirthOrBaptismRecord(recordSet: RecordSet.AsObject): boolean {
     const type = recordSet.type;
     return type == RecordTypes.BAPTISM || type == RecordTypes.BIRTH;
 }
+
+export function recordTypeName(record: RecordSet.AsObject): string {
+    const type = recordTypeFromValue(record.type);
+    return ShortRecordTitles[type];
+}
+
+const ShortRecordTitles: { [key in RecordType]: string } = {
+    UNSPECIFIED: "Miscellaneous",
+    BAPTISM: "Baptisms",
+    BIRTH: "Births",
+    BURIAL: "Burials",
+    DEATH: "Deaths",
+    MARRIAGE: "Marriages",
+    MEMBERSHIP: "Membership",
+    MEMORIAL: "Memorials",
+    MENTION: "Mentions",
+    MIXED: "Mixed",
+    PAYMENT: "Payments",
+    PROBATE: "Probate",
+    RESIDENCE: "Residence",
+    WILL: "Wills"
+};

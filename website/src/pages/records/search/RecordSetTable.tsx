@@ -7,6 +7,7 @@ import {ColumnProps} from "antd/es/table";
 import {EmptyPlaceWords, FormattedYearRange} from "../../../components/date/FormattedDateRange";
 import {recordSetHref} from "../RecordLinks";
 import {HasClass} from "../../../components/style/HasClass";
+import {recordTypeFromValue, recordTypeName} from "../../../components/records/RecordType";
 
 type Props = {
     recordSets: AsyncData<ReadonlyArray<RecordSet.AsObject>>
@@ -39,7 +40,10 @@ const Columns: ColumnProps<RecordSet.AsObject>[] = [
         key: "name",
         title: "Name",
         dataIndex: "longtitle",
-        render: (t, r) => <a href={recordSetHref(r)}>{t}</a>,
+        render: (t, r) => <>
+            <a href={recordSetHref(r)}>{t}</a>
+            <div className="small unimportant">{recordTypeName(r)}</div>
+        </>,
         width: 350,
         defaultSortOrder: "ascend",
         sorter: (a, b) => a.longtitle.localeCompare(b.longtitle)

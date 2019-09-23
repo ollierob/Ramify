@@ -8,7 +8,7 @@ import {placeHref} from "../../pages/places/PlaceLinks";
 import {recordSetHref} from "../../pages/records/RecordLinks";
 import "./RecordCards.css";
 import {RecordsIcon} from "../images/Icons";
-import {RecordType, recordTypeFromValue} from "./RecordType";
+import {recordTypeName} from "./RecordType";
 import {HasClass} from "../style/HasClass";
 import {Link} from "../style/Links";
 import {Loading} from "../style/Loading";
@@ -103,25 +103,7 @@ const AlsoSeeCard = (props: {alsoSee: ReadonlyArray<Place.AsObject>}) => {
 
 function shortTitle(record: RecordSet.AsObject): string {
     if (record.shorttitle) return record.shorttitle;
-    const type = recordTypeFromValue(record.type);
-    if (type == "MIXED") return record.longtitle;
-    return ShortRecordTitles[type];
-
+    const name = recordTypeName(record);
+    if (name == "Mixed") return record.longtitle;
+    return name;
 }
-
-const ShortRecordTitles: { [key in RecordType]: string } = {
-    UNSPECIFIED: "Miscellaneous",
-    BAPTISM: "Baptisms",
-    BIRTH: "Births",
-    BURIAL: "Burials",
-    DEATH: "Deaths",
-    MARRIAGE: "Marriages",
-    MEMBERSHIP: "Membership",
-    MEMORIAL: "Memorials",
-    MENTION: "Mentions",
-    MIXED: "Mixed",
-    PAYMENT: "Payments",
-    PROBATE: "Probate",
-    RESIDENCE: "Residence",
-    WILL: "Wills"
-};
