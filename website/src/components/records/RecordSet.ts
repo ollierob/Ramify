@@ -1,5 +1,5 @@
 import {RecordSet} from "../../protobuf/generated/record_pb";
-import {sortDateByEarliest} from "../date/DateRange";
+import {sortDatesByEarliest} from "../date/DateRange";
 
 export type RecordSetId = string;
 
@@ -8,7 +8,7 @@ export function sortRecordSetByTitle(r1: RecordSet.AsObject, r2: RecordSet.AsObj
 }
 
 export function sortRecordSetByEarliestDate(r1: RecordSet.AsObject, r2: RecordSet.AsObject): number {
-    return sortDateByEarliest(r1.date, r2.date);
+    return sortDatesByEarliest(r1.date, r2.date);
 }
 
 export function sortRecordSetByDateThenTitle(r1: RecordSet.AsObject, r2: RecordSet.AsObject): number {

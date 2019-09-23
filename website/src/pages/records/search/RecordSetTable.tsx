@@ -7,7 +7,8 @@ import {ColumnProps} from "antd/es/table";
 import {EmptyPlaceWords, FormattedYearRange} from "../../../components/date/FormattedDateRange";
 import {recordSetHref} from "../RecordLinks";
 import {HasClass} from "../../../components/style/HasClass";
-import {recordTypeFromValue, recordTypeName} from "../../../components/records/RecordType";
+import {recordTypeName} from "../../../components/records/RecordType";
+import {sortDatesByEarliestThenLatest} from "../../../components/date/DateRange";
 
 type Props = {
     recordSets: AsyncData<ReadonlyArray<RecordSet.AsObject>>
@@ -59,12 +60,13 @@ const Columns: ColumnProps<RecordSet.AsObject>[] = [
         key: "date",
         title: "Date",
         render: (t, r) => <FormattedYearRange date={r.date} words={EmptyPlaceWords}/>,
+        sorter: (a, b) => sortDatesByEarliestThenLatest(a.date, b.date),
         width: 120,
     },
     {
         key: "description",
         title: "Description",
         dataIndex: "description",
-        sorter: true
+        sorter: (a, b) => (a.description || "").localeCompare(b.description || "")
     }
 ];
