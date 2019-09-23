@@ -30,7 +30,12 @@ public class XmlMentionRecords extends XmlRecords {
     private List<XmlMentionRecord> records;
 
     @Override
-    public int size() {
+    public int numRecords() {
+        return records.size();
+    }
+
+    @Override
+    public int numIndividuals() {
         return records.size();
     }
 

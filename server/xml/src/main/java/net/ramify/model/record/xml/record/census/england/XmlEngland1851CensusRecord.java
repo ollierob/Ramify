@@ -18,7 +18,7 @@ public class XmlEngland1851CensusRecord extends XmlCensusRecord {
     private XmlResidenceRecord head;
 
     @Override
-    protected int size() {
+    protected int numIndividuals() {
         throw new UnsupportedOperationException(); //TODO
     }
 

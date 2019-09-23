@@ -117,4 +117,8 @@ public class XmlBurialRecord extends XmlPersonRecord {
         return new ChurchBurial(personId, date, Functions.ifNonNull(deathAge, Age::ofYears));
     }
 
+    int numIndividuals() {
+        return 1 + (relationships == null ? 0 : relationships.size()); //FIXME count unique
+    }
+
 }

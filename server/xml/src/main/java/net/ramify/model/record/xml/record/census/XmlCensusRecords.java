@@ -22,8 +22,13 @@ public abstract class XmlCensusRecords extends XmlRecords {
     private String censusArea;
 
     @Override
-    public int size() {
-        return this.records().stream().mapToInt(XmlCensusRecord::size).sum();
+    public int numRecords() {
+        return this.records().size();
+    }
+
+    @Override
+    public int numIndividuals() {
+        return this.records().stream().mapToInt(XmlCensusRecord::numIndividuals).sum();
     }
 
     @Override

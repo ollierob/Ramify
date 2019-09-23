@@ -64,7 +64,7 @@ public class XmlEngland1821ByAgeCensusRecord extends XmlCensusRecord {
     private Integer femalesFiveToTen;
 
     @Override
-    protected int size() {
+    protected int numIndividuals() {
         return this.ageCounts().values().stream().mapToInt(i -> i).sum();
     }
 

@@ -57,6 +57,13 @@ const Columns: ColumnProps<RecordSet.AsObject>[] = [
         width: 100
     },
     {
+        key: "numIndividuals",
+        title: "Individuals",
+        render: (t, r) => r.numindividuals.toLocaleString(),
+        sorter: (a, b) => a.numindividuals - b.numindividuals,
+        width: 120
+    },
+    {
         key: "date",
         title: "Date",
         render: (t, r) => <FormattedYearRange date={r.date} words={EmptyPlaceWords}/>,

@@ -110,7 +110,8 @@ class XmlRecordSet implements HasRecordSetId {
                 this.coversPlaceId(parent),
                 shortTitle,
                 Functions.ifNonNull(description, String::trim),
-                this.size(),
+                this.numRecords(),
+                this.numIndividuals(),
                 this.buildReferences(context),
                 Functions.ifNonNull(parent, HasRecordSetId::recordSetId),
                 this.nextIds());
@@ -143,9 +144,14 @@ class XmlRecordSet implements HasRecordSetId {
         return SetUtils.transform(nextIds, XmlRecordSetId::recordSetId);
     }
 
-    private int size() {
+    private int numRecords() {
         if (records == null) return 0;
-        return records.stream().mapToInt(XmlRecords::size).sum();
+        return records.stream().mapToInt(XmlRecords::numRecords).sum();
+    }
+
+    private int numIndividuals() {
+        if(records == null) return 0;
+        return records.stream().mapToInt(XmlRecords::numIndividuals).sum();
     }
 
     @Nonnull

@@ -20,8 +20,13 @@ public class XmlBurialRecords extends XmlRecords {
     private List<XmlBurialRecord> records;
 
     @Override
-    public int size() {
+    public int numRecords() {
         return records == null ? 0 : records.size();
+    }
+
+    @Override
+    public int numIndividuals() {
+        return records == null ? 0 : records.stream().mapToInt(XmlBurialRecord::numIndividuals).sum();
     }
 
     @Nonnull

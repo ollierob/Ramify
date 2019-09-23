@@ -43,7 +43,9 @@ public interface RecordSet extends HasTitleDescription, HasRecordSet, HasDate, H
         return this.covers();
     }
 
-    int size();
+    int numRecords();
+
+    int numIndividuals();
 
     @Nonnull
     default RecordProto.RecordSet.Builder toProtoBuilder() {
@@ -52,7 +54,8 @@ public interface RecordSet extends HasTitleDescription, HasRecordSet, HasDate, H
                 .setLongTitle(this.title())
                 .setDescription(MoreObjects.firstNonNull(this.description(), ""))
                 .setCoversPlaceId(this.covers().value())
-                .setNumRecords(this.size())
+                .setNumRecords(this.numRecords())
+                .setNumIndividuals(this.numIndividuals())
                 .addAllExternalReference(Iterables.transform(this.references(), RecordSetReference::toProto));
         Consumers.ifNonNull(this.createdBy(), place -> builder.setCreatorPlaceId(place.value()));
         Consumers.ifNonNull(this.date(), date -> builder.setDate(date.toProto()));

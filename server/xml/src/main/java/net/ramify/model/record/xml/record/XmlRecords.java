@@ -15,7 +15,9 @@ import java.util.Collection;
 @XmlSeeAlso({XmlMentionRecords.class, XmlResidenceRecords.class, XmlBurialRecords.class, XmlCensusRecords.class})
 public abstract class XmlRecords {
 
-    public abstract int size();
+    public abstract int numRecords();
+
+    public abstract int numIndividuals();
 
     @Nonnull
     public abstract Collection<? extends Record> build(

@@ -35,8 +35,13 @@ public class XmlResidenceRecords extends XmlRecords {
     private List<XmlResidenceRecord> records;
 
     @Override
-    public int size() {
+    public int numRecords() {
         return records == null ? 0 : records.size();
+    }
+
+    @Override
+    public int numIndividuals() {
+        return this.numRecords(); //TODO relationships?
     }
 
     @Nonnull

@@ -59,8 +59,13 @@ public abstract class DelegatedRecordSet implements RecordSet {
     }
 
     @Override
-    public int size() {
-        return delegate.size();
+    public int numRecords() {
+        return delegate.numRecords();
+    }
+
+    @Override
+    public int numIndividuals() {
+        return delegate.numIndividuals();
     }
 
     @Nonnull

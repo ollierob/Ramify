@@ -51,12 +51,14 @@ message RecordSet {
     SourceType source = 5;
     RecordType type = 6;
     DateRange date = 8;
-    uint32 numRecords = 9;
 
-    string creatorPlaceId = 10;
-    string coversPlaceId = 11;
+    uint32 numRecords = 10;
+    uint32 numIndividuals = 11;
 
-    repeated ExternalRecordReference externalReference = 20;
+    string creatorPlaceId = 20;
+    string coversPlaceId = 21;
+
+    repeated ExternalRecordReference externalReference = 30;
 
 }
 
