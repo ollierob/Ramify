@@ -4,7 +4,7 @@ import {Place, PlaceType as PlaceTypeProtoValues, PlaceTypeMap} from "../../prot
 import {NumberMap, numberMap} from "../Maps";
 
 export type PlaceType = keyof PlaceTypeMap;
-type PlaceInfo = {s: string, p?: string, d?: string}
+type PlaceInfo = {s: string, p?: string, d?: string, isBuilding?: boolean}
 
 const PlaceTypeInfo: { [key in PlaceType]: PlaceInfo } = {
     BOROUGH: {s: "Borough"},
@@ -13,37 +13,41 @@ const PlaceTypeInfo: { [key in PlaceType]: PlaceInfo } = {
     CIVIL_PARISH: {s: "Civil Parish", p: "Civil Parishes"},
     COUNTRY: {s: "Country", p: "Countries"},
     COUNTY: {s: "County", p: "Counties"},
-    CHURCH: {s: "Church", p: "Churches"},
+    CHURCH: {s: "Church", p: "Churches", isBuilding: true},
     DISTRICT: {s: "District"},
-    FARMSTEAD: {s: "Farmstead"},
-    GRAVEYARD: {s: "Graveyard"},
+    FARMSTEAD: {s: "Farmstead", isBuilding: true},
+    GRAVEYARD: {s: "Graveyard", isBuilding: true},
     GRAVESHIP: {s: "Graveship"},
     HAMLET: {s: "Hamlet"},
-    HOSPITAL: {s: "Hospital"},
-    HOUSE: {s: "House"},
+    HOSPITAL: {s: "Hospital", isBuilding: true},
+    HOUSE: {s: "House", isBuilding: true},
     HUNDRED: {s: "Hundred"},
-    INN: {s: "Inn"},
+    INN: {s: "Inn", isBuilding: true},
     MANOR: {s: "Manor"},
-    MILL: {s: "Mill"},
+    MILL: {s: "Mill", isBuilding: true},
     NEIGHBOURHOOD: {s: "Neighbourhood"},
     PARISH: {s: "Parish", p: "Parishes"},
     RAPE: {s: "Rape"},
-    SCHOOL: {s: "School"},
+    SCHOOL: {s: "School", isBuilding: true},
     STATE: {s: "State"},
-    STREET: {s: "Street"},
-    TOWN: {s: "Town"},
+    STREET: {s: "Street", isBuilding: true},
+    TOWN: {s: "Town", isBuilding: true},
     TOWNSHIP: {s: "Township"},
     VILLAGE: {s: "Village"},
     WAPENTAKE: {s: "Wapentake"},
 };
 
+function placeInfo(type: PlaceTypeMap[keyof PlaceTypeMap] | PlaceType): PlaceInfo {
+    return PlaceTypeInfo[typeof type == "number" ? placeTypeKey(type) : type];
+}
+
 const PlaceTypes: ReadonlyArray<PlaceType> = Object.keys(PlaceTypeProtoValues) as Array<PlaceType>;
 const ValueToPlaceTypeLookup: NumberMap<PlaceType> = numberMap(PlaceTypes, k => PlaceTypeProtoValues[k]);
 
 export function placeTypeName(type: PlaceTypeMap[keyof PlaceTypeMap] | PlaceType, plural: boolean = false): string {
-    const n = PlaceTypeInfo[typeof type == "number" ? placeTypeKey(type) : type];
-    if (!n) return null;
-    return plural ? (n.p || n.s + "s") : n.s;
+    const info = placeInfo(type);
+    if (!info) return null;
+    return plural ? (info.p || info.s + "s") : info.s;
 }
 
 export function placeTypeKey(type: PlaceTypeMap[keyof PlaceTypeMap]): PlaceType {
@@ -58,4 +62,8 @@ export function sortByPlaceType(t1: PlaceType, t2: PlaceType): number {
 
 export function sortByPlaceName(p1: Place.AsObject, p2: Place.AsObject): number {
     return p1.name.localeCompare(p2.name);
+}
+
+export function isBuilding(p1: Place.AsObject): boolean {
+    return placeInfo(p1.type).isBuilding;
 }

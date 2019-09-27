@@ -21,7 +21,6 @@ type Props = HasClass & {
     //groupByParent?: boolean
     shortTitle?: boolean
     alsoSee?: ReadonlyArray<Place.AsObject>
-    noRecordsMessage?: React.ReactNode
     fixedWidth?: boolean;
 }
 
@@ -37,7 +36,7 @@ export const RecordCards = (props: Props) => {
         style={props.style}>
         {props.loading && <Loading/>}
         {records.map(record => <RecordCard record={record} shortTitle={props.shortTitle}/>)}
-        {!props.loading && !records.length && props.noRecordsMessage}
+        {!props.loading && !records.length && <NoRecordCards/>}
         {props.alsoSee && <AlsoSeeCard alsoSee={props.alsoSee}/>}
     </div>;
 
@@ -73,7 +72,7 @@ const RecordCard = (props: {record: RecordSet.AsObject, shortTitle?: boolean}) =
         className="recordCard">
         Available <FormattedYearRange date={record.date}/>
         <br/>
-        {record.numrecords.toLocaleString()} records
+        {record.numrecords.toLocaleString()} records, {record.numindividuals.toLocaleString()} individuals
         {record.externalreferenceList.map(ref => <RecordReference reference={ref}/>)}
         {record.description && <div className="notags">{record.description}</div>}
     </Card>;
@@ -106,4 +105,8 @@ function shortTitle(record: RecordSet.AsObject): string {
     const name = recordTypeName(record);
     if (name == "Mixed") return record.longtitle;
     return name;
+}
+
+export const NoRecordCards = () => {
+    return <>No records known.</>
 }

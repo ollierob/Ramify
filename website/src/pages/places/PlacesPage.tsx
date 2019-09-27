@@ -3,23 +3,20 @@ import * as ReactDOM from "react-dom";
 import {HashRouter, Route, RouteComponentProps, Switch} from "react-router-dom";
 import BasePage from "../BasePage";
 import PlacesHomePage from "./home/PlacesHomePage";
-import ChurchPage from "./institution/ChurchPage";
 import PlacesBreadcrumbWrapper from "./PlacesBreadcrumbWrapper";
 import "./Places.css";
 import {PlaceId, PlaceList} from "../../components/places/Place";
 import {Place, PlaceBundle} from "../../protobuf/generated/place_pb";
-import AreaPage from "./area/AreaPage";
-import SchoolPage from "./institution/SchoolPage";
+import PlacePage from "./place/PlacePage";
 import {addPlaceFavourite, getPlaceFavourites, PlaceFavouritesHandler, removePlaceFavourite} from "../../components/places/PlaceFavourites";
 import {addPlaceHistory, getPlaceHistory} from "../../components/places/PlaceHistory";
-import BuildingPage from "./building/BuildingPage";
 
 type State = {
     history: PlaceList;
     favourites: PlaceList;
 }
 
-class PlacesPage extends BasePage<any, State> {
+class PlaceBasePage extends BasePage<any, State> {
 
     constructor(props) {
         super(props);
@@ -40,11 +37,8 @@ class PlacesPage extends BasePage<any, State> {
     body() {
         return <HashRouter>
             <Switch>
-                <Route path="/church" component={this.breadcrumb(ChurchPage)}/>
-                <Route path="/school" component={this.breadcrumb(SchoolPage)}/>
-                <Route path="/farmstead" component={this.breadcrumb(BuildingPage)}/>
                 <Route exact path="/" component={this.breadcrumb(PlacesHomePage, true)}/>
-                <Route path="*" component={this.breadcrumb(AreaPage)}/>
+                <Route path="*" component={this.breadcrumb(PlacePage)}/>
             </Switch>
         </HashRouter>;
     }
@@ -92,4 +86,4 @@ export type PlacesPageProps = RouteComponentProps<any> & PlaceFavouritesHandler 
     placeHistory: PlaceList;
 }
 
-ReactDOM.render(<PlacesPage/>, document.getElementById("main"));
+ReactDOM.render(<PlaceBasePage/>, document.getElementById("main"));

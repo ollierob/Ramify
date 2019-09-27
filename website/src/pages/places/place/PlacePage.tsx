@@ -17,7 +17,7 @@ type State = {
     placeRecords: AsyncData<ReadonlyArray<RecordSet.AsObject>>
 }
 
-export default class AreaPage extends React.PureComponent<Props, State> {
+export default class PlacePage extends React.PureComponent<Props, State> {
 
     private readonly placeLoader = DEFAULT_PLACE_LOADER;
     private readonly recordLoader = DEFAULT_RECORD_LOADER;
@@ -62,15 +62,14 @@ export default class AreaPage extends React.PureComponent<Props, State> {
 
     componentDidMount() {
         this.loadChildren();
+        this.loadRecords();
     }
 
     componentDidUpdate(prevProps: Props) {
-
         if (this.props.placeId != prevProps.placeId) {
-            this.loadChildren(this.props.placeId);
-            this.loadRecords(this.props.placeId);
+            this.loadChildren();
+            this.loadRecords();
         }
-
     }
 
     private loadChildren(id = this.props.placeId) {
