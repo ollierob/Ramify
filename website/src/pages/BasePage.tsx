@@ -1,11 +1,13 @@
 import * as React from "react";
-import HeaderMenu from "./HeaderMenu";
+import HeaderMenu, {HeaderMenuType} from "./HeaderMenu";
 import "./Core";
-import {getPlaceHistory} from "../components/places/PlaceHistory";
+import {getSessionPlaceHistory} from "../components/places/PlaceHistory";
 import {PlaceList} from "../components/places/Place";
-import {getPlaceFavourites} from "../components/places/PlaceFavourites";
+import {getSessionPlaceFavourites, PlaceFavouritesHandler, SessionPlaceFavouritesHandler} from "../components/places/PlaceFavourites";
 
 export default abstract class BasePage<P = any, S = any> extends React.PureComponent<P, S> {
+
+    favouritesHandler: PlaceFavouritesHandler = SessionPlaceFavouritesHandler;
 
     render() {
 
@@ -26,22 +28,18 @@ export default abstract class BasePage<P = any, S = any> extends React.PureCompo
     menu(): React.ReactNode {
         return <HeaderMenu
             placeHistory={this.placeHistory()}
-            placeFavourites={this.placeFavourites()}
+            placeFavourites={this.favouritesHandler}
             active={this.active()}/>;
     }
 
     placeHistory(): PlaceList {
         //TODO override without causing mount/update loops
-        return getPlaceHistory();
-    }
-
-    placeFavourites(): PlaceList {
-        return getPlaceFavourites();
+        return getSessionPlaceHistory();
     }
 
     abstract body(): React.ReactNode;
 
-    abstract active(): string;
+    abstract active(): HeaderMenuType;
 
 }
 

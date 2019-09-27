@@ -4,7 +4,7 @@ import * as React from "react";
 import {placeTypeName} from "../../components/places/PlaceType";
 import {placeHref} from "./PlaceLinks";
 
-export const PlaceBreadcrumb = (props: {loading: boolean, place: Place.AsObject}) => {
+export const PlaceBreadcrumb = (props: {loading?: boolean, place: Place.AsObject}) => {
     return <SubMenu>
         {props.place && <Hierarchy {...props}/>}
     </SubMenu>;

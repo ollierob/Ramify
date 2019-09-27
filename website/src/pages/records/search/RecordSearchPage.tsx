@@ -14,6 +14,8 @@ import {DEFAULT_RECORD_LOADER, RecordSetOptions} from "../../../components/recor
 import {readPageHash, updatePageHash} from "../../../components/Page";
 import {hashToRecordSearch, recordSearchToHash} from "../../../components/search/RecordSearchHandler";
 import BasePage from "../../BasePage";
+import {HeaderMenuType} from "../../HeaderMenu";
+import {RecordBasePage} from "../RecordBasePage";
 
 type Props = {}
 
@@ -25,7 +27,7 @@ type State = {
     recordName?: string;
 }
 
-export default class RecordSearchPage extends BasePage<Props, State> {
+export default class RecordSearchPage extends RecordBasePage<Props, State> {
 
     private readonly placeLoader = DEFAULT_PLACE_LOADER;
     private readonly recordLoader = DEFAULT_RECORD_LOADER;
@@ -43,10 +45,6 @@ export default class RecordSearchPage extends BasePage<Props, State> {
         this.renderRange = this.renderRange.bind(this);
         this.loadLeafPlace = this.loadLeafPlace.bind(this);
         this.doSearch = this.doSearch.bind(this);
-    }
-
-    active() {
-        return "recordSearch";
     }
 
     body() {

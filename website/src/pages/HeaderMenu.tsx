@@ -1,53 +1,34 @@
 import * as React from "react";
-import {Icon, Menu} from "antd";
+import {Dropdown, Icon, Menu} from "antd";
 import {FavouritesIcon, PeopleIcon, PlacesIcon, RecordsIcon, SearchIcon, TreeIcon} from "../components/images/Icons";
 import {PlaceList} from "../components/places/Place";
 import {Place} from "../protobuf/generated/place_pb";
 import {placeTypeName} from "../components/places/PlaceType";
 import {placeHref} from "./places/PlaceLinks";
+import {PlaceFavouritesHandler} from "../components/places/PlaceFavourites";
 
 type Props = {
-    active: string;
+    active: HeaderMenuType;
     placeHistory: PlaceList;
-    placeFavourites: PlaceList;
+    placeFavourites: PlaceFavouritesHandler;
 }
 
 export default class HeaderMenu extends React.PureComponent<Props> {
 
     render() {
 
-        const history = this.props.placeHistory;
-        const favourites = this.props.placeFavourites;
+        return <Menu mode="horizontal" className="menu">
 
-        return <Menu mode="horizontal" selectedKeys={[this.props.active]} className="menu">
+            <Menu.SubMenu title={<><TreeIcon/> People</>} className={this.props.active == "people" && ActiveClass}>
 
-            <Menu.SubMenu title={<><TreeIcon/> People</>}>
-                <Menu.Item key="peopleSearch">
-                    <a href="/people#/search"><SearchIcon/> Person search</a>
-                </Menu.Item>
-                <Menu.ItemGroup title={<><TreeIcon/> Trees</>}>
-                    <Menu.Item disabled>No trees yet.</Menu.Item>
-                </Menu.ItemGroup>
             </Menu.SubMenu>
 
-            <Menu.SubMenu title={<><PlacesIcon/> Places</>}>
-                <Menu.Item key="places">
-                    <a href="/places"><SearchIcon/> Place search</a>
-                </Menu.Item>
-                <Menu.SubMenu title={<><FavouritesIcon/> Favourites</>}>
-                    {!favourites.length && <Menu.Item disabled>No favourite places.</Menu.Item>}
-                    {favourites.map(h => <Menu.Item key={h.id}><PlaceMenuItem place={h}/></Menu.Item>)}
-                </Menu.SubMenu>
-                <Menu.SubMenu title={<><Icon type="history"/> Recent</>}>
-                    {!history.length && <Menu.Item key="" disabled>No recent places.</Menu.Item>}
-                    {history.map(h => <Menu.Item key={h.id}><PlaceMenuItem place={h}/></Menu.Item>)}
-                </Menu.SubMenu>
+            <Menu.SubMenu title={<><PlacesIcon/> Places</>} className={this.props.active == "places" && ActiveClass}>
+
             </Menu.SubMenu>
 
-            <Menu.SubMenu title={<><RecordsIcon/> Records</>}>
-                <Menu.Item key="recordSearch">
-                    <a href="/records#/search"><SearchIcon/> Record search</a>
-                </Menu.Item>
+            <Menu.SubMenu title={<><RecordsIcon/> Records</>} className={this.props.active == "records" && ActiveClass}>
+
             </Menu.SubMenu>
 
         </Menu>;
@@ -56,9 +37,5 @@ export default class HeaderMenu extends React.PureComponent<Props> {
 
 }
 
-const PlaceMenuItem = (props: {place: Place.AsObject}) => {
-    const place = props.place;
-    return <a href={placeHref(place)}>
-        {place.name} ({placeTypeName(place.type)})
-    </a>;
-};
+const ActiveClass = "ant-menu-item-selected";
+export type HeaderMenuType = "people" | "places" | "records"

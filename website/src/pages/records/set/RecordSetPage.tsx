@@ -11,6 +11,8 @@ import {PlaceMap} from "../../../components/places/PlaceMap";
 import RecordSetCard from "./RecordSetCard";
 import {PlaceInfo} from "../../../components/places/PlaceInfo";
 import BasePage from "../../BasePage";
+import {HeaderMenuType} from "../../HeaderMenu";
+import {RecordBasePage} from "../RecordBasePage";
 
 type Props = RouteComponentProps<any>
 
@@ -25,7 +27,7 @@ type State = {
     searchResults: AsyncData<ReadonlyArray<EnrichedRecord>>;
 }
 
-export default class RecordSetPage extends BasePage<Props, State> {
+export default class RecordSetPage extends RecordBasePage<Props, State> {
 
     private readonly recordLoader = DEFAULT_RECORD_LOADER;
     private readonly placeLoader = DEFAULT_PLACE_LOADER;
@@ -42,10 +44,6 @@ export default class RecordSetPage extends BasePage<Props, State> {
             searchResults: {}
         };
         this.search = this.search.bind(this);
-    }
-
-    active(): string {
-        return "";
     }
 
     body() {

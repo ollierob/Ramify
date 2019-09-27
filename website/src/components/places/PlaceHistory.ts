@@ -2,7 +2,7 @@ import {Place} from "../../protobuf/generated/place_pb";
 import {PlaceList} from "./Place";
 
 export function addPlaceHistory(place: Place.AsObject): PlaceList {
-    let currentHistory = getPlaceHistory();
+    let currentHistory = getSessionPlaceHistory();
     if (!place) return currentHistory;
     const history = addNewPlace(place, currentHistory);
     savePlaceHistory(history);
@@ -14,7 +14,7 @@ function savePlaceHistory(history: PlaceList): void {
     sessionStorage.setItem("place-history", JSON.stringify(history));
 }
 
-export function getPlaceHistory(): PlaceHistory {
+export function getSessionPlaceHistory(): PlaceHistory {
     return JSON.parse(sessionStorage.getItem("place-history")) || [];
 }
 
@@ -33,6 +33,6 @@ export function addNewPlace(place: Place.AsObject, list: PlaceList, permitDuplic
 }
 
 export type PlaceHistoryHandler = {
-    placeHistory: PlaceList;
+    placeHistory: () => PlaceList;
     addPlaceHistory: (place: Place.AsObject) => void;
 }

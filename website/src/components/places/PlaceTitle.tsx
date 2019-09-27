@@ -11,7 +11,7 @@ export const PlaceTitle = (props: {place: Place.AsObject, description: PlaceDesc
     const place = props.place;
     if (!place) return null;
 
-    const isFavourite = isPlaceFavourite(place.id, props.placeFavourites);
+    const isFavourite = isPlaceFavourite(place.id, props.placeFavourites());
 
     return <>
 

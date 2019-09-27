@@ -4,7 +4,7 @@ import {Route, Switch} from "react-router";
 import {HashRouter} from "react-router-dom";
 import PeopleSearchPage from "./search/PeopleSearchPage";
 
-class PeoplePage extends React.PureComponent {
+class PeopleRootPage extends React.PureComponent {
 
     render() {
         return <HashRouter>
@@ -17,4 +17,4 @@ class PeoplePage extends React.PureComponent {
 
 }
 
-ReactDOM.render(<PeoplePage/>, document.getElementById("main"));
+ReactDOM.render(<PeopleRootPage/>, document.getElementById("main"));

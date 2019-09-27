@@ -1,5 +1,4 @@
 import * as React from "react";
-import {PlacesPageProps} from "../PlacesPage";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {Place} from "../../../protobuf/generated/place_pb";
 import {Card} from "antd";
@@ -7,26 +6,25 @@ import {DEFAULT_PLACE_LOADER} from "../../../components/places/PlaceLoader";
 import {Loading} from "../../../components/style/Loading";
 import {Flag} from "../../../components/images/Flag";
 import {placeHref} from "../PlaceLinks";
-
-type Props = PlacesPageProps;
+import {PlaceBasePage} from "../PlaceBasePage";
+import {RouteComponentProps} from "react-router";
 
 type State = {
     countries: AsyncData<ReadonlyArray<Place.AsObject>>
 }
 
-export default class PlacesHomePage extends React.PureComponent<Props, State> {
+export default class PlacesHomePage extends PlaceBasePage<State> {
 
     private readonly placeLoader = DEFAULT_PLACE_LOADER;
 
-    constructor(props) {
+    constructor(props: RouteComponentProps<any>) {
         super(props);
         this.state = {
             countries: {loading: true}
-        }
+        };
     }
 
-
-    render() {
+    body() {
 
         return <div className="home">
 
@@ -35,12 +33,12 @@ export default class PlacesHomePage extends React.PureComponent<Props, State> {
             {this.state.countries.loading && <Loading/>}
             {this.state.countries.data && this.state.countries.data.map(country => <CountryCard country={country}/>)}
 
-        </div>
+        </div>;
 
     }
 
     componentDidMount() {
-        asyncLoadData(null, this.placeLoader.loadCountries, countries => this.setState({countries}))
+        asyncLoadData(null, this.placeLoader.loadCountries, countries => this.setState({countries}));
     }
 
 }
@@ -52,6 +50,6 @@ const CountryCard = (props: {country: Place.AsObject}) => {
         className="country"
         title={<><Flag iso={country.iso}/><a href={placeHref(country)}>{country.name}</a></>}>
 
-    </Card>
+    </Card>;
 };
 
