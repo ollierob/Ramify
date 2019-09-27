@@ -8,9 +8,12 @@ import {PlaceTypeDescription} from "../../../components/places/PlaceTypeDescript
 import {Loading} from "../../../components/style/Loading";
 import {DEFAULT_RECORD_LOADER} from "../../../components/records/RecordLoader";
 import {RecordSet} from "../../../protobuf/generated/record_pb";
-import {PlaceBasePage, PlacePageProps} from "../PlaceBasePage";
+import {PlaceBasePage, PlaceBasePageProps} from "../PlaceBasePage";
 import {PlaceId} from "../../../components/places/Place";
 import {PlaceBreadcrumb} from "../PlaceBreadcrumb";
+import "./PlaceInfo.css";
+
+type Props = PlaceBasePageProps;
 
 type State = {
     placeId: PlaceId;
@@ -24,7 +27,7 @@ export default class PlaceInfoPage extends PlaceBasePage<State> {
     private readonly placeLoader = DEFAULT_PLACE_LOADER;
     private readonly recordLoader = DEFAULT_RECORD_LOADER;
 
-    constructor(props: PlacePageProps) {
+    constructor(props: Props) {
         super(props);
         this.state = {
             children: {},
@@ -47,7 +50,7 @@ export default class PlaceInfoPage extends PlaceBasePage<State> {
                 loading={this.state.place.loading}
                 place={bundle.place}/>
 
-            <div className="area leftRest">
+            <div className="content area leftRest">
 
                 <PlaceMap
                     area={true}
@@ -78,7 +81,7 @@ export default class PlaceInfoPage extends PlaceBasePage<State> {
         this.loadRecords();
     }
 
-    componentDidUpdate(prevProps: Readonly<PlacePageProps>, prevState: Readonly<State>) {
+    componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>) {
 
         if (this.props.location != prevProps.location)
             this.setState({placeId: this.readPlace()});
@@ -89,6 +92,10 @@ export default class PlaceInfoPage extends PlaceBasePage<State> {
             this.loadRecords();
         }
 
+    }
+
+    private readPlace(): PlaceId {
+        return this.urlParameter("place");
     }
 
     private loadPlace(id = this.state.placeId) {

@@ -1,21 +1,13 @@
-import BasePage from "../BasePage";
+import BasePage, {BasePageProps} from "../BasePage";
 import {HeaderMenuType} from "../HeaderMenu";
-import {RouteComponentProps} from "react-router";
 import {PlaceId} from "../../components/places/Place";
 
-export type PlacePageProps = RouteComponentProps<any>;
+export type PlaceBasePageProps = BasePageProps;
 
-export abstract class PlaceBasePage<S> extends BasePage<PlacePageProps, S> {
+export abstract class PlaceBasePage<S> extends BasePage<S> {
 
     active(): HeaderMenuType {
         return "places";
-    }
-
-    readPlace(): PlaceId {
-        const location = this.props.location;
-        if (!location) return null;
-        const search = new URLSearchParams(location.search);
-        return search.get("place");
     }
 
 }

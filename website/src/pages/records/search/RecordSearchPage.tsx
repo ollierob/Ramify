@@ -15,9 +15,9 @@ import {readPageHash, updatePageHash} from "../../../components/Page";
 import {hashToRecordSearch, recordSearchToHash} from "../../../components/search/RecordSearchHandler";
 import BasePage from "../../BasePage";
 import {HeaderMenuType} from "../../HeaderMenu";
-import {RecordBasePage} from "../RecordBasePage";
+import {RecordBasePage, RecordBasePageProps} from "../RecordBasePage";
 
-type Props = {}
+type Props = RecordBasePageProps;
 
 type State = {
     selectedRegion: PlaceId[];
@@ -27,12 +27,12 @@ type State = {
     recordName?: string;
 }
 
-export default class RecordSearchPage extends RecordBasePage<Props, State> {
+export default class RecordSearchPage extends RecordBasePage<State> {
 
     private readonly placeLoader = DEFAULT_PLACE_LOADER;
     private readonly recordLoader = DEFAULT_RECORD_LOADER;
 
-    constructor(props) {
+    constructor(props: RecordBasePageProps) {
         super(props);
         const options = hashToRecordSearch(readPageHash());
         this.state = {

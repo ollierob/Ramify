@@ -6,8 +6,9 @@ import {DEFAULT_PLACE_LOADER} from "../../../components/places/PlaceLoader";
 import {Loading} from "../../../components/style/Loading";
 import {Flag} from "../../../components/images/Flag";
 import {placeHref} from "../PlaceLinks";
-import {PlaceBasePage} from "../PlaceBasePage";
-import {RouteComponentProps} from "react-router";
+import {PlaceBasePage, PlaceBasePageProps} from "../PlaceBasePage";
+
+type Props = PlaceBasePageProps;
 
 type State = {
     countries: AsyncData<ReadonlyArray<Place.AsObject>>
@@ -17,7 +18,7 @@ export default class PlacesHomePage extends PlaceBasePage<State> {
 
     private readonly placeLoader = DEFAULT_PLACE_LOADER;
 
-    constructor(props: RouteComponentProps<any>) {
+    constructor(props: Props) {
         super(props);
         this.state = {
             countries: {loading: true}

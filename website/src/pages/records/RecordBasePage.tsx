@@ -1,8 +1,11 @@
-import BasePage from "../BasePage";
+import BasePage, {BasePageProps} from "../BasePage";
 import {HeaderMenuType} from "../HeaderMenu";
+import {RecordSetId} from "../../components/records/RecordSet";
 
-export abstract class RecordBasePage<P, S> extends BasePage<P, S> {
-    
+export type RecordBasePageProps = BasePageProps;
+
+export abstract class RecordBasePage<S> extends BasePage<S> {
+
     active(): HeaderMenuType {
         return "records";
     }

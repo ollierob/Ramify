@@ -4,8 +4,11 @@ import "./Core";
 import {getSessionPlaceHistory} from "../components/places/PlaceHistory";
 import {PlaceList} from "../components/places/Place";
 import {getSessionPlaceFavourites, PlaceFavouritesHandler, SessionPlaceFavouritesHandler} from "../components/places/PlaceFavourites";
+import {RouteComponentProps} from "react-router";
 
-export default abstract class BasePage<P = any, S = any> extends React.PureComponent<P, S> {
+export type BasePageProps = RouteComponentProps<any>;
+
+export default abstract class BasePage<S = any> extends React.PureComponent<BasePageProps, S> {
 
     favouritesHandler: PlaceFavouritesHandler = SessionPlaceFavouritesHandler;
 
@@ -40,6 +43,12 @@ export default abstract class BasePage<P = any, S = any> extends React.PureCompo
     abstract body(): React.ReactNode;
 
     abstract active(): HeaderMenuType;
+
+    urlParameter(key: string): string {
+        const location = this.props.location;
+        if (!location) return null;
+        return new URLSearchParams(location.search).get(key);
+    }
 
 }
 

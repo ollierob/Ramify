@@ -12,9 +12,10 @@ import RecordSetCard from "./RecordSetCard";
 import {PlaceInfo} from "../../../components/places/PlaceInfo";
 import BasePage from "../../BasePage";
 import {HeaderMenuType} from "../../HeaderMenu";
-import {RecordBasePage} from "../RecordBasePage";
+import {RecordBasePage, RecordBasePageProps} from "../RecordBasePage";
+import {RecordSetId} from "../../../components/records/RecordSet";
 
-type Props = RouteComponentProps<any>
+type Props = RecordBasePageProps;
 
 type State = {
     records: AsyncData<ReadonlyArray<EnrichedRecord>>
@@ -27,17 +28,18 @@ type State = {
     searchResults: AsyncData<ReadonlyArray<EnrichedRecord>>;
 }
 
-export default class RecordSetPage extends RecordBasePage<Props, State> {
+export default class RecordSetPage extends RecordBasePage<State> {
 
     private readonly recordLoader = DEFAULT_RECORD_LOADER;
     private readonly placeLoader = DEFAULT_PLACE_LOADER;
 
-    constructor(props) {
+    constructor(props: Props) {
         super(props);
         this.state = {
             search: null, //TOOO read page hash
             records: {},
             recordSet: {},
+            recordSetId: this.readLocation(),
             recordSetCoversPlace: {loading: true},
             recordSetSource: {loading: true},
             recordSetRelatives: {},
@@ -82,26 +84,23 @@ export default class RecordSetPage extends RecordBasePage<Props, State> {
     }
 
     componentDidMount() {
-        this.readLocation();
+        this.loadRecordSet();
     }
 
     componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>) {
         if (this.props.location != prevProps.location)
-            this.readLocation();
+            this.setState({recordSetId: this.readLocation()});
         if (this.state.recordSetId != prevState.recordSetId)
             this.loadRecordSet(this.state.recordSetId);
         if (this.state.recordSet.data && this.state.recordSet.data != prevState.recordSet.data)
             this.loadPlace(this.state.recordSet.data.coversplaceid, this.state.recordSet.data.creatorplaceid);
     }
 
-    private readLocation() {
-        const location = this.props.location;
-        if (!location) return;
-        const search = new URLSearchParams(location.search);
-        this.setState({recordSetId: search.get("id")});
+    private readLocation(): RecordSetId {
+        return this.urlParameter("id");
     }
 
-    private loadRecordSet(id: string) {
+    private loadRecordSet(id: string = this.state.recordSetId) {
         if (!id) return;
         asyncLoadData(id, this.recordLoader.loadRecordSet, recordSet => this.setState({recordSet}));
         asyncLoadData(id, this.recordLoader.loadRecordSetRelatives, recordSetRelatives => this.setState({recordSetRelatives}));
