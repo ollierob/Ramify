@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import net.ramify.model.AbstractMappedProvider;
+import net.ramify.model.record.collection.HasRecordSetId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.RecordSetRelatives;
@@ -49,6 +50,26 @@ class XmlRecordSetRelativesProvider extends AbstractMappedProvider<RecordSetId, 
         return new XmlRecordSetRelativesProvider(this.immutableMap());
     }
 
+    boolean hasChildren(final RecordSetId id) {
+        final var real = this.get(id);
+        if (real != null) return !real.children().isEmpty();
+        final var lazy = workingSet.get(id);
+        return lazy != null && lazy.hasChildren();
+    }
+
+    @Override
+    @Deprecated //Doesn't work if we're using the working set
+    public RecordSet parentOf(final HasRecordSetId id) {
+        return RecordSetRelativesProvider.super.parentOf(id);
+    }
+
+    RecordSetId parentId(final RecordSetId id) {
+        final var real = this.get(id);
+        if (real != null) return Functions.ifNonNull(real.parent(), RecordSet::recordSetId);
+        final var lazy = workingSet.get(id);
+        return Functions.ifNonNull(lazy, LazyRelationships::parentId);
+    }
+
     private void add(final LazyRelationships lazy, final RecordSetProvider recordSets) {
         super.put(lazy.id, lazy.build(recordSets));
     }
@@ -62,6 +83,11 @@ class XmlRecordSetRelativesProvider extends AbstractMappedProvider<RecordSetId, 
 
         LazyRelationships(final RecordSetId id) {
             this.id = id;
+        }
+
+        @CheckForNull
+        RecordSetId parentId() {
+            return parentId;
         }
 
         void setParent(final RecordSetId id) {
@@ -78,6 +104,10 @@ class XmlRecordSetRelativesProvider extends AbstractMappedProvider<RecordSetId, 
 
         void addChild(final RecordSetId id) {
             this.childIds.add(id);
+        }
+
+        boolean hasChildren() {
+            return !childIds.isEmpty();
         }
 
         RecordSetRelatives build(final RecordSetProvider recordSets) {

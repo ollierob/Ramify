@@ -1,12 +1,15 @@
 package net.ramify.model.record.xml;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import net.ramify.model.AbstractMappedProvider;
+import net.ramify.model.record.collection.DelegatedRecordSet;
 import net.ramify.model.record.collection.HasRecordSetId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
+import net.ramify.model.record.proto.RecordProto;
 import net.ramify.model.record.provider.RecordSetProvider;
 import net.ramify.model.record.xml.collection.DefaultRecordSet;
 import net.ramify.model.record.xml.collection.XmlRecordSets;
@@ -77,7 +80,19 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
 
     @Nonnull
     RecordSetProvider immutable() {
-        return new XmlRecordSetProvider(this.immutableMap(), relatives);
+        final var records = this.mutableMap();
+        records.keySet().forEach(id -> this.updateParentCounts(id, records));
+        return new XmlRecordSetProvider(ImmutableMap.copyOf(records), relatives);
+    }
+
+    private void updateParentCounts(final RecordSetId id, final Map<RecordSetId, RecordSet> records) {
+        final var record = this.get(id);
+        if (record == null || record.numRecords() == 0) return; //Ignore no records
+        if (relatives.hasChildren(id)) return; //Ignore non-leaf nodes
+        var parentId = record.recordSetId();
+        while ((parentId = relatives.parentId(parentId)) != null) {
+            records.compute(parentId, (i, parent) -> ResizedRecordSet.of(parent, record));
+        }
     }
 
     static RecordSetProvider readRecordsInDirectory(
@@ -112,6 +127,42 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
         } catch (final Exception ex) {
             throw new RuntimeException("Error reading records in file " + file, ex);
         }
+    }
+
+    private static class ResizedRecordSet extends DelegatedRecordSet {
+
+        static ResizedRecordSet of(final RecordSet parent, final RecordSet leaf) {
+            //if(parent instanceof ResizedRecordSet) ... //TODO flatten
+            return new ResizedRecordSet(parent, leaf.numRecords(), leaf.numIndividuals());
+        }
+
+        private final int childRecords;
+        private final int childIndividuals;
+
+        private ResizedRecordSet(final RecordSet delegate, final int childRecords, final int childIndividuals) {
+            super(delegate);
+            this.childRecords = childRecords;
+            this.childIndividuals = childIndividuals;
+        }
+
+        @Override
+        public int numRecords() {
+            return super.numRecords() + childRecords;
+        }
+
+        @Override
+        public int numIndividuals() {
+            return super.numIndividuals() + childIndividuals;
+        }
+
+        @Nonnull
+        @Override
+        public RecordProto.RecordSet.Builder toProtoBuilder() {
+            return super.toProtoBuilder()
+                    .setNumIndividuals(this.numIndividuals())
+                    .setNumRecords(this.numRecords());
+        }
+
     }
 
 }

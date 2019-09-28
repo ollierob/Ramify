@@ -2,8 +2,7 @@
 
 <recordSets
         xmlns="http://ramify.net/records"
-        xmlns:d="http://ramify.net/dates"
-        xmlns:p="http://ramify.net/places">
+        xmlns:d="http://ramify.net/dates">
 
     <recordSet
             id="heptonstall_subsidy_rolls"

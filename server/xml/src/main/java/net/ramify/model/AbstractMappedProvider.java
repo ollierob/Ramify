@@ -1,6 +1,7 @@
 package net.ramify.model;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 
 import javax.annotation.CheckForNull;
 import javax.xml.bind.annotation.XmlTransient;
@@ -43,8 +44,12 @@ public abstract class AbstractMappedProvider<K, V> implements Provider<K, V> {
         return Collections.unmodifiableMap(map);
     }
 
+    protected Map<K, V> mutableMap() {
+        return Maps.newHashMap(map);
+    }
+
     protected ImmutableMap<K, V> immutableMap() {
-        return ImmutableMap.copyOf(map);
+        return ImmutableMap.copyOf(this.map());
     }
 
 }
