@@ -5,19 +5,16 @@ import "./Table.css";
 
 export function ColumnSubstringLocalSearch<T>(toString: (t: T) => string): Partial<ColumnProps<T>> {
     return {
-        ...SearchColumn,
+        ...ColumnSearch,
         onFilter: (value, record) => {
             const r = toString(record);
             if (!r) return false;
             return r.toLowerCase().includes(value.toLowerCase());
         },
-        onFilterDropdownVisibleChange: visible => {
-            //TODO focus on input
-        }
     };
 }
 
-const SearchColumn: Partial<ColumnProps<any>> = {
+export const ColumnSearch: Readonly<Partial<ColumnProps<any>>> = {
     filterIcon: filtered => <Icon type="search" className={filtered ? "active" : ""}/>,
     filterDropdown: (props: FilterDropdownProps) => <div className="filter">
         <Input
@@ -38,5 +35,8 @@ const SearchColumn: Partial<ColumnProps<any>> = {
             onClick={() => props.clearFilters(props.selectedKeys)}>
             Clear
         </Button>
-    </div>
+    </div>,
+    onFilterDropdownVisibleChange: visible => {
+        //TODO focus on input
+    }
 };
