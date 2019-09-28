@@ -9,7 +9,7 @@ import {RecordProperties} from "./IndividualRecordTable";
 import {recordTypeFromValue} from "../../../components/records/RecordType";
 import {IndividualRecord} from "./IndividualRecord";
 import {placeTypeName} from "../../../components/places/PlaceType";
-import {ColumnSubstringSearch} from "../../../components/table/ant/ColumnSubstringSearch";
+import {ColumnSubstringLocalSearch} from "../../../components/table/ant/ColumnSubstringLocalSearch";
 
 export type IndividualRecordColumn = ColumnProps<IndividualRecord>;
 
@@ -69,7 +69,7 @@ const NameColumn: IndividualRecordColumn = {
     },
     sorter: (r1, r2) => nameToString(r1.person.name).localeCompare(nameToString(r2.person.name)),
     width: 200,
-    ...ColumnSubstringSearch("Search name", r => nameToString(r.person.name))
+    ...ColumnSubstringLocalSearch(r => nameToString(r.person.name))
 };
 
 const BirthYear: IndividualRecordColumn = {
@@ -95,7 +95,7 @@ const ResidencePlace: IndividualRecordColumn = {
         {r.residence.place && <Minor text={placeTypeName(r.residence.place.type)}/>}
     </>,
     width: 200,
-    ...ColumnSubstringSearch("Search residence", r => r.residence.place && r.residence.place.name)
+    ...ColumnSubstringLocalSearch(r => r.residence.place && r.residence.place.name)
 };
 
 const DeathDateColumn: IndividualRecordColumn = {
