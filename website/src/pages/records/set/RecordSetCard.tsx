@@ -35,7 +35,7 @@ export default class RecordSetCard extends React.PureComponent<Props> {
 
         return <Card
             className="info"
-            title={recordSet ? <>Records of <b>{recordSet.longtitle}</b> <span className="unimportant">{recordSet.numrecords} records</span></> : <Loading/>}>
+            title={<Title recordSet={recordSet}/>}>
 
             {recordSet && <>
 
@@ -73,6 +73,18 @@ export default class RecordSetCard extends React.PureComponent<Props> {
     }
 
 }
+
+const Title = (props: {recordSet: RecordSet.AsObject}) => {
+    const recordSet = props.recordSet;
+    if (!recordSet) return <Loading/>;
+    return <>
+        Records of <b>{recordSet.longtitle}</b>
+        {" "}
+        <span className="unimportant">
+            {recordSet.numrecords.toLocaleString()} records
+            {recordSet.numrecords > 0 && <>, {recordSet.numindividuals.toLocaleString()} individuals</>}
+        </span></>;
+};
 
 const Description = (props: {record: RecordSet.AsObject}) => {
     const description = props.record.description;
