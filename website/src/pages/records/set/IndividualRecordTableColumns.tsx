@@ -5,13 +5,14 @@ import {Button, Icon} from "antd";
 import {nameToString} from "../../../components/people/Name";
 import {FormattedDateRange, FormattedYearRange} from "../../../components/date/FormattedDateRange";
 import {PlaceContextMenu} from "../../../components/places/PlaceContextMenu";
-import {RecordProperties} from "./RecordIndividualTable";
+import {RecordProperties} from "./IndividualRecordTable";
 import {recordTypeFromValue} from "../../../components/records/RecordType";
-import {RecordIndividualRow} from "./RecordIndividualRow";
+import {IndividualRecord} from "./IndividualRecord";
+import {placeTypeName} from "../../../components/places/PlaceType";
 
-export type RecordColumn = ColumnProps<RecordIndividualRow>;
+export type IndividualRecordColumn = ColumnProps<IndividualRecord>;
 
-export function determineColumns(recordSet: RecordSet.AsObject, properties: RecordProperties, showRecordSet?: boolean): RecordColumn[] {
+export function determineColumns(recordSet: RecordSet.AsObject, properties: RecordProperties, showRecordSet?: boolean): IndividualRecordColumn[] {
     if (!recordSet) return [];
     const type = recordTypeFromValue(recordSet.type);
     const columns = [...DefaultColumns];
@@ -29,24 +30,24 @@ export function determineColumns(recordSet: RecordSet.AsObject, properties: Reco
 }
 
 function genericColumns(properties: RecordProperties) {
-    const columns: RecordColumn[] = [];
-    if (properties.hasBirth) columns.push(BirthYearColumn);
-    if (properties.hasResidence) columns.push(ResidenceYearColumn, ResidencePlaceColumn);
+    const columns: IndividualRecordColumn[] = [];
+    if (properties.hasBirth) columns.push(BirthYear);
+    if (properties.hasResidence) columns.push(ResidenceYear, ResidencePlace);
     if (properties.hasDeath) columns.push(DeathDateColumn);
     if (properties.hasBurial) columns.push(BurialDateColumn);
     return columns;
 }
 
 function burialColumns(properties: RecordProperties) {
-    const columns: RecordColumn[] = [];
-    if (properties.hasBirth) columns.push(BirthYearColumn);
-    if (properties.hasResidence) columns.push(ResidencePlaceColumn);
+    const columns: IndividualRecordColumn[] = [];
+    if (properties.hasBirth) columns.push(BirthYear);
+    if (properties.hasResidence) columns.push(ResidencePlace);
     if (properties.hasDeath) columns.push(DeathDateColumn);
     if (properties.hasBurial) columns.push(BurialDateColumn);
     return columns;
 }
 
-const ImageColumn: RecordColumn = {
+const ImageColumn: IndividualRecordColumn = {
     key: "image",
     className: "image",
     dataIndex: "image",
@@ -54,7 +55,7 @@ const ImageColumn: RecordColumn = {
     width: 48,
 };
 
-const NameColumn: RecordColumn = {
+const NameColumn: IndividualRecordColumn = {
     key: "name",
     title: "Name",
     dataIndex: "person.name.surname",
@@ -62,16 +63,14 @@ const NameColumn: RecordColumn = {
         if (!r.person.name) return <span className="unimportant">Unknown</span>;
         return <>
             {nameToString(r.person.name)}
-            {r.person.name.original && <>
-                <div className="small unimportant">{r.person.name.original}</div>
-            </>}
+            {r.person.name.original && <Minor text={r.person.name.original}/>}
         </>;
     },
     sorter: (r1, r2) => nameToString(r1.person.name).localeCompare(nameToString(r2.person.name)),
     width: 200,
 };
 
-const BirthYearColumn: RecordColumn = {
+const BirthYear: IndividualRecordColumn = {
     key: "birthDate",
     title: "Birth date",
     dataIndex: "birth.date",
@@ -79,21 +78,24 @@ const BirthYearColumn: RecordColumn = {
     width: 120
 };
 
-const ResidenceYearColumn: RecordColumn = {
+const ResidenceYear: IndividualRecordColumn = {
     key: "residenceDate",
     title: "Residence date",
     render: (t, r) => r.residence && <FormattedYearRange date={r.residence.date} words={{in: ""}}/>,
     width: 150
 };
 
-const ResidencePlaceColumn: RecordColumn = {
+const ResidencePlace: IndividualRecordColumn = {
     key: "residencePlace",
     title: "Residence",
-    render: (t, r) => r.residence && <PlaceContextMenu place={r.residence.place} showType/>,
+    render: (t, r) => r.residence && <>
+        <PlaceContextMenu place={r.residence.place}/>
+        {r.residence.place && <Minor text={placeTypeName(r.residence.place.type)}/>}
+    </>,
     width: 200
 };
 
-const DeathDateColumn: RecordColumn = {
+const DeathDateColumn: IndividualRecordColumn = {
     key: "deathDate",
     title: "Death date",
     dataIndex: "death.date",
@@ -101,7 +103,7 @@ const DeathDateColumn: RecordColumn = {
     width: 120
 };
 
-const BurialDateColumn: RecordColumn = {
+const BurialDateColumn: IndividualRecordColumn = {
     key: "burialDate",
     title: "Burial date",
     dataIndex: "burial.date",
@@ -109,18 +111,20 @@ const BurialDateColumn: RecordColumn = {
     width: 120
 };
 
-const RecordSetColumn: RecordColumn = {
+const RecordSetColumn: IndividualRecordColumn = {
     key: "recordSet",
     title: "Record set",
     render: (t, r) => r.record.recordSet && r.record.recordSet.longtitle,
     width: 200
 };
 
-const NotesColumn: RecordColumn = {
+const NotesColumn: IndividualRecordColumn = {
     key: "notes",
     title: "Notes",
     dataIndex: "person.notes",
     sorter: (r1, r2) => (r1.person.notes || "").localeCompare(r2.person.notes || "")
 };
 
-const DefaultColumns: ReadonlyArray<RecordColumn> = [ImageColumn, NameColumn];
+const DefaultColumns: ReadonlyArray<IndividualRecordColumn> = [ImageColumn, NameColumn];
+
+const Minor = (props: {text: string}) => <div className="small unimportant">{props.text}</div>;

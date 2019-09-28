@@ -5,8 +5,8 @@ import {RecordPaginationHandler} from "../../../components/records/RecordPaginat
 import {isBirthEvent, isBurialEvent, isDeathEvent, isResidenceEvent} from "../../../components/event/Event";
 import {NoData} from "../../../components/style/NoData";
 import {EnrichedRecord} from "../../../components/records/RecordLoader";
-import {determineColumns, RecordColumn} from "./RecordIndividualTableColumns";
-import {RecordIndividualRow} from "./RecordIndividualRow";
+import {IndividualRecord} from "./IndividualRecord";
+import {determineColumns, IndividualRecordColumn} from "./IndividualRecordTableColumns";
 
 type Props = Partial<RecordPaginationHandler> & {
     recordSet: RecordSet.AsObject;
@@ -16,11 +16,11 @@ type Props = Partial<RecordPaginationHandler> & {
 }
 
 type State = {
-    data: RecordIndividualRow[];
-    columns: RecordColumn[]
+    data: IndividualRecord[];
+    columns: IndividualRecordColumn[]
 }
 
-export class RecordIndividualTable extends React.PureComponent<Props, State> {
+export class IndividualRecordTable extends React.PureComponent<Props, State> {
 
     constructor(props) {
         super(props);
@@ -62,9 +62,9 @@ export type RecordProperties = {
     hasBurial?: boolean;
 }
 
-function buildIndividualRecords(records: ReadonlyArray<EnrichedRecord>, properties: RecordProperties): RecordIndividualRow[] {
+function buildIndividualRecords(records: ReadonlyArray<EnrichedRecord>, properties: RecordProperties): IndividualRecord[] {
     if (!records || !records.length) return [];
-    const out: RecordIndividualRow[] = [];
+    const out: IndividualRecord[] = [];
     records.forEach(record => out.push(createRecord(record)));
     properties.hasBirth = out.some(r => r.birth);
     properties.hasResidence = out.some(r => r.residence);
@@ -73,10 +73,10 @@ function buildIndividualRecords(records: ReadonlyArray<EnrichedRecord>, properti
     return out;
 }
 
-function createRecord(record: EnrichedRecord): RecordIndividualRow {
+function createRecord(record: EnrichedRecord): IndividualRecord {
     //TODO include resolved record set
     const person = record.person;
-    const out: RecordIndividualRow = {person, record};
+    const out: IndividualRecord = {person, record};
     out.birth = person.eventsList.find(isBirthEvent);
     out.residence = person.eventsList.find(isResidenceEvent);
     out.death = person.eventsList.find(isDeathEvent);

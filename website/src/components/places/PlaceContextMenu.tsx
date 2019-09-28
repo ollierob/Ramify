@@ -13,7 +13,10 @@ export const PlaceContextMenu = (props: {place: Place.AsObject, showType?: boole
     if (!props.place) return null;
 
     return <span className="place">
-        <a href={placeHref(props.place)}>{props.place.name} {props.showType && placeTypeName(props.place.type)}</a>
+        <a href={placeHref(props.place)}>
+            {props.place.name}
+            {props.showType && <> {placeTypeName(props.place.type)}</>}
+        </a>
     </span>;
 
 };
