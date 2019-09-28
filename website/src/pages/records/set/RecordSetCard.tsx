@@ -2,7 +2,6 @@ import * as React from "react";
 import {CSSProperties} from "react";
 import {ExternalRecordReference, RecordSet, RecordSetRelatives} from "../../../protobuf/generated/record_pb";
 import {Card, Icon} from "antd";
-import {recordSetHref} from "../RecordLinks";
 import {RecordCards} from "../../../components/records/RecordCards";
 import {RecordSearchHandler} from "../../../components/search/RecordSearchHandler";
 import {RecordBrowser} from "./RecordBrowser";
@@ -99,18 +98,6 @@ const Creator = (props: {place: AsyncData<Readonly<PlaceBundle.AsObject>>}) => {
     if (!place.data || !place.loading) return null;
     return <div className="relationship place" style={MarginBottom}>
         <Icon type="edit"/> These records were created by <PlaceContextMenu place={place.data && place.data.place} loading={place.loading} showType/>
-    </div>;
-};
-
-const NextRelatives = (props: {next: ReadonlyArray<RecordSet.AsObject>}) => {
-    const next = props.next;
-    if (!next || !next.length) return null;
-    return <div className="relationship next" style={MarginBottom}>
-        <Icon type="right-square"/>
-        {" "}
-        Next in series {next.length > 1 ? "are" : "is"}
-        {" "}
-        {joinComponents(next.map(n => <a href={recordSetHref(n)}>{n.longtitle}</a>), " and ")}
     </div>;
 };
 
