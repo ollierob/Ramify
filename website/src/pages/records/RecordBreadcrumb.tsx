@@ -2,7 +2,8 @@ import * as React from "react";
 import {SubMenu} from "../SubMenu";
 import {RecordSetHierarchy, RecordSetRelatives} from "../../protobuf/generated/record_pb";
 import {recordSetHref} from "./RecordLinks";
-import {recordTypeName} from "../../components/records/RecordType";
+import {Dropdown, Menu, Popover} from "antd";
+import {NextIcon, PrevIcon} from "../../components/images/Icons";
 
 export const RecordBreadcrumb = (props: {hierarchy: RecordSetHierarchy.AsObject}) => {
     return <SubMenu>
@@ -20,12 +21,33 @@ const Hierarchy = (props: {hierarchy: RecordSetHierarchy.AsObject}) => {
 const Breadcrumb = (props: {relatives: RecordSetRelatives.AsObject, first?: boolean, last?: boolean}) => {
     const self = props.relatives.self;
     return <>
-        <span className="record">
-            <a href={recordSetHref(self)}>
-                {props.first ? self.longtitle : self.shorttitle}
-            </a>
-        </span>
+        <Popover content={<BreadcrumbDropdown {...props}/>} placement="bottomLeft">
+            <span className="record">
+                <a href={recordSetHref(self)}>
+                    <b>
+                        {props.first ? self.longtitle : self.shorttitle}
+                    </b>
+                </a>
+            </span>
+        </Popover>
         {!props.last && " » "}
+    </>;
+};
+
+const BreadcrumbDropdown = (props: {relatives: RecordSetRelatives.AsObject}) => {
+    const relatives = props.relatives;
+    if (!relatives) return null;
+    return <>
+        {relatives.previous && <div>
+            <PrevIcon/> Previous:
+            {" "}
+            <a href={recordSetHref(relatives.previous)}>{relatives.previous.longtitle}            </a>
+        </div>}
+        {relatives.nextList && relatives.nextList.length > 0 && <div>
+            <NextIcon/> Next:
+            {" "}
+            <a href={recordSetHref(relatives.nextList[0])}>{relatives.nextList[0].longtitle}</a>
+        </div>}
     </>;
 };
 
