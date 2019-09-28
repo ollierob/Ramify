@@ -27,6 +27,7 @@
     <recordSet
             id="england_census_1831"
             title="England 1831 Census"
+            shortTitle="England"
             coversPlaceId="country:england"
             source="government"
             type="residence">
@@ -37,6 +38,7 @@
     <recordSet
             id="england_census_1841"
             title="England 1841 Census"
+            shortTitle="England"
             coversPlaceId="country:england"
             source="government"
             type="residence">
@@ -47,6 +49,7 @@
     <recordSet
             id="england_census_1851"
             title="England 1851 Census"
+            shortTitle="England"
             coversPlaceId="country:england"
             source="government"
             type="residence">

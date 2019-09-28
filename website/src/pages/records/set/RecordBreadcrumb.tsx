@@ -26,7 +26,7 @@ const Breadcrumb = (props: {relatives: RecordSetRelatives.AsObject, first?: bool
             <span className="record">
                 <a href={recordSetHref(self)}>
                     <b>
-                        {props.first ? self.longtitle : self.shorttitle}
+                        {props.last ? self.longtitle : (self.shorttitle || self.longtitle)}
                     </b>
                 </a>
             </span>
@@ -42,7 +42,7 @@ const BreadcrumbDropdown = (props: {relatives: RecordSetRelatives.AsObject}) => 
         {relatives.previous && <div>
             <PrevIcon/> Previous:
             {" "}
-            <a href={recordSetHref(relatives.previous)}>{relatives.previous.longtitle}            </a>
+            <a href={recordSetHref(relatives.previous)}>{relatives.previous.longtitle}</a>
         </div>}
         {relatives.nextList && relatives.nextList.length > 0 && <div>
             <NextIcon/> Next:
