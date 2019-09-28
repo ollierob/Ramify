@@ -34,9 +34,7 @@ export const PlaceInfo = (props: Props) => {
             description={description}
             type={isBuilding(place) ? "demolished" : "historic"}/>}
 
-        {description && <Card className="description" title="Description" bordered={false}>
-            <ReactMarkdown source={description.description}/>
-        </Card>}
+        {description && <ReactMarkdown source={description.description}/>}
 
         {props.childPlaces && <Card className="places" title="Places" bordered={false}>
             <ChildPlaceCards
