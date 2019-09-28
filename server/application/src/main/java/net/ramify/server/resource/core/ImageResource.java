@@ -22,6 +22,7 @@ public class ImageResource extends AbstractResource {
 
     private static final MediaType JPG = new MediaType("image", "jpg");
     private static final MediaType PNG = new MediaType("image", "png");
+    private static final MediaType SVG = new MediaType("image", "svg");
 
     private final RecordSetProvider recordSets;
 
@@ -42,6 +43,8 @@ public class ImageResource extends AbstractResource {
                 return this.readSessionResource(context.session(), "/images/" + filename, JPG);
             case "png":
                 return this.readSessionResource(context.session(), "/images/" + filename, PNG);
+            case "svg":
+                return this.readSessionResource(context.session(), "/images/" + filename, SVG);
             default:
                 return notFound();
         }

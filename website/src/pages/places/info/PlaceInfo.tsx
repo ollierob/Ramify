@@ -36,7 +36,7 @@ export const PlaceInfo = (props: Props) => {
 
         {description && <ReactMarkdown source={description.description}/>}
 
-        {props.childPlaces && <Card className="places" title="Places" bordered={false}>
+        {props.childPlaces && (props.childPlaces.length || !isBuilding(place)) && <Card className="places" title="Places" bordered={false}>
             <ChildPlaceCards
                 {...props}
                 childPlaces={props.childPlaces}
