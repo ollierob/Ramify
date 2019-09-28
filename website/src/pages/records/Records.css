@@ -1,3 +1,14 @@
+.submenu .records {
+    height: 48px;
+    line-height: 48px;
+    font-size: 18px;
+    padding-left: 24px;
+}
+
+.submenu .records .record {
+    color: #AAAAAA;
+}
+
 .records .search, .records .filter {
     display: inline-block;
     font-size: 16px;

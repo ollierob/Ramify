@@ -13,7 +13,6 @@ export const PlaceBreadcrumb = (props: {loading?: boolean, place: Place.AsObject
 const Hierarchy = (props: {place: Place.AsObject}) => {
 
     const hierarchy = listHierarchy(props.place, 7);
-
     if (!hierarchy.length) return null;
 
     return <div className="places">

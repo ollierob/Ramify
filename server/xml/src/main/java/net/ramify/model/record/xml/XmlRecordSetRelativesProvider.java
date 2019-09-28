@@ -82,6 +82,7 @@ class XmlRecordSetRelativesProvider extends AbstractMappedProvider<RecordSetId, 
 
         RecordSetRelatives build(final RecordSetProvider recordSets) {
             return new DefaultRecordSetRelatives(
+                    recordSets.require(id),
                     Functions.ifNonNull(parentId, recordSets::require),
                     ImmutableSet.copyOf(SetUtils.transform(nextIds, recordSets::require)),
                     Functions.ifNonNull(previousId, recordSets::require),
@@ -93,14 +94,27 @@ class XmlRecordSetRelativesProvider extends AbstractMappedProvider<RecordSetId, 
     @XmlTransient
     private static class DefaultRecordSetRelatives implements RecordSetRelatives {
 
+        private final RecordSet self;
         private final RecordSet parent, previous;
         private final Set<RecordSet> next, children;
 
-        DefaultRecordSetRelatives(RecordSet recordSet, Set<RecordSet> next, RecordSet previous, Set<RecordSet> children) {
-            parent = recordSet;
+        DefaultRecordSetRelatives(
+                final RecordSet self,
+                final RecordSet parent,
+                final Set<RecordSet> next,
+                final RecordSet previous,
+                final Set<RecordSet> children) {
+            this.self = self;
+            this.parent = parent;
             this.next = next;
             this.previous = previous;
             this.children = children;
+        }
+
+        @Nonnull
+        @Override
+        public RecordSet self() {
+            return self;
         }
 
         @CheckForNull

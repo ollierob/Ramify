@@ -1,6 +1,6 @@
 import * as React from "react";
-import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
-import {RecordSearch, RecordSet, RecordSetRelatives} from "../../../protobuf/generated/record_pb";
+import {AsyncData, asyncLoadData, mapAsyncData} from "../../../components/fetch/AsyncData";
+import {RecordSearch, RecordSet, RecordSetHierarchy, RecordSetRelatives} from "../../../protobuf/generated/record_pb";
 import {RouteComponentProps} from "react-router";
 import {DEFAULT_RECORD_LOADER, EnrichedRecord} from "../../../components/records/RecordLoader";
 import {DEFAULT_PLACE_LOADER} from "../../../components/places/PlaceLoader";
@@ -14,6 +14,7 @@ import BasePage from "../../BasePage";
 import {HeaderMenuType} from "../../HeaderMenu";
 import {RecordBasePage, RecordBasePageProps} from "../RecordBasePage";
 import {RecordSetId} from "../../../components/records/RecordSet";
+import {RecordBreadcrumb} from "../RecordBreadcrumb";
 
 type Props = RecordBasePageProps;
 
@@ -23,7 +24,7 @@ type State = {
     recordSet: AsyncData<RecordSet.AsObject>;
     recordSetCoversPlace: AsyncData<PlaceBundle.AsObject>
     recordSetSource: AsyncData<PlaceBundle.AsObject>
-    recordSetRelatives: AsyncData<RecordSetRelatives.AsObject>
+    recordSetHierarchy?: AsyncData<RecordSetHierarchy.AsObject>
     search: RecordSearch;
     searchResults: AsyncData<ReadonlyArray<EnrichedRecord>>;
 }
@@ -42,7 +43,7 @@ export default class RecordSetPage extends RecordBasePage<State> {
             recordSetId: this.readLocation(),
             recordSetCoversPlace: {loading: true},
             recordSetSource: {loading: true},
-            recordSetRelatives: {},
+            recordSetHierarchy: {loading: true},
             searchResults: {}
         };
         this.search = this.search.bind(this);
@@ -53,33 +54,40 @@ export default class RecordSetPage extends RecordBasePage<State> {
         const recordSet = this.state.recordSet.data;
         if (!recordSet && !this.state.recordSet.loading) return <ErrorMessage message="Unknown record set"/>;
 
-        return <div className="content recordSet leftRest">
+        return <>
 
-            <PlaceMap
-                loading={this.state.recordSetCoversPlace.loading}
-                place={this.state.recordSetCoversPlace.data && this.state.recordSetCoversPlace.data.place}
-                position={this.state.recordSetCoversPlace.data && this.state.recordSetCoversPlace.data.position}/>
+            <RecordBreadcrumb
+                hierarchy={this.state.recordSetHierarchy.data}/>
 
-            <PlaceInfo
-                preTitle={<>These records relate to<br/></>}
-                loading={this.state.recordSetCoversPlace.loading}
-                description={this.state.recordSetCoversPlace.data && this.state.recordSetCoversPlace.data.description}
-                place={this.state.recordSetCoversPlace.data && this.state.recordSetCoversPlace.data.place}/>
+            <div className="content recordSet leftRest">
 
-            <RecordSetCard
-                {...this.props}
-                loading={this.state.recordSet.loading}
-                recordSet={recordSet}
-                recordSetRelatives={this.state.recordSetRelatives}
-                records={this.state.records}
-                paginate={null}
-                search={this.state.search}
-                searching={this.state.searchResults.loading}
-                doSearch={this.search}
-                searchResults={this.state.searchResults}
-                creatorPlace={this.state.recordSetSource}/>
+                <PlaceMap
+                    loading={this.state.recordSetCoversPlace.loading}
+                    place={this.state.recordSetCoversPlace.data && this.state.recordSetCoversPlace.data.place}
+                    position={this.state.recordSetCoversPlace.data && this.state.recordSetCoversPlace.data.position}/>
 
-        </div>;
+                <PlaceInfo
+                    preTitle={<>These records relate to<br/></>}
+                    loading={this.state.recordSetCoversPlace.loading}
+                    description={this.state.recordSetCoversPlace.data && this.state.recordSetCoversPlace.data.description}
+                    place={this.state.recordSetCoversPlace.data && this.state.recordSetCoversPlace.data.place}/>
+
+                <RecordSetCard
+                    {...this.props}
+                    loading={this.state.recordSet.loading}
+                    recordSet={recordSet}
+                    relatives={mapAsyncData(this.state.recordSetHierarchy, h => h.self)}
+                    records={this.state.records}
+                    paginate={null}
+                    search={this.state.search}
+                    searching={this.state.searchResults.loading}
+                    doSearch={this.search}
+                    searchResults={this.state.searchResults}
+                    creatorPlace={this.state.recordSetSource}/>
+
+            </div>
+
+        </>;
 
     }
 
@@ -103,7 +111,7 @@ export default class RecordSetPage extends RecordBasePage<State> {
     private loadRecordSet(id: string = this.state.recordSetId) {
         if (!id) return;
         asyncLoadData(id, this.recordLoader.loadRecordSet, recordSet => this.setState({recordSet}));
-        asyncLoadData(id, this.recordLoader.loadRecordSetRelatives, recordSetRelatives => this.setState({recordSetRelatives}));
+        asyncLoadData(id, this.recordLoader.loadRecordSetHierarchy, recordSetHierarchy => this.setState({recordSetHierarchy}));
         asyncLoadData(id, id => this.recordLoader.loadRecords(id, {children: true, limit: 100}), records => this.setState({records}));
     }
 

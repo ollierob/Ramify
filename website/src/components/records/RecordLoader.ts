@@ -1,4 +1,4 @@
-import {IndividualRecord, IndividualRecordList, Record, RecordImageList, RecordSearch, RecordSet, RecordSetList, RecordSetRelatives} from "../../protobuf/generated/record_pb";
+import {IndividualRecord, IndividualRecordList, Record, RecordImageList, RecordSearch, RecordSet, RecordSetHierarchy, RecordSetList, RecordSetRelatives} from "../../protobuf/generated/record_pb";
 import {PlaceId} from "../places/Place";
 import {queryParameters} from "../fetch/Fetch";
 import {protoGet, protoPost} from "../fetch/ProtoFetch";
@@ -15,6 +15,8 @@ export interface RecordLoader {
     loadRecordSets(options?: RecordSetOptions): Promise<ReadonlyArray<RecordSet.AsObject>>;
 
     loadRecordSetRelatives(id: RecordSetId): Promise<RecordSetRelatives.AsObject>
+
+    loadRecordSetHierarchy(id: RecordSetId): Promise<RecordSetHierarchy.AsObject>
 
     loadRecordImages(id: RecordSetId): Promise<RecordImageList.AsObject>
 
@@ -42,8 +44,13 @@ class ProtoRecordLoader implements RecordLoader {
         return protoGet(url, RecordSetList.deserializeBinary).then(readRecordSets);
     }
 
-    loadRecordSetRelatives(id: string) {
+    loadRecordSetRelatives(id: RecordSetId) {
         return protoGet("/records/sets/relatives/" + id, RecordSetRelatives.deserializeBinary)
+            .then(r => r ? r.toObject() : null);
+    }
+
+    loadRecordSetHierarchy(id: RecordSetId) {
+        return protoGet("/records/sets/hierarchy/" + id, RecordSetHierarchy.deserializeBinary)
             .then(r => r ? r.toObject() : null);
     }
 

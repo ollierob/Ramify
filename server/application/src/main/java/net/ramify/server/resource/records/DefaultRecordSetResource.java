@@ -4,6 +4,7 @@ import net.ramify.model.date.DateRange;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.record.collection.RecordSet;
+import net.ramify.model.record.collection.RecordSetHierarchy;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.RecordSetRelatives;
 import net.ramify.model.record.collection.RecordSets;
@@ -24,7 +25,10 @@ public class DefaultRecordSetResource implements RecordSetResource {
     private final PlaceProvider places;
 
     @Inject
-    DefaultRecordSetResource(final RecordSetProvider recordSets, final RecordSetRelativesProvider relatives, final PlaceProvider places) {
+    DefaultRecordSetResource(
+            final RecordSetProvider recordSets,
+            final RecordSetRelativesProvider relatives,
+            final PlaceProvider places) {
         this.recordSets = recordSets;
         this.relatives = relatives;
         this.places = places;
@@ -60,8 +64,14 @@ public class DefaultRecordSetResource implements RecordSetResource {
     }
 
     @Override
-    public RecordSetRelatives relatives(final RecordSetId parentId) {
-        return relatives.maybeGet(parentId).orElse(RecordSetRelatives.NONE);
+    public RecordSetRelatives relatives(final RecordSetId id) {
+        return relatives.get(id);
+    }
+
+    @CheckForNull
+    @Override
+    public RecordSetHierarchy hierarchy(final RecordSetId id) {
+        return relatives.hierarchy(id);
     }
 
 }

@@ -4,9 +4,11 @@ import com.google.common.collect.Sets;
 import net.ramify.model.Provider;
 import net.ramify.model.record.collection.HasRecordSetId;
 import net.ramify.model.record.collection.RecordSet;
+import net.ramify.model.record.collection.RecordSetHierarchy;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.RecordSetRelatives;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.Optional;
@@ -42,8 +44,32 @@ public interface RecordSetRelativesProvider extends Provider<RecordSetId, Record
     }
 
     @Nonnull
-    default Set<RecordSet> immediateChildren(final HasRecordSetId id) {
+    default Set<RecordSet> immediateChildren(@Nonnull final HasRecordSetId id) {
         return this.maybeGet(id).map(RecordSetRelatives::children).orElse(Collections.emptySet());
+    }
+
+    @CheckForNull
+    default RecordSetHierarchy hierarchy(@Nonnull final HasRecordSetId id) {
+
+        final var relatives = this.get(id.recordSetId());
+        if (relatives == null) return null;
+
+        return new RecordSetHierarchy() {
+
+            @Nonnull
+            @Override
+            public RecordSetRelatives relatives() {
+                return relatives;
+            }
+
+            @CheckForNull
+            @Override
+            public RecordSetHierarchy parent() {
+                final var parent = relatives.parent();
+                return parent == null ? null : RecordSetRelativesProvider.this.hierarchy(parent);
+            }
+
+        };
     }
 
 }

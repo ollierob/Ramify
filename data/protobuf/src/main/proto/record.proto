@@ -71,10 +71,18 @@ message RecordSetList {
 
 message RecordSetRelatives {
 
-    RecordSet parent = 1;
-    RecordSet previous = 2;
-    repeated RecordSet next = 3;
-    repeated RecordSet child = 4;
+    RecordSet self = 1;
+    RecordSet parent = 2;
+    RecordSet previous = 3;
+    repeated RecordSet next = 4;
+    repeated RecordSet child = 5;
+
+}
+
+message RecordSetHierarchy {
+
+    RecordSetRelatives self = 1;
+    RecordSetHierarchy parent = 2;
 
 }
 

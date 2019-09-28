@@ -20,7 +20,7 @@ import {PlaceContextMenu} from "../../../components/places/PlaceContextMenu";
 type Props = RecordPaginationHandler & RecordSearchHandler & RouteComponentProps<any> & {
     loading: boolean;
     recordSet: Readonly<RecordSet.AsObject>
-    recordSetRelatives: AsyncData<RecordSetRelatives.AsObject>;
+    relatives: AsyncData<RecordSetRelatives.AsObject>;
     records: AsyncData<ReadonlyArray<EnrichedRecord>>
     searchResults: AsyncData<ReadonlyArray<EnrichedRecord>>;
     creatorPlace: AsyncData<Readonly<PlaceBundle.AsObject>>
@@ -31,16 +31,13 @@ export default class RecordSetCard extends React.PureComponent<Props> {
     render() {
 
         const recordSet = this.props.recordSet;
-        const relatives: RecordSetRelatives.AsObject = this.props.recordSetRelatives.data || {childList: [], nextList: []};
+        const relatives: RecordSetRelatives.AsObject = this.props.relatives.data || {childList: [], nextList: []};
 
         return <Card
             className="info"
             title={recordSet ? <>Records of <b>{recordSet.longtitle}</b> <span className="unimportant">{recordSet.numrecords} records</span></> : <Loading/>}>
 
             {recordSet && <>
-
-                <Relatives
-                    relatives={relatives}/>
 
                 <Creator
                     place={this.props.creatorPlace}/>
@@ -70,7 +67,7 @@ export default class RecordSetCard extends React.PureComponent<Props> {
     }
 
     private useFixedWidthCards(): boolean {
-        const relatives = this.props.recordSetRelatives.data;
+        const relatives = this.props.relatives.data;
         if (!relatives || !relatives.childList.length) return false;
         return relatives.childList.every(c => (c.shorttitle || c.longtitle).length < 32);
     }
@@ -91,20 +88,6 @@ const Creator = (props: {place: AsyncData<Readonly<PlaceBundle.AsObject>>}) => {
     return <div className="relationship place" style={MarginBottom}>
         <Icon type="edit"/> These records were created by <PlaceContextMenu place={place.data && place.data.place} loading={place.loading} showType/>
     </div>;
-};
-
-const Relatives = (props: {relatives: RecordSetRelatives.AsObject}) => {
-    let relatives = props.relatives;
-    if (!relatives) return null;
-    return <>
-        {relatives.parent && <div className="relationship parent" style={MarginBottom}>
-            <Icon type="up-square"/> Part of the records of <a href={recordSetHref(relatives.parent)}>{relatives.parent.longtitle}</a>
-        </div>}
-        {relatives.previous && <div className="relationship previous" style={MarginBottom}>
-            <Icon type="left-square"/> Previous in series was <a href={recordSetHref(relatives.previous)}>{relatives.previous.longtitle}</a>
-        </div>}
-        <NextRelatives next={relatives.nextList}/>
-    </>;
 };
 
 const NextRelatives = (props: {next: ReadonlyArray<RecordSet.AsObject>}) => {

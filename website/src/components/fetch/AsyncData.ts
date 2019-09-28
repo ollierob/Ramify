@@ -14,3 +14,7 @@ export function asyncLoadData<Q, D>(query: Q, doLoad: (query: Q) => Promise<D>, 
             if (errorHandler) errorHandler(error);
         });
 }
+
+export function mapAsyncData<Q, F, T>(async: AsyncData<F, Q>, func: (f: F) => T): AsyncData<T, Q> {
+    return {...async, data: async.data ? func(async.data) : null};
+}
