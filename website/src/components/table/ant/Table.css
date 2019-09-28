@@ -1,0 +1,16 @@
+.ant-table-filter-dropdown .filter {
+    padding: 8px;
+}
+
+.ant-table-filter-dropdown .filter input {
+    margin-bottom: 8px;
+}
+
+.ant-table-filter-dropdown .filter .clear {
+    position: relative;
+    float: right;
+}
+
+.ant-table .anticon-search.active {
+    color: #b76337
+}
