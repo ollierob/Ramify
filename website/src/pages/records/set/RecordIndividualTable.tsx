@@ -1,13 +1,12 @@
 import * as React from "react";
-import {IndividualRecord, Record, RecordSet} from "../../../protobuf/generated/record_pb";
+import {RecordSet} from "../../../protobuf/generated/record_pb";
 import {Table} from "antd";
 import {RecordPaginationHandler} from "../../../components/records/RecordPaginationHandler";
-import {Person} from "../../../protobuf/generated/person_pb";
-import {Event} from "../../../protobuf/generated/event_pb";
 import {isBirthEvent, isBurialEvent, isDeathEvent, isResidenceEvent} from "../../../components/event/Event";
-import {determineColumns, RecordColumn} from "./RecordTableColumns";
 import {NoData} from "../../../components/style/NoData";
 import {EnrichedRecord} from "../../../components/records/RecordLoader";
+import {determineColumns, RecordColumn} from "./RecordIndividualTableColumns";
+import {RecordIndividualRow} from "./RecordIndividualRow";
 
 type Props = Partial<RecordPaginationHandler> & {
     recordSet: RecordSet.AsObject;
@@ -17,21 +16,11 @@ type Props = Partial<RecordPaginationHandler> & {
 }
 
 type State = {
-    data: TableRow[];
+    data: RecordIndividualRow[];
     columns: RecordColumn[]
 }
 
-export type TableRow = {
-    person: Person.AsObject;
-    birth?: Event.AsObject;
-    residence?: Event.AsObject;
-    death?: Event.AsObject;
-    burial?: Event.AsObject;
-    image?: string;
-    record: EnrichedRecord;
-}
-
-export class RecordTable extends React.PureComponent<Props, State> {
+export class RecordIndividualTable extends React.PureComponent<Props, State> {
 
     constructor(props) {
         super(props);
@@ -73,9 +62,9 @@ export type RecordProperties = {
     hasBurial?: boolean;
 }
 
-function buildIndividualRecords(records: ReadonlyArray<EnrichedRecord>, properties: RecordProperties): TableRow[] {
+function buildIndividualRecords(records: ReadonlyArray<EnrichedRecord>, properties: RecordProperties): RecordIndividualRow[] {
     if (!records || !records.length) return [];
-    const out: TableRow[] = [];
+    const out: RecordIndividualRow[] = [];
     records.forEach(record => out.push(createRecord(record)));
     properties.hasBirth = out.some(r => r.birth);
     properties.hasResidence = out.some(r => r.residence);
@@ -84,10 +73,10 @@ function buildIndividualRecords(records: ReadonlyArray<EnrichedRecord>, properti
     return out;
 }
 
-function createRecord(record: EnrichedRecord): TableRow {
+function createRecord(record: EnrichedRecord): RecordIndividualRow {
     //TODO include resolved record set
     const person = record.person;
-    const out: TableRow = {person, record};
+    const out: RecordIndividualRow = {person, record};
     out.birth = person.eventsList.find(isBirthEvent);
     out.residence = person.eventsList.find(isResidenceEvent);
     out.death = person.eventsList.find(isDeathEvent);

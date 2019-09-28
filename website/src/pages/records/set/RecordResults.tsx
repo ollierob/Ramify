@@ -2,7 +2,7 @@ import * as React from "react";
 import {Tabs} from "antd";
 import {AsyncData} from "../../../components/fetch/AsyncData";
 import {RecordSet} from "../../../protobuf/generated/record_pb";
-import {RecordTable} from "./RecordTable";
+import {RecordIndividualTable} from "./RecordIndividualTable";
 import {RecordPaginationHandler} from "../../../components/records/RecordPaginationHandler";
 import RecordImageGallery from "./RecordImageGallery";
 import {EnrichedRecord} from "../../../components/records/RecordLoader";
@@ -23,7 +23,7 @@ export class RecordResults extends React.PureComponent<Props, State> {
     constructor(props) {
         super(props);
         this.state = {
-            activeTab: "records",
+            activeTab: "individuals",
         };
     }
 
@@ -37,8 +37,15 @@ export class RecordResults extends React.PureComponent<Props, State> {
 
             <Tabs.TabPane
                 key="records"
-                tab={"Record browser"}>
-                <RecordTable
+                tab="Records"
+                disabled>
+
+            </Tabs.TabPane>
+
+            <Tabs.TabPane
+                key="individuals"
+                tab="Individuals">
+                <RecordIndividualTable
                     {...this.props}
                     loading={this.props.records.loading}
                     records={this.props.records.data}/>
@@ -55,7 +62,7 @@ export class RecordResults extends React.PureComponent<Props, State> {
                 key="search"
                 tab={"Search results"}
                 disabled={!this.props.searchResults.query}>
-                <RecordTable
+                <RecordIndividualTable
                     {...this.props}
                     loading={this.props.searchResults.loading}
                     records={this.props.searchResults.data}/>
