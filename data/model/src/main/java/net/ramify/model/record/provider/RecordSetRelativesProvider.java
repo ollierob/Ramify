@@ -30,7 +30,7 @@ public interface RecordSetRelativesProvider extends Provider<RecordSetId, Record
         return this.containsAnyParent(ids, this.parentOf(child));
     }
 
-    default Set<RecordSet> allChildren(final HasRecordSetId parentId) {
+    default Set<RecordSet> descendants(final HasRecordSetId parentId) {
         final var relatives = this.get(parentId.recordSetId());
         if (relatives == null) return Collections.emptySet();
         final var children = relatives.children();
@@ -38,7 +38,7 @@ public interface RecordSetRelativesProvider extends Provider<RecordSetId, Record
         final var set = Sets.<RecordSet>newHashSet();
         children.forEach(child -> {
             set.add(child);
-            set.addAll(this.allChildren(child));
+            set.addAll(this.descendants(child));
         });
         return set;
     }

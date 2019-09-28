@@ -2,11 +2,13 @@ package net.ramify.server.resource.records;
 
 import net.ramify.model.record.collection.AggregateRecords;
 import net.ramify.model.record.collection.IndividualRecords;
+import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.Records;
 import net.ramify.model.record.image.RecordImages;
 import net.ramify.model.record.proto.RecordProto;
 import net.ramify.model.record.provider.RecordImageProvider;
+import net.ramify.model.record.provider.RecordSetRelativesProvider;
 import net.ramify.model.record.provider.RecordsProvider;
 import net.ramify.utils.collections.ListUtils;
 
@@ -17,11 +19,10 @@ import java.util.stream.Collectors;
 @Singleton
 public class DefaultRecordsResource implements RecordsResource {
 
-    private static final int DEFAULT_LIMIT = 1000;
-
     private final RecordsProvider records;
     private final RecordSetResource recordSets;
     private final RecordImageProvider imageProvider;
+    private final RecordSetRelativesProvider relativesProvider;
     private final RecordSearch search;
 
     @Inject
@@ -29,10 +30,12 @@ public class DefaultRecordsResource implements RecordsResource {
             final RecordSetResource recordSets,
             final RecordsProvider records,
             final RecordImageProvider imageProvider,
+            final RecordSetRelativesProvider relativesProvider,
             final RecordSearch search) {
         this.recordSets = recordSets;
         this.records = records;
         this.imageProvider = imageProvider;
+        this.relativesProvider = relativesProvider;
         this.search = search;
     }
 
@@ -48,8 +51,8 @@ public class DefaultRecordsResource implements RecordsResource {
     }
 
     private Records parentAndChildRecords(final RecordSetId id) {
-        final var parent = this.records.require(id);
-        final var children = this.recordSets().relatives(id).childIds().map(records::require).collect(Collectors.toList());
+        final var parent = records.require(id);
+        final var children = relativesProvider.descendants(id).stream().map(RecordSet::recordSetId).map(records::require).collect(Collectors.toList());
         return new AggregateRecords(ListUtils.prefix(parent, children));
     }
 
