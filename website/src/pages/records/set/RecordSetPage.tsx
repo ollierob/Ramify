@@ -1,7 +1,6 @@
 import * as React from "react";
 import {AsyncData, asyncLoadData, mapAsyncData} from "../../../components/fetch/AsyncData";
-import {RecordSearch, RecordSet, RecordSetHierarchy, RecordSetRelatives} from "../../../protobuf/generated/record_pb";
-import {RouteComponentProps} from "react-router";
+import {RecordSearch, RecordSet, RecordSetHierarchy} from "../../../protobuf/generated/record_pb";
 import {DEFAULT_RECORD_LOADER, EnrichedRecord} from "../../../components/records/RecordLoader";
 import {DEFAULT_PLACE_LOADER} from "../../../components/places/PlaceLoader";
 import {PlaceBundle} from "../../../protobuf/generated/place_pb";
@@ -10,11 +9,9 @@ import {PlaceId} from "../../../components/places/Place";
 import {PlaceMap} from "../../../components/places/PlaceMap";
 import RecordSetCard from "./RecordSetCard";
 import {PlaceInfo} from "../../../components/places/PlaceInfo";
-import BasePage from "../../BasePage";
-import {HeaderMenuType} from "../../HeaderMenu";
 import {RecordBasePage, RecordBasePageProps} from "../RecordBasePage";
 import {RecordSetId} from "../../../components/records/RecordSet";
-import {RecordBreadcrumb} from "../RecordBreadcrumb";
+import {RecordBreadcrumb} from "./RecordBreadcrumb";
 
 type Props = RecordBasePageProps;
 

@@ -10,7 +10,7 @@ import {DEFAULT_RECORD_LOADER} from "../../../components/records/RecordLoader";
 import {RecordSet} from "../../../protobuf/generated/record_pb";
 import {PlaceBasePage, PlaceBasePageProps} from "../PlaceBasePage";
 import {PlaceId} from "../../../components/places/Place";
-import {PlaceBreadcrumb} from "../PlaceBreadcrumb";
+import {PlaceBreadcrumb} from "./PlaceBreadcrumb";
 import "./PlaceInfo.css";
 
 type Props = PlaceBasePageProps;

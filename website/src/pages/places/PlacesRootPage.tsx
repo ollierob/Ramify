@@ -3,7 +3,7 @@ import * as ReactDOM from "react-dom";
 import {HashRouter, Route, Switch} from "react-router-dom";
 import PlacesHomePage from "./home/PlacesHomePage";
 import "./Places.css";
-import PlaceInfoPage from "./place/PlaceInfoPage";
+import PlaceInfoPage from "./info/PlaceInfoPage";
 
 class PlacesRootPage extends React.PureComponent {
 

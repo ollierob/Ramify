@@ -1,9 +1,9 @@
 import * as React from "react";
-import {SubMenu} from "../SubMenu";
-import {RecordSetHierarchy, RecordSetRelatives} from "../../protobuf/generated/record_pb";
-import {recordSetHref} from "./RecordLinks";
-import {Dropdown, Menu, Popover} from "antd";
-import {NextIcon, PrevIcon} from "../../components/images/Icons";
+import {SubMenu} from "../../SubMenu";
+import {RecordSetHierarchy, RecordSetRelatives} from "../../../protobuf/generated/record_pb";
+import {recordSetHref} from "../RecordLinks";
+import {Popover} from "antd";
+import {NextIcon, PrevIcon, RecordsIcon} from "../../../components/images/Icons";
 
 export const RecordBreadcrumb = (props: {hierarchy: RecordSetHierarchy.AsObject}) => {
     return <SubMenu>
@@ -14,6 +14,7 @@ export const RecordBreadcrumb = (props: {hierarchy: RecordSetHierarchy.AsObject}
 const Hierarchy = (props: {hierarchy: RecordSetHierarchy.AsObject}) => {
     let list = toList(props.hierarchy);
     return <div className="records">
+        <RecordsIcon style={{marginRight: 8}}/>
         {list.map((r, i) => <Breadcrumb relatives={r} first={i == 0} last={i == list.length - 1}/>)}
     </div>;
 };

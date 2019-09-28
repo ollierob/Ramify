@@ -1,8 +1,9 @@
-import {Place, PlaceTypeMap} from "../../protobuf/generated/place_pb";
-import {SubMenu} from "../SubMenu";
+import {Place, PlaceTypeMap} from "../../../protobuf/generated/place_pb";
+import {SubMenu} from "../../SubMenu";
 import * as React from "react";
-import {placeTypeName} from "../../components/places/PlaceType";
-import {placeHref} from "./PlaceLinks";
+import {placeTypeName} from "../../../components/places/PlaceType";
+import {placeHref} from "../PlaceLinks";
+import {PlacesIcon} from "../../../components/images/Icons";
 
 export const PlaceBreadcrumb = (props: {loading?: boolean, place: Place.AsObject}) => {
     return <SubMenu>
@@ -16,6 +17,7 @@ const Hierarchy = (props: {place: Place.AsObject}) => {
     if (!hierarchy.length) return null;
 
     return <div className="places">
+        <PlacesIcon style={{marginRight: 8}}/>
         {hierarchy.map((place, i) => <Breadcrumb place={place} separator={i < hierarchy.length - 1}/>)}
     </div>;
 
