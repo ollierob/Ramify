@@ -74,7 +74,7 @@ const RecordCard = (props: {record: RecordSet.AsObject, shortTitle?: boolean}) =
         <br/>
         {record.numrecords.toLocaleString()} records, {record.numindividuals.toLocaleString()} individuals
         {record.externalreferenceList.map(ref => <RecordReference reference={ref}/>)}
-        {record.description && <div className="notags">{record.description}</div>}
+        {record.description && <div className="unimportant">{record.description}</div>}
     </Card>;
 };
 
