@@ -18,7 +18,7 @@ type State = {
     activeTab?: string;
 }
 
-export class RecordResults extends React.PureComponent<Props, State> {
+export class RecordBrowser extends React.PureComponent<Props, State> {
 
     constructor(props) {
         super(props);

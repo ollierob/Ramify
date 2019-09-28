@@ -5,7 +5,7 @@ import {Card, Icon} from "antd";
 import {recordSetHref} from "../RecordLinks";
 import {RecordCards} from "../../../components/records/RecordCards";
 import {RecordSearchHandler} from "../../../components/search/RecordSearchHandler";
-import {RecordResults} from "./RecordResults";
+import {RecordBrowser} from "./RecordBrowser";
 import {AsyncData} from "../../../components/fetch/AsyncData";
 import {RecordPaginationHandler} from "../../../components/records/RecordPaginationHandler";
 import {RouteComponentProps} from "react-router";
@@ -57,7 +57,7 @@ export default class RecordSetCard extends React.PureComponent<Props> {
                 records={relatives.childList}
                 style={MarginBottom}/>
 
-            <RecordResults
+            <RecordBrowser
                 {...this.props}
                 records={this.props.records}
                 showRecordSet={relatives.childList.length > 0}/>
