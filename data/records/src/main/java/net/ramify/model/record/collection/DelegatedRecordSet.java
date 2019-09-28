@@ -6,14 +6,20 @@ import net.ramify.model.record.proto.RecordProto;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import java.util.Objects;
 import java.util.Set;
 
 public abstract class DelegatedRecordSet implements RecordSet {
 
     private final RecordSet delegate;
 
-    protected DelegatedRecordSet(final RecordSet delegate) {
-        this.delegate = delegate;
+    protected DelegatedRecordSet(@Nonnull final RecordSet delegate) {
+        this.delegate = Objects.requireNonNull(delegate);
+    }
+
+    @Nonnull
+    protected RecordSet delegate() {
+        return delegate;
     }
 
     @Nonnull

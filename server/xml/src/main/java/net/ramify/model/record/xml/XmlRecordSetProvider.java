@@ -132,7 +132,11 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
     private static class ResizedRecordSet extends DelegatedRecordSet {
 
         static ResizedRecordSet of(final RecordSet parent, final RecordSet leaf) {
-            //if(parent instanceof ResizedRecordSet) ... //TODO flatten
+            if (parent instanceof ResizedRecordSet) {
+                //Flatten
+                final var resized = (ResizedRecordSet) parent;
+                return new ResizedRecordSet(resized.delegate(), leaf.numRecords() + resized.numRecords(), leaf.numIndividuals() + resized.numIndividuals());
+            }
             return new ResizedRecordSet(parent, leaf.numRecords(), leaf.numIndividuals());
         }
 
