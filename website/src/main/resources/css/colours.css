@@ -3,7 +3,7 @@
 }
 
 .gray, .unimportant, .background {
-    color: #AAAAAA;
+    color: #AAAAAA !important;
 }
 
 .yellow, .favourite {
@@ -13,4 +13,8 @@
 .bordered {
     border: 1px solid #D7D7D7;
     border-radius: 4px;
+}
+
+.red {
+    color: #b76337 !important;
 }

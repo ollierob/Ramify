@@ -10,7 +10,7 @@ export class EditTreePage extends ManageTreePage<State> {
 
         return <Card
             className="main large"
-            title="Edit tree">
+            title="Edit Family Tree">
 
         </Card>;
 

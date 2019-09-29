@@ -3,7 +3,7 @@ import {PeopleBasePage} from "../PeopleBasePage";
 import "./ManageTree.css";
 import {TreeNavigationMenu} from "./TreeNavigationMenu";
 
-export abstract class ManageTreePage<S> extends PeopleBasePage<S> {
+export abstract class ManageTreePage<S = {}> extends PeopleBasePage<S> {
 
     body() {
 
