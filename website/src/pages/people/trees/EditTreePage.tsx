@@ -1,9 +1,19 @@
-import {PeopleBasePage} from "../PeopleBasePage";
+import * as React from "react";
+import {ManageTreePage} from "./ManageTreePage";
+import {Card} from "antd";
 
-export class EditTreePage extends PeopleBasePage {
+type State = {};
 
-    body() {
-        return undefined;
+export class EditTreePage extends ManageTreePage<State> {
+
+    main() {
+
+        return <Card
+            className="main large"
+            title="Edit tree">
+
+        </Card>;
+
     }
 
 }

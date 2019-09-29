@@ -50,6 +50,7 @@ export default class RecordSearchPage extends RecordBasePage<State> {
     body() {
 
         return <div className="content">
+
             <Card
                 className="records large"
                 title={<>Record Sets</>}>
@@ -111,6 +112,7 @@ export default class RecordSearchPage extends RecordBasePage<State> {
                 </div>
 
             </Card>
+
         </div>;
 
     }

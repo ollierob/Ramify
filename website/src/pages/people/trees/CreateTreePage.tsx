@@ -1,11 +1,18 @@
 import * as React from "react";
-import {PeopleBasePage} from "../PeopleBasePage";
+import {ManageTreePage} from "./ManageTreePage";
+import {Card} from "antd";
 
-export class CreateTreePage extends PeopleBasePage {
+type State = {};
 
-    body() {
+export class CreateTreePage extends ManageTreePage<State> {
 
-        return null;
+    main() {
+
+        return <Card
+            className="main large"
+            title="Create tree">
+
+        </Card>;
 
     }
 
