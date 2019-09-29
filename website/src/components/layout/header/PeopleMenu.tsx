@@ -1,6 +1,7 @@
 import * as React from "react";
 import {Tabs} from "antd";
 import {NoData} from "../../style/NoData";
+import {createTreeHref} from "../../../pages/people/PeopleLinks";
 
 type Props = {}
 
@@ -40,5 +41,5 @@ const TabTitle = (props: {title: React.ReactNode, onMouseover: () => void}) => {
 };
 
 const Trees = (props: {}) => {
-    return <NoData text="No trees"/>;
+    return <><a href={createTreeHref()}>Create new tree</a></>;
 };

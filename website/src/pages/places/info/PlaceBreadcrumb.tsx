@@ -1,4 +1,4 @@
-import {Place, PlaceTypeMap} from "../../../protobuf/generated/place_pb";
+import {Place} from "../../../protobuf/generated/place_pb";
 import {SubMenu} from "../../SubMenu";
 import * as React from "react";
 import {placeTypeName} from "../../../components/places/PlaceType";
