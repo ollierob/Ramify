@@ -12,6 +12,7 @@ type State = {
 export class PeopleMenu extends React.PureComponent<Props, State> {
 
     private readonly setTrees = () => this.setState({activeTab: "trees"});
+    private readonly setRecent = () => this.setState({activeTab: "recent"});
 
     constructor(props) {
         super(props);
@@ -23,6 +24,10 @@ export class PeopleMenu extends React.PureComponent<Props, State> {
         return <div className="tabbedSubmenu">
 
             <Tabs tabPosition="left" activeKey={this.state.activeTab} size="large">
+
+                <Tabs.TabPane key="recent" tab={<TabTitle title="Recent" onMouseover={this.setRecent}/>}>
+                    <Recent/>
+                </Tabs.TabPane>
 
                 <Tabs.TabPane key="trees" tab={<TabTitle title="Trees" onMouseover={this.setTrees}/>}>
                     <Trees/>
@@ -42,4 +47,8 @@ const TabTitle = (props: {title: React.ReactNode, onMouseover: () => void}) => {
 
 const Trees = (props: {}) => {
     return <><a href={createTreeHref()}>Create new tree</a></>;
+};
+
+const Recent = (props: {}) => {
+    return <NoData text="No recent people"/>;
 };
