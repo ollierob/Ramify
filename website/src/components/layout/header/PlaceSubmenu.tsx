@@ -30,13 +30,11 @@ export class PlaceSubmenu extends React.PureComponent<Props, State> {
             <Tabs tabPosition="left" activeKey={this.state.activeTab}>
 
                 <Tabs.TabPane key="recent" tab={<TabTitle title="Recent" onMouseover={this.setRecent}/>}>
-
+                    <RecentList/>
                 </Tabs.TabPane>
 
                 <Tabs.TabPane key="favourites" tab={<TabTitle title="Favourites" onMouseover={this.setFavourites}/>}>
-
                     <FavouritesList {...this.props}/>
-
                 </Tabs.TabPane>
 
                 <Tabs.TabPane key="search" tab={<TabTitle title="Search" onMouseover={this.setSearch}/>}>
@@ -55,9 +53,13 @@ const TabTitle = (props: {title: React.ReactNode, onMouseover: () => void}) => {
     return <div onMouseOver={props.onMouseover}>{props.title}</div>;
 };
 
+const RecentList = (props: {}) => {
+    return <NoData text="No recent places"/>;
+};
+
 const FavouritesList = (props: PlaceFavouritesHandler) => {
     const favourites: Place.AsObject[] = [...props.placeFavourites()];
-    if (!favourites.length) return <NoData/>;
+    if (!favourites.length) return <NoData text="No favourite places"/>;
     return <List
         dataSource={favourites}
         renderItem={place => <PlaceListItem place={place}/>}/>;

@@ -1,3 +1,8 @@
 .ant-menu-submenu .placeMenu {
-    width: 400px;
+    width: 450px;
+}
+
+.ant-menu-submenu .placeMenu .ant-tabs .ant-tabs-left-content {
+    padding-left: 18px;
+    width: 330px;
 }
