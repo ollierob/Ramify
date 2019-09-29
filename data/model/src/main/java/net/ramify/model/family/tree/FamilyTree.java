@@ -11,20 +11,24 @@ import javax.annotation.Nonnull;
 public interface FamilyTree extends HasFamilyTreeId, HasFamilies, BuildsProto<FamilyProto.FamilyTree> {
 
     @Nonnull
-    String name();
+    FamilyTreeMeta meta();
 
     @Nonnull
-    default FamilyProto.FamilyTree.Builder toProtoBuilder() {
-        return FamilyProto.FamilyTree.newBuilder()
-                .setId(this.familyTreeId().value())
-                .setName(this.name())
-                .addAllFamily(Iterables.transform(this.families(), Family::toProto));
+    default String name() {
+        return this.meta().name();
     }
 
     @Nonnull
     @Override
-    default FamilyProto.FamilyTree toProto() {
-        return this.toProtoBuilder().build();
+    default FamilyTreeId familyTreeId() {
+        return this.meta().familyTreeId();
+    }
+
+    @Nonnull
+    default FamilyProto.FamilyTree.Builder toProtoBuilder() {
+        return this.meta()
+                .toProtoBuilder()
+                .addAllFamily(Iterables.transform(this.families(), Family::toProto));
     }
 
 }

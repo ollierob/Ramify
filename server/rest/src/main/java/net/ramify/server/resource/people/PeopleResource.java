@@ -7,7 +7,7 @@ import javax.ws.rs.Path;
 @Path("people")
 public interface PeopleResource extends RootResource {
 
-    @Path("trees")
-    FamilyTreeResource trees();
+    @Path("families")
+    FamilyResource families();
 
 }
