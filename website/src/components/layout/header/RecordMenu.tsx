@@ -16,7 +16,7 @@ export class RecordMenu extends React.PureComponent<Props, State> {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {activeTab: "recent"};
     }
 
     render() {

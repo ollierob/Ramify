@@ -1,5 +1,6 @@
 .ant-menu-submenu .tabbedSubmenu {
-    width: 450px;
+    padding: 8px;
+    width: 460px;
 }
 
 .ant-menu-submenu .tabbedSubmenu .ant-tabs .ant-tabs-left-content {
