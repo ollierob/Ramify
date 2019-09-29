@@ -3,7 +3,6 @@ import {List, Tabs} from "antd";
 import {PlaceFavouritesHandler} from "../../places/PlaceFavourites";
 import {NoData} from "../../style/NoData";
 import {Place} from "../../../protobuf/generated/place_pb";
-import {placeHref} from "../../../pages/places/PlaceLinks";
 import {PlaceLink} from "../../places/PlaceLink";
 
 type Props = PlaceFavouritesHandler;
@@ -12,7 +11,7 @@ type State = {
     activeTab?: string;
 }
 
-export class PlaceSubmenu extends React.PureComponent<Props, State> {
+export class PlaceMenu extends React.PureComponent<Props, State> {
 
     private readonly setRecent = () => this.setState({activeTab: "recent"});
     private readonly setFavourites = () => this.setState({activeTab: "favourites"});
@@ -25,9 +24,9 @@ export class PlaceSubmenu extends React.PureComponent<Props, State> {
 
     render() {
 
-        return <div className="placeMenu">
+        return <div className="tabbedSubmenu">
 
-            <Tabs tabPosition="left" activeKey={this.state.activeTab}>
+            <Tabs tabPosition="left" activeKey={this.state.activeTab} size="large">
 
                 <Tabs.TabPane key="recent" tab={<TabTitle title="Recent" onMouseover={this.setRecent}/>}>
                     <RecentList/>
