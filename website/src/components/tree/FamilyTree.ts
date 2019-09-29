@@ -1,1 +1,1 @@
-export type FamilyTree = string;
+export type FamilyTreeId = string;

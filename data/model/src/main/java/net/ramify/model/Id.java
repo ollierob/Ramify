@@ -7,7 +7,7 @@ public abstract class Id {
 
     private final String value;
 
-    protected Id(final String value) {
+    protected Id(@Nonnull final String value) {
         this.value = Objects.requireNonNull(value);
     }
 
@@ -28,7 +28,7 @@ public abstract class Id {
                 && this.equals((Id) o);
     }
 
-    protected boolean equals(Id that) {
+    protected boolean equals(@Nonnull final Id that) {
         return this.getClass() == that.getClass()
                 & Objects.equals(this.value, that.value);
     }

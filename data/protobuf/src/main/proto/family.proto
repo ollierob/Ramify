@@ -12,3 +12,17 @@ message Family {
     repeated Relationship relationship = 2;
 
 }
+
+message FamilyTree {
+
+    string id = 1;
+    string name = 2;
+    repeated Family family = 3;
+
+}
+
+message FamilyTreeList {
+
+    repeated FamilyTree familyTree = 1;
+
+}
