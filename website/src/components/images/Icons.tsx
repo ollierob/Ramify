@@ -7,6 +7,7 @@ type IconProps = HasClass & {
 };
 
 export const TreeIcon = (props: IconProps) => <Icon type="apartment" {...props}/>;
+export const PersonIcon = (props: IconProps) => <Icon type="user" {...props}/>;
 export const PeopleIcon = (props: IconProps) => <Icon type="user" {...props}/>;
 export const PlacesIcon = (props: IconProps) => <Icon type="global" {...props}/>;
 export const RecordsIcon = (props: IconProps) => <Icon type="read" {...props}/>;
@@ -18,3 +19,4 @@ export const LoadingIcon = (props: IconProps) => <Icon type="loading" {...props}
 
 export const PrevIcon = (props: IconProps) => <Icon type="left-square" {...props}/>;
 export const NextIcon = (props: IconProps) => <Icon type="right-square" {...props}/>;
+export const EditIcon = (props: IconProps) => <Icon type="edit" {...props}/>;

@@ -17,3 +17,14 @@
 .manageTree .main .ant-card-body, .manageTree .main .ant-card-body .ant-form-item-children {
     font-size: 16px;
 }
+
+.manageTree .main .manual .ant-card {
+    display: inline-block;
+    width: 300px;
+    margin-bottom: 8px;
+    vertical-align: top;
+}
+
+.manageTree .main .manual .ant-card .ant-card-head-title {
+    font-weight: normal;
+}

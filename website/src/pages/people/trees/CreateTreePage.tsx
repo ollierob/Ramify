@@ -1,6 +1,8 @@
 import * as React from "react";
 import {ManageTreePage} from "./ManageTreePage";
 import {Button, Card, Form, Icon, Input, Tabs} from "antd";
+import {CSSProperties} from "react";
+import {EditIcon, PeopleIcon} from "../../../components/images/Icons";
 
 export class CreateTreePage extends ManageTreePage {
 
@@ -27,7 +29,9 @@ export class CreateTreePage extends ManageTreePage {
 }
 
 type ManualState = {
-    name?: string;
+    treeName?: string;
+    firstName?: string;
+    lastName?: string;
 };
 
 class ManuallyCreateTree extends React.PureComponent<{}, ManualState> {
@@ -39,43 +43,57 @@ class ManuallyCreateTree extends React.PureComponent<{}, ManualState> {
 
     render() {
 
-        return <Form>
+        return <div className="manual">
 
-            <Form.Item>
+            <Card title="Tree name" size="small" bordered={false}>
 
-                Tree name:
+                <Input
+                    size="large"
+                    prefix={<EditIcon className="gray"/>}
+                    placeholder="Name"
+                    value={this.state.treeName}
+                    onChange={e => this.setState({treeName: e.target.value})}/>
+
+            </Card>
+
+            <Card title="Initial person" size="small" bordered={false}>
+
+                <Input
+                    size="large"
+                    prefix={<PeopleIcon className="gray"/>}
+                    placeholder="First names"
+                    value={this.state.firstName}
+                    onChange={e => this.setState({firstName: e.target.value})}/>
+
                 <br/>
 
                 <Input
                     size="large"
-                    style={{width: 300}}
-                    prefix={<Icon type="edit" className="gray"/>}
-                    value={this.state.name}
-                    onChange={e => this.setState({name: e.target.value})}/>
+                    style={{marginTop: 4}}
+                    prefix={<PeopleIcon className="gray"/>}
+                    placeholder="Last name"
+                    value={this.state.lastName}
+                    onChange={e => this.setState({lastName: e.target.value})}/>
 
-            </Form.Item>
+            </Card>
 
-            <Form.Item>
-
-                Initial person:
-                <br/>
-
-            </Form.Item>
-
-            <Form.Item>
-
+            <div style={{clear: "both"}}>
                 <Button
                     size="large"
                     type="primary"
-                    icon="plus-circle"
-                    disabled={!this.state.name}>
-                    Create
+                    disabled={!this.canSubmit()}>
+                    Create tree
                 </Button>
+            </div>
 
-            </Form.Item>
+        </div>;
 
-        </Form>;
+    }
 
+    private canSubmit(): boolean {
+        return !!this.state.treeName
+            && !!this.state.firstName
+            && !!this.state.lastName;
     }
 
 }
