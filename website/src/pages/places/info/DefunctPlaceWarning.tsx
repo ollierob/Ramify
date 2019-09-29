@@ -1,7 +1,7 @@
 import * as React from "react";
 import {PlaceDescription} from "../../../protobuf/generated/place_pb";
 import {joinComponents} from "../../../components/Components";
-import {PlaceContextMenu} from "../../../components/places/PlaceContextMenu";
+import {PlaceLink} from "../../../components/places/PlaceLink";
 import {Alert} from "antd";
 
 export const DefunctPlaceWarning = (props: {description: PlaceDescription.AsObject, type: DefunctType}) => {
@@ -9,7 +9,7 @@ export const DefunctPlaceWarning = (props: {description: PlaceDescription.AsObje
     const laterBecame = props.description ? props.description.laterbecameList : [];
 
     const description = laterBecame.length > 0
-        ? <>It later became part of {joinComponents(laterBecame.map(p => <PlaceContextMenu place={p} showType/>), ", ")}</>
+        ? <>It later became part of {joinComponents(laterBecame.map(p => <PlaceLink place={p} showType/>), ", ")}</>
         : <>It no longer exists</>;
 
     return <Alert

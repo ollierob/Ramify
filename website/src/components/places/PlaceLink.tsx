@@ -4,7 +4,7 @@ import {placeHref} from "../../pages/places/PlaceLinks";
 import {placeTypeName} from "./PlaceType";
 import {LoadingIcon} from "../images/Icons";
 
-export const PlaceContextMenu = (props: {place: Place.AsObject, showType?: boolean, loading?: boolean}) => {
+export const PlaceLink = (props: {place: Place.AsObject, showType?: boolean, loading?: boolean}) => {
 
     if (props.loading) return <span className="place">
         <LoadingIcon/>

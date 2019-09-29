@@ -2,7 +2,7 @@ import * as React from "react";
 import {Place, PlaceDescription} from "../../protobuf/generated/place_pb";
 import {HasClass} from "../style/HasClass";
 import {Card} from "antd";
-import {PlaceContextMenu} from "./PlaceContextMenu";
+import {PlaceLink} from "./PlaceLink";
 import {Loading} from "../style/Loading";
 
 type Props = HasClass & {
@@ -20,7 +20,7 @@ export const PlaceInfo = (props: Props) => {
     return <Card
         className={"placeInfo " + (props.className || "")}
         style={props.style}
-        title={<>{props.preTitle}<PlaceContextMenu place={props.place} showType/></>}>
+        title={<>{props.preTitle}<PlaceLink place={props.place} showType/></>}>
 
         {props.description && props.description.description || <i>No description available.</i>}
 

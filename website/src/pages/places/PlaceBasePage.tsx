@@ -1,5 +1,5 @@
 import BasePage, {BasePageProps} from "../BasePage";
-import {HeaderMenuType} from "../HeaderMenu";
+import {HeaderMenuType} from "../../components/layout/header/HeaderMenu";
 import {PlaceId} from "../../components/places/Place";
 
 export type PlaceBasePageProps = BasePageProps;

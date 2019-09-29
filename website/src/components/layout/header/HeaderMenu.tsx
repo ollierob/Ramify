@@ -1,16 +1,14 @@
 import * as React from "react";
-import {Dropdown, Icon, Menu} from "antd";
-import {FavouritesIcon, PeopleIcon, PlacesIcon, RecordsIcon, SearchIcon, TreeIcon} from "../components/images/Icons";
-import {PlaceList} from "../components/places/Place";
-import {Place} from "../protobuf/generated/place_pb";
-import {placeTypeName} from "../components/places/PlaceType";
-import {placeHref} from "./places/PlaceLinks";
-import {PlaceFavouritesHandler} from "../components/places/PlaceFavourites";
+import {Menu, Tabs} from "antd";
+import {PlacesIcon, RecordsIcon, TreeIcon} from "../../images/Icons";
+import {PlaceList} from "../../places/Place";
+import {PlaceFavouritesHandler} from "../../places/PlaceFavourites";
+import "./HeaderMenu.css";
+import {PlaceSubmenu} from "./PlaceSubmenu";
 
-type Props = {
+type Props = PlaceFavouritesHandler & {
     active: HeaderMenuType;
     placeHistory: PlaceList;
-    placeFavourites: PlaceFavouritesHandler;
 }
 
 export default class HeaderMenu extends React.PureComponent<Props> {
@@ -24,7 +22,7 @@ export default class HeaderMenu extends React.PureComponent<Props> {
             </Menu.SubMenu>
 
             <Menu.SubMenu title={<><PlacesIcon/> Places</>} className={this.props.active == "places" && ActiveClass}>
-
+                <PlaceSubmenu {...this.props}/>
             </Menu.SubMenu>
 
             <Menu.SubMenu title={<><RecordsIcon/> Records</>} className={this.props.active == "records" && ActiveClass}>

@@ -4,7 +4,7 @@ import {ColumnProps} from "antd/es/table";
 import {Button, Icon} from "antd";
 import {nameToString} from "../../../components/people/Name";
 import {FormattedDateRange, FormattedYearRange} from "../../../components/date/FormattedDateRange";
-import {PlaceContextMenu} from "../../../components/places/PlaceContextMenu";
+import {PlaceLink} from "../../../components/places/PlaceLink";
 import {RecordProperties} from "./IndividualRecordTable";
 import {recordTypeFromValue} from "../../../components/records/RecordType";
 import {IndividualRecord} from "./IndividualRecord";
@@ -91,7 +91,7 @@ const ResidencePlace: IndividualRecordColumn = {
     key: "residencePlace",
     title: "Residence",
     render: (t, r) => r.residence && <>
-        <PlaceContextMenu place={r.residence.place}/>
+        <PlaceLink place={r.residence.place}/>
         {r.residence.place && <Minor text={placeTypeName(r.residence.place.type)}/>}
     </>,
     width: 200,

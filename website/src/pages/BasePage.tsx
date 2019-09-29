@@ -1,5 +1,5 @@
 import * as React from "react";
-import HeaderMenu, {HeaderMenuType} from "./HeaderMenu";
+import HeaderMenu, {HeaderMenuType} from "../components/layout/header/HeaderMenu";
 import "./Core";
 import {getSessionPlaceHistory} from "../components/places/PlaceHistory";
 import {PlaceList} from "../components/places/Place";
@@ -10,7 +10,7 @@ export type BasePageProps = RouteComponentProps<any>;
 
 export default abstract class BasePage<S = any> extends React.PureComponent<BasePageProps, S> {
 
-    placeFavourites: PlaceFavouritesHandler = SessionPlaceFavouritesHandler;
+    readonly placeFavourites: PlaceFavouritesHandler = SessionPlaceFavouritesHandler;
 
     render() {
 
@@ -30,8 +30,8 @@ export default abstract class BasePage<S = any> extends React.PureComponent<Base
 
     menu(): React.ReactNode {
         return <HeaderMenu
+            {...this.placeFavourites}
             placeHistory={this.placeHistory()}
-            placeFavourites={this.placeFavourites}
             active={this.active()}/>;
     }
 

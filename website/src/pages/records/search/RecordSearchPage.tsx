@@ -14,7 +14,7 @@ import {DEFAULT_RECORD_LOADER, RecordSetOptions} from "../../../components/recor
 import {readPageHash, updatePageHash} from "../../../components/Page";
 import {hashToRecordSearch, recordSearchToHash} from "../../../components/search/RecordSearchHandler";
 import BasePage from "../../BasePage";
-import {HeaderMenuType} from "../../HeaderMenu";
+import {HeaderMenuType} from "../../../components/layout/header/HeaderMenu";
 import {RecordBasePage, RecordBasePageProps} from "../RecordBasePage";
 
 type Props = RecordBasePageProps;

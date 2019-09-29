@@ -14,7 +14,7 @@ import {RecordSetReferences} from "../../../components/records/RecordSetReferenc
 import {joinComponents} from "../../../components/Components";
 import {EnrichedRecord} from "../../../components/records/RecordLoader";
 import {PlaceBundle} from "../../../protobuf/generated/place_pb";
-import {PlaceContextMenu} from "../../../components/places/PlaceContextMenu";
+import {PlaceLink} from "../../../components/places/PlaceLink";
 
 type Props = RecordPaginationHandler & RecordSearchHandler & RouteComponentProps<any> & {
     loading: boolean;
@@ -97,7 +97,7 @@ const Creator = (props: {place: AsyncData<Readonly<PlaceBundle.AsObject>>}) => {
     const place = props.place;
     if (!place.data || !place.loading) return null;
     return <div className="relationship place" style={MarginBottom}>
-        <Icon type="edit"/> These records were created by <PlaceContextMenu place={place.data && place.data.place} loading={place.loading} showType/>
+        <Icon type="edit"/> These records were created by <PlaceLink place={place.data && place.data.place} loading={place.loading} showType/>
     </div>;
 };
 

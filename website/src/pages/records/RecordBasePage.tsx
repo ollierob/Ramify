@@ -1,5 +1,5 @@
 import BasePage, {BasePageProps} from "../BasePage";
-import {HeaderMenuType} from "../HeaderMenu";
+import {HeaderMenuType} from "../../components/layout/header/HeaderMenu";
 import {RecordSetId} from "../../components/records/RecordSet";
 
 export type RecordBasePageProps = BasePageProps;
