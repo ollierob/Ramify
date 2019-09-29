@@ -10,7 +10,7 @@ export type BasePageProps = RouteComponentProps<any>;
 
 export default abstract class BasePage<S = any> extends React.PureComponent<BasePageProps, S> {
 
-    favouritesHandler: PlaceFavouritesHandler = SessionPlaceFavouritesHandler;
+    placeFavourites: PlaceFavouritesHandler = SessionPlaceFavouritesHandler;
 
     render() {
 
@@ -31,7 +31,7 @@ export default abstract class BasePage<S = any> extends React.PureComponent<Base
     menu(): React.ReactNode {
         return <HeaderMenu
             placeHistory={this.placeHistory()}
-            placeFavourites={this.favouritesHandler}
+            placeFavourites={this.placeFavourites}
             active={this.active()}/>;
     }
 

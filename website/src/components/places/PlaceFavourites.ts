@@ -38,7 +38,7 @@ export function getSessionPlaceFavourites(): PlaceList {
 }
 
 export function isPlaceFavourite(id: PlaceId, favourites: PlaceList): boolean {
-    return favourites.some(s => s.id == id);
+    return favourites && favourites.some(s => s.id == id);
 }
 
 export type PlaceFavouritesHandler = {

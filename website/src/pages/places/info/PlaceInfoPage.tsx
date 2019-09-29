@@ -62,7 +62,7 @@ export default class PlaceInfoPage extends PlaceBasePage<State> {
                     description={bundle.typedescription}/>
 
                 <PlaceInfo
-                    {...this.favouritesHandler}
+                    {...this.placeFavourites}
                     loadingChildren={this.state.children.loading}
                     childPlaces={this.state.children.data}
                     place={bundle.place}
