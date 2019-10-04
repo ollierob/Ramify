@@ -31,4 +31,10 @@ public interface FamilyTree extends HasFamilyTreeId, HasFamilies, BuildsProto<Fa
                 .addAllFamily(Iterables.transform(this.families(), Family::toProto));
     }
 
+    @Nonnull
+    @Override
+    default FamilyProto.FamilyTree toProto() {
+        return this.toProtoBuilder().build();
+    }
+
 }

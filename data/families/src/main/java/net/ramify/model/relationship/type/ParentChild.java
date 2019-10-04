@@ -1,11 +1,12 @@
 package net.ramify.model.relationship.type;
 
+import net.ramify.model.person.HasPersonId;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.relationship.AbstractRelationship;
 
 public class ParentChild extends AbstractRelationship implements CosanguinealRelationship {
 
-    public ParentChild(final PersonId parent, final PersonId child) {
+    public ParentChild(final HasPersonId parent, final HasPersonId child) {
         super(parent, child);
     }
 

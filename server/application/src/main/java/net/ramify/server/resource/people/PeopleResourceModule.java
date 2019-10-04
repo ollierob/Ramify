@@ -8,6 +8,9 @@ public class PeopleResourceModule extends AbstractModule {
     protected void configure() {
         super.configure();
         this.bind(PeopleRouterResource.class);
+        this.bind(PeopleResource.class).to(DefaultPeopleResource.class);
+        this.bind(FamilyResource.class).to(DefaultFamilyResource.class);
+        this.bind(FamilyTreeResource.class).to(DefaultFamilyTreeResource.class);
     }
 
 }

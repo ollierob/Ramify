@@ -54,7 +54,8 @@ public interface Family extends HasPeople, HasRelationships, BuildsProto<FamilyP
     @Nonnull
     default FamilyProto.Family.Builder toProtoBuilder() {
         return FamilyProto.Family.newBuilder()
-                .addAllPerson(Iterables.transform(this.people(), Person::toProto));
+                .addAllPerson(Iterables.transform(this.people(), Person::toProto))
+                .addAllRelationship(Iterables.transform(this.relationships(), Relationship::toProto));
     }
 
     @Nonnull
