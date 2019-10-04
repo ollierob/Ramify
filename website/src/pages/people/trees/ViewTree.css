@@ -1,0 +1,12 @@
+.viewTree .submenu {
+    height: 48px;
+    line-height: 48px;
+    font-size: 18px;
+    padding-left: 24px;
+}
+
+.viewTree .submenu .title {
+    font-weight: bold;
+    margin-right: 32px;
+    transition-delay: 0.3s;
+}

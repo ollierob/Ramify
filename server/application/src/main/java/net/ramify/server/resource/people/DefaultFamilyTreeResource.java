@@ -8,6 +8,7 @@ import net.ramify.model.family.tree.FamilyTreeProvider;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 @Singleton
 public class DefaultFamilyTreeResource implements FamilyTreeResource {
@@ -21,7 +22,7 @@ public class DefaultFamilyTreeResource implements FamilyTreeResource {
 
     @Override
     public Collection<FamilyTreeMeta> names() {
-        throw new UnsupportedOperationException(); //TODO
+        return familyTreeProvider.allMeta().collect(Collectors.toList());
     }
 
     @Override

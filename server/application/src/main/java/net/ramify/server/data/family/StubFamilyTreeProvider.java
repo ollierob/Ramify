@@ -18,6 +18,7 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import javax.inject.Singleton;
 import java.util.Collections;
+import java.util.Set;
 
 @Singleton
 public class StubFamilyTreeProvider implements FamilyTreeProvider {
@@ -71,7 +72,7 @@ public class StubFamilyTreeProvider implements FamilyTreeProvider {
             @Nonnull
             @Override
             public String name() {
-                return "Family Tree";
+                return "Robertshaw";
             }
 
             @Nonnull
@@ -80,6 +81,12 @@ public class StubFamilyTreeProvider implements FamilyTreeProvider {
                 return new FamilyTreeId("stub");
             }
         };
+    }
+
+    @Nonnull
+    @Override
+    public Set<FamilyTreeId> allIds() {
+        return Collections.singleton(DEFAULT_TREE.familyTreeId());
     }
 
     @CheckForNull

@@ -18,7 +18,7 @@ import static net.ramify.server.resource.Resource.APPLICATION_PROTOBUF;
 public interface FamilyTreeResource extends Resource {
 
     @GET
-    @Path("names")
+    @Path("meta")
     Collection<FamilyTreeMeta> names();
 
     @GET
