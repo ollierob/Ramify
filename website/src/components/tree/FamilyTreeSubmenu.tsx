@@ -3,8 +3,9 @@ import {SubMenu} from "../../pages/SubMenu";
 import {AsyncData} from "../fetch/AsyncData";
 import {FamilyTree} from "../../protobuf/generated/family_pb";
 import {Loading} from "../style/Loading";
-import {SearchIcon, TreeIcon} from "../images/Icons";
-import {Dropdown, Input, Popover} from "antd";
+import {FavouritesIcon, SearchIcon, TreeIcon} from "../images/Icons";
+import {Input, Popover} from "antd";
+import {FamilyTreeId} from "./FamilyTree";
 
 export const FamilyTreeSubmenu = (props: {tree: AsyncData<FamilyTree.AsObject>}) => {
     return <SubMenu>
@@ -13,7 +14,7 @@ export const FamilyTreeSubmenu = (props: {tree: AsyncData<FamilyTree.AsObject>})
     </SubMenu>;
 };
 
-type TitleState = {dropdownActive?: boolean}
+type TitleState = {search?: boolean, favourites?: boolean}
 
 const FamilyTreeTitle = (props: {tree: FamilyTree.AsObject}) => {
 
@@ -28,15 +29,23 @@ const FamilyTreeTitle = (props: {tree: FamilyTree.AsObject}) => {
         </span>
 
         <Popover
-            content={<PersonSearchDropdown {...props}/>}
+            content={<PersonSearchDropdown id={tree.id}/>}
             placement="bottomLeft"
-            visible={state.dropdownActive}
-            onVisibleChange={v => setState({dropdownActive: v})}>
-
-            <span className={"control " + (state.dropdownActive ? "red" : "gray")}>
+            visible={state.search}
+            onVisibleChange={v => setState({search: v, favourites: false})}>
+            <span className={"control " + (state.search ? "red" : "gray")}>
                 <SearchIcon/> Find person
             </span>
+        </Popover>
 
+        <Popover
+            content={<PersonBookmarkDropdown id={tree.id}/>}
+            placement="bottomLeft"
+            visible={state.favourites}
+            onVisibleChange={v => setState({favourites: v, search: false})}>
+            <span className={"control " + (state.favourites ? "red" : "gray")}>
+                <FavouritesIcon/> Favourites
+            </span>
         </Popover>
 
     </>;
@@ -44,14 +53,21 @@ const FamilyTreeTitle = (props: {tree: FamilyTree.AsObject}) => {
 
 type SearchState = {input?: string};
 
-const PersonSearchDropdown = (props: {tree: FamilyTree.AsObject}) => {
+const PersonSearchDropdown = (props: {id: FamilyTreeId}) => {
 
     const [state, setState] = React.useState<SearchState>({});
 
     return <>
         <Input
+            placeholder="Enter a name"
             value={state.input}
             onChange={e => setState({input: e.target.value})}/>
     </>;
-    
+
+};
+
+const PersonBookmarkDropdown = (props: {id: FamilyTreeId}) => {
+    return <>
+        No favourites yet.
+    </>;
 };
