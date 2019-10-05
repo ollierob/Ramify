@@ -3,7 +3,7 @@ import {ensure, StringMap} from "../../Maps";
 import {isHorizontal, isParentChild} from "../../relationship/Relationship";
 
 type Ranking = {[rank: number]: string[]}
-type TreeNode = {id: string, parents: TreeNode[], children: TreeNode[], siblings: TreeNode[], ancestors?: number};
+type TreeNode = {id: string, parents: TreeNode[], children: TreeNode[], siblings: TreeNode[], ancestors?: number, generation?: number};
 
 export function rank(relationships: ReadonlyArray<Relationship.AsObject>): Ranking {
 
@@ -43,7 +43,7 @@ function joinNodes(n1: TreeNode, n2: TreeNode, relationship: Relationship.AsObje
 }
 
 function computeDepths(nodes: TreeNode[]): Ranking {
-    //FIXME this needs to be multi-pass
+    //FIXME this needs to be multi-pass, should compute "generation"
     const ranking: Ranking = {};
     nodes.forEach(node => {
         const rank = node.ancestors || 0;

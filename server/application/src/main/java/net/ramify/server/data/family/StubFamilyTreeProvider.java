@@ -28,8 +28,11 @@ public class StubFamilyTreeProvider implements FamilyTreeProvider {
 
     static {
         final var builder = new FamilyBuilder();
-        final var father = father();
+        final var grandfather = male("Grandaddy");
+        builder.addPerson(grandfather);
+        final var father = male("Daddy");
         builder.addPerson(father);
+        builder.addRelationship(grandfather, father, ParentChild::new);
         final var mother = mother();
         builder.addPerson(mother);
         builder.addRelationship(father, mother, Married::new);
@@ -41,10 +44,10 @@ public class StubFamilyTreeProvider implements FamilyTreeProvider {
         DEFAULT_TREE = new SingletonFamilyTree(meta(family), family);
     }
 
-    private static Person father() {
+    private static Person male(final String name) {
         return new GenericRecordPerson(
-                new PersonId("father"),
-                new ForenameSurname("Daddy", "Robertshaw"),
+                new PersonId(name),
+                new ForenameSurname(name, "Robertshaw"),
                 Gender.MALE,
                 Collections.emptySet(),
                 null);

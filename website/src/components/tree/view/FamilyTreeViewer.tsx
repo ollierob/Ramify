@@ -9,7 +9,8 @@ import {rank} from "./FamilyTreeRanking";
 
 type Props = {
     content?: boolean;
-    family: Family.AsObject
+    family: Family.AsObject;
+    zoom: number;
 }
 
 type PersonMap = StringMap<Person.AsObject>
@@ -30,12 +31,21 @@ export class FamilyTreeViewer extends React.PureComponent<Props, State> {
 
     render() {
 
-        return <div className={"treeViewer" + (this.props.content ? " content" : "")}>
+        return <div
+            className={"treeViewer" + (this.props.content ? " content" : "")}>
+
             <Draggable>
-                {integerKeys(this.state.ranks)
-                    .sort()
-                    .map(k => <PersonRow line={this.state.ranks[k]} people={this.state.people}/>)}
+
+                <div style={{transform: "scale(" + this.props.zoom + ")"}}>
+
+                    {integerKeys(this.state.ranks)
+                        .sort()
+                        .map(k => <PersonRow line={this.state.ranks[k]} people={this.state.people}/>)}
+
+                </div>
+                
             </Draggable>
+
         </div>;
 
     }

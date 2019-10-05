@@ -15,24 +15,27 @@ type State = {
     treeId: string;
     tree: AsyncData<FamilyTree.AsObject>;
     family?: Family.AsObject;
+    zoom: number
 }
 
 export class ViewTreePage extends PeopleBasePage<State> {
 
     readonly familyTreeLoader = DEFAULT_FAMILY_TREE_LOADER;
+    readonly setZoom = (zoom: number, reset?: boolean) => this.setState({zoom});
 
     constructor(props) {
         super(props);
         this.state = {
             treeId: this.readTreeId(),
-            tree: {loading: true}
+            tree: {loading: true},
+            zoom: 1
         };
     }
 
     body() {
         return <div className="viewTree">
-            <FamilyTreeSubmenu tree={this.state.tree}/>
-            <FamilyTreeViewer family={this.state.family} content/>
+            <FamilyTreeSubmenu tree={this.state.tree} zoom={this.state.zoom} setZoom={this.setZoom}/>
+            <FamilyTreeViewer family={this.state.family} content zoom={this.state.zoom}/>
         </div>;
     }
 

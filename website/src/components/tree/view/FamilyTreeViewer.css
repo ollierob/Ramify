@@ -14,6 +14,10 @@
     overflow: hidden;
 }
 
+.treeViewer .row {
+    margin: 16px 16px 32px 16px;
+}
+
 .treeViewer .personCard {
     display: inline-block;
     background-color: white;

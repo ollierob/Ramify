@@ -7,14 +7,16 @@ import {FavouritesIcon, SearchIcon, TreeIcon, ViewIcon} from "../../images/Icons
 import {Button, Icon, Input, Menu, Popover} from "antd";
 import {FamilyTreeId} from "../FamilyTree";
 
-export const FamilyTreeSubmenu = (props: {tree: AsyncData<FamilyTree.AsObject>}) => {
+type ZoomHandler = {zoom: number, setZoom: (zoom: number, reset?: boolean) => void}
+
+export const FamilyTreeSubmenu = (props: {tree: AsyncData<FamilyTree.AsObject>} & ZoomHandler) => {
     return <SubMenu>
         {props.tree.loading && <Loading/>}
-        {props.tree.data && <SubmenuContent tree={props.tree.data}/>}
+        {props.tree.data && <SubmenuContent {...props} tree={props.tree.data}/>}
     </SubMenu>;
 };
 
-const SubmenuContent = (props: {tree: FamilyTree.AsObject}) => {
+const SubmenuContent = (props: {tree: FamilyTree.AsObject} & ZoomHandler) => {
 
     const tree = props.tree;
 
@@ -89,12 +91,12 @@ const PersonBookmarkDropdown = (props: {id: FamilyTreeId}) => {
 
 type ViewState = {dropdown?: boolean};
 
-const ViewControls = (props: {tree: FamilyTree.AsObject}) => {
+const ViewControls = (props: {tree: FamilyTree.AsObject} & ZoomHandler) => {
 
     const [state, setState] = React.useState<ViewState>({});
 
     return <Popover
-        content={<ViewControlsDropdown/>}
+        content={<ViewControlsDropdown {...props}/>}
         placement="bottomLeft"
         visible={state.dropdown}
         onVisibleChange={visible => setState({dropdown: visible})}>
@@ -105,17 +107,24 @@ const ViewControls = (props: {tree: FamilyTree.AsObject}) => {
 
 };
 
-const ViewControlsDropdown = (props: {}) => {
+const ViewControlsDropdown = (props: {} & ZoomHandler) => {
     return <>
-        <Button icon="reload">
+        <Button
+            icon="reload"
+            onClick={e => props.setZoom(1, true)}>
             Reset view
         </Button>
         <br/>
-        <Button icon="zoom-in">
+        <Button
+            icon="zoom-in"
+            onClick={e => props.setZoom(props.zoom + 0.1)}>
             Zoom in
         </Button>
         <br/>
-        <Button icon="zoom-out">
+        <Button
+            disabled={props.zoom <= 0.1}
+            icon="zoom-out"
+            onClick={e => props.setZoom(props.zoom - 0.1)}>
             Zoom out
         </Button>
     </>;

@@ -1,5 +1,6 @@
 import * as React from "react";
 import {CSSProperties, MouseEvent, RefObject} from "react";
+import {HasClass} from "../../style/HasClass";
 
 type Props = {
     children: React.ReactNode;
@@ -32,11 +33,11 @@ export default class Draggable extends React.PureComponent<Props, State> {
         return <div
             ref={this.div}
             className="drag"
+            style={this.state.mouseDown ? DraggingStyle : DraggableStyle}
             onMouseUp={this.onMouseUp}
             onMouseMove={this.onMouseMove}
             onMouseDown={this.onMouseDown}
-            onDragStart={this.preventDefault}
-            style={this.state.mouseDown ? DraggingStyle : DraggableStyle}>
+            onDragStart={this.preventDefault}>
 
             <div style={{...AbsoluteStyle, left: this.state.left, top: this.state.top}}>
                 {this.props.children}
