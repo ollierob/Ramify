@@ -2,7 +2,7 @@ import * as React from "react";
 import {PeopleBasePage} from "../PeopleBasePage";
 import {BasePageProps} from "../../BasePage";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
-import {FamilyTree} from "../../../protobuf/generated/family_pb";
+import {Family, FamilyTree} from "../../../protobuf/generated/family_pb";
 import {FamilyTreeId} from "../../../components/tree/FamilyTree";
 import {FamilyTreeViewer} from "../../../components/tree/view/FamilyTreeViewer";
 import "./ViewTree.css";
@@ -13,7 +13,8 @@ type Props = BasePageProps;
 
 type State = {
     treeId: string;
-    tree: AsyncData<FamilyTree.AsObject>
+    tree: AsyncData<FamilyTree.AsObject>;
+    family?: Family.AsObject;
 }
 
 export class ViewTreePage extends PeopleBasePage<State> {
@@ -31,7 +32,7 @@ export class ViewTreePage extends PeopleBasePage<State> {
     body() {
         return <div className="viewTree">
             <FamilyTreeSubmenu tree={this.state.tree}/>
-            <FamilyTreeViewer tree={this.state.tree} content/>
+            <FamilyTreeViewer family={this.state.family} content/>
         </div>;
     }
 
@@ -52,7 +53,12 @@ export class ViewTreePage extends PeopleBasePage<State> {
 
     private loadTree(id: FamilyTreeId = this.state.treeId) {
         if (!id) return;
-        asyncLoadData(id, this.familyTreeLoader.loadFamilyTree, tree => this.setState({tree}));
+        asyncLoadData(id, this.familyTreeLoader.loadFamilyTree, tree => {
+            this.setState({
+                tree: tree,
+                family: tree.data ? tree.data.familyList[0] : null
+            });
+        });
     }
 
 }

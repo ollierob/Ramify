@@ -1,39 +1,62 @@
 import * as React from "react";
-import {FamilyTree} from "../../../protobuf/generated/family_pb";
-import {AsyncData} from "../../fetch/AsyncData";
+import {Family} from "../../../protobuf/generated/family_pb";
 import Draggable from "./Draggable";
 import "./FamilyTreeViewer.css";
 import {Person} from "../../../protobuf/generated/person_pb";
 import {PersonCard} from "./PersonCard";
+import {integerKeys, stringMap, StringMap} from "../../Maps";
+import {rank} from "./FamilyTreeRanking";
 
 type Props = {
     content?: boolean;
-    tree: AsyncData<FamilyTree.AsObject>
+    family: Family.AsObject
 }
 
-export class FamilyTreeViewer extends React.PureComponent<Props> {
+type PersonMap = StringMap<Person.AsObject>
+
+type Ranking = {
+    people: PersonMap
+    ranks: {[rank: number]: string[]}
+}
+
+type State = Ranking;
+
+export class FamilyTreeViewer extends React.PureComponent<Props, State> {
+
+    constructor(props: Props) {
+        super(props);
+        this.state = generateRanking(props.family);
+    }
 
     render() {
 
-        const people = allPeople(this.props.tree.data);
-
         return <div className={"treeViewer" + (this.props.content ? " content" : "")}>
-
             <Draggable>
-
-                {people.map(person => <PersonCard person={person}/>)}
-
+                {integerKeys(this.state.ranks)
+                    .sort()
+                    .map(k => <PersonRow line={this.state.ranks[k]} people={this.state.people}/>)}
             </Draggable>
-
         </div>;
 
     }
 
+    componentDidUpdate(prevProps: Readonly<Props>) {
+        if (this.props.family != prevProps.family)
+            this.setState(generateRanking(this.props.family));
+    }
+
 }
 
-function allPeople(tree: FamilyTree.AsObject): Person.AsObject[] {
-    const people: Person.AsObject[] = [];
-    if (!tree) return people;
-    tree.familyList.forEach(family => people.push(...family.personList));
-    return people;
+const PersonRow = (props: {people: PersonMap, line: string[]}) => {
+    return <div className="row">
+        {props.line.map(id => <PersonCard person={props.people[id]}/>)}
+    </div>;
+};
+
+function generateRanking(family: Family.AsObject): Ranking {
+    if (!family || !family.personList.length) return {people: {}, ranks: {}};
+    return {
+        people: stringMap(family.personList, p => p.id),
+        ranks: rank(family.relationshipList)
+    };
 }

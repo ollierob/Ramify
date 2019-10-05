@@ -34,3 +34,9 @@ export function numberMap<T>(objects: ReadonlyArray<T>, toNumber: (t: T) => numb
 export function integerKeys(map: NumberMap<any>): number[] {
     return Object.keys(map).map(m => parseInt(m));
 }
+
+export function ensure<V>(k: string, map: StringMap<V>, create: (k: string) => V): V {
+    let v = map[k];
+    if (v == null) map[k] = v = create(k);
+    return v;
+}
