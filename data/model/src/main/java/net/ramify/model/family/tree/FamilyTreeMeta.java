@@ -10,11 +10,14 @@ public interface FamilyTreeMeta extends HasFamilyTreeId, BuildsProto<FamilyProto
     @Nonnull
     String name();
 
+    int numPeople();
+
     @Nonnull
     default FamilyProto.FamilyTree.Builder toProtoBuilder() {
         return FamilyProto.FamilyTree.newBuilder()
                 .setId(this.familyTreeId().value())
-                .setName(this.name());
+                .setName(this.name())
+                .setNumPeople(this.numPeople());
     }
 
     @Nonnull

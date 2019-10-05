@@ -1,5 +1,5 @@
 import * as React from "react";
-import {List, Tabs} from "antd";
+import {Icon, List, Tabs} from "antd";
 import {NoData} from "../../style/NoData";
 import {FamilyTree} from "../../../protobuf/generated/family_pb";
 import {AsyncData, asyncLoadData} from "../../fetch/AsyncData";
@@ -71,23 +71,30 @@ const Search = () => {
     return <></>;
 };
 
-type TreeListItem = {create?: boolean, loading?: boolean, text?: string, id?: string};
+type TreeListItem = {create?: boolean, loading?: boolean, text?: string, id?: string, count?: number};
 
 const Trees = (props: {trees: ReadonlyArray<FamilyTree.AsObject>, loading: boolean}) => {
 
     const list: TreeListItem[] = [{create: true}];
-    if (props.trees) list.push(...props.trees.map<TreeListItem>(t => ({text: t.name, id: t.id})));
+    if (props.trees) list.push(...props.trees.map<TreeListItem>(t => ({text: t.name, id: t.id, count: t.numpeople})));
     if (props.loading) list.push({loading: true});
 
     return <List
         className="treeList"
         dataSource={list}
         renderItem={l => <List.Item>
-            {l.create && <a href={createTreeHref()}>Create new tree</a>}
+            {l.create && <a href={createTreeHref()}><Icon type="file-add"/> Create new tree</a>}
             {l.loading && <><Loading/> Loading</>}
-            {l.id && <a href={viewTreeHref(l.id)}>{l.text || <i>Unnamed tree</i>}</a>}
+            {l.id && <FamilyTreeLink item={l}/>}
         </List.Item>}/>;
 
+};
+
+const FamilyTreeLink = (props: {item: TreeListItem}) => {
+    return <>
+        <a href={viewTreeHref(props.item.id)}>{props.item.text || <i>Unnamed tree</i>}</a>
+        <span className="unimportant" style={{marginLeft: "0.5em"}}>{props.item.count.toLocaleString()} people</span>
+    </>;
 };
 
 const Recent = (props: {}) => {

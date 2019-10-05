@@ -1,5 +1,6 @@
 package net.ramify.server.data.family;
 
+import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.family.tree.FamilyTree;
 import net.ramify.model.family.tree.FamilyTreeId;
@@ -36,7 +37,8 @@ public class StubFamilyTreeProvider implements FamilyTreeProvider {
         builder.addPerson(self);
         builder.addRelationship(father, self, ParentChild::new);
         builder.addRelationship(mother, self, ParentChild::new);
-        DEFAULT_TREE = new SingletonFamilyTree(meta(), builder.build());
+        final var family = builder.build();
+        DEFAULT_TREE = new SingletonFamilyTree(meta(family), family);
     }
 
     private static Person father() {
@@ -66,13 +68,18 @@ public class StubFamilyTreeProvider implements FamilyTreeProvider {
                 null);
     }
 
-    private static FamilyTreeMeta meta() {
+    private static FamilyTreeMeta meta(final Family family) {
         return new FamilyTreeMeta() {
 
             @Nonnull
             @Override
             public String name() {
                 return "Robertshaw";
+            }
+
+            @Override
+            public int numPeople() {
+                return family.people().size();
             }
 
             @Nonnull
