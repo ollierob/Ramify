@@ -1,0 +1,3 @@
+[submodule "server/xml-data"]
+	path = server/xml-data
+	url = git@github.com:ollierob/ramify-xml-data.git
