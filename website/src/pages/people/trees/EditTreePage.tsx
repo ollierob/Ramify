@@ -4,7 +4,7 @@ import {Card} from "antd";
 
 type State = {};
 
-export class EditTreePage extends ManageTreePage<State> {
+export default class EditTreePage extends ManageTreePage<State> {
 
     main() {
 

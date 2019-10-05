@@ -48,3 +48,16 @@
     padding: 0 4px 4px 4px;
     text-align: center;
 }
+
+.treeViewer.personCard.title {
+    font-size: 16px;
+    padding: 8px 12px;
+}
+
+.treeViewer.personCard.controls {
+    user-select: none;
+}
+
+.treeViewer.personCard.controls .control {
+    padding: 4px;
+}

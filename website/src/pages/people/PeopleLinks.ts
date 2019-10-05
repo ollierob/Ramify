@@ -1,8 +1,12 @@
-import {FamilyTreeId} from "../tree/FamilyTree";
-import {PersonId} from "./PersonId";
+import {FamilyTreeId} from "../../components/tree/FamilyTree";
+import {PersonId} from "../../components/people/PersonId";
 
 export function personSearchHref(treeId: FamilyTreeId, personId: PersonId): string {
     return peoplePrefix() + "#/search?personId=" + personId + "&treeId=" + treeId;
+}
+
+export function personProfileHref(treeId: FamilyTreeId, personId: PersonId): string {
+    return peoplePrefix() + "#/profile?personId=" + personId + "&treeId=" + treeId;
 }
 
 export function createTreeHref() {

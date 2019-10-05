@@ -18,7 +18,7 @@ type State = {
     zoom: number
 }
 
-export class ViewTreePage extends PeopleBasePage<State> {
+export default class ViewTreePage extends PeopleBasePage<State> {
 
     readonly familyTreeLoader = DEFAULT_FAMILY_TREE_LOADER;
     readonly setZoom = (zoom: number, reset?: boolean) => this.setState({zoom});

@@ -4,7 +4,7 @@ import {nameToString} from "../../people/Name";
 import {HasClass} from "../../style/HasClass";
 import {birthYear, deathYear} from "../../event/Event";
 import {Icon, Popover} from "antd";
-import {personSearchHref} from "../../people/PeopleLinks";
+import {personProfileHref, personSearchHref} from "../../../pages/people/PeopleLinks";
 import {PersonId} from "../../people/PersonId";
 import {FamilyTreeId} from "../FamilyTree";
 
@@ -39,7 +39,8 @@ export class PersonCard extends React.PureComponent<Props, State> {
             trigger="click"
             visible={this.state.popoverVisible}
             onVisibleChange={this.setPopoverVisible}
-            content={<PersonControls personId={person.id} treeId={this.props.treeId}/>}>
+            title={<PersonPopoverTitle person={person}/>}
+            content={<PersonPopoverControls personId={person.id} treeId={this.props.treeId}/>}>
 
             <div
                 style={this.props.style}
@@ -94,22 +95,31 @@ const PersonDates = (props: {birthYear: number, deathYear: number, flourishedYea
     </div>;
 };
 
+const PersonPopoverTitle = (props: {person: Person.AsObject}) => {
+    return <div className="treeViewer personCard title">
+        {nameToString(props.person.name)}
+        {" "}
+        <Icon type="edit"/>
+    </div>;
+};
 
-const PersonControls = (props: {personId: PersonId, treeId: FamilyTreeId}) => {
-    return <>
-        <div>
-            <Icon type="profile"/> View profile
+const PersonPopoverControls = (props: {personId: PersonId, treeId: FamilyTreeId}) => {
+    return <div className="treeViewer personCard controls">
+        <div className="control">
+            <a href={personProfileHref(props.treeId, props.personId)}>
+                <Icon type="profile"/> View profile
+            </a>
         </div>
-        <div>
-            <a href={personSearchHref(props.personId, props.treeId)}>
+        <div className="control">
+            <a href={personSearchHref(props.treeId, props.personId)} target="_blank">
                 <Icon type="search"/> Search records
             </a>
         </div>
-        <div>
+        <div className="control">
             <Icon type="swap"/> Merge
         </div>
-        <div>
+        <div className="control">
             <Icon type="delete"/> Delete
         </div>
-    </>;
+    </div>;
 };
