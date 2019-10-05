@@ -2,12 +2,16 @@ import * as React from "react";
 import {CSSProperties, MouseEvent, RefObject} from "react";
 
 type Props = {
-    children: React.ReactNode
+    children: React.ReactNode;
 }
 
 type State = {
     mouseDown?: boolean;
     dragging?: boolean;
+    left: number;
+    top: number;
+    prevX?: number;
+    prevY?: number;
 }
 
 export default class Draggable extends React.PureComponent<Props, State> {
@@ -16,7 +20,7 @@ export default class Draggable extends React.PureComponent<Props, State> {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {left: 0, top: 0};
         this.div = React.createRef();
         this.onMouseUp = this.onMouseUp.bind(this);
         this.onMouseMove = this.onMouseMove.bind(this);
@@ -27,13 +31,16 @@ export default class Draggable extends React.PureComponent<Props, State> {
     render() {
         return <div
             ref={this.div}
+            className="drag"
             onMouseUp={this.onMouseUp}
             onMouseMove={this.onMouseMove}
             onMouseDown={this.onMouseDown}
             onDragStart={this.preventDefault}
             style={this.state.mouseDown ? DraggingStyle : DraggableStyle}>
 
-            {this.props.children}
+            <div style={{...AbsoluteStyle, left: this.state.left, top: this.state.top}}>
+                {this.props.children}
+            </div>
 
         </div>;
     }
@@ -46,12 +53,26 @@ export default class Draggable extends React.PureComponent<Props, State> {
         e.preventDefault();
     }
 
-    private onMouseDown() {
-        this.setState({mouseDown: true, dragging: false});
+    private onMouseDown(e: MouseEvent) {
+        this.setState({mouseDown: true, dragging: false, prevX: e.pageX, prevY: e.pageY});
     }
 
     private onMouseMove(e: MouseEvent) {
-        if (!this.state.mouseDown) return;
+        let state = this.state;
+        if (!state.mouseDown) return;
+        if (!state.dragging) {
+            this.setState({dragging: true});
+            return;
+        }
+        const dx = e.pageX - state.prevX;
+        const dy = e.pageY - state.prevY;
+        console.log("left " + state.left + " => " + e.pageX + " - " + state.prevX + " => " + (state.left + dx));
+        this.setState({
+            prevX: e.pageX,
+            prevY: e.pageY,
+            left: state.left + dx,
+            top: state.top + dy
+        });
     }
 
     private onMouseUp() {
@@ -64,5 +85,7 @@ export default class Draggable extends React.PureComponent<Props, State> {
 
 }
 
-const DraggableStyle: CSSProperties = {cursor: "grab"};
-const DraggingStyle: CSSProperties = {cursor: "grabbing"};
+const FullSizeStyle: CSSProperties = {width: "100%", height: "100%"};
+const AbsoluteStyle: CSSProperties = {...FullSizeStyle, position: "absolute"};
+const DraggableStyle: CSSProperties = {...FullSizeStyle, cursor: "grab"};
+const DraggingStyle: CSSProperties = {...FullSizeStyle, cursor: "grabbing"};
