@@ -1,5 +1,5 @@
 import {PlaceId} from "./Place";
-import {protoDelete, protoGet, protoPost, protoStringPost} from "../fetch/ProtoFetch";
+import {protoDelete, protoGet, protoStringPost} from "../fetch/ProtoFetch";
 import {Place, PlaceList as PlaceListProto} from "../../protobuf/generated/place_pb";
 
 export interface PlaceFavouritesLoader {
