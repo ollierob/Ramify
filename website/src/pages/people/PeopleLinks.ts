@@ -1,5 +1,11 @@
+import {FamilyTreeId} from "../../components/tree/FamilyTree";
+
 export function createTreeHref() {
     return peoplePrefix() + "#/tree/create";
+}
+
+export function viewTreeHref(id: FamilyTreeId) {
+    return peoplePrefix() + "#/tree/view?id=" + id;
 }
 
 function peoplePrefix() {

@@ -2,12 +2,11 @@ package net.ramify.server.resource.people;
 
 import net.ramify.model.family.tree.FamilyTree;
 import net.ramify.model.family.tree.FamilyTreeId;
-import net.ramify.model.family.tree.FamilyTreeMeta;
 import net.ramify.model.family.tree.FamilyTreeProvider;
+import net.ramify.model.family.tree.FamlyTreeMetas;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Singleton
@@ -21,8 +20,8 @@ public class DefaultFamilyTreeResource implements FamilyTreeResource {
     }
 
     @Override
-    public Collection<FamilyTreeMeta> names() {
-        return familyTreeProvider.allMeta().collect(Collectors.toList());
+    public FamlyTreeMetas names() {
+        return () -> familyTreeProvider.allMeta().collect(Collectors.toSet());
     }
 
     @Override

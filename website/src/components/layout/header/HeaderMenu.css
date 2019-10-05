@@ -4,10 +4,15 @@
 }
 
 .ant-menu-submenu .tabbedSubmenu .ant-tabs .ant-tabs-left-content {
+    font-size: 16px;
     padding-left: 18px;
     width: 320px;
 }
 
 .header .ant-menu-submenu .ant-menu-submenu-title a {
     color: unset;
+}
+
+.ant-menu-submenu .treeList .ant-list-item {
+    font-size: 16px;
 }

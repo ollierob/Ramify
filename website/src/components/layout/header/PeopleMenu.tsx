@@ -1,23 +1,32 @@
 import * as React from "react";
-import {Tabs} from "antd";
+import {List, Tabs} from "antd";
 import {NoData} from "../../style/NoData";
-import {createTreeHref} from "../../../pages/people/PeopleLinks";
+import {FamilyTree} from "../../../protobuf/generated/family_pb";
+import {AsyncData, asyncLoadData} from "../../fetch/AsyncData";
+import {createTreeHref, viewTreeHref} from "../../../pages/people/PeopleLinks";
+import {DEFAULT_FAMILY_TREE_LOADER} from "../../tree/FamilyTreeLoader";
+import {Loading} from "../../style/Loading";
 
 type Props = {}
 
 type State = {
     activeTab?: string;
+    trees: AsyncData<ReadonlyArray<FamilyTree.AsObject>>
 }
 
 export class PeopleMenu extends React.PureComponent<Props, State> {
 
+    private readonly treeLoader = DEFAULT_FAMILY_TREE_LOADER;
     private readonly setTrees = () => this.setState({activeTab: "trees"});
     private readonly setRecent = () => this.setState({activeTab: "recent"});
     private readonly setSearch = () => this.setState({activeTab: "search"});
 
     constructor(props) {
         super(props);
-        this.state = {activeTab: "search"};
+        this.state = {
+            activeTab: "search",
+            trees: {}
+        };
     }
 
     render() {
@@ -31,7 +40,7 @@ export class PeopleMenu extends React.PureComponent<Props, State> {
                 </Tabs.TabPane>
 
                 <Tabs.TabPane key="trees" tab={<TabTitle title="Trees" onMouseover={this.setTrees}/>}>
-                    <Trees/>
+                    <Trees trees={this.state.trees.data || []} loading={this.state.trees.loading}/>
                 </Tabs.TabPane>
 
                 <Tabs.TabPane key="recent" tab={<TabTitle title="Recent" onMouseover={this.setRecent}/>}>
@@ -44,6 +53,14 @@ export class PeopleMenu extends React.PureComponent<Props, State> {
 
     }
 
+    componentDidMount() {
+        this.loadTrees();
+    }
+
+    private loadTrees() {
+        asyncLoadData(null, this.treeLoader.loadFamilyTrees, trees => this.setState({trees}));
+    }
+
 }
 
 const TabTitle = (props: {title: React.ReactNode, onMouseover: () => void}) => {
@@ -54,8 +71,23 @@ const Search = () => {
     return <></>;
 };
 
-const Trees = (props: {}) => {
-    return <><a href={createTreeHref()}>Create new tree</a></>;
+type TreeListItem = {create?: boolean, loading?: boolean, text?: string, id?: string};
+
+const Trees = (props: {trees: ReadonlyArray<FamilyTree.AsObject>, loading: boolean}) => {
+
+    const list: TreeListItem[] = [{create: true}];
+    if (props.trees) list.push(...props.trees.map<TreeListItem>(t => ({text: t.name, id: t.id})));
+    if (props.loading) list.push({loading: true});
+
+    return <List
+        className="treeList"
+        dataSource={list}
+        renderItem={l => <List.Item>
+            {l.create && <a href={createTreeHref()}>Create new tree</a>}
+            {l.loading && <><Loading/> Loading</>}
+            {l.id && <a href={viewTreeHref(l.id)}>{l.text || <i>Unnamed tree</i>}</a>}
+        </List.Item>}/>;
+
 };
 
 const Recent = (props: {}) => {
