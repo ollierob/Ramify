@@ -12,7 +12,7 @@
     <xs:element name="foundedBefore" type="tns:xmlBeforeDate"/>
 
     <xs:element name="foundedIn" type="tns:xmlInYear"/>
-    
+
     <xs:element name="inYear" type="tns:xmlInYear"/>
 
     <xs:element name="xmlBeforeDate" type="tns:xmlBeforeDate"/>
