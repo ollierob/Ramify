@@ -94,10 +94,16 @@ const PersonDates = (props: {birthYear: number, deathYear: number, flourishedYea
 const PersonControls = (props: {}) => {
     return <>
         <div>
-            <Icon type="profile"/> Profile
+            <Icon type="profile"/> View profile
+        </div>
+        <div>
+            <Icon type="search"/> Search records
         </div>
         <div>
             <Icon type="swap"/> Merge
+        </div>
+        <div>
+            <Icon type="delete"/> Delete
         </div>
     </>;
 };
