@@ -98,13 +98,14 @@ const PersonDates = (props: {birthYear: number, deathYear: number, flourishedYea
 const PersonPopoverTitle = (props: {person: Person.AsObject}) => {
     return <div className="treeViewer personCard title">
         {nameToString(props.person.name)}
-        {" "}
-        <Icon type="edit"/>
     </div>;
 };
 
 const PersonPopoverControls = (props: {personId: PersonId, treeId: FamilyTreeId}) => {
     return <div className="treeViewer personCard controls">
+        <div className="control">
+            <Icon type="edit"/> Rename
+        </div>
         <div className="control">
             <a href={personProfileHref(props.treeId, props.personId)}>
                 <Icon type="profile"/> View profile
