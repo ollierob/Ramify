@@ -40,10 +40,10 @@ export class FamilyTreeViewer extends React.PureComponent<Props, State> {
 
                     {integerKeys(this.state.ranks)
                         .sort()
-                        .map(k => <PersonRow line={this.state.ranks[k]} people={this.state.people}/>)}
+                        .map(k => <PersonRow key={"row-" + k} line={this.state.ranks[k]} people={this.state.people}/>)}
 
                 </div>
-                
+
             </Draggable>
 
         </div>;
