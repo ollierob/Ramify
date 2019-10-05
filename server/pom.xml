@@ -21,6 +21,7 @@
         <module>authentication</module>
         <module>xml</module>
         <module>images</module>
+        <module>xml-data</module>
     </modules>
 
     <properties>
