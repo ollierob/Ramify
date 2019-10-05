@@ -12,6 +12,7 @@ public class PlaceResourceModule extends AbstractModule {
         this.bind(PlacesRouterResource.class);
         this.bind(ChurchesResource.class).to(DefaultChurchesResource.class);
         this.bind(DefaultPlacesResource.class);
+        this.bind(PlaceFavouritesResource.class).to(DefaultPlaceFavouritesResource.class);
     }
 
 }

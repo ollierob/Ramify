@@ -61,4 +61,7 @@ public interface PlacesResource extends RootResource {
     @Path("churches")
     ChurchesResource churches();
 
+    @Path("favourites")
+    PlaceFavouritesResource favourites();
+
 }
