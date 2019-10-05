@@ -10,6 +10,11 @@ public interface UnknownRelationship extends Relationship {
     }
 
     @Override
+    default boolean isUnknown() {
+        return true;
+    }
+
+    @Override
     default <R> R handleWith(final RelationshipHandler<R> handler) {
         return handler.handle(this);
     }

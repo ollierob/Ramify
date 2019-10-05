@@ -16,6 +16,10 @@ public interface Relationship extends Castable<Relationship>, BuildsProto<Relati
     @Nonnull
     PersonId toId();
 
+    default boolean isUnknown() {
+        return false;
+    }
+
     default boolean has(@Nonnull final PersonId personId) {
         return personId.equals(this.fromId()) || personId.equals(this.toId());
     }
@@ -34,7 +38,8 @@ public interface Relationship extends Castable<Relationship>, BuildsProto<Relati
         return RelationshipProto.Relationship.newBuilder()
                 .setFromId(this.fromId().value())
                 .setToId(this.toId().value())
-                .setDirected(this.isDirected());
+                .setUnknown(this.isUnknown())
+                .setDirection(this.isDirected() ? RelationshipProto.Relationship.Direction.SIDEWAYS : RelationshipProto.Relationship.Direction.UNDIRECTED);
     }
 
     @Nonnull

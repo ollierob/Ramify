@@ -7,7 +7,18 @@ message Relationship {
 
     string fromId = 1;
     string toId = 2;
-    bool directed = 3;
+
+    Direction direction = 3;
+    bool unknown = 4;
+
+    enum Direction {
+
+        UNDIRECTED = 0;
+        SIDEWAYS = 1;
+        TOP_BOTTOM = 2;
+        BOTTOM_TOP = 3;
+
+    }
 
 }
 

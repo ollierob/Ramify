@@ -3,6 +3,9 @@ package net.ramify.model.relationship.type;
 import net.ramify.model.person.HasPersonId;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.relationship.AbstractRelationship;
+import net.ramify.model.relationship.proto.RelationshipProto;
+
+import javax.annotation.Nonnull;
 
 public class ParentChild extends AbstractRelationship implements CosanguinealRelationship {
 
@@ -20,6 +23,12 @@ public class ParentChild extends AbstractRelationship implements CosanguinealRel
 
     public ChildParent inverse() {
         return new ChildParent(this.child(), this.parent());
+    }
+
+    @Nonnull
+    @Override
+    public RelationshipProto.Relationship.Builder toProtoBuilder() {
+        return super.toProtoBuilder().setDirection(RelationshipProto.Relationship.Direction.TOP_BOTTOM);
     }
 
 }
