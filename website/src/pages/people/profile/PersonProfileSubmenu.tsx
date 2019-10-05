@@ -4,6 +4,7 @@ import {Person} from "../../../protobuf/generated/person_pb";
 import {FamilyTree} from "../../../protobuf/generated/family_pb";
 import {PersonIcon, TreeIcon} from "../../../components/images/Icons";
 import {nameToString} from "../../../components/people/Name";
+import {viewTreeHref} from "../PeopleLinks";
 
 export const PersonProfileSubmenu = (props: {person: Person.AsObject, tree: FamilyTree.AsObject, loading: boolean}) => {
     return <SubMenu>
@@ -14,7 +15,9 @@ export const PersonProfileSubmenu = (props: {person: Person.AsObject, tree: Fami
 const SubmenuContent = (props: {person: Person.AsObject, tree: FamilyTree.AsObject}) => {
     return <>
         <span className="tree">
-            <TreeIcon/> {props.tree.name}
+            <a href={viewTreeHref(props.tree.id)}>
+                <TreeIcon/> {props.tree.name}
+            </a>
         </span>
         <span className="person">
             <PersonIcon/> {nameToString(props.person.name)}
