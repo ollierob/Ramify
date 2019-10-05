@@ -13,10 +13,11 @@ export class PeopleMenu extends React.PureComponent<Props, State> {
 
     private readonly setTrees = () => this.setState({activeTab: "trees"});
     private readonly setRecent = () => this.setState({activeTab: "recent"});
+    private readonly setSearch = () => this.setState({activeTab: "search"});
 
     constructor(props) {
         super(props);
-        this.state = {activeTab: "trees"};
+        this.state = {activeTab: "search"};
     }
 
     render() {
@@ -25,12 +26,16 @@ export class PeopleMenu extends React.PureComponent<Props, State> {
 
             <Tabs tabPosition="left" activeKey={this.state.activeTab} size="large">
 
-                <Tabs.TabPane key="recent" tab={<TabTitle title="Recent" onMouseover={this.setRecent}/>}>
-                    <Recent/>
+                <Tabs.TabPane key="search" tab={<TabTitle title="Search" onMouseover={this.setSearch}/>}>
+                    <Search/>
                 </Tabs.TabPane>
 
                 <Tabs.TabPane key="trees" tab={<TabTitle title="Trees" onMouseover={this.setTrees}/>}>
                     <Trees/>
+                </Tabs.TabPane>
+
+                <Tabs.TabPane key="recent" tab={<TabTitle title="Recent" onMouseover={this.setRecent}/>}>
+                    <Recent/>
                 </Tabs.TabPane>
 
             </Tabs>
@@ -43,6 +48,10 @@ export class PeopleMenu extends React.PureComponent<Props, State> {
 
 const TabTitle = (props: {title: React.ReactNode, onMouseover: () => void}) => {
     return <div onMouseOver={props.onMouseover}>{props.title}</div>;
+};
+
+const Search = () => {
+    return <></>;
 };
 
 const Trees = (props: {}) => {

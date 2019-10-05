@@ -16,7 +16,7 @@ export class RecordMenu extends React.PureComponent<Props, State> {
 
     constructor(props) {
         super(props);
-        this.state = {activeTab: "recent"};
+        this.state = {activeTab: "search"};
     }
 
     render() {
@@ -25,16 +25,16 @@ export class RecordMenu extends React.PureComponent<Props, State> {
 
             <Tabs tabPosition="left" activeKey={this.state.activeTab} size="large">
 
-                <Tabs.TabPane key="recent" tab={<TabTitle title="Recent" onMouseover={this.setRecent}/>}>
-                    <RecentList/>
+                <Tabs.TabPane key="search" tab={<TabTitle title="Search" onMouseover={this.setSearch}/>}>
+
                 </Tabs.TabPane>
 
                 <Tabs.TabPane key="favourites" tab={<TabTitle title="Favourites" onMouseover={this.setFavourites}/>}>
                     <FavouritesList/>
                 </Tabs.TabPane>
 
-                <Tabs.TabPane key="search" tab={<TabTitle title="Search" onMouseover={this.setSearch}/>}>
-
+                <Tabs.TabPane key="recent" tab={<TabTitle title="Recent" onMouseover={this.setRecent}/>}>
+                    <RecentList/>
                 </Tabs.TabPane>
 
             </Tabs>
