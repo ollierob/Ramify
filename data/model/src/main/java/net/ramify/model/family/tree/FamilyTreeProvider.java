@@ -1,6 +1,7 @@
 package net.ramify.model.family.tree;
 
 import net.ramify.model.Provider;
+import net.ramify.model.person.PersonId;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
@@ -11,6 +12,10 @@ public interface FamilyTreeProvider extends Provider<FamilyTreeId, FamilyTree> {
 
     @Nonnull
     Set<FamilyTreeId> allIds();
+
+    default FamilyTree get(final FamilyTreeId treeId, final PersonId personId) {
+        return this.get(treeId); //TODO
+    }
 
     @Nonnull
     default Stream<FamilyTreeMeta> allMeta() {

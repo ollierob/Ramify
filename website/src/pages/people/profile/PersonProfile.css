@@ -1,0 +1,14 @@
+.personProfile .submenu {
+    height: 48px;
+    line-height: 48px;
+    font-size: 18px;
+    padding-left: 24px;
+}
+
+.personProfile .submenu .tree {
+    font-weight: bold;
+}
+
+.personProfile .submenu .person {
+    margin-left: .5em;
+}

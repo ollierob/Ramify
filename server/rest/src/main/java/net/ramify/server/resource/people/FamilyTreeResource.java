@@ -2,7 +2,9 @@ package net.ramify.server.resource.people;
 
 import net.ramify.model.family.tree.FamilyTree;
 import net.ramify.model.family.tree.FamilyTreeId;
+import net.ramify.model.family.tree.FamilyTreeMeta;
 import net.ramify.model.family.tree.FamlyTreeMetas;
+import net.ramify.model.person.PersonId;
 import net.ramify.server.resource.Resource;
 
 import javax.ws.rs.GET;
@@ -21,7 +23,17 @@ public interface FamilyTreeResource extends Resource {
     FamlyTreeMetas names();
 
     @GET
+    @Path("meta/{id}")
+    FamilyTreeMeta name(@PathParam("id") FamilyTreeId id);
+
+    @GET
     @Path("load/{id}")
     FamilyTree load(@PathParam("id") FamilyTreeId id);
+
+    @GET
+    @Path("load/{treeId}/{personId}")
+    FamilyTree loadPerson(
+            @PathParam("treeId") FamilyTreeId id,
+            @PathParam("personId") PersonId personId);
 
 }
