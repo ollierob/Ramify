@@ -34,6 +34,7 @@ public class ImageResource extends AbstractResource {
     @GET
     @Path("{file}")
     @Produces("image/*")
+    @Cached(maxAgeDays = 1)
     public Response generalImage(
             @Context final UserSessionContext context,
             @PathParam("file") final String filename) {
