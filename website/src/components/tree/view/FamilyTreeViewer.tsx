@@ -1,6 +1,6 @@
 import * as React from "react";
-import {FamilyTree} from "../../protobuf/generated/family_pb";
-import {AsyncData} from "../fetch/AsyncData";
+import {FamilyTree} from "../../../protobuf/generated/family_pb";
+import {AsyncData} from "../../fetch/AsyncData";
 import Draggable from "./Draggable";
 import "./FamilyTreeViewer.css"
 

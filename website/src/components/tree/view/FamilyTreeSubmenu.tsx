@@ -1,11 +1,11 @@
 import * as React from "react";
-import {SubMenu} from "../../pages/SubMenu";
-import {AsyncData} from "../fetch/AsyncData";
-import {FamilyTree} from "../../protobuf/generated/family_pb";
-import {Loading} from "../style/Loading";
-import {FavouritesIcon, SearchIcon, TreeIcon, ViewIcon} from "../images/Icons";
+import {SubMenu} from "../../../pages/SubMenu";
+import {AsyncData} from "../../fetch/AsyncData";
+import {FamilyTree} from "../../../protobuf/generated/family_pb";
+import {Loading} from "../../style/Loading";
+import {FavouritesIcon, SearchIcon, TreeIcon, ViewIcon} from "../../images/Icons";
 import {Button, Icon, Input, Menu, Popover} from "antd";
-import {FamilyTreeId} from "./FamilyTree";
+import {FamilyTreeId} from "../FamilyTree";
 
 export const FamilyTreeSubmenu = (props: {tree: AsyncData<FamilyTree.AsObject>}) => {
     return <SubMenu>

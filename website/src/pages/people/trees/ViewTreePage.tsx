@@ -4,10 +4,10 @@ import {BasePageProps} from "../../BasePage";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {FamilyTree} from "../../../protobuf/generated/family_pb";
 import {FamilyTreeId} from "../../../components/tree/FamilyTree";
-import {FamilyTreeViewer} from "../../../components/tree/FamilyTreeViewer";
+import {FamilyTreeViewer} from "../../../components/tree/view/FamilyTreeViewer";
 import "./ViewTree.css";
 import {DEFAULT_FAMILY_TREE_LOADER} from "../../../components/tree/FamilyTreeLoader";
-import {FamilyTreeSubmenu} from "../../../components/tree/FamilyTreeSubmenu";
+import {FamilyTreeSubmenu} from "../../../components/tree/view/FamilyTreeSubmenu";
 
 type Props = BasePageProps;
 
