@@ -19,15 +19,21 @@ export default class HeaderMenu extends React.PureComponent<Props> {
 
         return <Menu mode="horizontal" className="menu">
 
-            <Menu.SubMenu title={<><TreeIcon/> People</>} className={this.props.active == "people" && ActiveClass}>
+            <Menu.SubMenu
+                title={<a href="/people"><TreeIcon/> People</a>}
+                className={this.props.active == "people" && ActiveClass}>
                 <PeopleMenu {...this.props}/>
             </Menu.SubMenu>
 
-            <Menu.SubMenu title={<><PlacesIcon/> Places</>} className={this.props.active == "places" && ActiveClass}>
+            <Menu.SubMenu
+                title={<a href="/places"><PlacesIcon/> Places</a>}
+                className={this.props.active == "places" && ActiveClass}>
                 <PlaceMenu {...this.props}/>
             </Menu.SubMenu>
 
-            <Menu.SubMenu title={<><RecordsIcon/> Records</>} className={this.props.active == "records" && ActiveClass}>
+            <Menu.SubMenu
+                title={<a href="/records"><RecordsIcon/> Records</a>}
+                className={this.props.active == "records" && ActiveClass}>
                 <RecordMenu {...this.props}/>
             </Menu.SubMenu>
 
