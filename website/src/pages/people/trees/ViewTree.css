@@ -11,4 +11,5 @@
 
 .viewTree .submenu .control {
     margin-left: 32px;
+    cursor: pointer;
 }
