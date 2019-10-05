@@ -34,6 +34,10 @@ export function protoPost<P extends Message, R extends Message>(url: string, ent
     return protoGet(url, decode, {body: writer.getResultBuffer(), method: "POST", consumeHeader: "protobuf"});
 }
 
+export function protoStringPost<R extends Message>(url: string, entity: string, decode: (bytes: Uint8Array) => R): Promise<R> {
+    return protoGet(url, decode, {body: entity, method: "POST"});
+}
+
 export function protoDelete<R extends Message>(url: string, decode: (bytes: Uint8Array) => R): Promise<R> {
     return protoGet(url, decode, {method: "DELETE"});
 }

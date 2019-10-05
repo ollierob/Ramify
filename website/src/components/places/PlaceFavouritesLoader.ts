@@ -1,35 +1,35 @@
 import {PlaceId} from "./Place";
-import {protoDelete, protoGet, protoPost} from "../fetch/ProtoFetch";
-import {PlaceIdList} from "../../protobuf/generated/place_pb";
+import {protoDelete, protoGet, protoPost, protoStringPost} from "../fetch/ProtoFetch";
+import {Place, PlaceList as PlaceListProto} from "../../protobuf/generated/place_pb";
 
 export interface PlaceFavouritesLoader {
 
-    get(): Promise<ReadonlyArray<PlaceId>>
+    get(): Promise<ReadonlyArray<Place.AsObject>>
 
-    add(id: PlaceId): Promise<ReadonlyArray<PlaceId>>
+    add(id: PlaceId): Promise<ReadonlyArray<Place.AsObject>>
 
-    remove(id: PlaceId): Promise<ReadonlyArray<PlaceId>>
+    remove(id: PlaceId): Promise<ReadonlyArray<Place.AsObject>>
 
 }
 
 class ProtoPlaceFavouritesLoader implements PlaceFavouritesLoader {
 
-    get(): Promise<ReadonlyArray<PlaceId>> {
-        return protoGet("/places/favourites/all", PlaceIdList.deserializeBinary).then(readIds);
+    get() {
+        return protoGet("/places/favourites/all", PlaceListProto.deserializeBinary).then(readPlaces);
     }
 
-    add(id: PlaceId): Promise<ReadonlyArray<PlaceId>> {
-        return protoPost("/places/favourites/add", id, (p, w) => w.writeString(p), PlaceIdList.deserializeBinary).then(readIds);
+    add(id: PlaceId) {
+        return protoStringPost("/places/favourites/add", id, PlaceListProto.deserializeBinary).then(readPlaces);
     }
 
-    remove(id: PlaceId): Promise<ReadonlyArray<PlaceId>> {
-        return protoDelete("/places/favourites/remove/" + id, PlaceIdList.deserializeBinary).then(readIds);
+    remove(id: PlaceId) {
+        return protoDelete("/places/favourites/remove/" + id, PlaceListProto.deserializeBinary).then(readPlaces);
     }
 
 }
 
-function readIds(l: PlaceIdList): PlaceId[] {
-    return l ? l.getIdList() : [];
+function readPlaces(l: PlaceListProto): Place.AsObject[] {
+    return l ? l.getPlaceList().map(p => p.toObject()) : [];
 }
 
 export const DEFAULT_PLACE_FAVOURITES_LOADER: PlaceFavouritesLoader = new ProtoPlaceFavouritesLoader();

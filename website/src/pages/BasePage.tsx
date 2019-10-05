@@ -3,14 +3,14 @@ import HeaderMenu, {HeaderMenuType} from "../components/layout/header/HeaderMenu
 import "./Core";
 import {getSessionPlaceHistory} from "../components/places/PlaceHistory";
 import {PlaceList} from "../components/places/Place";
-import {getSessionPlaceFavourites, PlaceFavouritesHandler, SessionPlaceFavouritesHandler} from "../components/places/PlaceFavourites";
+import {PlaceFavouritesHandler, RemotePlaceFavouritesHandler} from "../components/places/PlaceFavourites";
 import {RouteComponentProps} from "react-router";
 
 export type BasePageProps = RouteComponentProps<any>;
 
 export default abstract class BasePage<S = any> extends React.PureComponent<BasePageProps, S> {
 
-    readonly placeFavourites: PlaceFavouritesHandler = SessionPlaceFavouritesHandler;
+    readonly placeFavourites: PlaceFavouritesHandler = RemotePlaceFavouritesHandler;
 
     render() {
 

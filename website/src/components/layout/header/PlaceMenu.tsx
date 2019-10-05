@@ -4,11 +4,15 @@ import {PlaceFavouritesHandler} from "../../places/PlaceFavourites";
 import {NoData} from "../../style/NoData";
 import {Place} from "../../../protobuf/generated/place_pb";
 import {PlaceLink} from "../../places/PlaceLink";
+import {PlaceList} from "../../places/Place";
+import {AsyncData, asyncLoadData} from "../../fetch/AsyncData";
+import {Loading} from "../../style/Loading";
 
 type Props = PlaceFavouritesHandler;
 
 type State = {
-    activeTab?: string;
+    activeTab?: "recent" | "favourites" | "search";
+    favourites: AsyncData<PlaceList>
 }
 
 export class PlaceMenu extends React.PureComponent<Props, State> {
@@ -19,7 +23,10 @@ export class PlaceMenu extends React.PureComponent<Props, State> {
 
     constructor(props) {
         super(props);
-        this.state = {activeTab: "search"};
+        this.state = {
+            activeTab: "search",
+            favourites: {loading: true}
+        };
     }
 
     render() {
@@ -33,7 +40,9 @@ export class PlaceMenu extends React.PureComponent<Props, State> {
                 </Tabs.TabPane>
 
                 <Tabs.TabPane key="favourites" tab={<TabTitle title="Favourites" onMouseover={this.setFavourites}/>}>
-                    <FavouritesList {...this.props}/>
+                    <FavouritesList
+                        favourites={this.state.favourites.data}
+                        loading={this.state.favourites.loading}/>
                 </Tabs.TabPane>
 
                 <Tabs.TabPane key="recent" tab={<TabTitle title="Recent" onMouseover={this.setRecent}/>}>
@@ -46,6 +55,19 @@ export class PlaceMenu extends React.PureComponent<Props, State> {
 
     }
 
+    componentDidMount() {
+        this.loadFavourites();
+    }
+
+    componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>) {
+        if (this.state.activeTab == "favourites" && this.state.activeTab != prevState.activeTab)
+            this.loadFavourites();
+    }
+
+    private loadFavourites() {
+        asyncLoadData(null, this.props.placeFavourites, favourites => this.setState({favourites}));
+    }
+
 }
 
 const TabTitle = (props: {title: React.ReactNode, onMouseover: () => void}) => {
@@ -56,12 +78,13 @@ const RecentList = (props: {}) => {
     return <NoData text="No recent places"/>;
 };
 
-const FavouritesList = (props: PlaceFavouritesHandler) => {
-    const favourites: Place.AsObject[] = [...props.placeFavourites()];
-    if (!favourites.length) return <NoData text="No favourite places"/>;
+const FavouritesList = (props: {favourites: PlaceList, loading: boolean}) => {
+    if (props.loading) return <Loading/>;
+    const favourites = props.favourites;
+    if (!favourites || !favourites.length) return <NoData text="No favourite places"/>;
     return <List
-        dataSource={favourites}
-        renderItem={place => <PlaceListItem place={place}/>}/>;
+        dataSource={[...favourites]}
+        renderItem={place => <PlaceListItem key={place.id} place={place}/>}/>;
 };
 
 const PlaceListItem = (props: {place: Place.AsObject}) => {

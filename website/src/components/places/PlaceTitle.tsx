@@ -5,51 +5,75 @@ import {LinkTags} from "../style/Links";
 import {isPlaceFavourite, PlaceFavouritesHandler} from "./PlaceFavourites";
 import {FavouritesIcon} from "../images/Icons";
 import {Flag} from "../images/Flag";
+import {PlaceList} from "./Place";
 
-type State = {place: Place.AsObject, isFavourite?: boolean}
+type Props = PlaceFavouritesHandler & {
+    place: Place.AsObject,
+    description: PlaceDescription.AsObject;
+}
 
-export const PlaceTitle = (props: {place: Place.AsObject, description: PlaceDescription.AsObject} & PlaceFavouritesHandler) => {
+type State = {
+    favourites: PlaceList;
+    isFavourite?: boolean
+}
 
-    const [state, setState] = React.useState<State>(() => ({
-        place: props.place,
-        isFavourite: props.place && isPlaceFavourite(props.place.id, props.placeFavourites())
-    }));
+export class PlaceTitle extends React.PureComponent<Props, State> {
 
-    const place = props.place;
-    if (!place) return null;
+    private readonly setFavourites = (favourites: PlaceList) => this.setState({favourites});
 
-    if (place != state.place) setState({
-        place: place,
-        isFavourite: isPlaceFavourite(props.place.id, props.placeFavourites())
-    });
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            favourites: []
+        };
+    }
 
-    const isFavourite = state.isFavourite;
+    render() {
 
-    return <>
+        const place = this.props.place;
+        if (!place) return null;
 
-        <Flag iso={place.iso}/>
+        const isFavourite = this.state.isFavourite;
 
-        <b>{place.name}</b>
+        return <>
 
-        {" "}
+            <Flag iso={place.iso}/>
 
-        <span className="unimportant">
-            {placeTypeName(place.type)}
-        </span>
+            <b>{place.name}</b>
 
-        {" "}
+            {" "}
 
-        <FavouritesIcon
-            className={isFavourite && "favourite"}
-            onClick={() => {
-                if (isFavourite) props.removePlaceFavourite(place);
-                else props.addPlaceFavourite(place);
-                setState({place: place, isFavourite: !isFavourite});
-            }}/>
+            <span className="unimportant">
+                {placeTypeName(place.type)}
+            </span>
 
-        <LinkTags
-            links={props.description && props.description.linkList}/>
+            {" "}
 
-    </>;
+            <FavouritesIcon
+                className={isFavourite && "favourite"}
+                onClick={() => {
+                    if (isFavourite) this.props.removePlaceFavourite(place).then(this.setFavourites);
+                    else this.props.addPlaceFavourite(place).then(this.setFavourites);
+                }}/>
+
+            <LinkTags
+                links={this.props.description && this.props.description.linkList}/>
+
+        </>;
+
+    }
+
+    componentDidMount() {
+        this.loadPlaceFavourites();
+    }
+
+    private loadPlaceFavourites() {
+        this.props.placeFavourites().then(this.setFavourites);
+    }
+
+    componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>) {
+        if (this.props.place != prevProps.place || this.state.favourites != prevState.favourites)
+            this.setState({isFavourite: isPlaceFavourite(this.props.place.id, this.state.favourites)});
+    }
 
 };
