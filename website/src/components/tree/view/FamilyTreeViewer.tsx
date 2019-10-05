@@ -20,9 +20,13 @@ type Ranking = {
     ranks: {[rank: number]: string[]}
 }
 
-type State = Ranking;
+type State = Ranking & {
+    dragging?: boolean;
+};
 
 export class FamilyTreeViewer extends React.PureComponent<Props, State> {
+
+    private readonly onDrag = (dragging: boolean) => this.setState({dragging});
 
     constructor(props: Props) {
         super(props);
@@ -34,13 +38,13 @@ export class FamilyTreeViewer extends React.PureComponent<Props, State> {
         return <div
             className={"treeViewer" + (this.props.content ? " content" : "")}>
 
-            <Draggable>
+            <Draggable onDrag={this.onDrag}>
 
                 <div style={{transform: "scale(" + this.props.zoom + ")"}}>
 
                     {integerKeys(this.state.ranks)
                         .sort()
-                        .map(k => <PersonRow key={"row-" + k} line={this.state.ranks[k]} people={this.state.people}/>)}
+                        .map(k => <PersonRow key={"row-" + k} line={this.state.ranks[k]} people={this.state.people} dragging={this.state.dragging}/>)}
 
                 </div>
 
@@ -57,9 +61,9 @@ export class FamilyTreeViewer extends React.PureComponent<Props, State> {
 
 }
 
-const PersonRow = (props: {people: PersonMap, line: string[]}) => {
+const PersonRow = (props: {people: PersonMap, line: string[], dragging: boolean}) => {
     return <div className="row">
-        {props.line.map(id => <PersonCard person={props.people[id]}/>)}
+        {props.line.map(id => <PersonCard person={props.people[id]} dragging={props.dragging}/>)}
     </div>;
 };
 

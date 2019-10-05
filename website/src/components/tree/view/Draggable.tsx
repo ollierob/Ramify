@@ -4,6 +4,7 @@ import {HasClass} from "../../style/HasClass";
 
 type Props = {
     children: React.ReactNode;
+    onDrag?: (dragging: boolean) => void
 }
 
 type State = {
@@ -48,6 +49,11 @@ export default class Draggable extends React.PureComponent<Props, State> {
 
     componentDidMount() {
         this.div.current.addEventListener("selectstart", this.preventDefault);
+    }
+
+    componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>) {
+        if (this.props.onDrag && this.state.dragging != prevState.dragging)
+            this.props.onDrag(this.state.dragging);
     }
 
     private preventDefault(e: Event | MouseEvent) {

@@ -28,7 +28,7 @@ export class ViewTreePage extends PeopleBasePage<State> {
         this.state = {
             treeId: this.readTreeId(),
             tree: {loading: true},
-            zoom: 1
+            zoom: 0.8
         };
     }
 
