@@ -83,6 +83,7 @@ const FavouritesList = (props: {favourites: PlaceList, loading: boolean}) => {
     const favourites = props.favourites;
     if (!favourites || !favourites.length) return <NoData text="No favourite places"/>;
     return <List
+        className="placeFavouritesList"
         dataSource={[...favourites]}
         renderItem={place => <PlaceListItem key={place.id} place={place}/>}/>;
 };

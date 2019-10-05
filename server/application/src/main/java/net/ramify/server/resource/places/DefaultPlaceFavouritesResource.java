@@ -2,6 +2,7 @@ package net.ramify.server.resource.places;
 
 import com.google.common.base.Preconditions;
 import com.google.common.io.Files;
+import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.collection.Places;
 import net.ramify.model.place.provider.PlaceProvider;
@@ -11,6 +12,7 @@ import javax.inject.Singleton;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.Comparator;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -34,8 +36,11 @@ public class DefaultPlaceFavouritesResource implements PlaceFavouritesResource {
     }
 
     private Places places(final Set<PlaceId> placeIds) {
-        final var places = placeIds.stream().map(placeProvider::get).filter(Objects::nonNull).collect(Collectors.toList());
-        return places::iterator;
+        return placeIds.stream()
+                .map(placeProvider::get)
+                .filter(Objects::nonNull)
+                .sorted(Comparator.comparing(Place::name))
+                ::iterator;
     }
 
     private Set<PlaceId> placeIds() {
