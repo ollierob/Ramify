@@ -1,3 +1,10 @@
+.treeViewer.content {
+    top: 48px !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+}
+
 .treeViewer .drag {
     position: absolute;
     left: 0;
@@ -5,4 +12,28 @@
     top: 0;
     bottom: 0;
     overflow: hidden;
+}
+
+.treeViewer .personCard {
+    display: inline-block;
+    background-color: white;
+    width: 150px;
+    height: 200px;
+    cursor: pointer;
+}
+
+.treeViewer .personCard.unknown {
+    border: 1px solid #AAAAAA;
+}
+
+.treeViewer .personCard.male {
+    border: 1px solid #81a2ff;
+}
+
+.treeViewer .personCard.female {
+    border: 1px solid #ffb0da;
+}
+
+.treeViewer .personCard .name {
+    padding: 4px;
 }
