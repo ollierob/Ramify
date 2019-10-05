@@ -1,9 +1,10 @@
 import {Relationship} from "../../../protobuf/generated/relationship_pb";
 import {ensure, StringMap} from "../../Maps";
 import {isHorizontal, isParentChild} from "../../relationship/Relationship";
+import {PersonId} from "../../people/PersonId";
 
-type Ranking = {[rank: number]: string[]}
-type TreeNode = {id: string, parents: TreeNode[], children: TreeNode[], siblings: TreeNode[], ancestors?: number, generation?: number};
+type Ranking = {[rank: number]: PersonId[]}
+type TreeNode = {id: PersonId, parents: TreeNode[], children: TreeNode[], siblings: TreeNode[], ancestors?: number, generation?: number};
 
 export function rank(relationships: ReadonlyArray<Relationship.AsObject>): Ranking {
 
@@ -26,7 +27,7 @@ export function rank(relationships: ReadonlyArray<Relationship.AsObject>): Ranki
 
 }
 
-function createNode(id: string): TreeNode {
+function createNode(id: PersonId): TreeNode {
     return {id, parents: [], children: [], siblings: []};
 }
 

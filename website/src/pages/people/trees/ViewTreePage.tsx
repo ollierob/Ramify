@@ -35,7 +35,7 @@ export class ViewTreePage extends PeopleBasePage<State> {
     body() {
         return <div className="viewTree">
             <FamilyTreeSubmenu tree={this.state.tree} zoom={this.state.zoom} setZoom={this.setZoom}/>
-            <FamilyTreeViewer family={this.state.family} content zoom={this.state.zoom}/>
+            <FamilyTreeViewer treeId={this.state.treeId} family={this.state.family} content zoom={this.state.zoom}/>
         </div>;
     }
 

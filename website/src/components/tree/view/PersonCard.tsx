@@ -4,8 +4,12 @@ import {nameToString} from "../../people/Name";
 import {HasClass} from "../../style/HasClass";
 import {birthYear, deathYear} from "../../event/Event";
 import {Icon, Popover} from "antd";
+import {personSearchHref} from "../../people/PeopleLinks";
+import {PersonId} from "../../people/PersonId";
+import {FamilyTreeId} from "../FamilyTree";
 
 type Props = HasClass & {
+    treeId: FamilyTreeId;
     person: Person.AsObject
     dragging?: boolean
 }
@@ -35,7 +39,7 @@ export class PersonCard extends React.PureComponent<Props, State> {
             trigger="click"
             visible={this.state.popoverVisible}
             onVisibleChange={this.setPopoverVisible}
-            content={<PersonControls/>}>
+            content={<PersonControls personId={person.id} treeId={this.props.treeId}/>}>
 
             <div
                 style={this.props.style}
@@ -91,13 +95,15 @@ const PersonDates = (props: {birthYear: number, deathYear: number, flourishedYea
 };
 
 
-const PersonControls = (props: {}) => {
+const PersonControls = (props: {personId: PersonId, treeId: FamilyTreeId}) => {
     return <>
         <div>
             <Icon type="profile"/> View profile
         </div>
         <div>
-            <Icon type="search"/> Search records
+            <a href={personSearchHref(props.personId, props.treeId)}>
+                <Icon type="search"/> Search records
+            </a>
         </div>
         <div>
             <Icon type="swap"/> Merge

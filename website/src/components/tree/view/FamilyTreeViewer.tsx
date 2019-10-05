@@ -6,18 +6,21 @@ import {Person} from "../../../protobuf/generated/person_pb";
 import {PersonCard} from "./PersonCard";
 import {integerKeys, stringMap, StringMap} from "../../Maps";
 import {rank} from "./FamilyTreeRanking";
+import {PersonId} from "../../people/PersonId";
+import {FamilyTreeId} from "../FamilyTree";
 
 type Props = {
     content?: boolean;
     family: Family.AsObject;
     zoom: number;
+    treeId: FamilyTreeId;
 }
 
 type PersonMap = StringMap<Person.AsObject>
 
 type Ranking = {
     people: PersonMap
-    ranks: {[rank: number]: string[]}
+    ranks: {[rank: number]: PersonId[]}
 }
 
 type State = Ranking & {
@@ -42,9 +45,12 @@ export class FamilyTreeViewer extends React.PureComponent<Props, State> {
 
                 <div style={{transform: "scale(" + this.props.zoom + ")"}}>
 
-                    {integerKeys(this.state.ranks)
-                        .sort()
-                        .map(k => <PersonRow key={"row-" + k} line={this.state.ranks[k]} people={this.state.people} dragging={this.state.dragging}/>)}
+                    {integerKeys(this.state.ranks).sort().map(k => <PersonRow
+                        key={"row-" + k}
+                        line={this.state.ranks[k]}
+                        treeId={this.props.treeId}
+                        people={this.state.people}
+                        dragging={this.state.dragging}/>)}
 
                 </div>
 
@@ -61,9 +67,9 @@ export class FamilyTreeViewer extends React.PureComponent<Props, State> {
 
 }
 
-const PersonRow = (props: {people: PersonMap, line: string[], dragging: boolean}) => {
+const PersonRow = (props: {treeId: FamilyTreeId, people: PersonMap, line: PersonId[], dragging: boolean}) => {
     return <div className="row">
-        {props.line.map(id => <PersonCard person={props.people[id]} dragging={props.dragging}/>)}
+        {props.line.map(id => <PersonCard treeId={props.treeId} person={props.people[id]} dragging={props.dragging}/>)}
     </div>;
 };
 
