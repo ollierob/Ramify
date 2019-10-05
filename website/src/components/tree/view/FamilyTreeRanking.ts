@@ -21,6 +21,7 @@ export function rank(relationships: ReadonlyArray<Relationship.AsObject>): Ranki
 
     const allNodes = Object.values(nodes);
     allNodes.forEach(countAncestors);
+    allNodes.forEach(computeGeneration);
     return computeDepths(allNodes);
 
 }
@@ -46,7 +47,7 @@ function computeDepths(nodes: TreeNode[]): Ranking {
     //FIXME this needs to be multi-pass, should compute "generation"
     const ranking: Ranking = {};
     nodes.forEach(node => {
-        const rank = node.ancestors || 0;
+        const rank = node.generation || 0;
         let atRank = ranking[rank];
         if (atRank == null) atRank = ranking[rank] = [];
         atRank.push(node.id);
@@ -60,4 +61,11 @@ function countAncestors(node: TreeNode): number {
     const count = 1 + Math.max(...node.parents.map(countAncestors));
     node.ancestors = count;
     return count;
+}
+
+function computeGeneration(node: TreeNode) {
+    node.generation = node.ancestors;
+    if (!node.siblings.length) return;
+    const maxAncestors = Math.max(...node.siblings.map(s => s.generation || s.ancestors));
+    if (maxAncestors > node.generation) node.generation = maxAncestors;
 }

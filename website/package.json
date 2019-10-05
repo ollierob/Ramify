@@ -53,6 +53,7 @@
   },
   "scripts": {
     "build-dev": "webpack -d",
+    "test": "jest",
     "protoc": "mkdir -p src/protobuf/generated && protoc --plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts --js_out=import_style=commonjs,binary:src/protobuf/generated --ts_out=service=false:src/protobuf/generated --proto_path=target/protos target/protos/*.proto"
   }
 }
