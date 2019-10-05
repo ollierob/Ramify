@@ -1,4 +1,4 @@
-import {Date as DateProto, DateRange as DateRangeProto} from "../../protobuf/generated/date_pb";
+import {Date as DateProto, DateRange, DateRange as DateRangeProto} from "../../protobuf/generated/date_pb";
 
 export type DateRange = DateRangeProto.AsObject;
 export type YearRange = {from: number, to: number}
@@ -37,4 +37,18 @@ export function sortDates(d1: DateProto.AsObject, d2: DateProto.AsObject): numbe
     if (d1.year != d2.year) return d1.year - d2.year;
     if (d1.month != d2.month) return d1.month - d2.month;
     return d1.day - d2.day;
+}
+
+export function earliestYear(date: DateRangeProto.AsObject): number {
+    if (!date) return null;
+    if (date.earliest) return date.earliest.year;
+    if (date.latest) return date.latest.year;
+    return null;
+}
+
+export function latestYear(date: DateRangeProto.AsObject): number {
+    if (!date) return null;
+    if (date.latest) return date.latest.year;
+    if (date.earliest) return date.earliest.year;
+    return null;
 }

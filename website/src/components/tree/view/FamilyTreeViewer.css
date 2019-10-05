@@ -36,6 +36,11 @@
 
 .treeViewer .personCard .name {
     padding: 4px;
-    text-align: center;
     font-weight: bold;
+    text-align: center;
+}
+
+.treeViewer .personCard .dates {
+    padding: 0 4px 4px 4px;
+    text-align: center;
 }

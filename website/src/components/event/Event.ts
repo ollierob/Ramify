@@ -1,5 +1,6 @@
 import {Event} from "../../protobuf/generated/event_pb";
 import {RecordType, recordTypeFromValue} from "../records/RecordType";
+import {earliestYear, latestYear} from "../date/DateRange";
 
 export type EventType = RecordType;
 
@@ -35,4 +36,16 @@ export function isDeathOrBurialEvent(event: Event.AsObject): boolean {
 
 export function eventType(event: Event.AsObject): EventType {
     return event ? recordTypeFromValue(event.type) : null;
+}
+
+export function birthYear(events: ReadonlyArray<Event.AsObject>): number {
+    const birth = events.find(isBirthEvent);
+    if (!birth) return null;
+    return earliestYear(birth.date);
+}
+
+export function deathYear(events: ReadonlyArray<Event.AsObject>): number {
+    const death = events.find(isDeathEvent);
+    if (!death) return null;
+    return latestYear(death.date);
 }
