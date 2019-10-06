@@ -4,6 +4,7 @@ import com.google.common.graph.ImmutableNetwork;
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
 import net.ramify.model.person.Person;
+import net.ramify.model.person.provider.PersonProvider;
 import net.ramify.model.relationship.Relationship;
 import net.ramify.model.relationship.RelationshipFactory;
 
@@ -16,11 +17,19 @@ public class FamilyBuilder {
         return this;
     }
 
-    public FamilyBuilder addRelationship(final Person from, final Person to, final RelationshipFactory relationship) {
+    public FamilyBuilder addRelationship(final Person from, final Person to, final RelationshipFactory factory) {
+        return this.addRelationship(from, to, factory.relationshipBetween(from, to));
+    }
+
+    public FamilyBuilder addRelationship(final Relationship relationship, final PersonProvider people) {
+        return this.addRelationship(people.require(relationship.fromId()), people.require(relationship.toId()), relationship);
+    }
+
+    private FamilyBuilder addRelationship(final Person from, final Person to, final Relationship relationship) {
         if (from == to) return this;
         network.addNode(from);
         network.addNode(to);
-        network.addEdge(from, to, relationship.relationshipBetween(from, to));
+        network.addEdge(from, to, relationship);
         return this;
     }
 

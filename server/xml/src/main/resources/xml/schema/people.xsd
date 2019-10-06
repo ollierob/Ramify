@@ -67,9 +67,9 @@
 
             <xs:enumeration value="female"/>
 
-            <xs:enumeration value="male"/>
-
             <xs:enumeration value="unknown"/>
+
+            <xs:enumeration value="male"/>
 
         </xs:restriction>
 

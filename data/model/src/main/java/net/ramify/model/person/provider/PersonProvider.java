@@ -9,6 +9,8 @@ import javax.annotation.Nonnull;
 public interface PersonProvider extends Provider<PersonId, Person> {
 
     @Nonnull
-    PersonId createPerson();
+    default PersonId createId() {
+        return PersonId.random();
+    }
 
 }
