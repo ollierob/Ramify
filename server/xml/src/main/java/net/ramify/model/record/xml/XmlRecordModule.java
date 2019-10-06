@@ -49,9 +49,9 @@ public class XmlRecordModule extends PrivateModule {
     @Singleton
     @Named("data")
     File provideXmlDirectory() throws URISyntaxException {
-        final var places = XmlPlaceModule.class.getResource("/xml/data");
-        Preconditions.checkState(places != null, "Could not load XML data");
-        return new File(places.toURI());
+        final var data = XmlPlaceModule.class.getResource("/xml/data");
+        Preconditions.checkState(data != null, "Could not load XML data");
+        return new File(data.toURI());
     }
 
     @Provides

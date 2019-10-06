@@ -92,11 +92,11 @@
                                 </transformSchema>
                             </transformSchemas>
                             <schemaSourceExcludeFilters>
-                                <myExcludes
-                                        implementation="org.codehaus.mojo.jaxb2.shared.filters.pattern.PatternFileFilter">
+                                <myExcludes implementation="org.codehaus.mojo.jaxb2.shared.filters.pattern.PatternFileFilter">
                                     <patterns>
                                         <pattern>.*Module.java</pattern>
                                         <pattern>.*Provider.java</pattern>
+                                        <pattern>.*Context.java</pattern>
                                     </patterns>
                                 </myExcludes>
                             </schemaSourceExcludeFilters>

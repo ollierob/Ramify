@@ -31,9 +31,9 @@
 
                 <xs:sequence>
 
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="father" type="xs:string"/>
+                    <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="parent" type="xs:string"/>
 
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="spouse" type="xs:string"/>
+                    <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="spouse" type="xs:string"/>
 
                 </xs:sequence>
 

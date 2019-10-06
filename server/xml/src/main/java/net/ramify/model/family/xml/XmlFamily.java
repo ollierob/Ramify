@@ -42,7 +42,8 @@ public class XmlFamily {
         people.forEach(xmlPerson -> {
             final var self = provider.require(xmlPerson.personId());
             final var relationships = xmlPerson.relationships(self, provider);
-            relationships.forEach(relationship -> builder.addRelationship(relationship, provider));
+            if (relationships.isEmpty()) builder.addPerson(self);
+            else relationships.forEach(relationship -> builder.addRelationship(relationship, provider));
         });
         return builder.build();
     }

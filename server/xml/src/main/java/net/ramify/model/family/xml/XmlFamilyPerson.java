@@ -28,10 +28,10 @@ public class XmlFamilyPerson extends XmlPersonRecord {
     @XmlAttribute(name = "id", required = true)
     private String id;
 
-    @XmlElement(name = "father")
+    @XmlElement(name = "parent", namespace = XmlFamily.NAMESPACE)
     private List<String> parents;
 
-    @XmlElement(name = "spouse")
+    @XmlElement(name = "spouse", namespace = XmlFamily.NAMESPACE)
     private List<String> spouses;
 
     @Override
