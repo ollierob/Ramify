@@ -3,6 +3,8 @@ import {Event} from "../../protobuf/generated/event_pb";
 import {HasClass} from "../style/HasClass";
 import {Card} from "antd";
 import {FormattedDateRange} from "../date/FormattedDateRange";
+import {eventType, isBirthEvent, isDeathEvent, isDeathOrBurialEvent, isPostDeathEvent} from "./Event";
+import {isBirthOrBaptismRecord} from "../records/RecordType";
 
 type Props = HasClass & {
     events: ReadonlyArray<Event.AsObject>
@@ -31,7 +33,7 @@ const EventBox = (props: {event: Event.AsObject}) => {
 
     const event = props.event;
 
-    return <Card className="event">
+    return <Card className={"event " + eventClass(event)}>
         <div className="top">
             <div className="title">
                 {event.title}
@@ -43,3 +45,10 @@ const EventBox = (props: {event: Event.AsObject}) => {
     </Card>;
 
 };
+
+function eventClass(event: Event.AsObject): string {
+    if (isBirthEvent(event)) return "birth";
+    if (isDeathEvent(event)) return "death";
+    if (isPostDeathEvent(event)) return "postDeath";
+    return "postBirth";
+}

@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import net.ramify.model.date.InYears;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.type.birth.GenericBirth;
+import net.ramify.model.event.type.burial.ChurchBurial;
 import net.ramify.model.event.type.death.GenericDeath;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
@@ -14,6 +15,7 @@ import net.ramify.model.family.tree.FamilyTreeProvider;
 import net.ramify.model.family.tree.SingletonFamilyTree;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
+import net.ramify.model.person.age.Age;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.name.ForenameSurname;
 import net.ramify.model.record.GenericRecordPerson;
@@ -85,6 +87,7 @@ public class StubFamilyTreeProvider implements FamilyTreeProvider {
         final var events = Sets.<Event>newHashSet();
         if (birthYear > 0) events.add(new GenericBirth(id, new InYears(birthYear)));
         if (deathYear > 0) events.add(new GenericDeath(id, new InYears(deathYear)));
+        if (deathYear > 0) events.add(new ChurchBurial(id, new InYears(deathYear), Age.ofYears(deathYear - birthYear)));
         return events;
     }
 

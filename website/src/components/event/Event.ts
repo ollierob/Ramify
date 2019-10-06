@@ -34,6 +34,17 @@ export function isDeathOrBurialEvent(event: Event.AsObject): boolean {
     return isDeathEvent(event) || isBurialEvent(event);
 }
 
+export function isPostDeathEvent(event: Event.AsObject): boolean {
+    switch (eventType(event)) {
+        case "BURIAL":
+        case "PROBATE":
+        case "WILL":
+            return true;
+        default:
+            return false;
+    }
+}
+
 export function eventType(event: Event.AsObject): EventType {
     return event ? recordTypeFromValue(event.type) : null;
 }
