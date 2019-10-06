@@ -12,3 +12,32 @@
 .personProfile .submenu .person {
     margin-left: 32px;
 }
+
+.personProfile .profile .gallery {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 300px;
+}
+
+.personProfile .profile .eventList {
+    position: absolute;
+    left: 306px;
+    top: 0;
+    width: calc(50% - 150px);
+}
+
+.personProfile .profile .eventList .event .top {
+    font-size: 16px;
+}
+
+.personProfile .profile .eventList .event .title {
+    display: inline-block;
+    font-weight: bold;
+}
+
+.personProfile .profile .eventList .event .date {
+    color: #AAAAAA !important;
+    display: inline-block;
+    margin-left: .5em
+}

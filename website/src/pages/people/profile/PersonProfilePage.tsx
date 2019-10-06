@@ -9,6 +9,7 @@ import {FamilyTree} from "../../../protobuf/generated/family_pb";
 import {FamilyTreeId, findPersonInTree} from "../../../components/tree/FamilyTree";
 import {BasePageProps} from "../../BasePage";
 import {DEFAULT_FAMILY_TREE_LOADER} from "../../../components/tree/FamilyTreeLoader";
+import {PersonProfile} from "./PersonProfile";
 
 type Props = BasePageProps;
 
@@ -39,6 +40,9 @@ export default class PersonProfilePage extends PeopleBasePage<State> {
             <PersonProfileSubmenu
                 person={this.state.person}
                 tree={this.state.tree.data}
+                loading={this.state.tree.loading}/>
+            <PersonProfile
+                person={this.state.person}
                 loading={this.state.tree.loading}/>
         </div>;
     }

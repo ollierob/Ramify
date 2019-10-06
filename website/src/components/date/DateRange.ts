@@ -1,10 +1,10 @@
-import {Date as DateProto, DateRange, DateRange as DateRangeProto} from "../../protobuf/generated/date_pb";
+import {Date as DateProto, DateRange as DateRangeProto} from "../../protobuf/generated/date_pb";
 
 export type DateRange = DateRangeProto.AsObject;
 export type YearRange = {from: number, to: number}
 
 export function yearEquals(d1: DateProto.AsObject, d2: DateProto.AsObject): boolean {
-    return d1.year == d2.year;
+    return d1 && d2 && d1.year == d2.year;
 }
 
 export function monthsEqual(d1: DateProto.AsObject, d2: DateProto.AsObject): boolean {

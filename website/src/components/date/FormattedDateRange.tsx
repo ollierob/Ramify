@@ -13,8 +13,8 @@ export const FormattedDateRange = (props: {date: DateRangeProto.AsObject, words?
     if (!date.earliest && !date.latest) return <>{words.unknown}</>;
     if (!date.earliest && date.latest) return <>{words.before}{format(date.latest)}</>;
     if (date.earliest && !date.latest) return <>{words.after}{format(date.earliest)}</>;
-    if (props.accuracy == "year" && yearEquals(date.earliest, date.latest)) return <>{words.in}{format(date.earliest)}</>;
     if (datesEqual(date.earliest, date.latest)) return <>{words.on}{format(date.earliest)}</>;
+    if (isInYear(date)) return <>{words.in}{date.earliest.year}</>;
     return <>{format(date.earliest)} - {format(date.latest)}</>;
 };
 
@@ -27,6 +27,14 @@ function dateFormatter(accuracy: "year" | "month" | "day"): DateFormatter {
         case "day":
             return DayMonthYearFormatter;
     }
+}
+
+function isInYear(date: DateRangeProto.AsObject): boolean {
+    return yearEquals(date.earliest, date.latest)
+        && date.earliest.month == 1
+        && date.earliest.day == 1
+        && date.latest.month == 12
+        && date.latest.day == 31;
 }
 
 export type PrefixWords = {

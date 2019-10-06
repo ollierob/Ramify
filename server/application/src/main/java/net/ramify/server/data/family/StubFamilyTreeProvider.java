@@ -1,5 +1,10 @@
 package net.ramify.server.data.family;
 
+import com.google.common.collect.Sets;
+import net.ramify.model.date.InYears;
+import net.ramify.model.event.Event;
+import net.ramify.model.event.type.birth.GenericBirth;
+import net.ramify.model.event.type.death.GenericDeath;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.family.tree.FamilyTree;
@@ -28,9 +33,9 @@ public class StubFamilyTreeProvider implements FamilyTreeProvider {
 
     static {
         final var builder = new FamilyBuilder();
-        final var grandfather = male("Grandaddy");
+        final var grandfather = male("Grandaddy", 1927, 1996);
         builder.addPerson(grandfather);
-        final var father = male("Daddy");
+        final var father = male("Daddy", 1957);
         builder.addPerson(father);
         builder.addRelationship(grandfather, father, ParentChild::new);
         final var mother = mother();
@@ -44,12 +49,17 @@ public class StubFamilyTreeProvider implements FamilyTreeProvider {
         DEFAULT_TREE = new SingletonFamilyTree(meta(family), family);
     }
 
-    private static Person male(final String name) {
+    private static Person male(final String name, final int birthYear) {
+        return male(name, birthYear, -1);
+    }
+
+    private static Person male(final String name, final int birthYear, final int deathYear) {
+        final var id = new PersonId(name);
         return new GenericRecordPerson(
-                new PersonId(name),
+                id,
                 new ForenameSurname(name, "Robertshaw"),
                 Gender.MALE,
-                Collections.emptySet(),
+                events(id, birthYear, deathYear),
                 null);
     }
 
@@ -69,6 +79,13 @@ public class StubFamilyTreeProvider implements FamilyTreeProvider {
                 Gender.MALE,
                 Collections.emptySet(),
                 null);
+    }
+
+    private static Set<Event> events(final PersonId id, final int birthYear, final int deathYear) {
+        final var events = Sets.<Event>newHashSet();
+        if (birthYear > 0) events.add(new GenericBirth(id, new InYears(birthYear)));
+        if (deathYear > 0) events.add(new GenericDeath(id, new InYears(deathYear)));
+        return events;
     }
 
     private static FamilyTreeMeta meta(final Family family) {
