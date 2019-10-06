@@ -33,7 +33,7 @@ export default class RecordSetCard extends React.PureComponent<Props> {
         const relatives: RecordSetRelatives.AsObject = this.props.relatives.data || {childList: [], nextList: []};
 
         return <Card
-            className="info"
+            className="large info"
             title={<Title recordSet={recordSet}/>}>
 
             {recordSet && <>

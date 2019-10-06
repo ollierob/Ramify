@@ -63,8 +63,8 @@
     right: 0;
 }
 
-.recordSet .info .ant-card-head-title {
-    font-size: 1.5em;
+.recordSet.leftRest .info .ant-card-head-title {
+    font-weight: normal;
 }
 
 .recordSet .info {

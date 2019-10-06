@@ -15,8 +15,8 @@ export class EventList extends React.PureComponent<Props> {
         const events = this.props.events || [];
 
         return <Card
-            title="Events"
             className={"eventList " + (this.props.className || "")}
+            title="Events"
             style={this.props.style}>
 
             {events.map(e => <EventBox event={e}/>)}

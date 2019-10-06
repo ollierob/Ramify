@@ -17,9 +17,12 @@ export class PersonProfile extends React.PureComponent<Props> {
 
             {this.props.person && <>
 
-                <Gallery/>
+                <Gallery
+                    className="large"/>
 
-                <EventList events={this.props.person.eventsList}/>
+                <EventList
+                    className="large"
+                    events={this.props.person.eventsList}/>
 
             </>}
 

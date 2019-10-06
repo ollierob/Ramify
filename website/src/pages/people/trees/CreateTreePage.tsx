@@ -1,7 +1,6 @@
 import * as React from "react";
 import {ManageTreePage} from "./ManageTreePage";
-import {Button, Card, Form, Icon, Input, Tabs} from "antd";
-import {CSSProperties} from "react";
+import {Button, Card, Input, Tabs} from "antd";
 import {EditIcon, PeopleIcon} from "../../../components/images/Icons";
 
 export class CreateTreePage extends ManageTreePage {
