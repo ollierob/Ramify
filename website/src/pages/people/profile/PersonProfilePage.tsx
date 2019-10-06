@@ -5,7 +5,7 @@ import {PersonProfileSubmenu} from "./PersonProfileSubmenu";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {Person} from "../../../protobuf/generated/person_pb";
 import {PersonId} from "../../../components/people/PersonId";
-import {FamilyTree} from "../../../protobuf/generated/family_pb";
+import {Family, FamilyTree} from "../../../protobuf/generated/family_pb";
 import {FamilyTreeId, findPersonInTree} from "../../../components/tree/FamilyTree";
 import {BasePageProps} from "../../BasePage";
 import {DEFAULT_FAMILY_TREE_LOADER} from "../../../components/tree/FamilyTreeLoader";
@@ -21,6 +21,7 @@ type IdState = {
 type State = IdState & {
     tree: AsyncData<FamilyTree.AsObject>
     person?: Person.AsObject
+    family?: Family.AsObject;
 }
 
 export default class PersonProfilePage extends PeopleBasePage<State> {
@@ -43,6 +44,7 @@ export default class PersonProfilePage extends PeopleBasePage<State> {
                 loading={this.state.tree.loading}/>
             <PersonProfile
                 person={this.state.person}
+                family={this.state.family}
                 loading={this.state.tree.loading}/>
         </div>;
     }
@@ -63,8 +65,10 @@ export default class PersonProfilePage extends PeopleBasePage<State> {
             this.setState({...this.readIds()});
         if (this.state.personId != prevState.personId || this.state.treeId != prevState.treeId)
             this.loadTree(this.state.treeId, this.state.personId);
-        if (this.state.tree.data && this.state.tree.data != prevState.tree.data)
-            this.setState({person: findPersonInTree(this.state.personId, this.state.tree.data)});
+        if (this.state.tree.data && this.state.tree.data != prevState.tree.data) {
+            const find = findPersonInTree(this.state.personId, this.state.tree.data);
+            this.setState({family: find && find.family, person: find && find.person});
+        }
     }
 
     private loadTree(treeId = this.state.treeId, personId = this.state.personId) {

@@ -24,7 +24,8 @@
     position: absolute;
     left: 306px;
     top: 0;
-    width: calc(50% - 150px);
+    width: calc(100% - 712px);
+    min-width: 400px;
 }
 
 .personProfile .profile .eventList .event {
@@ -52,4 +53,11 @@
     color: #AAAAAA !important;
     display: inline-block;
     margin-left: .5em
+}
+
+.personProfile .profile .relatives {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 400px;
 }

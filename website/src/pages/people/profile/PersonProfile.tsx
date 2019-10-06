@@ -1,12 +1,14 @@
 import * as React from "react";
 import {Person} from "../../../protobuf/generated/person_pb";
 import {EventList} from "../../../components/event/EventList";
-import {HasClass} from "../../../components/style/HasClass";
 import {Card} from "antd";
+import {Family} from "../../../protobuf/generated/family_pb";
+import {Event} from "../../../protobuf/generated/event_pb";
 
 type Props = {
-    person: Person.AsObject
-    loading: boolean
+    person: Person.AsObject;
+    family: Family.AsObject;
+    loading: boolean;
 }
 
 export class PersonProfile extends React.PureComponent<Props> {
@@ -17,12 +19,11 @@ export class PersonProfile extends React.PureComponent<Props> {
 
             {this.props.person && <>
 
-                <Gallery
-                    className="large"/>
+                <ProfileGallery/>
 
-                <EventList
-                    className="large"
-                    events={this.props.person.eventsList}/>
+                <ProfileEvents events={this.props.person.eventsList}/>
+
+                <ProfileRelatives family={this.props.family}/>
 
             </>}
 
@@ -32,11 +33,26 @@ export class PersonProfile extends React.PureComponent<Props> {
 
 }
 
-const Gallery = (props: HasClass) => {
+const ProfileGallery = () => {
     return <Card
         title="Gallery"
-        className={"gallery " + (props.className || "")}
-        style={props.style}>
+        className="gallery large">
+
+    </Card>;
+};
+
+const ProfileEvents = (props: {events: ReadonlyArray<Event.AsObject>}) => {
+    return <Card
+        title="Events"
+        className="eventList large">
+        <EventList events={props.events}/>
+    </Card>;
+};
+
+const ProfileRelatives = (props: {family: Family.AsObject}) => {
+    return <Card
+        title="Relatives"
+        className="relatives large">
 
     </Card>;
 };
