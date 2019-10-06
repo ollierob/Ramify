@@ -1,52 +1,76 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ramify.net/families" targetNamespace="http://ramify.net/families" version="1.0">
-    
-  <xs:element name="father" type="tns:xmlFather"/>
-    
-  <xs:element name="mother" type="tns:xmlMother"/>
-    
-  <xs:complexType name="xmlFamily">
-        
-    <xs:sequence/>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlFather">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlRelationship">
-                
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/records" xmlns:tns="http://ramify.net/families" targetNamespace="http://ramify.net/families" version="1.0">
+
+    <xs:import namespace="http://ramify.net/records" schemaLocation="records.xsd"/>
+
+    <xs:element name="father" type="tns:xmlFather"/>
+
+    <xs:element name="mother" type="tns:xmlMother"/>
+
+    <xs:element name="person" type="tns:xmlFamilyPerson"/>
+
+    <xs:complexType name="xmlFamily">
+
         <xs:sequence/>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType abstract="true" name="xmlRelationship">
-        
-    <xs:sequence/>
-        
-    <xs:attribute name="name" type="xs:string"/>
-        
-    <xs:attribute name="deceased" type="xs:boolean"/>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlMother">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlRelationship">
-                
+
+    </xs:complexType>
+
+    <xs:complexType name="xmlFamilyPerson">
+
+        <xs:complexContent>
+
+            <xs:extension base="ns1:xmlPersonRecord">
+
+                <xs:sequence/>
+
+                <xs:attribute name="id" type="xs:string" use="required"/>
+
+                <xs:attribute name="father" type="xs:string"/>
+
+                <xs:attribute name="mother" type="xs:string"/>
+
+            </xs:extension>
+
+        </xs:complexContent>
+
+    </xs:complexType>
+
+    <xs:complexType name="xmlFather">
+
+        <xs:complexContent>
+
+            <xs:extension base="tns:xmlRelationship">
+
+                <xs:sequence/>
+
+            </xs:extension>
+
+        </xs:complexContent>
+
+    </xs:complexType>
+
+    <xs:complexType abstract="true" name="xmlRelationship">
+
         <xs:sequence/>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-  
+
+        <xs:attribute name="name" type="xs:string"/>
+
+        <xs:attribute name="deceased" type="xs:boolean"/>
+
+    </xs:complexType>
+
+    <xs:complexType name="xmlMother">
+
+        <xs:complexContent>
+
+            <xs:extension base="tns:xmlRelationship">
+
+                <xs:sequence/>
+
+            </xs:extension>
+
+        </xs:complexContent>
+
+    </xs:complexType>
+
 </xs:schema>

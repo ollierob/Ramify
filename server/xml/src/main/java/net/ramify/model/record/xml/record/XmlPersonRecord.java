@@ -1,6 +1,7 @@
 package net.ramify.model.record.xml.record;
 
 import com.google.common.collect.Sets;
+import net.ramify.model.ParserContext;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.type.Birth;
@@ -16,7 +17,6 @@ import net.ramify.model.person.xml.XmlGender;
 import net.ramify.model.person.xml.XmlName;
 import net.ramify.model.record.GenericRecordPerson;
 import net.ramify.model.record.RecordId;
-import net.ramify.model.record.xml.RecordContext;
 import net.ramify.utils.objects.Consumers;
 import net.ramify.utils.objects.Functions;
 
@@ -51,7 +51,7 @@ public class XmlPersonRecord extends XmlRecord {
     @XmlElementRef(required = false)
     private XmlAge complexAge;
 
-    public Person person(final DateRange date, final RecordContext context) {
+    protected Person person(final DateRange date, final ParserContext context) {
         final var id = this.personId();
         final var name = this.name(context.nameParser());
         final var gender = this.gender();
