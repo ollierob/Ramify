@@ -16,6 +16,10 @@ public interface HasPeople extends HasEvents {
     @Nonnull
     Set<? extends Person> people();
 
+    default int numPeople() {
+        return this.people().size();
+    }
+
     default boolean has(@Nonnull final PersonId id) {
         return IterableUtils.any(this.people(), p -> id.equals(p.personId()));
     }

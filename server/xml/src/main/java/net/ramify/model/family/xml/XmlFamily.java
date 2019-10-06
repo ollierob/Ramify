@@ -11,10 +11,12 @@ import net.ramify.model.person.provider.PersonProvider;
 
 import javax.annotation.CheckForNull;
 import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.util.List;
 import java.util.Map;
 
+@XmlRootElement(namespace = XmlFamily.NAMESPACE, name = "family")
 public class XmlFamily {
 
     public static final String NAMESPACE = "http://ramify.net/families";

@@ -3,6 +3,10 @@
 
     <xs:import namespace="http://ramify.net/records" schemaLocation="records.xsd"/>
 
+    <xs:element name="family" type="tns:xmlFamily"/>
+
+    <xs:element name="familyTree" type="tns:familyTree"/>
+
     <xs:element name="father" type="tns:xmlFather"/>
 
     <xs:element name="mother" type="tns:xmlMother"/>
@@ -31,8 +35,6 @@
 
                     <xs:element maxOccurs="unbounded" minOccurs="0" name="spouse" type="xs:string"/>
 
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="child" type="xs:string"/>
-
                 </xs:sequence>
 
                 <xs:attribute name="id" type="xs:string" use="required"/>
@@ -40,6 +42,18 @@
             </xs:extension>
 
         </xs:complexContent>
+
+    </xs:complexType>
+
+    <xs:complexType name="familyTree">
+
+        <xs:sequence>
+
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:family"/>
+
+        </xs:sequence>
+
+        <xs:attribute name="name" type="xs:string" use="required"/>
 
     </xs:complexType>
 
