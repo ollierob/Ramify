@@ -10,7 +10,6 @@ import net.ramify.model.record.GenericRecordPerson;
 import net.ramify.model.record.xml.record.XmlPersonRecord;
 import net.ramify.model.relationship.Relationship;
 import net.ramify.model.relationship.RelationshipFactory;
-import net.ramify.model.relationship.type.ChildParent;
 import net.ramify.model.relationship.type.Married;
 import net.ramify.model.relationship.type.ParentChild;
 
@@ -35,9 +34,6 @@ public class XmlFamilyPerson extends XmlPersonRecord {
     @XmlElement(name = "spouse")
     private List<String> spouses;
 
-    @XmlElement(name = "child")
-    private List<String> children;
-
     @Override
     protected PersonId personId() {
         return new PersonId(id);
@@ -60,7 +56,6 @@ public class XmlFamilyPerson extends XmlPersonRecord {
         final var relationships = Sets.<Relationship>newHashSet();
         relationships.addAll(relatives(self, people, parents, ParentChild::new));
         relationships.addAll(relatives(self, people, spouses, Married::new));
-        relationships.addAll(relatives(self, people, children, ChildParent::new));
         return relationships;
     }
 
@@ -70,7 +65,7 @@ public class XmlFamilyPerson extends XmlPersonRecord {
                 .distinct()
                 .map(PersonId::new)
                 .map(people::require)
-                .map(person -> new ParentChild(person, self))
+                .map(person -> factory.relationshipBetween(person, self))
                 .collect(Collectors.toList());
     }
 
