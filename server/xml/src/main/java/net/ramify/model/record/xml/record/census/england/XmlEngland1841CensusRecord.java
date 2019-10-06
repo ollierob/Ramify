@@ -6,7 +6,7 @@ import net.ramify.model.place.region.County;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.residence.uk.Census1841Record;
 import net.ramify.model.record.xml.RecordContext;
-import net.ramify.model.record.xml.record.XmlPersonRecord;
+import net.ramify.model.record.xml.record.XmlPersonOnDateRecord;
 import net.ramify.model.record.xml.record.XmlRecord;
 import net.ramify.model.record.xml.record.census.XmlCensusRecord;
 import net.ramify.utils.collections.ListUtils;
@@ -41,7 +41,7 @@ public class XmlEngland1841CensusRecord extends XmlCensusRecord {
     }
 
     @XmlType(namespace = XmlRecord.NAMESPACE, name = "census1841EnglandEntry")
-    public static class Individual extends XmlPersonRecord {
+    public static class Individual extends XmlPersonOnDateRecord {
 
         @XmlAttribute(name = "bornInCounty")
         private Boolean bornInCounty;

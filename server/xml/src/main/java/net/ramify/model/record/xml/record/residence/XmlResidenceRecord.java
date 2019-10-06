@@ -13,7 +13,7 @@ import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.residence.GenericLifeEventRecord;
 import net.ramify.model.record.type.LifeEventRecord;
 import net.ramify.model.record.xml.RecordContext;
-import net.ramify.model.record.xml.record.XmlPersonRecord;
+import net.ramify.model.record.xml.record.XmlPersonOnDateRecord;
 import net.ramify.model.record.xml.record.XmlRecord;
 import net.ramify.utils.objects.Functions;
 
@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Set;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "residence")
-public class XmlResidenceRecord extends XmlPersonRecord {
+public class XmlResidenceRecord extends XmlPersonOnDateRecord {
 
     @XmlAttribute(name = "placeId", required = false)
     private String placeId;

@@ -11,7 +11,11 @@
 
     <xs:complexType name="xmlFamily">
 
-        <xs:sequence/>
+        <xs:sequence>
+
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:person"/>
+
+        </xs:sequence>
 
     </xs:complexType>
 

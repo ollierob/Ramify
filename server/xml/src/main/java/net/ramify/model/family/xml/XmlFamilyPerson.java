@@ -1,12 +1,16 @@
 package net.ramify.model.family.xml;
 
 import net.ramify.model.ParserContext;
-import net.ramify.model.family.FamilyBuilder;
+import net.ramify.model.event.Event;
+import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
+import net.ramify.model.record.GenericRecordPerson;
 import net.ramify.model.record.xml.record.XmlPersonRecord;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Collections;
+import java.util.Set;
 
 @XmlRootElement(namespace = XmlFamily.NAMESPACE, name = "person")
 public class XmlFamilyPerson extends XmlPersonRecord {
@@ -25,8 +29,17 @@ public class XmlFamilyPerson extends XmlPersonRecord {
         return new PersonId(id);
     }
 
-    protected void family(final ParserContext context, final FamilyBuilder builder) {
-        throw new UnsupportedOperationException();
+    protected Person toPerson(final ParserContext context) {
+        return new GenericRecordPerson(
+                this.personId(),
+                this.name(context.nameParser()),
+                this.gender(),
+                this.events(),
+                this.notes());
+    }
+
+    protected Set<Event> events() {
+        return Collections.emptySet();
     }
 
 }
