@@ -17,7 +17,7 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.function.Consumer;
 
-@XmlSeeAlso({XmlCountry.class, XmlState.class, XmlCounty.class, XmlParish.class, XmlWapentake.class, XmlTown.class, XmlCity.class})
+@XmlSeeAlso({XmlCountry.class, XmlState.class, XmlParish.class, XmlHundred.class, XmlWapentake.class, XmlTown.class, XmlCity.class})
 public abstract class XmlPlace implements HasPlaceId {
 
     public static final String NAMESPACE = "http://ramify.net/places";
@@ -77,4 +77,5 @@ public abstract class XmlPlace implements HasPlaceId {
     public String toString() {
         return this.getClass().getSimpleName() + "[" + id + "]";
     }
+
 }

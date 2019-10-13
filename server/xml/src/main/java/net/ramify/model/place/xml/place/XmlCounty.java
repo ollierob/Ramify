@@ -25,6 +25,7 @@ class XmlCounty extends XmlPlace {
     @XmlElementRefs({
             @XmlElementRef(type = XmlParish.class),
             @XmlElementRef(type = XmlManor.class),
+            @XmlElementRef(type = XmlHundred.class),
             @XmlElementRef(type = XmlWapentake.class),
             @XmlElementRef(type = XmlMetropolitanBorough.class),
             @XmlElementRef(type = XmlUrbanDistrict.class),

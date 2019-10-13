@@ -33,6 +33,8 @@
 
     <xs:element name="hamlet" type="tns:xmlHamlet"/>
 
+    <xs:element name="hundred" type="tns:xmlHundred"/>
+
     <xs:element name="inn" type="tns:xmlInn"/>
 
     <xs:element name="manor" type="tns:xmlManor"/>
@@ -326,6 +328,8 @@
                         <xs:element ref="tns:parish"/>
 
                         <xs:element ref="tns:manor"/>
+
+                        <xs:element ref="tns:hundred"/>
 
                         <xs:element ref="tns:wapentake"/>
 
@@ -709,6 +713,30 @@
 
     </xs:complexType>
 
+    <xs:complexType name="xmlHundred">
+
+        <xs:complexContent>
+
+            <xs:extension base="tns:xmlPlace">
+
+                <xs:sequence>
+
+                    <xs:choice maxOccurs="unbounded" minOccurs="0">
+
+                        <xs:element ref="tns:parish"/>
+
+                        <xs:element ref="tns:manor"/>
+
+                    </xs:choice>
+
+                </xs:sequence>
+
+            </xs:extension>
+
+        </xs:complexContent>
+
+    </xs:complexType>
+
     <xs:complexType name="xmlWapentake">
 
         <xs:complexContent>
@@ -874,6 +902,8 @@
                 <xs:element ref="tns:manor"/>
 
                 <xs:element ref="tns:graveship"/>
+
+                <xs:element ref="tns:hundred"/>
 
                 <xs:element ref="tns:wapentake"/>
 
