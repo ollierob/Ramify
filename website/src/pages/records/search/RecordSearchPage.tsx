@@ -16,6 +16,7 @@ import {hashToRecordSearch, recordSearchToHash} from "../../../components/search
 import BasePage from "../../BasePage";
 import {HeaderMenuType} from "../../../components/layout/header/HeaderMenu";
 import {RecordBasePage, RecordBasePageProps} from "../RecordBasePage";
+import {SearchIcon} from "../../../components/images/Icons";
 
 type Props = RecordBasePageProps;
 
@@ -99,8 +100,9 @@ export default class RecordSearchPage extends RecordBasePage<State> {
                         <Button
                             htmlType="submit"
                             size="large"
+                            type="primary"
                             disabled={this.state.recordSets.loading}>
-                            Load records
+                            <SearchIcon/> Search for records
                         </Button>
                     </Form.Item>
 
