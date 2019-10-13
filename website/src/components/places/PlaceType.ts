@@ -9,7 +9,7 @@ type PlaceInfo = {s: string, p?: string, d?: string, isBuilding?: boolean}
 const PlaceTypeInfo: { [key in PlaceType]: PlaceInfo } = {
     BOROUGH: {s: "Borough"},
     CHAPELRY: {s: "Chapelry", p: "Chapelries"},
-    CITY: {s: "City"},
+    CITY: {s: "City", p: "Cities"},
     CIVIL_PARISH: {s: "Civil Parish", p: "Civil Parishes"},
     COUNTRY: {s: "Country", p: "Countries"},
     COUNTY: {s: "County", p: "Counties"},

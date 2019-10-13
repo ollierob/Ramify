@@ -17,6 +17,8 @@
     
   <xs:element name="churchRecordSet" type="tns:xmlChurchRecordSetInfo"/>
     
+  <xs:element name="city" type="tns:xmlCity"/>
+    
   <xs:element name="civilParish" type="tns:xmlCivilParish"/>
     
   <xs:element name="country" type="tns:xmlCountry"/>
@@ -703,7 +705,15 @@
                 
         <xs:sequence>
                     
-          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:civilParish"/>
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        
+            <xs:element ref="tns:civilParish"/>
+                        
+            <xs:element ref="tns:city"/>
+                        
+            <xs:element ref="tns:town"/>
+                      
+          </xs:choice>
                   
         </xs:sequence>
               
@@ -726,6 +736,38 @@
             <xs:element ref="tns:town"/>
                         
             <xs:element ref="tns:village"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlCity">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPlace">
+                
+        <xs:sequence>
+                    
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        
+            <xs:element ref="tns:street"/>
+                        
+            <xs:element ref="tns:church"/>
+                        
+            <xs:element ref="tns:mill"/>
+                        
+            <xs:element ref="tns:school"/>
+                        
+            <xs:element ref="tns:inn"/>
+                        
+            <xs:element ref="tns:graveyard"/>
                       
           </xs:choice>
                   
@@ -832,6 +874,8 @@
         <xs:element ref="tns:metropolitanBorough"/>
                 
         <xs:element ref="tns:civilParish"/>
+                
+        <xs:element ref="tns:city"/>
                 
         <xs:element ref="tns:urbanDistrict"/>
                 

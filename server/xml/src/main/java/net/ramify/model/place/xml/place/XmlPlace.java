@@ -5,6 +5,7 @@ import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.provider.PlaceProvider;
+import net.ramify.model.place.xml.place.settlement.XmlCity;
 import net.ramify.model.place.xml.place.settlement.XmlTown;
 import net.ramify.utils.objects.Functions;
 
@@ -16,7 +17,7 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.function.Consumer;
 
-@XmlSeeAlso({XmlCountry.class, XmlState.class, XmlCounty.class, XmlParish.class, XmlWapentake.class, XmlTown.class})
+@XmlSeeAlso({XmlCountry.class, XmlState.class, XmlCounty.class, XmlParish.class, XmlWapentake.class, XmlTown.class, XmlCity.class})
 public abstract class XmlPlace implements HasPlaceId {
 
     public static final String NAMESPACE = "http://ramify.net/places";
