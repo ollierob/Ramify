@@ -78,6 +78,7 @@ message PlaceDescription {
     repeated Place alsoSee = 2;
     repeated Link link = 3;
     repeated Place laterBecame = 4;
+    repeated Place coterminous = 5;
 
 }
 

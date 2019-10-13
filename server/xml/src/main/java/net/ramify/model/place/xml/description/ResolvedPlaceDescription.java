@@ -15,6 +15,7 @@ class ResolvedPlaceDescription implements PlaceDescription {
     private final PlaceId placeId;
     private final String description;
     private final Set<Place> alsoSee;
+    private final Set<Place> coterminous;
     private final Set<Place> laterBecame;
     private final Set<Link> links;
 
@@ -22,11 +23,13 @@ class ResolvedPlaceDescription implements PlaceDescription {
             final PlaceId placeId,
             final String description,
             final Set<Place> alsoSee,
+            final Set<Place> coterminous,
             final Set<Place> laterBecame,
             final Set<Link> links) {
         this.placeId = placeId;
         this.description = description;
         this.alsoSee = alsoSee;
+        this.coterminous = coterminous;
         this.laterBecame = laterBecame;
         this.links = links;
     }
@@ -47,6 +50,12 @@ class ResolvedPlaceDescription implements PlaceDescription {
     @Override
     public Set<Place> alsoSee() {
         return alsoSee;
+    }
+
+    @Nonnull
+    @Override
+    public Set<Place> coterminous() {
+        return coterminous;
     }
 
     @Nonnull

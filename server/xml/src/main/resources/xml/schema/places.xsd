@@ -213,6 +213,8 @@
 
             <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="alsoSee" type="tns:placeId"/>
 
+            <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="coterminous" type="tns:placeId"/>
+
             <xs:choice maxOccurs="unbounded" minOccurs="0">
 
                 <xs:element ref="tns:textLink"/>

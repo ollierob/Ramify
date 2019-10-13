@@ -30,6 +30,9 @@ class XmlPlaceDescription {
     @XmlElement(name = "alsoSee", namespace = XmlPlace.NAMESPACE)
     private List<XmlPlaceId> alsoSee;
 
+    @XmlElement(name = "coterminous", namespace = XmlPlace.NAMESPACE)
+    private List<XmlPlaceId> coterminous;
+
     @XmlElementRef
     private List<XmlLink> links;
 
@@ -47,6 +50,7 @@ class XmlPlaceDescription {
                 this.placeId(),
                 description.trim(),
                 this.alsoSee(places),
+                this.coterminous(places),
                 this.laterBecame(places),
                 this.links());
     }
@@ -63,6 +67,12 @@ class XmlPlaceDescription {
         return this.laterBecame == null
                 ? Collections.emptySet()
                 : SetUtils.transformIgnoreNull(this.laterBecame, id -> places.get(id.placeId()));
+    }
+
+    private Set<Place> coterminous(final PlaceProvider places) {
+        return coterminous == null
+                ? Collections.emptySet()
+                : SetUtils.transformIgnoreNull(this.coterminous, id -> places.get(id.placeId()));
     }
 
     @Nonnull

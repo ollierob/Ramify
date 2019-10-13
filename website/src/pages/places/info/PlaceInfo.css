@@ -1,0 +1,8 @@
+.area .info .tags {
+    display: inline-block;
+}
+
+.area .info .tags .ant-tag {
+    font-size: 16px;
+    line-height: 24px;
+}

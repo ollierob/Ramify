@@ -6,6 +6,7 @@ import {isPlaceFavourite, PlaceFavouritesHandler} from "./PlaceFavourites";
 import {FavouritesIcon} from "../images/Icons";
 import {Flag} from "../images/Flag";
 import {PlaceList} from "./Place";
+import {Tag} from "antd";
 
 type Props = PlaceFavouritesHandler & {
     place: Place.AsObject,
@@ -56,6 +57,10 @@ export class PlaceTitle extends React.PureComponent<Props, State> {
                     else this.props.addPlaceFavourite(place).then(this.setFavourites);
                 }}/>
 
+            {" "}
+
+            <TypeTags {...this.props}/>
+
             <LinkTags
                 links={this.props.description && this.props.description.linkList}/>
 
@@ -76,4 +81,16 @@ export class PlaceTitle extends React.PureComponent<Props, State> {
             this.setState({isFavourite: isPlaceFavourite(this.props.place.id, this.state.favourites)});
     }
 
+}
+
+const TypeTags = (props: {description: PlaceDescription.AsObject}) => {
+    return <div className="tags">
+        {props.description.laterbecameList && props.description.laterbecameList.map(place => <DefunctPlaceTag place={place}/>)}
+    </div>;
+};
+
+const DefunctPlaceTag = (props: {place: Place.AsObject}) => {
+    return <Tag color="orange">
+        Defunct
+    </Tag>;
 };
