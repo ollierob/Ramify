@@ -8,7 +8,6 @@ import {NoRecordCards, RecordCards} from "../../../components/records/RecordCard
 import {RecordSet} from "../../../protobuf/generated/record_pb";
 import {AsyncData} from "../../../components/fetch/AsyncData";
 import {isBuilding} from "../../../components/places/PlaceType";
-import {CoterminousPlaceInfo} from "./CoterminousPlaceInfo";
 import ReactMarkdown = require("react-markdown");
 
 type Props = PlaceFavouritesHandler & {
@@ -30,10 +29,7 @@ export const PlaceInfo = (props: Props) => {
         className="info"
         title={<PlaceTitle {...props}/>}>
 
-        {description && <>
-            <CoterminousPlaceInfo description={description}/>
-            <ReactMarkdown source={description.description}/>
-        </>}
+        {description && <ReactMarkdown source={description.description}/>}
 
         {props.childPlaces && (props.childPlaces.length || !isBuilding(place)) && <Card className="places" title="Places" bordered={false}>
             <ChildPlaceCards

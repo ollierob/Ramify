@@ -7,6 +7,7 @@ import {FavouritesIcon} from "../images/Icons";
 import {Flag} from "../images/Flag";
 import {PlaceList} from "./Place";
 import {Tag} from "antd";
+import {PlaceLink} from "./PlaceLink";
 
 type Props = PlaceFavouritesHandler & {
     place: Place.AsObject,
@@ -86,11 +87,18 @@ export class PlaceTitle extends React.PureComponent<Props, State> {
 const TypeTags = (props: {description: PlaceDescription.AsObject}) => {
     return <div className="tags">
         {props.description.laterbecameList && props.description.laterbecameList.map(place => <DefunctPlaceTag place={place}/>)}
+        {props.description.coterminousList && props.description.coterminousList.map(place => <CoterminousPlaceTag place={place}/>)}
     </div>;
 };
 
 const DefunctPlaceTag = (props: {place: Place.AsObject}) => {
     return <Tag color="orange">
-        Defunct
+        Replaced by <PlaceLink place={props.place} showType/>
+    </Tag>;
+};
+
+const CoterminousPlaceTag = (props: {place: Place.AsObject}) => {
+    return <Tag color="geekblue">
+        Coterminous with <PlaceLink place={props.place} showType/>
     </Tag>;
 };
