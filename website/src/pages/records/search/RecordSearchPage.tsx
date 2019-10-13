@@ -147,7 +147,7 @@ export default class RecordSearchPage extends RecordBasePage<State> {
                         label: <><Flag iso={child.iso}/>{child.name}</>,
                         value: child.id,
                         depth: 2
-                    }));
+                    })).sort((o1, o2) => o1.value.localeCompare(o2.value));
                 }).then(() => this.setState(current => ({regions: [...current.regions]})));
         }
     }
@@ -171,7 +171,7 @@ function generateCountryOptions(countries: ReadonlyArray<Place.AsObject>): Casca
         value: country.id,
         isLeaf: false,
         depth: 1
-    }));
+    })).sort((o1, o2) => o1.value.localeCompare(o2.value));
 }
 
 const YearRanges = generateYearRanges();
