@@ -3,6 +3,7 @@ package net.ramify.model.family.xml;
 import com.google.common.collect.Sets;
 import net.ramify.model.ParserContext;
 import net.ramify.model.event.Event;
+import net.ramify.model.event.xml.XmlEvent;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.provider.PersonProvider;
@@ -15,6 +16,7 @@ import net.ramify.model.relationship.type.ParentChild;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.Collections;
@@ -34,22 +36,27 @@ public class XmlFamilyPerson extends XmlPersonRecord {
     @XmlElement(name = "spouse", namespace = XmlFamily.NAMESPACE)
     private List<String> spouses;
 
+    @XmlElementRef
+    private List<XmlEvent> events;
+
     @Override
     protected PersonId personId() {
         return new PersonId(id);
     }
 
     protected Person toPerson(final ParserContext context) {
+        final var personId = this.personId();
         return new GenericRecordPerson(
-                this.personId(),
+                personId,
                 this.name(context.nameParser()),
                 this.gender(),
-                this.events(),
+                this.events(personId, context),
                 this.notes());
     }
 
-    protected Set<Event> events() {
-        return Collections.emptySet(); //TODO
+    protected Set<Event> events(final PersonId personId, final ParserContext context) {
+        if (events == null || events.isEmpty()) return Collections.emptySet();
+        return events.stream().map(event -> event.toEvent(personId, context)).collect(Collectors.toSet());
     }
 
     protected Set<Relationship> relationships(final Person self, final PersonProvider people) {

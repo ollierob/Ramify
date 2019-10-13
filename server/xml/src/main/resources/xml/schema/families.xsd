@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/records" xmlns:tns="http://ramify.net/families" targetNamespace="http://ramify.net/families" version="1.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/events" xmlns:ns2="http://ramify.net/dates" xmlns:ns3="http://ramify.net/records" xmlns:tns="http://ramify.net/families"
+           targetNamespace="http://ramify.net/families" version="1.0">
+
+    <xs:import namespace="http://ramify.net/events" schemaLocation="events.xsd"/>
+
+    <xs:import namespace="http://ramify.net/dates" schemaLocation="dates.xsd"/>
 
     <xs:import namespace="http://ramify.net/records" schemaLocation="records.xsd"/>
 
@@ -27,13 +32,23 @@
 
         <xs:complexContent>
 
-            <xs:extension base="ns1:xmlPersonRecord">
+            <xs:extension base="ns3:xmlPersonRecord">
 
                 <xs:sequence>
 
                     <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="parent" type="xs:string"/>
 
                     <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="spouse" type="xs:string"/>
+
+                    <xs:choice maxOccurs="unbounded" minOccurs="0">
+
+                        <xs:element ref="ns1:event"/>
+
+                        <xs:element ref="ns1:birth"/>
+
+                        <xs:element ref="ns1:death"/>
+
+                    </xs:choice>
 
                 </xs:sequence>
 
