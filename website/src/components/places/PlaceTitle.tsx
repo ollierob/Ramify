@@ -85,6 +85,7 @@ export class PlaceTitle extends React.PureComponent<Props, State> {
 }
 
 const TypeTags = (props: {description: PlaceDescription.AsObject}) => {
+    if (!props.description) return null;
     return <div className="tags">
         {props.description.laterbecameList && props.description.laterbecameList.map(place => <DefunctPlaceTag place={place}/>)}
         {props.description.coterminousList && props.description.coterminousList.map(place => <CoterminousPlaceTag place={place}/>)}
