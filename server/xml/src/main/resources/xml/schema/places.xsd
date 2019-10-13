@@ -361,6 +361,8 @@
 
                         <xs:element ref="tns:township"/>
 
+                        <xs:element ref="tns:city"/>
+
                         <xs:element ref="tns:town"/>
 
                         <xs:element ref="tns:village"/>
@@ -631,6 +633,38 @@
 
     </xs:complexType>
 
+    <xs:complexType name="xmlCity">
+
+        <xs:complexContent>
+
+            <xs:extension base="tns:xmlPlace">
+
+                <xs:sequence>
+
+                    <xs:choice maxOccurs="unbounded" minOccurs="0">
+
+                        <xs:element ref="tns:street"/>
+
+                        <xs:element ref="tns:church"/>
+
+                        <xs:element ref="tns:mill"/>
+
+                        <xs:element ref="tns:school"/>
+
+                        <xs:element ref="tns:inn"/>
+
+                        <xs:element ref="tns:graveyard"/>
+
+                    </xs:choice>
+
+                </xs:sequence>
+
+            </xs:extension>
+
+        </xs:complexContent>
+
+    </xs:complexType>
+
     <xs:complexType name="xmlManor">
 
         <xs:complexContent>
@@ -747,38 +781,6 @@
 
     </xs:complexType>
 
-    <xs:complexType name="xmlCity">
-
-        <xs:complexContent>
-
-            <xs:extension base="tns:xmlPlace">
-
-                <xs:sequence>
-
-                    <xs:choice maxOccurs="unbounded" minOccurs="0">
-
-                        <xs:element ref="tns:street"/>
-
-                        <xs:element ref="tns:church"/>
-
-                        <xs:element ref="tns:mill"/>
-
-                        <xs:element ref="tns:school"/>
-
-                        <xs:element ref="tns:inn"/>
-
-                        <xs:element ref="tns:graveyard"/>
-
-                    </xs:choice>
-
-                </xs:sequence>
-
-            </xs:extension>
-
-        </xs:complexContent>
-
-    </xs:complexType>
-
     <xs:complexType name="xmlUrbanDistrict">
 
         <xs:complexContent>
@@ -865,6 +867,8 @@
 
                 <xs:element ref="tns:town"/>
 
+                <xs:element ref="tns:city"/>
+
                 <xs:element ref="tns:manor"/>
 
                 <xs:element ref="tns:graveship"/>
@@ -874,8 +878,6 @@
                 <xs:element ref="tns:metropolitanBorough"/>
 
                 <xs:element ref="tns:civilParish"/>
-
-                <xs:element ref="tns:city"/>
 
                 <xs:element ref="tns:urbanDistrict"/>
 
