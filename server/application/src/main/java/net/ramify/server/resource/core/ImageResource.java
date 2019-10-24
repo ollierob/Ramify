@@ -22,7 +22,7 @@ public class ImageResource extends AbstractResource {
 
     private static final MediaType JPG = new MediaType("image", "jpg");
     private static final MediaType PNG = new MediaType("image", "png");
-    private static final MediaType SVG = new MediaType("image", "svg");
+    private static final MediaType SVG = new MediaType("image", "svg+xml");
 
     private final RecordSetProvider recordSets;
 
