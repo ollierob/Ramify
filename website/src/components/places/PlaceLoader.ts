@@ -1,10 +1,15 @@
 import {PlaceId} from "./Place";
-import {Place, PlaceBundle, PlaceList} from "../../protobuf/generated/place_pb";
+import {Place, PlaceBundle, PlaceGroup, PlaceList} from "../../protobuf/generated/place_pb";
 import {protoGet} from "../fetch/ProtoFetch";
 import {queryParameters} from "../fetch/Fetch";
 import {Position} from "../../protobuf/generated/location_pb";
+import {PlaceGroupId, ResolvedPlaceGroup} from "./PlaceGroup";
 
 export interface PlaceLoader {
+
+    loadGroup(id: PlaceGroupId): Promise<PlaceGroup.AsObject>
+
+    loadResolvedGroup(id: PlaceGroupId): Promise<ResolvedPlaceGroup>
 
     loadPlace(id: PlaceId): Promise<Place.AsObject>
 
@@ -19,6 +24,19 @@ export interface PlaceLoader {
 }
 
 class ProtoPlaceLoader implements PlaceLoader {
+
+    loadGroup(id: PlaceGroupId) {
+        return protoGet("/places/group/" + id, PlaceGroup.deserializeBinary)
+            .then(p => p ? p.toObject() : null);
+    }
+
+    loadResolvedGroup(id: PlaceGroupId) {
+        //FIXME offer this server-side
+        return this.loadGroup(id).then(group => {
+            const loadChildren = Promise.all([group.defaultchildid].concat(group.otherchildidList).map(this.loadPlaceBundle));
+            return loadChildren.then(children => ({group, children}));
+        });
+    }
 
     loadPlace(id: PlaceId) {
         return protoGet("/places/at/" + id, Place.deserializeBinary)

@@ -1,0 +1,7 @@
+.group.ant-card {
+    position: absolute;
+}
+
+.group .ant-card-head-title {
+    font-size: 1.5em;
+}

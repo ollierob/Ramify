@@ -5,7 +5,7 @@ import RecordSearchPage from "./search/RecordSearchPage";
 import RecordSetPage from "./set/RecordSetPage";
 import "./Records.css";
 
-class RecordsRootPage extends React.PureComponent {
+class RecordsRouter extends React.PureComponent {
 
     render() {
         return <HashRouter>
@@ -19,4 +19,4 @@ class RecordsRootPage extends React.PureComponent {
 
 }
 
-ReactDOM.render(<RecordsRootPage/>, document.getElementById("main"));
+ReactDOM.render(<RecordsRouter/>, document.getElementById("main"));

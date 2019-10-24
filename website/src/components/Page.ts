@@ -4,13 +4,13 @@ type QueryableType = string | number | boolean;
 
 export type QueryMap = StringMap<QueryableType> & {base: string}
 
-export function updatePageHash(delta: QueryMap, current: StringMap = readPageHash()): void {
+export function updatePageHash(delta: QueryMap, current: StringMap = readPageHash(), update: (hash: string) => void = setPageHashString): void {
     const total: QueryMap = {...current, ...delta, base: delta.base};
     Object.keys(delta).filter(k => k != "base").forEach(key => {
         const n = delta[key];
         if (!n) delete total[key];
     });
-    setPageHashString(createPageHash(total));
+    update(createPageHash(total));
 }
 
 export function readPageHash(): StringMap {
@@ -29,7 +29,7 @@ function createPageHash(map: QueryMap): string {
     const q = Object.keys(map)
         .filter(key => key != "base" && !!map[key])
         .map(key => key + "=" + encodeURIComponent(map[key]))
-        .join("?");
+        .join("&");
     return "/" + map.base + (q.length ? "?" + q : "");
 }
 

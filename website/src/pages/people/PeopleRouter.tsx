@@ -8,7 +8,7 @@ import PersonProfilePage from "./profile/PersonProfilePage";
 import ViewTreePage from "./trees/ViewTreePage";
 import EditTreePage from "./trees/EditTreePage";
 
-class PeopleRootPage extends React.PureComponent {
+class PeopleRouter extends React.PureComponent {
 
     render() {
         return <HashRouter>
@@ -25,4 +25,4 @@ class PeopleRootPage extends React.PureComponent {
 
 }
 
-ReactDOM.render(<PeopleRootPage/>, document.getElementById("main"));
+ReactDOM.render(<PeopleRouter/>, document.getElementById("main"));

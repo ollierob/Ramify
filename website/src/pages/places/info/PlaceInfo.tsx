@@ -16,6 +16,7 @@ type Props = PlaceFavouritesHandler & {
     childPlaces?: ReadonlyArray<Place.AsObject>
     loadingChildren?: boolean;
     records?: AsyncData<ReadonlyArray<RecordSet.AsObject>>;
+    card?: boolean;
 }
 
 export const PlaceInfo = (props: Props) => {
@@ -25,11 +26,7 @@ export const PlaceInfo = (props: Props) => {
 
     const description = props.description;
 
-    return <Card
-        className="info"
-        title={<PlaceTitle {...props}/>}>
-
-        {description && <ReactMarkdown source={description.description}/>}
+    const inner = <>{description && <ReactMarkdown source={description.description}/>}
 
         {props.childPlaces && (props.childPlaces.length || !isBuilding(place)) && <Card className="places" title="Places" bordered={false}>
             <ChildPlaceCards
@@ -44,8 +41,14 @@ export const PlaceInfo = (props: Props) => {
             {props.records ? <RecordCards
                 loading={props.records.loading}
                 records={props.records.data}/> : <NoRecordCards/>}
-        </Card>
+        </Card></>;
 
+    if (props.card) return <Card
+        className="info"
+        title={<PlaceTitle {...props}/>}>
+        {inner}
     </Card>;
+
+    return inner;
 
 };

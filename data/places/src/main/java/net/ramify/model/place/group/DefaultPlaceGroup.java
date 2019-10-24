@@ -19,7 +19,7 @@ public class DefaultPlaceGroup implements PlaceGroup {
         this.id = id;
         this.name = name;
         this.defaultChildId = defaultChildId;
-        this.childIds = SetUtils.concat(childIds, defaultChildId);
+        this.childIds = SetUtils.with(childIds, defaultChildId);
     }
 
     @Nonnull

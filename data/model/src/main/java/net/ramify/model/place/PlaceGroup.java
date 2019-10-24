@@ -30,11 +30,12 @@ public interface PlaceGroup extends BuildsProto<PlaceProto.PlaceGroup> {
 
     @Nonnull
     default PlaceProto.PlaceGroup.Builder toProtoBuilder() {
+        final var otherChildIds = SetUtils.without(this.childIds(), this.defaultChildId());
         return PlaceProto.PlaceGroup.newBuilder()
                 .setId(this.id().value())
                 .setName(this.name())
                 .setDefaultChildId(this.defaultChildId().value())
-                .addAllOtherChildId(Iterables.transform(this.childIds(), PlaceId::value));
+                .addAllOtherChildId(Iterables.transform(otherChildIds, PlaceId::value));
     }
 
     @Nonnull
