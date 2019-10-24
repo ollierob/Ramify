@@ -49,4 +49,12 @@ public class SetUtils {
                 : Sets.newHashSet(collection);
     }
 
+    public static <T> Set<T> concat(final Set<T> set, final T element) {
+        if (set.isEmpty()) return Collections.singleton(element);
+        if (set.contains(element)) return set;
+        final var copy = Sets.newHashSet(set);
+        copy.add(element);
+        return copy;
+    }
+
 }

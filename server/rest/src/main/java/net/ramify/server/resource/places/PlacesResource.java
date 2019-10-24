@@ -1,6 +1,8 @@
 package net.ramify.server.resource.places;
 
 import net.ramify.model.place.Place;
+import net.ramify.model.place.PlaceGroup;
+import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.collection.Places;
 import net.ramify.model.place.position.Position;
@@ -20,6 +22,11 @@ import static net.ramify.server.resource.Resource.APPLICATION_PROTOBUF;
 @Path("places")
 @Produces({MediaType.TEXT_PLAIN, APPLICATION_PROTOBUF})
 public interface PlacesResource extends RootResource {
+
+    @GET
+    @Path("group/{id}")
+    @CheckForNull
+    PlaceGroup group(@PathParam("id") PlaceGroupId id);
 
     @GET
     @Path("at/{id}")

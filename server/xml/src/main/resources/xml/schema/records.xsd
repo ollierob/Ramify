@@ -518,15 +518,11 @@
 
         <xs:restriction base="xs:string">
 
-            <xs:enumeration value="death"/>
+            <xs:enumeration value="baptism"/>
 
             <xs:enumeration value="payment"/>
 
-            <xs:enumeration value="baptism"/>
-
             <xs:enumeration value="birth"/>
-
-            <xs:enumeration value="residence"/>
 
             <xs:enumeration value="burial"/>
 
@@ -535,6 +531,10 @@
             <xs:enumeration value="marriage"/>
 
             <xs:enumeration value="census"/>
+
+            <xs:enumeration value="residence"/>
+
+            <xs:enumeration value="death"/>
 
             <xs:enumeration value="mixed"/>
 

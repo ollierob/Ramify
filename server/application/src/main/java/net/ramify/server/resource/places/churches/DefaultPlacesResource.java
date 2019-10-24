@@ -2,12 +2,15 @@ package net.ramify.server.resource.places.churches;
 
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceDescription;
+import net.ramify.model.place.PlaceGroup;
+import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.collection.Places;
 import net.ramify.model.place.position.Position;
 import net.ramify.model.place.position.PositionProvider;
 import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.provider.PlaceDescriptionProvider;
+import net.ramify.model.place.provider.PlaceGroupProvider;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.region.Country;
 import net.ramify.server.resource.places.ChurchesResource;
@@ -23,6 +26,7 @@ import javax.inject.Singleton;
 public class DefaultPlacesResource implements PlacesResource {
 
     private final PlaceProvider placeProvider;
+    private final PlaceGroupProvider placeGroupProvider;
     private final PositionProvider positionProvider;
     private final PlaceDescriptionProvider descriptionProvider;
     private final ChurchesResource churchesResource;
@@ -31,15 +35,23 @@ public class DefaultPlacesResource implements PlacesResource {
     @Inject
     DefaultPlacesResource(
             final PlaceProvider placeProvider,
+            final PlaceGroupProvider placeGroupProvider,
             final PositionProvider positionProvider,
             final PlaceDescriptionProvider descriptionProvider,
             final ChurchesResource churchesResource,
             final PlaceFavouritesResource favouritesResource) {
         this.placeProvider = placeProvider;
+        this.placeGroupProvider = placeGroupProvider;
         this.positionProvider = positionProvider;
         this.descriptionProvider = descriptionProvider;
         this.churchesResource = churchesResource;
         this.favouritesResource = favouritesResource;
+    }
+
+    @CheckForNull
+    @Override
+    public PlaceGroup group(final PlaceGroupId id) {
+        return placeGroupProvider.get(id);
     }
 
     @Override

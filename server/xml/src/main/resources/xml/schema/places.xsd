@@ -51,6 +51,10 @@
 
     <xs:element name="placeDescriptions" type="tns:placeDescriptions"/>
 
+    <xs:element name="placeGroup" type="tns:xmlPlaceGroup"/>
+
+    <xs:element name="placeGroups" type="tns:placeGroups"/>
+
     <xs:element name="placePoint" type="tns:xmlPlacePoint"/>
 
     <xs:element name="placePositions" type="tns:placePositions"/>
@@ -920,6 +924,32 @@
                 <xs:element ref="tns:state"/>
 
             </xs:choice>
+
+        </xs:sequence>
+
+    </xs:complexType>
+
+    <xs:complexType name="xmlPlaceGroup">
+
+        <xs:sequence>
+
+            <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="childId" type="xs:string"/>
+
+        </xs:sequence>
+
+        <xs:attribute name="id" type="xs:string" use="required"/>
+
+        <xs:attribute name="name" type="xs:string" use="required"/>
+
+        <xs:attribute name="defaultChildId" type="xs:string" use="required"/>
+
+    </xs:complexType>
+
+    <xs:complexType name="placeGroups">
+
+        <xs:sequence>
+
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:placeGroup"/>
 
         </xs:sequence>
 

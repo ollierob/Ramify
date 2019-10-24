@@ -9,12 +9,14 @@ import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.place.institution.church.ChurchInfoProvider;
 import net.ramify.model.place.position.PositionProvider;
 import net.ramify.model.place.provider.PlaceDescriptionProvider;
+import net.ramify.model.place.provider.PlaceGroupProvider;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.xml.archives.XmlArchives;
 import net.ramify.model.place.xml.church.XmlChurchInfos;
 import net.ramify.model.place.xml.description.XmlPlaceDescriptions;
 import net.ramify.model.place.xml.location.XmlPlacePositions;
 import net.ramify.model.place.xml.place.XmlPlaces;
+import net.ramify.model.place.xml.place.group.XmlPlaceGroups;
 import net.ramify.model.record.archive.ArchiveProvider;
 import net.ramify.model.record.provider.RecordSetProvider;
 
@@ -33,6 +35,7 @@ public class XmlPlaceModule extends PrivateModule {
     protected void configure() {
         this.expose(ChurchInfoProvider.class);
         this.expose(PlaceProvider.class);
+        this.expose(PlaceGroupProvider.class);
         this.expose(PositionProvider.class);
         this.expose(PlaceDescriptionProvider.class);
         this.expose(ArchiveProvider.class);
@@ -42,7 +45,7 @@ public class XmlPlaceModule extends PrivateModule {
     @Provides
     @Singleton
     JAXBContext providePlaceContext() throws JAXBException {
-        return JAXBContext.newInstance(XmlPlaces.class, XmlChurchInfos.class, XmlPlacePositions.class, XmlPlaceDescriptions.class, XmlArchives.class);
+        return JAXBContext.newInstance(XmlPlaces.class, XmlChurchInfos.class, XmlPlacePositions.class, XmlPlaceDescriptions.class, XmlArchives.class, XmlPlaceGroups.class);
     }
 
     @Provides
@@ -54,6 +57,12 @@ public class XmlPlaceModule extends PrivateModule {
             final RecordSetProvider records,
             final DateParser dateParser) throws JAXBException {
         return XmlChurchInfoProvider.readChurchInfo(context, data, places, records, dateParser);
+    }
+
+    @Provides
+    @Singleton
+    PlaceGroupProvider providePlaceGroupProvider(final JAXBContext context, @Named("data") final File data) throws JAXBException {
+        return XmlPlaceGroupProvider.readGroupsInDirectory(context, data);
     }
 
     @Provides
