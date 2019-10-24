@@ -6,6 +6,16 @@ option java_outer_classname = "PlaceProto";
 import "location.proto";
 import "link.proto";
 
+message PlaceGroup {
+
+    string name = 1;
+    string id = 2;
+
+    string defaultChildId = 3;
+    repeated string otherChildId = 4;
+
+}
+
 message Place {
 
     string id = 1;
