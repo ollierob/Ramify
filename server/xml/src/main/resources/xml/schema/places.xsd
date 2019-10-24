@@ -777,6 +777,8 @@
 
                         <xs:element ref="tns:town"/>
 
+                        <xs:element ref="tns:village"/>
+
                     </xs:choice>
 
                 </xs:sequence>

@@ -6,6 +6,7 @@ import net.ramify.model.place.xml.place.XmlArea;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.settlement.XmlCity;
 import net.ramify.model.place.xml.place.settlement.XmlTown;
+import net.ramify.model.place.xml.place.settlement.XmlVillage;
 
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
@@ -20,6 +21,7 @@ public class XmlMetropolitanBorough extends XmlArea<MetropolitanBorough> {
             @XmlElementRef(type = XmlCivilParish.class),
             @XmlElementRef(type = XmlCity.class),
             @XmlElementRef(type = XmlTown.class),
+            @XmlElementRef(type = XmlVillage.class)
     })
     private List<XmlPlace> children;
 
