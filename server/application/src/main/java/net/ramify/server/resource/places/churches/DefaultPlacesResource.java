@@ -111,6 +111,7 @@ public class DefaultPlacesResource implements PlacesResource {
         Consumers.ifNonNull(this.position(id), pos -> builder.setPosition(pos.toProto()));
         descriptionProvider.maybeGet(id).ifPresent(d -> builder.setDescription(d.toProto()));
         Consumers.ifNonNull(this.describeType(id), builder::setTypeDescription);
+        this.within(id, null).forEach(child -> builder.addChild(child.toProto(false)));
         return builder.build();
     }
 

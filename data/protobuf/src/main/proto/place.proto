@@ -98,5 +98,6 @@ message PlaceBundle {
     Position position = 2;
     PlaceDescription description = 3;
     string typeDescription = 4;
+    repeated Place child = 5;
 
 }

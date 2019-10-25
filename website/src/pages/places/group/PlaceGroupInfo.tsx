@@ -12,7 +12,6 @@ type Props = {
     group: AsyncData<ResolvedPlaceGroup>
     selected: PlaceId;
     select: (id: PlaceId) => void;
-    childPlaces: ReadonlyArray<Place.AsObject>
     favourites: PlaceFavouritesHandler
 }
 
@@ -22,7 +21,7 @@ export const PlaceGroupInfo = (props: Props) => {
     if (!resolved) return null;
 
     return <Card
-        className="group"
+        className="placeGroup"
         title={resolved.group.name}>
 
         <Tabs
@@ -34,7 +33,8 @@ export const PlaceGroupInfo = (props: Props) => {
                 <PlaceInfo
                     {...props.favourites}
                     place={child.place}
-                    description={child.description}/>
+                    description={child.description}
+                    childPlaces={child.childList}/>
             </Tabs.TabPane>)}
 
         </Tabs>

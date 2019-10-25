@@ -50,8 +50,7 @@ export class PlaceGroupPage extends PlaceBasePage<State> {
                 {...this.state}
                 favourites={this.placeFavourites}
                 selected={this.state.placeId}
-                select={this.setPlaceId}
-                childPlaces={[]}/>
+                select={this.setPlaceId}/>
         </div>;
 
     }

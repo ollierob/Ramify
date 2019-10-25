@@ -1,7 +1,11 @@
-.group.ant-card {
+.placeGroup.ant-card {
     position: absolute;
 }
 
-.group .ant-card-head-title {
+.placeGroup .ant-card-head-title {
     font-size: 1.5em;
+}
+
+.placeGroup .ant-card-body {
+    padding-top: 0;
 }

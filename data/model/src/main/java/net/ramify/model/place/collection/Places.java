@@ -8,6 +8,7 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.proto.PlaceProto;
 
 import javax.annotation.Nonnull;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -53,5 +54,7 @@ public interface Places extends Iterable<Place>, HasPlaces, BuildsProto<PlacePro
 
         };
     }
+
+    Places NONE = Collections::emptyIterator;
 
 }
