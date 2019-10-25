@@ -4,7 +4,7 @@ import {Place, PlaceBundle} from "../../../protobuf/generated/place_pb";
 import {Card, Tabs} from "antd";
 import {PlaceId} from "../../../components/places/Place";
 import {ResolvedPlaceGroup} from "../../../components/places/PlaceGroup";
-import {placeTypeName} from "../../../components/places/PlaceType";
+import {placeTypeKey, placeTypeName, sortByPlaceType} from "../../../components/places/PlaceType";
 import {PlaceInfo} from "../info/PlaceInfo";
 import {PlaceFavouritesHandler} from "../../../components/places/PlaceFavourites";
 
@@ -22,14 +22,14 @@ export const PlaceGroupInfo = (props: Props) => {
 
     return <Card
         className="placeGroup"
-        title={resolved.group.name}>
+        title={<b>{resolved.group.name}</b>}>
 
         <Tabs
             size="large"
             activeKey={props.selected}
             onChange={active => props.select(active)}>
 
-            {resolved.children.map(child => <Tabs.TabPane key={child.place.id} tab={placeTypeName(child.place.type)}>
+            {sortChildren(resolved.children).map(child => <Tabs.TabPane key={child.place.id} tab={placeTypeName(child.place.type)}>
                 <PlaceInfo
                     {...props.favourites}
                     place={child.place}
@@ -42,3 +42,10 @@ export const PlaceGroupInfo = (props: Props) => {
     </Card>;
 
 };
+
+function sortChildren(children: ReadonlyArray<PlaceBundle.AsObject>): ReadonlyArray<PlaceBundle.AsObject> {
+    if (!children || !children.length) return [];
+    const sorted = [...children];
+    sorted.sort((p1, p2) => sortByPlaceType(placeTypeKey(p1.place.type), placeTypeKey(p2.place.type)));
+    return sorted;
+}

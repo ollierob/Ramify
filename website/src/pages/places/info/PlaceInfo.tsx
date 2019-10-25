@@ -28,7 +28,7 @@ export const PlaceInfo = (props: Props) => {
 
     const inner = <>{description && <ReactMarkdown source={description.description}/>}
 
-        {props.childPlaces && (props.childPlaces.length || !isBuilding(place)) && <Card className="places" title="Places" bordered={false}>
+        {props.childPlaces && (props.childPlaces.length || !isBuilding(place)) && <Card className="places" title={<b>Places</b>} bordered={false}>
             <ChildPlaceCards
                 {...props}
                 childPlaces={props.childPlaces}
@@ -37,10 +37,10 @@ export const PlaceInfo = (props: Props) => {
                 noPlacesMessage={<>No further places within this area have been registered.</>}/>
         </Card>}
 
-        <Card className="records" title="Records" bordered={false}>
-            {props.records ? <RecordCards
-                loading={props.records.loading}
-                records={props.records.data}/> : <NoRecordCards/>}
+        <Card className="records" title={<b>Records</b>} bordered={false}>
+            <RecordCards
+                loading={props.records && props.records.loading}
+                records={props.records && props.records.data}/>
         </Card></>;
 
     if (props.card) return <Card

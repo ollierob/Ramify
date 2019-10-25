@@ -10,3 +10,9 @@
 .placeGroup .ant-card-body {
     padding-top: 0;
 }
+
+.placeGroup .places.ant-card, .placeGroup .records.ant-card {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+}
