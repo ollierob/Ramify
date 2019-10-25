@@ -1,5 +1,6 @@
 .placeGroup.ant-card {
     position: absolute;
+    width: 100%;
 }
 
 .placeGroup .ant-card-head-title {
