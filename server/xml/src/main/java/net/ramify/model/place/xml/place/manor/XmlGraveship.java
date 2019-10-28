@@ -2,6 +2,7 @@ package net.ramify.model.place.xml.place.manor;
 
 import com.google.common.base.MoreObjects;
 import net.ramify.model.place.Place;
+import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.manor.Graveship;
@@ -28,8 +29,8 @@ class XmlGraveship extends XmlPlace {
     }
 
     @Override
-    protected Graveship place(final Place parent) throws Place.InvalidPlaceTypeException {
-        return new Graveship(this.placeId(), this.name(), parent);
+    protected Graveship place(final Place parent, final PlaceGroupId groupId) throws Place.InvalidPlaceTypeException {
+        return new Graveship(this.placeId(), this.name(), parent, groupId);
     }
 
     @Override

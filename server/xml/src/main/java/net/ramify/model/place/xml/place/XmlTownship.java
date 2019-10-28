@@ -2,6 +2,7 @@ package net.ramify.model.place.xml.place;
 
 import com.google.common.base.MoreObjects;
 import net.ramify.model.place.Place;
+import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.Township;
@@ -40,8 +41,8 @@ class XmlTownship extends XmlPlace {
     }
 
     @Override
-    protected Township place(final Place parent) throws Place.InvalidPlaceTypeException {
-        return new Township(this.placeId(), this.name(), parent);
+    protected Township place(final Place parent, final PlaceGroupId groupId) throws Place.InvalidPlaceTypeException {
+        return new Township(this.placeId(), this.name(), parent, groupId);
     }
 
     @Override

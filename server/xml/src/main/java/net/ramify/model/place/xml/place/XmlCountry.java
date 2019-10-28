@@ -1,6 +1,7 @@
 package net.ramify.model.place.xml.place;
 
 import net.ramify.model.place.Place;
+import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.Country;
@@ -33,7 +34,7 @@ class XmlCountry extends XmlPlace {
     }
 
     @Override
-    protected Place place(final Place parent) throws Place.InvalidPlaceTypeException {
+    protected Place place(final Place parent, final PlaceGroupId groupId) throws Place.InvalidPlaceTypeException {
         return new Country(this.placeId(), this.name(), iso, parent);
     }
 

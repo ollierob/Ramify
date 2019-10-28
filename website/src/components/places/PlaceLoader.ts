@@ -7,8 +7,6 @@ import {PlaceGroupId, ResolvedPlaceGroup} from "./PlaceGroup";
 
 export interface PlaceLoader {
 
-    findGroupId(id: PlaceId): Promise<PlaceGroupId>
-
     loadGroup(id: PlaceGroupId): Promise<PlaceGroup.AsObject>
 
     loadResolvedGroup(groupId: PlaceGroupId): Promise<ResolvedPlaceGroup>
@@ -26,11 +24,6 @@ export interface PlaceLoader {
 }
 
 class ProtoPlaceLoader implements PlaceLoader {
-
-    findGroupId(id: string): Promise<PlaceGroupId> {
-        return protoGet("/places/group/find/" + id, PlaceGroup.deserializeBinary)
-            .then(g => g ? g.getId() : null);
-    }
 
     loadGroup(id: PlaceGroupId) {
         return protoGet("/places/group/at/" + id, PlaceGroup.deserializeBinary)

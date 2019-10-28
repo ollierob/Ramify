@@ -1,6 +1,7 @@
 package net.ramify.model.place.xml.place.district;
 
 import net.ramify.model.place.Place;
+import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.region.district.RuralDistrict;
 import net.ramify.model.place.xml.place.XmlArea;
 import net.ramify.model.place.xml.place.XmlPlace;
@@ -24,8 +25,8 @@ public class XmlRuralDistrict extends XmlArea<RuralDistrict> {
     }
 
     @Override
-    protected RuralDistrict place(final Place parent) throws Place.InvalidPlaceTypeException {
-        return new RuralDistrict(this.placeId(), this.name(), parent);
+    protected RuralDistrict place(final Place parent, final PlaceGroupId groupId) throws Place.InvalidPlaceTypeException {
+        return new RuralDistrict(this.placeId(), this.name(), parent, groupId);
     }
 
     @Override

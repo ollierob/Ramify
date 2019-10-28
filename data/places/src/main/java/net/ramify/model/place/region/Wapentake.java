@@ -1,17 +1,18 @@
 package net.ramify.model.place.region;
 
 import net.ramify.model.place.Place;
+import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.proto.PlaceProto;
 
 public class Wapentake extends Hundred {
 
-    public Wapentake(final PlaceId id, final String name, final Place parent) throws InvalidPlaceTypeException {
-        this(id, name, parent.requireAs(County.class));
+    public Wapentake(final PlaceId id, final String name, final Place parent, final PlaceGroupId groupId) throws InvalidPlaceTypeException {
+        this(id, name, parent.requireAs(County.class), groupId);
     }
 
-    public Wapentake(final PlaceId id, final String name, final County parent) {
-        super(id, name, parent);
+    public Wapentake(final PlaceId id, final String name, final County parent, final PlaceGroupId groupId) {
+        super(id, name, parent, groupId);
     }
 
     @Override

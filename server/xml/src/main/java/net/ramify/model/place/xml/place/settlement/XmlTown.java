@@ -2,6 +2,7 @@ package net.ramify.model.place.xml.place.settlement;
 
 import com.google.common.base.MoreObjects;
 import net.ramify.model.place.Place;
+import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.settlement.Town;
@@ -33,8 +34,8 @@ public class XmlTown extends XmlPlace {
     }
 
     @Override
-    protected Town place(final Place parent) throws Place.InvalidPlaceTypeException {
-        return new Town(this.placeId(), this.name(), parent);
+    protected Town place(final Place parent, final PlaceGroupId groupId) throws Place.InvalidPlaceTypeException {
+        return new Town(this.placeId(), this.name(), parent, groupId);
     }
 
     @Override

@@ -2,7 +2,6 @@ package net.ramify.model.place.region;
 
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
-import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.proto.PlaceProto;
 
 import javax.annotation.CheckForNull;
@@ -25,7 +24,7 @@ public class Country extends AbstractRegion {
     }
 
     public Country(final PlaceId id, final String name, final String iso, final Country parent) {
-        super(id, name);
+        super(id, name, null);
         this.parent = parent;
         this.iso = iso;
     }

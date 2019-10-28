@@ -1,6 +1,7 @@
 package net.ramify.model.place.settlement;
 
 import net.ramify.model.place.AbstractPlace;
+import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.type.Region;
 import net.ramify.model.place.type.Settlement;
@@ -11,8 +12,8 @@ public abstract class AbstractSettlement extends AbstractPlace implements Settle
 
     private final Region region;
 
-    protected AbstractSettlement(final PlaceId id, final String name, final Region region) {
-        super(id, name);
+    protected AbstractSettlement(final PlaceId id, final String name, final Region region, final PlaceGroupId groupId) {
+        super(id, name, groupId);
         this.region = region;
     }
 

@@ -1,6 +1,7 @@
 package net.ramify.model.place.xml.place.settlement;
 
 import net.ramify.model.place.Place;
+import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.building.Farmstead;
 import net.ramify.model.place.xml.place.XmlPlace;
 
@@ -14,8 +15,8 @@ public class XmlFarmstead extends XmlBuilding<Farmstead> {
     }
 
     @Override
-    protected Farmstead place(final Place parent) throws Place.InvalidPlaceTypeException {
-        return new Farmstead(this.placeId(), this.name(), parent);
+    protected Farmstead place(final Place parent, final PlaceGroupId groupId) throws Place.InvalidPlaceTypeException {
+        return new Farmstead(this.placeId(), this.name(), parent, groupId);
     }
 
 }

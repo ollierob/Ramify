@@ -67,8 +67,8 @@ public class XmlPlaceModule extends PrivateModule {
 
     @Provides
     @Singleton
-    PlaceProvider providePlaceProvider(final JAXBContext context, @Named("data") final File data) throws JAXBException {
-        return XmlPlaceProvider.readPlacesInDirectory(context, data);
+    PlaceProvider providePlaceProvider(final JAXBContext context, @Named("data") final File data, final PlaceGroupProvider groupProvider) throws JAXBException {
+        return XmlPlaceProvider.readPlacesInDirectory(context, data, groupProvider);
     }
 
     @Provides

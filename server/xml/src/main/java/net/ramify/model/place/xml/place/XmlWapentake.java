@@ -2,6 +2,7 @@ package net.ramify.model.place.xml.place;
 
 import com.google.common.base.MoreObjects;
 import net.ramify.model.place.Place;
+import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.region.Wapentake;
 import net.ramify.model.place.xml.place.manor.XmlManor;
 
@@ -27,9 +28,9 @@ class XmlWapentake extends XmlArea<Wapentake> {
     }
 
     @Override
-    protected Wapentake place(final Place parent) throws Place.InvalidPlaceTypeException {
+    protected Wapentake place(final Place parent, final PlaceGroupId groupId) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
-        return new Wapentake(this.placeId(), this.name(), parent);
+        return new Wapentake(this.placeId(), this.name(), parent, groupId);
     }
 
     @Override

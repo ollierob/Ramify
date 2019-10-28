@@ -2,6 +2,7 @@ package net.ramify.model.place.xml.place;
 
 import com.google.common.collect.Sets;
 import net.ramify.model.place.Place;
+import net.ramify.model.place.provider.PlaceGroupProvider;
 import net.ramify.model.place.provider.PlaceProvider;
 
 import javax.annotation.Nonnull;
@@ -20,10 +21,10 @@ public class XmlPlaces {
     private List<XmlPlace> places;
 
     @Nonnull
-    public Set<Place> places(final PlaceProvider placeProvider) {
+    public Set<Place> places(final PlaceProvider placeProvider, final PlaceGroupProvider groupProvider) {
         if (places == null) return Collections.emptySet();
         final var places = Sets.<Place>newHashSet();
-        this.places.forEach(place -> places.addAll(place.places(placeProvider)));
+        this.places.forEach(place -> places.addAll(place.places(placeProvider, groupProvider)));
         return places;
     }
 

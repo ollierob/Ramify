@@ -2,6 +2,7 @@ package net.ramify.model.place.region;
 
 import com.google.common.collect.ImmutableSet;
 import net.ramify.model.place.Place;
+import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.region.district.District;
@@ -20,12 +21,12 @@ public class County extends AbstractRegion {
     private final Region parent;
     private final String iso;
 
-    public County(final PlaceId id, final String name, final Place parent, final String iso) throws InvalidPlaceTypeException {
-        this(id, name, parent.requireAs(Region.class), iso);
+    public County(final PlaceId id, final String name, final Place parent, final String iso, final PlaceGroupId groupId) throws InvalidPlaceTypeException {
+        this(id, name, parent.requireAs(Region.class), iso, groupId);
     }
 
-    public County(final PlaceId id, final String name, final Region parent, final String iso) {
-        super(id, name);
+    public County(final PlaceId id, final String name, final Region parent, final String iso, final PlaceGroupId groupId) {
+        super(id, name, groupId);
         this.parent = parent;
         this.iso = iso;
     }
@@ -52,4 +53,5 @@ public class County extends AbstractRegion {
     public Optional<String> iso() {
         return Optional.ofNullable(iso);
     }
+
 }

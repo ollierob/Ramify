@@ -20,6 +20,9 @@ public interface Place extends HasPlaceId, Castable<Place>, BuildsProto<PlacePro
     @CheckForNull
     Place parent();
 
+    @CheckForNull
+    PlaceGroupId groupId();
+
     @Nonnull
     default Optional<String> iso() {
         return Optional.empty();
@@ -75,6 +78,7 @@ public interface Place extends HasPlaceId, Castable<Place>, BuildsProto<PlacePro
                 .setDefunct(this.isDefunct());
         if (includeParent) Consumers.ifNonNull(this.parent(), parent -> builder.setParent(parent.toProto()));
         this.iso().ifPresent(builder::setIso);
+        Consumers.ifNonNull(this.groupId(), groupId -> builder.setGroupId(groupId.value()));
         return builder;
     }
 

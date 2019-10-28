@@ -1,6 +1,7 @@
 package net.ramify.model.place.xml.place;
 
 import net.ramify.model.place.Place;
+import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.type.Region;
@@ -22,6 +23,6 @@ public abstract class XmlArea<P extends Region> extends XmlPlace {
     }
 
     @Override
-    protected abstract P place(Place parent) throws Place.InvalidPlaceTypeException;
+    protected abstract P place(Place parent, PlaceGroupId groupId) throws Place.InvalidPlaceTypeException;
 
 }

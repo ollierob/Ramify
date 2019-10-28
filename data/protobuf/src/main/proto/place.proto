@@ -24,6 +24,7 @@ message Place {
     Place parent = 4;
     string iso = 5;
     bool defunct = 6;
+    string groupId = 7;
 
 }
 

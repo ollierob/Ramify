@@ -2,6 +2,7 @@ package net.ramify.model.place.building;
 
 import net.ramify.model.place.AbstractPlace;
 import net.ramify.model.place.Place;
+import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.type.SettlementOrRegion;
@@ -12,12 +13,12 @@ public class Hospital extends AbstractPlace implements Institution {
 
     private final SettlementOrRegion parent;
 
-    public Hospital(final PlaceId id, final String name, final Place parent) throws InvalidPlaceTypeException {
-        this(id, name, parent.requireAs(SettlementOrRegion.class));
+    public Hospital(final PlaceId id, final String name, final Place parent, final PlaceGroupId groupId) throws InvalidPlaceTypeException {
+        this(id, name, parent.requireAs(SettlementOrRegion.class), groupId);
     }
 
-    public Hospital(final PlaceId id, final String name, final SettlementOrRegion parent) {
-        super(id, name);
+    public Hospital(final PlaceId id, final String name, final SettlementOrRegion parent, final PlaceGroupId groupId) {
+        super(id, name, groupId);
         this.parent = Objects.requireNonNull(parent, "parent");
     }
 

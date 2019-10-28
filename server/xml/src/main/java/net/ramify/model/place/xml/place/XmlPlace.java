@@ -3,7 +3,10 @@ package net.ramify.model.place.xml.place;
 import com.google.common.collect.Sets;
 import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.Place;
+import net.ramify.model.place.PlaceGroup;
+import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.provider.PlaceGroupProvider;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.xml.place.settlement.XmlCity;
 import net.ramify.model.place.xml.place.settlement.XmlTown;
@@ -40,11 +43,11 @@ public abstract class XmlPlace implements HasPlaceId {
         return name;
     }
 
-    public Set<Place> places(final PlaceProvider placeProvider) {
+    public Set<Place> places(final PlaceProvider placeProvider, final PlaceGroupProvider groupProvider) {
         final var places = Sets.<Place>newHashSet();
         final var id = this.placeId();
         final var parent = this.parent(id, placeProvider);
-        this.addPlaces(placeProvider, parent, places::add);
+        this.addPlaces(placeProvider, parent, places::add, groupProvider);
         return places;
     }
 
@@ -52,23 +55,24 @@ public abstract class XmlPlace implements HasPlaceId {
         return Functions.ifNonNull(placeProvider.get(id), Place::parent);
     }
 
-    private void addPlaces(final PlaceProvider placeProvider, final Place parent, final Consumer<Place> addPlace) {
+    private void addPlaces(final PlaceProvider placeProvider, final Place parent, final Consumer<Place> addPlace, final PlaceGroupProvider groupProvider) {
         try {
-            final var self = this.place(placeProvider, parent);
+            final var self = this.place(placeProvider, parent, groupProvider);
             addPlace.accept(self);
             final var children = this.children();
-            if (children != null) children.forEach(child -> child.addPlaces(placeProvider, self, addPlace));
+            if (children != null) children.forEach(child -> child.addPlaces(placeProvider, self, addPlace, groupProvider));
         } catch (final Place.InvalidPlaceTypeException | RuntimeException rex) {
             throw new RuntimeException("Error reading " + this, rex);
         }
     }
 
-    private Place place(final PlaceProvider placeProvider, final Place parent) throws Place.InvalidPlaceTypeException {
-        return name == null ? placeProvider.require(this.placeId()) : this.place(parent);
+    private Place place(final PlaceProvider placeProvider, final Place parent, final PlaceGroupProvider groupProvider) throws Place.InvalidPlaceTypeException {
+        final var id = this.placeId();
+        return name == null ? placeProvider.require(id) : this.place(parent, Functions.ifNonNull(groupProvider.getGroup(id), PlaceGroup::id));
     }
 
     @Nonnull
-    protected abstract Place place(Place parent) throws Place.InvalidPlaceTypeException;
+    protected abstract Place place(Place parent, PlaceGroupId groupId) throws Place.InvalidPlaceTypeException;
 
     @CheckForNull
     protected abstract Collection<XmlPlace> children();

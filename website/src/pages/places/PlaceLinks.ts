@@ -2,7 +2,7 @@ import {Place} from "../../protobuf/generated/place_pb";
 import {placeTypeName} from "../../components/places/PlaceType";
 
 export function placeHref(place: Place.AsObject) {
-    return placePrefix() + "#/group?place=" + place.id;
+    return placePrefix() + "#/group?id=" + place.groupid + "&place=" + place.id;
 }
 
 function placePrefix() {

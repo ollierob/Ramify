@@ -2,6 +2,7 @@ package net.ramify.model.place.region;
 
 import com.google.common.collect.ImmutableSet;
 import net.ramify.model.place.Place;
+import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.building.Church;
 import net.ramify.model.place.proto.PlaceProto;
@@ -18,12 +19,12 @@ public class Parish extends AbstractRegion {
 
     private final Region parent;
 
-    public Parish(final PlaceId id, final String name, final Place parent) throws InvalidPlaceTypeException {
-        this(id, name, parent.requireAs(Region.class));
+    public Parish(final PlaceId id, final String name, final Place parent, final PlaceGroupId groupId) throws InvalidPlaceTypeException {
+        this(id, name, parent.requireAs(Region.class), groupId);
     }
 
-    public Parish(final PlaceId id, final String name, final Region parent) {
-        super(id, name);
+    public Parish(final PlaceId id, final String name, final Region parent, final PlaceGroupId groupId) {
+        super(id, name, groupId);
         this.parent = parent;
     }
 

@@ -1,6 +1,7 @@
 package net.ramify.model.place.xml.place.settlement;
 
 import net.ramify.model.place.Place;
+import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.xml.place.XmlPlace;
@@ -24,7 +25,7 @@ abstract class XmlBuilding<P extends Place> extends XmlPlace {
     }
 
     @Override
-    protected abstract P place(Place parent) throws Place.InvalidPlaceTypeException;
+    protected abstract P place(Place parent, PlaceGroupId groupId) throws Place.InvalidPlaceTypeException;
 
     @Override
     protected Collection<XmlPlace> children() {

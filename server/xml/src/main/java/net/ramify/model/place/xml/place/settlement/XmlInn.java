@@ -1,6 +1,7 @@
 package net.ramify.model.place.xml.place.settlement;
 
 import net.ramify.model.place.Place;
+import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.building.Inn;
 import net.ramify.model.place.xml.place.XmlPlace;
 
@@ -14,8 +15,8 @@ public class XmlInn extends XmlBuilding<Inn> {
     }
 
     @Override
-    protected Inn place(final Place parent) throws Place.InvalidPlaceTypeException {
-        return new Inn(this.placeId(), this.name(), parent);
+    protected Inn place(final Place parent, final PlaceGroupId groupId) throws Place.InvalidPlaceTypeException {
+        return new Inn(this.placeId(), this.name(), parent, groupId);
     }
 
 }
