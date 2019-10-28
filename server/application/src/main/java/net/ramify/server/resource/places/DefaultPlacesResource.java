@@ -1,4 +1,4 @@
-package net.ramify.server.resource.places.churches;
+package net.ramify.server.resource.places;
 
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceDescription;
@@ -13,9 +13,6 @@ import net.ramify.model.place.provider.PlaceDescriptionProvider;
 import net.ramify.model.place.provider.PlaceGroupProvider;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.region.Country;
-import net.ramify.server.resource.places.ChurchesResource;
-import net.ramify.server.resource.places.PlaceFavouritesResource;
-import net.ramify.server.resource.places.PlacesResource;
 import net.ramify.utils.objects.Consumers;
 
 import javax.annotation.CheckForNull;
@@ -46,6 +43,11 @@ public class DefaultPlacesResource implements PlacesResource {
         this.descriptionProvider = descriptionProvider;
         this.churchesResource = churchesResource;
         this.favouritesResource = favouritesResource;
+    }
+
+    @Override
+    public PlaceGroup group(final PlaceId id) {
+        return placeGroupProvider.getGroup(id);
     }
 
     @CheckForNull

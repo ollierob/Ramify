@@ -7,9 +7,11 @@ import {PlaceGroupId, ResolvedPlaceGroup} from "./PlaceGroup";
 
 export interface PlaceLoader {
 
+    findGroupId(id: PlaceId): Promise<PlaceGroupId>
+
     loadGroup(id: PlaceGroupId): Promise<PlaceGroup.AsObject>
 
-    loadResolvedGroup(id: PlaceGroupId): Promise<ResolvedPlaceGroup>
+    loadResolvedGroup(groupId: PlaceGroupId): Promise<ResolvedPlaceGroup>
 
     loadPlace(id: PlaceId): Promise<Place.AsObject>
 
@@ -25,17 +27,25 @@ export interface PlaceLoader {
 
 class ProtoPlaceLoader implements PlaceLoader {
 
+    findGroupId(id: string): Promise<PlaceGroupId> {
+        return protoGet("/places/group/find/" + id, PlaceGroup.deserializeBinary)
+            .then(g => g ? g.getId() : null);
+    }
+
     loadGroup(id: PlaceGroupId) {
-        return protoGet("/places/group/" + id, PlaceGroup.deserializeBinary)
+        return protoGet("/places/group/at/" + id, PlaceGroup.deserializeBinary)
             .then(p => p ? p.toObject() : null);
     }
 
     loadResolvedGroup(id: PlaceGroupId) {
+        if (!id) return Promise.reject("No group ID provided");
         //FIXME offer this server-side
-        return this.loadGroup(id).then(group => {
-            const loadChildren = Promise.all([group.defaultchildid].concat(group.otherchildidList).map(this.loadPlaceBundle));
-            return loadChildren.then(children => ({group, children}));
-        });
+        return this.loadGroup(id).then(group => this.resolveGroup(group));
+    }
+
+    private resolveGroup(group: PlaceGroup.AsObject): Promise<ResolvedPlaceGroup> {
+        const loadChildren = Promise.all([group.defaultchildid].concat(group.otherchildidList).map(this.loadPlaceBundle));
+        return loadChildren.then(children => ({group, children}));
     }
 
     loadPlace(id: PlaceId) {

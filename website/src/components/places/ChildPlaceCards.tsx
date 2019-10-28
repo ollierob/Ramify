@@ -35,7 +35,10 @@ export default class ChildPlaceCards extends React.PureComponent<Props, State> {
 
         return <div className="childPlaces">
 
-            {keys.sort(sortByPlaceType).map(type => <TypeCard type={type as PlaceType} places={this.state.groupedPlaces[type]}/>)}
+            {keys.sort(sortByPlaceType).map(type => <TypeCard
+                key={type}
+                type={type as PlaceType}
+                places={this.state.groupedPlaces[type]}/>)}
 
             <AlsoSee
                 asCard={keys.length > 0}

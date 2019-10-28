@@ -1,4 +1,4 @@
-package net.ramify.server.resource.places.churches;
+package net.ramify.server.resource.places;
 
 import com.google.common.collect.ImmutableTable;
 import net.ramify.model.place.PlaceId;

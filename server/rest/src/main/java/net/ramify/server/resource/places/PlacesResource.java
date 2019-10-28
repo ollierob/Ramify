@@ -24,7 +24,11 @@ import static net.ramify.server.resource.Resource.APPLICATION_PROTOBUF;
 public interface PlacesResource extends RootResource {
 
     @GET
-    @Path("group/{id}")
+    @Path("group/find/{id}")
+    PlaceGroup group(@PathParam("id") PlaceId id);
+
+    @GET
+    @Path("group/at/{id}")
     @CheckForNull
     PlaceGroup group(@PathParam("id") PlaceGroupId id);
 

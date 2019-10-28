@@ -4,7 +4,7 @@ import {Place, PlaceDescription} from "../../../protobuf/generated/place_pb";
 import ChildPlaceCards from "../../../components/places/ChildPlaceCards";
 import {PlaceTitle} from "../../../components/places/PlaceTitle";
 import {PlaceFavouritesHandler} from "../../../components/places/PlaceFavourites";
-import {NoRecordCards, RecordCards} from "../../../components/records/RecordCards";
+import {RecordCards} from "../../../components/records/RecordCards";
 import {RecordSet} from "../../../protobuf/generated/record_pb";
 import {AsyncData} from "../../../components/fetch/AsyncData";
 import {isBuilding} from "../../../components/places/PlaceType";
@@ -17,6 +17,7 @@ type Props = PlaceFavouritesHandler & {
     loadingChildren?: boolean;
     records?: AsyncData<ReadonlyArray<RecordSet.AsObject>>;
     card?: boolean;
+    showAlsoSee?: boolean;
 }
 
 export const PlaceInfo = (props: Props) => {
@@ -32,7 +33,7 @@ export const PlaceInfo = (props: Props) => {
             <ChildPlaceCards
                 {...props}
                 childPlaces={props.childPlaces}
-                alsoSeePlaces={description && description.alsoseeList}
+                alsoSeePlaces={props.showAlsoSee && description && description.alsoseeList}
                 loading={props.loadingChildren}
                 noPlacesMessage={<>No further places within this area have been registered.</>}/>
         </Card>}

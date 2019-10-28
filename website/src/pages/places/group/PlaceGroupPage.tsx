@@ -6,7 +6,7 @@ import {DEFAULT_PLACE_LOADER} from "../../../components/places/PlaceLoader";
 import {PlaceGroupInfo} from "./PlaceGroupInfo";
 import "./PlaceGroup.css";
 import {updatePageHash} from "../../../components/Page";
-import {PlaceGroupId, ResolvedPlaceGroup} from "../../../components/places/PlaceGroup";
+import {PlaceGroupId, ResolvedPlaceGroup, synthesizePlaceGroup} from "../../../components/places/PlaceGroup";
 
 type Props = PlaceBasePageProps;
 
@@ -34,6 +34,11 @@ export class PlaceGroupPage extends PlaceBasePage<State> {
         return this.urlParameter("id");
     }
 
+    private setGroupId(groupId: PlaceGroupId) {
+        this.setState({groupId});
+        updatePageHash({base: "group", id: groupId});
+    }
+
     private readPlaceId(): PlaceId {
         return this.urlParameter("place");
     }
@@ -56,19 +61,34 @@ export class PlaceGroupPage extends PlaceBasePage<State> {
     }
 
     componentDidMount() {
-        this.loadPlaceGroup(this.state.groupId);
+        this.loadPlaceGroup(this.state.placeId, this.state.groupId);
     }
 
     componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>) {
         if (this.props.location != prevProps.location)
             this.setState({groupId: this.readPlaceGroupId(), placeId: this.readPlaceId()});
         if (this.state.groupId != prevState.groupId)
-            this.loadPlaceGroup(this.state.groupId);
+            this.loadPlaceGroup(this.state.placeId, this.state.groupId);
     }
 
-    private loadPlaceGroup(id: PlaceGroupId) {
-        if (!id) return;
-        asyncLoadData(id, id => this.placeLoader.loadResolvedGroup(id), group => this.setState({group}));
+    private loadPlaceGroup(placeId: PlaceId, groupId: PlaceGroupId) {
+        if (groupId && groupId != this.state.group.query) {
+            asyncLoadData(groupId, id => this.placeLoader.loadResolvedGroup(id), group => this.setState({group}));
+        } else if (!groupId && placeId) {
+            this.findGroup(placeId);
+        }
+    }
+
+    private findGroup(placeId: PlaceId) {
+        this.setState({group: {loading: true}});
+        this.placeLoader.findGroupId(placeId).then(id => {
+            if (id) this.setGroupId(id);
+            else asyncLoadData(placeId, id => this.synthesizeGroup(id), group => this.setState({group}));
+        });
+    }
+
+    private synthesizeGroup(id: PlaceId): Promise<ResolvedPlaceGroup> {
+        return this.placeLoader.loadPlaceBundle(id).then(synthesizePlaceGroup);
     }
 
 }
