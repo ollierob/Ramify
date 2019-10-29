@@ -21,3 +21,7 @@
     position: relative;
     margin-bottom: 12px;
 }
+
+.placeGroup .ant-tabs-content .submenu .places {
+    padding-left: 8px;
+}

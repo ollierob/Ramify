@@ -76,7 +76,7 @@ const TypeCard = (props: {type: PlaceType, places: ReadonlyArray<Place.AsObject>
         className="placeCard"
         title={<><Img src={"/images/" + props.type.toLowerCase() + ".svg"}/> {placeTypeName(props.type, true)}</>}>
         <ul>
-            {places.map(place => <li><PlaceLink place={place}/></li>)}
+            {places.map(place => <li key={place.id}><PlaceLink place={place}/></li>)}
         </ul>
     </Card>;
 };
