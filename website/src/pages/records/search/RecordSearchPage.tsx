@@ -13,8 +13,6 @@ import RecordSetTable from "./RecordSetTable";
 import {DEFAULT_RECORD_LOADER, RecordSetOptions} from "../../../components/records/RecordLoader";
 import {readPageHash, updatePageHash} from "../../../components/Page";
 import {hashToRecordSearch, recordSearchToHash} from "../../../components/search/RecordSearchHandler";
-import BasePage from "../../BasePage";
-import {HeaderMenuType} from "../../../components/layout/header/HeaderMenu";
 import {RecordBasePage, RecordBasePageProps} from "../RecordBasePage";
 import {SearchIcon} from "../../../components/images/Icons";
 

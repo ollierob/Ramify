@@ -7,7 +7,7 @@ import {PlacesIcon} from "../../../components/images/Icons";
 
 export const PlaceBreadcrumb = (props: {loading?: boolean, place: Place.AsObject}) => {
     return props.place && <SubMenu>
-        <Hierarchy {...props}/>}
+        <Hierarchy {...props}/>
     </SubMenu>;
 };
 
