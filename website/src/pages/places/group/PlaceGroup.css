@@ -11,10 +11,12 @@
     padding-top: 0;
 }
 
-.placeGroup .places.ant-card, .placeGroup .records.ant-card {
-    width: 50%;
-    display: inline-block;
-    vertical-align: top;
+.placeGroup .ant-tabs-tab {
+    font-size: 18px;
+}
+
+.placeGroup .ant-tabs-tab-active.ant-tabs-tab {
+    font-weight: bold;
 }
 
 .placeGroup .ant-tabs-content .submenu {
@@ -24,4 +26,18 @@
 
 .placeGroup .ant-tabs-content .submenu .places {
     padding-left: 8px;
+}
+
+.placeGroup .ant-tabs-content .description {
+    font-size: 16px;
+}
+
+.placeGroup .places.ant-card, .placeGroup .records.ant-card {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.placeGroup .places.ant-card .ant-card-body, .placeGroup .records.ant-card .ant-card-body {
+    padding-left: 0;
 }
