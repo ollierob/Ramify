@@ -38,7 +38,7 @@ class ProtoPlaceLoader implements PlaceLoader {
 
     private resolveGroup(group: PlaceGroup.AsObject): Promise<ResolvedPlaceGroup> {
         const loadChildren = Promise.all([group.defaultchildid].concat(group.otherchildidList).map(this.loadPlaceBundle));
-        return loadChildren.then(children => ({group, children}));
+        return loadChildren.then(children => ({group, children: children.filter(c => !!c)}));
     }
 
     loadPlace(id: PlaceId) {
