@@ -16,3 +16,8 @@
     display: inline-block;
     vertical-align: top;
 }
+
+.placeGroup .ant-tabs-content .submenu {
+    position: relative;
+    margin-bottom: 12px;
+}

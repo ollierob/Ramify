@@ -6,15 +6,15 @@ import {placeHref} from "../PlaceLinks";
 import {PlacesIcon} from "../../../components/images/Icons";
 
 export const PlaceBreadcrumb = (props: {loading?: boolean, place: Place.AsObject}) => {
-    return <SubMenu>
-        {props.place && <Hierarchy {...props}/>}
+    return props.place && <SubMenu>
+        <Hierarchy {...props}/>}
     </SubMenu>;
 };
 
 const Hierarchy = (props: {place: Place.AsObject}) => {
 
     const hierarchy = listHierarchy(props.place, 7);
-    if (!hierarchy.length) return null;
+    if (hierarchy.length <= 1) return null;
 
     return <div className="places">
         <PlacesIcon style={{marginRight: 8}}/>
