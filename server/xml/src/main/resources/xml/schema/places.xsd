@@ -267,7 +267,19 @@
 
     <xs:complexType abstract="true" name="xmlPlace">
 
-        <xs:sequence/>
+        <xs:sequence>
+
+            <xs:choice minOccurs="0">
+
+                <xs:element ref="ns1:closedInYear"/>
+
+                <xs:element ref="ns1:closedBetwweenYears"/>
+
+                <xs:element ref="ns1:closedBeforeYear"/>
+
+            </xs:choice>
+
+        </xs:sequence>
 
         <xs:attribute name="id" type="xs:string" use="required"/>
 
@@ -485,16 +497,6 @@
 
                     </xs:choice>
 
-                    <xs:choice minOccurs="0">
-
-                        <xs:element ref="ns1:closedInYear"/>
-
-                        <xs:element ref="ns1:closedBetwweenYears"/>
-
-                        <xs:element ref="ns1:closedBeforeYear"/>
-
-                    </xs:choice>
-
                 </xs:sequence>
 
                 <xs:attribute name="demolished" type="xs:boolean"/>
@@ -520,16 +522,6 @@
                         <xs:element ref="ns1:builtBetwweenYears"/>
 
                         <xs:element ref="ns1:builtBeforeYear"/>
-
-                    </xs:choice>
-
-                    <xs:choice minOccurs="0">
-
-                        <xs:element ref="ns1:closedInYear"/>
-
-                        <xs:element ref="ns1:closedBetwweenYears"/>
-
-                        <xs:element ref="ns1:closedBeforeYear"/>
 
                     </xs:choice>
 
@@ -561,16 +553,6 @@
 
                     </xs:choice>
 
-                    <xs:choice minOccurs="0">
-
-                        <xs:element ref="ns1:closedInYear"/>
-
-                        <xs:element ref="ns1:closedBetwweenYears"/>
-
-                        <xs:element ref="ns1:closedBeforeYear"/>
-
-                    </xs:choice>
-
                 </xs:sequence>
 
                 <xs:attribute name="demolished" type="xs:boolean"/>
@@ -596,16 +578,6 @@
                         <xs:element ref="ns1:builtBetwweenYears"/>
 
                         <xs:element ref="ns1:builtBeforeYear"/>
-
-                    </xs:choice>
-
-                    <xs:choice minOccurs="0">
-
-                        <xs:element ref="ns1:closedInYear"/>
-
-                        <xs:element ref="ns1:closedBetwweenYears"/>
-
-                        <xs:element ref="ns1:closedBeforeYear"/>
 
                     </xs:choice>
 
@@ -637,16 +609,6 @@
 
                     </xs:choice>
 
-                    <xs:choice minOccurs="0">
-
-                        <xs:element ref="ns1:closedInYear"/>
-
-                        <xs:element ref="ns1:closedBetwweenYears"/>
-
-                        <xs:element ref="ns1:closedBeforeYear"/>
-
-                    </xs:choice>
-
                 </xs:sequence>
 
                 <xs:attribute name="demolished" type="xs:boolean"/>
@@ -672,16 +634,6 @@
                         <xs:element ref="ns1:builtBetwweenYears"/>
 
                         <xs:element ref="ns1:builtBeforeYear"/>
-
-                    </xs:choice>
-
-                    <xs:choice minOccurs="0">
-
-                        <xs:element ref="ns1:closedInYear"/>
-
-                        <xs:element ref="ns1:closedBetwweenYears"/>
-
-                        <xs:element ref="ns1:closedBeforeYear"/>
 
                     </xs:choice>
 
@@ -740,16 +692,6 @@
                         <xs:element ref="ns1:builtBetwweenYears"/>
 
                         <xs:element ref="ns1:builtBeforeYear"/>
-
-                    </xs:choice>
-
-                    <xs:choice minOccurs="0">
-
-                        <xs:element ref="ns1:closedInYear"/>
-
-                        <xs:element ref="ns1:closedBetwweenYears"/>
-
-                        <xs:element ref="ns1:closedBeforeYear"/>
 
                     </xs:choice>
 

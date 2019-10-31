@@ -2,10 +2,18 @@ package net.ramify.model.place.xml.place;
 
 import com.google.common.collect.Sets;
 import net.ramify.model.ParserContext;
+import net.ramify.model.date.DateRange;
+import net.ramify.model.date.parse.DateParser;
+import net.ramify.model.date.xml.XmlBeforeYear;
+import net.ramify.model.date.xml.XmlBetweenYears;
+import net.ramify.model.date.xml.XmlDateRange;
+import net.ramify.model.date.xml.XmlInYear;
+import net.ramify.model.place.DefaultPlaceHistory;
 import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroup;
 import net.ramify.model.place.PlaceGroupId;
+import net.ramify.model.place.PlaceHistory;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.provider.PlaceGroupProvider;
 import net.ramify.model.place.provider.PlaceProvider;
@@ -16,6 +24,8 @@ import net.ramify.utils.objects.Functions;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.Collection;
 import java.util.Set;
@@ -31,6 +41,13 @@ public abstract class XmlPlace implements HasPlaceId {
 
     @XmlAttribute(name = "name")
     private String name;
+
+    @XmlElements({
+            @XmlElement(name = "closedInYear", type = XmlInYear.class, namespace = XmlDateRange.NAMESPACE),
+            @XmlElement(name = "closedBetwweenYears", type = XmlBetweenYears.class, namespace = XmlDateRange.NAMESPACE),
+            @XmlElement(name = "closedBeforeYear", type = XmlBeforeYear.class, namespace = XmlDateRange.NAMESPACE)
+    })
+    private XmlDateRange closed;
 
     protected abstract PlaceId placeId(String id);
 
@@ -77,6 +94,14 @@ public abstract class XmlPlace implements HasPlaceId {
 
     @CheckForNull
     protected abstract Collection<XmlPlace> children();
+
+    protected DateRange closed(final DateParser dates) {
+        return closed == null ? null : closed.resolve(dates);
+    }
+
+    protected PlaceHistory history(final ParserContext context) {
+        return closed == null ? null : new DefaultPlaceHistory(null, this.closed(context.dateParser()));
+    }
 
     @Override
     public String toString() {

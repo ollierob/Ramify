@@ -33,13 +33,6 @@ abstract class XmlBuilding<P extends Place> extends XmlPlace {
     })
     private XmlDateRange built;
 
-    @XmlElements({
-            @XmlElement(name = "closedInYear", type = XmlInYear.class, namespace = XmlDateRange.NAMESPACE),
-            @XmlElement(name = "closedBetwweenYears", type = XmlBetweenYears.class, namespace = XmlDateRange.NAMESPACE),
-            @XmlElement(name = "closedBeforeYear", type = XmlBeforeYear.class, namespace = XmlDateRange.NAMESPACE)
-    })
-    private XmlDateRange closed;
-
     @XmlAttribute(name = "demolished", required = false)
     private Boolean demolished;
 
@@ -71,14 +64,11 @@ abstract class XmlBuilding<P extends Place> extends XmlPlace {
         return built == null ? null : built.resolve(dates);
     }
 
-    protected DateRange closed(final DateParser dates) {
-        return closed == null ? null : closed.resolve(dates);
-    }
-
     protected boolean isDemolished() {
         return demolished == Boolean.TRUE;
     }
 
+    @Override
     protected BuildingHistory history(final ParserContext context) {
         return new DefaultBuildingHistory(this.built(context.dateParser()), this.closed(context.dateParser()), this.isDemolished());
     }

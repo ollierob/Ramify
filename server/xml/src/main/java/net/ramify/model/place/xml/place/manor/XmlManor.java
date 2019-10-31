@@ -32,7 +32,7 @@ public class XmlManor extends XmlPlace {
 
     @Override
     protected Manor place(final Place parent, final PlaceGroupId groupId, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new Manor(this.placeId(), this.name(), parent, groupId);
+        return new Manor(this.placeId(), this.name(), parent, groupId, this.history(context));
     }
 
     @Override
