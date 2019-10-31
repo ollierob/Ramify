@@ -7,7 +7,6 @@ import net.ramify.model.date.xml.XmlBeforeDate;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlInYear;
 import net.ramify.model.place.HasPlaceId;
-import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.building.Church;
 import net.ramify.model.place.id.Spid;
@@ -81,15 +80,16 @@ public class XmlChurchInfo implements HasPlaceId {
 
     @Nonnull
     ChurchInfo resolve(final PlaceProvider places, final RecordSetProvider records, final DateParser dateParser) {
+        final var placeId = this.placeId();
         try {
             return new ResolvedChurchInfo(
-                    places.require(this.placeId(), Church.class),
+                    places.require(placeId, Church.class),
                     denomination,
                     this.founded(dateParser),
                     this.closed(dateParser),
                     this.recordSets(records));
-        } catch (final Place.InvalidPlaceTypeException ex) {
-            throw new IllegalArgumentException(ex);
+        } catch (final Exception ex) {
+            throw new IllegalArgumentException("Error creating church info for " + placeId, ex);
         }
     }
 
