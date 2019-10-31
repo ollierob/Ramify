@@ -1,9 +1,9 @@
 import * as React from "react";
-import {Place, PlaceDescription} from "../../protobuf/generated/place_pb";
-import {HasClass} from "../style/HasClass";
+import {Place, PlaceDescription} from "../../../protobuf/generated/place_pb";
+import {HasClass} from "../../../components/style/HasClass";
 import {Card} from "antd";
-import {PlaceLink} from "./PlaceLink";
-import {Loading} from "../style/Loading";
+import {PlaceLink} from "../../../components/places/PlaceLink";
+import {Loading} from "../../../components/style/Loading";
 
 type Props = HasClass & {
     loading: boolean;
@@ -12,7 +12,7 @@ type Props = HasClass & {
     preTitle?: React.ReactNode;
 }
 
-export const PlaceInfo = (props: Props) => {
+export const RecordPlaceInfo = (props: Props) => {
 
     if (props.loading) return <Loading/>;
     if (!props.place) return null;

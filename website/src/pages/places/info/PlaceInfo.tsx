@@ -29,9 +29,9 @@ export const PlaceInfo = (props: Props) => {
 
     const inner = <>
 
-        {description && <ReactMarkdown
-            className="description"
-            source={description.description}/>}
+        <div className="description">
+            {description ? <ReactMarkdown source={description.description}/> : NoDescription}
+        </div>
 
         {props.childPlaces && (props.childPlaces.length || !isBuilding(place)) && <Card className="places" title={<b>Places</b>} bordered={false}>
             <ChildPlaceCards
@@ -57,3 +57,5 @@ export const PlaceInfo = (props: Props) => {
     return inner;
 
 };
+
+const NoDescription = <i>No description of this place is available.</i>;

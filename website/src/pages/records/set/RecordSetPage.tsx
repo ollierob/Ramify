@@ -8,7 +8,7 @@ import {ErrorMessage} from "../../../components/style/Error";
 import {PlaceId} from "../../../components/places/Place";
 import {PlaceMap} from "../../../components/places/PlaceMap";
 import RecordSetCard from "./RecordSetCard";
-import {PlaceInfo} from "../../../components/places/PlaceInfo";
+import {RecordPlaceInfo} from "./RecordPlaceInfo";
 import {RecordBasePage, RecordBasePageProps} from "../RecordBasePage";
 import {RecordSetId} from "../../../components/records/RecordSet";
 import {RecordBreadcrumb} from "./RecordBreadcrumb";
@@ -63,7 +63,7 @@ export default class RecordSetPage extends RecordBasePage<State> {
                     place={this.state.recordSetCoversPlace.data && this.state.recordSetCoversPlace.data.place}
                     position={this.state.recordSetCoversPlace.data && this.state.recordSetCoversPlace.data.position}/>
 
-                <PlaceInfo
+                <RecordPlaceInfo
                     preTitle={<>These records relate to<br/></>}
                     loading={this.state.recordSetCoversPlace.loading}
                     description={this.state.recordSetCoversPlace.data && this.state.recordSetCoversPlace.data.description}
