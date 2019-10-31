@@ -167,22 +167,6 @@
 
         <xs:sequence>
 
-            <xs:choice minOccurs="0">
-
-                <xs:element ref="ns1:foundedBefore"/>
-
-                <xs:element ref="ns1:foundedIn"/>
-
-            </xs:choice>
-
-            <xs:choice minOccurs="0">
-
-                <xs:element ref="ns1:closedBefore"/>
-
-                <xs:element ref="ns1:closedIn"/>
-
-            </xs:choice>
-
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:churchRecordSet"/>
 
         </xs:sequence>

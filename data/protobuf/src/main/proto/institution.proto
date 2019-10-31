@@ -17,8 +17,6 @@ message Institution {
 
     Place place = 1;
     string type = 2;
-    DateRange established = 3;
-    DateRange closed = 4;
-    repeated RecordSet recordSet = 5;
+    repeated RecordSet recordSet = 3;
 
 }

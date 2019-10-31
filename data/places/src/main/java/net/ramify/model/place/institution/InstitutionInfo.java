@@ -3,12 +3,10 @@ package net.ramify.model.place.institution;
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.Iterables;
 import net.ramify.data.proto.BuildsProto;
-import net.ramify.model.date.DateRange;
 import net.ramify.model.place.HasPlace;
 import net.ramify.model.place.institution.church.ChurchInfo;
 import net.ramify.model.place.proto.InstitutionProto;
 import net.ramify.model.record.collection.RecordSet;
-import net.ramify.utils.objects.Consumers;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -17,18 +15,8 @@ import java.util.Set;
 
 public interface InstitutionInfo extends HasPlace, BuildsProto<InstitutionProto.Institution> {
 
-    @Nonnull
-    DateRange founded();
-
-    @CheckForNull
-    DateRange closed();
-
     @CheckForNull
     String type();
-
-    default boolean isClosed() {
-        return this.closed() != null;
-    }
 
     @Nonnull
     Set<RecordSet> records();
@@ -37,9 +25,7 @@ public interface InstitutionInfo extends HasPlace, BuildsProto<InstitutionProto.
     default InstitutionProto.Institution.Builder toProtoBuilder() {
         final var builder = InstitutionProto.Institution.newBuilder()
                 .setPlace(this.place().toProto())
-                .setType(MoreObjects.firstNonNull(this.type(), ""))
-                .setEstablished(this.founded().toProto());
-        Consumers.ifNonNull(this.closed(), c -> builder.setClosed(c.toProto()));
+                .setType(MoreObjects.firstNonNull(this.type(), ""));
         this.records().forEach(record -> builder.addRecordSet(record.toProto()));
         return builder;
     }
