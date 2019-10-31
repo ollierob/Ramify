@@ -1,6 +1,7 @@
 package net.ramify.model.date;
 
 import javax.annotation.Nonnull;
+import java.time.LocalDate;
 import java.time.chrono.ChronoLocalDate;
 import java.util.Optional;
 
@@ -14,6 +15,10 @@ public class BeforeDate<D extends ChronoLocalDate> implements DateRange {
 
     public static <D extends ChronoLocalDate> BeforeDate<D> strictlyBefore(final D date) {
         return new BeforeDate<>(date, false);
+    }
+
+    public static BeforeDate<?> strictlyBefore(final int year) {
+        return new BeforeDate<>(LocalDate.of(year, 1, 1), false);
     }
 
     private final D date;
@@ -40,4 +45,5 @@ public class BeforeDate<D extends ChronoLocalDate> implements DateRange {
     public boolean isApproximate() {
         return approximate;
     }
+
 }

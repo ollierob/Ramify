@@ -50,6 +50,10 @@ export default abstract class BasePage<S = any> extends React.PureComponent<Base
         return new URLSearchParams(location.search).get(key);
     }
 
+    setPageTitle(title: string) {
+        document.title = title;
+    }
+
 }
 
 const Header = (props: {children: React.ReactNode}) => <div className="header">

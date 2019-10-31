@@ -1,6 +1,7 @@
 package net.ramify.model.place.xml.place.settlement;
 
 import com.google.common.base.MoreObjects;
+import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
@@ -33,7 +34,7 @@ public class XmlHamlet extends XmlPlace {
     }
 
     @Override
-    protected Hamlet place(final Place parent, final PlaceGroupId groupId) throws Place.InvalidPlaceTypeException {
+    protected Hamlet place(final Place parent, final PlaceGroupId groupId, final ParserContext context) throws Place.InvalidPlaceTypeException {
         return new Hamlet(this.placeId(), this.name(), parent, groupId);
     }
 

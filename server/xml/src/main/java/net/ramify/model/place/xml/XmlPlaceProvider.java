@@ -8,6 +8,7 @@ import com.google.common.collect.ImmutableSetMultimap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
+import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.provider.PlaceGroupProvider;
@@ -98,15 +99,15 @@ class XmlPlaceProvider implements PlaceProvider {
         return new XmlPlaceProvider(ImmutableMap.copyOf(places), ImmutableSetMultimap.copyOf(children), ImmutableSet.copyOf(countries));
     }
 
-    static PlaceProvider readPlacesInDirectory(final JAXBContext context, final File root, final PlaceGroupProvider groupProvider) throws JAXBException {
+    static PlaceProvider readPlacesInDirectory(final JAXBContext jaxbContext, final File root, final PlaceGroupProvider groupProvider, final ParserContext context) throws JAXBException {
         final var provider = new XmlPlaceProvider(Maps.newHashMap(), HashMultimap.create(), Sets.newHashSet());
-        final var unmarshaller = context.createUnmarshaller();
-        FileTraverseUtils.traverseSubdirectories(root, file -> file.getName().endsWith(".xml"), file -> readPlacesInFile(unmarshaller, file, provider, groupProvider));
+        final var unmarshaller = jaxbContext.createUnmarshaller();
+        FileTraverseUtils.traverseSubdirectories(root, file -> file.getName().endsWith(".xml"), file -> readPlacesInFile(unmarshaller, file, provider, groupProvider, context));
         logger.info("Loaded {} places from {}.", provider.size(), root);
         return provider.immutable();
     }
 
-    private static void readPlacesInFile(final Unmarshaller unmarshaller, final File file, final XmlPlaceProvider placeProvider, final PlaceGroupProvider groupProvider) {
+    private static void readPlacesInFile(final Unmarshaller unmarshaller, final File file, final XmlPlaceProvider placeProvider, final PlaceGroupProvider groupProvider, final ParserContext context) {
         Preconditions.checkArgument(file.isFile(), "Not a file: %s", file);
         Preconditions.checkArgument(file.canRead(), "Not a readable file: %s", file);
         Preconditions.checkArgument(file.getName().endsWith(".xml"), "Not an XML file: %s", file);
@@ -115,7 +116,7 @@ class XmlPlaceProvider implements PlaceProvider {
             final var unmarshalled = unmarshaller.unmarshal(file);
             if (!(unmarshalled instanceof XmlPlaces)) return;
             final var places = (XmlPlaces) unmarshalled;
-            placeProvider.addAll(places.places(placeProvider, groupProvider));
+            placeProvider.addAll(places.places(placeProvider, groupProvider, context));
         } catch (final JAXBException jex) {
             logger.warn("Could not read places in file " + file + ": " + jex.getMessage());
         }

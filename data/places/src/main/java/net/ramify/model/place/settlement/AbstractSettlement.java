@@ -13,7 +13,7 @@ public abstract class AbstractSettlement extends AbstractPlace implements Settle
     private final Region region;
 
     protected AbstractSettlement(final PlaceId id, final String name, final Region region, final PlaceGroupId groupId) {
-        super(id, name, groupId);
+        super(id, name, groupId, null);
         this.region = region;
     }
 

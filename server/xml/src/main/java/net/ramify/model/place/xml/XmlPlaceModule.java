@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.inject.PrivateModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
+import net.ramify.model.ParserContext;
 import net.ramify.model.date.XmlDateParser;
 import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.place.institution.church.ChurchInfoProvider;
@@ -67,8 +68,8 @@ public class XmlPlaceModule extends PrivateModule {
 
     @Provides
     @Singleton
-    PlaceProvider providePlaceProvider(final JAXBContext context, @Named("data") final File data, final PlaceGroupProvider groupProvider) throws JAXBException {
-        return XmlPlaceProvider.readPlacesInDirectory(context, data, groupProvider);
+    PlaceProvider providePlaceProvider(final JAXBContext jaxbContext, @Named("data") final File data, final PlaceGroupProvider groupProvider, final ParserContext context) throws JAXBException {
+        return XmlPlaceProvider.readPlacesInDirectory(jaxbContext, data, groupProvider, context);
     }
 
     @Provides

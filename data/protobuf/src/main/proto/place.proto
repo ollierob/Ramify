@@ -5,6 +5,7 @@ option java_outer_classname = "PlaceProto";
 
 import "location.proto";
 import "link.proto";
+import "date.proto";
 
 message PlaceGroup {
 
@@ -25,6 +26,15 @@ message Place {
     string iso = 5;
     bool defunct = 6;
     string groupId = 7;
+    PlaceHistory history = 8;
+
+}
+
+message PlaceHistory {
+
+    DateRange open = 1;
+    DateRange close = 2;
+    bool demolished = 3;
 
 }
 

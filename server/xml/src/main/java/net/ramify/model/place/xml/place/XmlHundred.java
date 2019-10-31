@@ -1,6 +1,7 @@
 package net.ramify.model.place.xml.place;
 
 import com.google.common.base.MoreObjects;
+import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.region.County;
@@ -29,7 +30,7 @@ class XmlHundred extends XmlArea<Hundred> {
     }
 
     @Override
-    protected Hundred place(final Place parent, final PlaceGroupId groupId) throws Place.InvalidPlaceTypeException {
+    protected Hundred place(final Place parent, final PlaceGroupId groupId, final ParserContext context) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
         return new Hundred(this.placeId(), this.name(), parent.requireAs(County.class), groupId);
     }

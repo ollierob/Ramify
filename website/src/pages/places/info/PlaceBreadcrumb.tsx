@@ -1,9 +1,10 @@
-import {Place} from "../../../protobuf/generated/place_pb";
+import {Place, PlaceHistory} from "../../../protobuf/generated/place_pb";
 import {SubMenu} from "../../SubMenu";
 import * as React from "react";
 import {placeTypeName} from "../../../components/places/PlaceType";
 import {placeHref} from "../PlaceLinks";
 import {PlacesIcon} from "../../../components/images/Icons";
+import {earliestYear, latestYear} from "../../../components/date/DateRange";
 
 export const PlaceBreadcrumb = (props: {loading?: boolean, place: Place.AsObject}) => {
 

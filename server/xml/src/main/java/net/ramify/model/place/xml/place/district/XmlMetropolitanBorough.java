@@ -1,5 +1,6 @@
 package net.ramify.model.place.xml.place.district;
 
+import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.region.district.MetropolitanBorough;
@@ -31,7 +32,7 @@ public class XmlMetropolitanBorough extends XmlArea<MetropolitanBorough> {
     }
 
     @Override
-    protected MetropolitanBorough place(final Place parent, final PlaceGroupId groupId) throws Place.InvalidPlaceTypeException {
+    protected MetropolitanBorough place(final Place parent, final PlaceGroupId groupId, final ParserContext context) throws Place.InvalidPlaceTypeException {
         return new MetropolitanBorough(this.placeId(), this.name(), parent, groupId);
     }
 

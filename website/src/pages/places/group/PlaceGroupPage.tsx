@@ -64,6 +64,8 @@ export class PlaceGroupPage extends PlaceBasePage<State> {
             this.setState({groupId: this.readPlaceGroupId(), placeId: this.readPlaceId()});
         if (this.state.groupId != prevState.groupId || (!this.state.groupId && this.state.placeId != prevState.placeId))
             this.loadPlaceGroup();
+        if (this.state.group.data && this.state.group.data != prevState.group.data)
+            this.setPageTitle(this.state.group.data.group.name);
     }
 
     private loadPlaceGroup(groupId: PlaceGroupId = this.state.groupId, placeId: PlaceId = this.state.placeId) {

@@ -1,24 +1,34 @@
 package net.ramify.model.place.building;
 
-import net.ramify.model.place.AbstractPlace;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.proto.PlaceProto;
+import net.ramify.model.place.type.BuildingHistory;
 import net.ramify.model.place.type.SettlementOrRegion;
 
 import java.util.Objects;
 
-public class School extends AbstractPlace implements Institution {
+public class School extends AbstractBuilding implements Institution {
 
     private final SettlementOrRegion parent;
 
-    public School(final PlaceId id, final String name, final Place parent, final PlaceGroupId groupId) throws InvalidPlaceTypeException {
-        this(id, name, parent.requireAs(SettlementOrRegion.class), groupId);
+    public School(
+            final PlaceId id,
+            final String name,
+            final Place parent,
+            final PlaceGroupId groupId,
+            final BuildingHistory history) throws InvalidPlaceTypeException {
+        this(id, name, parent.requireAs(SettlementOrRegion.class), groupId, history);
     }
 
-    public School(final PlaceId id, final String name, final SettlementOrRegion parent, final PlaceGroupId groupId) {
-        super(id, name, groupId);
+    public School(
+            final PlaceId id,
+            final String name,
+            final SettlementOrRegion parent,
+            final PlaceGroupId groupId,
+            final BuildingHistory history) {
+        super(id, name, groupId, history);
         this.parent = Objects.requireNonNull(parent, "parent");
     }
 

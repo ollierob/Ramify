@@ -1,5 +1,6 @@
 package net.ramify.model.place.xml.place.settlement;
 
+import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.building.Graveyard;
@@ -15,8 +16,8 @@ public class XmlGraveyard extends XmlBuilding<Graveyard> {
     }
 
     @Override
-    protected Graveyard place(final Place parent, final PlaceGroupId groupId) throws Place.InvalidPlaceTypeException {
-        return new Graveyard(this.placeId(), this.name(), parent, groupId);
+    protected Graveyard place(final Place parent, final PlaceGroupId groupId, final ParserContext context) throws Place.InvalidPlaceTypeException {
+        return new Graveyard(this.placeId(), this.name(), parent, groupId, this.history(context));
     }
 
 }

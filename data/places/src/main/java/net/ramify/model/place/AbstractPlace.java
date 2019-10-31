@@ -11,11 +11,13 @@ public abstract class AbstractPlace implements Place {
     private final PlaceId id;
     private final String name;
     private final PlaceGroupId groupId;
+    private final PlaceHistory history;
 
-    protected AbstractPlace(final PlaceId id, final String name, PlaceGroupId groupId) {
+    protected AbstractPlace(final PlaceId id, final String name, final PlaceGroupId groupId, final PlaceHistory history) {
         this.id = Objects.requireNonNull(id, "id");
         this.name = Objects.requireNonNull(name, "name");
         this.groupId = groupId;
+        this.history = history;
     }
 
     @Nonnull
@@ -36,9 +38,15 @@ public abstract class AbstractPlace implements Place {
         return groupId;
     }
 
+    @CheckForNull
+    @Override
+    public PlaceHistory history() {
+        return history;
+    }
+
     @Override
     public boolean isDefunct() {
-        return DefunctPlaces.isDefunct(this, this.find(Country.class).orElse(null));
+        return (history != null && history.hasClosure()) || DefunctPlaces.isDefunct(this, this.find(Country.class).orElse(null));
     }
 
 }

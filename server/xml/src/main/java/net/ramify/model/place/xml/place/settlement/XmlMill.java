@@ -1,5 +1,6 @@
 package net.ramify.model.place.xml.place.settlement;
 
+import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.building.Mill;
@@ -15,8 +16,8 @@ public class XmlMill extends XmlBuilding<Mill> {
     }
 
     @Override
-    protected Mill place(final Place parent, final PlaceGroupId groupId) throws Place.InvalidPlaceTypeException {
-        return new Mill(this.placeId(), this.name(), parent, groupId);
+    protected Mill place(final Place parent, final PlaceGroupId groupId, final ParserContext context) throws Place.InvalidPlaceTypeException {
+        return new Mill(this.placeId(), this.name(), parent, groupId, this.history(context));
     }
 
 }

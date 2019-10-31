@@ -1,5 +1,6 @@
 package net.ramify.model.place.xml.place;
 
+import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
@@ -23,6 +24,6 @@ public abstract class XmlArea<P extends Region> extends XmlPlace {
     }
 
     @Override
-    protected abstract P place(Place parent, PlaceGroupId groupId) throws Place.InvalidPlaceTypeException;
+    protected abstract P place(Place parent, PlaceGroupId groupId, ParserContext context) throws Place.InvalidPlaceTypeException;
 
 }

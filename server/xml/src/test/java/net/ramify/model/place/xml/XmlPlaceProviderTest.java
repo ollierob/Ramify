@@ -1,5 +1,6 @@
 package net.ramify.model.place.xml;
 
+import net.ramify.model.ParserContext;
 import net.ramify.model.place.building.Church;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.provider.PlaceGroupProvider;
@@ -8,6 +9,7 @@ import net.ramify.model.place.region.Parish;
 import net.ramify.model.place.settlement.Village;
 import net.ramify.model.place.xml.place.XmlPlaces;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import javax.xml.bind.JAXBContext;
 import java.io.File;
@@ -24,7 +26,8 @@ class XmlPlaceProviderTest {
         final var context = JAXBContext.newInstance(XmlPlaces.class);
         final var file = new File(XmlPlaceProviderTest.class.getResource("/xml/data").toURI());
         final var groups = mock(PlaceGroupProvider.class);
-        final var placeProvider = XmlPlaceProvider.readPlacesInDirectory(context, file, groups);
+        final var parserContext = mock(ParserContext.class, Mockito.RETURNS_MOCKS);
+        final var placeProvider = XmlPlaceProvider.readPlacesInDirectory(context, file, groups, parserContext);
 
         assertNotNull(placeProvider.get(new Spid(Country.class, "england")));
         assertNotNull(placeProvider.get(new Spid(Parish.class, "halifax")));

@@ -1,6 +1,6 @@
 import * as React from "react";
 import {AsyncData} from "../../../components/fetch/AsyncData";
-import {Place, PlaceBundle} from "../../../protobuf/generated/place_pb";
+import {Place, PlaceBundle, PlaceHistory} from "../../../protobuf/generated/place_pb";
 import {Card, Tabs} from "antd";
 import {PlaceId} from "../../../components/places/Place";
 import {ResolvedPlaceGroup} from "../../../components/places/PlaceGroup";
@@ -8,6 +8,7 @@ import {placeTypeKey, placeTypeName, sortByPlaceType} from "../../../components/
 import {PlaceInfo} from "../info/PlaceInfo";
 import {PlaceFavouritesHandler} from "../../../components/places/PlaceFavourites";
 import {PlaceBreadcrumb} from "../info/PlaceBreadcrumb";
+import {earliestYear, latestYear} from "../../../components/date/DateRange";
 
 type Props = {
     group: AsyncData<ResolvedPlaceGroup>
@@ -30,7 +31,7 @@ export const PlaceGroupInfo = (props: Props) => {
             activeKey={props.selected}
             onChange={active => props.select(active)}>
 
-            {sortChildren(resolved.children).map(child => <Tabs.TabPane key={child.place.id} tab={placeTypeName(child.place.type)}>
+            {sortChildren(resolved.children).map(child => <Tabs.TabPane key={child.place.id} tab={<Title place={child.place}/>}>
                 <ChildInfo favourites={props.favourites} place={child}/>
             </Tabs.TabPane>)}
 
@@ -72,3 +73,21 @@ class ChildInfo extends React.PureComponent<ChildProps> {
     }
 
 }
+
+const Title = (props: {place: Place.AsObject}) => {
+    const place = props.place;
+    return <>
+        {placeTypeName(place.type)}
+        <History history={place.history}/>
+    </>;
+};
+
+const History = (props: {history: PlaceHistory.AsObject}) => {
+    const history = props.history;
+    if (!history) return null;
+    if (!history.open && !history.close) return null;
+    return <span className="history">
+        {" "}
+        ({earliestYear(history.open) || "?"} - {latestYear(history.close) || "now"})
+    </span>;
+};

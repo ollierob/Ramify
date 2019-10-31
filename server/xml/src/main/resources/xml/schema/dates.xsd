@@ -3,9 +3,21 @@
 
     <xs:element name="betweenYears" type="tns:xmlBetweenYears"/>
 
+    <xs:element name="builtBeforeYear" type="tns:xmlBeforeYear"/>
+
+    <xs:element name="builtBetwweenYears" type="tns:xmlBetweenYears"/>
+
+    <xs:element name="builtInYear" type="tns:xmlInYear"/>
+
     <xs:element name="closedBefore" type="tns:xmlBeforeDate"/>
 
+    <xs:element name="closedBeforeYear" type="tns:xmlBeforeYear"/>
+
+    <xs:element name="closedBetwweenYears" type="tns:xmlBetweenYears"/>
+
     <xs:element name="closedIn" type="tns:xmlInYear"/>
+
+    <xs:element name="closedInYear" type="tns:xmlInYear"/>
 
     <xs:element name="deathDate" type="tns:xmlExactDate"/>
 
@@ -16,6 +28,8 @@
     <xs:element name="inYear" type="tns:xmlInYear"/>
 
     <xs:element name="xmlBeforeDate" type="tns:xmlBeforeDate"/>
+
+    <xs:element name="xmlBeforeYear" type="tns:xmlBeforeYear"/>
 
     <xs:element name="xmlBetweenYears" type="tns:xmlBetweenYears"/>
 
@@ -74,6 +88,22 @@
                 <xs:attribute name="month" type="xs:int" use="required"/>
 
                 <xs:attribute name="dayOfMonth" type="xs:int" use="required"/>
+
+            </xs:extension>
+
+        </xs:complexContent>
+
+    </xs:complexType>
+
+    <xs:complexType name="xmlBeforeYear">
+
+        <xs:complexContent>
+
+            <xs:extension base="tns:xmlDateRange">
+
+                <xs:sequence/>
+
+                <xs:attribute name="year" type="xs:int" use="required"/>
 
             </xs:extension>
 
