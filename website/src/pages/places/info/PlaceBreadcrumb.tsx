@@ -38,7 +38,7 @@ const Breadcrumb = (props: {place: Place.AsObject, separator: boolean}) => {
     if (!place) return <> ... &raquo; </>;
 
     const type = placeTypeName(place.type);
-    const prefix = !place.name.endsWith(type);
+    const prefix = !place.name.endsWith(type) && type != "Country";
 
     return <>
         <span className="place">
