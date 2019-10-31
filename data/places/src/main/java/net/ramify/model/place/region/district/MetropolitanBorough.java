@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.region.AbstractRegion;
 import net.ramify.model.place.type.Region;
 
@@ -32,6 +33,11 @@ public class MetropolitanBorough extends AbstractRegion implements District {
     @Override
     public Set<Class<? extends Place>> childTypes() {
         return ImmutableSet.of();
+    }
+
+    @Override
+    public PlaceProto.PlaceType protoType() {
+        return PlaceProto.PlaceType.BOROUGH;
     }
 
 }
