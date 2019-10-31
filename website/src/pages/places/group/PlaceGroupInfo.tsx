@@ -61,7 +61,7 @@ class ChildInfo extends React.PureComponent<ChildProps> {
         if (!place) return null;
 
         return <>
-            <PlaceBreadcrumb place={place.place}/>
+            <PlaceBreadcrumb place={place.place} skipSelf/>
             <PlaceInfo
                 {...this.props.favourites}
                 card={false}

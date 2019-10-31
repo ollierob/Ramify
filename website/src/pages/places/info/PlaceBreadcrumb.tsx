@@ -1,14 +1,13 @@
-import {Place, PlaceHistory} from "../../../protobuf/generated/place_pb";
+import {Place} from "../../../protobuf/generated/place_pb";
 import {SubMenu} from "../../SubMenu";
 import * as React from "react";
 import {placeTypeName} from "../../../components/places/PlaceType";
 import {placeHref} from "../PlaceLinks";
 import {PlacesIcon} from "../../../components/images/Icons";
-import {earliestYear, latestYear} from "../../../components/date/DateRange";
 
-export const PlaceBreadcrumb = (props: {loading?: boolean, place: Place.AsObject}) => {
+export const PlaceBreadcrumb = (props: {loading?: boolean, place: Place.AsObject, skipSelf?: boolean}) => {
 
-    const hierarchy = listHierarchy(props.place, 7);
+    const hierarchy = listHierarchy(props.place, 7, props.skipSelf);
     if (hierarchy.length <= 1) return null;
 
     return <SubMenu>
@@ -20,8 +19,9 @@ export const PlaceBreadcrumb = (props: {loading?: boolean, place: Place.AsObject
 
 };
 
-function listHierarchy(place: Place.AsObject, max: number): ReadonlyArray<Place.AsObject> {
+function listHierarchy(place: Place.AsObject, max: number, skipSelf: boolean): ReadonlyArray<Place.AsObject> {
     if (!place) return [];
+    if (skipSelf) return listHierarchy(place.parent, max, false);
     let list: Place.AsObject[] = [];
     while (place != null) {
         list.push(place);
