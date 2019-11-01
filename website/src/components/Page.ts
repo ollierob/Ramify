@@ -28,9 +28,14 @@ export function readPageHash(): StringMap {
 function createPageHash(map: QueryMap): string {
     const q = Object.keys(map)
         .filter(key => key != "base" && !!map[key])
-        .map(key => key + "=" + encodeURIComponent(map[key]))
+        .map(key => key + "=" + weakEncode(map[key]))
         .join("&");
     return "/" + map.base + (q.length ? "?" + q : "");
+}
+
+function weakEncode(s: string | number | boolean) {
+    if (!s || typeof s != "string") return s;
+    return s; //TODO
 }
 
 function setPageHashString(hash: string) {

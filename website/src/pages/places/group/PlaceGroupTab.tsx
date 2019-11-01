@@ -43,9 +43,7 @@ export class PlaceGroupTab extends React.PureComponent<Props, State> {
         if (!place) return null;
 
         return <>
-            <PlaceBreadcrumb
-                place={place.place}
-                skipSelf/>
+            <PlaceBreadcrumb place={place.place}/>
             <PlaceInfo
                 {...this.props.favourites}
                 card={false}
