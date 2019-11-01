@@ -1,7 +1,6 @@
 package net.ramify.model.place.xml.place.settlement;
 
 import com.google.common.base.MoreObjects;
-import com.google.common.base.Preconditions;
 import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
@@ -17,6 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "city")
 public class XmlCity extends XmlPlace {
@@ -38,7 +38,7 @@ public class XmlCity extends XmlPlace {
 
     @Override
     protected City place(final Place parent, final PlaceGroupId groupId, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        Preconditions.checkArgument(parent != null, "Missing parent");
+        Objects.requireNonNull(parent, "parent");
         return new City(this.placeId(), this.name(), parent.requireAs(Region.class), groupId);
     }
 
