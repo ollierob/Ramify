@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
-import net.ramify.model.place.building.Institution;
+import net.ramify.model.place.building.Church;
 import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.settlement.Town;
 import net.ramify.model.place.settlement.Village;
@@ -14,7 +14,7 @@ import java.util.Set;
 
 public class Chapelry extends AbstractRegion {
 
-    private static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(Township.class, Town.class, Village.class, Institution.class);
+    private static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(Township.class, Town.class, Village.class, Church.class);
 
     private final Parish parent;
 
