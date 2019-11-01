@@ -6,6 +6,7 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.region.Wapentake;
 import net.ramify.model.place.xml.place.manor.XmlManor;
+import net.ramify.model.place.xml.place.settlement.XmlCity;
 
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
@@ -20,7 +21,8 @@ class XmlWapentake extends XmlArea<Wapentake> {
 
     @XmlElementRefs({
             @XmlElementRef(type = XmlParish.class),
-            @XmlElementRef(type = XmlManor.class)
+            @XmlElementRef(type = XmlManor.class),
+            @XmlElementRef(type = XmlCity.class),
     })
     private List<XmlPlace> children;
 

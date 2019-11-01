@@ -848,6 +848,8 @@
             <xs:element ref="tns:parish"/>
                         
             <xs:element ref="tns:manor"/>
+                        
+            <xs:element ref="tns:city"/>
                       
           </xs:choice>
                   
