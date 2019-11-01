@@ -7,11 +7,14 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.region.AbstractRegion;
 import net.ramify.model.place.type.Region;
+import net.ramify.model.place.type.Settlement;
 
 import javax.annotation.Nonnull;
 import java.util.Set;
 
 public class MetropolitanBorough extends AbstractRegion implements District {
+
+    private static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(Region.class, Settlement.class);
 
     private final Region parent;
 
@@ -32,7 +35,7 @@ public class MetropolitanBorough extends AbstractRegion implements District {
     @Nonnull
     @Override
     public Set<Class<? extends Place>> childTypes() {
-        return ImmutableSet.of();
+        return CHILD_TYPES;
     }
 
     @Override
