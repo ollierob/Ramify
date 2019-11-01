@@ -26,11 +26,8 @@ public interface RecordSetProvider extends Provider<RecordSetId, RecordSet> {
 
     class UnknownRecordSetException extends RuntimeException {
 
-        private final RecordSetId id;
-
         public UnknownRecordSetException(final RecordSetId id) {
             super("Unknown record set: " + id);
-            this.id = id;
         }
 
     }

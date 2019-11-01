@@ -33,7 +33,11 @@ export const PlaceGroupInfo = (props: Props) => {
             onChange={active => props.select(active)}>
 
             {sortChildren(resolved.children).map(child => <Tabs.TabPane key={child.place.id} tab={<Title place={child.place}/>}>
-                <PlaceGroupTab key={child.place.id} favourites={props.favourites} place={child}/>
+                <PlaceGroupTab
+                    key={child.place.id}
+                    group={resolved.group}
+                    favourites={props.favourites}
+                    place={child}/>
             </Tabs.TabPane>)}
 
         </Tabs>

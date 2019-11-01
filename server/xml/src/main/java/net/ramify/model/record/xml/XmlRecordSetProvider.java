@@ -70,6 +70,8 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
             if (relatives.containsAnyParent(matching.keySet(), record.recordSetId())) continue;
 
             matching.put(record.recordSetId(), record);
+            relatives.descendants(record).forEach(descendant -> matching.remove(descendant.recordSetId()));
+
             if (matching.size() >= limit) break;
 
         }

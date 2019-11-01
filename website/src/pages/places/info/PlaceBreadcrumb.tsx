@@ -5,7 +5,7 @@ import {placeTypeName} from "../../../components/places/PlaceType";
 import {placeHref} from "../PlaceLinks";
 import {PlacesIcon} from "../../../components/images/Icons";
 
-export const PlaceBreadcrumb = (props: {loading?: boolean, place: Place.AsObject}) => {
+export const PlaceBreadcrumb = (props: {loading?: boolean, place: Place.AsObject, showLastName?: boolean}) => {
 
     const hierarchy = listHierarchy(props.place, 7);
     if (hierarchy.length <= 1) return null;
@@ -13,7 +13,11 @@ export const PlaceBreadcrumb = (props: {loading?: boolean, place: Place.AsObject
     return <SubMenu>
         <div className="places">
             <PlacesIcon style={{marginRight: 8}}/>
-            {hierarchy.map((place, i) => <Breadcrumb key={place.id} place={place} separator={i < hierarchy.length - 1} showType={i < hierarchy.length - 1}/>)}
+            {hierarchy.map((place, i) => <Breadcrumb
+                key={place.id}
+                place={place}
+                separator={i < hierarchy.length - 1}
+                showType={i < hierarchy.length - 1 || !props.showLastName}/>)}
         </div>
     </SubMenu>;
 

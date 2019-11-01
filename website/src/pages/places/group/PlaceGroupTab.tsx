@@ -1,5 +1,5 @@
 import * as React from "react";
-import {PlaceBundle} from "../../../protobuf/generated/place_pb";
+import {PlaceBundle, PlaceGroup} from "../../../protobuf/generated/place_pb";
 import {PlaceFavouritesHandler} from "../../../components/places/PlaceFavourites";
 import {PlaceBreadcrumb} from "../info/PlaceBreadcrumb";
 import {PlaceInfo} from "../info/PlaceInfo";
@@ -9,6 +9,7 @@ import {PlaceId} from "../../../components/places/Place";
 import {DEFAULT_RECORD_LOADER} from "../../../components/records/RecordLoader";
 
 type Props = {
+    group: PlaceGroup.AsObject;
     place: PlaceBundle.AsObject;
     favourites: PlaceFavouritesHandler
 }
@@ -42,8 +43,12 @@ export class PlaceGroupTab extends React.PureComponent<Props, State> {
         const place = this.props.place;
         if (!place) return null;
 
+        const group = this.props.group;
+
         return <>
-            <PlaceBreadcrumb place={place.place}/>
+            <PlaceBreadcrumb
+                place={place.place}
+                showLastName={group && place.place.name != group.name}/>
             <PlaceInfo
                 {...this.props.favourites}
                 card={false}
@@ -57,7 +62,7 @@ export class PlaceGroupTab extends React.PureComponent<Props, State> {
 
     private loadRecords(place: PlaceId) {
         if (!place) return;
-        asyncLoadData(place, id => this.recordLoader.loadRecordSets({place}), records => this.setState({records}));
+        asyncLoadData(place, id => this.recordLoader.loadRecordSets({place, onlyParents: true}), records => this.setState({records}));
     }
 
 }
