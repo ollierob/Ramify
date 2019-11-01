@@ -9,6 +9,7 @@ import {PlaceInfo} from "../info/PlaceInfo";
 import {PlaceFavouritesHandler} from "../../../components/places/PlaceFavourites";
 import {PlaceBreadcrumb} from "../info/PlaceBreadcrumb";
 import {earliestYear, latestYear} from "../../../components/date/DateRange";
+import {PlaceGroupTab} from "./PlaceGroupTab";
 
 type Props = {
     group: AsyncData<ResolvedPlaceGroup>
@@ -32,7 +33,7 @@ export const PlaceGroupInfo = (props: Props) => {
             onChange={active => props.select(active)}>
 
             {sortChildren(resolved.children).map(child => <Tabs.TabPane key={child.place.id} tab={<Title place={child.place}/>}>
-                <ChildInfo favourites={props.favourites} place={child}/>
+                <PlaceGroupTab favourites={props.favourites} place={child}/>
             </Tabs.TabPane>)}
 
         </Tabs>
@@ -51,27 +52,6 @@ function sortChildren(children: ReadonlyArray<PlaceBundle.AsObject>): ReadonlyAr
 type ChildProps = {
     place: PlaceBundle.AsObject;
     favourites: PlaceFavouritesHandler
-}
-
-class ChildInfo extends React.PureComponent<ChildProps> {
-
-    render() {
-
-        const place = this.props.place;
-        if (!place) return null;
-
-        return <>
-            <PlaceBreadcrumb place={place.place} skipSelf/>
-            <PlaceInfo
-                {...this.props.favourites}
-                card={false}
-                place={place.place}
-                description={place.description}
-                childPlaces={place.childList}/>
-        </>;
-
-    }
-
 }
 
 const Title = (props: {place: Place.AsObject}) => {
