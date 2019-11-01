@@ -20,24 +20,32 @@ const Hierarchy = (props: {hierarchy: RecordSetHierarchy.AsObject}) => {
 };
 
 const Breadcrumb = (props: {relatives: RecordSetRelatives.AsObject, first?: boolean, last?: boolean}) => {
+
     const self = props.relatives.self;
-    return <>
-        <Popover content={<BreadcrumbDropdown {...props}/>} placement="bottomLeft">
-            <span className="record">
-                <a href={recordSetHref(self)}>
-                    <b>
-                        {props.last ? self.longtitle : (self.shorttitle || self.longtitle)}
-                    </b>
-                </a>
-            </span>
-        </Popover>
-        {!props.last && " » "}
-    </>;
+
+    const inner = <span className="record">
+            <a href={recordSetHref(self)}>
+                <b>{self.longtitle || self.shorttitle}</b>
+            </a>
+        </span>;
+
+    const outer = hasRelatives(props.relatives)
+        ? <Popover content={props.relatives && <BreadcrumbDropdown {...props}/>} placement="bottomLeft">{inner}</Popover>
+        : inner;
+
+    return <>{outer}{!props.last && " » "}    </>;
+
 };
+
+function hasRelatives(relatives: RecordSetRelatives.AsObject): boolean {
+    if (!relatives) return false;
+    return relatives.previous != null || (relatives.nextList != null && relatives.nextList.length > 0);
+}
+
 
 const BreadcrumbDropdown = (props: {relatives: RecordSetRelatives.AsObject}) => {
     const relatives = props.relatives;
-    if (!relatives) return null;
+    if (!hasRelatives(relatives)) return null;
     return <>
         {relatives.previous && <div>
             <PrevIcon/> Previous:
