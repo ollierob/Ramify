@@ -7,6 +7,7 @@ import {PlaceGroupInfo} from "./PlaceGroupInfo";
 import "./PlaceGroup.css";
 import {updatePageHash} from "../../../components/Page";
 import {PlaceGroupId, ResolvedPlaceGroup, synthesizePlaceGroup} from "../../../components/places/PlaceGroup";
+import {addPlaceHistory} from "../../../components/places/PlaceHistory";
 
 type Props = PlaceBasePageProps;
 

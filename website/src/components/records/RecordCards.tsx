@@ -14,12 +14,14 @@ import {Link} from "../style/Links";
 import {Loading} from "../style/Loading";
 import {sortRecordSetByDateThenTitle} from "./RecordSet";
 
-type Props = HasClass & {
+type Titling = {
+    shortTitle?: boolean;
+    removePrefix?: string;
+}
+
+type Props = HasClass & Titling & {
     loading?: boolean
     records: ReadonlyArray<RecordSet.AsObject>
-    //relatives?: ReadonlyArray<RecordSetRelatives.AsObject>
-    //groupByParent?: boolean
-    shortTitle?: boolean
     alsoSee?: ReadonlyArray<Place.AsObject>
     fixedWidth?: boolean;
 }
@@ -35,38 +37,17 @@ export const RecordCards = (props: Props) => {
         className={"recordCards" + (props.fixedWidth ? " fixedWidth" : "")}
         style={props.style}>
         {props.loading && <Loading/>}
-        {records.map(record => <RecordCard record={record} shortTitle={props.shortTitle}/>)}
+        {records.map(record => <RecordCard {...props} record={record}/>)}
         {!props.loading && !records.length && <NoRecordCards/>}
         {props.alsoSee && <AlsoSeeCard alsoSee={props.alsoSee}/>}
     </div>;
 
 };
 
-// const GroupedRecordCards = (props: {records: ReadonlyArray<RecordSet.AsObject>, alsoSee?: ReadonlyArray<Place.AsObject>}) => {
-//     const records = props.records;
-//     const parentGroups: CardGrouping[] = [];
-//     return <div className="recordCards">
-//         {Object.keys(parentGroups).map(group => <GroupRecordCard records={parentGroups[group]}/>)}
-//     </div>;
-// };
-
-type CardGrouping = {records: ReadonlyArray<RecordSet.AsObject>, relatives: RecordSetRelatives.AsObject}
-
-const GroupRecordCard = (props: {records: ReadonlyArray<RecordSet.AsObject>, relatives: RecordSetRelatives.AsObject}) => {
-    const children = [...props.records].sort(sortRecordSetByDateThenTitle);
-    const cards = <>{children.map(record => <RecordCard record={record} shortTitle/>)}</>;
-    const parent = props.relatives && props.relatives.parent;
-    if (!parent) return cards;
-    return <Card
-        className="groupCard"
-        title={<><RecordsIcon/> <a href={recordSetHref(parent)}>{parent.longtitle}</a></>}>
-        {cards}
-    </Card>;
-};
-
-const RecordCard = (props: {record: RecordSet.AsObject, shortTitle?: boolean}) => {
+const RecordCard = (props: {record: RecordSet.AsObject} & Titling) => {
     const record = props.record;
-    const title = props.shortTitle ? shortTitle(record) : record.longtitle;
+    let title = props.shortTitle ? shortTitle(record) : record.longtitle;
+    if (props.removePrefix && title.startsWith(props.removePrefix)) title = title.substring(props.removePrefix.length).trimLeft();
     return <Card
         title={<a href={recordSetHref(record)}>{title}</a>}
         className="recordCard">
@@ -108,5 +89,5 @@ function shortTitle(record: RecordSet.AsObject): string {
 }
 
 export const NoRecordCards = () => {
-    return <>No records known.</>
-}
+    return <>No records known.</>;
+};
