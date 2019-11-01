@@ -24,6 +24,7 @@ public class XmlCity extends XmlPlace {
     @XmlElementRefs({
             @XmlElementRef(type = XmlStreet.class),
             @XmlElementRef(type = XmlChurch.class),
+            @XmlElementRef(type = XmlMonastery.class),
             @XmlElementRef(type = XmlMill.class),
             @XmlElementRef(type = XmlSchool.class),
             @XmlElementRef(type = XmlInn.class),

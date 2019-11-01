@@ -78,6 +78,7 @@ enum PlaceType {
     MILL = 105;
     INN = 106;
     GRAVEYARD = 107;
+    MONASTERY = 108;
 
 }
 

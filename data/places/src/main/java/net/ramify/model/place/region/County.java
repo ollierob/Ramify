@@ -14,7 +14,7 @@ import javax.annotation.Nonnull;
 import java.util.Optional;
 import java.util.Set;
 
-public class County extends AbstractRegion {
+public class County extends AbstractRegion implements CountyOrSubdivision {
 
     private static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(Manor.class, Parish.class, City.class, Hundred.class, MetropolitanBorough.class);
 

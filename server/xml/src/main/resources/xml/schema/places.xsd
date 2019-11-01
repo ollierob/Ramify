@@ -43,6 +43,8 @@
     
   <xs:element name="mill" type="tns:xmlMill"/>
     
+  <xs:element name="monastery" type="tns:xmlMonastery"/>
+    
   <xs:element name="nationalArchivesLink" type="tns:xmlNationalArchivesLink"/>
     
   <xs:element name="parish" type="tns:xmlParish"/>
@@ -723,6 +725,8 @@
                         
             <xs:element ref="tns:church"/>
                         
+            <xs:element ref="tns:monastery"/>
+                        
             <xs:element ref="tns:mill"/>
                         
             <xs:element ref="tns:school"/>
@@ -734,6 +738,34 @@
           </xs:choice>
                   
         </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlMonastery">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPlace">
+                
+        <xs:sequence>
+                    
+          <xs:choice minOccurs="0">
+                        
+            <xs:element ref="ns1:builtInYear"/>
+                        
+            <xs:element ref="ns1:builtBetwweenYears"/>
+                        
+            <xs:element ref="ns1:builtBeforeYear"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+                
+        <xs:attribute name="demolished" type="xs:boolean"/>
               
       </xs:extension>
           
@@ -754,6 +786,8 @@
             <xs:element ref="tns:street"/>
                         
             <xs:element ref="tns:church"/>
+                        
+            <xs:element ref="tns:monastery"/>
                         
             <xs:element ref="tns:mill"/>
                         
@@ -830,6 +864,8 @@
             <xs:element ref="tns:manor"/>
                         
             <xs:element ref="tns:city"/>
+                        
+            <xs:element ref="tns:town"/>
                         
             <xs:element ref="tns:hundred"/>
                       
@@ -1030,6 +1066,8 @@
         <xs:element ref="tns:farmstead"/>
                 
         <xs:element ref="tns:town"/>
+                
+        <xs:element ref="tns:monastery"/>
                 
         <xs:element ref="tns:city"/>
                 

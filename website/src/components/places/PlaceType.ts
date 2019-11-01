@@ -25,6 +25,7 @@ const PlaceTypeInfo: { [key in PlaceType]: PlaceInfo } = {
     INN: {s: "Inn", isBuilding: true},
     MANOR: {s: "Manor"},
     MILL: {s: "Mill", isBuilding: true},
+    MONASTERY: {s: "Monastery", p: "Monasteries", isBuilding: true},
     NEIGHBOURHOOD: {s: "Neighbourhood"},
     PARISH: {s: "Church Parish", p: "Church Parishes"},
     RAPE: {s: "Rape"},
