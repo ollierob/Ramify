@@ -559,7 +559,7 @@
                       
           </xs:choice>
                     
-          <xs:element minOccurs="0" ref="tns:graveyard"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:graveyard"/>
                   
         </xs:sequence>
                 

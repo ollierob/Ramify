@@ -20,6 +20,9 @@ enum XmlRecordSetType {
     @XmlEnumValue("marriage")
     MARRIAGE,
 
+    @XmlEnumValue("mention")
+    MENTION,
+
     @XmlEnumValue("census")
     CENSUS(EventProto.RecordType.RESIDENCE),
 

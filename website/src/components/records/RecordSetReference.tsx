@@ -28,11 +28,11 @@ const PopoverContent = (props: {archive: Archive.AsObject, references: ReadonlyA
     if (!references || !references.length) return null;
     const archive = props.archive;
     return <div className="recordSetReferences">
-        <div style={MarginBottom}>
+        {archive.website && <div style={MarginBottom}>
             <a href={archive.website.href} target="_blank">
                 <Icon type="export"/> Archive website
             </a>
-        </div>
+        </div>}
         <div>
             <RecordsIcon/> References:
         </div>

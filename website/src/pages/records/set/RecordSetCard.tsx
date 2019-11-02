@@ -54,7 +54,8 @@ export default class RecordSetCard extends React.PureComponent<Props> {
                 fixedWidth={this.useFixedWidthCards()}
                 shortTitle
                 records={relatives.childList}
-                style={MarginBottom}/>
+                style={MarginBottom}
+                ignoreNone/>
 
             <RecordBrowser
                 {...this.props}

@@ -23,6 +23,7 @@ type Props = HasClass & Titling & {
     records: ReadonlyArray<RecordSet.AsObject>
     alsoSee?: ReadonlyArray<Place.AsObject>
     fixedWidth?: boolean;
+    ignoreNone?: boolean;
 }
 
 export const RecordCards = (props: Props) => {
@@ -37,7 +38,7 @@ export const RecordCards = (props: Props) => {
         style={props.style}>
         {props.loading && <Loading/>}
         {records.map(record => <RecordCard {...props} key={record.id} record={record}/>)}
-        {!props.loading && !records.length && <NoRecordCards/>}
+        {!props.loading && !records.length && !props.ignoreNone && <NoRecordCards/>}
         {props.alsoSee && <AlsoSeeCard alsoSee={props.alsoSee}/>}
     </div>;
 
