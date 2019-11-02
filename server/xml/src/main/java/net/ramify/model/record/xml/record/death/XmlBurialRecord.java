@@ -1,15 +1,12 @@
 package net.ramify.model.record.xml.record.death;
 
-import com.google.common.collect.Sets;
 import net.ramify.model.date.BeforeDate;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlExactDate;
 import net.ramify.model.event.Event;
-import net.ramify.model.event.type.Birth;
 import net.ramify.model.event.type.Death;
-import net.ramify.model.event.type.birth.GenericBirth;
 import net.ramify.model.event.type.burial.Burial;
 import net.ramify.model.event.type.burial.ChurchBurial;
 import net.ramify.model.event.type.death.GenericDeath;
@@ -20,7 +17,6 @@ import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.family.xml.XmlRelationship;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
-import net.ramify.model.person.age.Age;
 import net.ramify.model.person.name.NameParser;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
@@ -32,7 +28,6 @@ import net.ramify.model.record.type.BurialRecord;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlPersonOnDateRecord;
 import net.ramify.model.record.xml.record.XmlRecord;
-import net.ramify.utils.objects.Functions;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -44,9 +39,6 @@ import java.util.Set;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "churchBurial")
 public class XmlBurialRecord extends XmlPersonOnDateRecord {
-
-    @XmlAttribute(name = "age", required = false)
-    private Integer deathAge;
 
     @XmlAttribute(name = "residence", required = false)
     private String residence;
@@ -94,15 +86,11 @@ public class XmlBurialRecord extends XmlPersonOnDateRecord {
     }
 
     Set<Event> events(final PersonId personId, final ExactDate burialDate, final PlaceProvider places) {
-        final var events = Sets.<Event>newHashSet(this.burial(personId, burialDate));
-        if (deathAge != null) events.add(this.birth(personId, burialDate, deathAge)); //FIXME use death date
+        final var events = super.events(personId, burialDate);
+        events.add(this.burial(personId, burialDate));
         if (deathDate != null) events.add(this.death(personId, deathDate.resolve()));
         if (residence != null) events.add(this.residence(personId, burialDate, places.require(new PlaceId(residence))));
         return events;
-    }
-
-    Birth birth(final PersonId personId, final ExactDate burialDate, final int deathAge) {
-        return new GenericBirth(personId, burialDate.yearsAgo(deathAge));
     }
 
     Residence residence(final PersonId personId, final DateRange burialDate, final Place place) {
@@ -114,7 +102,7 @@ public class XmlBurialRecord extends XmlPersonOnDateRecord {
     }
 
     Burial burial(final PersonId personId, final ExactDate date) {
-        return new ChurchBurial(personId, date, Functions.ifNonNull(deathAge, Age::ofYears));
+        return new ChurchBurial(personId, date, this.age());
     }
 
     int numIndividuals() {

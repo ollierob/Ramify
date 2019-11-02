@@ -23,15 +23,15 @@ import java.time.Period;
 @XmlType(namespace = XmlRecord.NAMESPACE, name = "censusEngland1821ByAge")
 public class XmlEngland1821ByAgeCensusRecord extends XmlCensusRecord {
 
-    static final Age UNDER_FIVE = Age.between(Period.ZERO, Period.of(5, 0, -1));
-    static final Age FIVE_TO_TEN = Age.between(Period.ofYears(5), Period.of(10, 0, -1));
-    static final Age TEN_TO_FIFTEEN = Age.between(Period.ofYears(10), Period.of(15, 0, -1));
-    static final Age FIFTEEN_TO_TWENTY = Age.between(Period.ofYears(15), Period.of(20, 0, -1));
-    static final Age TWENTY_TO_THIRTY = Age.between(Period.ofYears(20), Period.of(30, 0, -1));
-    static final Age THIRTY_TO_FORTY = Age.between(Period.ofYears(30), Period.of(40, 0, -1));
-    static final Age FORTY_TO_FIFTY = Age.between(Period.ofYears(40), Period.of(50, 0, -1));
-    static final Age FIFTY_TO_SIXTY = Age.between(Period.ofYears(50), Period.of(60, 0, -1));
-    static final Age SIXTY_TO_SEVENTY = Age.between(Period.ofYears(60), Period.of(70, 0, -1));
+    static final Age UNDER_FIVE = Age.betweenInclusive(Period.ZERO, Period.of(5, 0, -1));
+    static final Age FIVE_TO_TEN = Age.betweenInclusive(Period.ofYears(5), Period.of(10, 0, -1));
+    static final Age TEN_TO_FIFTEEN = Age.betweenInclusive(Period.ofYears(10), Period.of(15, 0, -1));
+    static final Age FIFTEEN_TO_TWENTY = Age.betweenInclusive(Period.ofYears(15), Period.of(20, 0, -1));
+    static final Age TWENTY_TO_THIRTY = Age.betweenInclusive(Period.ofYears(20), Period.of(30, 0, -1));
+    static final Age THIRTY_TO_FORTY = Age.betweenInclusive(Period.ofYears(30), Period.of(40, 0, -1));
+    static final Age FORTY_TO_FIFTY = Age.betweenInclusive(Period.ofYears(40), Period.of(50, 0, -1));
+    static final Age FIFTY_TO_SIXTY = Age.betweenInclusive(Period.ofYears(50), Period.of(60, 0, -1));
+    static final Age SIXTY_TO_SEVENTY = Age.betweenInclusive(Period.ofYears(60), Period.of(70, 0, -1));
 
     @XmlElement(name = "head", required = true, namespace = XmlRecord.NAMESPACE)
     private XmlResidenceRecord head;

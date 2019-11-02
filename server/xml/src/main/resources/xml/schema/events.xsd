@@ -51,7 +51,13 @@
                 
         <xs:sequence>
                     
-          <xs:element minOccurs="0" ref="ns2:exactAge"/>
+          <xs:choice minOccurs="0">
+                        
+            <xs:element ref="ns2:exactAge"/>
+                        
+            <xs:element ref="ns2:approximateAge"/>
+                      
+          </xs:choice>
                   
         </xs:sequence>
                 

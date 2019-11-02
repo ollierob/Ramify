@@ -19,7 +19,6 @@ import javax.annotation.CheckForNull;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
-import java.time.Period;
 import java.util.Set;
 import java.util.UUID;
 
@@ -28,7 +27,7 @@ public class XmlPersonOnDateRecord extends XmlPersonRecord {
     public static final String NAMESPACE = "http://ramify.net/records";
 
     @XmlAttribute(name = "age")
-    private Integer age;
+    private Integer simpleAge;
 
     @XmlElementRef(required = false)
     private XmlAge complexAge;
@@ -54,15 +53,16 @@ public class XmlPersonOnDateRecord extends XmlPersonRecord {
     }
 
     @CheckForNull
-    protected Period age() {
+    protected Age age() {
         if (complexAge != null) return complexAge.age();
-        return Functions.ifNonNull(age, Period::ofYears);
+        return Functions.ifNonNull(simpleAge, Age::ofYears);
     }
 
     @CheckForNull
     protected Birth birth(final PersonId personId, final DateRange date) {
+        final var age = this.age();
         if (age == null) return null;
-        return new GenericBirth(personId, Age.birthDate(age, date));
+        return new GenericBirth(personId, age.birthDate(date));
     }
 
 }

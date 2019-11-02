@@ -40,7 +40,7 @@ public interface Age {
         return approximateCompare(period, this.upperBound()) <= 0;
     }
 
-    static Age exactly(final Period period) {
+    static Age exactly(@Nonnull final Period period) {
         return new PeriodBasedAge(period);
     }
 
@@ -48,13 +48,17 @@ public interface Age {
         return new RoundedDownAge(years);
     }
 
-    static Age between(final int minYears, final int maxYears) {
-        if (minYears > maxYears) return between(maxYears, minYears);
+    static Age betweenInclusive(final int minYears, final int maxYears) {
+        if (minYears > maxYears) return betweenInclusive(maxYears, minYears);
         if (minYears == maxYears) return exactly(Period.ofYears(minYears));
         return new PeriodBasedAge(Period.ofYears(minYears), Period.ofYears(maxYears));
     }
 
-    static Age between(final Period min, final Period max) {
+    static Age betweenExclusive(final int minYears, final int maxYears) {
+        return new PeriodBasedAge(Period.ofYears(minYears), Period.of(maxYears, 0, -1));
+    }
+
+    static Age betweenInclusive(final Period min, final Period max) {
         return new PeriodBasedAge(min, max);
     }
 

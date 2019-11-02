@@ -59,22 +59,31 @@ public class Census1841Record extends CensusRecord implements HasPlace {
         return inferAge(age).birthDate(CENSUS_DATE);
     }
 
+    DateRange inferBirthDate(final Age age) {
+        final var lower = age.lowerBound();
+        final var upper = age.upperBound();
+        if (lower.getDays() > 0 || lower.getMonths() > 0 || upper.getDays() > 0 || upper.getMonths() > 0) return age.birthDate(CENSUS_DATE);
+        if (lower.getYears() == upper.getYears() - 1) return this.inferBirthDate(lower);
+        return age.birthDate(CENSUS_DATE);
+    }
+
     static Age inferAge(final Period age) {
-        if (age.getMonths() > 0 || age.getDays() > 0 || age.getYears() < 15 || age.getYears() % 5 != 0) return Age.exactly(age);
+        if (age.getMonths() > 0 || age.getDays() > 0) return Age.exactly(age);
+        if (age.getYears() < 15 || age.getYears() % 5 != 0) return Age.ofYears(age.getYears());
         final var years = age.getYears();
-        return Age.between(years, years + 4);
+        return Age.betweenExclusive(years, years + 5);
     }
 
     public static class Census1841Entry {
 
         private final PersonId id;
         private final Name name;
-        private final Period age;
+        private final Age age;
         private final Gender gender;
         private final String occupation;
         private final Place birthPlace;
 
-        public Census1841Entry(final PersonId id, final Name name, final Period age, final Gender gender, final String occupation, final Place birthPlace) {
+        public Census1841Entry(final PersonId id, final Name name, final Age age, final Gender gender, final String occupation, final Place birthPlace) {
             this.id = id;
             this.name = name;
             this.age = age;
@@ -124,6 +133,7 @@ public class Census1841Record extends CensusRecord implements HasPlace {
         public PersonProto.Person.Builder toProtoBuilder() {
             return super.toProtoBuilder().setNotes(MoreObjects.firstNonNull(occupation, ""));
         }
+
     }
 
 }

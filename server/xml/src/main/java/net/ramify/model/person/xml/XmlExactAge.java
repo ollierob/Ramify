@@ -1,5 +1,7 @@
 package net.ramify.model.person.xml;
 
+import net.ramify.model.person.age.Age;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.time.Period;
@@ -17,8 +19,8 @@ public class XmlExactAge extends XmlAge {
     private int days;
 
     @Override
-    public Period age() {
-        return Period.of(years, months, days);
+    public Age age() {
+        return Age.exactly(Period.of(years, months, days));
     }
 
 }

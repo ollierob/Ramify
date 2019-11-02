@@ -91,7 +91,13 @@
                 
         <xs:sequence>
                     
-          <xs:element minOccurs="0" ref="ns1:exactAge"/>
+          <xs:choice minOccurs="0">
+                        
+            <xs:element ref="ns1:exactAge"/>
+                        
+            <xs:element ref="ns1:approximateAge"/>
+                      
+          </xs:choice>
                   
         </xs:sequence>
                 
@@ -296,8 +302,6 @@
           </xs:choice>
                   
         </xs:sequence>
-                
-        <xs:attribute name="age" type="xs:int"/>
                 
         <xs:attribute name="residence" type="xs:string"/>
                 
@@ -581,9 +585,9 @@
             
       <xs:enumeration value="manor"/>
             
-      <xs:enumeration value="government"/>
-            
       <xs:enumeration value="church"/>
+            
+      <xs:enumeration value="government"/>
           
     </xs:restriction>
       
@@ -593,25 +597,25 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="membership"/>
-            
-      <xs:enumeration value="marriage"/>
-            
-      <xs:enumeration value="birth"/>
-            
-      <xs:enumeration value="census"/>
-            
-      <xs:enumeration value="baptism"/>
-            
       <xs:enumeration value="payment"/>
             
       <xs:enumeration value="burial"/>
             
+      <xs:enumeration value="marriage"/>
+            
+      <xs:enumeration value="membership"/>
+            
+      <xs:enumeration value="baptism"/>
+            
+      <xs:enumeration value="birth"/>
+            
       <xs:enumeration value="death"/>
             
-      <xs:enumeration value="mixed"/>
+      <xs:enumeration value="census"/>
             
       <xs:enumeration value="residence"/>
+            
+      <xs:enumeration value="mixed"/>
           
     </xs:restriction>
       

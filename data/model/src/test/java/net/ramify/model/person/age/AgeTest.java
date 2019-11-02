@@ -16,7 +16,7 @@ class AgeTest {
     @Test
     void testContains() {
 
-        final var age = Age.between(10, 15);
+        final var age = Age.betweenInclusive(10, 15);
         assertFalse(age.isSame(Period.ofYears(9)));
         assertTrue(age.isSame(Period.ofYears(10)));
         assertTrue(age.isSame(Period.ofYears(12)));
@@ -31,9 +31,9 @@ class AgeTest {
         final var p = Period.ofYears(16);
 
         assertFalse(Age.ofYears(2).isSameOrOlderThan(p));
-        assertFalse(Age.between(10, 15).isSameOrOlderThan(p));
-        assertTrue(Age.between(15, 20).isSameOrOlderThan(p));
-        assertTrue(Age.between(20, 25).isSameOrOlderThan(p));
+        assertFalse(Age.betweenInclusive(10, 15).isSameOrOlderThan(p));
+        assertTrue(Age.betweenInclusive(15, 20).isSameOrOlderThan(p));
+        assertTrue(Age.betweenInclusive(20, 25).isSameOrOlderThan(p));
 
     }
 

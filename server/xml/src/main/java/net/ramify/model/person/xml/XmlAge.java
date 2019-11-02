@@ -5,16 +5,15 @@ import net.ramify.model.person.age.Age;
 
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
-import java.time.Period;
 
 @XmlType(namespace = XmlPerson.NAMESPACE)
-@XmlSeeAlso({XmlExactAge.class})
+@XmlSeeAlso({XmlExactAge.class, XmlApproximateAge.class})
 public abstract class XmlAge {
 
-    public abstract Period age();
+    public abstract Age age();
 
     public DateRange birthDate(final DateRange on) {
-        return Age.birthDate(this.age(), on);
+        return this.age().birthDate(on);
     }
 
 }
