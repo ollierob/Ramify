@@ -55,7 +55,7 @@ abstract class XmlBuilding<P extends Place> extends XmlPlace {
             throws Place.InvalidPlaceTypeException;
 
     @Override
-    protected Collection<XmlPlace> children() {
+    protected Collection<? extends XmlPlace> children() {
         return Collections.emptySet();
     }
 

@@ -73,7 +73,7 @@ public abstract class XmlPlace implements HasPlaceId {
         return Functions.ifNonNull(placeProvider.get(id), Place::parent);
     }
 
-    private void addPlaces(final PlaceProvider placeProvider, final Place parent, final Consumer<Place> addPlace, final PlaceGroupProvider groupProvider, final ParserContext context) {
+    void addPlaces(final PlaceProvider placeProvider, final Place parent, final Consumer<Place> addPlace, final PlaceGroupProvider groupProvider, final ParserContext context) {
         try {
             final var self = this.place(placeProvider, parent, groupProvider, context);
             addPlace.accept(self);
@@ -93,7 +93,7 @@ public abstract class XmlPlace implements HasPlaceId {
     protected abstract Place place(Place parent, PlaceGroupId groupId, ParserContext context) throws Place.InvalidPlaceTypeException;
 
     @CheckForNull
-    protected abstract Collection<XmlPlace> children();
+    protected abstract Collection<? extends XmlPlace> children();
 
     protected DateRange closed(final DateParser dates) {
         return closed == null ? null : closed.resolve(dates);

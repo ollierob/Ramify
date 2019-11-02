@@ -10,12 +10,13 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "church")
 public class XmlChurch extends XmlBuilding<Church> {
 
     @XmlElementRef(required = false)
-    private XmlGraveyard graveyard;
+    private List<XmlGraveyard> graveyards;
 
     XmlChurch() {
         super(Church.class);
@@ -27,8 +28,8 @@ public class XmlChurch extends XmlBuilding<Church> {
     }
 
     @Override
-    protected Collection<XmlPlace> children() {
-        return graveyard == null ? Collections.emptySet() : Collections.singleton(graveyard);
+    protected Collection<? extends XmlPlace> children() {
+        return graveyards == null ? Collections.emptySet() : graveyards;
     }
 
 }
