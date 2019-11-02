@@ -502,6 +502,14 @@
         <xs:sequence>
                     
           <xs:element minOccurs="0" ref="ns2:deathDate"/>
+                    
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        
+            <xs:element ref="ns4:father"/>
+                        
+            <xs:element ref="ns4:mother"/>
+                      
+          </xs:choice>
                   
         </xs:sequence>
                 
@@ -567,23 +575,23 @@
             
       <xs:enumeration value="residence"/>
             
-      <xs:enumeration value="death"/>
+      <xs:enumeration value="mixed"/>
+            
+      <xs:enumeration value="baptism"/>
+            
+      <xs:enumeration value="payment"/>
+            
+      <xs:enumeration value="birth"/>
             
       <xs:enumeration value="marriage"/>
             
       <xs:enumeration value="burial"/>
             
-      <xs:enumeration value="birth"/>
-            
-      <xs:enumeration value="census"/>
-            
-      <xs:enumeration value="payment"/>
-            
-      <xs:enumeration value="baptism"/>
+      <xs:enumeration value="death"/>
             
       <xs:enumeration value="membership"/>
             
-      <xs:enumeration value="mixed"/>
+      <xs:enumeration value="census"/>
           
     </xs:restriction>
       
