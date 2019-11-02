@@ -28,6 +28,7 @@ import net.ramify.model.record.type.BurialRecord;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlPersonOnDateRecord;
 import net.ramify.model.record.xml.record.XmlRecord;
+import net.ramify.utils.objects.Functions;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -89,7 +90,7 @@ public class XmlBurialRecord extends XmlPersonOnDateRecord {
         final var events = super.events(personId, burialDate);
         events.add(this.burial(personId, burialDate));
         if (deathDate != null) events.add(this.death(personId, deathDate.resolve()));
-        if (residence != null) events.add(this.residence(personId, burialDate, places.require(new PlaceId(residence))));
+        if (residence != null) events.add(this.residence(personId, Functions.ifNonNull(deathDate, XmlExactDate::resolve, burialDate), places.require(new PlaceId(residence))));
         return events;
     }
 
