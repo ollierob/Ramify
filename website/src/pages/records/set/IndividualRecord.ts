@@ -6,7 +6,8 @@ export type IndividualRecord = {
     person: Person.AsObject;
     birth?: Event.AsObject;
     baptism?: Event.AsObject;
-    residence?: Event.AsObject;
+    residence?: ReadonlyArray<Event.AsObject>;
+    mention?: ReadonlyArray<Event.AsObject>
     death?: Event.AsObject;
     burial?: Event.AsObject;
     image?: string;

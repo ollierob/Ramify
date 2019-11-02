@@ -6,6 +6,7 @@ import net.ramify.model.date.DateRange;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.type.Death;
 import net.ramify.model.event.type.death.GenericDeath;
+import net.ramify.model.event.type.misc.Flourished;
 import net.ramify.model.event.xml.XmlEvent;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.person.HasPersonId;
@@ -54,6 +55,7 @@ public abstract class XmlRelationship {
 
     protected Set<Event> events(final PersonId personId, final DateRange date, final RecordContext context) {
         final var events = Sets.<Event>newHashSet();
+        events.add(new Flourished(personId, date));
         if (this.events != null) this.events.forEach(event -> events.addAll(event.allEvents(personId, context)));
         if (Boolean.TRUE.equals(deceased) && !IterableUtils.has(events, Death.class)) events.add(new GenericDeath(personId, BeforeDate.strictlyBefore(date)));
         return events;

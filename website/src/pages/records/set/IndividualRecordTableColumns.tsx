@@ -35,6 +35,7 @@ function genericColumns(properties: RecordProperties) {
     if (properties.hasBirth) columns.push(BirthYear);
     if (properties.hasBaptism) columns.push(BaptismYear);
     if (properties.hasResidence) columns.push(ResidenceYear, ResidencePlace);
+    if (properties.hasMention) columns.push(MentionYear);
     if (properties.hasDeath) columns.push(DeathDateColumn);
     if (properties.hasBurial) columns.push(BurialDateColumn);
     return columns;
@@ -44,6 +45,7 @@ function burialColumns(properties: RecordProperties) {
     const columns: IndividualRecordColumn[] = [];
     if (properties.hasBirth) columns.push(BirthYear);
     if (properties.hasResidence) columns.push(ResidenceYear, ResidencePlace);
+    if (properties.hasMention) columns.push(MentionYear);
     if (properties.hasDeath) columns.push(DeathDateColumn);
     if (properties.hasBurial) columns.push(BurialDateColumn);
     return columns;
@@ -92,19 +94,26 @@ const BaptismYear: IndividualRecordColumn = {
 const ResidenceYear: IndividualRecordColumn = {
     key: "residenceDate",
     title: "Residence date",
-    render: (t, r) => r.residence && <FormattedYearRange date={r.residence.date} words={{in: ""}}/>,
+    render: (t, r) => r.residence && r.residence.length && <FormattedYearRange date={r.residence[0].date} words={{in: ""}}/>,
     width: 150
 };
 
 const ResidencePlace: IndividualRecordColumn = {
     key: "residencePlace",
     title: "Residence",
-    render: (t, r) => r.residence && <>
-        <PlaceLink place={r.residence.place}/>
-        {r.residence.place && <Minor text={placeTypeName(r.residence.place.type)}/>}
+    render: (t, r) => r.residence && r.residence.length && <>
+        <PlaceLink place={r.residence[0].place}/>
+        {r.residence[0].place && <Minor text={placeTypeName(r.residence[0].place.type)}/>}
     </>,
     width: 200,
-    ...ColumnSubstringLocalSearch(r => r.residence.place && r.residence.place.name)
+    ...ColumnSubstringLocalSearch(r => r.residence && r.residence.length && r.residence[0].place && r.residence[0].place.name)
+};
+
+const MentionYear: IndividualRecordColumn = {
+    key: "mentionDate",
+    title: "Mentioned",
+    render: (t, r) => r.mention && r.mention.length && <FormattedYearRange date={r.mention[0].date} words={{in: ""}}/>,
+    width: 150
 };
 
 const DeathDateColumn: IndividualRecordColumn = {

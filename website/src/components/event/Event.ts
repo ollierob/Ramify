@@ -26,6 +26,10 @@ export function isResidenceEvent(event: Event.AsObject): boolean {
     }
 }
 
+export function isMentionEvent(event: Event.AsObject): boolean {
+    return eventType(event) == "MENTION";
+}
+
 export function isDeathEvent(event: Event.AsObject): boolean {
     return eventType(event) == "DEATH";
 }
