@@ -11,7 +11,7 @@ import {recordTypeName} from "./RecordType";
 import {HasClass} from "../style/HasClass";
 import {Link} from "../style/Links";
 import {Loading} from "../style/Loading";
-import {sortRecordSetByDateThenTitle} from "./RecordSet";
+import {sortRecordSetByDateThenTitle, sortRecordSetByTitle} from "./RecordSet";
 
 type Titling = {
     shortTitle?: boolean;
@@ -29,7 +29,7 @@ export const RecordCards = (props: Props) => {
 
     if (!props.records) return null;
 
-    const records = [...props.records].sort(sortRecordSetByDateThenTitle);
+    const records = [...props.records].sort(sortRecordSetByTitle);
     //if (props.groupByParent && props.relatives && props.relatives.length) return <GroupedRecordCards {...props}/>;
 
     return <div
