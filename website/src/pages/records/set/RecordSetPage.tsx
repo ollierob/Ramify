@@ -97,8 +97,10 @@ export default class RecordSetPage extends RecordBasePage<State> {
             this.setState({recordSetId: this.readLocation()});
         if (this.state.recordSetId != prevState.recordSetId)
             this.loadRecordSet(this.state.recordSetId);
-        if (this.state.recordSet.data && this.state.recordSet.data != prevState.recordSet.data)
+        if (this.state.recordSet.data && this.state.recordSet.data != prevState.recordSet.data) {
             this.loadPlace(this.state.recordSet.data.coversplaceid, this.state.recordSet.data.creatorplaceid);
+            this.setPageTitle(this.state.recordSet.data.longtitle);
+        }
     }
 
     private readLocation(): RecordSetId {
