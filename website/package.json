@@ -8,7 +8,6 @@
     "google-protobuf": "^3.10.0",
     "leaflet": "^1.5.1",
     "react-leaflet": "^2.5.0",
-    "react-markdown": "^4.2.2",
     "react-router-dom": "^5.1.2"
   },
   "devDependencies": {

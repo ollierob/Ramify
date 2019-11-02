@@ -8,7 +8,7 @@ import {RecordCards} from "../../../components/records/RecordCards";
 import {RecordSet} from "../../../protobuf/generated/record_pb";
 import {AsyncData} from "../../../components/fetch/AsyncData";
 import {isBuilding} from "../../../components/places/PlaceType";
-import ReactMarkdown = require("react-markdown");
+import {Markdown} from "../../../components/layout/Markdown";
 
 type Props = PlaceFavouritesHandler & {
     place: Place.AsObject;
@@ -30,7 +30,7 @@ export const PlaceInfo = (props: Props) => {
     const inner = <>
 
         <div className="description">
-            {description ? <ReactMarkdown source={description.description}/> : NoDescription}
+            {description ? <Markdown text={description.description}/> : NoDescription}
         </div>
 
         {props.childPlaces && (props.childPlaces.length || !isBuilding(place)) && <Card className="places" title={<b>Places</b>} bordered={false}>
