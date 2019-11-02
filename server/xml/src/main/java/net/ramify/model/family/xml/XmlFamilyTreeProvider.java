@@ -3,10 +3,10 @@ package net.ramify.model.family.xml;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import net.ramify.model.AbstractMappedProvider;
-import net.ramify.model.ParserContext;
 import net.ramify.model.family.tree.FamilyTree;
 import net.ramify.model.family.tree.FamilyTreeId;
 import net.ramify.model.family.tree.FamilyTreeProvider;
+import net.ramify.model.record.xml.RecordContext;
 import net.ramify.utils.file.FileTraverseUtils;
 import net.ramify.utils.file.FileUtils;
 import org.slf4j.Logger;
@@ -45,7 +45,7 @@ public class XmlFamilyTreeProvider extends AbstractMappedProvider<FamilyTreeId, 
     static FamilyTreeProvider readTreesInDirectory(
             final JAXBContext jaxbContext,
             final File root,
-            final ParserContext context) throws JAXBException {
+            final RecordContext context) throws JAXBException {
         final var unmarshaller = jaxbContext.createUnmarshaller();
         final var provider = new XmlFamilyTreeProvider(Maps.newHashMap());
         FileTraverseUtils.traverseSubdirectories(
@@ -55,7 +55,7 @@ public class XmlFamilyTreeProvider extends AbstractMappedProvider<FamilyTreeId, 
         return provider.immutable();
     }
 
-    private static void readRecordsInFile(final Unmarshaller unmarshaller, final File file, final XmlFamilyTreeProvider provider, final ParserContext context) {
+    private static void readRecordsInFile(final Unmarshaller unmarshaller, final File file, final XmlFamilyTreeProvider provider, final RecordContext context) {
         FileUtils.checkReadableFile(file);
         Preconditions.checkArgument(file.getName().endsWith(".xml"), "Not an XML file: %s", file);
         try {

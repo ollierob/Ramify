@@ -36,14 +36,15 @@ public class XmlMemorialInscription extends XmlRecord {
 
     public Collection<DeathRecord> build(final PlaceId coversId, final RecordContext context, final RecordSet recordSet) {
         if (families == null) return Collections.emptySet();
-        return ListUtils.eagerlyTransform(families, family -> this.buildDeathRecord(family.toFamily(context), coversId, context, recordSet));
+        return ListUtils.eagerlyTransform(families, family -> this.buildDeathRecord(family.toFamily(context), coversId, recordSet));
     }
 
-    private DeathRecord buildDeathRecord(final Family family, final PlaceId coversId, final RecordContext context, final RecordSet recordSet) {
+    private DeathRecord buildDeathRecord(final Family family, final PlaceId coversId, final RecordSet recordSet) {
+        final var date = this.deathRange(family);
         return new GenericDeathRecord(
                 this.recordId(),
                 recordSet,
-                this.deathRange(family),
+                date,
                 coversId,
                 family);
     }

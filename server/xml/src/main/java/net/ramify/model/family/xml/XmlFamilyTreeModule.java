@@ -4,11 +4,11 @@ import com.google.common.base.Preconditions;
 import com.google.inject.Exposed;
 import com.google.inject.PrivateModule;
 import com.google.inject.Provides;
-import net.ramify.model.ParserContext;
 import net.ramify.model.date.XmlDateParser;
 import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.family.tree.FamilyTreeProvider;
 import net.ramify.model.place.xml.XmlPlaceModule;
+import net.ramify.model.record.xml.RecordContext;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -46,7 +46,7 @@ public class XmlFamilyTreeModule extends PrivateModule {
     FamilyTreeProvider provideTreeProvider(
             final JAXBContext context,
             @Named("data") final File data,
-            final ParserContext parsers) throws JAXBException {
+            final RecordContext parsers) throws JAXBException {
         return XmlFamilyTreeProvider.readTreesInDirectory(context, data, parsers);
     }
 

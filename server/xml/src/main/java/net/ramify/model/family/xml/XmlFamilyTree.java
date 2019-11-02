@@ -1,11 +1,11 @@
 package net.ramify.model.family.xml;
 
 import com.google.common.base.Preconditions;
-import net.ramify.model.ParserContext;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.tree.FamilyTree;
 import net.ramify.model.family.tree.FamilyTreeId;
 import net.ramify.model.family.tree.FamilyTreeMeta;
+import net.ramify.model.record.xml.RecordContext;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -29,7 +29,7 @@ public class XmlFamilyTree {
     private List<XmlFamily> families;
 
     @Nonnull
-    public FamilyTree toFamilyTree(final ParserContext context) {
+    public FamilyTree toFamilyTree(final RecordContext context) {
         Preconditions.checkState(families != null && !families.isEmpty(), "No families defined");
         final AtomicInteger numPeople = new AtomicInteger();
         final Set<Family> families = this.families.stream()

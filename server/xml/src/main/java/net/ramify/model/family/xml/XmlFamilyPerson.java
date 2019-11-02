@@ -1,13 +1,13 @@
 package net.ramify.model.family.xml;
 
 import com.google.common.collect.Sets;
-import net.ramify.model.ParserContext;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.xml.XmlEvent;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.provider.PersonProvider;
 import net.ramify.model.record.GenericRecordPerson;
+import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlPersonRecord;
 import net.ramify.model.relationship.Relationship;
 import net.ramify.model.relationship.RelationshipFactory;
@@ -45,7 +45,7 @@ public class XmlFamilyPerson extends XmlPersonRecord {
         return new PersonId(id);
     }
 
-    protected Person toPerson(final ParserContext context) {
+    protected Person toPerson(final RecordContext context) {
         final var personId = this.personId();
         return new GenericRecordPerson(
                 personId,
@@ -55,7 +55,7 @@ public class XmlFamilyPerson extends XmlPersonRecord {
                 this.notes());
     }
 
-    protected Set<Event> events(final PersonId personId, final ParserContext context) {
+    protected Set<Event> events(final PersonId personId, final RecordContext context) {
         if (events == null || events.isEmpty()) return Collections.emptySet();
         final var events = Sets.<Event>newHashSet();
         this.events.forEach(event -> events.addAll(event.allEvents(personId, context)));

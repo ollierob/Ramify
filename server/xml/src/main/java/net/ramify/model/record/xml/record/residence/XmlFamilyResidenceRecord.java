@@ -22,7 +22,7 @@ public class XmlFamilyResidenceRecord extends XmlResidenceRecord {
     public FamilyBuilder family(final Person person, final Place place, final DateRange date, final RecordContext context) {
         final var builder = super.family(person, place, date, context);
         if (relationships != null) {
-            relationships.forEach(r -> r.addRelationship(person, builder, context.nameParser(), date));
+            relationships.forEach(r -> r.addRelationship(person, builder, context, date));
         }
         return builder;
     }

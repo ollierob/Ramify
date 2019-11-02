@@ -11,6 +11,8 @@
     
   <xs:element name="event" type="tns:xmlEvent"/>
     
+  <xs:element name="residence" type="tns:xmlResidenceEvent"/>
+    
   <xs:complexType name="xmlBirthEvent">
         
     <xs:complexContent>
@@ -62,6 +64,20 @@
         </xs:sequence>
                 
         <xs:attribute name="age" type="xs:int"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlResidenceEvent">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlEvent">
+                
+        <xs:sequence/>
               
       </xs:extension>
           

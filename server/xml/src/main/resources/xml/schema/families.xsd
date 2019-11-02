@@ -42,6 +42,8 @@
             <xs:element ref="ns1:birth"/>
                         
             <xs:element ref="ns1:death"/>
+                        
+            <xs:element ref="ns1:residence"/>
                       
           </xs:choice>
                     
@@ -87,7 +89,21 @@
     
   <xs:complexType abstract="true" name="xmlRelationship">
         
-    <xs:sequence/>
+    <xs:sequence>
+            
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+                
+        <xs:element ref="ns1:event"/>
+                
+        <xs:element ref="ns1:birth"/>
+                
+        <xs:element ref="ns1:death"/>
+                
+        <xs:element ref="ns1:residence"/>
+              
+      </xs:choice>
+          
+    </xs:sequence>
         
     <xs:attribute name="name" type="xs:string"/>
         

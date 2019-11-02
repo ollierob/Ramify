@@ -1,6 +1,5 @@
 package net.ramify.model.event.xml;
 
-import net.ramify.model.ParserContext;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.date.xml.XmlDateRange;
@@ -9,6 +8,7 @@ import net.ramify.model.date.xml.XmlInYear;
 import net.ramify.model.event.Event;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.record.xml.RecordContext;
 import net.ramify.utils.collections.SetUtils;
 import net.ramify.utils.objects.Functions;
 
@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.Collections;
 import java.util.Set;
 
-@XmlSeeAlso({XmlBirthEvent.class, XmlDeathEvent.class})
+@XmlSeeAlso({XmlBirthEvent.class, XmlDeathEvent.class, XmlResidenceEvent.class})
 @XmlRootElement(namespace = XmlEvent.NAMESPACE, name = "event")
 public abstract class XmlEvent {
 
@@ -38,8 +38,13 @@ public abstract class XmlEvent {
     private XmlDateRange date;
 
     @Nonnull
-    protected DateRange date(final DateParser dates) {
+    private DateRange date(final DateParser dates) {
         return date.resolve(dates);
+    }
+
+    protected DateRange date(final RecordContext context) {
+        if (date != null) return this.date(context.dateParser());
+        return context.recordDate();
     }
 
     @CheckForNull
@@ -47,11 +52,11 @@ public abstract class XmlEvent {
         return Functions.ifNonNull(placeId, PlaceId::new);
     }
 
-    public abstract Event toEvent(PersonId personId, ParserContext context);
+    public abstract Event toEvent(PersonId personId, RecordContext context);
 
-    public abstract Set<Event> inferredEvents(PersonId personId, ParserContext context);
+    public abstract Set<Event> inferredEvents(PersonId personId, RecordContext context);
 
-    public Set<Event> allEvents(final PersonId personId, final ParserContext context) {
+    public Set<Event> allEvents(final PersonId personId, final RecordContext context) {
         final var event = this.toEvent(personId, context);
         final var inferred = this.inferredEvents(personId, context);
         return inferred.isEmpty() ? Collections.singleton(event) : SetUtils.with(inferred, event);

@@ -2,12 +2,12 @@ package net.ramify.model.family.xml;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
-import net.ramify.model.ParserContext;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.provider.PersonProvider;
+import net.ramify.model.record.xml.RecordContext;
 
 import javax.annotation.CheckForNull;
 import javax.xml.bind.annotation.XmlElementRef;
@@ -24,12 +24,12 @@ public class XmlFamily {
     @XmlElementRef
     private List<XmlFamilyPerson> people;
 
-    public Family toFamily(final ParserContext context) {
+    public Family toFamily(final RecordContext context) {
         final var people = this.buildPeople(context);
         return this.buildFamily(people);
     }
 
-    FamilyPersonProvider buildPeople(final ParserContext context) {
+    FamilyPersonProvider buildPeople(final RecordContext context) {
         Preconditions.checkArgument(people != null && !people.isEmpty());
         final var provider = new FamilyPersonProvider();
         people.forEach(xmlPerson -> provider.add(xmlPerson.toPerson(context)));
