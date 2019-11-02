@@ -131,6 +131,7 @@ const DeathAgeColumn: IndividualRecordColumn = {
     title: "Age",
     dataIndex: "death.givenage",
     render: (t, r) => r.death && r.death.givenage > 0 && <>{r.death.givenage}</>,
+    sorter: (r1, r2) => (r1.death ? r1.death.givenage : 0) - (r2.death ? r2.death.givenage : 0),
     width: 80
 };
 
