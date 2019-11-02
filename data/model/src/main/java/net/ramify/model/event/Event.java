@@ -2,6 +2,7 @@ package net.ramify.model.event;
 
 import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.date.DateRange;
+import net.ramify.model.date.HasDate;
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.event.type.Birth;
 import net.ramify.model.event.type.Death;
@@ -14,7 +15,7 @@ import net.ramify.utils.objects.Castable;
 
 import javax.annotation.Nonnull;
 
-public interface Event extends HasPersonId, Castable<Event>, BuildsProto<EventProto.Event> {
+public interface Event extends HasDate, HasPersonId, Castable<Event>, BuildsProto<EventProto.Event> {
 
     @Nonnull
     DateRange date();

@@ -65,10 +65,6 @@ public interface DateRange extends BuildsProto<DateProto.DateRange> {
         return this.toProtoBuilder().build();
     }
 
-    static ChronoLocalDate min(final ChronoLocalDate d1, final ChronoLocalDate d2) {
-        return d1.isBefore(d2) ? d1 : d2;
-    }
-
     static <T extends ChronoLocalDate> ChronoLocalDate covariant(final T date) {
         return date;
     }

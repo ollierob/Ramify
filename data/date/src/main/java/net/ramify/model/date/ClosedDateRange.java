@@ -2,9 +2,40 @@ package net.ramify.model.date;
 
 import javax.annotation.Nonnull;
 import java.time.chrono.ChronoLocalDate;
+import java.util.Collection;
 import java.util.Optional;
 
 public class ClosedDateRange implements DateRange {
+
+    public static DateRange of(final Collection<? extends HasDate> dates) {
+        switch (dates.size()) {
+            case 0:
+                return DateRange.NEVER;
+            case 1:
+                return dates.iterator().next().date();
+            default:
+                ChronoLocalDate earliest = null;
+                ChronoLocalDate latest = null;
+                for (final HasDate d : dates) {
+                    final var date = d.date();
+                    earliest = min(earliest, date.earliestInclusive().orElse(null));
+                    latest = max(latest, date.latestInclusive().orElse(null));
+                }
+                return new ClosedDateRange(earliest, latest);
+        }
+    }
+
+    private static ChronoLocalDate max(final ChronoLocalDate d1, final ChronoLocalDate d2) {
+        if (d1 == null) return d2;
+        if (d2 == null) return d1;
+        return d1.isAfter(d2) ? d1 : d2;
+    }
+
+    private static ChronoLocalDate min(final ChronoLocalDate d1, final ChronoLocalDate d2) {
+        if (d1 == null) return d2;
+        if (d2 == null) return d1;
+        return d1.isBefore(d2) ? d1 : d2;
+    }
 
     private final ChronoLocalDate earliest, latest;
 

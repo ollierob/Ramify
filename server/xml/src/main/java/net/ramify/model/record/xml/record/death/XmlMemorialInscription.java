@@ -1,5 +1,6 @@
 package net.ramify.model.record.xml.record.death;
 
+import net.ramify.model.date.ClosedDateRange;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.type.Death;
 import net.ramify.model.family.Family;
@@ -48,15 +49,7 @@ public class XmlMemorialInscription extends XmlRecord {
     }
 
     private DateRange deathRange(final Family family) {
-        final var deaths = family.events(Death.class);
-        switch (deaths.size()) {
-            case 0:
-                return DateRange.NEVER;
-            case 1:
-                return deaths.iterator().next().date();
-            default:
-                throw new UnsupportedOperationException();
-        }
+        return ClosedDateRange.of(family.events(Death.class));
     }
 
 }

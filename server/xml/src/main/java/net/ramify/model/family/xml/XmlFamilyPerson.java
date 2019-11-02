@@ -31,14 +31,14 @@ public class XmlFamilyPerson extends XmlPersonRecord {
     @XmlAttribute(name = "id")
     private String id = UUID.randomUUID().toString();
 
+    @XmlElementRef
+    private List<XmlEvent> events;
+
     @XmlElement(name = "parent", namespace = XmlFamily.NAMESPACE)
     private List<String> parents;
 
     @XmlElement(name = "spouse", namespace = XmlFamily.NAMESPACE)
     private List<String> spouses;
-
-    @XmlElementRef
-    private List<XmlEvent> events;
 
     @Override
     protected PersonId personId() {

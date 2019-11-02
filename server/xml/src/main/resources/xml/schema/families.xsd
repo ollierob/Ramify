@@ -35,10 +35,6 @@
                 
         <xs:sequence>
                     
-          <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="parent" type="xs:string"/>
-                    
-          <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="spouse" type="xs:string"/>
-                    
           <xs:choice maxOccurs="unbounded" minOccurs="0">
                         
             <xs:element ref="ns1:event"/>
@@ -48,6 +44,10 @@
             <xs:element ref="ns1:death"/>
                       
           </xs:choice>
+                    
+          <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="parent" type="xs:string"/>
+                    
+          <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="spouse" type="xs:string"/>
                   
         </xs:sequence>
                 
