@@ -53,12 +53,12 @@ public interface RecordSet extends HasTitleDescription, HasRecordSet, HasDate, H
                 .setId(this.recordSetId().value())
                 .setLongTitle(this.title())
                 .setDescription(MoreObjects.firstNonNull(this.description(), ""))
-                .setCoversPlaceId(this.covers().value())
                 .setNumRecords(this.numRecords())
                 .setNumIndividuals(this.numIndividuals())
                 .addAllExternalReference(Iterables.transform(this.references(), RecordSetReference::toProto));
         Consumers.ifNonNull(this.createdBy(), place -> builder.setCreatorPlaceId(place.value()));
         Consumers.ifNonNull(this.date(), date -> builder.setDate(date.toProto()));
+        Consumers.ifNonNull(this.covers(), covers -> builder.setCoversPlaceId(covers.value()));
         return builder;
     }
 
