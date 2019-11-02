@@ -1,4 +1,4 @@
-package net.ramify.model.record.xml.record.burial;
+package net.ramify.model.record.xml.record.death;
 
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.type.BurialRecord;

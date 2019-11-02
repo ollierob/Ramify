@@ -13,9 +13,13 @@
     
   <xs:element name="churchBurial" type="tns:xmlBurialRecord"/>
     
+  <xs:element name="death" type="tns:xmlDeathRecord"/>
+    
   <xs:element name="englandCensus" type="tns:xmlEnglandCensusRecords"/>
     
   <xs:element name="familyResidence" type="tns:xmlFamilyResidenceRecord"/>
+    
+  <xs:element name="memorialInscription" type="tns:xmlMemorialInscription"/>
     
   <xs:element name="mention" type="tns:xmlMentionRecord"/>
     
@@ -126,6 +130,8 @@
         <xs:element ref="tns:burialRecords"/>
                 
         <xs:element ref="tns:englandCensus"/>
+                
+        <xs:element ref="tns:memorialInscription"/>
               
       </xs:choice>
           
@@ -145,7 +151,7 @@
         
     <xs:attribute name="source" type="tns:xmlRecordSetSource" use="required"/>
         
-    <xs:attribute name="type" type="tns:xmlRecordSetType" use="required"/>
+    <xs:attribute name="type" type="tns:xmlRecordSetType"/>
       
   </xs:complexType>
     
@@ -467,6 +473,46 @@
       
   </xs:complexType>
     
+  <xs:complexType name="xmlMemorialInscription">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlRecords">
+                
+        <xs:sequence>
+                    
+          <xs:element form="qualified" name="text" type="xs:string"/>
+                    
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:death"/>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlDeathRecord">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPersonOnDateRecord">
+                
+        <xs:sequence>
+                    
+          <xs:element minOccurs="0" ref="ns2:deathDate"/>
+                  
+        </xs:sequence>
+                
+        <xs:attribute ref="tns:deathPlace"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
   <xs:complexType name="recordSets">
         
     <xs:sequence>
@@ -505,11 +551,11 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="government"/>
-            
       <xs:enumeration value="church"/>
             
       <xs:enumeration value="manor"/>
+            
+      <xs:enumeration value="government"/>
           
     </xs:restriction>
       
@@ -519,28 +565,30 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="payment"/>
+      <xs:enumeration value="residence"/>
             
       <xs:enumeration value="death"/>
-            
-      <xs:enumeration value="birth"/>
-            
-      <xs:enumeration value="census"/>
             
       <xs:enumeration value="marriage"/>
             
       <xs:enumeration value="burial"/>
             
-      <xs:enumeration value="mixed"/>
+      <xs:enumeration value="birth"/>
             
-      <xs:enumeration value="residence"/>
+      <xs:enumeration value="census"/>
+            
+      <xs:enumeration value="payment"/>
             
       <xs:enumeration value="baptism"/>
             
       <xs:enumeration value="membership"/>
+            
+      <xs:enumeration value="mixed"/>
           
     </xs:restriction>
       
   </xs:simpleType>
+    
+  <xs:attribute name="deathPlace" type="xs:string"/>
   
 </xs:schema>

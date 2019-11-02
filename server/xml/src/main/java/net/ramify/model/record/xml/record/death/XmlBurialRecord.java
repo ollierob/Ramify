@@ -1,4 +1,4 @@
-package net.ramify.model.record.xml.record.burial;
+package net.ramify.model.record.xml.record.death;
 
 import com.google.common.collect.Sets;
 import net.ramify.model.date.BeforeDate;
