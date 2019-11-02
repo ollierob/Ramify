@@ -33,6 +33,7 @@ export function determineColumns(recordSet: RecordSet.AsObject, properties: Reco
 function genericColumns(properties: RecordProperties) {
     const columns: IndividualRecordColumn[] = [];
     if (properties.hasBirth) columns.push(BirthYear);
+    if (properties.hasBaptism) columns.push(BaptismYear);
     if (properties.hasResidence) columns.push(ResidenceYear, ResidencePlace);
     if (properties.hasDeath) columns.push(DeathDateColumn);
     if (properties.hasBurial) columns.push(BurialDateColumn);
@@ -78,6 +79,14 @@ const BirthYear: IndividualRecordColumn = {
     dataIndex: "birth.date",
     render: (t, r) => r.birth && <FormattedYearRange date={r.birth.date}/>,
     width: 120
+};
+
+const BaptismYear: IndividualRecordColumn = {
+    key: "baptismDate",
+    title: "Baptism date",
+    dataIndex: "baptism.date",
+    render: (t, r) => r.baptism && <FormattedYearRange date={r.baptism.date}/>,
+    width: 150
 };
 
 const ResidenceYear: IndividualRecordColumn = {

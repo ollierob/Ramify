@@ -14,6 +14,7 @@ import net.ramify.model.person.PersonId;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.name.Name;
 import net.ramify.model.person.name.NameParser;
+import net.ramify.model.person.xml.XmlName;
 import net.ramify.model.record.GenericRecordPerson;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.relationship.Relationship;
@@ -32,6 +33,9 @@ public abstract class XmlRelationship {
 
     @XmlAttribute(name = "name", required = false)
     private String name;
+
+    @XmlElementRef(required = false)
+    private XmlName complexName;
 
     @XmlAttribute(name = "deceased")
     private Boolean deceased;
@@ -56,8 +60,9 @@ public abstract class XmlRelationship {
     }
 
     @CheckForNull
-    protected Name name(final NameParser nameParser) {
-        return Functions.ifNonNull(name, nameParser::parse);
+    protected Name name(final NameParser parser) {
+        if (complexName != null) return complexName.build(parser);
+        return Functions.ifNonNull(name, parser::parse);
     }
 
     protected PersonId personId() {

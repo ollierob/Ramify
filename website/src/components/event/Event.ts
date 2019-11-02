@@ -8,6 +8,10 @@ export function isBirthEvent(event: Event.AsObject): boolean {
     return eventType(event) == "BIRTH";
 }
 
+export function isBaptismEvent(event: Event.AsObject): boolean {
+    return eventType(event) == "BAPTISM";
+}
+
 export function isResidenceEvent(event: Event.AsObject): boolean {
     switch (eventType(event)) {
         case "BAPTISM":

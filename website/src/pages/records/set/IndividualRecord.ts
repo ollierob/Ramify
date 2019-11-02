@@ -5,6 +5,7 @@ import {EnrichedRecord} from "../../../components/records/RecordLoader";
 export type IndividualRecord = {
     person: Person.AsObject;
     birth?: Event.AsObject;
+    baptism?: Event.AsObject;
     residence?: Event.AsObject;
     death?: Event.AsObject;
     burial?: Event.AsObject;
