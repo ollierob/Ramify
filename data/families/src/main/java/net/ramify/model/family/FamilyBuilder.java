@@ -12,6 +12,14 @@ public class FamilyBuilder {
 
     private final MutableNetwork<Person, Relationship> network = NetworkBuilder.directed().build();
 
+    public FamilyBuilder() {
+
+    }
+
+    public FamilyBuilder(final Person root) {
+        network.addNode(root);
+    }
+
     public FamilyBuilder addPerson(final Person person) {
         network.addNode(person);
         return this;

@@ -17,6 +17,8 @@
     
   <xs:element name="closedInYear" type="tns:xmlInYear"/>
     
+  <xs:element name="date" type="tns:xmlExactDate"/>
+    
   <xs:element name="deathDate" type="tns:xmlExactDate"/>
     
   <xs:element name="inYear" type="tns:xmlInYear"/>

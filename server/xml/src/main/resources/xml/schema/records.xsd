@@ -9,6 +9,10 @@
     
   <xs:import namespace="http://ramify.net/families" schemaLocation="families.xsd"/>
     
+  <xs:element name="baptism" type="tns:xmlBaptismRecord"/>
+    
+  <xs:element name="baptismRecords" type="tns:xmlBaptismRecords"/>
+    
   <xs:element name="birthRecord" type="tns:xmlBirthRecord"/>
     
   <xs:element name="birthRecords" type="tns:xmlBirthRecords"/>
@@ -146,6 +150,8 @@
         <xs:element ref="tns:memorialInscriptions"/>
                 
         <xs:element ref="tns:birthRecords"/>
+                
+        <xs:element ref="tns:baptismRecords"/>
               
       </xs:choice>
           
@@ -545,11 +551,29 @@
         
     <xs:complexContent>
             
-      <xs:extension base="tns:xmlPersonOnDateRecord">
+      <xs:extension base="tns:xmlPersonOnDateWithFamilyRecord">
                 
         <xs:sequence>
                     
           <xs:element ref="ns2:birthDate"/>
+                  
+        </xs:sequence>
+                
+        <xs:attribute name="birthPlace" type="xs:string"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlPersonOnDateWithFamilyRecord">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPersonOnDateRecord">
+                
+        <xs:sequence>
                     
           <xs:choice maxOccurs="unbounded" minOccurs="0">
                         
@@ -560,8 +584,6 @@
           </xs:choice>
                   
         </xs:sequence>
-                
-        <xs:attribute name="birthPlace" type="xs:string"/>
               
       </xs:extension>
           
@@ -576,6 +598,42 @@
       <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:recordSet"/>
           
     </xs:sequence>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlBaptismRecord">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPersonOnDateWithFamilyRecord">
+                
+        <xs:sequence>
+                    
+          <xs:element ref="ns2:date"/>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlBaptismRecords">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlRecords">
+                
+        <xs:sequence>
+                    
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:baptism"/>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
       
   </xs:complexType>
     
@@ -635,11 +693,11 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="government"/>
+      <xs:enumeration value="manor"/>
             
       <xs:enumeration value="church"/>
             
-      <xs:enumeration value="manor"/>
+      <xs:enumeration value="government"/>
           
     </xs:restriction>
       
@@ -649,25 +707,25 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="death"/>
-            
-      <xs:enumeration value="marriage"/>
-            
-      <xs:enumeration value="census"/>
-            
       <xs:enumeration value="membership"/>
-            
-      <xs:enumeration value="payment"/>
-            
-      <xs:enumeration value="baptism"/>
-            
-      <xs:enumeration value="residence"/>
-            
-      <xs:enumeration value="mixed"/>
             
       <xs:enumeration value="birth"/>
             
+      <xs:enumeration value="baptism"/>
+            
+      <xs:enumeration value="marriage"/>
+            
+      <xs:enumeration value="mixed"/>
+            
+      <xs:enumeration value="residence"/>
+            
+      <xs:enumeration value="death"/>
+            
       <xs:enumeration value="burial"/>
+            
+      <xs:enumeration value="payment"/>
+            
+      <xs:enumeration value="census"/>
           
     </xs:restriction>
       

@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
 import java.util.Set;
 import java.util.UUID;
+import java.util.function.Function;
 
 public class XmlPersonOnDateRecord extends XmlPersonRecord {
 
@@ -33,12 +34,16 @@ public class XmlPersonOnDateRecord extends XmlPersonRecord {
     private XmlAge complexAge;
 
     protected Person person(final DateRange date, final RecordContext context) {
-        final var id = this.personId();
+        return this.person(date, context, id -> this.events(id, date, context));
+    }
+
+    protected Person person(final DateRange date, final RecordContext context, final Function<PersonId, Set<? extends Event>> createEvents) {
+        final var personId = this.personId();
         final var name = this.name(context.nameParser());
         final var gender = this.gender();
-        final var events = this.events(id, date, context);
+        final var events = createEvents.apply(personId);
         final var notes = this.notes();
-        return new GenericRecordPerson(id, name, gender, events, notes);
+        return new GenericRecordPerson(personId, name, gender, events, notes);
     }
 
     @OverridingMethodsMustInvokeSuper

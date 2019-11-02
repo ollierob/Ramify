@@ -9,6 +9,7 @@ import {recordSetHref} from "../RecordLinks";
 import {HasClass} from "../../../components/style/HasClass";
 import {recordTypeName} from "../../../components/records/RecordType";
 import {sortDatesByEarliestThenLatest} from "../../../components/date/DateRange";
+import {PlaceLink} from "../../../components/places/PlaceLink";
 
 type Props = {
     recordSets: AsyncData<ReadonlyArray<RecordSet.AsObject>>
@@ -54,14 +55,14 @@ const Columns: ColumnProps<RecordSet.AsObject>[] = [
         title: "Records",
         render: (t, r) => r.numrecords.toLocaleString(),
         sorter: (a, b) => a.numrecords - b.numrecords,
-        width: 100
+        width: 110
     },
     {
         key: "numIndividuals",
         title: "Individuals",
         render: (t, r) => r.numindividuals.toLocaleString(),
         sorter: (a, b) => a.numindividuals - b.numindividuals,
-        width: 120
+        width: 130
     },
     {
         key: "date",
