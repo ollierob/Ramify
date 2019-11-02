@@ -122,7 +122,10 @@ const DeathDateColumn: IndividualRecordColumn = {
     key: "deathDate",
     title: "Died",
     dataIndex: "death.date",
-    render: (t, r) => r.death && <FormattedDateRange date={r.death.date} accuracy="day"/>,
+    render: (t, r) => r.death && <>
+        <FormattedDateRange date={r.death.date} accuracy="day"/>
+        {r.death.givenage && <Minor>Age {r.death.givenage}</Minor>}
+    </>,
     width: 120
 };
 

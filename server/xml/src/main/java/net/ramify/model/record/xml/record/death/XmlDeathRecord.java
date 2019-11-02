@@ -65,7 +65,7 @@ public class XmlDeathRecord extends XmlPersonOnDateRecord {
     @Override
     protected Set<Event> events(final PersonId personId, final DateRange date, final RecordContext context) {
         final var events = super.events(personId, date, context);
-        events.add(new GenericDeath(personId, date));
+        events.add(new GenericDeath(personId, date).with(this.age()));
         return events;
     }
 
