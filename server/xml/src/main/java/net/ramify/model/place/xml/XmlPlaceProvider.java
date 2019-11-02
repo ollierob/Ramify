@@ -82,10 +82,11 @@ class XmlPlaceProvider implements PlaceProvider {
     }
 
     @Override
-    public Set<Place> findByName(final String name) {
+    public Set<Place> findByName(final String name, final int limit) {
         final var findString = name.toLowerCase();
         return places.values().stream()
                 .filter(place -> place.name().toLowerCase().contains(findString))
+                .limit(limit)
                 .collect(Collectors.toSet());
     }
 

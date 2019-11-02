@@ -120,9 +120,9 @@ public class DefaultPlacesResource implements PlacesResource {
     }
 
     @Override
-    public Places find(final String name) {
+    public Places find(final String name, final int limit) {
         if (isEmpty(name)) return Places.of();
-        return Places.of(placeProvider.findByName(name), false);
+        return Places.of(placeProvider.findByName(name, limit), false);
     }
 
     @Override

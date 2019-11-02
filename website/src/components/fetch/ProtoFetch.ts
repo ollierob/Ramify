@@ -8,6 +8,7 @@ type FetchOptions = {
 }
 
 export function protoGet<T extends Message>(url: string, decode: (bytes: Uint8Array) => T, options: FetchOptions = {}): Promise<T> {
+    console.log("Querying " + url);
     return new Promise<Response>((resolve, reject) => {
             setTimeout(() => reject(new Error("Timeout")), 120_000);
             fetch(url, {

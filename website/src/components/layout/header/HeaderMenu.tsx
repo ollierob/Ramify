@@ -4,7 +4,7 @@ import {PlacesIcon, RecordsIcon, TreeIcon} from "../../images/Icons";
 import {PlaceList} from "../../places/Place";
 import {PlaceFavouritesHandler} from "../../places/PlaceFavourites";
 import "./HeaderMenu.css";
-import {PlaceMenu} from "./PlaceMenu";
+import {PlaceMenu} from "./place/PlaceMenu";
 import {RecordMenu} from "./RecordMenu";
 import {PeopleMenu} from "./PeopleMenu";
 

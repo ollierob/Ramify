@@ -10,6 +10,7 @@ import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.server.resource.RootResource;
 
 import javax.annotation.CheckForNull;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -77,6 +78,8 @@ public interface PlacesResource extends RootResource {
 
     @GET
     @Path("search")
-    Places find(@QueryParam("name") String name);
+    Places find(
+            @QueryParam("name") String name,
+            @QueryParam("limit") @DefaultValue("100") int limit);
 
 }

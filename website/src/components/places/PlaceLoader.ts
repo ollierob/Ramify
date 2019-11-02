@@ -21,7 +21,7 @@ export interface PlaceLoader {
 
     loadCountries(): Promise<ReadonlyArray<Place.AsObject>>
 
-    findPlaces(name: string): Promise<ReadonlyArray<Place.AsObject>>
+    findPlaces(name: string, limit?: number): Promise<ReadonlyArray<Place.AsObject>>
 
 }
 
@@ -66,8 +66,8 @@ class ProtoPlaceLoader implements PlaceLoader {
         return protoGet("/places/countries", PlaceList.deserializeBinary).then(readPlaces);
     }
 
-    findPlaces(name: string) {
-        return protoGet("/places/search?name=" + name, PlaceList.deserializeBinary).then(readPlaces);
+    findPlaces(name: string, limit: number = 100) {
+        return protoGet("/places/search?name=" + name + "&limit=" + limit, PlaceList.deserializeBinary).then(readPlaces);
     }
 
 }

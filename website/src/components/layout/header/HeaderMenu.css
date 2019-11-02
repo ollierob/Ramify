@@ -21,3 +21,7 @@
     max-height: 300px;
     overflow-y: auto;
 }
+
+.ant-menu-submenu .placeSearch .ant-form-item {
+    margin-bottom: 8px;
+}
