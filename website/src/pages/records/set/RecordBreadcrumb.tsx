@@ -15,7 +15,7 @@ const Hierarchy = (props: {hierarchy: RecordSetHierarchy.AsObject}) => {
     let list = toList(props.hierarchy);
     return <div className="records">
         <RecordsIcon style={{marginRight: 8}}/>
-        {list.map((r, i) => <Breadcrumb relatives={r} first={i == 0} last={i == list.length - 1}/>)}
+        {list.map((r, i) => <Breadcrumb key={r.self.id} relatives={r} first={i == 0} last={i == list.length - 1}/>)}
     </div>;
 };
 

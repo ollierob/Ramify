@@ -42,7 +42,7 @@ function genericColumns(properties: RecordProperties) {
 function burialColumns(properties: RecordProperties) {
     const columns: IndividualRecordColumn[] = [];
     if (properties.hasBirth) columns.push(BirthYear);
-    if (properties.hasResidence) columns.push(ResidencePlace);
+    if (properties.hasResidence) columns.push(ResidenceYear, ResidencePlace);
     if (properties.hasDeath) columns.push(DeathDateColumn);
     if (properties.hasBurial) columns.push(BurialDateColumn);
     return columns;
