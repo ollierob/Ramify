@@ -10,12 +10,15 @@ export const PlaceLink = (props: {place: Place.AsObject, showType?: boolean, loa
         <LoadingIcon/>
     </span>;
 
-    if (!props.place) return null;
+    const place = props.place;
+    if (!place) return null;
+
+    const type = props.showType && placeTypeName(place.type);
 
     return <span className="place">
-        <a href={placeHref(props.place)}>
-            {props.place.name}
-            {props.showType && <> {placeTypeName(props.place.type)}</>}
+        <a href={placeHref(place)}>
+            {place.name}
+            {props.showType && !place.name.endsWith(type) && <> {type}</>}
         </a>
     </span>;
 
