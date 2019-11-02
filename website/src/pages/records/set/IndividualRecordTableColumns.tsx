@@ -67,7 +67,7 @@ const NameColumn: IndividualRecordColumn = {
         if (!r.person.name) return <span className="unimportant">Unknown</span>;
         return <>
             {nameToString(r.person.name)}
-            {r.person.name.original && <Minor text={r.person.name.original}/>}
+            {r.person.name.original && <Minor children={r.person.name.original}/>}
         </>;
     },
     sorter: (r1, r2) => nameToString(r1.person.name).localeCompare(nameToString(r2.person.name)),
@@ -77,15 +77,17 @@ const NameColumn: IndividualRecordColumn = {
 
 const BirthYear: IndividualRecordColumn = {
     key: "birthDate",
-    title: "Birth date",
+    title: "Born",
     dataIndex: "birth.date",
-    render: (t, r) => r.birth && <FormattedYearRange date={r.birth.date}/>,
-    width: 120
+    render: (t, r) => r.birth && <>
+        <FormattedYearRange date={r.birth.date}/>
+    </>,
+    width: 110
 };
 
 const BaptismYear: IndividualRecordColumn = {
     key: "baptismDate",
-    title: "Baptism date",
+    title: "Baptized",
     dataIndex: "baptism.date",
     render: (t, r) => r.baptism && <FormattedYearRange date={r.baptism.date}/>,
     width: 150
@@ -101,9 +103,9 @@ const ResidenceYear: IndividualRecordColumn = {
 const ResidencePlace: IndividualRecordColumn = {
     key: "residencePlace",
     title: "Residence",
-    render: (t, r) => r.residence && r.residence.length > 0 && <>
+    render: (t, r) => r.residence && r.residence.length > 0 && r.residence[0].place && <>
         <PlaceLink place={r.residence[0].place}/>
-        {r.residence[0].place && <Minor text={placeTypeName(r.residence[0].place.type)}/>}
+        <Minor>{placeTypeName(r.residence[0].place.type)}</Minor>
     </>,
     width: 200,
     ...ColumnSubstringLocalSearch(r => r.residence && r.residence.length && r.residence[0].place && r.residence[0].place.name)
@@ -118,7 +120,7 @@ const MentionYear: IndividualRecordColumn = {
 
 const DeathDateColumn: IndividualRecordColumn = {
     key: "deathDate",
-    title: "Death date",
+    title: "Died",
     dataIndex: "death.date",
     render: (t, r) => r.death && <FormattedDateRange date={r.death.date} accuracy="day"/>,
     width: 120
@@ -126,10 +128,10 @@ const DeathDateColumn: IndividualRecordColumn = {
 
 const BurialDateColumn: IndividualRecordColumn = {
     key: "burialDate",
-    title: "Burial date",
+    title: "Buried",
     dataIndex: "burial.date",
     render: (t, r) => r.burial && <FormattedDateRange date={r.burial.date} accuracy="day"/>,
-    width: 120
+    width: 110
 };
 
 const RecordSetColumn: IndividualRecordColumn = {
@@ -149,4 +151,4 @@ const NotesColumn: IndividualRecordColumn = {
 
 const DefaultColumns: ReadonlyArray<IndividualRecordColumn> = [ImageColumn, NameColumn];
 
-const Minor = (props: {text: string}) => <div className="small unimportant">{props.text}</div>;
+const Minor = (props: {children: React.ReactNode}) => <div className="small unimportant">{props.children}</div>;
