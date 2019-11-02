@@ -93,9 +93,11 @@ const SearchResults = (props: {searchResults: AsyncData<ReadonlyArray<Place.AsOb
 };
 
 const SearchResult = (props: {place: Place.AsObject}) => {
+    const place = props.place;
     return <>
-        <PlaceLink place={props.place} showType={false}/>
+        <PlaceLink place={place} showType={false}/>
         &nbsp;
-        <span className="unimportant">{placeTypeName(props.place.type)}</span>
+        <span className="unimportant">{placeTypeName(place.type)}</span>
+        {place.parent && <>&nbsp;in <PlaceLink place={place.parent}/></>}
     </>;
 };

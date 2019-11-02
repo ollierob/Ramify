@@ -25,3 +25,7 @@
 .ant-menu-submenu .placeSearch .ant-form-item {
     margin-bottom: 8px;
 }
+
+.ant-menu-submenu .placeSearch .results .ant-list-item {
+    display: block;
+}
