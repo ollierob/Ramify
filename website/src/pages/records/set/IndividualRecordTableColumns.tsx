@@ -36,7 +36,7 @@ function genericColumns(properties: RecordProperties) {
     if (properties.hasBaptism) columns.push(BaptismYear);
     if (properties.hasResidence) columns.push(ResidenceYear, ResidencePlace);
     if (properties.hasMention) columns.push(MentionYear);
-    if (properties.hasDeath) columns.push(DeathDateColumn);
+    if (properties.hasDeath) columns.push(DeathDateColumn, DeathAgeColumn);
     if (properties.hasBurial) columns.push(BurialDateColumn);
     return columns;
 }
@@ -46,7 +46,7 @@ function burialColumns(properties: RecordProperties) {
     if (properties.hasBirth) columns.push(BirthYear);
     if (properties.hasResidence) columns.push(ResidenceYear, ResidencePlace);
     if (properties.hasMention) columns.push(MentionYear);
-    if (properties.hasDeath) columns.push(DeathDateColumn);
+    if (properties.hasDeath) columns.push(DeathDateColumn, DeathAgeColumn);
     if (properties.hasBurial) columns.push(BurialDateColumn);
     return columns;
 }
@@ -122,11 +122,16 @@ const DeathDateColumn: IndividualRecordColumn = {
     key: "deathDate",
     title: "Died",
     dataIndex: "death.date",
-    render: (t, r) => r.death && <>
-        <FormattedDateRange date={r.death.date} accuracy="day"/>
-        {r.death.givenage && <Minor>Age {r.death.givenage}</Minor>}
-    </>,
+    render: (t, r) => r.death && <FormattedDateRange date={r.death.date} accuracy="day"/>,
     width: 120
+};
+
+const DeathAgeColumn: IndividualRecordColumn = {
+    key: "deathAge",
+    title: "Age",
+    dataIndex: "death.givenage",
+    render: (t, r) => r.death && r.death.givenage > 0 && <>{r.death.givenage}</>,
+    width: 80
 };
 
 const BurialDateColumn: IndividualRecordColumn = {
