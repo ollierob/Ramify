@@ -1,6 +1,6 @@
 package net.ramify.model.place.xml.archives;
 
-import net.ramify.model.place.xml.description.XmlTextLink;
+import net.ramify.model.place.xml.description.XmlLink;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.record.archive.Archive;
 import net.ramify.model.record.archive.ArchiveId;
@@ -28,7 +28,7 @@ public class XmlArchive implements HasArchiveId {
     private String description;
 
     @XmlElementRef(required = false)
-    private XmlTextLink link;
+    private XmlLink link;
 
     @Nonnull
     Archive build() {
@@ -45,4 +45,5 @@ public class XmlArchive implements HasArchiveId {
     public ArchiveId archiveId() {
         return new ArchiveId(id);
     }
+
 }
