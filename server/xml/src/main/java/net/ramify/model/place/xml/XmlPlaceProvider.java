@@ -81,6 +81,14 @@ class XmlPlaceProvider implements PlaceProvider {
         return countries;
     }
 
+    @Override
+    public Set<Place> findByName(final String name) {
+        final var findString = name.toLowerCase();
+        return places.values().stream()
+                .filter(place -> place.name().toLowerCase().contains(findString))
+                .collect(Collectors.toSet());
+    }
+
     void add(final Place place) {
         places.put(place.placeId(), place);
         Consumers.ifNonNull(place.parent(), parent -> children.put(parent.placeId(), place.placeId()));

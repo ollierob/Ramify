@@ -32,6 +32,10 @@ public interface Places extends Iterable<Place>, HasPlaces, BuildsProto<PlacePro
                 .build();
     }
 
+    static Places of() {
+        return of(ImmutableSet.of(), false);
+    }
+
     static Places of(final Set<? extends Place> places, final boolean includeParent) {
         final ImmutableSet<Place> fixedPlaces = ImmutableSet.copyOf(places);
         return new Places() {

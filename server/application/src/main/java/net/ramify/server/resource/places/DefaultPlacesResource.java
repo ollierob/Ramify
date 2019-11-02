@@ -19,6 +19,8 @@ import javax.annotation.CheckForNull;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import static net.ramify.utils.StringUtils.isEmpty;
+
 @Singleton
 public class DefaultPlacesResource implements PlacesResource {
 
@@ -115,6 +117,12 @@ public class DefaultPlacesResource implements PlacesResource {
         Consumers.ifNonNull(this.describeType(id), builder::setTypeDescription);
         this.within(id, null).forEach(child -> builder.addChild(child.toProto(false)));
         return builder.build();
+    }
+
+    @Override
+    public Places find(final String name) {
+        if (isEmpty(name)) return Places.of();
+        return Places.of(placeProvider.findByName(name), false);
     }
 
     @Override

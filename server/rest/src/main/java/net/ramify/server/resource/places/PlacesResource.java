@@ -75,4 +75,8 @@ public interface PlacesResource extends RootResource {
     @Path("favourites")
     PlaceFavouritesResource favourites();
 
+    @GET
+    @Path("search")
+    Places find(@QueryParam("name") String name);
+
 }

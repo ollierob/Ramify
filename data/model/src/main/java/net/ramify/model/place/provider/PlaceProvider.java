@@ -40,6 +40,9 @@ public interface PlaceProvider extends Provider<PlaceId, Place> {
     @Nonnull
     Set<? extends Place> countries();
 
+    @Nonnull
+    Set<Place> findByName(String name);
+
     class UnknownPlaceException extends RuntimeException {
 
         private final PlaceId placeId;

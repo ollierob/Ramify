@@ -21,6 +21,8 @@ export interface PlaceLoader {
 
     loadCountries(): Promise<ReadonlyArray<Place.AsObject>>
 
+    findPlaces(name: string): Promise<ReadonlyArray<Place.AsObject>>
+
 }
 
 class ProtoPlaceLoader implements PlaceLoader {
@@ -47,8 +49,7 @@ class ProtoPlaceLoader implements PlaceLoader {
     }
 
     loadChildren(id: string, maxDepth?: number) {
-        return protoGet("/places/children/" + id + queryParameters({depth: maxDepth}), PlaceList.deserializeBinary)
-            .then(l => l ? l.getPlaceList().map(p => p.toObject()) : []);
+        return protoGet("/places/children/" + id + queryParameters({depth: maxDepth}), PlaceList.deserializeBinary).then(readPlaces);
     }
 
     loadPosition(id: string) {
@@ -62,10 +63,17 @@ class ProtoPlaceLoader implements PlaceLoader {
     }
 
     loadCountries() {
-        return protoGet("/places/countries", PlaceList.deserializeBinary)
-            .then(places => places ? places.getPlaceList().map(p => p.toObject()) : []);
+        return protoGet("/places/countries", PlaceList.deserializeBinary).then(readPlaces);
     }
 
+    findPlaces(name: string) {
+        return protoGet("/places/search?name=" + name, PlaceList.deserializeBinary).then(readPlaces);
+    }
+
+}
+
+function readPlaces(l: PlaceList): ReadonlyArray<Place.AsObject> {
+    return l ? l.getPlaceList().map(p => p.toObject()) : [];
 }
 
 export const DEFAULT_PLACE_LOADER: PlaceLoader = new ProtoPlaceLoader();
