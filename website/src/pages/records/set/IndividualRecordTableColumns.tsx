@@ -94,14 +94,14 @@ const BaptismYear: IndividualRecordColumn = {
 const ResidenceYear: IndividualRecordColumn = {
     key: "residenceDate",
     title: "Residence date",
-    render: (t, r) => r.residence && r.residence.length && <FormattedYearRange date={r.residence[0].date} words={{in: ""}}/>,
+    render: (t, r) => r.residence && r.residence.length > 0 && <FormattedYearRange date={r.residence[0].date} words={{in: ""}}/>,
     width: 150
 };
 
 const ResidencePlace: IndividualRecordColumn = {
     key: "residencePlace",
     title: "Residence",
-    render: (t, r) => r.residence && r.residence.length && <>
+    render: (t, r) => r.residence && r.residence.length > 0 && <>
         <PlaceLink place={r.residence[0].place}/>
         {r.residence[0].place && <Minor text={placeTypeName(r.residence[0].place.type)}/>}
     </>,
@@ -112,7 +112,7 @@ const ResidencePlace: IndividualRecordColumn = {
 const MentionYear: IndividualRecordColumn = {
     key: "mentionDate",
     title: "Mentioned",
-    render: (t, r) => r.mention && r.mention.length && <FormattedYearRange date={r.mention[0].date} words={{in: ""}}/>,
+    render: (t, r) => r.mention && r.mention.length > 0 && <FormattedYearRange date={r.mention[0].date} words={{in: ""}}/>,
     width: 150
 };
 
