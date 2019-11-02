@@ -127,7 +127,7 @@ const RecordSetColumn: IndividualRecordColumn = {
     key: "recordSet",
     title: "Record set",
     render: (t, r) => r.record.recordSet && r.record.recordSet.longtitle,
-    width: 200
+    width: 220
 };
 
 const NotesColumn: IndividualRecordColumn = {
