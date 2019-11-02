@@ -1,5 +1,6 @@
 package net.ramify.model.record.xml.collection;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.parse.DateParser;
@@ -57,7 +58,7 @@ class XmlRecordSet implements HasRecordSetId {
     @XmlAttribute(name = "source", required = true)
     private XmlRecordSetSource source;
 
-    @XmlAttribute(name = "type", required = true)
+    @XmlAttribute(name = "type")
     private XmlRecordSetType type;
 
     @XmlElement(namespace = XmlRecord.NAMESPACE, name = "description")
@@ -134,6 +135,10 @@ class XmlRecordSet implements HasRecordSetId {
         return Functions.ifNonNull(parent, RecordSet::covers);
     }
 
+    XmlRecordSetType type() {
+        return MoreObjects.firstNonNull(type, XmlRecordSetType.MIXED);
+    }
+
     private Set<RecordSetReference> buildReferences(final RecordContext context) {
         if (references == null) return Collections.emptySet();
         return SetUtils.transform(references, ref -> ref.build(context.archives()));
@@ -150,7 +155,7 @@ class XmlRecordSet implements HasRecordSetId {
     }
 
     private int numIndividuals() {
-        if(records == null) return 0;
+        if (records == null) return 0;
         return records.stream().mapToInt(XmlRecords::numIndividuals).sum();
     }
 

@@ -77,13 +77,19 @@ const Title = (props: {recordSet: RecordSet.AsObject}) => {
     const recordSet = props.recordSet;
     if (!recordSet) return <Loading/>;
     return <>
-        Records of <b>{recordSet.longtitle}</b>
+        {prefixWithRecords(recordSet.longtitle) && <>Records of </>}
+        <b>{recordSet.longtitle}</b>
         {" "}
         <span className="unimportant">
             {recordSet.numrecords.toLocaleString()} records
             {recordSet.numrecords > 0 && <>, {recordSet.numindividuals.toLocaleString()} individuals</>}
         </span></>;
 };
+
+function prefixWithRecords(title: string) {
+    return !title.endsWith("Registers")
+        && !title.endsWith("Returns");
+}
 
 const Description = (props: {record: RecordSet.AsObject}) => {
     const description = props.record.description;
