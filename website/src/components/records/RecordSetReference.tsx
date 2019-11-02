@@ -11,10 +11,17 @@ export const RecordSetReferences = (props: {archive: Archive.AsObject, reference
     if (archive.pb_private) return <>Private collection</>;
     return <Popover content={<PopoverContent {...props}/>} placement="bottomLeft">
         <a>
-            {archive.icon && <><img src={archive.icon} className="image" alt={archive.name}/> </>} {archive.name}
+            {archiveIcon(archive)}
+            {" "}
+            {archive.name}
         </a>
     </Popover>;
 };
+
+function archiveIcon(archive: Archive.AsObject) {
+    if (archive.icon) return <img src={archive.icon} className="image" alt={archive.name}/>;
+    return <Icon type="link" className="image" title={archive.name}/>;
+}
 
 const PopoverContent = (props: {archive: Archive.AsObject, references: ReadonlyArray<ExternalRecordReference.AsObject>}) => {
     const references = props.references;
@@ -31,7 +38,7 @@ const PopoverContent = (props: {archive: Archive.AsObject, references: ReadonlyA
         </div>
         <ul>
             {references.map(r => <li>
-                {r.reference}
+                {r.link ? <a href={r.link.href} target="_blank">{r.reference}</a> : r.reference}
             </li>)}
         </ul>
     </div>;
