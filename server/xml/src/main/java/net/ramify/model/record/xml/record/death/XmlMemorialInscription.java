@@ -6,7 +6,7 @@ import net.ramify.model.event.type.Death;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.xml.XmlFamily;
 import net.ramify.model.place.PlaceId;
-import net.ramify.model.record.civil.GenericDeathRecord;
+import net.ramify.model.record.GenericDeathRecord;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.type.DeathRecord;
 import net.ramify.model.record.xml.RecordContext;

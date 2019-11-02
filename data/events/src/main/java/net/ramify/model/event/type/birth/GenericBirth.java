@@ -5,6 +5,7 @@ import net.ramify.model.event.AbstractEvent;
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.event.type.Birth;
 import net.ramify.model.person.PersonId;
+import net.ramify.model.place.Place;
 
 import javax.annotation.Nonnull;
 
@@ -21,6 +22,11 @@ public class GenericBirth extends AbstractEvent<GenericBirth> implements Birth {
     @Override
     public PersonId personId() {
         return personId;
+    }
+
+    @Override
+    public Birth with(final Place place) {
+        return place == null ? this : new BirthWithPlace(this, place);
     }
 
     @Nonnull

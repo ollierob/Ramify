@@ -3,6 +3,8 @@
     
   <xs:element name="betweenYears" type="tns:xmlBetweenYears"/>
     
+  <xs:element name="birthDate" type="tns:xmlExactDate"/>
+    
   <xs:element name="builtBeforeYear" type="tns:xmlBeforeYear"/>
     
   <xs:element name="builtBetwweenYears" type="tns:xmlBetweenYears"/>

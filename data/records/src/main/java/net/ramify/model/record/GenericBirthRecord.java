@@ -1,29 +1,27 @@
-package net.ramify.model.record.civil;
+package net.ramify.model.record;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.family.Family;
-import net.ramify.model.place.PlaceId;
-import net.ramify.model.record.DateRecord;
-import net.ramify.model.record.RecordId;
+import net.ramify.model.place.Place;
 import net.ramify.model.record.collection.RecordSet;
-import net.ramify.model.record.type.DeathRecord;
+import net.ramify.model.record.type.BirthRecord;
 
 import javax.annotation.Nonnull;
 
-public class GenericDeathRecord extends DateRecord implements DeathRecord {
+public class GenericBirthRecord extends DateRecord implements BirthRecord {
 
-    private final PlaceId deathPlace;
+    private final Place birthPlace;
     private final Family family;
 
-    public GenericDeathRecord(
+    public GenericBirthRecord(
             final RecordId id,
             final RecordSet recordSet,
             final DateRange date,
-            final PlaceId deathPlace,
+            final Place birthPlace,
             final Family family) {
         super(id, recordSet, date);
-        this.deathPlace = deathPlace;
+        this.birthPlace = birthPlace;
         this.family = family;
     }
 
@@ -35,13 +33,13 @@ public class GenericDeathRecord extends DateRecord implements DeathRecord {
 
     @Nonnull
     @Override
-    public PlaceId placeId() {
-        return deathPlace;
+    public Place place() {
+        return birthPlace;
     }
 
     @Override
     protected EventProto.RecordType protoType() {
-        return EventProto.RecordType.DEATH;
+        return EventProto.RecordType.BIRTH;
     }
 
 }

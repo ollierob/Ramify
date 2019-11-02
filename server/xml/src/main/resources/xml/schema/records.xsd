@@ -9,6 +9,10 @@
     
   <xs:import namespace="http://ramify.net/families" schemaLocation="families.xsd"/>
     
+  <xs:element name="birthRecord" type="tns:xmlBirthRecord"/>
+    
+  <xs:element name="birthRecords" type="tns:xmlBirthRecords"/>
+    
   <xs:element name="burialRecords" type="tns:xmlBurialRecords"/>
     
   <xs:element name="churchBurial" type="tns:xmlBurialRecord"/>
@@ -140,6 +144,8 @@
         <xs:element ref="tns:englandCensus"/>
                 
         <xs:element ref="tns:memorialInscriptions"/>
+                
+        <xs:element ref="tns:birthRecords"/>
               
       </xs:choice>
           
@@ -517,6 +523,52 @@
       
   </xs:complexType>
     
+  <xs:complexType name="xmlBirthRecords">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlRecords">
+                
+        <xs:sequence>
+                    
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:birthRecord"/>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlBirthRecord">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPersonOnDateRecord">
+                
+        <xs:sequence>
+                    
+          <xs:element ref="ns2:birthDate"/>
+                    
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        
+            <xs:element ref="ns4:father"/>
+                        
+            <xs:element ref="ns4:mother"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+                
+        <xs:attribute name="birthPlace" type="xs:string"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
   <xs:complexType name="recordSets">
         
     <xs:sequence>
@@ -583,11 +635,11 @@
         
     <xs:restriction base="xs:string">
             
+      <xs:enumeration value="government"/>
+            
       <xs:enumeration value="church"/>
             
       <xs:enumeration value="manor"/>
-            
-      <xs:enumeration value="government"/>
           
     </xs:restriction>
       
@@ -597,25 +649,25 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="birth"/>
-            
-      <xs:enumeration value="baptism"/>
+      <xs:enumeration value="death"/>
             
       <xs:enumeration value="marriage"/>
+            
+      <xs:enumeration value="census"/>
+            
+      <xs:enumeration value="membership"/>
+            
+      <xs:enumeration value="payment"/>
+            
+      <xs:enumeration value="baptism"/>
             
       <xs:enumeration value="residence"/>
             
       <xs:enumeration value="mixed"/>
             
-      <xs:enumeration value="census"/>
-            
-      <xs:enumeration value="death"/>
+      <xs:enumeration value="birth"/>
             
       <xs:enumeration value="burial"/>
-            
-      <xs:enumeration value="payment"/>
-            
-      <xs:enumeration value="membership"/>
           
     </xs:restriction>
       

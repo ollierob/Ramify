@@ -20,7 +20,6 @@ import net.ramify.model.person.PersonId;
 import net.ramify.model.person.name.NameParser;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
-import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.record.GenericRecordPerson;
 import net.ramify.model.record.church.ChurchBurialRecord;
 import net.ramify.model.record.collection.RecordSet;
@@ -70,27 +69,27 @@ public class XmlBurialRecord extends XmlPersonOnDateRecord {
     }
 
     Family family(final ExactDate burialDate, final RecordContext context) {
-        final var person = this.person(context.nameParser(), burialDate, context.places());
+        final var person = this.person(context.nameParser(), burialDate, context);
         final var builder = new FamilyBuilder().addPerson(person);
         if (relationships != null) relationships.forEach(relationship -> relationship.addRelationship(person, builder, context, burialDate));
         return builder.build();
     }
 
-    Person person(final NameParser nameParser, final ExactDate burialDate, final PlaceProvider places) {
+    Person person(final NameParser nameParser, final ExactDate burialDate, final RecordContext context) {
         final var personId = this.personId();
         return new GenericRecordPerson(
                 personId,
                 this.name(nameParser),
                 this.gender(),
-                this.events(personId, burialDate, places),
+                this.events(personId, burialDate, context),
                 this.notes());
     }
 
-    Set<Event> events(final PersonId personId, final ExactDate burialDate, final PlaceProvider places) {
-        final var events = super.events(personId, burialDate);
+    Set<Event> events(final PersonId personId, final ExactDate burialDate, final RecordContext context) {
+        final var events = super.events(personId, burialDate, context);
         events.add(this.burial(personId, burialDate));
         if (deathDate != null) events.add(this.death(personId, deathDate.resolve()));
-        if (residence != null) events.add(this.residence(personId, Functions.ifNonNull(deathDate, XmlExactDate::resolve, burialDate), places.require(new PlaceId(residence))));
+        if (residence != null) events.add(this.residence(personId, Functions.ifNonNull(deathDate, XmlExactDate::resolve, burialDate), context.places().require(new PlaceId(residence))));
         return events;
     }
 

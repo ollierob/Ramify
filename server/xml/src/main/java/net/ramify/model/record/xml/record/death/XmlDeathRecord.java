@@ -13,7 +13,7 @@ import net.ramify.model.family.xml.XmlRelationship;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.place.PlaceId;
-import net.ramify.model.record.civil.GenericDeathRecord;
+import net.ramify.model.record.GenericDeathRecord;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.type.DeathRecord;
 import net.ramify.model.record.xml.RecordContext;
@@ -63,8 +63,8 @@ public class XmlDeathRecord extends XmlPersonOnDateRecord {
     }
 
     @Override
-    protected Set<Event> events(final PersonId personId, final DateRange date) {
-        final var events = super.events(personId, date);
+    protected Set<Event> events(final PersonId personId, final DateRange date, final RecordContext context) {
+        final var events = super.events(personId, date, context);
         events.add(new GenericDeath(personId, date));
         return events;
     }

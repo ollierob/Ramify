@@ -45,13 +45,13 @@ public class XmlResidenceRecord extends XmlPersonOnDateRecord {
         final var id = this.personId();
         final var name = this.name(context.nameParser());
         final var gender = this.gender();
-        final var events = this.events(id, place, date);
+        final var events = this.events(id, place, date, context);
         final var notes = this.notes();
         return new GenericRecordPerson(id, name, gender, events, notes);
     }
 
-    protected Set<Event> events(final PersonId personId, final Place place, final DateRange date) {
-        final var events = super.events(personId, date);
+    protected Set<Event> events(final PersonId personId, final Place place, final DateRange date, final RecordContext context) {
+        final var events = super.events(personId, date, context);
         events.add(new GenericResidence(personId, date, place));
         return events;
     }
