@@ -10,6 +10,7 @@ import net.ramify.model.place.xml.place.settlement.XmlCity;
 import net.ramify.model.place.xml.place.settlement.XmlTown;
 import net.ramify.model.place.xml.place.settlement.XmlVillage;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -27,13 +28,16 @@ public class XmlMetropolitanBorough extends XmlArea<MetropolitanBorough> {
     })
     private List<XmlPlace> children;
 
+    @XmlAttribute(name = "iso")
+    private String iso;
+
     XmlMetropolitanBorough() {
         super(MetropolitanBorough.class);
     }
 
     @Override
     protected MetropolitanBorough place(final Place parent, final PlaceGroupId groupId, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new MetropolitanBorough(this.placeId(), this.name(), parent, groupId);
+        return new MetropolitanBorough(this.placeId(), this.name(), parent, groupId, iso);
     }
 
     @Override

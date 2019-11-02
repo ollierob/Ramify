@@ -978,6 +978,8 @@
           </xs:choice>
                   
         </xs:sequence>
+                
+        <xs:attribute name="iso" type="xs:string"/>
               
       </xs:extension>
           

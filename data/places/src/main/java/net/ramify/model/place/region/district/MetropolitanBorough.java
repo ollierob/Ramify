@@ -14,6 +14,7 @@ import net.ramify.model.place.type.Settlement;
 
 import javax.annotation.Nonnull;
 import java.time.Month;
+import java.util.Optional;
 import java.util.Set;
 
 public class MetropolitanBorough extends AbstractRegion implements District {
@@ -22,14 +23,16 @@ public class MetropolitanBorough extends AbstractRegion implements District {
     private static final PlaceHistory BOROUGH_HISTORY = new DefaultPlaceHistory(ExactDate.on(1974, Month.APRIL, 1), null);
 
     private final Region parent;
+    private final String iso;
 
-    public MetropolitanBorough(final PlaceId id, final String name, final Place parent, final PlaceGroupId groupId) throws InvalidPlaceTypeException {
-        this(id, name, parent.requireAs(Region.class), groupId);
+    public MetropolitanBorough(final PlaceId id, final String name, final Place parent, final PlaceGroupId groupId, final String iso) throws InvalidPlaceTypeException {
+        this(id, name, parent.requireAs(Region.class), groupId, iso);
     }
 
-    public MetropolitanBorough(final PlaceId id, final String name, final Region parent, final PlaceGroupId groupId) {
+    public MetropolitanBorough(final PlaceId id, final String name, final Region parent, final PlaceGroupId groupId, final String iso) {
         super(id, name, groupId, BOROUGH_HISTORY);
         this.parent = parent;
+        this.iso = iso;
     }
 
     @Override
@@ -41,6 +44,12 @@ public class MetropolitanBorough extends AbstractRegion implements District {
     @Override
     public Set<Class<? extends Place>> childTypes() {
         return CHILD_TYPES;
+    }
+
+    @Nonnull
+    @Override
+    public Optional<String> iso() {
+        return Optional.ofNullable(iso);
     }
 
     @Override

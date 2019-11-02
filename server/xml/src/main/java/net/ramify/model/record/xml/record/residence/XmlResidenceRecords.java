@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "residenceRecords")
@@ -49,6 +50,7 @@ public class XmlResidenceRecords extends XmlRecords {
     public Collection<? extends LifeEventRecord> build(
             final RecordSet recordSet,
             final RecordContext context) {
+        if (records == null) return Collections.emptyList();
         final var place = context.places().require(Functions.ifNonNull(this.placeId, PlaceId::new, recordSet.placeId()));
         final var date = Functions.ifNonNull(this.date, d -> d.resolve(context.dateParser()), recordSet.date());
         return ListUtils.eagerlyTransform(records, record -> record.build(place, date, context, recordSet));
