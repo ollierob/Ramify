@@ -125,7 +125,8 @@ const NotesColumn: IndividualRecordColumn = {
     key: "notes",
     title: "Notes",
     dataIndex: "person.notes",
-    sorter: (r1, r2) => (r1.person.notes || "").localeCompare(r2.person.notes || "")
+    sorter: (r1, r2) => (r1.person.notes || "").localeCompare(r2.person.notes || ""),
+    ...ColumnSubstringLocalSearch(r => r.person.notes)
 };
 
 const DefaultColumns: ReadonlyArray<IndividualRecordColumn> = [ImageColumn, NameColumn];

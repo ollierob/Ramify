@@ -24,9 +24,7 @@ const Breadcrumb = (props: {relatives: RecordSetRelatives.AsObject, first?: bool
     const self = props.relatives.self;
 
     const inner = <span className="record">
-            <a href={recordSetHref(self)}>
-                <b>{self.longtitle || self.shorttitle}</b>
-            </a>
+        {props.last ? self.longtitle : <a href={recordSetHref(self)}><b>{self.longtitle}</b></a>}
         </span>;
 
     const outer = hasRelatives(props.relatives)
