@@ -22,13 +22,14 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @XmlRootElement(namespace = XmlFamily.NAMESPACE, name = "person")
 public class XmlFamilyPerson extends XmlPersonRecord {
 
-    @XmlAttribute(name = "id", required = true)
-    private String id;
+    @XmlAttribute(name = "id")
+    private String id = UUID.randomUUID().toString();
 
     @XmlElement(name = "parent", namespace = XmlFamily.NAMESPACE)
     private List<String> parents;
@@ -56,7 +57,9 @@ public class XmlFamilyPerson extends XmlPersonRecord {
 
     protected Set<Event> events(final PersonId personId, final ParserContext context) {
         if (events == null || events.isEmpty()) return Collections.emptySet();
-        return events.stream().map(event -> event.toEvent(personId, context)).collect(Collectors.toSet());
+        final var events = Sets.<Event>newHashSet();
+        this.events.forEach(event -> events.addAll(event.allEvents(personId, context)));
+        return events;
     }
 
     protected Set<Relationship> relationships(final Person self, final PersonProvider people) {
@@ -74,6 +77,10 @@ public class XmlFamilyPerson extends XmlPersonRecord {
                 .map(people::require)
                 .map(person -> factory.relationshipBetween(person, self))
                 .collect(Collectors.toList());
+    }
+
+    public int numPeople() {
+        return 1 + (parents == null ? 0 : parents.size()) + (spouses == null ? 0 : spouses.size());
     }
 
 }

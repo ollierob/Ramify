@@ -37,4 +37,10 @@ public interface HasPeople extends HasEvents {
         return events;
     }
 
+    default <E extends Event> Set<E> events(final Class<E> eventType) {
+        final var events = new HashSet<E>();
+        this.people().forEach(person -> events.addAll(person.events(eventType)));
+        return events;
+    }
+
 }

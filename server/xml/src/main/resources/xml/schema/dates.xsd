@@ -19,6 +19,8 @@
     
   <xs:element name="inYear" type="tns:xmlInYear"/>
     
+  <xs:element name="onDate" type="tns:xmlExactDate"/>
+    
   <xs:element name="xmlBeforeDate" type="tns:xmlBeforeDate"/>
     
   <xs:element name="xmlBeforeYear" type="tns:xmlBeforeYear"/>

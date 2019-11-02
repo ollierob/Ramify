@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/dates" xmlns:tns="http://ramify.net/events" targetNamespace="http://ramify.net/events" version="1.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/dates" xmlns:ns2="http://ramify.net/people" xmlns:tns="http://ramify.net/events" targetNamespace="http://ramify.net/events" version="1.0">
     
   <xs:import namespace="http://ramify.net/dates" schemaLocation="dates.xsd"/>
+    
+  <xs:import namespace="http://ramify.net/people" schemaLocation="people.xsd"/>
     
   <xs:element name="birth" type="tns:xmlBirthEvent"/>
     
@@ -27,7 +29,13 @@
         
     <xs:sequence>
             
-      <xs:element minOccurs="0" ref="ns1:inYear"/>
+      <xs:choice minOccurs="0">
+                
+        <xs:element ref="ns1:inYear"/>
+                
+        <xs:element ref="ns1:onDate"/>
+              
+      </xs:choice>
           
     </xs:sequence>
         
@@ -41,7 +49,13 @@
             
       <xs:extension base="tns:xmlEvent">
                 
-        <xs:sequence/>
+        <xs:sequence>
+                    
+          <xs:element minOccurs="0" ref="ns2:exactAge"/>
+                  
+        </xs:sequence>
+                
+        <xs:attribute name="age" type="xs:int"/>
               
       </xs:extension>
           

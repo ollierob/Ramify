@@ -5,30 +5,6 @@
     
   <xs:element name="nameTranscription" type="tns:xmlNameTranscription"/>
     
-  <xs:complexType abstract="true" name="xmlName">
-        
-    <xs:sequence/>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlNameTranscription">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlName">
-                
-        <xs:sequence/>
-                
-        <xs:attribute name="original" type="xs:string" use="required"/>
-                
-        <xs:attribute name="assumed" type="xs:string" use="required"/>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
   <xs:complexType abstract="true" name="xmlAge">
         
     <xs:sequence/>
@@ -55,6 +31,30 @@
       
   </xs:complexType>
     
+  <xs:complexType abstract="true" name="xmlName">
+        
+    <xs:sequence/>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlNameTranscription">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlName">
+                
+        <xs:sequence/>
+                
+        <xs:attribute name="original" type="xs:string" use="required"/>
+                
+        <xs:attribute name="assumed" type="xs:string" use="required"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
   <xs:complexType name="xmlPerson">
         
     <xs:sequence/>
@@ -65,11 +65,11 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="male"/>
-            
       <xs:enumeration value="female"/>
             
       <xs:enumeration value="unknown"/>
+            
+      <xs:enumeration value="male"/>
           
     </xs:restriction>
       

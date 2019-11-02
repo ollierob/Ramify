@@ -29,14 +29,14 @@ public class XmlFamily {
         return this.buildFamily(people);
     }
 
-    private FamilyPersonProvider buildPeople(final ParserContext context) {
+    FamilyPersonProvider buildPeople(final ParserContext context) {
         Preconditions.checkArgument(people != null && !people.isEmpty());
         final var provider = new FamilyPersonProvider();
         people.forEach(xmlPerson -> provider.add(xmlPerson.toPerson(context)));
         return provider;
     }
 
-    private Family buildFamily(final FamilyPersonProvider provider) {
+    Family buildFamily(final FamilyPersonProvider provider) {
         Preconditions.checkArgument(people != null && !people.isEmpty());
         final var builder = new FamilyBuilder();
         people.forEach(xmlPerson -> {
@@ -48,8 +48,12 @@ public class XmlFamily {
         return builder.build();
     }
 
+    public int numPeople() {
+        return people == null ? 0 : people.stream().mapToInt(XmlFamilyPerson::numPeople).sum();
+    }
+
     @XmlTransient
-    private static class FamilyPersonProvider implements PersonProvider {
+    static class FamilyPersonProvider implements PersonProvider {
 
         private final Map<PersonId, Person> people = Maps.newHashMap();
 

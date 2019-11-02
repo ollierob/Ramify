@@ -58,8 +58,12 @@ public interface Age {
         return new PeriodBasedAge(min, max);
     }
 
-    static DateRange birthDate(final int age, final DateRange date) {
-        return Age.ofYears(age).birthDate(date);
+    static DateRange birthDate(final int age, final DateRange on) {
+        return Age.ofYears(age).birthDate(on);
+    }
+
+    static DateRange birthDate(final Period age, final DateRange on) {
+        return Age.exactly(age).birthDate(on);
     }
 
 }
