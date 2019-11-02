@@ -1,6 +1,7 @@
 package net.ramify.server.resource.records;
 
 import net.ramify.model.date.DateRange;
+import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.record.collection.RecordSet;
@@ -10,6 +11,7 @@ import net.ramify.model.record.collection.RecordSetRelatives;
 import net.ramify.model.record.collection.RecordSets;
 import net.ramify.model.record.provider.RecordSetProvider;
 import net.ramify.model.record.provider.RecordSetRelativesProvider;
+import net.ramify.utils.objects.Functions;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -49,12 +51,18 @@ public class DefaultRecordSetResource implements RecordSetResource {
         }
         if (withinPlace != null) {
             final var place = places.require(withinPlace);
-            predicate = predicate.and(r -> place.isParentOf(r.resolvePlace(places)));
+            predicate = predicate.and(record -> this.isCovered(record, place));
         }
         if (withinDate != null) {
             predicate = predicate.and(r -> r.date().intersects(withinDate));
         }
         return RecordSets.of(recordSets.matching(predicate, limit, onlyParents));
+    }
+
+    private boolean isCovered(final RecordSet recordSet, final Place place) {
+        if (place.isParentOf(recordSet.covers().resolvePlace(places))) return true;
+        final var createdPlace = Functions.ifNonNull(recordSet.createdBy(), id -> id.resolvePlace(places));
+        return createdPlace != null && place.isParentOf(createdPlace);
     }
 
     @CheckForNull

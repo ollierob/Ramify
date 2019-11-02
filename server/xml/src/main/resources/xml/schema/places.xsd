@@ -558,6 +558,36 @@
             <xs:element ref="ns1:builtBeforeYear"/>
                       
           </xs:choice>
+                    
+          <xs:element minOccurs="0" ref="tns:graveyard"/>
+                  
+        </xs:sequence>
+                
+        <xs:attribute name="demolished" type="xs:boolean"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlGraveyard">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPlace">
+                
+        <xs:sequence>
+                    
+          <xs:choice minOccurs="0">
+                        
+            <xs:element ref="ns1:builtInYear"/>
+                        
+            <xs:element ref="ns1:builtBetwweenYears"/>
+                        
+            <xs:element ref="ns1:builtBeforeYear"/>
+                      
+          </xs:choice>
                   
         </xs:sequence>
                 
@@ -626,34 +656,6 @@
   </xs:complexType>
     
   <xs:complexType name="xmlInn">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:choice minOccurs="0">
-                        
-            <xs:element ref="ns1:builtInYear"/>
-                        
-            <xs:element ref="ns1:builtBetwweenYears"/>
-                        
-            <xs:element ref="ns1:builtBeforeYear"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-                
-        <xs:attribute name="demolished" type="xs:boolean"/>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlGraveyard">
         
     <xs:complexContent>
             
@@ -1083,13 +1085,13 @@
                 
         <xs:element ref="tns:church"/>
                 
+        <xs:element ref="tns:graveyard"/>
+                
         <xs:element ref="tns:mill"/>
                 
         <xs:element ref="tns:school"/>
                 
         <xs:element ref="tns:inn"/>
-                
-        <xs:element ref="tns:graveyard"/>
                 
         <xs:element ref="tns:hamlet"/>
                 

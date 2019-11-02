@@ -9,9 +9,6 @@ import java.util.Set;
 
 public interface Building extends Place {
 
-    @Nonnull
-    SettlementOrRegion parent();
-
     @CheckForNull
     @Override
     BuildingHistory history();
