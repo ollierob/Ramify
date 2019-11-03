@@ -7,6 +7,7 @@ import {FormattedDateRange} from "../../../../components/date/FormattedDateRange
 import {renderFamilyRecord} from "./FamilyRecordTableCell";
 import {RecordSet} from "../../../../protobuf/generated/record_pb";
 import {PlaceLink} from "../../../../components/places/PlaceLink";
+import {placeTypeName} from "../../../../components/places/PlaceType";
 
 export type FamilyRecordColumn = ColumnProps<FamilyRecord>;
 
@@ -41,8 +42,11 @@ const DateColumn: FamilyRecordColumn = {
 const PlaceColumn: FamilyRecordColumn = {
     key: "place",
     title: "Place",
-    render: (t, r) => <PlaceLink place={r.place}/>,
-    width: 120
+    render: (t, r) => r.place && <>
+        <PlaceLink place={r.place}/>
+        <Minor>{placeTypeName(r.place.type)}</Minor>
+    </>,
+    width: 140
 };
 
 const FamilyColumn: FamilyRecordColumn = {
@@ -61,3 +65,4 @@ const RecordSetColumn: FamilyRecordColumn = {
 
 const PrefixColumns = [ImageColumn, TypeColumn, DateColumn];
 const SuffixColumns = [FamilyColumn, RecordSetColumn];
+const Minor = (props: {children: React.ReactNode}) => <div className="small unimportant">{props.children}</div>;
