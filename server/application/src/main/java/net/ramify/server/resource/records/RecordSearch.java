@@ -33,11 +33,11 @@ class RecordSearch {
         this.nameParser = nameParser;
     }
 
-    IndividualRecords search(final Records source, final RecordProto.RecordSearch search) {
-        return source.individualRecords().filter(this.searchTest(search));
+    IndividualRecords searchIndividuals(final Records source, final RecordProto.RecordSearch search) {
+        return source.individualRecords().filter(this.searchIndividualTest(search));
     }
 
-    private Predicate<IndividualRecord> searchTest(final RecordProto.RecordSearch search) {
+    private Predicate<IndividualRecord> searchIndividualTest(final RecordProto.RecordSearch search) {
         final var place = this.searchPlace(search);
         final var name = this.searchName(search);
         //TODO also age/DOB search

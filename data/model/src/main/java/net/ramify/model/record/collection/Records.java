@@ -35,6 +35,10 @@ public interface Records extends BuildsProto<RecordProto.RecordList> {
         return () -> this.records().flatMap(Record::individualRecords);
     }
 
+    default Records paginate(final int start, final int limit) {
+        return () -> this.records().skip(start).limit(limit);
+    }
+
     static Records of(final Collection<Record> records) {
         final var immutable = ImmutableList.copyOf(records);
         return immutable::stream;

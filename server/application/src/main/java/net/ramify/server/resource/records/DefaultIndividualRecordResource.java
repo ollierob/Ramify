@@ -22,7 +22,10 @@ public class DefaultIndividualRecordResource implements IndividualRecordResource
     private final RecordSearch search;
 
     @Inject
-    DefaultIndividualRecordResource(RecordsProvider records, RecordSetRelativesProvider relativesProvider, RecordSearch search) {
+    DefaultIndividualRecordResource(
+            final RecordsProvider records,
+            final RecordSetRelativesProvider relativesProvider,
+            final RecordSearch search) {
         this.records = records;
         this.relativesProvider = relativesProvider;
         this.search = search;
@@ -40,7 +43,7 @@ public class DefaultIndividualRecordResource implements IndividualRecordResource
         final var records = recordSetId.isEmpty()
                 ? this.allRecords()
                 : this.parentAndChildRecords(new RecordSetId(recordSetId));
-        return search.search(records, searchParameters);
+        return search.searchIndividuals(records, searchParameters);
     }
 
     private Records parentAndChildRecords(final RecordSetId id) {

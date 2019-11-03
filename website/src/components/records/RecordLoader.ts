@@ -1,10 +1,23 @@
-import {IndividualRecord, IndividualRecordList, RecordImageList, RecordSearch, RecordSet, RecordSetHierarchy, RecordSetList, RecordSetRelatives} from "../../protobuf/generated/record_pb";
+import {
+    IndividualRecord,
+    IndividualRecordList,
+    Record,
+    RecordImageList,
+    RecordList,
+    RecordSearch,
+    RecordSet,
+    RecordSetHierarchy,
+    RecordSetList,
+    RecordSetRelatives
+} from "../../protobuf/generated/record_pb";
 import {PlaceId} from "../places/Place";
 import {queryParameters} from "../fetch/Fetch";
 import {protoGet, protoPost} from "../fetch/ProtoFetch";
 import {RecordSetId, sortRecordSetByDateThenTitle} from "./RecordSet";
 
 export interface RecordLoader {
+
+    loadRecords(id: RecordSetId, options?: RecordOptions): Promise<ReadonlyArray<Record.AsObject>>
 
     loadIndividualRecords(id: RecordSetId, options?: RecordOptions): Promise<ReadonlyArray<EnrichedIndividualRecord>>
 
@@ -28,15 +41,20 @@ export type EnrichedIndividualRecord = IndividualRecord.AsObject & {recordSet: R
 
 class ProtoRecordLoader implements RecordLoader {
 
+    loadRecords(id: string, options: RecordOptions = {}) {
+        const url = "/records/in/" + id + queryParameters(options);
+        return protoGet(url, RecordList.deserializeBinary).then(readRecords);
+    }
+
     loadIndividualRecords(id: string, options: RecordOptions = {}) {
         const url = "/records/individuals/in/" + id + queryParameters(options);
         return protoGet(url, IndividualRecordList.deserializeBinary)
-            .then(readRecords);
+            .then(readIndividualRecords);
     }
 
     searchIndividualRecords(search: RecordSearch) {
         return protoPost("/records/individuals/search", search, RecordSearch.serializeBinaryToWriter, IndividualRecordList.deserializeBinary)
-            .then(readRecords);
+            .then(readIndividualRecords);
     }
 
     loadRecordSet(id: string) {
@@ -66,12 +84,17 @@ class ProtoRecordLoader implements RecordLoader {
 
 }
 
+function readRecords(list: RecordList): Record.AsObject[] {
+    if (!list) return [];
+    return list.getRecordList().map(l => l.toObject());
+}
+
 function readRecordSets(list: RecordSetList): RecordSet.AsObject[] {
     if (!list) return [];
     return list.getRecordsetList().map(l => l.toObject()).sort(sortRecordSetByDateThenTitle);
 }
 
-function readRecords(list: IndividualRecordList): EnrichedIndividualRecord[] {
+function readIndividualRecords(list: IndividualRecordList): EnrichedIndividualRecord[] {
     if (!list) return [];
     const recordSets = list.getRecordsetsMap();
     return list.getRecordList().map(l => l.toObject()).map<EnrichedIndividualRecord>(o => ({...o, recordSet: recordSets.get(o.recordsetid).toObject()}));
