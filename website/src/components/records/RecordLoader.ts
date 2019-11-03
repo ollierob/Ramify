@@ -17,7 +17,7 @@ import {RecordSetId, sortRecordSetByDateThenTitle} from "./RecordSet";
 
 export interface RecordLoader {
 
-    loadRecords(id: RecordSetId, options?: RecordOptions): Promise<ReadonlyArray<Record.AsObject>>
+    loadFamilyRecords(id: RecordSetId, options?: RecordOptions): Promise<ReadonlyArray<Record.AsObject>>
 
     loadIndividualRecords(id: RecordSetId, options?: RecordOptions): Promise<ReadonlyArray<EnrichedIndividualRecord>>
 
@@ -41,7 +41,7 @@ export type EnrichedIndividualRecord = IndividualRecord.AsObject & {recordSet: R
 
 class ProtoRecordLoader implements RecordLoader {
 
-    loadRecords(id: string, options: RecordOptions = {}) {
+    loadFamilyRecords(id: string, options: RecordOptions = {}) {
         const url = "/records/in/" + id + queryParameters(options);
         return protoGet(url, RecordList.deserializeBinary).then(readRecords);
     }
