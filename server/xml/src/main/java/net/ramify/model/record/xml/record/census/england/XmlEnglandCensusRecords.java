@@ -1,7 +1,6 @@
 package net.ramify.model.record.xml.record.census.england;
 
 import net.ramify.model.record.xml.record.XmlRecord;
-import net.ramify.model.record.xml.record.census.XmlCensusRecord;
 import net.ramify.model.record.xml.record.census.XmlCensusRecords;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -17,10 +16,10 @@ public class XmlEnglandCensusRecords extends XmlCensusRecords {
             @XmlElement(name = "entry1841", type = XmlEngland1841CensusRecord.class, namespace = XmlRecord.NAMESPACE),
             @XmlElement(name = "entry1851", type = XmlEngland1851CensusRecord.class, namespace = XmlRecord.NAMESPACE)
     })
-    private List<XmlCensusRecord> records;
+    private List<XmlEnglandCensus> records;
 
     @Override
-    protected List<XmlCensusRecord> records() {
+    protected List<XmlEnglandCensus> records() {
         return records;
     }
 

@@ -62,6 +62,8 @@
         <xs:attribute name="gender" type="ns1:xmlGender" use="required"/>
                 
         <xs:attribute name="notes" type="xs:string"/>
+                
+        <xs:attribute name="id" type="xs:string"/>
               
       </xs:extension>
           
@@ -487,13 +489,47 @@
             
       <xs:extension base="tns:xmlCensusRecord">
                 
-        <xs:choice>
+        <xs:sequence>
                     
-          <xs:element ref="tns:residence"/>
-                    
-          <xs:element ref="tns:familyResidence"/>
+          <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="entry" type="tns:xmlEngland1851CensusIndividual"/>
                   
-        </xs:choice>
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlEngland1851CensusIndividual">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlEnglandCensusIndividual">
+                
+        <xs:sequence/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType abstract="true" name="xmlEnglandCensusIndividual">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPersonOnDateRecord">
+                
+        <xs:sequence/>
+                
+        <xs:attribute name="relationshipToHead" type="tns:censusRelationshipToHead" use="required"/>
+                
+        <xs:attribute name="marriageCondition" type="tns:censusMarriageCondition"/>
+                
+        <xs:attribute name="occupation" type="xs:string"/>
+                
+        <xs:attribute name="placeOfBirth" type="xs:string"/>
               
       </xs:extension>
           
@@ -703,11 +739,11 @@
         
     <xs:restriction base="xs:string">
             
+      <xs:enumeration value="manor"/>
+            
       <xs:enumeration value="government"/>
             
       <xs:enumeration value="church"/>
-            
-      <xs:enumeration value="manor"/>
           
     </xs:restriction>
       
@@ -717,27 +753,57 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="payment"/>
+      <xs:enumeration value="mention"/>
             
       <xs:enumeration value="membership"/>
             
-      <xs:enumeration value="marriage"/>
+      <xs:enumeration value="birth"/>
             
       <xs:enumeration value="burial"/>
             
+      <xs:enumeration value="marriage"/>
+            
       <xs:enumeration value="census"/>
             
-      <xs:enumeration value="mixed"/>
-            
-      <xs:enumeration value="birth"/>
-            
-      <xs:enumeration value="baptism"/>
+      <xs:enumeration value="payment"/>
             
       <xs:enumeration value="residence"/>
             
-      <xs:enumeration value="mention"/>
+      <xs:enumeration value="baptism"/>
             
       <xs:enumeration value="death"/>
+            
+      <xs:enumeration value="mixed"/>
+          
+    </xs:restriction>
+      
+  </xs:simpleType>
+    
+  <xs:simpleType name="censusRelationshipToHead">
+        
+    <xs:restriction base="xs:string">
+            
+      <xs:enumeration value="child"/>
+            
+      <xs:enumeration value="head"/>
+            
+      <xs:enumeration value="parent"/>
+            
+      <xs:enumeration value="spouse"/>
+          
+    </xs:restriction>
+      
+  </xs:simpleType>
+    
+  <xs:simpleType name="censusMarriageCondition">
+        
+    <xs:restriction base="xs:string">
+            
+      <xs:enumeration value="unmarried"/>
+            
+      <xs:enumeration value="married"/>
+            
+      <xs:enumeration value="widowed"/>
           
     </xs:restriction>
       

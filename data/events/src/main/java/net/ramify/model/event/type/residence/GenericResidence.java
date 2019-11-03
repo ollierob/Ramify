@@ -18,7 +18,7 @@ public class GenericResidence extends AbstractEvent<GenericResidence> implements
             @Nonnull final DateRange date,
             @Nonnull final Place place) {
         super(personId, date);
-        this.place = Objects.requireNonNull(place);
+        this.place = Objects.requireNonNull(place, "residence place");
     }
 
     @Nonnull

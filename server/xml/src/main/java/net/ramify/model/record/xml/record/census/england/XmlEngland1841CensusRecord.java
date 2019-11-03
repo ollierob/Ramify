@@ -8,7 +8,6 @@ import net.ramify.model.record.residence.uk.Census1841Record;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlPersonOnDateRecord;
 import net.ramify.model.record.xml.record.XmlRecord;
-import net.ramify.model.record.xml.record.census.XmlCensusRecord;
 import net.ramify.utils.collections.ListUtils;
 
 import javax.annotation.Nonnull;
@@ -18,7 +17,7 @@ import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
 @XmlType(namespace = XmlRecord.NAMESPACE, name = "censusEngland1841")
-public class XmlEngland1841CensusRecord extends XmlCensusRecord {
+public class XmlEngland1841CensusRecord extends XmlEnglandCensus {
 
     @XmlElement(type = Individual.class, name = "entry", namespace = XmlRecord.NAMESPACE)
     private List<Individual> individuals;

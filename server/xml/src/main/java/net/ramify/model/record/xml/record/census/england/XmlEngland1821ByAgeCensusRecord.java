@@ -10,7 +10,6 @@ import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.residence.uk.Census1821Record;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlRecord;
-import net.ramify.model.record.xml.record.census.XmlCensusRecord;
 import net.ramify.model.record.xml.record.residence.XmlResidenceRecord;
 import net.ramify.utils.objects.Consumers;
 
@@ -21,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
 import java.time.Period;
 
 @XmlType(namespace = XmlRecord.NAMESPACE, name = "censusEngland1821ByAge")
-public class XmlEngland1821ByAgeCensusRecord extends XmlCensusRecord {
+public class XmlEngland1821ByAgeCensusRecord extends XmlEnglandCensus {
 
     static final Age UNDER_FIVE = Age.betweenInclusive(Period.ZERO, Period.of(5, 0, -1));
     static final Age FIVE_TO_TEN = Age.betweenInclusive(Period.ofYears(5), Period.of(10, 0, -1));

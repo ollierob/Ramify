@@ -8,6 +8,7 @@ import net.ramify.model.event.infer.MarriageConditionEventInference;
 import net.ramify.model.event.type.birth.GenericBirth;
 import net.ramify.model.event.type.residence.GenericResidence;
 import net.ramify.model.family.Family;
+import net.ramify.model.family.SinglePersonFamily;
 import net.ramify.model.person.AbstractPerson;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
@@ -23,7 +24,6 @@ import net.ramify.model.relationship.RelationshipFactory;
 
 import javax.annotation.Nonnull;
 import java.time.Month;
-import java.time.Period;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -54,6 +54,7 @@ public class Census1851Record extends CensusRecord {
     @Override
     public Family family() {
         final var head = this.head.build(this);
+        if (residents.isEmpty()) return new SinglePersonFamily(head);
         throw new UnsupportedOperationException(); //TODO
     }
 
@@ -64,7 +65,7 @@ public class Census1851Record extends CensusRecord {
         private final Sex sex;
         private final RelationshipFactory relationshipToHead;
         private final MarriageConditionEventInference condition;
-        private final Period age;
+        private final Age age;
         private final Place birthPlace;
 
         protected Census1851Entry(
@@ -73,7 +74,7 @@ public class Census1851Record extends CensusRecord {
                 final Sex sex,
                 final RelationshipFactory relationshipToHead,
                 final MarriageConditionEventInference condition,
-                final Period age,
+                final Age age,
                 final Place birthPlace) {
             this.id = id;
             this.name = name;
@@ -95,7 +96,7 @@ public class Census1851Record extends CensusRecord {
                     sex,
                     record.place(),
                     relationshipToHead.relationshipBetween(record.headId(), id),
-                    Age.exactly(age).birthDate(CENSUS_DATE),
+                    age.birthDate(CENSUS_DATE),
                     birthPlace,
                     condition.inferEvents(id, record));
         }
@@ -109,7 +110,7 @@ public class Census1851Record extends CensusRecord {
                 final Name name,
                 final Sex sex,
                 final MarriageConditionEventInference condition,
-                final Period age,
+                final Age age,
                 final Place birthPlace) {
             super(id, name, sex, (a, b) -> null, condition, age, birthPlace);
         }
@@ -124,7 +125,7 @@ public class Census1851Record extends CensusRecord {
                 final Sex sex,
                 final RelationshipFactory relationshipToHead,
                 final MarriageConditionEventInference condition,
-                final Period age,
+                final Age age,
                 final Place birthPlace) {
             super(id, name, sex, Objects.requireNonNull(relationshipToHead), condition, age, birthPlace);
         }
@@ -149,7 +150,7 @@ public class Census1851Record extends CensusRecord {
                 final Place birthPlace,
                 final Set<? extends Event> extraEvents) {
             super(id, name, gender);
-            this.residencePlace = residencePlace;
+            this.residencePlace = Objects.requireNonNull(residencePlace, "residence place");
             this.birthDate = birthDate;
             this.birthPlace = birthPlace;
             this.relationshipToHead = relationshipToHead;

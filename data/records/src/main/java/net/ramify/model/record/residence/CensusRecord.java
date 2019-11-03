@@ -10,6 +10,7 @@ import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.type.LifeEventRecord;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 
 public abstract class CensusRecord extends ExactDateRecord implements LifeEventRecord, HasPlace {
 
@@ -21,7 +22,7 @@ public abstract class CensusRecord extends ExactDateRecord implements LifeEventR
             final ExactDate date,
             final Place place) {
         super(id, recordSet, date);
-        this.place = place;
+        this.place = Objects.requireNonNull(place, "census place");
     }
 
     @Nonnull
