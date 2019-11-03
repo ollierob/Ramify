@@ -8,7 +8,7 @@ import {FormattedYearRange} from "../../../../components/date/FormattedDateRange
 import {findBirth} from "../../../../components/event/Event";
 import {Family} from "../../../../protobuf/generated/family_pb";
 import {Relationship} from "../../../../protobuf/generated/relationship_pb";
-import {determineRelationship} from "../../../../components/relationship/Relationship";
+import {findRelationship, relationshipName} from "../../../../components/relationship/Relationship";
 
 export function renderFamilyRecord(record: FamilyRecord) {
     if (!record) return null;
@@ -43,6 +43,7 @@ function renderBirth(event: Event.AsObject) {
 }
 
 function renderRelationship(person: Person.AsObject, root: Person.AsObject, relationships: ReadonlyArray<Relationship.AsObject>) {
-    const relationship = determineRelationship(person, root, relationships);
-    return relationship && <span className="relationship">{relationship}</span>;
+    const relationship = findRelationship(person, root, relationships, true);
+    if (!relationship || !relationship.type) return null;
+    return <span className="relationship">{relationshipName(relationship, person)}</span>;
 }

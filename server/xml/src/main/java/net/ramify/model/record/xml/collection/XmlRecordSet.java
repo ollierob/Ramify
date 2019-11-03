@@ -7,6 +7,7 @@ import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.date.xml.XmlBetweenYears;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlInYear;
+import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.Record;
 import net.ramify.model.record.collection.HasRecordSetId;
@@ -104,7 +105,7 @@ class XmlRecordSet implements HasRecordSetId {
         return new DefaultRecordSet(
                 this.recordSetId(),
                 source.source(),
-                type.type(),
+                this.type(parent),
                 this.date(parent, context.dateParser()),
                 title,
                 this.creatorPlaceId(parent),
@@ -116,6 +117,12 @@ class XmlRecordSet implements HasRecordSetId {
                 this.buildReferences(context),
                 Functions.ifNonNull(parent, HasRecordSetId::recordSetId),
                 this.nextIds());
+    }
+
+    EventProto.RecordType type(final RecordSet parent) {
+        if (this.type != null) return this.type.type();
+        if (parent != null) return parent.toProtoBuilder().getType();
+        return null;
     }
 
     DateRange date(final RecordSet parent, final DateParser dateParser) {

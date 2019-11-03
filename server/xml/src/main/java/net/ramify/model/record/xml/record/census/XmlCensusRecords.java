@@ -1,5 +1,6 @@
 package net.ramify.model.record.xml.record.census;
 
+import com.google.common.base.MoreObjects;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.residence.CensusRecord;
@@ -18,7 +19,7 @@ import java.util.List;
 @XmlSeeAlso({XmlEnglandCensusRecords.class})
 public abstract class XmlCensusRecords extends XmlRecords {
 
-    @XmlAttribute(name = "censusPlace", required = true)
+    @XmlAttribute(name = "censusPlace")
     private String censusArea;
 
     @Override
@@ -35,7 +36,7 @@ public abstract class XmlCensusRecords extends XmlRecords {
     public Collection<? extends CensusRecord> build(final RecordSet recordSet, final RecordContext context) {
         final var records = this.records();
         if (records.isEmpty()) return Collections.emptyList();
-        final var censusArea = context.places().require(new PlaceId(this.censusArea));
+        final var censusArea = MoreObjects.firstNonNull(recordSet.covers().resolvePlace(context.places()), context.places().require(new PlaceId(this.censusArea)));
         return ListUtils.eagerlyTransform(records, record -> record.build(context, censusArea, recordSet));
     }
 
