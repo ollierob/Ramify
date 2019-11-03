@@ -2,13 +2,14 @@ import * as React from "react";
 import {RecordSet} from "../../../../protobuf/generated/record_pb";
 import {ColumnProps} from "antd/es/table";
 import {Button, Icon} from "antd";
-import {nameToString} from "../../../../components/people/Name";
+import {isUnknownName, nameToString} from "../../../../components/people/Name";
 import {FormattedDateRange, FormattedYearRange} from "../../../../components/date/FormattedDateRange";
 import {PlaceLink} from "../../../../components/places/PlaceLink";
 import {recordTypeFromValue} from "../../../../components/records/RecordType";
 import {IndividualRecord, IndividualRecordProperties} from "./IndividualRecord";
 import {placeTypeName} from "../../../../components/places/PlaceType";
 import {ColumnSubstringLocalSearch} from "../../../../components/table/ant/ColumnSubstringLocalSearch";
+import {isFemale, isMale} from "../../../../components/people/Gender";
 
 export type IndividualRecordColumn = ColumnProps<IndividualRecord>;
 
@@ -63,7 +64,10 @@ const NameColumn: IndividualRecordColumn = {
     title: "Name",
     dataIndex: "person.name.surname",
     render: (t, r) => {
-        if (!r.person.name) return <span className="unimportant">Unknown</span>;
+        if (isUnknownName(r.person.name)) {
+            const gender = isMale(r.person) ? "male" : isFemale(r.person) ? "female" : "";
+            return <span className="unimportant">Unknown{gender && <> {gender}</>}</span>;
+        }
         return <>
             {nameToString(r.person.name)}
             {r.person.name.original && <Minor children={r.person.name.original}/>}
