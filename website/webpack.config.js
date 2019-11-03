@@ -67,7 +67,7 @@ module.exports = {
     plugins: [
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         new Chunks2JsonPlugin({outputDir: 'target/classes/js/'}), //Outputs manifest
-        new ForkTsCheckerWebpackPlugin() //Type checks
+        new ForkTsCheckerWebpackPlugin({checkSyntacticErrors: true}) //Type checks
     ],
     externals: {
         // "react": "React",

@@ -16,7 +16,6 @@ import {RecordBreadcrumb} from "./RecordBreadcrumb";
 type Props = RecordBasePageProps;
 
 type State = {
-    records: AsyncData<ReadonlyArray<EnrichedIndividualRecord>>
     recordSetId?: string;
     recordSet: AsyncData<RecordSet.AsObject>;
     recordSetCoversPlace: AsyncData<PlaceBundle.AsObject>
@@ -35,7 +34,6 @@ export default class RecordSetPage extends RecordBasePage<State> {
         super(props);
         this.state = {
             search: null, //TOOO read page hash
-            records: {},
             recordSet: {},
             recordSetId: this.readLocation(),
             recordSetCoversPlace: {loading: true},
@@ -74,7 +72,6 @@ export default class RecordSetPage extends RecordBasePage<State> {
                     loading={this.state.recordSet.loading}
                     recordSet={recordSet}
                     relatives={mapAsyncData(this.state.recordSetHierarchy, h => h.self)}
-                    records={this.state.records}
                     paginate={null}
                     search={this.state.search}
                     searching={this.state.searchResults.loading}
@@ -111,7 +108,6 @@ export default class RecordSetPage extends RecordBasePage<State> {
         if (!id) return;
         asyncLoadData(id, this.recordLoader.loadRecordSet, recordSet => this.setState({recordSet}));
         asyncLoadData(id, this.recordLoader.loadRecordSetHierarchy, recordSetHierarchy => this.setState({recordSetHierarchy}));
-        asyncLoadData(id, id => this.recordLoader.loadIndividualRecords(id, {children: true, limit: 100}), records => this.setState({records}));
     }
 
     private loadPlace(covers: PlaceId, source: PlaceId) {

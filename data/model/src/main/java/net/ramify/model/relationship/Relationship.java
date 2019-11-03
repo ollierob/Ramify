@@ -38,8 +38,7 @@ public interface Relationship extends Castable<Relationship>, BuildsProto<Relati
         return RelationshipProto.Relationship.newBuilder()
                 .setFromId(this.fromId().value())
                 .setToId(this.toId().value())
-                .setUnknown(this.isUnknown())
-                .setDirection(this.isDirected() ? RelationshipProto.Relationship.Direction.SIDEWAYS : RelationshipProto.Relationship.Direction.UNDIRECTED);
+                .setUnknown(this.isUnknown());
     }
 
     @Nonnull

@@ -5,6 +5,7 @@
   "main": "webpack.config.js",
   "dependencies": {
     "antd": "^3.24.3",
+    "arr-flatten": "^1.1.0",
     "google-protobuf": "^3.10.0",
     "leaflet": "^1.5.1",
     "react-leaflet": "^2.5.0",
@@ -40,15 +41,15 @@
   },
   "jest": {
     "automock": false,
+    "transform": {
+      "\\.(ts|tsx)$": "ts-jest"
+    },
+    "testRegex": ".*\\.test\\.(ts|tsx|js)$",
     "moduleFileExtensions": [
       "ts",
       "tsx",
       "js"
-    ],
-    "transform": {
-      "\\.(ts|tsx)$": "ts-jest"
-    },
-    "testRegex": ".*\\.test\\.(ts|tsx|js)$"
+    ]
   },
   "scripts": {
     "build-dev": "webpack -d",

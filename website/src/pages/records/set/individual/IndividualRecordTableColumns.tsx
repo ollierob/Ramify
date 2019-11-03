@@ -1,19 +1,18 @@
 import * as React from "react";
-import {RecordSet} from "../../../protobuf/generated/record_pb";
+import {RecordSet} from "../../../../protobuf/generated/record_pb";
 import {ColumnProps} from "antd/es/table";
 import {Button, Icon} from "antd";
-import {nameToString} from "../../../components/people/Name";
-import {FormattedDateRange, FormattedYearRange} from "../../../components/date/FormattedDateRange";
-import {PlaceLink} from "../../../components/places/PlaceLink";
-import {RecordProperties} from "./IndividualRecordTable";
-import {recordTypeFromValue} from "../../../components/records/RecordType";
-import {IndividualRecord} from "./IndividualRecord";
-import {placeTypeName} from "../../../components/places/PlaceType";
-import {ColumnSubstringLocalSearch} from "../../../components/table/ant/ColumnSubstringLocalSearch";
+import {nameToString} from "../../../../components/people/Name";
+import {FormattedDateRange, FormattedYearRange} from "../../../../components/date/FormattedDateRange";
+import {PlaceLink} from "../../../../components/places/PlaceLink";
+import {recordTypeFromValue} from "../../../../components/records/RecordType";
+import {IndividualRecord, IndividualRecordProperties} from "./IndividualRecord";
+import {placeTypeName} from "../../../../components/places/PlaceType";
+import {ColumnSubstringLocalSearch} from "../../../../components/table/ant/ColumnSubstringLocalSearch";
 
 export type IndividualRecordColumn = ColumnProps<IndividualRecord>;
 
-export function determineColumns(recordSet: RecordSet.AsObject, properties: RecordProperties, showRecordSet?: boolean): IndividualRecordColumn[] {
+export function determineColumns(recordSet: RecordSet.AsObject, properties: IndividualRecordProperties, showRecordSet?: boolean): IndividualRecordColumn[] {
     if (!recordSet) return [];
     const type = recordTypeFromValue(recordSet.type);
     const columns = [...DefaultColumns];
@@ -30,7 +29,7 @@ export function determineColumns(recordSet: RecordSet.AsObject, properties: Reco
     return columns;
 }
 
-function genericColumns(properties: RecordProperties) {
+function genericColumns(properties: IndividualRecordProperties) {
     const columns: IndividualRecordColumn[] = [];
     if (properties.hasBirth) columns.push(BirthYear);
     if (properties.hasBaptism) columns.push(BaptismYear);
@@ -41,7 +40,7 @@ function genericColumns(properties: RecordProperties) {
     return columns;
 }
 
-function burialColumns(properties: RecordProperties) {
+function burialColumns(properties: IndividualRecordProperties) {
     const columns: IndividualRecordColumn[] = [];
     if (properties.hasBirth) columns.push(BirthYear);
     if (properties.hasResidence) columns.push(ResidenceYear, ResidencePlace);

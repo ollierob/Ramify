@@ -1,6 +1,6 @@
 import {Relationship} from "../../../protobuf/generated/relationship_pb";
 import {ensure, StringMap} from "../../Maps";
-import {isHorizontal, isParentChild} from "../../relationship/Relationship";
+import {isSpouseOrSibling, isParentChild} from "../../relationship/Relationship";
 import {PersonId} from "../../people/PersonId";
 
 type Ranking = {[rank: number]: PersonId[]}
@@ -32,7 +32,7 @@ function createNode(id: PersonId): TreeNode {
 }
 
 function joinNodes(n1: TreeNode, n2: TreeNode, relationship: Relationship.AsObject) {
-    if (isHorizontal(relationship)) {
+    if (isSpouseOrSibling(relationship)) {
         n1.siblings.push(n2);
         n2.siblings.push(n1);
     } else if (isParentChild(relationship)) {

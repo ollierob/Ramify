@@ -68,3 +68,7 @@ export function deathYear(events: ReadonlyArray<Event.AsObject>): number {
     if (!death) return null;
     return latestYear(death.date);
 }
+
+export function findBirth(events: ReadonlyArray<Event.AsObject>): Event.AsObject {
+    return events ? events.find(isBirthEvent) : null;
+}

@@ -28,7 +28,7 @@ public class ParentChild extends AbstractRelationship implements CosanguinealRel
     @Nonnull
     @Override
     public RelationshipProto.Relationship.Builder toProtoBuilder() {
-        return super.toProtoBuilder().setDirection(RelationshipProto.Relationship.Direction.TOP_BOTTOM);
+        return super.toProtoBuilder().setType(RelationshipProto.Relationship.Type.PARENT_CHILD);
     }
 
 }

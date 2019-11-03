@@ -8,15 +8,16 @@ message Relationship {
     string fromId = 1;
     string toId = 2;
 
-    Direction direction = 3;
+    Type type = 3;
     bool unknown = 4;
 
-    enum Direction {
+    enum Type {
 
-        UNDIRECTED = 0;
-        SIDEWAYS = 1;
-        TOP_BOTTOM = 2;
-        BOTTOM_TOP = 3;
+        UNKNOWN = 0;
+        SPOUSE = 1;
+        SIBLING = 2;
+        PARENT_CHILD = 3;
+        CHILD_PARENT = 4;
 
     }
 

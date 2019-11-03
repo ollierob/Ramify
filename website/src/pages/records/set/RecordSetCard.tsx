@@ -20,7 +20,6 @@ type Props = RecordPaginationHandler & RecordSearchHandler & RouteComponentProps
     loading: boolean;
     recordSet: Readonly<RecordSet.AsObject>
     relatives: AsyncData<RecordSetRelatives.AsObject>;
-    records: AsyncData<ReadonlyArray<EnrichedIndividualRecord>>
     searchResults: AsyncData<ReadonlyArray<EnrichedIndividualRecord>>;
     creatorPlace: AsyncData<Readonly<PlaceBundle.AsObject>>
 }
@@ -59,7 +58,6 @@ export default class RecordSetCard extends React.PureComponent<Props> {
 
             <RecordBrowser
                 {...this.props}
-                records={this.props.records}
                 showRecordSet={relatives.childList.length > 0}/>
 
         </Card>;

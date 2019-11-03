@@ -2,14 +2,14 @@ import * as React from "react";
 import {Tabs} from "antd";
 import {AsyncData} from "../../../components/fetch/AsyncData";
 import {RecordSet} from "../../../protobuf/generated/record_pb";
-import {IndividualRecordTable} from "./IndividualRecordTable";
 import {RecordPaginationHandler} from "../../../components/records/RecordPaginationHandler";
 import RecordImageGallery from "./RecordImageGallery";
 import {EnrichedIndividualRecord} from "../../../components/records/RecordLoader";
+import FamilyRecordTable from "./family/FamilyRecordTable";
+import IndividualRecordTable from "./individual/IndividualRecordTable";
 
 type Props = RecordPaginationHandler & {
     recordSet: RecordSet.AsObject;
-    records: AsyncData<ReadonlyArray<EnrichedIndividualRecord>>;
     searchResults: AsyncData<ReadonlyArray<EnrichedIndividualRecord>>;
     showRecordSet?: boolean;
 }
@@ -23,7 +23,7 @@ export class RecordBrowser extends React.PureComponent<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            activeTab: "individuals",
+            activeTab: "families",
         };
     }
 
@@ -36,36 +36,28 @@ export class RecordBrowser extends React.PureComponent<Props, State> {
             onChange={activeTab => this.setState({activeTab})}>
 
             <Tabs.TabPane
-                key="records"
-                tab="Records"
-                disabled>
-
+                key="families"
+                tab="Family records">
+                <FamilyRecordTable {...this.props}/>
             </Tabs.TabPane>
 
             <Tabs.TabPane
                 key="individuals"
-                tab="Individuals">
-                <IndividualRecordTable
-                    {...this.props}
-                    loading={this.props.records.loading}
-                    records={this.props.records.data}/>
+                tab="Individual records">
+                <IndividualRecordTable {...this.props}/>
             </Tabs.TabPane>
 
             <Tabs.TabPane
                 key="images"
                 tab="Image browser">
-                <RecordImageGallery
-                    {...this.props}/>
+                <RecordImageGallery {...this.props}/>
             </Tabs.TabPane>
 
             <Tabs.TabPane
                 key="search"
                 tab={"Search results"}
                 disabled={!this.props.searchResults.query}>
-                <IndividualRecordTable
-                    {...this.props}
-                    loading={this.props.searchResults.loading}
-                    records={this.props.searchResults.data}/>
+                <IndividualRecordTable {...this.props}/>
             </Tabs.TabPane>
 
         </Tabs>;

@@ -20,7 +20,7 @@ public class Married extends AbstractRelationship implements AffineRelationship 
     @Nonnull
     @Override
     public RelationshipProto.Relationship.Builder toProtoBuilder() {
-        return super.toProtoBuilder().setDirection(RelationshipProto.Relationship.Direction.SIDEWAYS);
+        return super.toProtoBuilder().setType(RelationshipProto.Relationship.Type.SPOUSE);
     }
 
 }

@@ -3,7 +3,11 @@ import {DateRange as DateRangeProto} from "../../protobuf/generated/date_pb";
 import {DateFormatter, DayMonthYearFormatter, MonthYearFormatter, YearFormatter} from "./DateFormatter";
 import {datesEqual, yearEquals} from "./DateRange";
 
-export const FormattedYearRange = (props: {date: DateRangeProto.AsObject, words?: Partial<PrefixWords>}) => <FormattedDateRange {...props} accuracy="year"/>;
+export const FormattedYearRange = (props: {date: DateRangeProto.AsObject, words?: Partial<PrefixWords>}) => {
+    const words: Partial<PrefixWords> = {...props.words};
+    if (!words.on) words.on = words.in || DefaultPrefixWords.in;
+    return <FormattedDateRange {...props} words={words} accuracy="year"/>;
+};
 
 export const FormattedDateRange = (props: {date: DateRangeProto.AsObject, words?: Partial<PrefixWords>, accuracy: "year" | "month" | "day"}) => {
     const date = props.date;
