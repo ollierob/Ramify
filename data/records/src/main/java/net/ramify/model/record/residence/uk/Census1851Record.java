@@ -2,31 +2,39 @@ package net.ramify.model.record.residence.uk;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.Sets;
+import net.ramify.model.date.ClosedDateRange;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.infer.MarriageConditionEventInference;
 import net.ramify.model.event.type.birth.GenericBirth;
+import net.ramify.model.event.type.death.GenericDeath;
 import net.ramify.model.event.type.residence.GenericResidence;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.person.AbstractPerson;
+import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.gender.Sex;
 import net.ramify.model.person.name.Name;
 import net.ramify.model.place.Place;
+import net.ramify.model.record.GenericRecordPerson;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.residence.CensusRecord;
 import net.ramify.model.relationship.Relationship;
 import net.ramify.model.relationship.RelationshipFactory;
+import net.ramify.model.relationship.type.Married;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.time.Month;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 public class Census1851Record extends CensusRecord {
@@ -56,11 +64,25 @@ public class Census1851Record extends CensusRecord {
     public Family family() {
         final var head = this.head.build(this);
         final var builder = new FamilyBuilder(head);
+        this.widowOf(head).ifPresent(dead -> builder.addRelationship(head, dead, Married::new));
         residents.forEach(entry -> {
             final var person = entry.build(this);
             builder.addRelationship(head, person, entry.relationshipToHead());
+            this.widowOf(person).ifPresent(dead -> builder.addRelationship(person, dead, Married::new));
         });
         return builder.build();
+    }
+
+    @CheckForNull
+    private Optional<Person> widowOf(final Census1851Person person) {
+        if (!person.isWidowed()) return Optional.empty();
+        final var id = PersonId.random();
+        return Optional.of(new GenericRecordPerson(
+                id,
+                Name.UNKNOWN,
+                person.gender().inverse(),
+                Collections.singleton(new GenericDeath(id, ClosedDateRange.of(person.birthDate, CENSUS_DATE))), //FIXME tighter bounds
+                "Inferred ex-spouse of " + person.name()));
     }
 
     public static abstract class Census1851Entry {
@@ -99,6 +121,7 @@ public class Census1851Record extends CensusRecord {
         }
 
         Census1851Person build(final Census1851Record record) {
+            final var id = this.id();
             return new Census1851Person(
                     id,
                     name,
@@ -107,7 +130,8 @@ public class Census1851Record extends CensusRecord {
                     relationshipToHead.relationshipBetween(record.headId(), id),
                     age.birthDate(CENSUS_DATE),
                     birthPlace,
-                    condition.inferEvents(id, record));
+                    condition.inferEvents(id, record),
+                    condition);
         }
 
     }
@@ -148,6 +172,7 @@ public class Census1851Record extends CensusRecord {
         private final Place birthPlace;
         private final Relationship relationshipToHead;
         private final Set<? extends Event> extraEvents;
+        private final MarriageConditionEventInference condition;
 
         Census1851Person(
                 final PersonId id,
@@ -157,17 +182,23 @@ public class Census1851Record extends CensusRecord {
                 final Relationship relationshipToHead,
                 final DateRange birthDate,
                 final Place birthPlace,
-                final Set<? extends Event> extraEvents) {
+                final Set<? extends Event> extraEvents,
+                final MarriageConditionEventInference condition) {
             super(id, name, gender);
             this.residencePlace = Objects.requireNonNull(residencePlace, "residence place");
             this.birthDate = birthDate;
             this.birthPlace = birthPlace;
             this.relationshipToHead = relationshipToHead;
             this.extraEvents = extraEvents;
+            this.condition = condition;
         }
 
         boolean isHead() {
             return relationshipToHead == null;
+        }
+
+        boolean isWidowed() {
+            return condition != null && condition.isWidowed();
         }
 
         @Nonnull

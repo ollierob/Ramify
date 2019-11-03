@@ -18,5 +18,9 @@ public enum Sex implements Gender {
     public String value() {
         return value;
     }
-    
+
+    public Sex inverse() {
+        return this == MALE ? FEMALE : MALE;
+    }
+
 }

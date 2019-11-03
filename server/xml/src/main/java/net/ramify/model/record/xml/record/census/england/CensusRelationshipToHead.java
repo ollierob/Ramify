@@ -57,8 +57,4 @@ public enum CensusRelationshipToHead implements RelationshipFactory {
         return this == HEAD;
     }
 
-    @Nonnull
-    @Override
-    public abstract Relationship relationshipBetween(HasPersonId from, HasPersonId to);
-
 }

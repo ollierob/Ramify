@@ -43,7 +43,7 @@ public abstract class XmlEnglandCensusIndividual extends XmlPersonOnDateRecord {
     }
 
     protected MarriageConditionEventInference marriageCondition() {
-        return marriageCondition;
+        return marriageCondition == null ? MarriageConditionEventInference.NONE : marriageCondition.inference();
     }
 
     protected String notes() {

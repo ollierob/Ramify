@@ -15,4 +15,8 @@ public interface Gender {
         return this == that || this == UNKNOWN || that == UNKNOWN;
     }
 
+    default Gender inverse() {
+        return this instanceof Sex ? ((Sex) this).inverse() : this;
+    }
+
 }

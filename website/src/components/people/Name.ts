@@ -6,3 +6,7 @@ export function nameToString(name: Name.AsObject): string {
         + " "
         + name.surname).trimLeft();
 }
+
+export function isUnknownName(name: Name.AsObject): boolean {
+    return !name || ((!name.forenameList || !name.forenameList.length) && !name.surname);
+}

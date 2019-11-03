@@ -20,4 +20,8 @@ public interface MarriageConditionEventInference {
     MarriageConditionEventInference WIDOWED = MARRIED;
     MarriageConditionEventInference NONE = UNMARRIED;
 
+    default boolean isWidowed() {
+        return this == WIDOWED;
+    }
+
 }

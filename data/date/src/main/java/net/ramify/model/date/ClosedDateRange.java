@@ -7,6 +7,14 @@ import java.util.Optional;
 
 public class ClosedDateRange implements DateRange {
 
+    public static DateRange of(final DateRange s, final DateRange e) {
+        final var earliest = s.earliestInclusive().orElse(null);
+        if (earliest == null) return s;
+        final var latest = e.latestInclusive().orElse(null);
+        if (latest == null) return e;
+        return new ClosedDateRange(earliest, latest);
+    }
+
     public static DateRange of(final Collection<? extends HasDate> dates) {
         switch (dates.size()) {
             case 0:

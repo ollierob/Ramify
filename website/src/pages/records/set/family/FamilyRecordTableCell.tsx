@@ -2,7 +2,7 @@ import * as React from "react";
 import {FamilyRecord} from "./FamilyRecord";
 import {List} from "antd";
 import {Name, Person} from "../../../../protobuf/generated/person_pb";
-import {nameToString} from "../../../../components/people/Name";
+import {isUnknownName, nameToString} from "../../../../components/people/Name";
 import {Event} from "../../../../protobuf/generated/event_pb";
 import {FormattedYearRange} from "../../../../components/date/FormattedDateRange";
 import {findBirth} from "../../../../components/event/Event";
@@ -21,7 +21,7 @@ export function renderFamilyRecord(record: FamilyRecord) {
 function renderFamily(family: Family.AsObject) {
     if (!family || !family.personList || !family.personList.length) return null;
     return <List
-        dataSource={family.personList}
+        dataSource={family.personList.filter(p => !isUnknownName(p.name))}
         renderItem={person => <List.Item>{renderPerson(person, family.personList[0], family.relationshipList)}</List.Item>}/>;
 }
 
