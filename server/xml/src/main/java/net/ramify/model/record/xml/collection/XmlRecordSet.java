@@ -122,7 +122,7 @@ class XmlRecordSet implements HasRecordSetId {
     EventProto.RecordType type(final RecordSet parent) {
         if (this.type != null) return this.type.type();
         if (parent != null) return parent.toProtoBuilder().getType();
-        return null;
+        return EventProto.RecordType.UNSPECIFIED;
     }
 
     DateRange date(final RecordSet parent, final DateParser dateParser) {

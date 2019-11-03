@@ -45,8 +45,7 @@ public abstract class DateRecord implements Record {
     @Nonnull
     @Override
     public RecordProto.Record.Builder toProtoBuilder() {
-        return Record.super.toProtoBuilder()
-                .setType(this.protoType());
+        return Record.super.toProtoBuilder().setType(this.protoType());
     }
 
 }

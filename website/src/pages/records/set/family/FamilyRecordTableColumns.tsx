@@ -5,8 +5,16 @@ import {Button, Icon} from "antd";
 import {recordTypeName} from "../../../../components/records/RecordType";
 import {FormattedDateRange} from "../../../../components/date/FormattedDateRange";
 import {renderFamilyRecord} from "./FamilyRecordTableCell";
+import {RecordSet} from "../../../../protobuf/generated/record_pb";
+import {PlaceLink} from "../../../../components/places/PlaceLink";
 
 export type FamilyRecordColumn = ColumnProps<FamilyRecord>;
+
+export function determineColumns(recordSet: Readonly<RecordSet.AsObject>, records: ReadonlyArray<FamilyRecord>): FamilyRecordColumn[] {
+    const columns = [...PrefixColumns];
+    if (records.some(r => !!r.place)) columns.push(PlaceColumn);
+    return columns.concat(SuffixColumns);
+}
 
 const ImageColumn: FamilyRecordColumn = {
     key: "image",
@@ -19,8 +27,7 @@ const ImageColumn: FamilyRecordColumn = {
 const TypeColumn: FamilyRecordColumn = {
     key: "type",
     title: "Type",
-    dataIndex: "type",
-    render: t => recordTypeName(t),
+    render: (t, r) => recordTypeName(r.type),
     width: 100
 };
 
@@ -28,6 +35,13 @@ const DateColumn: FamilyRecordColumn = {
     key: "date",
     title: "Date",
     render: (t, r) => <FormattedDateRange date={r.date} accuracy="day"/>,
+    width: 120
+};
+
+const PlaceColumn: FamilyRecordColumn = {
+    key: "place",
+    title: "Place",
+    render: (t, r) => <PlaceLink place={r.place}/>,
     width: 120
 };
 
@@ -45,4 +59,5 @@ const RecordSetColumn: FamilyRecordColumn = {
     width: 220
 };
 
-export const FamilyRecordColumns: ReadonlyArray<FamilyRecordColumn> = [ImageColumn, TypeColumn, DateColumn, FamilyColumn, RecordSetColumn];
+const PrefixColumns = [ImageColumn, TypeColumn, DateColumn];
+const SuffixColumns = [FamilyColumn, RecordSetColumn];

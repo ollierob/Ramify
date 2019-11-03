@@ -1,5 +1,6 @@
 package net.ramify.model.record.residence.uk;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Sets;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.ExactDate;
@@ -8,7 +9,7 @@ import net.ramify.model.event.infer.MarriageConditionEventInference;
 import net.ramify.model.event.type.birth.GenericBirth;
 import net.ramify.model.event.type.residence.GenericResidence;
 import net.ramify.model.family.Family;
-import net.ramify.model.family.SinglePersonFamily;
+import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.person.AbstractPerson;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
@@ -54,8 +55,12 @@ public class Census1851Record extends CensusRecord {
     @Override
     public Family family() {
         final var head = this.head.build(this);
-        if (residents.isEmpty()) return new SinglePersonFamily(head);
-        throw new UnsupportedOperationException(); //TODO
+        final var builder = new FamilyBuilder(head);
+        residents.forEach(entry -> {
+            final var person = entry.build(this);
+            builder.addRelationship(head, person, entry.relationshipToHead());
+        });
+        return builder.build();
     }
 
     public static abstract class Census1851Entry {
@@ -80,13 +85,17 @@ public class Census1851Record extends CensusRecord {
             this.name = name;
             this.sex = sex;
             this.relationshipToHead = relationshipToHead;
-            this.condition = condition;
+            this.condition = MoreObjects.firstNonNull(condition, MarriageConditionEventInference.NONE);
             this.age = age;
             this.birthPlace = birthPlace;
         }
 
         public PersonId id() {
             return id;
+        }
+
+        RelationshipFactory relationshipToHead() {
+            return relationshipToHead;
         }
 
         Census1851Person build(final Census1851Record record) {

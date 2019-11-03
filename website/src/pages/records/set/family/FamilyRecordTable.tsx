@@ -8,7 +8,7 @@ import {NoData} from "../../../../components/style/NoData";
 import {RecordSetId} from "../../../../components/records/RecordSet";
 import {DEFAULT_RECORD_LOADER} from "../../../../components/records/RecordLoader";
 import {ErrorMessage} from "../../../../components/style/Error";
-import {FamilyRecordColumn, FamilyRecordColumns} from "./FamilyRecordTableColumns";
+import {determineColumns, FamilyRecordColumn} from "./FamilyRecordTableColumns";
 import "./FamilyRecordTable.css";
 
 type Props = Partial<RecordPaginationHandler> & {
@@ -29,7 +29,7 @@ export default class FamilyRecordTable extends React.PureComponent<Props, State>
         super(props);
         this.state = {
             records: {loading: true},
-            columns: [...FamilyRecordColumns]
+            columns: []
         };
     }
 
@@ -57,6 +57,8 @@ export default class FamilyRecordTable extends React.PureComponent<Props, State>
     componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>) {
         if (this.props.recordSet && this.props.recordSet != prevProps.recordSet)
             this.loadRecords(this.props.recordSet.id);
+        if (this.state.records.data && this.state.records.data != prevState.records.data)
+            this.setColumns(this.state.records.data);
     }
 
     private loadRecords(id: RecordSetId) {
@@ -65,6 +67,11 @@ export default class FamilyRecordTable extends React.PureComponent<Props, State>
             id,
             id => this.recordLoader.loadFamilyRecords(id, {children: true, limit: 100}),
             records => this.setState({records: mapAsyncData(records, buildFamilyRecords)}));
+    }
+
+    private setColumns(records: ReadonlyArray<FamilyRecord>) {
+        const columns = determineColumns(this.props.recordSet, records);
+        this.setState({columns});
     }
 
 }

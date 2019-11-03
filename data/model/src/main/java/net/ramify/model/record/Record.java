@@ -5,6 +5,7 @@ import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.date.HasDate;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.collection.HasFamilies;
+import net.ramify.model.place.HasPlace;
 import net.ramify.model.record.collection.HasRecordSet;
 import net.ramify.model.record.proto.RecordProto;
 import net.ramify.model.record.type.RecordHandler;
@@ -24,11 +25,13 @@ public interface Record extends HasRecordId, HasRecordSet, HasDate, HasFamilies,
 
     @Nonnull
     default RecordProto.Record.Builder toProtoBuilder() {
-        return RecordProto.Record.newBuilder()
+        final var builder = RecordProto.Record.newBuilder()
                 .setId(this.recordId().value())
                 .setDate(this.date().toProto())
                 .setRecordSetId(this.recordSetId().value())
                 .addAllFamily(Iterables.transform(this.families(), Family::toProto));
+        if (this instanceof HasPlace) builder.setPlace(((HasPlace) this).place().toProto(true));
+        return builder;
     }
 
     @Nonnull

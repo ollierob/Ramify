@@ -111,9 +111,15 @@ class XmlPlaceProvider implements PlaceProvider {
     static PlaceProvider readPlacesInDirectory(final JAXBContext jaxbContext, final File root, final PlaceGroupProvider groupProvider, final ParserContext context) throws JAXBException {
         final var provider = new XmlPlaceProvider(Maps.newHashMap(), HashMultimap.create(), Sets.newHashSet());
         final var unmarshaller = jaxbContext.createUnmarshaller();
-        FileTraverseUtils.traverseSubdirectories(root, file -> file.getName().endsWith(".xml"), file -> readPlacesInFile(unmarshaller, file, provider, groupProvider, context));
+        FileTraverseUtils.traverseSubdirectories(root, XmlPlaceProvider::includeFile, file -> readPlacesInFile(unmarshaller, file, provider, groupProvider, context));
         logger.info("Loaded {} places from {}.", provider.size(), root);
         return provider.immutable();
+    }
+
+    private static boolean includeFile(final File file) {
+        final var name = file.getName();
+        return name.endsWith(".xml")
+                && !name.contains("_records");
     }
 
     private static void readPlacesInFile(final Unmarshaller unmarshaller, final File file, final XmlPlaceProvider placeProvider, final PlaceGroupProvider groupProvider, final ParserContext context) {

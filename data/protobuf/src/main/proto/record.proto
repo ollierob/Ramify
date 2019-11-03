@@ -9,6 +9,7 @@ import "link.proto";
 import "event.proto";
 import "archive.proto";
 import "person.proto";
+import "place.proto";
 
 message Record {
 
@@ -17,6 +18,7 @@ message Record {
     repeated Family family = 3;
     RecordType type = 4;
     string recordSetId = 5;
+    Place place = 6;
 
 }
 

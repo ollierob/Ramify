@@ -20,8 +20,8 @@ export function isBirthOrBaptismRecord(recordSet: RecordSet.AsObject): boolean {
     return type == RecordTypes.BAPTISM || type == RecordTypes.BIRTH;
 }
 
-export function recordTypeName(record: RecordSet.AsObject | RecordSet.AsObject): string {
-    const type = recordTypeFromValue(record.type);
+export function recordTypeName(record: RecordSet.AsObject | RecordType): string {
+    const type: RecordType = typeof record == "string" ? record : recordTypeFromValue(record.type);
     return ShortRecordTitles[type];
 }
 
