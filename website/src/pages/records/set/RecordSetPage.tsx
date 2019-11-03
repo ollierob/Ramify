@@ -1,7 +1,7 @@
 import * as React from "react";
 import {AsyncData, asyncLoadData, mapAsyncData} from "../../../components/fetch/AsyncData";
 import {RecordSearch, RecordSet, RecordSetHierarchy} from "../../../protobuf/generated/record_pb";
-import {DEFAULT_RECORD_LOADER, EnrichedRecord} from "../../../components/records/RecordLoader";
+import {DEFAULT_RECORD_LOADER, EnrichedIndividualRecord} from "../../../components/records/RecordLoader";
 import {DEFAULT_PLACE_LOADER} from "../../../components/places/PlaceLoader";
 import {PlaceBundle} from "../../../protobuf/generated/place_pb";
 import {ErrorMessage} from "../../../components/style/Error";
@@ -16,14 +16,14 @@ import {RecordBreadcrumb} from "./RecordBreadcrumb";
 type Props = RecordBasePageProps;
 
 type State = {
-    records: AsyncData<ReadonlyArray<EnrichedRecord>>
+    records: AsyncData<ReadonlyArray<EnrichedIndividualRecord>>
     recordSetId?: string;
     recordSet: AsyncData<RecordSet.AsObject>;
     recordSetCoversPlace: AsyncData<PlaceBundle.AsObject>
     recordSetSource: AsyncData<PlaceBundle.AsObject>
     recordSetHierarchy?: AsyncData<RecordSetHierarchy.AsObject>
     search: RecordSearch;
-    searchResults: AsyncData<ReadonlyArray<EnrichedRecord>>;
+    searchResults: AsyncData<ReadonlyArray<EnrichedIndividualRecord>>;
 }
 
 export default class RecordSetPage extends RecordBasePage<State> {
@@ -111,7 +111,7 @@ export default class RecordSetPage extends RecordBasePage<State> {
         if (!id) return;
         asyncLoadData(id, this.recordLoader.loadRecordSet, recordSet => this.setState({recordSet}));
         asyncLoadData(id, this.recordLoader.loadRecordSetHierarchy, recordSetHierarchy => this.setState({recordSetHierarchy}));
-        asyncLoadData(id, id => this.recordLoader.loadRecords(id, {children: true, limit: 100}), records => this.setState({records}));
+        asyncLoadData(id, id => this.recordLoader.loadIndividualRecords(id, {children: true, limit: 100}), records => this.setState({records}));
     }
 
     private loadPlace(covers: PlaceId, source: PlaceId) {
@@ -123,7 +123,7 @@ export default class RecordSetPage extends RecordBasePage<State> {
 
     private search(search: RecordSearch) {
         if (this.state.recordSetId) search.setRecordsetid(this.state.recordSetId);
-        asyncLoadData(search, this.recordLoader.submitSearch, searchResults => this.setState({searchResults}));
+        asyncLoadData(search, this.recordLoader.searchIndividualRecords, searchResults => this.setState({searchResults}));
     }
 
 }

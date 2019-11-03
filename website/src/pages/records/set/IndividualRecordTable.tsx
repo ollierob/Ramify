@@ -4,14 +4,14 @@ import {Table} from "antd";
 import {RecordPaginationHandler} from "../../../components/records/RecordPaginationHandler";
 import {isBaptismEvent, isBirthEvent, isBurialEvent, isDeathEvent, isMentionEvent, isResidenceEvent} from "../../../components/event/Event";
 import {NoData} from "../../../components/style/NoData";
-import {EnrichedRecord} from "../../../components/records/RecordLoader";
+import {EnrichedIndividualRecord} from "../../../components/records/RecordLoader";
 import {IndividualRecord} from "./IndividualRecord";
 import {determineColumns, IndividualRecordColumn} from "./IndividualRecordTableColumns";
 
 type Props = Partial<RecordPaginationHandler> & {
     recordSet: RecordSet.AsObject;
     loading: boolean;
-    records: ReadonlyArray<EnrichedRecord>
+    records: ReadonlyArray<EnrichedIndividualRecord>
     showRecordSet?: boolean;
 }
 
@@ -64,7 +64,7 @@ export type RecordProperties = {
     hasBurial?: boolean;
 }
 
-function buildIndividualRecords(records: ReadonlyArray<EnrichedRecord>, properties: RecordProperties): IndividualRecord[] {
+function buildIndividualRecords(records: ReadonlyArray<EnrichedIndividualRecord>, properties: RecordProperties): IndividualRecord[] {
     if (!records || !records.length) return [];
     const out: IndividualRecord[] = [];
     records.forEach(record => out.push(createRecord(record)));
@@ -77,7 +77,7 @@ function buildIndividualRecords(records: ReadonlyArray<EnrichedRecord>, properti
     return out;
 }
 
-function createRecord(record: EnrichedRecord): IndividualRecord {
+function createRecord(record: EnrichedIndividualRecord): IndividualRecord {
     //TODO include resolved record set
     const person = record.person;
     const out: IndividualRecord = {person, record};

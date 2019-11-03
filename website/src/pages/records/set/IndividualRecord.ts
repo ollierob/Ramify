@@ -1,6 +1,6 @@
 import {Person} from "../../../protobuf/generated/person_pb";
 import {Event} from "../../../protobuf/generated/event_pb";
-import {EnrichedRecord} from "../../../components/records/RecordLoader";
+import {EnrichedIndividualRecord} from "../../../components/records/RecordLoader";
 
 export type IndividualRecord = {
     person: Person.AsObject;
@@ -11,5 +11,5 @@ export type IndividualRecord = {
     death?: Event.AsObject;
     burial?: Event.AsObject;
     image?: string;
-    record: EnrichedRecord;
+    record: EnrichedIndividualRecord;
 }

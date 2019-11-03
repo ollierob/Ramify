@@ -55,7 +55,7 @@ const ImageColumn: IndividualRecordColumn = {
     key: "image",
     className: "image",
     dataIndex: "image",
-    render: t => <Button disabled={!t} title={t ? "View source image" : "No source image available"}><Icon type="file-search"/></Button>,
+    render: t => <Button disabled={!t} title={t ? "View source image" : "No source image available"}><Icon type="file-image"/></Button>,
     width: 48,
 };
 

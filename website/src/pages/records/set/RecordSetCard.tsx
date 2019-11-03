@@ -12,7 +12,7 @@ import {Loading} from "../../../components/style/Loading";
 import {stringMultimap} from "../../../components/Maps";
 import {RecordSetReferences} from "../../../components/records/RecordSetReference";
 import {joinComponents} from "../../../components/Components";
-import {EnrichedRecord} from "../../../components/records/RecordLoader";
+import {EnrichedIndividualRecord} from "../../../components/records/RecordLoader";
 import {PlaceBundle} from "../../../protobuf/generated/place_pb";
 import {PlaceLink} from "../../../components/places/PlaceLink";
 
@@ -20,8 +20,8 @@ type Props = RecordPaginationHandler & RecordSearchHandler & RouteComponentProps
     loading: boolean;
     recordSet: Readonly<RecordSet.AsObject>
     relatives: AsyncData<RecordSetRelatives.AsObject>;
-    records: AsyncData<ReadonlyArray<EnrichedRecord>>
-    searchResults: AsyncData<ReadonlyArray<EnrichedRecord>>;
+    records: AsyncData<ReadonlyArray<EnrichedIndividualRecord>>
+    searchResults: AsyncData<ReadonlyArray<EnrichedIndividualRecord>>;
     creatorPlace: AsyncData<Readonly<PlaceBundle.AsObject>>
 }
 

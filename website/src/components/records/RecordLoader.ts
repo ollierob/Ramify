@@ -1,4 +1,4 @@
-import {IndividualRecord, IndividualRecordList, Record, RecordImageList, RecordSearch, RecordSet, RecordSetHierarchy, RecordSetList, RecordSetRelatives} from "../../protobuf/generated/record_pb";
+import {IndividualRecord, IndividualRecordList, RecordImageList, RecordSearch, RecordSet, RecordSetHierarchy, RecordSetList, RecordSetRelatives} from "../../protobuf/generated/record_pb";
 import {PlaceId} from "../places/Place";
 import {queryParameters} from "../fetch/Fetch";
 import {protoGet, protoPost} from "../fetch/ProtoFetch";
@@ -6,9 +6,9 @@ import {RecordSetId, sortRecordSetByDateThenTitle} from "./RecordSet";
 
 export interface RecordLoader {
 
-    loadRecords(id: RecordSetId, options?: RecordOptions): Promise<ReadonlyArray<EnrichedRecord>>
+    loadIndividualRecords(id: RecordSetId, options?: RecordOptions): Promise<ReadonlyArray<EnrichedIndividualRecord>>
 
-    submitSearch(search: RecordSearch): Promise<ReadonlyArray<EnrichedRecord>>
+    searchIndividualRecords(search: RecordSearch): Promise<ReadonlyArray<EnrichedIndividualRecord>>
 
     loadRecordSet(id: RecordSetId): Promise<Readonly<RecordSet.AsObject>>
 
@@ -24,13 +24,18 @@ export interface RecordLoader {
 
 type RecordOptions = {start?: number, limit?: number, children?: boolean}
 export type RecordSetOptions = {name?: string, place?: PlaceId, limit?: number, onlyParents?: boolean}
-export type EnrichedRecord = IndividualRecord.AsObject & {recordSet: RecordSet.AsObject};
+export type EnrichedIndividualRecord = IndividualRecord.AsObject & {recordSet: RecordSet.AsObject};
 
 class ProtoRecordLoader implements RecordLoader {
 
-    loadRecords(id: string, options: RecordOptions = {}) {
-        const url = "/records/in/" + id + queryParameters(options);
+    loadIndividualRecords(id: string, options: RecordOptions = {}) {
+        const url = "/records/individuals/in/" + id + queryParameters(options);
         return protoGet(url, IndividualRecordList.deserializeBinary)
+            .then(readRecords);
+    }
+
+    searchIndividualRecords(search: RecordSearch) {
+        return protoPost("/records/individuals/search", search, RecordSearch.serializeBinaryToWriter, IndividualRecordList.deserializeBinary)
             .then(readRecords);
     }
 
@@ -54,11 +59,6 @@ class ProtoRecordLoader implements RecordLoader {
             .then(r => r ? r.toObject() : null);
     }
 
-    submitSearch(search: RecordSearch) {
-        return protoPost("/records/search", search, RecordSearch.serializeBinaryToWriter, IndividualRecordList.deserializeBinary)
-            .then(readRecords);
-    }
-
     loadRecordImages(id: string): Promise<RecordImageList.AsObject> {
         return protoGet("/records/images/" + id, RecordImageList.deserializeBinary)
             .then(l => l ? l.toObject() : null);
@@ -71,10 +71,10 @@ function readRecordSets(list: RecordSetList): RecordSet.AsObject[] {
     return list.getRecordsetList().map(l => l.toObject()).sort(sortRecordSetByDateThenTitle);
 }
 
-function readRecords(list: IndividualRecordList): EnrichedRecord[] {
+function readRecords(list: IndividualRecordList): EnrichedIndividualRecord[] {
     if (!list) return [];
     const recordSets = list.getRecordsetsMap();
-    return list.getRecordList().map(l => l.toObject()).map<EnrichedRecord>(o => ({...o, recordSet: recordSets.get(o.recordsetid).toObject()}));
+    return list.getRecordList().map(l => l.toObject()).map<EnrichedIndividualRecord>(o => ({...o, recordSet: recordSets.get(o.recordsetid).toObject()}));
 }
 
 export const DEFAULT_RECORD_LOADER: RecordLoader = new ProtoRecordLoader();

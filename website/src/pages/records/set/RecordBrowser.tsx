@@ -5,12 +5,12 @@ import {RecordSet} from "../../../protobuf/generated/record_pb";
 import {IndividualRecordTable} from "./IndividualRecordTable";
 import {RecordPaginationHandler} from "../../../components/records/RecordPaginationHandler";
 import RecordImageGallery from "./RecordImageGallery";
-import {EnrichedRecord} from "../../../components/records/RecordLoader";
+import {EnrichedIndividualRecord} from "../../../components/records/RecordLoader";
 
 type Props = RecordPaginationHandler & {
     recordSet: RecordSet.AsObject;
-    records: AsyncData<ReadonlyArray<EnrichedRecord>>;
-    searchResults: AsyncData<ReadonlyArray<EnrichedRecord>>;
+    records: AsyncData<ReadonlyArray<EnrichedIndividualRecord>>;
+    searchResults: AsyncData<ReadonlyArray<EnrichedIndividualRecord>>;
     showRecordSet?: boolean;
 }
 
