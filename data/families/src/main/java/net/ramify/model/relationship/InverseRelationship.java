@@ -1,6 +1,7 @@
 package net.ramify.model.relationship;
 
 import net.ramify.model.person.PersonId;
+import net.ramify.model.relationship.proto.RelationshipProto;
 import net.ramify.model.relationship.type.RelationshipHandler;
 import net.ramify.utils.collections.ListUtils;
 
@@ -57,6 +58,12 @@ public class InverseRelationship<R extends Relationship> implements Relationship
     @Override
     public <R> R handleWith(final RelationshipHandler<R> handler) {
         return inverse.handleWith(handler);
+    }
+
+    @Nonnull
+    @Override
+    public RelationshipProto.Relationship.Builder toProtoBuilder() {
+        return inverse.toProtoBuilder();
     }
 
 }

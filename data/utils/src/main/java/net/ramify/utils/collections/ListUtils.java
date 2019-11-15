@@ -38,4 +38,15 @@ public class ListUtils {
         return list;
     }
 
+    public static <T> List<T> reversed(final List<T> list) {
+        if (list.size() <= 1) return list;
+        return reversedCopy(list);
+    }
+
+    public static <T> List<T> reversedCopy(final List<? extends T> list) {
+        final List<T> out = Lists.newArrayList(list);
+        Collections.reverse(out);
+        return out;
+    }
+
 }

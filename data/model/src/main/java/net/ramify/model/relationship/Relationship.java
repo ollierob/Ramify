@@ -30,9 +30,7 @@ public interface Relationship extends Castable<Relationship>, BuildsProto<Relati
     <R> R handleWith(final RelationshipHandler<R> handler);
 
     @Nonnull
-    default Relationship inverse() {
-        return new InverseRelationship<>(this);
-    }
+    Relationship inverse();
 
     @Nonnull
     List<Relationship> inferredRelationships();

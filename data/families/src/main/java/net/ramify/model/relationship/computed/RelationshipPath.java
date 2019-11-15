@@ -5,6 +5,7 @@ import net.ramify.model.person.PersonId;
 import net.ramify.model.relationship.Relationship;
 import net.ramify.model.relationship.type.IndirectRelationship;
 import net.ramify.utils.collections.IterableUtils;
+import net.ramify.utils.collections.ListUtils;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -44,6 +45,13 @@ public class RelationshipPath implements IndirectRelationship {
     @Override
     public boolean isDirected() {
         return IterableUtils.all(relationships, Relationship::isDirected);
+    }
+
+    @Nonnull
+    @Override
+    public RelationshipPath inverse() {
+        if (relationships.size() == 1) return this;
+        return new RelationshipPath(ListUtils.eagerlyTransform(ListUtils.reversed(relationships), Relationship::inverse));
     }
 
 }

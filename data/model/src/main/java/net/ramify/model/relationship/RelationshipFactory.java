@@ -25,6 +25,12 @@ public interface RelationshipFactory {
             return to.personId();
         }
 
+        @Nonnull
+        @Override
+        public Relationship inverse() {
+            return UNKNOWN.relationshipBetween(to, from);
+        }
+
     };
 
 }
