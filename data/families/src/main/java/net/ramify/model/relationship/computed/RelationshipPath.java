@@ -37,8 +37,13 @@ public class RelationshipPath implements IndirectRelationship {
     }
 
     @Override
+    public boolean isUnknown() {
+        return IterableUtils.any(relationships, Relationship::isUnknown);
+    }
+
+    @Override
     public boolean isDirected() {
-        return IterableUtils.any(relationships, Relationship::isDirected);
+        return IterableUtils.all(relationships, Relationship::isDirected);
     }
 
 }
