@@ -38,6 +38,14 @@ public class ListUtils {
         return list;
     }
 
+    public static <T> List<T> suffix(final Collection<? extends T> collection, final T element) {
+        if (collection.isEmpty()) return Collections.singletonList(element);
+        final var list = Lists.<T>newArrayListWithExpectedSize(collection.size() + 1);
+        list.addAll(collection);
+        list.add(element);
+        return list;
+    }
+
     public static <T> List<T> reversed(final List<T> list) {
         if (list.size() <= 1) return list;
         return reversedCopy(list);
