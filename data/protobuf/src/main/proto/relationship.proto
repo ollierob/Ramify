@@ -19,6 +19,10 @@ message Relationship {
         PARENT_CHILD = 3;
         CHILD_PARENT = 4;
 
+        INDIRECT = 10;
+
+        FICTIVE = 20;
+
     }
 
 }
