@@ -13,7 +13,7 @@ public abstract class AbstractRelationship implements Relationship {
         this(from.personId(), to.personId());
     }
 
-    protected AbstractRelationship(PersonId from, PersonId to) {
+    protected AbstractRelationship(final PersonId from, final PersonId to) {
         this.from = from;
         this.to = to;
     }
@@ -28,5 +28,6 @@ public abstract class AbstractRelationship implements Relationship {
     public PersonId toId() {
         return to;
     }
+
 }
 

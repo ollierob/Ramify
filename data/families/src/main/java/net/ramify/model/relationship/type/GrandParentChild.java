@@ -11,19 +11,25 @@ import java.util.List;
 
 public class GrandParentChild extends AbstractRelationship implements CosanguinealRelationship {
 
-    protected GrandParentChild(HasPersonId from, HasPersonId to) {
+    public GrandParentChild(final HasPersonId from, final HasPersonId to) {
         super(from, to);
     }
 
-    protected GrandParentChild(PersonId from, PersonId to) {
-        super(from, to);
+    @Nonnull
+    public PersonId grandparent() {
+        return this.fromId();
+    }
+
+    @Nonnull
+    public PersonId grandchild() {
+        return this.toId();
     }
 
     @Nonnull
     @Override
     public List<Relationship> inferredRelationships() {
         final PersonId parentId = PersonId.random();
-        return Arrays.asList(new ParentChild(this.fromId(), parentId), new ParentChild(parentId, this.toId()));
+        return Arrays.asList(new ParentChild(this.grandparent(), parentId), new ParentChild(parentId, this.grandchild()));
     }
 
 }
