@@ -2,10 +2,19 @@ package net.ramify.model.relationship.type;
 
 import net.ramify.model.relationship.Relationship;
 
+import javax.annotation.Nonnull;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * @see IndirectRelationship
  */
 public interface DirectRelationship extends Relationship {
+
+    @Nonnull
+    default List<Relationship> inferredRelationships() {
+        return Collections.emptyList();
+    }
 
     default boolean isAffine() {
         return this.is(AffineRelationship.class);

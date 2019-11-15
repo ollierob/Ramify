@@ -6,7 +6,7 @@ import net.ramify.model.relationship.proto.RelationshipProto;
 
 import javax.annotation.Nonnull;
 
-public class Married extends AbstractRelationship implements AffineRelationship {
+public class Married extends AbstractRelationship implements DirectRelationship, AffineRelationship {
 
     public Married(final HasPersonId from, final HasPersonId to) {
         super(from, to);

@@ -2,8 +2,10 @@ package net.ramify.model.relationship;
 
 import net.ramify.model.person.PersonId;
 import net.ramify.model.relationship.type.RelationshipHandler;
+import net.ramify.utils.collections.ListUtils;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 import java.util.Optional;
 
 public class InverseRelationship<R extends Relationship> implements Relationship {
@@ -44,6 +46,12 @@ public class InverseRelationship<R extends Relationship> implements Relationship
     @Override
     public <R extends Relationship> Optional<R> as(final Class<? extends R> clazz) {
         return inverse.as(clazz); //FIXME invoke .as ?
+    }
+
+    @Nonnull
+    @Override
+    public List<Relationship> inferredRelationships() {
+        return ListUtils.eagerlyTransform(inverse.inferredRelationships(), Relationship::inverse);
     }
 
     @Override

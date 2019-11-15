@@ -32,7 +32,7 @@ public class RelationshipPath implements IndirectRelationship {
 
     @Nonnull
     @Override
-    public List<Relationship> relationships() {
+    public List<Relationship> inferredRelationships() {
         return relationships;
     }
 

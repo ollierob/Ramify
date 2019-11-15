@@ -24,6 +24,7 @@ public interface RelationshipFactory {
         public PersonId toId() {
             return to.personId();
         }
+
     };
 
 }

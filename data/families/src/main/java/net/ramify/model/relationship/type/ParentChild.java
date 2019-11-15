@@ -7,7 +7,7 @@ import net.ramify.model.relationship.proto.RelationshipProto;
 
 import javax.annotation.Nonnull;
 
-public class ParentChild extends AbstractRelationship implements CosanguinealRelationship {
+public class ParentChild extends AbstractRelationship implements DirectRelationship, CosanguinealRelationship {
 
     public ParentChild(final HasPersonId parent, final HasPersonId child) {
         super(parent, child);

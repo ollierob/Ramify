@@ -7,6 +7,7 @@ import net.ramify.model.relationship.type.RelationshipHandler;
 import net.ramify.utils.objects.Castable;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 
 public interface Relationship extends Castable<Relationship>, BuildsProto<RelationshipProto.Relationship> {
 
@@ -32,6 +33,9 @@ public interface Relationship extends Castable<Relationship>, BuildsProto<Relati
     default Relationship inverse() {
         return new InverseRelationship<>(this);
     }
+
+    @Nonnull
+    List<Relationship> inferredRelationships();
 
     @Nonnull
     default RelationshipProto.Relationship.Builder toProtoBuilder() {
