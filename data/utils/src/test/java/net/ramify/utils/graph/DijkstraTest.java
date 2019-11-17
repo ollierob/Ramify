@@ -4,6 +4,7 @@ import com.google.common.graph.NetworkBuilder;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -31,8 +32,17 @@ class DijkstraTest {
         network.addEdge(b, c, bc);
         network.addEdge(a, d, ad);
 
-        final var path = Dijkstra.findPath(network, a, c);
-        assertEquals(Arrays.asList(ab, bc), path);
+        {
+            final var path = Dijkstra.findPath(network, a, c);
+            assertEquals(Arrays.asList(ab, bc), path);
+        }
+
+        {
+            final var e = "e";
+            network.addNode(e);
+            final var noPath = Dijkstra.findPath(network, a, e);
+            assertEquals(Collections.emptyList(), noPath);
+        }
 
     }
 

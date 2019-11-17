@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.graph.Network;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +22,11 @@ class Dijkstra {
         for (final var node : network.nodes()) {
 
             final var min = dist.min(remaining);
+            if (min == null) return Collections.emptyList();
 
             final var minNode = min.getKey();
+            if (to.equals(minNode)) break;
+
             remaining.remove(minNode);
 
             final var minDist = min.getValue();
