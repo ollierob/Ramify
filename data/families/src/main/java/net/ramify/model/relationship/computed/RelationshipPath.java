@@ -1,6 +1,7 @@
 package net.ramify.model.relationship.computed;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.relationship.Relationship;
 import net.ramify.model.relationship.RelationshipFactory;
@@ -15,14 +16,14 @@ import java.util.List;
 public class RelationshipPath implements IndirectRelationship {
 
     public static RelationshipPath of(final Relationship relationship) {
-        return new RelationshipPath(Collections.singletonList(relationship));
+        return new RelationshipPath(ImmutableList.of(relationship));
     }
 
     private final List<Relationship> relationships;
 
     public RelationshipPath(final List<Relationship> relationships) {
         Preconditions.checkArgument(!relationships.isEmpty());
-        this.relationships = relationships;
+        this.relationships = ImmutableList.copyOf(relationships);
     }
 
     @Nonnull
@@ -40,7 +41,7 @@ public class RelationshipPath implements IndirectRelationship {
     @Nonnull
     @Override
     public List<Relationship> inferredRelationships() {
-        return relationships;
+        return Collections.unmodifiableList(relationships);
     }
 
     @Override
@@ -56,7 +57,6 @@ public class RelationshipPath implements IndirectRelationship {
     @Nonnull
     @Override
     public RelationshipPath inverse() {
-        if (relationships.size() == 1) return this;
         return new RelationshipPath(ListUtils.eagerlyTransform(ListUtils.reversed(relationships), Relationship::inverse));
     }
 
