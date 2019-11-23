@@ -15,6 +15,7 @@ public interface Name extends BuildsProto<NameProto.Name> {
 
     @Nonnull
     default Set<String> variations() {
+        if (this.isUnknown()) return Collections.emptySet();
         return Collections.singleton(this.value());
     }
 

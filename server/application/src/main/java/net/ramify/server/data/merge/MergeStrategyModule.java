@@ -5,9 +5,8 @@ import com.google.inject.Provides;
 import net.ramify.model.person.name.Name;
 import net.ramify.strategy.person.match.name.MergedNameMatcher;
 import net.ramify.strategy.person.match.name.NameMatcher;
-import net.ramify.strategy.person.merge.name.DefaultNameMerger;
-import net.ramify.strategy.person.merge.name.ForenameSurnameMerger;
 import net.ramify.strategy.person.merge.name.NameMerger;
+import net.ramify.strategy.person.merge.name.NameVariationMerger;
 
 import javax.inject.Singleton;
 
@@ -22,7 +21,7 @@ public class MergeStrategyModule extends AbstractModule {
     @Provides
     @Singleton
     NameMerger<Name> provideNameMerge() {
-        return new DefaultNameMerger(new ForenameSurnameMerger((s1, s2) -> s1.length() > s2.length() ? s1.contains(s2) : s2.contains(s1))); //FIXME
+        return new NameVariationMerger((n1, n2) -> n1.length() > n2.length() ? n1.contains(n2) : n2.contains(n1));
     }
 
 }
