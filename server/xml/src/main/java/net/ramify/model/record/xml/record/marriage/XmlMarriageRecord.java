@@ -1,20 +1,18 @@
 package net.ramify.model.record.xml.record.marriage;
 
+import net.ramify.model.place.Place;
+import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.type.MarriageRecord;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlRecord;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "marriage")
-public class XmlMarriageRecord extends XmlRecord {
+@XmlType(namespace = XmlRecord.NAMESPACE)
+public abstract class XmlMarriageRecord extends XmlRecord {
 
-    public int numIndividuals() {
-        throw new UnsupportedOperationException();
-    }
+    public abstract int numIndividuals();
 
-    public MarriageRecord toRecord(final RecordContext context) {
-        throw new UnsupportedOperationException();
-    }
+    public abstract MarriageRecord build(RecordContext context, RecordSet recordSet, Place marriagePlace);
 
 }
