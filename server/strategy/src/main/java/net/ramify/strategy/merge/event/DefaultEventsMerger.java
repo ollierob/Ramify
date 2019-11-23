@@ -2,7 +2,6 @@ package net.ramify.strategy.merge.event;
 
 import net.ramify.model.event.Event;
 import net.ramify.model.event.collection.HasPersonEvents;
-import net.ramify.strategy.merge.Merger;
 
 import javax.annotation.Nonnull;
 import java.util.Set;
@@ -22,10 +21,10 @@ public class DefaultEventsMerger implements EventsMerger {
     public Result<Set<? extends Event>> merge(final HasPersonEvents e1, final HasPersonEvents e2) {
 
         final var birth = births.merge(e1.findBirth(), e2.findBirth());
-        if (birth.isImpossible()) return Merger.impossible();
+        if (birth.isImpossible()) return Result.impossible();
 
         final var death = deaths.merge(e1.findDeath(), e2.findDeath());
-        if (death.isImpossible()) return Merger.impossible();
+        if (death.isImpossible()) return Result.impossible();
 
         throw new UnsupportedOperationException(); //TODO
 

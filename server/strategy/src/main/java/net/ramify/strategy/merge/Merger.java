@@ -11,9 +11,9 @@ public interface Merger<F, T> {
     Result<T> merge(F f1, F f2);
 
     default Result<T> merge(final Optional<? extends F> f1, final Optional<? extends F> f2) {
-        if (f1.isEmpty() && f2.isEmpty()) return unknown();
-        if (f1.isEmpty()) return value(this.just(f2.get()));
-        if (f2.isEmpty()) return value(this.just(f1.get()));
+        if (f1.isEmpty() && f2.isEmpty()) return Result.unknown();
+        if (f1.isEmpty()) return Result.of(this.just(f2.get()));
+        if (f2.isEmpty()) return Result.of(this.just(f1.get()));
         return this.merge(f1.get(), f2.get());
     }
 
@@ -23,6 +23,14 @@ public interface Merger<F, T> {
 
         @Nonnull
         Optional<T> value();
+
+        default T require() {
+            return this.value().get();
+        }
+
+        default boolean isPossible() {
+            return this.value().isPresent();
+        }
 
         default boolean isUnknown() {
             return this.value().isEmpty() && !this.isImpossible();
@@ -37,30 +45,35 @@ public interface Merger<F, T> {
             return OptionalBoolean.of(this.value().isPresent());
         }
 
-    }
+        default <R> Result<R> notPossible() {
+            return this.isImpossible() ? impossible() : unknown();
+        }
 
-    static <T> Merger.Result<T> value(@Nonnull final T value) {
-        return () -> Optional.of(value);
-    }
+        static <T> Result<T> of(@Nonnull final T value) {
+            return () -> Optional.of(value);
+        }
 
-    static <T> Merger.Result<T> unknown() {
-        return Optional::empty;
-    }
+        static <T> Result<T> unknown() {
+            return Optional::empty;
+        }
 
-    static <T> Merger.Result<T> impossible() {
-        return new Result<T>() {
+        static <T> Result<T> impossible() {
+            return new Result<>() {
 
-            @Nonnull
-            @Override
-            public Optional<T> value() {
-                return Optional.empty();
-            }
+                @Nonnull
+                @Override
+                public Optional<T> value() {
+                    return Optional.empty();
+                }
 
-            @Override
-            public boolean isImpossible() {
-                return true;
-            }
-        };
+                @Override
+                public boolean isImpossible() {
+                    return true;
+                }
+
+            };
+        }
+
     }
 
 }
