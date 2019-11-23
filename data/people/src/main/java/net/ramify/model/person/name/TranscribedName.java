@@ -20,6 +20,10 @@ public class TranscribedName implements Name {
         return assumed.value();
     }
 
+    public Name assumed() {
+        return assumed;
+    }
+
     @Override
     public boolean contains(final String name) {
         final var lc = name.toLowerCase();
