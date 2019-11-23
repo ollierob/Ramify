@@ -48,19 +48,18 @@ export class PlaceSearch extends React.PureComponent<Props, State> {
                 </Form.Item>
 
                 <Form.Item>
+
                     <Button
                         htmlType="submit"
                         type="primary"
                         disabled={this.state.searchResults.loading}>
                         <SearchIcon/> Search
                     </Button>
-                </Form.Item>
 
-                <Form.Item>
                     <RegionCascader
-                        size="small"
                         placeLoader={this.placeLoader}
                         onSelect={this.setSelectedRegion}/>
+
                 </Form.Item>
 
             </Form>
@@ -77,7 +76,7 @@ export class PlaceSearch extends React.PureComponent<Props, State> {
         if (e) e.preventDefault();
         const name = this.state.searchString;
         if (!name) return;
-        asyncLoadData(name, n => this.placeLoader.findPlaces(n, 10), searchResults => this.setState({searchResults}));
+        asyncLoadData(name, n => this.placeLoader.findPlaces(n, {limit: 10, within: this.state.selectedRegion}), searchResults => this.setState({searchResults}));
     }
 
     componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>) {

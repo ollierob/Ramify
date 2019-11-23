@@ -80,6 +80,7 @@ public interface PlacesResource extends RootResource {
     @Path("search")
     Places find(
             @QueryParam("name") String name,
+            @QueryParam("within") PlaceId within,
             @QueryParam("limit") @DefaultValue("100") int limit);
 
 }

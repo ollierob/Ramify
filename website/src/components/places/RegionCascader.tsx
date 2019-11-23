@@ -10,7 +10,7 @@ type Props = {
     placeHolder?: string;
     placeLoader: PlaceLoader;
     onSelect: (id: PlaceId) => void;
-    size?: "large" | "default" | "small"
+    size?: "large" | "small"
 }
 
 type State = {
@@ -37,8 +37,9 @@ export default class RegionCascader extends React.PureComponent<Props, State> {
     render() {
 
         return <Cascader
+            className="regionCascader"
             placeholder={this.props.placeHolder || "Matching all places"}
-            size={this.props.size || "large"}
+            size={this.props.size}
             changeOnSelect
             value={this.state.selectedRegion}
             onChange={this.setSelectedRegion}

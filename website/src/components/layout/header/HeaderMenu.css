@@ -29,3 +29,8 @@
 .ant-menu-submenu .placeSearch .results .ant-list-item {
     display: block;
 }
+
+.ant-menu-submenu .placeSearch .regionCascader {
+    width: 210px;
+    float: right;
+}

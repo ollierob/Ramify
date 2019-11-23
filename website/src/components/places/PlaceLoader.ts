@@ -21,8 +21,13 @@ export interface PlaceLoader {
 
     loadCountries(): Promise<ReadonlyArray<Place.AsObject>>
 
-    findPlaces(name: string, limit?: number): Promise<ReadonlyArray<Place.AsObject>>
+    findPlaces(name: string, options: SearchOptions): Promise<ReadonlyArray<Place.AsObject>>
 
+}
+
+type SearchOptions = {
+    limit?: number
+    within?: PlaceId
 }
 
 class ProtoPlaceLoader implements PlaceLoader {
@@ -66,8 +71,11 @@ class ProtoPlaceLoader implements PlaceLoader {
         return protoGet("/places/countries", PlaceList.deserializeBinary).then(readPlaces);
     }
 
-    findPlaces(name: string, limit: number = 100) {
-        return protoGet("/places/search?name=" + name + "&limit=" + limit, PlaceList.deserializeBinary).then(readPlaces);
+    findPlaces(name: string, options: SearchOptions) {
+        const url = "/places/search?name=" + name
+            + "&limit=" + (options.limit || 1000)
+            + (options.within ? "&within=" + options.within : "");
+        return protoGet(url, PlaceList.deserializeBinary).then(readPlaces);
     }
 
 }
