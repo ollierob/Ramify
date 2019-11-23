@@ -3,6 +3,7 @@ package net.ramify.strategy.person.merge.name;
 import net.ramify.model.person.name.ForenameSurname;
 import net.ramify.model.person.name.Name;
 import net.ramify.model.person.name.TranscribedName;
+import net.ramify.strategy.merge.Merger;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
@@ -18,6 +19,8 @@ public class DefaultNameMerger implements NameMerger<Name> {
     @Nonnull
     @Override
     public Result<Name> merge(final Name n1, final Name n2) {
+        if (n1.isUnknown()) return Merger.value(n2);
+        if (n2.isUnknown()) return Merger.value(n1);
         return forenameSurnameMerger.merge(readForenameSurname(n1), readForenameSurname(n2));
     }
 

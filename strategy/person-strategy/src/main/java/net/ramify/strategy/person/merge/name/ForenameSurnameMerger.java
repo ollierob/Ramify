@@ -22,7 +22,7 @@ public class ForenameSurnameMerger implements NameMerger<ForenameSurname> {
         if (!surnamesMatch.test(n1.surname(), n2.surname())) return Merger.impossible();
 
         throw new UnsupportedOperationException(); //TODO
-        
+
     }
 
 }
