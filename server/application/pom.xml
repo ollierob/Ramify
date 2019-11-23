@@ -71,6 +71,12 @@
             <artifactId>logback-classic</artifactId>
             <version>1.2.3</version>
         </dependency>
+        <dependency>
+            <groupId>net.ramify</groupId>
+            <artifactId>person-strategy</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 </project>

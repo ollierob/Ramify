@@ -16,6 +16,10 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>event-strategy</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>people</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

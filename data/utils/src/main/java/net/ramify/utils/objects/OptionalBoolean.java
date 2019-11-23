@@ -9,9 +9,22 @@ public abstract class OptionalBoolean {
 
     public abstract boolean isPresent();
 
+    public abstract boolean isTrue();
+
     public abstract <T> Optional<T> map(BooleanObjectFunction<? extends T> function);
 
+    public static OptionalBoolean empty() {
+        return Undefined.INSTANCE;
+    }
+
+    public static OptionalBoolean of(final boolean b) {
+        return b ? Defined.TRUE : Defined.FALSE;
+    }
+
     private static class Defined extends OptionalBoolean {
+
+        static final Defined TRUE = new Defined(true);
+        static final Defined FALSE = new Defined(false);
 
         private final boolean value;
 
@@ -25,6 +38,11 @@ public abstract class OptionalBoolean {
         }
 
         @Override
+        public boolean isTrue() {
+            return value;
+        }
+
+        @Override
         public <T> Optional<T> map(final BooleanObjectFunction<? extends T> function) {
             return Optional.ofNullable(function.apply(value));
         }
@@ -33,8 +51,15 @@ public abstract class OptionalBoolean {
 
     private static class Undefined extends OptionalBoolean {
 
+        static final Undefined INSTANCE = new Undefined();
+
         @Override
         public boolean isPresent() {
+            return false;
+        }
+
+        @Override
+        public boolean isTrue() {
             return false;
         }
 

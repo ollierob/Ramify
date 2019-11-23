@@ -12,7 +12,7 @@ import net.ramify.model.record.IndividualRecord;
 import net.ramify.model.record.collection.IndividualRecords;
 import net.ramify.model.record.collection.Records;
 import net.ramify.model.record.proto.RecordProto;
-import net.ramify.strategy.match.name.NameMatch;
+import net.ramify.strategy.person.match.name.NameMatcher;
 
 import javax.annotation.CheckForNull;
 import javax.inject.Inject;
@@ -23,11 +23,11 @@ import java.util.function.Predicate;
 class RecordSearch {
 
     private final PlaceProvider places;
-    private final NameMatch<Name> nameMatch;
+    private final NameMatcher nameMatch;
     private final NameParser nameParser;
 
     @Inject
-    RecordSearch(final PlaceProvider places, final NameMatch<Name> nameMatch, final NameParser nameParser) {
+    RecordSearch(final PlaceProvider places, final NameMatcher nameMatch, final NameParser nameParser) {
         this.places = places;
         this.nameMatch = nameMatch;
         this.nameParser = nameParser;
@@ -70,7 +70,7 @@ class RecordSearch {
     }
 
     private boolean testName(final IndividualRecord record, final Name searchName) {
-        return searchName == null || nameMatch.match(record.person().name(), searchName);
+        return searchName == null || nameMatch.match(record.person().name(), searchName).isTrue();
     }
 
 }

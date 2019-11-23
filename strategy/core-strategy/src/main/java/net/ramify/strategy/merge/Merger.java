@@ -1,5 +1,7 @@
 package net.ramify.strategy.merge;
 
+import net.ramify.utils.objects.OptionalBoolean;
+
 import javax.annotation.Nonnull;
 import java.util.Optional;
 
@@ -30,9 +32,14 @@ public interface Merger<F, T> {
             return false;
         }
 
+        default OptionalBoolean isPresent() {
+            if (this.isImpossible()) return OptionalBoolean.empty();
+            return OptionalBoolean.of(this.value().isPresent());
+        }
+
     }
 
-    static <T> Merger.Result<T> value(final T value) {
+    static <T> Merger.Result<T> value(@Nonnull final T value) {
         return () -> Optional.of(value);
     }
 
