@@ -22,10 +22,10 @@ public class DefaultEventsMerger implements EventsMerger {
     public Result<Set<? extends Event>> merge(final HasPersonEvents e1, final HasPersonEvents e2) {
 
         final var birth = births.merge(e1.findBirth(), e2.findBirth());
-        if (birth.impossibleMerge()) return Result.impossible();
+        if (birth.isImpossibleMerge()) return Result.impossible();
 
         final var death = deaths.merge(e1.findDeath(), e2.findDeath());
-        if (death.impossibleMerge()) return Result.impossible();
+        if (death.isImpossibleMerge()) return Result.impossible();
 
         final var events = new HashSet<Event>();
         events.addAll(e1.events());

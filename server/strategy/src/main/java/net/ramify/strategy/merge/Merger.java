@@ -31,29 +31,33 @@ public interface Merger<F, T> {
             return this.value().get();
         }
 
-        default boolean canMerge() {
+        default T orElse(final T value) {
+            return this.value().orElse(value);
+        }
+
+        default boolean isMergeable() {
             return this.value().isPresent();
         }
 
-        default boolean unknownMerge() {
-            return this.value().isEmpty() && !this.impossibleMerge();
+        default boolean isUnknownMerge() {
+            return this.value().isEmpty() && !this.isImpossibleMerge();
         }
 
-        default boolean impossibleMerge() {
+        default boolean isImpossibleMerge() {
             return false;
         }
 
         default OptionalBoolean isPresent() {
-            if (this.impossibleMerge()) return OptionalBoolean.empty();
+            if (this.isImpossibleMerge()) return OptionalBoolean.empty();
             return OptionalBoolean.of(this.value().isPresent());
         }
 
         default <R> Result<R> cannotMerge() {
-            return this.impossibleMerge() ? impossible() : unknown();
+            return this.isImpossibleMerge() ? impossible() : unknown();
         }
 
         default void ifPresent(final Consumer<? super T> consumer) {
-            Preconditions.checkState(!this.impossibleMerge());
+            Preconditions.checkState(!this.isImpossibleMerge());
             this.value().ifPresent(consumer);
         }
 
@@ -75,7 +79,7 @@ public interface Merger<F, T> {
                 }
 
                 @Override
-                public boolean impossibleMerge() {
+                public boolean isImpossibleMerge() {
                     return true;
                 }
 

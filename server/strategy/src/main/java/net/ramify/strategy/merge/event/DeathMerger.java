@@ -4,6 +4,7 @@ import net.ramify.model.date.DateRange;
 import net.ramify.model.event.type.Death;
 import net.ramify.model.event.type.death.GenericDeath;
 import net.ramify.model.person.PersonId;
+import net.ramify.model.place.Place;
 import net.ramify.strategy.merge.place.PlaceMerger;
 
 public class DeathMerger extends AbstractEventMerger<Death> {
@@ -13,8 +14,8 @@ public class DeathMerger extends AbstractEventMerger<Death> {
     }
 
     @Override
-    Death merge(final PersonId id, final DateRange date) {
-        return new GenericDeath(id, date);
+    Death merge(final PersonId id, final DateRange date, final Place place) {
+        return new GenericDeath(id, date).with(place);
     }
 
 }
