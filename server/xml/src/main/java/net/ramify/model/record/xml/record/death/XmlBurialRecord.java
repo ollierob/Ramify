@@ -37,7 +37,7 @@ import java.time.Month;
 import java.util.List;
 import java.util.Set;
 
-@XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "churchBurial")
+@XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "burial")
 public class XmlBurialRecord extends XmlPersonOnDateRecord {
 
     @XmlAttribute(name = "residence", required = false)
