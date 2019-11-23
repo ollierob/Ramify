@@ -12,7 +12,7 @@ import net.ramify.model.record.IndividualRecord;
 import net.ramify.model.record.collection.IndividualRecords;
 import net.ramify.model.record.collection.Records;
 import net.ramify.model.record.proto.RecordProto;
-import net.ramify.strategy.person.match.name.NameMatcher;
+import net.ramify.strategy.match.person.name.NameMatcher;
 
 import javax.annotation.CheckForNull;
 import javax.inject.Inject;
