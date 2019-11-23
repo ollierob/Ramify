@@ -4,10 +4,11 @@ import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.event.type.EventHandler;
 import net.ramify.model.event.type.PostDeathEvent;
 import net.ramify.model.event.type.UniqueEvent;
+import net.ramify.model.place.HasPlace;
 
 import javax.annotation.Nonnull;
 
-public interface Burial extends UniqueEvent, PostDeathEvent {
+public interface Burial extends UniqueEvent, PostDeathEvent, HasPlace {
 
     @Override
     default <R> R handleWith(final EventHandler<R> handler) {

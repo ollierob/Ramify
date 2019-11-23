@@ -16,7 +16,7 @@ public interface HasRelationships {
     }
 
     @Nonnull
-    default <R extends Relationship> Set<R> findAll(@Nonnull final Class<R> type) {
+    default <R extends Relationship> Set<R> findAllRelationships(@Nonnull final Class<R> type) {
         return IterableUtils.findAll(this.relationships(), type);
     }
 

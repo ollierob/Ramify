@@ -65,29 +65,29 @@ public class XmlBurialRecord extends XmlPersonOnDateRecord {
                 recordSet,
                 burialDate,
                 placeId,
-                this.family(burialDate, context.onDate(burialDate)));
+                this.family(burialDate, context.onDate(burialDate), placeId));
     }
 
-    Family family(final ExactDate burialDate, final RecordContext context) {
-        final var person = this.person(context.nameParser(), burialDate, context);
+    Family family(final ExactDate burialDate, final RecordContext context, final PlaceId burialPlaceId) {
+        final var person = this.person(context.nameParser(), burialDate, context, burialPlaceId);
         final var builder = new FamilyBuilder().addPerson(person);
         if (relationships != null) relationships.forEach(relationship -> relationship.addRelationship(person, builder, context, burialDate));
         return builder.build();
     }
 
-    Person person(final NameParser nameParser, final ExactDate burialDate, final RecordContext context) {
+    Person person(final NameParser nameParser, final ExactDate burialDate, final RecordContext context, final PlaceId burialPlaceId) {
         final var personId = this.personId();
         return new GenericRecordPerson(
                 personId,
                 this.name(nameParser),
                 this.gender(),
-                this.events(personId, burialDate, context),
+                this.events(personId, burialDate, context, burialPlaceId),
                 this.notes());
     }
 
-    Set<Event> events(final PersonId personId, final ExactDate burialDate, final RecordContext context) {
+    Set<Event> events(final PersonId personId, final ExactDate burialDate, final RecordContext context, final PlaceId burialPlaceId) {
         final var events = super.events(personId, burialDate, context);
-        events.add(this.burial(personId, burialDate));
+        events.add(this.burial(personId, burialDate, context.places().require(burialPlaceId)));
         if (deathDate != null) events.add(this.death(personId, deathDate.resolve()));
         if (residence != null) events.add(this.residence(personId, Functions.ifNonNull(deathDate, XmlExactDate::resolve, burialDate), context.places().require(new PlaceId(residence))));
         return events;
@@ -101,8 +101,8 @@ public class XmlBurialRecord extends XmlPersonOnDateRecord {
         return new GenericDeath(personId, date);
     }
 
-    Burial burial(final PersonId personId, final ExactDate date) {
-        return new ChurchBurial(personId, date, this.age());
+    Burial burial(final PersonId personId, final ExactDate date, final Place burialPlace) {
+        return new ChurchBurial(personId, date, this.age(), burialPlace);
     }
 
     int numIndividuals() {
