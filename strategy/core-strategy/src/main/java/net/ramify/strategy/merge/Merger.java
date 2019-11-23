@@ -23,7 +23,7 @@ public interface Merger<F, T> {
         Optional<T> value();
 
         default boolean isUnknown() {
-            return this.value().isEmpty();
+            return this.value().isEmpty() && !this.isImpossible();
         }
 
         default boolean isImpossible() {
