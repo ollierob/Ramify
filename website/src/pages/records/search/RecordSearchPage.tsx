@@ -15,34 +15,32 @@ import {readPageHash, updatePageHash} from "../../../components/Page";
 import {hashToRecordSearch, recordSearchToHash} from "../../../components/search/RecordSearchHandler";
 import {RecordBasePage, RecordBasePageProps} from "../RecordBasePage";
 import {SearchIcon} from "../../../components/images/Icons";
+import RegionCascader from "../../../components/places/RegionCascader";
 
 type Props = RecordBasePageProps;
 
 type State = {
-    selectedRegion: PlaceId[];
-    regions: CascaderOptionType[];
     selectedRange: string[];
     recordSets: AsyncData<ReadonlyArray<RecordSet.AsObject>>;
     recordName?: string;
+    selectedRegion?: PlaceId;
 }
 
 export default class RecordSearchPage extends RecordBasePage<State> {
 
     private readonly placeLoader = DEFAULT_PLACE_LOADER;
     private readonly recordLoader = DEFAULT_RECORD_LOADER;
+    private readonly setSelectedRegion = (id: PlaceId) => this.setState({selectedRegion: id});
 
-    constructor(props: RecordBasePageProps) {
+    constructor(props: Props) {
         super(props);
         const options = hashToRecordSearch(readPageHash());
         this.state = {
-            selectedRegion: [],
-            regions: [],
             selectedRange: [],
             recordSets: {},
             recordName: options.name
         };
         this.renderRange = this.renderRange.bind(this);
-        this.loadLeafPlace = this.loadLeafPlace.bind(this);
         this.doSearch = this.doSearch.bind(this);
     }
 
@@ -69,15 +67,10 @@ export default class RecordSearchPage extends RecordBasePage<State> {
                     <Form.Item className="filter">
                         Filter by record place:
                         <br/>
-                        <Cascader
-                            placeholder="Matching all places"
+                        <RegionCascader
+                            placeLoader={this.placeLoader}
                             size="large"
-                            changeOnSelect
-                            value={this.state.selectedRegion}
-                            onChange={selectedRegion => this.setState({selectedRegion})}
-                            options={this.state.regions}
-                            loadData={this.loadLeafPlace}
-                            displayRender={this.renderPlace}/>
+                            onSelect={this.setSelectedRegion}/>
                     </Form.Item>
 
                     <Form.Item className="filter">
@@ -118,15 +111,8 @@ export default class RecordSearchPage extends RecordBasePage<State> {
     }
 
     componentDidMount() {
-        this.placeLoader.loadCountries()
-            .then(countries => this.setState({regions: generateCountryOptions(countries)}));
-        if (this.state.recordName || this.state.selectedRegion.length)
+        if (this.state.recordName || this.state.selectedRegion)
             this.doSearch();
-    }
-
-    private renderPlace(places: PlaceId[]): React.ReactNode {
-        if (!places.length) return null;
-        return places[places.length - 1];
     }
 
     private renderRange(range: string[]): React.ReactNode {
@@ -134,26 +120,10 @@ export default class RecordSearchPage extends RecordBasePage<State> {
         return range[range.length - 1];
     }
 
-    private loadLeafPlace(selected: CascaderOptionType[]) {
-        const target = selected[selected.length - 1];
-        if (target.depth == 1) {
-            target.loading = true;
-            this.placeLoader.loadChildren(target.value, 1)
-                .then(children => {
-                    target.loading = false;
-                    target.children = children.map<CascaderOptionType>(child => ({
-                        label: <><Flag iso={child.iso}/>{child.name}</>,
-                        value: child.id,
-                        depth: 2
-                    })).sort((o1, o2) => o1.value.localeCompare(o2.value));
-                }).then(() => this.setState(current => ({regions: [...current.regions]})));
-        }
-    }
-
     private doSearch(e?: FormEvent<HTMLFormElement>) {
         if (e) e.preventDefault();
         const options: RecordSetOptions = {
-            place: this.state.selectedRegion.length ? this.state.selectedRegion[this.state.selectedRegion.length - 1] : null,
+            place: this.state.selectedRegion,
             name: this.state.recordName,
         };
         asyncLoadData(options, this.recordLoader.loadRecordSets, recordSets => this.setState({recordSets}));
@@ -162,15 +132,6 @@ export default class RecordSearchPage extends RecordBasePage<State> {
 
 }
 
-function generateCountryOptions(countries: ReadonlyArray<Place.AsObject>): CascaderOptionType[] {
-    if (!countries) return [];
-    return countries.map<CascaderOptionType>(country => ({
-        label: <><Flag iso={country.iso}/>{country.name}</>,
-        value: country.id,
-        isLeaf: false,
-        depth: 1
-    })).sort((o1, o2) => o1.value.localeCompare(o2.value));
-}
 
 const YearRanges = generateYearRanges();
 

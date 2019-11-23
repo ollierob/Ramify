@@ -8,18 +8,22 @@ import {SearchIcon} from "../../../images/Icons";
 import {Loading} from "../../../style/Loading";
 import {PlaceLink} from "../../../places/PlaceLink";
 import {placeTypeName} from "../../../places/PlaceType";
+import {PlaceId} from "../../../places/Place";
+import RegionCascader from "../../../places/RegionCascader";
 
 type Props = {}
 
 type State = {
     searchString?: string;
     searchResults: AsyncData<ReadonlyArray<Place.AsObject>>
+    selectedRegion?: PlaceId
 };
 
 export class PlaceSearch extends React.PureComponent<Props, State> {
 
     private readonly placeLoader = DEFAULT_PLACE_LOADER;
     private readonly setSearchString = (e: ChangeEvent<HTMLInputElement>) => this.setState({searchString: e.target.value});
+    private readonly setSelectedRegion = (id: PlaceId) => this.setState({selectedRegion: id});
 
     constructor(props: Props) {
         super(props);
@@ -50,6 +54,13 @@ export class PlaceSearch extends React.PureComponent<Props, State> {
                         disabled={this.state.searchResults.loading}>
                         <SearchIcon/> Search
                     </Button>
+                </Form.Item>
+
+                <Form.Item>
+                    <RegionCascader
+                        size="small"
+                        placeLoader={this.placeLoader}
+                        onSelect={this.setSelectedRegion}/>
                 </Form.Item>
 
             </Form>
