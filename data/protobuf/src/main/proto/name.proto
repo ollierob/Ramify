@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option java_package = "net.ramify.model.person.proto";
+option java_outer_classname = "NameProto";
+
+message Name {
+
+    string value = 1;
+    bool unknown = 2;
+
+    repeated string variation = 10;
+
+}

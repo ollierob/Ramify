@@ -2,7 +2,6 @@ import * as React from "react";
 import {RecordSet} from "../../../../protobuf/generated/record_pb";
 import {ColumnProps} from "antd/es/table";
 import {Button, Icon} from "antd";
-import {isUnknownName, nameToString} from "../../../../components/people/Name";
 import {FormattedDateRange, FormattedYearRange} from "../../../../components/date/FormattedDateRange";
 import {PlaceLink} from "../../../../components/places/PlaceLink";
 import {recordTypeFromValue} from "../../../../components/records/RecordType";
@@ -64,18 +63,18 @@ const NameColumn: IndividualRecordColumn = {
     title: "Name",
     dataIndex: "person.name.surname",
     render: (t, r) => {
-        if (isUnknownName(r.person.name)) {
+        if (r.person.name.unknown) {
             const gender = isMale(r.person) ? "male" : isFemale(r.person) ? "female" : "";
             return <span className="unimportant">Unknown{gender && <> {gender}</>}</span>;
         }
         return <>
-            {nameToString(r.person.name)}
-            {r.person.name.original && <Minor children={r.person.name.original}/>}
+            {r.person.name.value}
+            {r.person.name.variationList.map(v => <Minor children={v}/>)}
         </>;
     },
-    sorter: (r1, r2) => nameToString(r1.person.name).localeCompare(nameToString(r2.person.name)),
+    sorter: (r1, r2) => r1.person.name.value.localeCompare(r2.person.name.value),
     width: 200,
-    ...ColumnSubstringLocalSearch(r => nameToString(r.person.name))
+    ...ColumnSubstringLocalSearch(r => r.person.name.value)
 };
 
 const BirthYear: IndividualRecordColumn = {

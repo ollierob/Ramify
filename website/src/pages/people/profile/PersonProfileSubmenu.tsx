@@ -3,7 +3,6 @@ import {SubMenu} from "../../SubMenu";
 import {Person} from "../../../protobuf/generated/person_pb";
 import {FamilyTree} from "../../../protobuf/generated/family_pb";
 import {PersonIcon, TreeIcon} from "../../../components/images/Icons";
-import {nameToString} from "../../../components/people/Name";
 import {viewTreeHref} from "../PeopleLinks";
 
 export const PersonProfileSubmenu = (props: {person: Person.AsObject, tree: FamilyTree.AsObject, loading: boolean}) => {
@@ -20,7 +19,7 @@ const SubmenuContent = (props: {person: Person.AsObject, tree: FamilyTree.AsObje
             </a>
         </span>
         <span className="person">
-            <PersonIcon/> {nameToString(props.person.name)}
+            <PersonIcon/> {props.person.name.value}
         </span>
     </>;
 };

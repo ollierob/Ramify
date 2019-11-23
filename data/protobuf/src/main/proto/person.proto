@@ -4,6 +4,7 @@ option java_package = "net.ramify.model.person.proto";
 option java_outer_classname = "PersonProto";
 
 import "event.proto";
+import "name.proto";
 
 message Person {
 
@@ -16,13 +17,3 @@ message Person {
 
 }
 
-message Name {
-
-    repeated string forename = 1;
-    string surname = 2;
-    string prefix = 3;
-    string suffix = 4;
-
-    string original = 10;
-
-}

@@ -1,12 +1,12 @@
 import * as React from "react";
-import {Person, Name} from "../../../protobuf/generated/person_pb";
-import {nameToString} from "../../people/Name";
+import {Person} from "../../../protobuf/generated/person_pb";
 import {HasClass} from "../../style/HasClass";
 import {birthYear, deathYear} from "../../event/Event";
 import {Icon, Popover} from "antd";
 import {personProfileHref, personSearchHref} from "../../../pages/people/PeopleLinks";
 import {PersonId} from "../../people/PersonId";
 import {FamilyTreeId} from "../FamilyTree";
+import {Name} from "../../../protobuf/generated/name_pb";
 
 type Props = HasClass & {
     treeId: FamilyTreeId;
@@ -83,9 +83,7 @@ export class PersonCard extends React.PureComponent<Props, State> {
 }
 
 const PersonName = (props: {name: Name.AsObject}) => {
-    return <div className="name">
-        {nameToString(props.name)}
-    </div>;
+    return <div className="name">{props.name.value}</div>;
 };
 
 const PersonDates = (props: {birthYear: number, deathYear: number, flourishedYear: number}) => {
@@ -97,7 +95,7 @@ const PersonDates = (props: {birthYear: number, deathYear: number, flourishedYea
 
 const PersonPopoverTitle = (props: {person: Person.AsObject}) => {
     return <div className="treeViewer personCard title">
-        {nameToString(props.person.name)}
+        {props.person.name.value}
     </div>;
 };
 

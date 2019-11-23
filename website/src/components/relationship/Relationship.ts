@@ -17,7 +17,9 @@ const RelationshipNames: { [key in RelationshipType]: string } = {
     SPOUSE: "Spouse",
     SIBLING: "Sibling",
     PARENT_CHILD: "Parent",
-    CHILD_PARENT: "Child"
+    CHILD_PARENT: "Child",
+    INDIRECT: "Indirect",
+    FICTIVE: "Fictive"
 };
 
 export function relationshipType(relationship: Relationship.AsObject): RelationshipType {

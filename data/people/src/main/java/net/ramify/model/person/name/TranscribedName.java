@@ -1,8 +1,9 @@
 package net.ramify.model.person.name;
 
-import net.ramify.model.person.proto.PersonProto;
+import com.google.common.collect.ImmutableSet;
 
 import javax.annotation.Nonnull;
+import java.util.Set;
 
 public class TranscribedName implements Name {
 
@@ -17,9 +18,10 @@ public class TranscribedName implements Name {
     @Nonnull
     @Override
     public String value() {
-        return assumed.value();
+        return original;
     }
 
+    @Nonnull
     public Name assumed() {
         return assumed;
     }
@@ -32,8 +34,11 @@ public class TranscribedName implements Name {
 
     @Nonnull
     @Override
-    public PersonProto.Name.Builder toProtoBuilder() {
-        return assumed.toProtoBuilder().setOriginal(original);
+    public Set<String> variations() {
+        return ImmutableSet.<String>builder()
+                .add(original)
+                .addAll(assumed.variations())
+                .build();
     }
 
 }

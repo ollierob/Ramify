@@ -1,14 +1,14 @@
 import * as React from "react";
 import {FamilyRecord} from "./FamilyRecord";
 import {List} from "antd";
-import {Name, Person} from "../../../../protobuf/generated/person_pb";
-import {isUnknownName, nameToString} from "../../../../components/people/Name";
+import {Person} from "../../../../protobuf/generated/person_pb";
 import {Event} from "../../../../protobuf/generated/event_pb";
 import {FormattedYearRange} from "../../../../components/date/FormattedDateRange";
 import {findBirth} from "../../../../components/event/Event";
 import {Family} from "../../../../protobuf/generated/family_pb";
 import {Relationship} from "../../../../protobuf/generated/relationship_pb";
 import {findRelationship, relationshipName} from "../../../../components/relationship/Relationship";
+import {Name} from "../../../../protobuf/generated/name_pb";
 
 export function renderFamilyRecord(record: FamilyRecord) {
     if (!record) return null;
@@ -21,7 +21,7 @@ export function renderFamilyRecord(record: FamilyRecord) {
 function renderFamily(family: Family.AsObject) {
     if (!family || !family.personList || !family.personList.length) return null;
     return <List
-        dataSource={family.personList.filter(p => !isUnknownName(p.name))}
+        dataSource={family.personList.filter(p => !p.name.unknown)}
         renderItem={person => <List.Item>{renderPerson(person, family.personList[0], family.relationshipList)}</List.Item>}/>;
 }
 
@@ -34,7 +34,7 @@ function renderPerson(person: Person.AsObject, root: Person.AsObject, relationsh
 }
 
 function renderName(name: Name.AsObject) {
-    return <span className="name">{nameToString(name)}</span>;
+    return <span className="name">{name}</span>;
 }
 
 function renderBirth(event: Event.AsObject) {

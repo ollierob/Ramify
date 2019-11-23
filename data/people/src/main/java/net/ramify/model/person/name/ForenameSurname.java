@@ -4,12 +4,13 @@ import com.google.common.base.Joiner;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
-import net.ramify.model.person.proto.PersonProto;
 
 import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import static net.ramify.utils.StringUtils.isEmpty;
 
 public class ForenameSurname implements Name {
 
@@ -48,22 +49,23 @@ public class ForenameSurname implements Name {
     @Nonnull
     @Override
     public String value() {
-        return ((forenames.isEmpty() ? "" : JOIN_SPACES.join(forenames) + ' ')
-                + surname).trim();
+        final var sb = new StringBuilder();
+        append(prefix, sb);
+        if (!forenames.isEmpty()) append(JOIN_SPACES.join(forenames), sb);
+        append(surname, sb);
+        append(suffix, sb);
+        return sb.toString().trim();
     }
 
-    @Nonnull
-    @Override
-    public PersonProto.Name.Builder toProtoBuilder() {
-        return Name.super.toProtoBuilder()
-                .setPrefix(MoreObjects.firstNonNull(prefix, ""))
-                .addAllForename(forenames)
-                .setSurname(surname)
-                .setSuffix(MoreObjects.firstNonNull(suffix, ""));
+    private static void append(final String part, final StringBuilder sb) {
+        if (isEmpty(part)) return;
+        if (sb.length() > 0 && sb.charAt(sb.length() - 1) != ' ') sb.append(' ');
+        sb.append(part).append(' ');
     }
 
     @Override
     public String toString() {
         return this.value();
     }
+
 }
