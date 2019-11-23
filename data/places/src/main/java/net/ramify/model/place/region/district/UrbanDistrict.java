@@ -3,6 +3,7 @@ package net.ramify.model.place.region.district;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.region.AbstractRegion;
 import net.ramify.model.place.region.County;
 
@@ -22,6 +23,11 @@ public class UrbanDistrict extends AbstractRegion implements District {
     @Override
     public County parent() {
         return parent;
+    }
+
+    @Override
+    public PlaceProto.PlaceType protoType() {
+        return PlaceProto.PlaceType.URBAN_DISTRICT;
     }
 
 }

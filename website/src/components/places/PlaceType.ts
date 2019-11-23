@@ -29,11 +29,13 @@ const PlaceTypeInfo: { [key in PlaceType]: PlaceInfo } = {
     NEIGHBOURHOOD: {s: "Neighbourhood"},
     PARISH: {s: "Church Parish", p: "Church Parishes"},
     RAPE: {s: "Rape"},
+    RURAL_DISTRICT: {s: "Rural District"},
     SCHOOL: {s: "School", isBuilding: true},
     STATE: {s: "State"},
     STREET: {s: "Street", isBuilding: true},
     TOWN: {s: "Town", isBuilding: true},
     TOWNSHIP: {s: "Township"},
+    URBAN_DISTRICT: {s: "Urban District"},
     VILLAGE: {s: "Village"},
     WAPENTAKE: {s: "Wapentake"},
 };

@@ -57,6 +57,8 @@ enum PlaceType {
 
     TOWNSHIP = 50;
     DISTRICT = 51;
+    URBAN_DISTRICT = 52;
+    RURAL_DISTRICT = 53;
 
     CIVIL_PARISH = 60;
     TOWN = 61;
