@@ -8,16 +8,25 @@ public interface Merger<F, T> {
     @Nonnull
     Result<T> merge(F f1, F f2);
 
+    default Result<T> merge(final Optional<? extends F> f1, final Optional<? extends F> f2) {
+        if (f1.isEmpty() && f2.isEmpty()) return unknown();
+        if (f1.isEmpty()) return value(this.just(f2.get()));
+        if (f2.isEmpty()) return value(this.just(f1.get()));
+        return this.merge(f1.get(), f2.get());
+    }
+
+    T just(F from);
+
     interface Result<T> {
 
         @Nonnull
         Optional<T> value();
 
-        default boolean unknown() {
+        default boolean isUnknown() {
             return this.value().isEmpty();
         }
 
-        default boolean impossible() {
+        default boolean isImpossible() {
             return false;
         }
 
@@ -41,7 +50,7 @@ public interface Merger<F, T> {
             }
 
             @Override
-            public boolean impossible() {
+            public boolean isImpossible() {
                 return true;
             }
         };
