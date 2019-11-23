@@ -31,7 +31,8 @@ public class GenericRecordPerson extends AbstractPerson {
     @Nonnull
     @Override
     public PersonProto.Person.Builder toProtoBuilder() {
-        return super.toProtoBuilder().setNotes(MoreObjects.firstNonNull(notes, ""));
+        return super.toProtoBuilder()
+                .setNotes(MoreObjects.firstNonNull(notes, ""));
     }
 
 }

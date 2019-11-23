@@ -12,6 +12,7 @@ abstract class AbstractEventMerger<E extends Event> implements EventMerger<E> {
     @Nonnull
     @Override
     public Result<E> merge(final E e1, final E e2) {
+        //TODO check place merge
         return e1.date().intersection(e2.date())
                 .map(date -> Merger.value(this.merge(e1.personId(), date)))
                 .orElseGet(Merger::impossible);
