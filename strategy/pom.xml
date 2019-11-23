@@ -17,6 +17,7 @@
         <module>event-strategy</module>
         <module>core-strategy</module>
         <module>person-strategy</module>
+        <module>place-strategy</module>
     </modules>
 
     <dependencies>
@@ -37,6 +38,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>event-strategy</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.ramify</groupId>
+                <artifactId>place-strategy</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

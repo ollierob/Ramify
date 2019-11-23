@@ -4,10 +4,17 @@ import net.ramify.model.date.DateRange;
 import net.ramify.model.event.Event;
 import net.ramify.model.person.PersonId;
 import net.ramify.strategy.merge.Merger;
+import net.ramify.strategy.place.merge.PlaceMerger;
 
 import javax.annotation.Nonnull;
 
 abstract class AbstractEventMerger<E extends Event> implements EventMerger<E> {
+
+    private final PlaceMerger placeMerger;
+
+    AbstractEventMerger(final PlaceMerger placeMerger) {
+        this.placeMerger = placeMerger;
+    }
 
     @Nonnull
     @Override
