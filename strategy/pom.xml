@@ -16,6 +16,7 @@
     <modules>
         <module>event-strategy</module>
         <module>core-strategy</module>
+        <module>person-strategy</module>
     </modules>
 
     <dependencies>
@@ -25,5 +26,20 @@
             <version>${project.version}</version>
         </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>core-strategy</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>event-strategy</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

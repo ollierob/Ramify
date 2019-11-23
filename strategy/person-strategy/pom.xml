@@ -6,20 +6,15 @@
         <artifactId>strategy</artifactId>
         <groupId>net.ramify</groupId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>event-strategy</artifactId>
+    <artifactId>person-strategy</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>core-strategy</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>events</artifactId>
+            <artifactId>event-strategy</artifactId>
         </dependency>
     </dependencies>
 
