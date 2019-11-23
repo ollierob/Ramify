@@ -11,6 +11,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>strategy</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>event-strategy</module>
+        <module>core-strategy</module>
+    </modules>
 
     <dependencies>
         <dependency>
