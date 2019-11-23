@@ -10,7 +10,7 @@ import {PlaceSearch} from "./PlaceSearch";
 type Props = PlaceFavouritesHandler;
 
 type State = {
-    activeTab?: "recent" | "favourites" | "search";
+    activeTab?: "recent" | "favourites" | "search" | "directory";
     favourites: AsyncData<PlaceList>
 }
 
@@ -19,6 +19,7 @@ export class PlaceMenu extends React.PureComponent<Props, State> {
     private readonly setRecent = () => this.setState({activeTab: "recent"});
     private readonly setFavourites = () => this.setState({activeTab: "favourites"});
     private readonly setSearch = () => this.setState({activeTab: "search"});
+    private readonly setDirectory = () => this.setState({activeTab: "directory"});
 
     constructor(props) {
         super(props);
@@ -36,6 +37,10 @@ export class PlaceMenu extends React.PureComponent<Props, State> {
 
                 <Tabs.TabPane key="search" tab={<TabTitle title="Search" onMouseover={this.setSearch}/>}>
                     <PlaceSearch/>
+                </Tabs.TabPane>
+
+                <Tabs.TabPane key="directory" tab={<TabTitle title="Directory" onMouseover={this.setDirectory}/>}>
+
                 </Tabs.TabPane>
 
                 <Tabs.TabPane key="favourites" tab={<TabTitle title="Favourites" onMouseover={this.setFavourites}/>}>
