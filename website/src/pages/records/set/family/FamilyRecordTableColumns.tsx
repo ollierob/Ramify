@@ -29,7 +29,7 @@ const TypeColumn: FamilyRecordColumn = {
     key: "type",
     title: "Type",
     render: (t, r) => recordTypeName(r.type),
-    width: 100
+    width: 120
 };
 
 const DateColumn: FamilyRecordColumn = {

@@ -34,12 +34,11 @@ function renderPerson(person: Person.AsObject, root: Person.AsObject, relationsh
 }
 
 function renderName(name: Name.AsObject) {
-    return <span className="name">{name}</span>;
+    return name && <span className="name">{name.value}</span>;
 }
 
 function renderBirth(event: Event.AsObject) {
-    if (!event) return null;
-    return <span className="birth">Born <FormattedYearRange date={event.date} words={{in: "in"}}/></span>;
+    return event && <span className="birth">Born <FormattedYearRange date={event.date} words={{in: "in"}}/></span>;
 }
 
 function renderRelationship(person: Person.AsObject, root: Person.AsObject, relationships: ReadonlyArray<Relationship.AsObject>) {
