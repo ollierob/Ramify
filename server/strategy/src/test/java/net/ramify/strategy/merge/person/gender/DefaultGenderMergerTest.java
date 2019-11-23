@@ -38,7 +38,7 @@ class DefaultGenderMergerTest {
 
         {
             final var result = testMerger.merge(Gender.FEMALE, Gender.MALE);
-            assertTrue(result.isImpossible());
+            assertTrue(result.impossibleMerge());
         }
 
     }

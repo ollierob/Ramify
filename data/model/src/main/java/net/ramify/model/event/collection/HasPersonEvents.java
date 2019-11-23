@@ -3,13 +3,12 @@ package net.ramify.model.event.collection;
 import net.ramify.model.event.type.Birth;
 import net.ramify.model.event.type.Death;
 import net.ramify.model.event.type.UniqueEvent;
-import net.ramify.model.person.HasPersonId;
 import net.ramify.utils.collections.IterableUtils;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
 
-public interface HasPersonEvents extends HasEvents, HasPersonId {
+public interface HasPersonEvents extends HasEvents {
 
     @Nonnull
     default <T extends UniqueEvent> Optional<T> find(final Class<T> type) {

@@ -9,6 +9,7 @@ import net.ramify.model.event.type.Death;
 import net.ramify.model.event.type.EventHandler;
 import net.ramify.model.event.type.LifeEvent;
 import net.ramify.model.event.type.PostDeathEvent;
+import net.ramify.model.event.type.UniqueEvent;
 import net.ramify.model.person.HasPersonId;
 import net.ramify.model.place.HasPlace;
 import net.ramify.utils.objects.Castable;
@@ -36,6 +37,10 @@ public interface Event extends HasDate, HasPersonId, Castable<Event>, BuildsProt
 
     default boolean isPostDeath() {
         return this.is(PostDeathEvent.class);
+    }
+
+    default boolean isUnique() {
+        return this.is(UniqueEvent.class);
     }
 
     @Nonnull

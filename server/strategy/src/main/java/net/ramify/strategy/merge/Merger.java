@@ -1,9 +1,11 @@
 package net.ramify.strategy.merge;
 
+import com.google.common.base.Preconditions;
 import net.ramify.utils.objects.OptionalBoolean;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 public interface Merger<F, T> {
 
@@ -24,29 +26,35 @@ public interface Merger<F, T> {
         @Nonnull
         Optional<T> value();
 
+        @Nonnull
         default T require() {
             return this.value().get();
         }
 
-        default boolean isPossible() {
+        default boolean canMerge() {
             return this.value().isPresent();
         }
 
-        default boolean isUnknown() {
-            return this.value().isEmpty() && !this.isImpossible();
+        default boolean unknownMerge() {
+            return this.value().isEmpty() && !this.impossibleMerge();
         }
 
-        default boolean isImpossible() {
+        default boolean impossibleMerge() {
             return false;
         }
 
         default OptionalBoolean isPresent() {
-            if (this.isImpossible()) return OptionalBoolean.empty();
+            if (this.impossibleMerge()) return OptionalBoolean.empty();
             return OptionalBoolean.of(this.value().isPresent());
         }
 
-        default <R> Result<R> notPossible() {
-            return this.isImpossible() ? impossible() : unknown();
+        default <R> Result<R> cannotMerge() {
+            return this.impossibleMerge() ? impossible() : unknown();
+        }
+
+        default void ifPresent(final Consumer<? super T> consumer) {
+            Preconditions.checkState(!this.impossibleMerge());
+            this.value().ifPresent(consumer);
         }
 
         static <T> Result<T> of(@Nonnull final T value) {
@@ -67,7 +75,7 @@ public interface Merger<F, T> {
                 }
 
                 @Override
-                public boolean isImpossible() {
+                public boolean impossibleMerge() {
                     return true;
                 }
 

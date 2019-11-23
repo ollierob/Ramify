@@ -4,6 +4,7 @@ import net.ramify.model.event.Event;
 import net.ramify.model.event.collection.HasPersonEvents;
 
 import javax.annotation.Nonnull;
+import java.util.HashSet;
 import java.util.Set;
 
 public class DefaultEventsMerger implements EventsMerger {
@@ -21,12 +22,20 @@ public class DefaultEventsMerger implements EventsMerger {
     public Result<Set<? extends Event>> merge(final HasPersonEvents e1, final HasPersonEvents e2) {
 
         final var birth = births.merge(e1.findBirth(), e2.findBirth());
-        if (birth.isImpossible()) return Result.impossible();
+        if (birth.impossibleMerge()) return Result.impossible();
 
         final var death = deaths.merge(e1.findDeath(), e2.findDeath());
-        if (death.isImpossible()) return Result.impossible();
+        if (death.impossibleMerge()) return Result.impossible();
 
-        throw new UnsupportedOperationException(); //TODO
+        final var events = new HashSet<Event>();
+        events.addAll(e1.events());
+        events.addAll(e2.events());
+        events.removeIf(Event::isUnique);
+
+        birth.ifPresent(events::add);
+        death.ifPresent(events::add);
+
+        return Result.of(events);
 
     }
 
