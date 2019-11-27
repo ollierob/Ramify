@@ -28,6 +28,12 @@ public class GrandParentChild extends AbstractRelationship implements Cosanguine
 
     @Nonnull
     @Override
+    public String describeFrom() {
+        return "Grand-parent";
+    }
+
+    @Nonnull
+    @Override
     public List<Relationship> inferredRelationships() {
         final PersonId parentId = PersonId.random();
         return Arrays.asList(new ParentChild(this.grandparent(), parentId), new ParentChild(parentId, this.grandchild()));

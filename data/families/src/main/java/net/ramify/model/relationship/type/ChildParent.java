@@ -23,6 +23,12 @@ public class ChildParent extends AbstractRelationship implements DirectRelations
 
     @Nonnull
     @Override
+    public String describeFrom() {
+        return "Child";
+    }
+
+    @Nonnull
+    @Override
     public ParentChild inverse() {
         return new ParentChild(this.parent(), this.child());
     }

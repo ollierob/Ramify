@@ -20,6 +20,12 @@ public interface UnknownRelationship extends DirectRelationship {
 
     @Nonnull
     @Override
+    default String describeFrom() {
+        return "Unknown";
+    }
+
+    @Nonnull
+    @Override
     default List<Relationship> inferredRelationships() {
         return Collections.emptyList();
     }

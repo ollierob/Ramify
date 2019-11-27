@@ -10,8 +10,8 @@ import net.ramify.utils.collections.IterableUtils;
 import net.ramify.utils.collections.ListUtils;
 
 import javax.annotation.Nonnull;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RelationshipPath implements IndirectRelationship {
 
@@ -41,7 +41,7 @@ public class RelationshipPath implements IndirectRelationship {
     @Nonnull
     @Override
     public List<Relationship> inferredRelationships() {
-        return Collections.unmodifiableList(relationships);
+        return relationships.stream().flatMap(r -> r.inferredRelationships().stream()).collect(Collectors.toList());
     }
 
     @Override
@@ -52,6 +52,20 @@ public class RelationshipPath implements IndirectRelationship {
     @Override
     public boolean isDirected() {
         return IterableUtils.all(relationships, Relationship::isDirected);
+    }
+
+    @Nonnull
+    @Override
+    public String describeFrom() {
+        return RelationshipPathDescription.describeFrom(this);
+    }
+
+    int size() {
+        return relationships.size();
+    }
+
+    Relationship get(final int index) {
+        return relationships.get(index);
     }
 
     @Nonnull

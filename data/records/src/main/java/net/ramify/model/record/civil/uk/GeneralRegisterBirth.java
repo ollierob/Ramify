@@ -6,6 +6,7 @@ import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.place.Place;
+import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.GenericRecordEntry;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.civil.AbstractCivilRecord;
@@ -70,8 +71,8 @@ public class GeneralRegisterBirth extends AbstractCivilRecord implements General
 
     @Nonnull
     @Override
-    public Place place() {
-        return this.birthPlace();
+    public PlaceId placeId() {
+        return this.birthPlace().placeId();
     }
 
 }

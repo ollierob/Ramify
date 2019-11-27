@@ -39,6 +39,18 @@ public class InverseRelationship<R extends Relationship> implements Relationship
         return inverse;
     }
 
+    @Nonnull
+    @Override
+    public String describeFrom() {
+        return inverse.describeTo();
+    }
+
+    @Nonnull
+    @Override
+    public String describeTo() {
+        return inverse.describeFrom();
+    }
+
     @Override
     public boolean is(final Class<?> type) {
         return inverse.is(type);

@@ -17,6 +17,14 @@ public interface Relationship extends Castable<Relationship>, BuildsProto<Relati
     @Nonnull
     PersonId toId();
 
+    @Nonnull
+    String describeFrom();
+
+    @Nonnull
+    default String describeTo() {
+        return this.inverse().describeTo();
+    }
+
     default boolean isUnknown() {
         return false;
     }

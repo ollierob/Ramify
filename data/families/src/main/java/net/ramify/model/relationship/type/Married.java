@@ -19,6 +19,12 @@ public class Married extends AbstractRelationship implements DirectRelationship,
 
     @Nonnull
     @Override
+    public String describeFrom() {
+        return "Married";
+    }
+
+    @Nonnull
+    @Override
     public RelationshipProto.Relationship.Builder toProtoBuilder() {
         return super.toProtoBuilder().setType(RelationshipProto.Relationship.Type.SPOUSE);
     }
