@@ -13,7 +13,7 @@ public interface DirectRelationship extends Relationship {
 
     @Nonnull
     default List<Relationship> inferredRelationships() {
-        return Collections.emptyList();
+        return Collections.singletonList(this);
     }
 
     default boolean isAffine() {
