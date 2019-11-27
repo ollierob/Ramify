@@ -1,5 +1,6 @@
 package net.ramify.model.record.civil.uk;
 
+import net.ramify.model.date.DateRange;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.family.Family;
@@ -40,7 +41,7 @@ public class GeneralRegisterDeath extends AbstractCivilRecord implements General
     }
 
     @Nonnull
-    ExactDate deathDate() {
+    DateRange deathDate() {
         return this.date();
     }
 

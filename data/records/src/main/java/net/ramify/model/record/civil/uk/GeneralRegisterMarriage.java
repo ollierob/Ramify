@@ -1,6 +1,6 @@
 package net.ramify.model.record.civil.uk;
 
-import net.ramify.model.date.ExactDate;
+import net.ramify.model.date.DateRange;
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
@@ -19,8 +19,8 @@ import javax.annotation.Nonnull;
 public class GeneralRegisterMarriage extends AbstractCivilRecord implements GeneralRegisterRecord, MarriageRecord {
 
     private final PlaceId marriagePlace;
-    private final GenericRecordEntry groom;
     private final GenericRecordEntry bride;
+    private final GenericRecordEntry groom;
     private final GenericRecordEntry groomFather;
     private final GenericRecordEntry brideFather;
     private final GenericRecordEntry firstWitness;
@@ -29,12 +29,12 @@ public class GeneralRegisterMarriage extends AbstractCivilRecord implements Gene
     public GeneralRegisterMarriage(
             final RecordId id,
             final RecordSet recordSet,
-            final ExactDate date,
+            final DateRange date,
             final PlaceId marriagePlace,
-            final GenericRecordEntry groom,
             final GenericRecordEntry bride,
-            final GenericRecordEntry groomFather,
             final GenericRecordEntry brideFather,
+            final GenericRecordEntry groom,
+            final GenericRecordEntry groomFather,
             final GenericRecordEntry firstWitness,
             final GenericRecordEntry secondWitness) {
         super(id, recordSet, date);

@@ -27,7 +27,7 @@ public class XmlPersonRecord extends XmlRecord {
     @XmlAttribute(name = "notes")
     private String notes;
 
-    @XmlAttribute(name = "id", required = false)
+    @XmlAttribute(name = "id")
     private String id = UUID.randomUUID().toString();
 
     protected PersonId personId() {

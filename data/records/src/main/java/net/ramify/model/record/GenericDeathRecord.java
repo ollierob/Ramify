@@ -7,12 +7,7 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.type.DeathRecord;
 
-import javax.annotation.Nonnull;
-
-public class GenericDeathRecord extends DateRecord implements DeathRecord {
-
-    private final PlaceId deathPlace;
-    private final Family family;
+public class GenericDeathRecord extends DatePlaceFamilyRecord implements DeathRecord {
 
     public GenericDeathRecord(
             final RecordId id,
@@ -20,21 +15,7 @@ public class GenericDeathRecord extends DateRecord implements DeathRecord {
             final DateRange date,
             final PlaceId deathPlace,
             final Family family) {
-        super(id, recordSet, date);
-        this.deathPlace = deathPlace;
-        this.family = family;
-    }
-
-    @Nonnull
-    @Override
-    public Family family() {
-        return family;
-    }
-
-    @Nonnull
-    @Override
-    public PlaceId placeId() {
-        return deathPlace;
+        super(id, recordSet, date, deathPlace, family);
     }
 
     @Override

@@ -30,7 +30,7 @@ public class XmlPersonOnDateWithFamilyRecord extends XmlPersonOnDateRecord {
         return builder.build();
     }
 
-    void addFamily(final Person root, final FamilyBuilder builder, final RecordContext context, final DateRange recordDate) {
+    protected void addFamily(final Person root, final FamilyBuilder builder, final RecordContext context, final DateRange recordDate) {
         if (relationships == null) return;
         relationships.forEach(relationship -> relationship.addRelationship(root, builder, context, recordDate));
     }

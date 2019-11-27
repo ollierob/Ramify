@@ -2,7 +2,6 @@ package net.ramify.model.family;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import com.google.common.graph.Network;
 import com.google.common.graph.NetworkBuilder;
 import net.ramify.data.proto.BuildsProto;
@@ -28,11 +27,6 @@ public interface Family extends HasPeople, HasRelationships, BuildsProto<FamilyP
     Set<? extends Relationship> relationships();
 
     @Nonnull
-    default Set<? extends Relationship> relationships(final PersonId person) {
-        return Sets.filter(this.relationships(), r -> r.has(person));
-    }
-
-    @Nonnull
     Optional<Relationship> between(PersonId from, PersonId to);
 
     default boolean hasDirected() {
@@ -47,7 +41,7 @@ public interface Family extends HasPeople, HasRelationships, BuildsProto<FamilyP
             mapped.put(person.personId(), person);
             network.addNode(person);
         });
-        this.relationships().forEach(r -> network.addEdge(mapped.get(r.fromId()), mapped.get(r.toId()), r)); //TODO also add inverses?
+        this.relationships().forEach(r -> network.addEdge(mapped.get(r.fromId()), mapped.get(r.toId()), r));
         return network;
     }
 

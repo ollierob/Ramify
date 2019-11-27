@@ -39,7 +39,7 @@ public class XmlMarriageRecords extends XmlRecords {
     @Override
     public Collection<? extends Record> build(final RecordSet recordSet, final RecordContext context) {
         if (marriageRecords == null) return Collections.emptyList();
-        final var marriagePlace = context.places().require(new PlaceId(marriagePlaceId));
+        final var marriagePlace = new PlaceId(marriagePlaceId);
         return ListUtils.eagerlyTransform(marriageRecords, record -> record.build(context, recordSet, marriagePlace));
     }
 

@@ -14,6 +14,7 @@ import net.ramify.model.record.type.BirthRecord;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlPersonOnDateWithFamilyRecord;
 import net.ramify.model.record.xml.record.XmlRecord;
+import net.ramify.utils.objects.Functions;
 
 import javax.annotation.CheckForNull;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -31,7 +32,7 @@ public class XmlBirthRecord extends XmlPersonOnDateWithFamilyRecord {
 
     public BirthRecord build(final PlaceId recordCovers, final RecordContext context, final RecordSet recordSet) {
         final var birthDate = this.birthDate.resolve();
-        final var birthPlace = this.birthPlace(context);
+        final var birthPlace = this.birthPlace();
         return new GenericBirthRecord(
                 this.recordId(),
                 recordSet,
@@ -46,8 +47,12 @@ public class XmlBirthRecord extends XmlPersonOnDateWithFamilyRecord {
     }
 
     @CheckForNull
+    PlaceId birthPlace() {
+        return birthPlace == null ? null : new PlaceId(birthPlace);
+    }
+
     Place birthPlace(final RecordContext context) {
-        return birthPlace == null ? null : context.places().require(new PlaceId(birthPlace));
+        return Functions.ifNonNull(this.birthPlace(), id -> context.places().require(id));
     }
 
 }
