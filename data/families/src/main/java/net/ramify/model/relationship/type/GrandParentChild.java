@@ -29,7 +29,13 @@ public class GrandParentChild extends AbstractRelationship implements Cosanguine
     @Nonnull
     @Override
     public String describeFrom() {
-        return "Grand-parent";
+        return "Grandparent";
+    }
+
+    @Nonnull
+    @Override
+    public String describeTo() {
+        return "Grandchild";
     }
 
     @Nonnull

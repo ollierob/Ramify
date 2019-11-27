@@ -1,5 +1,7 @@
 package net.ramify.model.relationship.computed;
 
+import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
 import net.ramify.model.relationship.Relationship;
 import net.ramify.model.relationship.type.AffineRelationship;
 import net.ramify.model.relationship.type.CosanguinealRelationship;
@@ -31,26 +33,33 @@ class RelationshipPathDescription {
 
     private static class RelationshipDescriber implements RelationshipHandler<Relationship> {
 
+        private static final Joiner FLATTEN = Joiner.on('/');
+
         private boolean anyUnknown;
+        private final List<String> descriptions = Lists.newArrayList();
 
         @Override
         public Relationship handle(final AffineRelationship relationship) {
-            throw new UnsupportedOperationException(); //TODO
+            descriptions.add(relationship.describeFrom());
+            return relationship;
         }
 
         @Override
         public Relationship handle(final CosanguinealRelationship relationship) {
-            throw new UnsupportedOperationException(); //TODO
+            descriptions.add(relationship.describeFrom());
+            return relationship;
         }
 
         @Override
         public Relationship handle(final FictiveRelationship relationship) {
-            throw new UnsupportedOperationException(); //TODO
+            descriptions.add(relationship.describeFrom());
+            return relationship;
         }
 
         @Override
         public Relationship handle(final IndirectRelationship relationship) {
-            throw new UnsupportedOperationException(); //TODO
+            relationship.inferredRelationships().forEach(this::handle);
+            return relationship;
         }
 
         @Override
@@ -61,7 +70,7 @@ class RelationshipPathDescription {
 
         String describe() {
             if (anyUnknown) return "Unknown";
-            return "???";
+            return FLATTEN.join(descriptions); //FIXME
         }
 
     }

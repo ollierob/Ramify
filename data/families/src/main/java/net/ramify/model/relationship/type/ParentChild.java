@@ -33,6 +33,12 @@ public class ParentChild extends AbstractRelationship implements DirectRelations
 
     @Nonnull
     @Override
+    public String describeTo() {
+        return this.inverse().describeFrom();
+    }
+
+    @Nonnull
+    @Override
     public RelationshipProto.Relationship.Builder toProtoBuilder() {
         return super.toProtoBuilder().setType(RelationshipProto.Relationship.Type.PARENT_CHILD);
     }

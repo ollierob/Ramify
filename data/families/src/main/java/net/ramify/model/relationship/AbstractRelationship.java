@@ -31,6 +31,10 @@ public abstract class AbstractRelationship implements Relationship {
 
     @Nonnull
     @Override
+    public abstract String describeTo();
+
+    @Nonnull
+    @Override
     public Relationship inverse() {
         return new InverseRelationship<>(this);
     }

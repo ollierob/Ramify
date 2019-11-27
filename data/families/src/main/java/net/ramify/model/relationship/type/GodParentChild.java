@@ -22,4 +22,10 @@ public class GodParentChild extends AbstractRelationship implements FictiveRelat
         return "God-parent";
     }
 
+    @Nonnull
+    @Override
+    public String describeTo() {
+        return "God-child";
+    }
+
 }
