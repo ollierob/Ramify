@@ -7,8 +7,8 @@ import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.region.Chapelry;
 import net.ramify.model.place.xml.place.XmlArea;
 import net.ramify.model.place.xml.place.XmlPlace;
-import net.ramify.model.place.xml.place.settlement.XmlChurch;
-import net.ramify.model.place.xml.place.settlement.XmlSchool;
+import net.ramify.model.place.xml.place.building.XmlChurch;
+import net.ramify.model.place.xml.place.building.XmlSchool;
 import net.ramify.model.place.xml.place.settlement.XmlTown;
 import net.ramify.model.place.xml.place.settlement.XmlVillage;
 

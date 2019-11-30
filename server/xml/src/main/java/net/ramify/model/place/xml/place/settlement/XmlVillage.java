@@ -8,6 +8,12 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.settlement.Village;
 import net.ramify.model.place.xml.place.XmlPlace;
+import net.ramify.model.place.xml.place.building.XmlChurch;
+import net.ramify.model.place.xml.place.building.XmlGraveyard;
+import net.ramify.model.place.xml.place.building.XmlInn;
+import net.ramify.model.place.xml.place.building.XmlMill;
+import net.ramify.model.place.xml.place.building.XmlSchool;
+import net.ramify.model.place.xml.place.building.XmlStreet;
 
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
@@ -17,7 +23,7 @@ import java.util.Collections;
 import java.util.List;
 
 @XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "village")
-public class XmlVillage extends XmlPlace {
+public class XmlVillage extends XmlSettlement {
 
     @XmlElementRefs({
             @XmlElementRef(type = XmlStreet.class),

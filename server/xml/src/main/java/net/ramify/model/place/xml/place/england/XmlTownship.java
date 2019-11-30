@@ -8,12 +8,12 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.Township;
 import net.ramify.model.place.xml.place.XmlPlace;
-import net.ramify.model.place.xml.place.settlement.XmlChurch;
-import net.ramify.model.place.xml.place.settlement.XmlFarmstead;
+import net.ramify.model.place.xml.place.building.XmlChurch;
+import net.ramify.model.place.xml.place.building.XmlFarmstead;
 import net.ramify.model.place.xml.place.settlement.XmlHamlet;
-import net.ramify.model.place.xml.place.settlement.XmlInn;
-import net.ramify.model.place.xml.place.settlement.XmlMill;
-import net.ramify.model.place.xml.place.settlement.XmlSchool;
+import net.ramify.model.place.xml.place.building.XmlInn;
+import net.ramify.model.place.xml.place.building.XmlMill;
+import net.ramify.model.place.xml.place.building.XmlSchool;
 import net.ramify.model.place.xml.place.settlement.XmlVillage;
 
 import javax.xml.bind.annotation.XmlElementRef;

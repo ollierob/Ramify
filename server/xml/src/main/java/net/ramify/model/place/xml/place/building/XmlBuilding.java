@@ -1,4 +1,4 @@
-package net.ramify.model.place.xml.place.settlement;
+package net.ramify.model.place.xml.place.building;
 
 import net.ramify.model.ParserContext;
 import net.ramify.model.date.DateRange;
