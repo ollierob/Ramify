@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/dates" xmlns:ns2="http://ramify.net/people" xmlns:tns="http://ramify.net/events" targetNamespace="http://ramify.net/events" version="1.0">
+    
+  <xs:import namespace="http://ramify.net/dates" schemaLocation="dates.xsd"/>
+    
+  <xs:import namespace="http://ramify.net/people" schemaLocation="people.xsd"/>
+    
+  <xs:element name="birth" type="tns:xmlBirthEvent"/>
+    
+  <xs:element name="death" type="tns:xmlDeathEvent"/>
+    
+  <xs:element name="event" type="tns:xmlEvent"/>
+    
+  <xs:element name="residence" type="tns:xmlResidenceEvent"/>
+    
+  <xs:complexType name="xmlBirthEvent">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlEvent">
+                
+        <xs:sequence/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType abstract="true" name="xmlEvent">
+        
+    <xs:sequence>
+            
+      <xs:choice minOccurs="0">
+                
+        <xs:element ref="ns1:inYear"/>
+                
+        <xs:element ref="ns1:onDate"/>
+              
+      </xs:choice>
+          
+    </xs:sequence>
+        
+    <xs:attribute name="placeId" type="xs:string"/>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlDeathEvent">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlEvent">
+                
+        <xs:sequence>
+                    
+          <xs:choice minOccurs="0">
+                        
+            <xs:element ref="ns2:exactAge"/>
+                        
+            <xs:element ref="ns2:approximateAge"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+                
+        <xs:attribute name="age" type="xs:int"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlResidenceEvent">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlEvent">
+                
+        <xs:sequence/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+  
+</xs:schema>

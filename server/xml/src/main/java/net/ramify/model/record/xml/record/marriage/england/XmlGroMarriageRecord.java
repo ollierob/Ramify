@@ -7,9 +7,9 @@ import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlRecord;
 import net.ramify.model.record.xml.record.marriage.XmlMarriageRecord;
 
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlType(namespace = XmlRecord.NAMESPACE, name = "groMarriage")
+@XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "groMarriage")
 public class XmlGroMarriageRecord extends XmlMarriageRecord {
 
     @Override

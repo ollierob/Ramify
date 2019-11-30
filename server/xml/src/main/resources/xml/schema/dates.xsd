@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ramify.net/dates" targetNamespace="http://ramify.net/dates" version="1.0">
+
+  <xs:element name="betweenYears" type="tns:xmlBetweenYears"/>
+
+  <xs:element name="birthDate" type="tns:xmlExactDate"/>
+
+  <xs:element name="builtBeforeYear" type="tns:xmlBeforeYear"/>
+
+  <xs:element name="builtBetwweenYears" type="tns:xmlBetweenYears"/>
+
+  <xs:element name="builtInYear" type="tns:xmlInYear"/>
+
+  <xs:element name="closedBeforeYear" type="tns:xmlBeforeYear"/>
+
+  <xs:element name="closedBetwweenYears" type="tns:xmlBetweenYears"/>
+
+  <xs:element name="closedInYear" type="tns:xmlInYear"/>
+
+  <xs:element name="date" type="tns:xmlExactDate"/>
+
+  <xs:element name="deathDate" type="tns:xmlExactDate"/>
+
+  <xs:element name="inYear" type="tns:xmlInYear"/>
+
+  <xs:element name="onDate" type="tns:xmlExactDate"/>
+
+  <xs:element name="xmlBeforeDate" type="tns:xmlBeforeDate"/>
+
+  <xs:element name="xmlBeforeYear" type="tns:xmlBeforeYear"/>
+
+  <xs:element name="xmlBetweenYears" type="tns:xmlBetweenYears"/>
+
+  <xs:element name="xmlExactDate" type="tns:xmlExactDate"/>
+
+  <xs:element name="xmlInYear" type="tns:xmlInYear"/>
+
+  <xs:complexType name="xmlBeforeDate">
+
+    <xs:complexContent>
+
+      <xs:extension base="tns:xmlDateRange">
+
+        <xs:sequence/>
+
+        <xs:attribute name="date" type="xs:string" use="required"/>
+
+      </xs:extension>
+
+    </xs:complexContent>
+
+  </xs:complexType>
+
+  <xs:complexType abstract="true" name="xmlDateRange">
+
+    <xs:sequence/>
+
+  </xs:complexType>
+
+  <xs:complexType name="xmlInYear">
+
+    <xs:complexContent>
+
+      <xs:extension base="tns:xmlDateRange">
+
+        <xs:sequence/>
+
+        <xs:attribute name="year" type="xs:int" use="required"/>
+
+      </xs:extension>
+
+    </xs:complexContent>
+
+  </xs:complexType>
+
+  <xs:complexType name="xmlExactDate">
+
+    <xs:complexContent>
+
+      <xs:extension base="tns:xmlDateRange">
+
+        <xs:sequence/>
+
+        <xs:attribute name="year" type="xs:int" use="required"/>
+
+        <xs:attribute name="month" type="xs:int" use="required"/>
+
+        <xs:attribute name="dayOfMonth" type="xs:int" use="required"/>
+
+      </xs:extension>
+
+    </xs:complexContent>
+
+  </xs:complexType>
+
+  <xs:complexType name="xmlBeforeYear">
+
+    <xs:complexContent>
+
+      <xs:extension base="tns:xmlDateRange">
+
+        <xs:sequence/>
+
+        <xs:attribute name="year" type="xs:int" use="required"/>
+
+      </xs:extension>
+
+    </xs:complexContent>
+
+  </xs:complexType>
+
+  <xs:complexType name="xmlBetweenYears">
+
+    <xs:complexContent>
+
+      <xs:extension base="tns:xmlDateRange">
+
+        <xs:sequence/>
+
+        <xs:attribute name="start" type="xs:int" use="required"/>
+
+        <xs:attribute name="end" type="xs:int" use="required"/>
+
+      </xs:extension>
+
+    </xs:complexContent>
+
+  </xs:complexType>
+
+</xs:schema>
