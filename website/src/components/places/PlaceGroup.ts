@@ -5,6 +5,7 @@ export type PlaceGroupId = string;
 export type ResolvedPlaceGroup = {
     group: PlaceGroup.AsObject
     children: ReadonlyArray<PlaceBundle.AsObject>
+    iso?: string
 }
 
 export function synthesizePlaceGroup(place: PlaceBundle.AsObject): ResolvedPlaceGroup {
@@ -12,6 +13,7 @@ export function synthesizePlaceGroup(place: PlaceBundle.AsObject): ResolvedPlace
     const id = place.place.id;
     return {
         group: {id: id, name: place.place.name, defaultchildid: id, otherchildidList: []},
-        children: [place]
+        children: [place],
+        iso: place.place.iso
     };
 }

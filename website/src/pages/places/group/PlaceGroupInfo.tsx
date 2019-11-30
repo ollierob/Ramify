@@ -10,6 +10,7 @@ import {PlaceFavouritesHandler} from "../../../components/places/PlaceFavourites
 import {PlaceBreadcrumb} from "../info/PlaceBreadcrumb";
 import {earliestYear, latestYear} from "../../../components/date/DateRange";
 import {PlaceGroupTab} from "./PlaceGroupTab";
+import {Flag} from "../../../components/images/Flag";
 
 type Props = {
     group: AsyncData<ResolvedPlaceGroup>
@@ -25,7 +26,7 @@ export const PlaceGroupInfo = (props: Props) => {
 
     return <Card
         className="placeGroup"
-        title={<b>{resolved.group.name}</b>}>
+        title={<><Flag iso={resolved.iso}/><b>{resolved.group.name}</b></>}>
 
         <Tabs
             size="large"
