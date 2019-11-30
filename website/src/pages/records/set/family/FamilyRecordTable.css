@@ -2,3 +2,8 @@
     margin-left: 4px;
     color: #AAAAAA !important;
 }
+
+.records .ant-table .family .relationship {
+    margin-left: .5em;
+    font-style: italic;
+}

@@ -21,10 +21,10 @@ export function renderFamilyRecord(record: FamilyRecord) {
 
 function renderFamily(family: Family.AsObject) {
     if (!family || !family.personList || !family.personList.length) return null;
-    const list = [...family.personList].sort(sortPeopleByBirthDate);
+    const list = [...family.personList].filter(p => p.name && !p.name.unknown).sort(sortPeopleByBirthDate);
     return <List
-        dataSource={list.filter(p => !p.name.unknown)}
-        renderItem={person => <List.Item key={person.id}>{renderPerson(person, list[0], family.relationshipList)}</List.Item>}/>;
+        dataSource={list}
+        renderItem={person => <List.Item key={person.id}>{renderPerson(person, family.personList[0], family.relationshipList)}</List.Item>}/>;
 }
 
 function renderPerson(person: Person.AsObject, root: Person.AsObject, relationships: ReadonlyArray<Relationship.AsObject>) {
