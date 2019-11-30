@@ -597,6 +597,38 @@
       
   </xs:complexType>
     
+  <xs:complexType name="xmlVillage">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlSettlement">
+                
+        <xs:sequence>
+                    
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        
+            <xs:element ref="tns:street"/>
+                        
+            <xs:element ref="tns:church"/>
+                        
+            <xs:element ref="tns:mill"/>
+                        
+            <xs:element ref="tns:school"/>
+                        
+            <xs:element ref="tns:inn"/>
+                        
+            <xs:element ref="tns:graveyard"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
   <xs:complexType abstract="true" name="xmlEnglishPlace">
         
     <xs:complexContent>
@@ -780,38 +812,6 @@
             <xs:element ref="tns:mill"/>
                         
             <xs:element ref="tns:inn"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlVillage">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:choice maxOccurs="unbounded" minOccurs="0">
-                        
-            <xs:element ref="tns:street"/>
-                        
-            <xs:element ref="tns:church"/>
-                        
-            <xs:element ref="tns:mill"/>
-                        
-            <xs:element ref="tns:school"/>
-                        
-            <xs:element ref="tns:inn"/>
-                        
-            <xs:element ref="tns:graveyard"/>
                       
           </xs:choice>
                   
@@ -1091,6 +1091,8 @@
                 
         <xs:element ref="tns:town"/>
                 
+        <xs:element ref="tns:village"/>
+                
         <xs:element ref="tns:country"/>
                 
         <xs:element ref="tns:county"/>
@@ -1102,8 +1104,6 @@
         <xs:element ref="tns:chapelry"/>
                 
         <xs:element ref="tns:township"/>
-                
-        <xs:element ref="tns:village"/>
                 
         <xs:element ref="tns:hamlet"/>
                 
