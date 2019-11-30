@@ -44,11 +44,16 @@ enum PlaceType {
 
     STATE = 10;
     COUNTY = 11;
+    REGION = 12;
 
-    RAPE = 20;
+    RIDING = 20;
+    RAPE = 21;
+    LATHE = 22;
+    DEPARTMENT = 23;
 
     HUNDRED = 30;
     WAPENTAKE = 31;
+    PROVINCE = 32;
 
     PARISH = 40;
     BOROUGH = 41;
