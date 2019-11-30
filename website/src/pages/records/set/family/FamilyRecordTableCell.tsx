@@ -9,6 +9,7 @@ import {Family} from "../../../../protobuf/generated/family_pb";
 import {Relationship} from "../../../../protobuf/generated/relationship_pb";
 import {findRelationship, relationshipName} from "../../../../components/relationship/Relationship";
 import {Name} from "../../../../protobuf/generated/name_pb";
+import {sortPeopleByBirthDate} from "../../../../components/people/Person";
 
 export function renderFamilyRecord(record: FamilyRecord) {
     if (!record) return null;
@@ -20,9 +21,10 @@ export function renderFamilyRecord(record: FamilyRecord) {
 
 function renderFamily(family: Family.AsObject) {
     if (!family || !family.personList || !family.personList.length) return null;
+    const list = [...family.personList].sort(sortPeopleByBirthDate);
     return <List
-        dataSource={family.personList.filter(p => !p.name.unknown)}
-        renderItem={person => <List.Item>{renderPerson(person, family.personList[0], family.relationshipList)}</List.Item>}/>;
+        dataSource={list.filter(p => !p.name.unknown)}
+        renderItem={person => <List.Item key={person.id}>{renderPerson(person, list[0], family.relationshipList)}</List.Item>}/>;
 }
 
 function renderPerson(person: Person.AsObject, root: Person.AsObject, relationships: ReadonlyArray<Relationship.AsObject>) {
