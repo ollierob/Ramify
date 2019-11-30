@@ -1,4 +1,4 @@
-package net.ramify.model.place.xml.place.england;
+package net.ramify.model.place.xml.place.uk;
 
 import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
@@ -16,7 +16,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-@XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "country")
+@XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "country")
 class XmlCountry extends XmlPlace {
 
     @XmlAttribute(name = "iso", required = true)

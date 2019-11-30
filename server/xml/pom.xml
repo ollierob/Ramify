@@ -83,16 +83,20 @@
                                     <toFile>people.xsd</toFile>
                                 </transformSchema>
                                 <transformSchema>
-                                    <uri>http://ramify.net/places</uri>
-                                    <toFile>places.xsd</toFile>
-                                </transformSchema>
-                                <transformSchema>
                                     <uri>http://ramify.net/records</uri>
                                     <toFile>records.xsd</toFile>
                                 </transformSchema>
                                 <transformSchema>
                                     <uri>http://ramify.net/events</uri>
                                     <toFile>events.xsd</toFile>
+                                </transformSchema>
+                                <transformSchema>
+                                    <uri>http://ramify.net/places</uri>
+                                    <toFile>places.xsd</toFile>
+                                </transformSchema>
+                                <transformSchema>
+                                    <uri>http://ramify.net/places/uk</uri>
+                                    <toFile>places_uk.xsd</toFile>
                                 </transformSchema>
                             </transformSchemas>
                             <schemaSourceExcludeFilters>

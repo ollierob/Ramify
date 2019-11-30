@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/dates" xmlns:tns="http://ramify.net/places" targetNamespace="http://ramify.net/places" version="1.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/dates" xmlns:ns2="http://ramify.net/places/uk" xmlns:tns="http://ramify.net/places" targetNamespace="http://ramify.net/places" version="1.0">
     
   <xs:import namespace="http://ramify.net/dates" schemaLocation="dates.xsd"/>
+    
+  <xs:import namespace="http://ramify.net/places/uk" schemaLocation="places_uk.xsd"/>
     
   <xs:element name="archive" type="tns:xmlArchive"/>
     
   <xs:element name="archives" type="tns:archives"/>
-    
-  <xs:element name="chapelry" type="tns:xmlChapelry"/>
     
   <xs:element name="church" type="tns:xmlChurch"/>
     
@@ -19,35 +19,19 @@
     
   <xs:element name="city" type="tns:xmlCity"/>
     
-  <xs:element name="civilParish" type="tns:xmlCivilParish"/>
-    
-  <xs:element name="country" type="tns:xmlCountry"/>
-    
-  <xs:element name="county" type="tns:xmlCounty"/>
-    
   <xs:element name="farmstead" type="tns:xmlFarmstead"/>
-    
-  <xs:element name="graveship" type="tns:xmlGraveship"/>
     
   <xs:element name="graveyard" type="tns:xmlGraveyard"/>
     
   <xs:element name="hamlet" type="tns:xmlHamlet"/>
     
-  <xs:element name="hundred" type="tns:xmlHundred"/>
-    
   <xs:element name="inn" type="tns:xmlInn"/>
-    
-  <xs:element name="manor" type="tns:xmlManor"/>
-    
-  <xs:element name="metropolitanBorough" type="tns:xmlMetropolitanBorough"/>
     
   <xs:element name="mill" type="tns:xmlMill"/>
     
   <xs:element name="monastery" type="tns:xmlMonastery"/>
     
   <xs:element name="nationalArchivesLink" type="tns:xmlNationalArchivesLink"/>
-    
-  <xs:element name="parish" type="tns:xmlParish"/>
     
   <xs:element name="placeDescription" type="tns:xmlPlaceDescription"/>
     
@@ -63,10 +47,6 @@
     
   <xs:element name="places" type="tns:places"/>
     
-  <xs:element name="rape" type="tns:xmlRape"/>
-    
-  <xs:element name="ruralDistrict" type="tns:xmlRuralDistrict"/>
-    
   <xs:element name="school" type="tns:xmlSchool"/>
     
   <xs:element name="street" type="tns:xmlStreet"/>
@@ -75,13 +55,7 @@
     
   <xs:element name="town" type="tns:xmlTown"/>
     
-  <xs:element name="township" type="tns:xmlTownship"/>
-    
-  <xs:element name="urbanDistrict" type="tns:xmlUrbanDistrict"/>
-    
   <xs:element name="village" type="tns:xmlVillage"/>
-    
-  <xs:element name="wapentake" type="tns:xmlWapentake"/>
     
   <xs:element name="websiteLink" type="tns:xmlWebsiteLink"/>
     
@@ -629,200 +603,6 @@
       
   </xs:complexType>
     
-  <xs:complexType abstract="true" name="xmlEnglishPlace">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence/>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlCountry">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:county"/>
-                  
-        </xs:sequence>
-                
-        <xs:attribute name="iso" type="xs:string" use="required"/>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlCounty">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlEnglishPlace">
-                
-        <xs:sequence>
-                    
-          <xs:choice maxOccurs="unbounded" minOccurs="0">
-                        
-            <xs:element ref="tns:wapentake"/>
-                        
-            <xs:element ref="tns:parish"/>
-                        
-            <xs:element ref="tns:manor"/>
-                        
-            <xs:element ref="tns:hundred"/>
-                        
-            <xs:element ref="tns:rape"/>
-                        
-            <xs:element ref="tns:metropolitanBorough"/>
-                        
-            <xs:element ref="tns:urbanDistrict"/>
-                        
-            <xs:element ref="tns:ruralDistrict"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-                
-        <xs:attribute name="iso" type="xs:string"/>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlWapentake">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:choice maxOccurs="unbounded" minOccurs="0">
-                        
-            <xs:element ref="tns:parish"/>
-                        
-            <xs:element ref="tns:manor"/>
-                        
-            <xs:element ref="tns:city"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlParish">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlEnglishPlace">
-                
-        <xs:sequence>
-                    
-          <xs:choice maxOccurs="unbounded" minOccurs="0">
-                        
-            <xs:element ref="tns:parish"/>
-                        
-            <xs:element ref="tns:chapelry"/>
-                        
-            <xs:element ref="tns:township"/>
-                        
-            <xs:element ref="tns:city"/>
-                        
-            <xs:element ref="tns:town"/>
-                        
-            <xs:element ref="tns:village"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlChapelry">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:choice maxOccurs="unbounded" minOccurs="0">
-                        
-            <xs:element ref="tns:township"/>
-                        
-            <xs:element ref="tns:town"/>
-                        
-            <xs:element ref="tns:village"/>
-                        
-            <xs:element ref="tns:church"/>
-                        
-            <xs:element ref="tns:school"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlTownship">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:choice maxOccurs="unbounded" minOccurs="0">
-                        
-            <xs:element ref="tns:village"/>
-                        
-            <xs:element ref="tns:hamlet"/>
-                        
-            <xs:element ref="tns:church"/>
-                        
-            <xs:element ref="tns:school"/>
-                        
-            <xs:element ref="tns:farmstead"/>
-                        
-            <xs:element ref="tns:mill"/>
-                        
-            <xs:element ref="tns:inn"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
   <xs:complexType name="xmlHamlet">
         
     <xs:complexContent>
@@ -881,192 +661,6 @@
       
   </xs:complexType>
     
-  <xs:complexType name="xmlManor">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:choice maxOccurs="unbounded" minOccurs="0">
-                        
-            <xs:element ref="tns:manor"/>
-                        
-            <xs:element ref="tns:graveship"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlGraveship">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:manor"/>
-                  
-        </xs:sequence>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlHundred">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:choice maxOccurs="unbounded" minOccurs="0">
-                        
-            <xs:element ref="tns:parish"/>
-                        
-            <xs:element ref="tns:manor"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlRape">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:choice maxOccurs="unbounded" minOccurs="0">
-                        
-            <xs:element ref="tns:parish"/>
-                        
-            <xs:element ref="tns:manor"/>
-                        
-            <xs:element ref="tns:city"/>
-                        
-            <xs:element ref="tns:town"/>
-                        
-            <xs:element ref="tns:hundred"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlMetropolitanBorough">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:choice maxOccurs="unbounded" minOccurs="0">
-                        
-            <xs:element ref="tns:civilParish"/>
-                        
-            <xs:element ref="tns:city"/>
-                        
-            <xs:element ref="tns:town"/>
-                        
-            <xs:element ref="tns:village"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-                
-        <xs:attribute name="iso" type="xs:string"/>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlCivilParish">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:choice maxOccurs="unbounded" minOccurs="0">
-                        
-            <xs:element ref="tns:town"/>
-                        
-            <xs:element ref="tns:village"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlUrbanDistrict">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:civilParish"/>
-                  
-        </xs:sequence>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlRuralDistrict">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:civilParish"/>
-                  
-        </xs:sequence>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
   <xs:complexType name="places">
         
     <xs:sequence>
@@ -1093,37 +687,37 @@
                 
         <xs:element ref="tns:village"/>
                 
-        <xs:element ref="tns:country"/>
+        <xs:element ref="ns2:country"/>
                 
-        <xs:element ref="tns:county"/>
+        <xs:element ref="ns2:county"/>
                 
-        <xs:element ref="tns:wapentake"/>
+        <xs:element ref="ns2:wapentake"/>
                 
-        <xs:element ref="tns:parish"/>
+        <xs:element ref="ns2:parish"/>
                 
-        <xs:element ref="tns:chapelry"/>
+        <xs:element ref="ns2:chapelry"/>
                 
-        <xs:element ref="tns:township"/>
+        <xs:element ref="ns2:township"/>
                 
         <xs:element ref="tns:hamlet"/>
                 
         <xs:element ref="tns:farmstead"/>
                 
-        <xs:element ref="tns:manor"/>
+        <xs:element ref="ns2:manor"/>
                 
-        <xs:element ref="tns:graveship"/>
+        <xs:element ref="ns2:graveship"/>
                 
-        <xs:element ref="tns:hundred"/>
+        <xs:element ref="ns2:hundred"/>
                 
-        <xs:element ref="tns:rape"/>
+        <xs:element ref="ns2:rape"/>
                 
-        <xs:element ref="tns:metropolitanBorough"/>
+        <xs:element ref="ns2:metropolitanBorough"/>
                 
-        <xs:element ref="tns:civilParish"/>
+        <xs:element ref="ns2:civilParish"/>
                 
-        <xs:element ref="tns:urbanDistrict"/>
+        <xs:element ref="ns2:urbanDistrict"/>
                 
-        <xs:element ref="tns:ruralDistrict"/>
+        <xs:element ref="ns2:ruralDistrict"/>
               
       </xs:choice>
           

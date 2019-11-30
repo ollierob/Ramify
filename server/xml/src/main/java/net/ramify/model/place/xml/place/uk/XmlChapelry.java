@@ -1,4 +1,4 @@
-package net.ramify.model.place.xml.place.england;
+package net.ramify.model.place.xml.place.uk;
 
 import com.google.common.base.MoreObjects;
 import net.ramify.model.ParserContext;
@@ -19,7 +19,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-@XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "chapelry")
+@XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "chapelry")
 public class XmlChapelry extends XmlArea<Chapelry> {
 
     @XmlElementRefs({

@@ -1,4 +1,4 @@
-package net.ramify.model.place.xml.place.england.district;
+package net.ramify.model.place.xml.place.uk.district;
 
 import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
@@ -9,6 +9,7 @@ import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.settlement.XmlCity;
 import net.ramify.model.place.xml.place.settlement.XmlTown;
 import net.ramify.model.place.xml.place.settlement.XmlVillage;
+import net.ramify.model.place.xml.place.uk.XmlUkPlace;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
@@ -17,7 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.List;
 
-@XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "metropolitanBorough")
+@XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "metropolitanBorough")
 public class XmlMetropolitanBorough extends XmlArea<MetropolitanBorough> {
 
     @XmlElementRefs({

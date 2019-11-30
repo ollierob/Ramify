@@ -17,7 +17,7 @@ import net.ramify.model.place.PlaceHistory;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.provider.PlaceGroupProvider;
 import net.ramify.model.place.provider.PlaceProvider;
-import net.ramify.model.place.xml.place.england.XmlEnglishPlace;
+import net.ramify.model.place.xml.place.uk.XmlUkPlace;
 import net.ramify.model.place.xml.place.settlement.XmlSettlement;
 import net.ramify.utils.objects.Functions;
 
@@ -31,7 +31,7 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.function.Consumer;
 
-@XmlSeeAlso({XmlSettlement.class, XmlEnglishPlace.class})
+@XmlSeeAlso({XmlSettlement.class, XmlUkPlace.class})
 public abstract class XmlPlace implements HasPlaceId {
 
     public static final String NAMESPACE = "http://ramify.net/places";
