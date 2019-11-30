@@ -69,8 +69,6 @@
     
   <xs:element name="school" type="tns:xmlSchool"/>
     
-  <xs:element name="state" type="tns:xmlState"/>
-    
   <xs:element name="street" type="tns:xmlStreet"/>
     
   <xs:element name="textLink" type="tns:xmlTextLink"/>
@@ -319,7 +317,21 @@
       
   </xs:complexType>
     
-  <xs:complexType name="xmlCountry">
+  <xs:complexType abstract="true" name="xmlSettlement">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPlace">
+                
+        <xs:sequence/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlCity">
         
     <xs:complexContent>
             
@@ -329,13 +341,285 @@
                     
           <xs:choice maxOccurs="unbounded" minOccurs="0">
                         
-            <xs:element ref="tns:country"/>
+            <xs:element ref="tns:street"/>
                         
-            <xs:element ref="tns:county"/>
+            <xs:element ref="tns:church"/>
                         
-            <xs:element ref="tns:state"/>
+            <xs:element ref="tns:monastery"/>
+                        
+            <xs:element ref="tns:mill"/>
+                        
+            <xs:element ref="tns:school"/>
+                        
+            <xs:element ref="tns:inn"/>
+                        
+            <xs:element ref="tns:graveyard"/>
                       
           </xs:choice>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlStreet">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPlace">
+                
+        <xs:sequence>
+                    
+          <xs:choice minOccurs="0">
+                        
+            <xs:element ref="ns1:builtInYear"/>
+                        
+            <xs:element ref="ns1:builtBetwweenYears"/>
+                        
+            <xs:element ref="ns1:builtBeforeYear"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+                
+        <xs:attribute name="demolished" type="xs:boolean"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlChurch">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPlace">
+                
+        <xs:sequence>
+                    
+          <xs:choice minOccurs="0">
+                        
+            <xs:element ref="ns1:builtInYear"/>
+                        
+            <xs:element ref="ns1:builtBetwweenYears"/>
+                        
+            <xs:element ref="ns1:builtBeforeYear"/>
+                      
+          </xs:choice>
+                    
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:graveyard"/>
+                  
+        </xs:sequence>
+                
+        <xs:attribute name="demolished" type="xs:boolean"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlGraveyard">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPlace">
+                
+        <xs:sequence>
+                    
+          <xs:choice minOccurs="0">
+                        
+            <xs:element ref="ns1:builtInYear"/>
+                        
+            <xs:element ref="ns1:builtBetwweenYears"/>
+                        
+            <xs:element ref="ns1:builtBeforeYear"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+                
+        <xs:attribute name="demolished" type="xs:boolean"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlMonastery">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPlace">
+                
+        <xs:sequence>
+                    
+          <xs:choice minOccurs="0">
+                        
+            <xs:element ref="ns1:builtInYear"/>
+                        
+            <xs:element ref="ns1:builtBetwweenYears"/>
+                        
+            <xs:element ref="ns1:builtBeforeYear"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+                
+        <xs:attribute name="demolished" type="xs:boolean"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlMill">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPlace">
+                
+        <xs:sequence>
+                    
+          <xs:choice minOccurs="0">
+                        
+            <xs:element ref="ns1:builtInYear"/>
+                        
+            <xs:element ref="ns1:builtBetwweenYears"/>
+                        
+            <xs:element ref="ns1:builtBeforeYear"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+                
+        <xs:attribute name="demolished" type="xs:boolean"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlSchool">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPlace">
+                
+        <xs:sequence>
+                    
+          <xs:choice minOccurs="0">
+                        
+            <xs:element ref="ns1:builtInYear"/>
+                        
+            <xs:element ref="ns1:builtBetwweenYears"/>
+                        
+            <xs:element ref="ns1:builtBeforeYear"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+                
+        <xs:attribute name="demolished" type="xs:boolean"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlInn">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPlace">
+                
+        <xs:sequence>
+                    
+          <xs:choice minOccurs="0">
+                        
+            <xs:element ref="ns1:builtInYear"/>
+                        
+            <xs:element ref="ns1:builtBetwweenYears"/>
+                        
+            <xs:element ref="ns1:builtBeforeYear"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+                
+        <xs:attribute name="demolished" type="xs:boolean"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlTown">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlSettlement">
+                
+        <xs:sequence>
+                    
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        
+            <xs:element ref="tns:street"/>
+                        
+            <xs:element ref="tns:church"/>
+                        
+            <xs:element ref="tns:monastery"/>
+                        
+            <xs:element ref="tns:mill"/>
+                        
+            <xs:element ref="tns:school"/>
+                        
+            <xs:element ref="tns:inn"/>
+                        
+            <xs:element ref="tns:graveyard"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType abstract="true" name="xmlEnglishPlace">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPlace">
+                
+        <xs:sequence/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlCountry">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPlace">
+                
+        <xs:sequence>
+                    
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:county"/>
                   
         </xs:sequence>
                 
@@ -351,21 +635,21 @@
         
     <xs:complexContent>
             
-      <xs:extension base="tns:xmlPlace">
+      <xs:extension base="tns:xmlEnglishPlace">
                 
         <xs:sequence>
                     
           <xs:choice maxOccurs="unbounded" minOccurs="0">
                         
+            <xs:element ref="tns:wapentake"/>
+                        
             <xs:element ref="tns:parish"/>
                         
             <xs:element ref="tns:manor"/>
                         
-            <xs:element ref="tns:rape"/>
-                        
             <xs:element ref="tns:hundred"/>
                         
-            <xs:element ref="tns:wapentake"/>
+            <xs:element ref="tns:rape"/>
                         
             <xs:element ref="tns:metropolitanBorough"/>
                         
@@ -385,11 +669,37 @@
       
   </xs:complexType>
     
-  <xs:complexType name="xmlParish">
+  <xs:complexType name="xmlWapentake">
         
     <xs:complexContent>
             
       <xs:extension base="tns:xmlPlace">
+                
+        <xs:sequence>
+                    
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        
+            <xs:element ref="tns:parish"/>
+                        
+            <xs:element ref="tns:manor"/>
+                        
+            <xs:element ref="tns:city"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlParish">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlEnglishPlace">
                 
         <xs:sequence>
                     
@@ -513,176 +823,6 @@
       
   </xs:complexType>
     
-  <xs:complexType name="xmlStreet">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:choice minOccurs="0">
-                        
-            <xs:element ref="ns1:builtInYear"/>
-                        
-            <xs:element ref="ns1:builtBetwweenYears"/>
-                        
-            <xs:element ref="ns1:builtBeforeYear"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-                
-        <xs:attribute name="demolished" type="xs:boolean"/>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlChurch">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:choice minOccurs="0">
-                        
-            <xs:element ref="ns1:builtInYear"/>
-                        
-            <xs:element ref="ns1:builtBetwweenYears"/>
-                        
-            <xs:element ref="ns1:builtBeforeYear"/>
-                      
-          </xs:choice>
-                    
-          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:graveyard"/>
-                  
-        </xs:sequence>
-                
-        <xs:attribute name="demolished" type="xs:boolean"/>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlGraveyard">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:choice minOccurs="0">
-                        
-            <xs:element ref="ns1:builtInYear"/>
-                        
-            <xs:element ref="ns1:builtBetwweenYears"/>
-                        
-            <xs:element ref="ns1:builtBeforeYear"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-                
-        <xs:attribute name="demolished" type="xs:boolean"/>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlMill">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:choice minOccurs="0">
-                        
-            <xs:element ref="ns1:builtInYear"/>
-                        
-            <xs:element ref="ns1:builtBetwweenYears"/>
-                        
-            <xs:element ref="ns1:builtBeforeYear"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-                
-        <xs:attribute name="demolished" type="xs:boolean"/>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlSchool">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:choice minOccurs="0">
-                        
-            <xs:element ref="ns1:builtInYear"/>
-                        
-            <xs:element ref="ns1:builtBetwweenYears"/>
-                        
-            <xs:element ref="ns1:builtBeforeYear"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-                
-        <xs:attribute name="demolished" type="xs:boolean"/>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlInn">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:choice minOccurs="0">
-                        
-            <xs:element ref="ns1:builtInYear"/>
-                        
-            <xs:element ref="ns1:builtBetwweenYears"/>
-                        
-            <xs:element ref="ns1:builtBeforeYear"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-                
-        <xs:attribute name="demolished" type="xs:boolean"/>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
   <xs:complexType name="xmlHamlet">
         
     <xs:complexContent>
@@ -741,102 +881,6 @@
       
   </xs:complexType>
     
-  <xs:complexType name="xmlTown">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:choice maxOccurs="unbounded" minOccurs="0">
-                        
-            <xs:element ref="tns:street"/>
-                        
-            <xs:element ref="tns:church"/>
-                        
-            <xs:element ref="tns:monastery"/>
-                        
-            <xs:element ref="tns:mill"/>
-                        
-            <xs:element ref="tns:school"/>
-                        
-            <xs:element ref="tns:inn"/>
-                        
-            <xs:element ref="tns:graveyard"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlMonastery">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:choice minOccurs="0">
-                        
-            <xs:element ref="ns1:builtInYear"/>
-                        
-            <xs:element ref="ns1:builtBetwweenYears"/>
-                        
-            <xs:element ref="ns1:builtBeforeYear"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-                
-        <xs:attribute name="demolished" type="xs:boolean"/>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlCity">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:choice maxOccurs="unbounded" minOccurs="0">
-                        
-            <xs:element ref="tns:street"/>
-                        
-            <xs:element ref="tns:church"/>
-                        
-            <xs:element ref="tns:monastery"/>
-                        
-            <xs:element ref="tns:mill"/>
-                        
-            <xs:element ref="tns:school"/>
-                        
-            <xs:element ref="tns:inn"/>
-                        
-            <xs:element ref="tns:graveyard"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
   <xs:complexType name="xmlManor">
         
     <xs:complexContent>
@@ -879,36 +923,6 @@
       
   </xs:complexType>
     
-  <xs:complexType name="xmlRape">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:choice maxOccurs="unbounded" minOccurs="0">
-                        
-            <xs:element ref="tns:parish"/>
-                        
-            <xs:element ref="tns:manor"/>
-                        
-            <xs:element ref="tns:city"/>
-                        
-            <xs:element ref="tns:town"/>
-                        
-            <xs:element ref="tns:hundred"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
   <xs:complexType name="xmlHundred">
         
     <xs:complexContent>
@@ -933,7 +947,7 @@
       
   </xs:complexType>
     
-  <xs:complexType name="xmlWapentake">
+  <xs:complexType name="xmlRape">
         
     <xs:complexContent>
             
@@ -948,6 +962,10 @@
             <xs:element ref="tns:manor"/>
                         
             <xs:element ref="tns:city"/>
+                        
+            <xs:element ref="tns:town"/>
+                        
+            <xs:element ref="tns:hundred"/>
                       
           </xs:choice>
                   
@@ -1049,29 +1067,35 @@
       
   </xs:complexType>
     
-  <xs:complexType name="xmlState">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence/>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
   <xs:complexType name="places">
         
     <xs:sequence>
             
       <xs:choice maxOccurs="unbounded" minOccurs="0">
                 
+        <xs:element ref="tns:city"/>
+                
+        <xs:element ref="tns:street"/>
+                
+        <xs:element ref="tns:church"/>
+                
+        <xs:element ref="tns:graveyard"/>
+                
+        <xs:element ref="tns:monastery"/>
+                
+        <xs:element ref="tns:mill"/>
+                
+        <xs:element ref="tns:school"/>
+                
+        <xs:element ref="tns:inn"/>
+                
+        <xs:element ref="tns:town"/>
+                
         <xs:element ref="tns:country"/>
                 
         <xs:element ref="tns:county"/>
+                
+        <xs:element ref="tns:wapentake"/>
                 
         <xs:element ref="tns:parish"/>
                 
@@ -1081,37 +1105,17 @@
                 
         <xs:element ref="tns:village"/>
                 
-        <xs:element ref="tns:street"/>
-                
-        <xs:element ref="tns:church"/>
-                
-        <xs:element ref="tns:graveyard"/>
-                
-        <xs:element ref="tns:mill"/>
-                
-        <xs:element ref="tns:school"/>
-                
-        <xs:element ref="tns:inn"/>
-                
         <xs:element ref="tns:hamlet"/>
                 
         <xs:element ref="tns:farmstead"/>
-                
-        <xs:element ref="tns:town"/>
-                
-        <xs:element ref="tns:monastery"/>
-                
-        <xs:element ref="tns:city"/>
                 
         <xs:element ref="tns:manor"/>
                 
         <xs:element ref="tns:graveship"/>
                 
-        <xs:element ref="tns:rape"/>
-                
         <xs:element ref="tns:hundred"/>
                 
-        <xs:element ref="tns:wapentake"/>
+        <xs:element ref="tns:rape"/>
                 
         <xs:element ref="tns:metropolitanBorough"/>
                 
@@ -1120,8 +1124,6 @@
         <xs:element ref="tns:urbanDistrict"/>
                 
         <xs:element ref="tns:ruralDistrict"/>
-                
-        <xs:element ref="tns:state"/>
               
       </xs:choice>
           

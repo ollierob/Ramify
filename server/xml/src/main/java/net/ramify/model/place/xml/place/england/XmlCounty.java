@@ -1,4 +1,4 @@
-package net.ramify.model.place.xml.place;
+package net.ramify.model.place.xml.place.england;
 
 import com.google.common.base.MoreObjects;
 import net.ramify.model.ParserContext;
@@ -7,10 +7,11 @@ import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.County;
-import net.ramify.model.place.xml.place.district.XmlMetropolitanBorough;
-import net.ramify.model.place.xml.place.district.XmlRuralDistrict;
-import net.ramify.model.place.xml.place.district.XmlUrbanDistrict;
-import net.ramify.model.place.xml.place.manor.XmlManor;
+import net.ramify.model.place.xml.place.XmlPlace;
+import net.ramify.model.place.xml.place.england.district.XmlMetropolitanBorough;
+import net.ramify.model.place.xml.place.england.district.XmlRuralDistrict;
+import net.ramify.model.place.xml.place.england.district.XmlUrbanDistrict;
+import net.ramify.model.place.xml.place.england.manor.XmlManor;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
@@ -22,14 +23,14 @@ import java.util.List;
 import java.util.Objects;
 
 @XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "county")
-class XmlCounty extends XmlPlace {
+class XmlCounty extends XmlEnglishPlace {
 
     @XmlElementRefs({
+            @XmlElementRef(type = XmlWapentake.class),
             @XmlElementRef(type = XmlParish.class),
             @XmlElementRef(type = XmlManor.class),
-            @XmlElementRef(type = XmlRape.class),
             @XmlElementRef(type = XmlHundred.class),
-            @XmlElementRef(type = XmlWapentake.class),
+            @XmlElementRef(type = XmlRape.class),
             @XmlElementRef(type = XmlMetropolitanBorough.class),
             @XmlElementRef(type = XmlUrbanDistrict.class),
             @XmlElementRef(type = XmlRuralDistrict.class)

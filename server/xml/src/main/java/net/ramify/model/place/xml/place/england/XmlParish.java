@@ -1,13 +1,16 @@
-package net.ramify.model.place.xml.place;
+package net.ramify.model.place.xml.place.england;
 
 import com.google.common.base.MoreObjects;
 import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
-import net.ramify.model.place.region.Rape;
-import net.ramify.model.place.xml.place.manor.XmlManor;
+import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.id.Spid;
+import net.ramify.model.place.region.Parish;
+import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.settlement.XmlCity;
 import net.ramify.model.place.xml.place.settlement.XmlTown;
+import net.ramify.model.place.xml.place.settlement.XmlVillage;
 
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
@@ -15,28 +18,28 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
-@XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "rape")
-class XmlRape extends XmlArea<Rape> {
+@XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "parish")
+public class XmlParish extends XmlEnglishPlace {
 
     @XmlElementRefs({
             @XmlElementRef(type = XmlParish.class),
-            @XmlElementRef(type = XmlManor.class),
+            @XmlElementRef(type = XmlChapelry.class),
+            @XmlElementRef(type = XmlTownship.class),
             @XmlElementRef(type = XmlCity.class),
             @XmlElementRef(type = XmlTown.class),
-            @XmlElementRef(type = XmlHundred.class)
+            @XmlElementRef(type = XmlVillage.class)
     })
     private List<XmlPlace> children;
 
-    XmlRape() {
-        super(Rape.class);
+    @Override
+    protected PlaceId placeId(final String id) {
+        return new Spid(Parish.class, id);
     }
 
     @Override
-    protected Rape place(final Place parent, final PlaceGroupId groupId, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        Objects.requireNonNull(parent, "parent");
-        return new Rape(this.placeId(), this.name(), parent, groupId);
+    protected Parish place(final Place parent, final PlaceGroupId groupId, final ParserContext context) throws Place.InvalidPlaceTypeException {
+        return new Parish(this.placeId(), this.name(), parent, groupId);
     }
 
     @Override

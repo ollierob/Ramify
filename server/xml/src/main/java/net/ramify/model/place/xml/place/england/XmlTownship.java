@@ -1,4 +1,4 @@
-package net.ramify.model.place.xml.place;
+package net.ramify.model.place.xml.place.england;
 
 import com.google.common.base.MoreObjects;
 import net.ramify.model.ParserContext;
@@ -7,6 +7,7 @@ import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.Township;
+import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.settlement.XmlChurch;
 import net.ramify.model.place.xml.place.settlement.XmlFarmstead;
 import net.ramify.model.place.xml.place.settlement.XmlHamlet;

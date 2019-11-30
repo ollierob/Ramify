@@ -1,4 +1,4 @@
-package net.ramify.model.place.xml.place.district;
+package net.ramify.model.place.xml.place.england.district;
 
 import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;

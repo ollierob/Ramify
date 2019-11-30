@@ -1,5 +1,5 @@
 @XmlSchema(namespace = XmlPlace.NAMESPACE)
-package net.ramify.model.place.xml.place.district;
+package net.ramify.model.place.xml.place.england.district;
 
 import net.ramify.model.place.xml.place.XmlPlace;
 

@@ -17,7 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 @XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "town")
-public class XmlTown extends XmlPlace {
+public class XmlTown extends XmlSettlement {
 
     @XmlElementRefs({
             @XmlElementRef(type = XmlStreet.class),

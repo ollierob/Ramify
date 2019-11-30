@@ -1,4 +1,4 @@
-package net.ramify.model.place.xml.place;
+package net.ramify.model.place.xml.place.england;
 
 import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
@@ -6,11 +6,11 @@ import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.Country;
+import net.ramify.model.place.xml.place.XmlPlace;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.List;
@@ -22,12 +22,8 @@ class XmlCountry extends XmlPlace {
     @XmlAttribute(name = "iso", required = true)
     private String iso;
 
-    @XmlElementRefs({
-            @XmlElementRef(type = XmlCountry.class),
-            @XmlElementRef(type = XmlCounty.class),
-            @XmlElementRef(type = XmlState.class)
-    })
-    private List<XmlPlace> children;
+    @XmlElementRef
+    private List<XmlCounty> counties;
 
     @Nonnull
     protected PlaceId placeId(final String id) {
@@ -40,8 +36,8 @@ class XmlCountry extends XmlPlace {
     }
 
     @Override
-    protected Collection<XmlPlace> children() {
-        return Objects.requireNonNull(children, "Country has no children");
+    protected Collection<XmlCounty> children() {
+        return Objects.requireNonNull(counties, "Country has no children");
     }
 
 }

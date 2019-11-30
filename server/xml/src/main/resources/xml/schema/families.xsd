@@ -54,8 +54,6 @@
           <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="spouse" type="xs:string"/>
                   
         </xs:sequence>
-                
-        <xs:attribute name="id" type="xs:string"/>
               
       </xs:extension>
           
