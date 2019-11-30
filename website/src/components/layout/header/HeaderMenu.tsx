@@ -17,7 +17,9 @@ export default class HeaderMenu extends React.PureComponent<Props> {
 
     render() {
 
-        return <Menu mode="horizontal" className="menu">
+        return <Menu
+            mode="horizontal"
+            className="menu">
 
             <Menu.SubMenu
                 title={<a href="/people"><TreeIcon/> People</a>}

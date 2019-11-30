@@ -72,6 +72,9 @@ export class PlaceMenu extends React.PureComponent<Props, State> {
         asyncLoadData(null, this.props.placeFavourites, favourites => this.setState({favourites}));
     }
 
+    componentWillUnmount() {
+    }
+
 }
 
 const TabTitle = (props: {title: React.ReactNode, onMouseover: () => void}) => {

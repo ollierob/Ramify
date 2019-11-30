@@ -32,7 +32,7 @@ export const ColumnSearch: Readonly<Partial<ColumnProps<any>>> = {
         </Button>
         <Button
             className="clear"
-            onClick={() => props.clearFilters(props.selectedKeys as string[])}>
+            onClick={() => props.clearFilters()}>
             Clear
         </Button>
     </div>,
