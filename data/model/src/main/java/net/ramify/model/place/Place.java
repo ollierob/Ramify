@@ -9,6 +9,7 @@ import net.ramify.utils.objects.Consumers;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.Set;
 
@@ -110,5 +111,7 @@ public interface Place extends HasPlaceId, Castable<Place>, BuildsProto<PlacePro
         }
 
     }
+
+    Comparator<Place> SORT_BY_NAME = Comparator.comparing(Place::name);
 
 }

@@ -13,6 +13,7 @@ import net.ramify.model.place.provider.PlaceDescriptionProvider;
 import net.ramify.model.place.provider.PlaceGroupProvider;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.region.Country;
+import net.ramify.utils.collections.ListUtils;
 import net.ramify.utils.objects.Consumers;
 
 import javax.annotation.CheckForNull;
@@ -84,7 +85,7 @@ public class DefaultPlacesResource implements PlacesResource {
 
     @Override
     public Places countries() {
-        return Places.of(placeProvider.countries(), false);
+        return Places.of(ListUtils.sortedCopy(placeProvider.countries(), Place.SORT_BY_NAME), false);
     }
 
     @Override

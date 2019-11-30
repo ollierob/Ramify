@@ -8,6 +8,7 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.proto.PlaceProto;
 
 import javax.annotation.Nonnull;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Set;
@@ -36,7 +37,7 @@ public interface Places extends Iterable<Place>, HasPlaces, BuildsProto<PlacePro
         return of(ImmutableSet.of(), false);
     }
 
-    static Places of(final Set<? extends Place> places, final boolean includeParent) {
+    static Places of(final Collection<? extends Place> places, final boolean includeParent) {
         final ImmutableSet<Place> fixedPlaces = ImmutableSet.copyOf(places);
         return new Places() {
 

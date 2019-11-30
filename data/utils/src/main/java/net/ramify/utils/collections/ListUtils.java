@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.RandomAccess;
 import java.util.function.Function;
@@ -55,6 +56,19 @@ public class ListUtils {
         final List<T> out = Lists.newArrayList(list);
         Collections.reverse(out);
         return out;
+    }
+
+    public static <T> List<T> sortedCopy(final Collection<? extends T> collection, final Comparator<? super T> comparator) {
+        switch (collection.size()) {
+            case 0:
+                return Collections.emptyList();
+            case 1:
+                return Collections.singletonList(collection.iterator().next());
+            default:
+                final var list = Lists.<T>newArrayList(collection);
+                list.sort(comparator);
+                return list;
+        }
     }
 
 }

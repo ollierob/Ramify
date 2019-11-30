@@ -1,5 +1,6 @@
 package net.ramify.model.place.xml.place.uk;
 
+import com.google.common.base.MoreObjects;
 import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
@@ -13,8 +14,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 @XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "country")
 class XmlCountry extends XmlPlace {
@@ -37,7 +38,7 @@ class XmlCountry extends XmlPlace {
 
     @Override
     protected Collection<XmlCounty> children() {
-        return Objects.requireNonNull(counties, "Country has no children");
+        return MoreObjects.firstNonNull(counties, Collections.emptyList());
     }
 
 }
