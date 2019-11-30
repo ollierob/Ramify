@@ -5,7 +5,7 @@ import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.proto.PlaceProto;
 
-public class Wapentake extends Hundred {
+public class Wapentake extends Hundred implements CountyOrSubdivision {
 
     public Wapentake(final PlaceId id, final String name, final Place parent, final PlaceGroupId groupId) throws InvalidPlaceTypeException {
         this(id, name, parent.requireAs(County.class), groupId);
