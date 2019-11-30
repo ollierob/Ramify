@@ -4,9 +4,8 @@ import com.google.common.base.MoreObjects;
 import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
-import net.ramify.model.place.PlaceId;
-import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.Township;
+import net.ramify.model.place.xml.place.XmlArea;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.settlement.XmlCity;
 import net.ramify.model.place.xml.place.settlement.XmlTown;
@@ -19,7 +18,7 @@ import java.util.Collections;
 import java.util.List;
 
 @XmlRootElement(namespace = XmlUsaPlace.NAMESPACE, name = "township")
-class XmlTownship extends XmlPlace {
+class XmlTownship extends XmlArea<Township> {
 
     @XmlElementRefs({
             @XmlElementRef(type = XmlCity.class),
@@ -27,13 +26,12 @@ class XmlTownship extends XmlPlace {
     })
     private List<XmlPlace> children;
 
-    @Override
-    protected PlaceId placeId(final String id) {
-        return new Spid(Township.class, id);
+    public XmlTownship() {
+        super(Township.class);
     }
 
     @Override
-    protected Place place(final Place parent, final PlaceGroupId groupId, final ParserContext context) throws Place.InvalidPlaceTypeException {
+    protected Township place(final Place parent, final PlaceGroupId groupId, final ParserContext context) throws Place.InvalidPlaceTypeException {
         return new Township(this.placeId(), this.name(), parent, groupId);
     }
 

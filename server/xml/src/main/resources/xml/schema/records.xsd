@@ -807,11 +807,11 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="church"/>
+      <xs:enumeration value="government"/>
             
       <xs:enumeration value="manor"/>
             
-      <xs:enumeration value="government"/>
+      <xs:enumeration value="church"/>
           
     </xs:restriction>
       
@@ -821,27 +821,27 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="birth"/>
-            
-      <xs:enumeration value="mention"/>
-            
-      <xs:enumeration value="baptism"/>
-            
-      <xs:enumeration value="burial"/>
-            
-      <xs:enumeration value="mixed"/>
+      <xs:enumeration value="membership"/>
             
       <xs:enumeration value="death"/>
             
-      <xs:enumeration value="membership"/>
+      <xs:enumeration value="residence"/>
+            
+      <xs:enumeration value="birth"/>
+            
+      <xs:enumeration value="mixed"/>
+            
+      <xs:enumeration value="baptism"/>
+            
+      <xs:enumeration value="payment"/>
             
       <xs:enumeration value="marriage"/>
             
-      <xs:enumeration value="residence"/>
+      <xs:enumeration value="mention"/>
             
       <xs:enumeration value="census"/>
             
-      <xs:enumeration value="payment"/>
+      <xs:enumeration value="burial"/>
           
     </xs:restriction>
       
@@ -851,11 +851,11 @@
         
     <xs:restriction base="xs:string">
             
+      <xs:enumeration value="head"/>
+            
       <xs:enumeration value="spouse"/>
             
       <xs:enumeration value="child"/>
-            
-      <xs:enumeration value="head"/>
             
       <xs:enumeration value="parent"/>
           
@@ -867,9 +867,9 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="widowed"/>
-            
       <xs:enumeration value="married"/>
+            
+      <xs:enumeration value="widowed"/>
             
       <xs:enumeration value="unmarried"/>
           
