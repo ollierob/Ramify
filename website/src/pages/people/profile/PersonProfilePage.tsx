@@ -62,13 +62,21 @@ export default class PersonProfilePage extends PeopleBasePage<State> {
 
     componentDidUpdate(prevProps: Readonly<BasePageProps>, prevState: Readonly<State>, snapshot?: any): void {
         if (this.props.location != prevProps.location)
-            this.setState({...this.readIds()});
+            this.updatePerson();
         if (this.state.personId != prevState.personId || this.state.treeId != prevState.treeId)
             this.loadTree(this.state.treeId, this.state.personId);
         if (this.state.tree.data && this.state.tree.data != prevState.tree.data) {
             const find = findPersonInTree(this.state.personId, this.state.tree.data);
             this.setState({family: find && find.family, person: find && find.person});
         }
+    }
+
+    private updatePerson() {
+        this.setState({...this.readIds()});
+    }
+
+    protected hashChanged(): void {
+        this.updatePerson();
     }
 
     private loadTree(treeId = this.state.treeId, personId = this.state.personId) {

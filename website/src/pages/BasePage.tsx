@@ -11,6 +11,7 @@ export type BasePageProps = RouteComponentProps<any>;
 export default abstract class BasePage<S = any> extends React.PureComponent<BasePageProps, S> {
 
     readonly placeFavourites: PlaceFavouritesHandler = RemotePlaceFavouritesHandler;
+    private readonly onHashChange = () => this.hashChanged();
 
     render() {
 
@@ -52,6 +53,17 @@ export default abstract class BasePage<S = any> extends React.PureComponent<Base
 
     setPageTitle(title: string) {
         document.title = title;
+    }
+
+    componentDidMount() {
+        window.addEventListener("hashchange", this.onHashChange, false);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("hashchange", this.onHashChange, false);
+    }
+
+    protected hashChanged(): void {
     }
 
 }

@@ -111,6 +111,7 @@ export default class RecordSearchPage extends RecordBasePage<State> {
     }
 
     componentDidMount() {
+        super.componentDidMount();
         if (this.state.recordName || this.state.selectedRegion)
             this.doSearch();
     }

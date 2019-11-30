@@ -78,6 +78,7 @@ export default class PlaceInfoPage extends PlaceBasePage<State> {
     }
 
     componentDidMount() {
+        super.componentDidMount();
         this.loadPlace();
         this.loadChildren();
         this.loadRecords();
@@ -86,7 +87,7 @@ export default class PlaceInfoPage extends PlaceBasePage<State> {
     componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>) {
 
         if (this.props.location != prevProps.location)
-            this.setState({placeId: this.readPlace()});
+            this.updatePlace();
 
         if (this.state.placeId != prevState.placeId) {
             this.loadPlace();
@@ -94,6 +95,14 @@ export default class PlaceInfoPage extends PlaceBasePage<State> {
             this.loadRecords();
         }
 
+    }
+
+    private updatePlace() {
+        this.setState({placeId: this.readPlace()});
+    }
+
+    protected hashChanged(): void {
+        this.updatePlace();
     }
 
     private readPlace(): PlaceId {

@@ -57,16 +57,25 @@ export class PlaceGroupPage extends PlaceBasePage<State> {
     }
 
     componentDidMount() {
+        super.componentDidMount();
         this.loadPlaceGroup();
     }
 
     componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>) {
         if (this.props.location != prevProps.location)
-            this.setState({groupId: this.readPlaceGroupId(), placeId: this.readPlaceId()});
+            this.updatePlace();
         if (this.state.groupId != prevState.groupId || (!this.state.groupId && this.state.placeId != prevState.placeId))
             this.loadPlaceGroup();
         if (this.state.group.data && this.state.group.data != prevState.group.data)
             this.setPageTitle(this.state.group.data.group.name);
+    }
+
+    protected hashChanged(): void {
+        this.updatePlace();
+    }
+
+    private updatePlace() {
+        this.setState({groupId: this.readPlaceGroupId(), placeId: this.readPlaceId()});
     }
 
     private loadPlaceGroup(groupId: PlaceGroupId = this.state.groupId, placeId: PlaceId = this.state.placeId) {

@@ -39,6 +39,7 @@ export default class PlacesHomePage extends PlaceBasePage<State> {
     }
 
     componentDidMount() {
+        super.componentDidMount();
         asyncLoadData(null, this.placeLoader.loadCountries, countries => this.setState({countries}));
     }
 
