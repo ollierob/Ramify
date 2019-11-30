@@ -726,6 +726,8 @@
         <xs:element ref="ns3:state"/>
                 
         <xs:element ref="ns3:county"/>
+                
+        <xs:element ref="ns3:parish"/>
               
       </xs:choice>
           

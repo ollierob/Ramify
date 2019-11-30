@@ -6,7 +6,7 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
-import net.ramify.model.place.region.County;
+import net.ramify.model.place.region.Township;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.settlement.XmlCity;
 import net.ramify.model.place.xml.place.settlement.XmlTown;
@@ -18,24 +18,23 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-@XmlRootElement(namespace = XmlUsaPlace.NAMESPACE, name = "county")
-class XmlCounty extends XmlPlace {
+@XmlRootElement(namespace = XmlUsaPlace.NAMESPACE, name = "township")
+class XmlTownship extends XmlPlace {
 
     @XmlElementRefs({
-            @XmlElementRef(type = XmlTownship.class),
             @XmlElementRef(type = XmlCity.class),
-            @XmlElementRef(type = XmlTown.class)
+            @XmlElementRef(type = XmlTown.class),
     })
     private List<XmlPlace> children;
 
     @Override
     protected PlaceId placeId(final String id) {
-        return new Spid(County.class, id);
+        return new Spid(Township.class, id);
     }
 
     @Override
     protected Place place(final Place parent, final PlaceGroupId groupId, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new County(this.placeId(), this.name(), parent, null, groupId);
+        return new Township(this.placeId(), this.name(), parent, groupId);
     }
 
     @Override

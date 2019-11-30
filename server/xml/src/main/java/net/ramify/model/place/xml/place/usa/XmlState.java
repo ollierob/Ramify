@@ -22,7 +22,8 @@ import java.util.List;
 public class XmlState extends XmlPlace {
 
     @XmlElementRefs({
-            @XmlElementRef(type = XmlCounty.class)
+            @XmlElementRef(type = XmlCounty.class),
+            @XmlElementRef(type = XmlParish.class)
     })
     private List<XmlPlace> children;
 

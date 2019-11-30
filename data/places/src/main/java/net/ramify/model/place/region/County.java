@@ -11,6 +11,7 @@ import net.ramify.model.place.settlement.City;
 import net.ramify.model.place.type.Region;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -22,7 +23,7 @@ public class County extends AbstractRegion implements CountyOrSubdivision {
     private final String iso;
 
     public County(final PlaceId id, final String name, final Place parent, final String iso, final PlaceGroupId groupId) throws InvalidPlaceTypeException {
-        this(id, name, parent.requireAs(Region.class), iso, groupId);
+        this(id, name, Objects.requireNonNull(parent).requireAs(Region.class), iso, groupId);
     }
 
     public County(final PlaceId id, final String name, final Region parent, final String iso, final PlaceGroupId groupId) {

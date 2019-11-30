@@ -20,7 +20,7 @@ import java.util.Collections;
 import java.util.List;
 
 @XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "parish")
-public class XmlParish extends XmlUkPlace {
+public class XmlParish extends XmlPlace {
 
     @XmlElementRefs({
             @XmlElementRef(type = XmlParish.class),
@@ -38,7 +38,7 @@ public class XmlParish extends XmlUkPlace {
     }
 
     @Override
-    protected Parish place(final Place parent, final PlaceGroupId groupId, final ParserContext context) throws Place.InvalidPlaceTypeException {
+    protected Place place(final Place parent, final PlaceGroupId groupId, final ParserContext context) throws Place.InvalidPlaceTypeException {
         return new Parish(this.placeId(), this.name(), parent, groupId);
     }
 

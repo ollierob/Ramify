@@ -7,6 +7,8 @@
     
   <xs:element name="county" type="tns:xmlCounty"/>
     
+  <xs:element name="parish" type="tns:xmlParish"/>
+    
   <xs:element name="state" type="tns:xmlState"/>
     
   <xs:complexType abstract="true" name="xmlUsaPlace">
@@ -51,7 +53,13 @@
                 
         <xs:sequence>
                     
-          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:county"/>
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        
+            <xs:element ref="tns:county"/>
+                        
+            <xs:element ref="tns:parish"/>
+                      
+          </xs:choice>
                   
         </xs:sequence>
               
@@ -67,9 +75,31 @@
             
       <xs:extension base="ns1:xmlPlace">
                 
-        <xs:sequence/>
+        <xs:sequence>
+                    
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        
+            <xs:element ref="ns1:city"/>
+                        
+            <xs:element ref="ns1:town"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlParish">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlCounty">
                 
-        <xs:attribute name="iso" type="xs:string"/>
+        <xs:sequence/>
               
       </xs:extension>
           
