@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/dates" xmlns:ns2="http://ramify.net/places/uk" xmlns:tns="http://ramify.net/places" targetNamespace="http://ramify.net/places" version="1.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/dates" xmlns:ns2="http://ramify.net/places/uk" xmlns:ns3="http://ramify.net/places/usa" xmlns:tns="http://ramify.net/places" targetNamespace="http://ramify.net/places" version="1.0">
     
   <xs:import namespace="http://ramify.net/dates" schemaLocation="dates.xsd"/>
     
   <xs:import namespace="http://ramify.net/places/uk" schemaLocation="places_uk.xsd"/>
+    
+  <xs:import namespace="http://ramify.net/places/usa" schemaLocation="places_usa.xsd"/>
     
   <xs:element name="archive" type="tns:xmlArchive"/>
     
@@ -718,6 +720,12 @@
         <xs:element ref="ns2:urbanDistrict"/>
                 
         <xs:element ref="ns2:ruralDistrict"/>
+                
+        <xs:element ref="ns3:country"/>
+                
+        <xs:element ref="ns3:state"/>
+                
+        <xs:element ref="ns3:county"/>
               
       </xs:choice>
           

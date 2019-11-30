@@ -98,6 +98,10 @@
                                     <uri>http://ramify.net/places/uk</uri>
                                     <toFile>places_uk.xsd</toFile>
                                 </transformSchema>
+                                <transformSchema>
+                                    <uri>http://ramify.net/places/usa</uri>
+                                    <toFile>places_usa.xsd</toFile>
+                                </transformSchema>
                             </transformSchemas>
                             <schemaSourceExcludeFilters>
                                 <myExcludes implementation="org.codehaus.mojo.jaxb2.shared.filters.pattern.PatternFileFilter">

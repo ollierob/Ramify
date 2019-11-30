@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/places" xmlns:tns="http://ramify.net/places/usa" targetNamespace="http://ramify.net/places/usa" version="1.0">
+    
+  <xs:import namespace="http://ramify.net/places" schemaLocation="places.xsd"/>
+    
+  <xs:element name="country" type="tns:xmlCountry"/>
+    
+  <xs:element name="county" type="tns:xmlCounty"/>
+    
+  <xs:element name="state" type="tns:xmlState"/>
+    
+  <xs:complexType abstract="true" name="xmlUsaPlace">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="ns1:xmlPlace">
+                
+        <xs:sequence/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlCountry">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="ns1:xmlPlace">
+                
+        <xs:sequence>
+                    
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:state"/>
+                  
+        </xs:sequence>
+                
+        <xs:attribute name="iso" type="xs:string" use="required"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlState">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="ns1:xmlPlace">
+                
+        <xs:sequence>
+                    
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:county"/>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlCounty">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="ns1:xmlPlace">
+                
+        <xs:sequence/>
+                
+        <xs:attribute name="iso" type="xs:string"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+  
+</xs:schema>

@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Objects;
 
 @XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "county")
-class XmlCounty extends XmlUkPlace {
+class XmlCounty extends XmlPlace {
 
     @XmlElementRefs({
             @XmlElementRef(type = XmlWapentake.class),
