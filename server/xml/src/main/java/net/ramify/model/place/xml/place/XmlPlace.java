@@ -17,8 +17,8 @@ import net.ramify.model.place.PlaceHistory;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.provider.PlaceGroupProvider;
 import net.ramify.model.place.provider.PlaceProvider;
-import net.ramify.model.place.xml.place.uk.XmlUkPlace;
 import net.ramify.model.place.xml.place.settlement.XmlSettlement;
+import net.ramify.model.place.xml.place.uk.XmlUkPlace;
 import net.ramify.model.place.xml.place.usa.XmlUsaPlace;
 import net.ramify.utils.objects.Functions;
 
@@ -44,8 +44,13 @@ public abstract class XmlPlace implements HasPlaceId {
     private String name;
 
     @XmlElements({
+            @XmlElement(name = "openedInYear", type = XmlInYear.class, namespace = XmlDateRange.NAMESPACE),
+    })
+    private XmlDateRange opened;
+
+    @XmlElements({
             @XmlElement(name = "closedInYear", type = XmlInYear.class, namespace = XmlDateRange.NAMESPACE),
-            @XmlElement(name = "closedBetwweenYears", type = XmlBetweenYears.class, namespace = XmlDateRange.NAMESPACE),
+            @XmlElement(name = "closedBetweenYears", type = XmlBetweenYears.class, namespace = XmlDateRange.NAMESPACE),
             @XmlElement(name = "closedBeforeYear", type = XmlBeforeYear.class, namespace = XmlDateRange.NAMESPACE)
     })
     private XmlDateRange closed;
@@ -96,12 +101,18 @@ public abstract class XmlPlace implements HasPlaceId {
     @CheckForNull
     protected abstract Collection<? extends XmlPlace> children();
 
+    protected DateRange opened(final DateParser dates) {
+        return opened == null ? null : opened.resolve(dates);
+    }
+
     protected DateRange closed(final DateParser dates) {
         return closed == null ? null : closed.resolve(dates);
     }
 
     protected PlaceHistory history(final ParserContext context) {
-        return closed == null ? null : new DefaultPlaceHistory(null, this.closed(context.dateParser()));
+        return opened == null && closed == null
+                ? null
+                : new DefaultPlaceHistory(this.opened(context.dateParser()), this.closed(context.dateParser()));
     }
 
     @Override

@@ -13,7 +13,7 @@
     
   <xs:element name="closedBeforeYear" type="tns:xmlBeforeYear"/>
     
-  <xs:element name="closedBetwweenYears" type="tns:xmlBetweenYears"/>
+  <xs:element name="closedBetweenYears" type="tns:xmlBetweenYears"/>
     
   <xs:element name="closedInYear" type="tns:xmlInYear"/>
     
@@ -24,6 +24,8 @@
   <xs:element name="inYear" type="tns:xmlInYear"/>
     
   <xs:element name="onDate" type="tns:xmlExactDate"/>
+    
+  <xs:element name="openedInYear" type="tns:xmlInYear"/>
     
   <xs:element name="xmlBeforeDate" type="tns:xmlBeforeDate"/>
     

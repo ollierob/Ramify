@@ -275,11 +275,13 @@
         
     <xs:sequence>
             
+      <xs:element minOccurs="0" ref="ns1:openedInYear"/>
+            
       <xs:choice minOccurs="0">
                 
         <xs:element ref="ns1:closedInYear"/>
                 
-        <xs:element ref="ns1:closedBetwweenYears"/>
+        <xs:element ref="ns1:closedBetweenYears"/>
                 
         <xs:element ref="ns1:closedBeforeYear"/>
               
