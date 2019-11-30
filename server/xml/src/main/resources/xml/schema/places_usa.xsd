@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/places" xmlns:tns="http://ramify.net/places/usa" targetNamespace="http://ramify.net/places/usa" version="1.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/places" xmlns:tns="http://ramify.net/places/us" targetNamespace="http://ramify.net/places/us" version="1.0">
     
   <xs:import namespace="http://ramify.net/places" schemaLocation="places.xsd"/>
     
@@ -10,6 +10,8 @@
   <xs:element name="parish" type="tns:xmlParish"/>
     
   <xs:element name="state" type="tns:xmlState"/>
+    
+  <xs:element name="township" type="tns:xmlTownship"/>
     
   <xs:complexType abstract="true" name="xmlUsaPlace">
         
@@ -70,6 +72,32 @@
   </xs:complexType>
     
   <xs:complexType name="xmlCounty">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="ns1:xmlPlace">
+                
+        <xs:sequence>
+                    
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        
+            <xs:element ref="tns:township"/>
+                        
+            <xs:element ref="ns1:city"/>
+                        
+            <xs:element ref="ns1:town"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlTownship">
         
     <xs:complexContent>
             

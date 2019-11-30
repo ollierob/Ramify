@@ -95,11 +95,11 @@
                                     <toFile>places.xsd</toFile>
                                 </transformSchema>
                                 <transformSchema>
-                                    <uri>http://ramify.net/places/uk</uri>
+                                    <uri>http://ramify.net/places/gb</uri>
                                     <toFile>places_uk.xsd</toFile>
                                 </transformSchema>
                                 <transformSchema>
-                                    <uri>http://ramify.net/places/usa</uri>
+                                    <uri>http://ramify.net/places/us</uri>
                                     <toFile>places_usa.xsd</toFile>
                                 </transformSchema>
                             </transformSchemas>

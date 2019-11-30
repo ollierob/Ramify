@@ -7,6 +7,6 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 @XmlSeeAlso({XmlCountry.class})
 public abstract class XmlUkPlace extends XmlPlace {
 
-    public static final String NAMESPACE = XmlPlace.NAMESPACE + "/uk";
+    public static final String NAMESPACE = XmlPlace.NAMESPACE + "/gb";
 
 }

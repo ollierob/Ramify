@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/places" xmlns:tns="http://ramify.net/places/uk" targetNamespace="http://ramify.net/places/uk" version="1.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/places" xmlns:tns="http://ramify.net/places/gb" targetNamespace="http://ramify.net/places/gb" version="1.0">
     
   <xs:import namespace="http://ramify.net/places" schemaLocation="places.xsd"/>
     
@@ -133,7 +133,7 @@
         
     <xs:complexContent>
             
-      <xs:extension base="tns:xmlUkPlace">
+      <xs:extension base="ns1:xmlPlace">
                 
         <xs:sequence>
                     
