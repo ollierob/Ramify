@@ -89,6 +89,11 @@
     background-color: black;
 }
 
+.records .table.error {
+    margin: 12px;
+    font-size: 1.5em;
+}
+
 .image-gallery-slides .image-gallery-slide img {
     height: 100% !important;
     width: unset !important;

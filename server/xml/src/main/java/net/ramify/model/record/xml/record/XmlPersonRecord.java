@@ -30,7 +30,7 @@ public class XmlPersonRecord extends XmlRecord {
     @XmlAttribute(name = "id")
     private String id = UUID.randomUUID().toString();
 
-    protected PersonId personId() {
+    public PersonId personId() {
         return new PersonId(id);
     }
 

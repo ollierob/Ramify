@@ -35,7 +35,7 @@ export default class FamilyRecordTable extends React.PureComponent<Props, State>
 
     render() {
 
-        if (this.state.records.error) return <ErrorMessage message={this.state.records.error}/>;
+        if (this.state.records.error) return <ErrorMessage className="table" message={this.state.records.error}/>;
 
         const data: FamilyRecord[] = this.state.records.data || [];
         const loading = this.state.records.loading;

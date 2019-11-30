@@ -15,7 +15,7 @@
     border-radius: 4px;
 }
 
-.red {
+.red, .error {
     color: #b76337 !important;
 }
 

@@ -3,7 +3,7 @@ export function rethrowResponseError<T>(response: Response): Promise<T> {
         if (!text) text = response.statusText;
         if (text.startsWith("<html") || text.startsWith("<!DOCTYPE html")) text = parseHtmlResponse(text);
         if (text.startsWith("ERROR:")) text = text.substr(6).trimLeft();
-        throw new Error("Error fetching");
+        throw new Error("Error fetching data!");
     });
 }
 

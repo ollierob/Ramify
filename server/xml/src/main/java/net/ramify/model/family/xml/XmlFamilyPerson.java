@@ -14,7 +14,6 @@ import net.ramify.model.relationship.RelationshipFactory;
 import net.ramify.model.relationship.type.Married;
 import net.ramify.model.relationship.type.ParentChild;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -22,14 +21,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @XmlRootElement(namespace = XmlFamily.NAMESPACE, name = "person")
 public class XmlFamilyPerson extends XmlPersonRecord {
-
-    @XmlAttribute(name = "id")
-    private String id = UUID.randomUUID().toString();
 
     @XmlElementRef
     private List<XmlEvent> events;
@@ -39,11 +34,6 @@ public class XmlFamilyPerson extends XmlPersonRecord {
 
     @XmlElement(name = "spouse", namespace = XmlFamily.NAMESPACE)
     private List<String> spouses;
-
-    @Override
-    protected PersonId personId() {
-        return new PersonId(id);
-    }
 
     protected Person toPerson(final RecordContext context) {
         final var personId = this.personId();
