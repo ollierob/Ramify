@@ -38,6 +38,11 @@ public class XmlManor extends XmlPlace {
     }
 
     @Override
+    protected PlaceHistory history(ParserContext context) {
+        return MoreObjects.firstNonNull(super.history(context), Manor.DEFAULT_HISTORY);
+    }
+
+    @Override
     protected Collection<XmlPlace> children() {
         return MoreObjects.firstNonNull(children, Collections.emptyList());
     }

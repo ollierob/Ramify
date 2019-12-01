@@ -1,6 +1,8 @@
 package net.ramify.model.place.region.manor;
 
 import com.google.common.collect.ImmutableSet;
+import net.ramify.model.date.BeforeDate;
+import net.ramify.model.place.DefaultPlaceHistory;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceHistory;
@@ -14,6 +16,7 @@ import java.util.Set;
 
 public class Manor extends AbstractRegion {
 
+    public static final PlaceHistory DEFAULT_HISTORY = new DefaultPlaceHistory(null, BeforeDate.approximatelyBefore(1925));
     static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(Manor.class, Graveship.class);
 
     private final Region parent;
