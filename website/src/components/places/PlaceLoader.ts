@@ -3,7 +3,7 @@ import {Place, PlaceBundle, PlaceGroup, PlaceList} from "../../protobuf/generate
 import {protoGet} from "../fetch/ProtoFetch";
 import {queryParameters} from "../fetch/Fetch";
 import {Position} from "../../protobuf/generated/location_pb";
-import {PlaceGroupId, ResolvedPlaceGroup} from "./PlaceGroup";
+import {PlaceGroupId, ResolvedPlaceGroup, sortPlaceGroupChildren} from "./PlaceGroup";
 
 export interface PlaceLoader {
 

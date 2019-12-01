@@ -3,13 +3,12 @@ import {AsyncData} from "../../../components/fetch/AsyncData";
 import {Place, PlaceBundle, PlaceHistory} from "../../../protobuf/generated/place_pb";
 import {Card, Tabs} from "antd";
 import {PlaceId} from "../../../components/places/Place";
-import {ResolvedPlaceGroup} from "../../../components/places/PlaceGroup";
+import {ResolvedPlaceGroup, sortPlaceGroupChildren} from "../../../components/places/PlaceGroup";
 import {placeTypeKey, placeTypeName, sortByPlaceType} from "../../../components/places/PlaceType";
 import {PlaceFavouritesHandler} from "../../../components/places/PlaceFavourites";
-import {earliestYear, latestYear, yearPeriod} from "../../../components/date/DateRange";
+import {yearPeriod} from "../../../components/date/DateRange";
 import {PlaceGroupTab} from "./PlaceGroupTab";
 import {Flag} from "../../../components/images/Flag";
-import {DateRange} from "../../../protobuf/generated/date_pb";
 
 type Props = {
     group: AsyncData<ResolvedPlaceGroup>
@@ -32,7 +31,7 @@ export const PlaceGroupInfo = (props: Props) => {
             activeKey={props.selected}
             onChange={active => props.select(active)}>
 
-            {sortChildren(resolved.children).map(child => <Tabs.TabPane key={child.place.id} tab={<Title place={child.place}/>}>
+            {sortPlaceGroupChildren(resolved.group, resolved.children).map(child => <Tabs.TabPane key={child.place.id} tab={<Title place={child.place}/>}>
                 <PlaceGroupTab
                     key={child.place.id}
                     group={resolved.group}
@@ -45,13 +44,6 @@ export const PlaceGroupInfo = (props: Props) => {
     </Card>;
 
 };
-
-function sortChildren(children: ReadonlyArray<PlaceBundle.AsObject>): ReadonlyArray<PlaceBundle.AsObject> {
-    if (!children || !children.length) return [];
-    const sorted = [...children];
-    sorted.sort((p1, p2) => sortByPlaceType(placeTypeKey(p1.place.type), placeTypeKey(p2.place.type)));
-    return sorted;
-}
 
 const Title = (props: {place: Place.AsObject}) => {
     const place = props.place;
