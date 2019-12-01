@@ -7,7 +7,9 @@ import {DEFAULT_FAMILY_TREE_LOADER} from "../../tree/FamilyTreeLoader";
 import {Loading} from "../../style/Loading";
 import {createTreeHref, viewTreeHref} from "../../../pages/people/PeopleLinks";
 
-type Props = {}
+type Props = {
+    open: boolean;
+}
 
 type State = {
     activeTab?: string;

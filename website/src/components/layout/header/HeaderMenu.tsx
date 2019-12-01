@@ -13,30 +13,46 @@ type Props = PlaceFavouritesHandler & {
     placeHistory: PlaceList;
 }
 
-export default class HeaderMenu extends React.PureComponent<Props> {
+type State = {
+    openMenus?: string[];
+}
+
+export default class HeaderMenu extends React.PureComponent<Props, State> {
+
+    private readonly setOpenMenus = (openMenus: string[]) => this.setState({openMenus});
+
+    constructor(props) {
+        super(props);
+        this.state = {openMenus: []};
+    }
 
     render() {
 
         return <Menu
             mode="horizontal"
-            className="menu">
+            className="menu"
+            onOpenChange={this.setOpenMenus}
+            openKeys={this.state.openMenus}>
 
             <Menu.SubMenu
+                key="people"
                 title={<a href="/people"><TreeIcon/> People</a>}
                 className={this.props.active == "people" && ActiveClass}>
-                <PeopleMenu {...this.props}/>
+                <PeopleMenu {...this.props} open={this.state.openMenus.includes("people")}/>
             </Menu.SubMenu>
 
             <Menu.SubMenu
+                key="places"
                 title={<><PlacesIcon/> Places</>}
                 className={this.props.active == "places" && ActiveClass}>
-                <PlaceMenu {...this.props}/>
+                <PlaceMenu {...this.props} open={this.state.openMenus.includes("places")}/>
             </Menu.SubMenu>
 
             <Menu.SubMenu
+                key="records"
                 title={<a href="/records"><RecordsIcon/> Records</a>}
                 className={this.props.active == "records" && ActiveClass}>
-                <RecordMenu {...this.props}/>
+                <RecordMenu {...this.props} open={this.state.openMenus.includes("records")}/>
             </Menu.SubMenu>
 
         </Menu>;

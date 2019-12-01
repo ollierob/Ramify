@@ -7,7 +7,9 @@ import {AsyncData, asyncLoadData} from "../../../fetch/AsyncData";
 import {PlaceFavouritesList} from "./PlaceFavouritesList";
 import {PlaceSearch} from "./PlaceSearch";
 
-type Props = PlaceFavouritesHandler;
+type Props = PlaceFavouritesHandler & {
+    open: boolean;
+};
 
 type State = {
     activeTab?: "recent" | "favourites" | "search" | "directory";
@@ -36,7 +38,7 @@ export class PlaceMenu extends React.PureComponent<Props, State> {
             <Tabs tabPosition="left" activeKey={this.state.activeTab} size="large">
 
                 <Tabs.TabPane key="search" tab={<TabTitle title="Search" onMouseover={this.setSearch}/>}>
-                    <PlaceSearch/>
+                    <PlaceSearch parentOpen={this.props.open}/>
                 </Tabs.TabPane>
 
                 <Tabs.TabPane key="directory" tab={<TabTitle title="Directory" onMouseover={this.setDirectory}/>}>

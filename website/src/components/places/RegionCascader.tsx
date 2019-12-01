@@ -5,23 +5,27 @@ import {CascaderOptionType} from "antd/es/cascader";
 import {Flag} from "../images/Flag";
 import {PlaceLoader} from "./PlaceLoader";
 import {Place} from "../../protobuf/generated/place_pb";
+import {RefObject} from "react";
 
 type Props = {
     placeHolder?: string;
     placeLoader: PlaceLoader;
     onSelect: (id: PlaceId) => void;
     size?: "large" | "small"
+    parentOpen?: boolean;
 }
 
 type State = {
     selectedRegion: PlaceId[];
     regions: CascaderOptionType[];
     loadingCountries?: boolean;
+    visible?: boolean;
 }
 
 export default class RegionCascader extends React.PureComponent<Props, State> {
 
     private readonly setSelectedRegion = (id: PlaceId[]) => this.setState({selectedRegion: id});
+    private readonly setVisible = (visible: boolean) => this.setState({visible});
 
     constructor(props: Props) {
         super(props);
@@ -45,7 +49,9 @@ export default class RegionCascader extends React.PureComponent<Props, State> {
             onChange={this.setSelectedRegion}
             options={this.state.regions}
             loadData={this.loadLeafPlace}
-            displayRender={this.renderPlace}/>;
+            displayRender={this.renderPlace}
+            popupVisible={this.state.visible}
+            onPopupVisibleChange={this.setVisible}/>;
 
     }
 
@@ -59,6 +65,8 @@ export default class RegionCascader extends React.PureComponent<Props, State> {
     componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>) {
         if (this.state.selectedRegion != prevState.selectedRegion)
             this.props.onSelect(this.state.selectedRegion.length ? this.state.selectedRegion[this.state.selectedRegion.length - 1] : null);
+        if (!this.props.parentOpen && prevProps.parentOpen && this.state.visible)
+            this.setState({visible: false});
     }
 
     private renderPlace(places: PlaceId[]): React.ReactNode {

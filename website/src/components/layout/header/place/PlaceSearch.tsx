@@ -11,7 +11,9 @@ import {placeTypeName} from "../../../places/PlaceType";
 import {PlaceId} from "../../../places/Place";
 import RegionCascader from "../../../places/RegionCascader";
 
-type Props = {}
+type Props = {
+    parentOpen: boolean;
+}
 
 type State = {
     searchString?: string;
@@ -57,6 +59,7 @@ export class PlaceSearch extends React.PureComponent<Props, State> {
                     </Button>
 
                     <RegionCascader
+                        parentOpen={this.props.parentOpen}
                         placeLoader={this.placeLoader}
                         onSelect={this.setSelectedRegion}/>
 

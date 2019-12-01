@@ -2,7 +2,9 @@ import * as React from "react";
 import {Tabs} from "antd";
 import {NoData} from "../../style/NoData";
 
-type Props = {}
+type Props = {
+    open: boolean;
+}
 
 type State = {
     activeTab?: string;
