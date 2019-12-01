@@ -4,6 +4,7 @@ import com.google.common.base.MoreObjects;
 import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
+import net.ramify.model.place.PlaceHistory;
 import net.ramify.model.place.region.State;
 import net.ramify.model.place.xml.place.XmlArea;
 import net.ramify.model.place.xml.place.XmlPlace;
@@ -36,7 +37,7 @@ public class XmlState extends XmlArea<State> {
 
     @Nonnull
     @Override
-    protected State place(Place parent, PlaceGroupId groupId, ParserContext context) throws Place.InvalidPlaceTypeException {
+    protected State place(Place parent, PlaceGroupId groupId, final PlaceHistory history, ParserContext context) throws Place.InvalidPlaceTypeException {
         return new State(this.placeId(), this.name(), parent, iso, groupId);
     }
 

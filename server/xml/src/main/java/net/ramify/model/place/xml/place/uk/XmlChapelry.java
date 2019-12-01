@@ -4,6 +4,7 @@ import com.google.common.base.MoreObjects;
 import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
+import net.ramify.model.place.PlaceHistory;
 import net.ramify.model.place.region.Chapelry;
 import net.ramify.model.place.xml.place.XmlArea;
 import net.ramify.model.place.xml.place.XmlPlace;
@@ -36,8 +37,8 @@ public class XmlChapelry extends XmlArea<Chapelry> {
     }
 
     @Override
-    protected Chapelry place(final Place parent, final PlaceGroupId groupId, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new Chapelry(this.placeId(), this.name(), parent, groupId);
+    protected Chapelry place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
+        return new Chapelry(this.placeId(), this.name(), parent, groupId, history);
     }
 
     @Override

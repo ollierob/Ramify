@@ -9,6 +9,7 @@ import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlInYear;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
+import net.ramify.model.place.PlaceHistory;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.building.DefaultBuildingHistory;
 import net.ramify.model.place.id.Spid;
@@ -48,9 +49,19 @@ abstract class XmlBuilding<P extends Place> extends XmlPlace {
     }
 
     @Override
+    protected P place(
+            Place parent,
+            PlaceGroupId groupId,
+            PlaceHistory history,
+            ParserContext context)
+            throws Place.InvalidPlaceTypeException {
+        return this.place(parent, groupId, history instanceof BuildingHistory ? (BuildingHistory) history : this.history(context), context);
+    }
+
     protected abstract P place(
             Place parent,
             PlaceGroupId groupId,
+            BuildingHistory history,
             ParserContext context)
             throws Place.InvalidPlaceTypeException;
 

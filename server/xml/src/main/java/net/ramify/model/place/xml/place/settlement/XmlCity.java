@@ -4,6 +4,7 @@ import com.google.common.base.MoreObjects;
 import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
+import net.ramify.model.place.PlaceHistory;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.settlement.City;
@@ -45,9 +46,9 @@ public class XmlCity extends XmlPlace {
     }
 
     @Override
-    protected City place(final Place parent, final PlaceGroupId groupId, final ParserContext context) throws Place.InvalidPlaceTypeException {
+    protected City place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
-        return new City(this.placeId(), this.name(), parent.requireAs(Region.class), groupId);
+        return new City(this.placeId(), this.name(), parent.requireAs(Region.class), groupId, history);
     }
 
     @Override

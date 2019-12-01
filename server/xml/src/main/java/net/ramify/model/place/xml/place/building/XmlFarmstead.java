@@ -4,6 +4,7 @@ import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.building.Farmstead;
+import net.ramify.model.place.type.BuildingHistory;
 import net.ramify.model.place.xml.place.XmlPlace;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -16,8 +17,8 @@ public class XmlFarmstead extends XmlBuilding<Farmstead> {
     }
 
     @Override
-    protected Farmstead place(final Place parent, final PlaceGroupId groupId, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new Farmstead(this.placeId(), this.name(), parent, groupId, this.history(context));
+    protected Farmstead place(final Place parent, final PlaceGroupId groupId, final BuildingHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
+        return new Farmstead(this.placeId(), this.name(), parent, groupId, history);
     }
 
 }

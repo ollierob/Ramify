@@ -20,17 +20,29 @@ import java.util.Set;
 public class MetropolitanBorough extends AbstractRegion implements District {
 
     private static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(Region.class, Settlement.class);
-    private static final PlaceHistory BOROUGH_HISTORY = new DefaultPlaceHistory(ExactDate.on(1974, Month.APRIL, 1), null);
+    public static final PlaceHistory BOROUGH_HISTORY = new DefaultPlaceHistory(ExactDate.on(1974, Month.APRIL, 1), null);
 
     private final Region parent;
     private final String iso;
 
-    public MetropolitanBorough(final PlaceId id, final String name, final Place parent, final PlaceGroupId groupId, final String iso) throws InvalidPlaceTypeException {
-        this(id, name, parent.requireAs(Region.class), groupId, iso);
+    public MetropolitanBorough(
+            final PlaceId id,
+            final String name,
+            final Place parent,
+            final PlaceGroupId groupId,
+            final String iso,
+            final PlaceHistory history) throws InvalidPlaceTypeException {
+        this(id, name, parent.requireAs(Region.class), groupId, iso, history);
     }
 
-    public MetropolitanBorough(final PlaceId id, final String name, final Region parent, final PlaceGroupId groupId, final String iso) {
-        super(id, name, groupId, BOROUGH_HISTORY);
+    public MetropolitanBorough(
+            final PlaceId id,
+            final String name,
+            final Region parent,
+            final PlaceGroupId groupId,
+            final String iso,
+            final PlaceHistory history) {
+        super(id, name, groupId, history);
         this.parent = parent;
         this.iso = iso;
     }

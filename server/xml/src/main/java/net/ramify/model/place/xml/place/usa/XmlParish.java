@@ -3,6 +3,7 @@ package net.ramify.model.place.xml.place.usa;
 import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
+import net.ramify.model.place.PlaceHistory;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.Parish;
@@ -18,8 +19,8 @@ class XmlParish extends XmlCounty {
     }
 
     @Override
-    protected Parish place(final Place parent, final PlaceGroupId groupId, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new Parish(this.placeId(), this.name(), parent, groupId);
+    protected Parish place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
+        return new Parish(this.placeId(), this.name(), parent, groupId, history);
     }
 
 }

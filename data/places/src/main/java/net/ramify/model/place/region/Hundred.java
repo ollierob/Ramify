@@ -3,6 +3,7 @@ package net.ramify.model.place.region;
 import com.google.common.collect.ImmutableSet;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
+import net.ramify.model.place.PlaceHistory;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.region.manor.Manor;
@@ -16,8 +17,8 @@ public class Hundred extends AbstractRegion {
 
     private final CountyOrSubdivision parent;
 
-    public Hundred(final PlaceId id, final String name, final CountyOrSubdivision parent, final PlaceGroupId groupId) {
-        super(id, name, groupId);
+    public Hundred(final PlaceId id, final String name, final CountyOrSubdivision parent, final PlaceGroupId groupId, final PlaceHistory history) {
+        super(id, name, groupId, history);
         this.parent = parent;
     }
 

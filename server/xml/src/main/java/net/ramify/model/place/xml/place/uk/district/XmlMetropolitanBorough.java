@@ -1,8 +1,10 @@
 package net.ramify.model.place.xml.place.uk.district;
 
+import com.google.common.base.MoreObjects;
 import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
+import net.ramify.model.place.PlaceHistory;
 import net.ramify.model.place.region.district.MetropolitanBorough;
 import net.ramify.model.place.xml.place.XmlArea;
 import net.ramify.model.place.xml.place.XmlPlace;
@@ -37,8 +39,13 @@ public class XmlMetropolitanBorough extends XmlArea<MetropolitanBorough> {
     }
 
     @Override
-    protected MetropolitanBorough place(final Place parent, final PlaceGroupId groupId, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new MetropolitanBorough(this.placeId(), this.name(), parent, groupId, iso);
+    protected MetropolitanBorough place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
+        return new MetropolitanBorough(this.placeId(), this.name(), parent, groupId, iso, history);
+    }
+
+    @Override
+    protected PlaceHistory history(final ParserContext context) {
+        return MoreObjects.firstNonNull(super.history(context), MetropolitanBorough.BOROUGH_HISTORY);
     }
 
     @Override

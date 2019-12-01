@@ -47,7 +47,7 @@ export default abstract class BasePage<S = any> extends React.PureComponent<Base
     }
 
     setPageTitle(title: string) {
-        document.title = title;
+        document.title = "Ramify // " + title;
     }
 
     componentDidMount() {

@@ -1,8 +1,10 @@
 package net.ramify.model.place.xml.place.uk.district;
 
+import com.google.common.base.MoreObjects;
 import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
+import net.ramify.model.place.PlaceHistory;
 import net.ramify.model.place.region.district.RuralDistrict;
 import net.ramify.model.place.xml.place.XmlArea;
 import net.ramify.model.place.xml.place.XmlPlace;
@@ -27,13 +29,18 @@ public class XmlRuralDistrict extends XmlArea<RuralDistrict> {
     }
 
     @Override
-    protected RuralDistrict place(final Place parent, final PlaceGroupId groupId, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new RuralDistrict(this.placeId(), this.name(), parent, groupId);
+    protected RuralDistrict place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
+        return new RuralDistrict(this.placeId(), this.name(), parent, groupId, history);
     }
 
     @Override
     protected Collection<XmlPlace> children() {
         return children;
+    }
+
+    @Override
+    protected PlaceHistory history(final ParserContext context) {
+        return MoreObjects.firstNonNull(super.history(context), RuralDistrict.HISTORY);
     }
 
 }

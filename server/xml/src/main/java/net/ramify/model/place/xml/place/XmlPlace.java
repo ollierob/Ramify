@@ -92,11 +92,11 @@ public abstract class XmlPlace implements HasPlaceId {
 
     private Place place(final PlaceProvider placeProvider, final Place parent, final PlaceGroupProvider groupProvider, final ParserContext context) throws Place.InvalidPlaceTypeException {
         final var id = this.placeId();
-        return name == null ? placeProvider.require(id) : this.place(parent, Functions.ifNonNull(groupProvider.getGroup(id), PlaceGroup::id), context);
+        return name == null ? placeProvider.require(id) : this.place(parent, Functions.ifNonNull(groupProvider.getGroup(id), PlaceGroup::id), this.history(context), context);
     }
 
     @Nonnull
-    protected abstract Place place(Place parent, PlaceGroupId groupId, ParserContext context) throws Place.InvalidPlaceTypeException;
+    protected abstract Place place(Place parent, PlaceGroupId groupId, PlaceHistory history, ParserContext context) throws Place.InvalidPlaceTypeException;
 
     @CheckForNull
     protected abstract Collection<? extends XmlPlace> children();

@@ -4,12 +4,13 @@ import com.google.common.base.MoreObjects;
 import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
+import net.ramify.model.place.PlaceHistory;
 import net.ramify.model.place.region.Rape;
 import net.ramify.model.place.xml.place.XmlArea;
 import net.ramify.model.place.xml.place.XmlPlace;
-import net.ramify.model.place.xml.place.uk.manor.XmlManor;
 import net.ramify.model.place.xml.place.settlement.XmlCity;
 import net.ramify.model.place.xml.place.settlement.XmlTown;
+import net.ramify.model.place.xml.place.uk.manor.XmlManor;
 
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
@@ -36,9 +37,9 @@ class XmlRape extends XmlArea<Rape> {
     }
 
     @Override
-    protected Rape place(final Place parent, final PlaceGroupId groupId, final ParserContext context) throws Place.InvalidPlaceTypeException {
+    protected Rape place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
-        return new Rape(this.placeId(), this.name(), parent, groupId);
+        return new Rape(this.placeId(), this.name(), parent, groupId, history);
     }
 
     @Override

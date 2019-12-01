@@ -4,6 +4,7 @@ import com.google.common.base.MoreObjects;
 import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
+import net.ramify.model.place.PlaceHistory;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.manor.Manor;
@@ -32,8 +33,8 @@ public class XmlManor extends XmlPlace {
     }
 
     @Override
-    protected Manor place(final Place parent, final PlaceGroupId groupId, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new Manor(this.placeId(), this.name(), parent, groupId, this.history(context));
+    protected Manor place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
+        return new Manor(this.placeId(), this.name(), parent, groupId, history);
     }
 
     @Override

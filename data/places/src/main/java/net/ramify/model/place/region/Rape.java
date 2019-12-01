@@ -3,6 +3,7 @@ package net.ramify.model.place.region;
 import com.google.common.collect.ImmutableSet;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
+import net.ramify.model.place.PlaceHistory;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.proto.PlaceProto;
 
@@ -13,12 +14,12 @@ public class Rape extends Hundred implements CountyOrSubdivision {
 
     static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(Hundred.class);
 
-    public Rape(final PlaceId id, final String name, final Place parent, final PlaceGroupId groupId) throws InvalidPlaceTypeException {
-        this(id, name, parent.requireAs(County.class), groupId);
+    public Rape(final PlaceId id, final String name, final Place parent, final PlaceGroupId groupId, final PlaceHistory history) throws InvalidPlaceTypeException {
+        this(id, name, parent.requireAs(County.class), groupId, history);
     }
 
-    public Rape(final PlaceId id, final String name, final County parent, final PlaceGroupId groupId) {
-        super(id, name, parent, groupId);
+    public Rape(final PlaceId id, final String name, final County parent, final PlaceGroupId groupId, final PlaceHistory history) {
+        super(id, name, parent, groupId, history);
     }
 
     @Override
