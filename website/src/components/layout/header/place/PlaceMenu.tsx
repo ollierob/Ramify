@@ -1,13 +1,13 @@
 import * as React from "react";
 import {Tabs} from "antd";
 import {PlaceFavouritesHandler} from "../../../places/PlaceFavourites";
-import {NoData} from "../../../style/NoData";
 import {PlaceList} from "../../../places/Place";
 import {AsyncData, asyncLoadData} from "../../../fetch/AsyncData";
-import {PlaceFavouritesList} from "./PlaceFavouritesList";
+import {PlaceFavouritesList, PlaceHistoryList} from "./PlaceFavouritesList";
 import {PlaceSearch} from "./PlaceSearch";
+import {PlaceHistoryHandler} from "../../../places/PlaceHistory";
 
-type Props = PlaceFavouritesHandler & {
+type Props = PlaceFavouritesHandler & PlaceHistoryHandler & {
     open: boolean;
 };
 
@@ -47,12 +47,12 @@ export class PlaceMenu extends React.PureComponent<Props, State> {
 
                 <Tabs.TabPane key="favourites" tab={<TabTitle title="Favourites" onMouseover={this.setFavourites}/>}>
                     <PlaceFavouritesList
-                        favourites={this.state.favourites.data}
+                        places={this.state.favourites.data}
                         loading={this.state.favourites.loading}/>
                 </Tabs.TabPane>
 
                 <Tabs.TabPane key="recent" tab={<TabTitle title="Recent" onMouseover={this.setRecent}/>}>
-                    <RecentList/>
+                    <RecentList history={this.props.placeHistory()}/>
                 </Tabs.TabPane>
 
             </Tabs>
@@ -83,6 +83,6 @@ const TabTitle = (props: {title: React.ReactNode, onMouseover: () => void}) => {
     return <div onMouseOver={props.onMouseover}>{props.title}</div>;
 };
 
-const RecentList = (props: {}) => {
-    return <NoData text="No recent places"/>;
+const RecentList = (props: {history: PlaceList}) => {
+    return <PlaceHistoryList loading={false} places={props.history}/>;
 };

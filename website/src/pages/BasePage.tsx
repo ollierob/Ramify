@@ -1,8 +1,7 @@
 import * as React from "react";
 import HeaderMenu, {HeaderMenuType} from "../components/layout/header/HeaderMenu";
 import "./Core";
-import {getSessionPlaceHistory} from "../components/places/PlaceHistory";
-import {PlaceList} from "../components/places/Place";
+import {PlaceHistoryHandler, SessionPlaceHistoryHandler} from "../components/places/PlaceHistory";
 import {PlaceFavouritesHandler, RemotePlaceFavouritesHandler} from "../components/places/PlaceFavourites";
 import {RouteComponentProps} from "react-router";
 
@@ -11,6 +10,7 @@ export type BasePageProps = RouteComponentProps<any>;
 export default abstract class BasePage<S = any> extends React.PureComponent<BasePageProps, S> {
 
     readonly placeFavourites: PlaceFavouritesHandler = RemotePlaceFavouritesHandler;
+    readonly placeHistory: PlaceHistoryHandler = SessionPlaceHistoryHandler;
     private readonly onHashChange = () => this.hashChanged();
 
     render() {
@@ -32,13 +32,8 @@ export default abstract class BasePage<S = any> extends React.PureComponent<Base
     menu(): React.ReactNode {
         return <HeaderMenu
             {...this.placeFavourites}
-            placeHistory={this.placeHistory()}
+            {...this.placeHistory}
             active={this.active()}/>;
-    }
-
-    placeHistory(): PlaceList {
-        //TODO override without causing mount/update loops
-        return getSessionPlaceHistory();
     }
 
     abstract body(): React.ReactNode;

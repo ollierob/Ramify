@@ -7,14 +7,13 @@ import {PlaceGroupInfo} from "./PlaceGroupInfo";
 import "./PlaceGroup.css";
 import {updatePageHash} from "../../../components/Page";
 import {PlaceGroupId, ResolvedPlaceGroup, synthesizePlaceGroup} from "../../../components/places/PlaceGroup";
-import {addPlaceHistory} from "../../../components/places/PlaceHistory";
 
 type Props = PlaceBasePageProps;
 
 type State = {
-    groupId: PlaceGroupId;
+    selectedGroupId: PlaceGroupId;
+    selectedPlaceId: PlaceId;
     group: AsyncData<ResolvedPlaceGroup>;
-    placeId: PlaceId;
 };
 
 export class PlaceGroupPage extends PlaceBasePage<State> {
@@ -24,9 +23,9 @@ export class PlaceGroupPage extends PlaceBasePage<State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            groupId: this.readPlaceGroupId(),
+            selectedGroupId: this.readPlaceGroupId(),
             group: {loading: true},
-            placeId: this.readPlaceId(),
+            selectedPlaceId: this.readPlaceId(),
         };
         this.setPlaceId = this.setPlaceId.bind(this);
     }
@@ -40,7 +39,7 @@ export class PlaceGroupPage extends PlaceBasePage<State> {
     }
 
     private setPlaceId(id: PlaceId) {
-        this.setState({placeId: id});
+        this.setState({selectedPlaceId: id});
         updatePageHash({base: "group", place: id});
     }
 
@@ -50,7 +49,7 @@ export class PlaceGroupPage extends PlaceBasePage<State> {
             <PlaceGroupInfo
                 {...this.state}
                 favourites={this.placeFavourites}
-                selected={this.state.placeId}
+                selected={this.state.selectedPlaceId}
                 select={this.setPlaceId}/>
         </div>;
 
@@ -64,10 +63,12 @@ export class PlaceGroupPage extends PlaceBasePage<State> {
     componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>) {
         if (this.props.location != prevProps.location)
             this.updatePlace();
-        if (this.state.groupId != prevState.groupId || (!this.state.groupId && this.state.placeId != prevState.placeId))
+        if (this.state.selectedGroupId != prevState.selectedGroupId || (!this.state.selectedGroupId && this.state.selectedPlaceId != prevState.selectedPlaceId))
             this.loadPlaceGroup();
         if (this.state.group.data && this.state.group.data != prevState.group.data)
             this.setPageTitle(this.state.group.data.group.name);
+        if (this.state.selectedPlaceId != prevState.selectedPlaceId || this.state.group != prevState.group)
+            this.addPlaceHistory(this.state.selectedPlaceId);
     }
 
     protected hashChanged(): void {
@@ -75,16 +76,25 @@ export class PlaceGroupPage extends PlaceBasePage<State> {
     }
 
     private updatePlace() {
-        this.setState({groupId: this.readPlaceGroupId(), placeId: this.readPlaceId()});
+        this.setState({selectedGroupId: this.readPlaceGroupId(), selectedPlaceId: this.readPlaceId()});
     }
 
-    private loadPlaceGroup(groupId: PlaceGroupId = this.state.groupId, placeId: PlaceId = this.state.placeId) {
+    private loadPlaceGroup(groupId: PlaceGroupId = this.state.selectedGroupId, placeId: PlaceId = this.state.selectedPlaceId) {
         if (groupId) asyncLoadData(groupId, id => this.placeLoader.loadResolvedGroup(id), group => this.setState({group}));
         else if (placeId) asyncLoadData(placeId, id => this.loadPlace(id), group => this.setState({group}));
     }
 
     private loadPlace(id: PlaceId): Promise<ResolvedPlaceGroup> {
         return this.placeLoader.loadPlaceBundle(id).then(synthesizePlaceGroup);
+    }
+
+    private addPlaceHistory(selectedPlaceId: PlaceId) {
+        if (!selectedPlaceId) return;
+        const data = this.state.group.data;
+        if (!data) return;
+        console.log("Adding place: " + selectedPlaceId);
+        const child = data.children.find(p => p.place.id == selectedPlaceId);
+        if (child) this.placeHistory.addPlaceHistory(child.place);
     }
 
 }

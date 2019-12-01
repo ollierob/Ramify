@@ -54,11 +54,6 @@ function sortChildren(children: ReadonlyArray<PlaceBundle.AsObject>): ReadonlyAr
     return sorted;
 }
 
-type ChildProps = {
-    place: PlaceBundle.AsObject;
-    favourites: PlaceFavouritesHandler
-}
-
 const Title = (props: {place: Place.AsObject}) => {
     const place = props.place;
     return <>

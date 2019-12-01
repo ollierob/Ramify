@@ -1,7 +1,7 @@
 import {Place} from "../../protobuf/generated/place_pb";
 import {PlaceList} from "./Place";
 
-export function addPlaceHistory(place: Place.AsObject): PlaceList {
+function pushPlaceHistory(place: Place.AsObject): PlaceList {
     let currentHistory = getSessionPlaceHistory();
     if (!place) return currentHistory;
     const history = addNewPlace(place, currentHistory);
@@ -14,7 +14,7 @@ function savePlaceHistory(history: PlaceList): void {
     sessionStorage.setItem("place-history", JSON.stringify(history));
 }
 
-export function getSessionPlaceHistory(): PlaceHistory {
+function getSessionPlaceHistory(): PlaceHistory {
     return JSON.parse(sessionStorage.getItem("place-history")) || [];
 }
 
@@ -25,14 +25,20 @@ export function addNewPlace(place: Place.AsObject, list: PlaceList, permitDuplic
     place = place.parent ? {...place, parent: null} : place;
     if (!list.length) return [place];
     if (list[0].id == place.id) return list;
+    const newList = [place].concat(list);
     if (!permitDuplicates) {
-        const i = list.findIndex(h => h.id == place.id);
-        if (i >= 0) return [].concat(list).splice(i, 1).concat(place);
+        const i = newList.findIndex((h, i) => i > 0 && h.id == place.id);
+        if (i >= 0) newList.splice(i, 1);
     }
-    return [place].concat(list);
+    return newList;
 }
 
 export type PlaceHistoryHandler = {
     placeHistory: () => PlaceList;
     addPlaceHistory: (place: Place.AsObject) => void;
 }
+
+export const SessionPlaceHistoryHandler: PlaceHistoryHandler = {
+    addPlaceHistory: pushPlaceHistory,
+    placeHistory: getSessionPlaceHistory
+};

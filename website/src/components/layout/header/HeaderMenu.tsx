@@ -1,16 +1,15 @@
 import * as React from "react";
 import {Menu} from "antd";
 import {PlacesIcon, RecordsIcon, TreeIcon} from "../../images/Icons";
-import {PlaceList} from "../../places/Place";
 import {PlaceFavouritesHandler} from "../../places/PlaceFavourites";
 import "./HeaderMenu.css";
 import {PlaceMenu} from "./place/PlaceMenu";
 import {RecordMenu} from "./RecordMenu";
 import {PeopleMenu} from "./PeopleMenu";
+import {PlaceHistoryHandler} from "../../places/PlaceHistory";
 
-type Props = PlaceFavouritesHandler & {
+type Props = PlaceFavouritesHandler & PlaceHistoryHandler & {
     active: HeaderMenuType;
-    placeHistory: PlaceList;
 }
 
 type State = {
@@ -31,7 +30,9 @@ export default class HeaderMenu extends React.PureComponent<Props, State> {
         return <Menu
             mode="horizontal"
             className="menu"
+            subMenuCloseDelay={0.3}
             onOpenChange={this.setOpenMenus}
+            multiple={false}
             openKeys={this.state.openMenus}>
 
             <Menu.SubMenu
