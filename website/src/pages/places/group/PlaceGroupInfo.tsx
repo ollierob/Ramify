@@ -1,12 +1,12 @@
 import * as React from "react";
 import {AsyncData} from "../../../components/fetch/AsyncData";
-import {Place, PlaceBundle, PlaceHistory} from "../../../protobuf/generated/place_pb";
+import {Place, PlaceHistory} from "../../../protobuf/generated/place_pb";
 import {Card, Tabs} from "antd";
 import {PlaceId} from "../../../components/places/Place";
 import {ResolvedPlaceGroup, sortPlaceGroupChildren} from "../../../components/places/PlaceGroup";
-import {placeTypeKey, placeTypeName, sortByPlaceType} from "../../../components/places/PlaceType";
+import {placeTypeName} from "../../../components/places/PlaceType";
 import {PlaceFavouritesHandler} from "../../../components/places/PlaceFavourites";
-import {yearPeriod} from "../../../components/date/DateRange";
+import {formatYearPeriod} from "../../../components/date/DateRange";
 import {PlaceGroupTab} from "./PlaceGroupTab";
 import {Flag} from "../../../components/images/Flag";
 
@@ -59,7 +59,7 @@ const History = (props: {history: PlaceHistory.AsObject}) => {
     if (!history.open && !history.close) return null;
     return <span className="history">
         {" "}
-        ({yearPeriod(history.open, history.close)})
+        ({formatYearPeriod(history.open, history.close, {after: "since ", before: "until "})})
     </span>;
 };
 

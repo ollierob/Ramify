@@ -1,5 +1,6 @@
 import {Date as DateProto} from "../../protobuf/generated/date_pb";
 
+//FIXME make this accept two values
 export type DateFormatter = (date: DateProto.AsObject) => string | number;
 
 export const YearFormatter: DateFormatter = d => d.year;

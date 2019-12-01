@@ -4,12 +4,13 @@ import {List} from "antd";
 import {Person} from "../../../../protobuf/generated/person_pb";
 import {Event} from "../../../../protobuf/generated/event_pb";
 import {FormattedYearRange} from "../../../../components/date/FormattedDateRange";
-import {findBirth} from "../../../../components/event/Event";
+import {findBirth, findDeath} from "../../../../components/event/Event";
 import {Family} from "../../../../protobuf/generated/family_pb";
 import {Relationship} from "../../../../protobuf/generated/relationship_pb";
 import {findRelationship, relationshipName} from "../../../../components/relationship/Relationship";
 import {Name} from "../../../../protobuf/generated/name_pb";
 import {sortPeopleByBirthDate} from "../../../../components/people/Person";
+import {formatYearPeriod, formatYear} from "../../../../components/date/DateRange";
 
 export function renderFamilyRecord(record: FamilyRecord) {
     if (!record) return null;
@@ -30,7 +31,7 @@ function renderFamily(family: Family.AsObject) {
 function renderPerson(person: Person.AsObject, root: Person.AsObject, relationships: ReadonlyArray<Relationship.AsObject>) {
     return <>
         {renderName(person.name)}
-        {renderBirth(findBirth(person.eventsList))}
+        {renderLifespan(person)}
         {renderRelationship(person, root, relationships)}
     </>;
 }
@@ -39,8 +40,13 @@ function renderName(name: Name.AsObject) {
     return name && <span className="name">{name.value}</span>;
 }
 
-function renderBirth(event: Event.AsObject) {
-    return event && <span className="birth">Born <FormattedYearRange date={event.date} words={{in: "in"}}/></span>;
+function renderLifespan(person: Person.AsObject) {
+    const birth = findBirth(person.eventsList);
+    const death = findDeath(person.eventsList);
+    if (birth && death) return <span className="birth death">Lived {formatYearPeriod(birth.date, death.date)}</span>;
+    if (birth) return <span className="birth">Born {formatYearPeriod(birth.date, null)}</span>;
+    if (death) return <span className="death">Died <FormattedYearRange date={death.date}/></span>;
+    return null;
 }
 
 function renderRelationship(person: Person.AsObject, root: Person.AsObject, relationships: ReadonlyArray<Relationship.AsObject>) {
