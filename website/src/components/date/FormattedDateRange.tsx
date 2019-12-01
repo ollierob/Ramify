@@ -13,13 +13,13 @@ export const FormattedDateRange = (props: {date: DateRangeProto.AsObject, words?
     const date = props.date;
     if (!date) return null;
     const words = props.words ? {...DefaultPrefixWords, ...props.words} : DefaultPrefixWords;
-    const format = dateFormatter(props.accuracy);
+    const formatter = dateFormatter(props.accuracy);
     if (!date.earliest && !date.latest) return <>{words.unknown}</>;
-    if (!date.earliest && date.latest) return <>{words.before}{format(date.latest)}</>;
-    if (date.earliest && !date.latest) return <>{words.after}{format(date.earliest)}</>;
-    if (datesEqual(date.earliest, date.latest)) return <>{words.on}{format(date.earliest)}</>;
+    if (!date.earliest && date.latest) return <>{words.before}{formatter.formatDate(date.latest)}</>;
+    if (date.earliest && !date.latest) return <>{words.after}{formatter.formatDate(date.earliest)}</>;
+    if (datesEqual(date.earliest, date.latest)) return <>{words.on}{formatter.formatDate(date.earliest)}</>;
     if (isInYear(date)) return <>{words.in}{date.earliest.year}</>;
-    return <>{format(date.earliest)} - {format(date.latest)}</>;
+    return <>{formatter.formatRange(date.earliest, date.latest)}</>;
 };
 
 function dateFormatter(accuracy: "year" | "month" | "day"): DateFormatter {

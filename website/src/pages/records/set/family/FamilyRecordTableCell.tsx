@@ -2,15 +2,14 @@ import * as React from "react";
 import {FamilyRecord} from "./FamilyRecord";
 import {List} from "antd";
 import {Person} from "../../../../protobuf/generated/person_pb";
-import {Event} from "../../../../protobuf/generated/event_pb";
-import {FormattedYearRange} from "../../../../components/date/FormattedDateRange";
+import {FormattedDateRange, FormattedYearRange} from "../../../../components/date/FormattedDateRange";
 import {findBirth, findDeath} from "../../../../components/event/Event";
 import {Family} from "../../../../protobuf/generated/family_pb";
 import {Relationship} from "../../../../protobuf/generated/relationship_pb";
 import {findRelationship, relationshipName} from "../../../../components/relationship/Relationship";
 import {Name} from "../../../../protobuf/generated/name_pb";
 import {sortPeopleByBirthDate} from "../../../../components/people/Person";
-import {formatYearPeriod, formatYear} from "../../../../components/date/DateRange";
+import {formatDateRange} from "../../../../components/date/DateRange";
 
 export function renderFamilyRecord(record: FamilyRecord) {
     if (!record) return null;
@@ -43,8 +42,8 @@ function renderName(name: Name.AsObject) {
 function renderLifespan(person: Person.AsObject) {
     const birth = findBirth(person.eventsList);
     const death = findDeath(person.eventsList);
-    if (birth && death) return <span className="birth death">Lived {formatYearPeriod(birth.date, death.date)}</span>;
-    if (birth) return <span className="birth">Born {formatYearPeriod(birth.date, null)}</span>;
+    if (birth && death) return <span className="birth death">Alive {formatDateRange(birth.date, death.date)}</span>;
+    if (birth) return <span className="birth">Born <FormattedYearRange date={birth.date}/></span>;
     if (death) return <span className="death">Died <FormattedYearRange date={death.date}/></span>;
     return null;
 }

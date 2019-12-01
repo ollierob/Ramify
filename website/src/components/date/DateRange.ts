@@ -1,4 +1,5 @@
 import {Date as DateProto, DateRange as DateRangeProto} from "../../protobuf/generated/date_pb";
+import {PrefixWords} from "./FormattedDateRange";
 
 export type DateRange = DateRangeProto.AsObject;
 export type YearRange = {from: number, to: number}
@@ -53,30 +54,39 @@ export function latestYear(date: DateRangeProto.AsObject): number {
     return null;
 }
 
-type PeriodWords = {
-    after?: string;
-    before?: string;
-}
+const DefaultRangeWords: Partial<PrefixWords> = {before: "before ", after: "after "};
 
-const DefaultPeriodWords: PeriodWords = {before: "before ", after: "since "};
-
-export function formatYearPeriod(start: DateRangeProto.AsObject, end: DateRangeProto.AsObject, words?: PeriodWords): string {
-    words = {...DefaultPeriodWords, ...words};
+export function formatDateRange(start: DateRangeProto.AsObject, end: DateRangeProto.AsObject, words?: Partial<PrefixWords>): string {
+    words = {...DefaultRangeWords, ...words};
     if (!start && !end) return null;
     if (!start) return words.before + circa(end) + (latestYear(end) || "now");
     if (!end) return words.after + circa(start) + (earliestYear(start) || "?");
-    return circa(start) + formatYear(start, true) + " - " + circa(end) + formatYear(end, false);
+    return circa(start) + formatFromYear(start.earliest, start.latest)
+        + " - "
+        + circa(end) + formatToYear(end.earliest, end.latest);
 }
 
-export function formatYear(date: DateRangeProto.AsObject, useEarlier: boolean) {
-    if (!date) return null;
-    const y1 = earliestYear(date);
-    const y2 = latestYear(date);
+function formatFromYear(start: DateProto.AsObject, end: DateProto.AsObject) {
+    return formatCloseYears(start, end) || start.year;
+}
+
+function formatToYear(start: DateProto.AsObject, end: DateProto.AsObject) {
+    return formatCloseYears(start, end) || end.year;
+}
+
+function formatCloseYears(start: DateProto.AsObject, end: DateProto.AsObject) {
+    if (!start && !end) return null;
+    const y1 = start ? start.year : end.year;
+    const y2 = end ? end.year : start.year;
     if (y1 == y2) return y1;
-    if (y1 == y2 - 1) return y1 + "/" + (y2 % 100);
-    return useEarlier ? y1 : y2;
+    if (y1 + 1 == y2) return y1 + "/" + (y2 % 100);
+    return null;
 }
 
 function circa(date: DateRangeProto.AsObject): string {
     return date != null && date.approximate ? "c." : "";
+}
+
+export function dateToRange(date: DateProto.AsObject): DateRangeProto.AsObject {
+    return {earliest: date, latest: date, approximate: false};
 }
