@@ -44,7 +44,7 @@ export const PlaceInfo = (props: Props) => {
 
         <Card className="records" title={<b>Records</b>} bordered={false}>
             <RecordCards
-                removePrefix={place.name}
+                removePrefix={place.name + " "}
                 loading={props.records && props.records.loading}
                 records={props.records && props.records.data}/>
         </Card></>;
