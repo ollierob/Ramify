@@ -1,5 +1,6 @@
 package net.ramify.model.place.xml.place.uk.district;
 
+import com.google.common.base.MoreObjects;
 import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
@@ -33,6 +34,11 @@ public class XmlCivilParish extends XmlArea<CivilParish> {
     @Override
     protected CivilParish place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
         return new CivilParish(this.placeId(), this.name(), parent, groupId, history);
+    }
+
+    @Override
+    protected PlaceHistory history(ParserContext context) {
+        return MoreObjects.firstNonNull(super.history(context), CivilParish.HISTORY);
     }
 
     @Override

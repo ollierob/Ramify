@@ -52,3 +52,14 @@ export function latestYear(date: DateRangeProto.AsObject): number {
     if (date.earliest) return date.earliest.year;
     return null;
 }
+
+export function yearPeriod(start: DateRangeProto.AsObject, end: DateRangeProto.AsObject): string {
+    if (!start && !end) return null;
+    if (!start) return "until " + circa(end) + (latestYear(end) || "now");
+    if (!end) return "since " + circa(start) + (earliestYear(start) || "?");
+    return circa(start) + (earliestYear(start) || "?") + " - " + circa(end) + (latestYear(end) || "now");
+}
+
+function circa(date: DateRangeProto.AsObject): string {
+    return date != null && date.approximate ? "c." : "";
+}

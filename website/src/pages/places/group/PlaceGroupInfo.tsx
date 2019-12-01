@@ -5,12 +5,11 @@ import {Card, Tabs} from "antd";
 import {PlaceId} from "../../../components/places/Place";
 import {ResolvedPlaceGroup} from "../../../components/places/PlaceGroup";
 import {placeTypeKey, placeTypeName, sortByPlaceType} from "../../../components/places/PlaceType";
-import {PlaceInfo} from "../info/PlaceInfo";
 import {PlaceFavouritesHandler} from "../../../components/places/PlaceFavourites";
-import {PlaceBreadcrumb} from "../info/PlaceBreadcrumb";
-import {earliestYear, latestYear} from "../../../components/date/DateRange";
+import {earliestYear, latestYear, yearPeriod} from "../../../components/date/DateRange";
 import {PlaceGroupTab} from "./PlaceGroupTab";
 import {Flag} from "../../../components/images/Flag";
+import {DateRange} from "../../../protobuf/generated/date_pb";
 
 type Props = {
     group: AsyncData<ResolvedPlaceGroup>
@@ -68,6 +67,7 @@ const History = (props: {history: PlaceHistory.AsObject}) => {
     if (!history.open && !history.close) return null;
     return <span className="history">
         {" "}
-        ({earliestYear(history.open) || "?"} - {latestYear(history.close) || "now"})
+        ({yearPeriod(history.open, history.close)})
     </span>;
 };
+

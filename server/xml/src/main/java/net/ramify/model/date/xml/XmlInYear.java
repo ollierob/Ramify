@@ -13,9 +13,12 @@ public class XmlInYear extends XmlDateRange {
     @XmlAttribute(name = "year", required = true)
     private int year;
 
+    @XmlAttribute(name = "approximate")
+    private Boolean approximate;
+
     @Override
     public DateRange resolve(final DateParser parser) {
-        return new InYears(year);
+        return new InYears(year, Boolean.TRUE.equals(approximate));
     }
 
 }

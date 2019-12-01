@@ -21,6 +21,10 @@ public class BeforeDate<D extends ChronoLocalDate> implements DateRange {
         return new BeforeDate<>(LocalDate.of(year, 1, 1), false);
     }
 
+    public static BeforeDate<?> approximatelyBefore(final int year) {
+        return new BeforeDate<>(LocalDate.of(year, 1, 1), true);
+    }
+
     private final D date;
     private final boolean approximate;
 

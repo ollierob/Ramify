@@ -68,6 +68,8 @@
         <xs:sequence/>
                 
         <xs:attribute name="year" type="xs:int" use="required"/>
+                
+        <xs:attribute name="approximate" type="xs:boolean"/>
               
       </xs:extension>
           
@@ -104,6 +106,8 @@
         <xs:sequence/>
                 
         <xs:attribute name="year" type="xs:int" use="required"/>
+                
+        <xs:attribute name="approximate" type="xs:boolean"/>
               
       </xs:extension>
           

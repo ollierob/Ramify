@@ -13,9 +13,14 @@ public class XmlBeforeYear extends XmlDateRange {
     @XmlAttribute(name = "year", required = true)
     private int year;
 
+    @XmlAttribute(name = "approximate")
+    private Boolean approximate;
+
     @Override
     public DateRange resolve(final DateParser parser) {
-        return BeforeDate.strictlyBefore(year);
+        return Boolean.TRUE.equals(approximate)
+                ? BeforeDate.approximatelyBefore(year)
+                : BeforeDate.strictlyBefore(year);
     }
 
 }

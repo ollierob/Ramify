@@ -11,6 +11,8 @@ import javax.annotation.Nonnull;
 
 public class CivilParish extends AbstractRegion {
 
+    public static final PlaceHistory HISTORY = MetropolitanBorough.BOROUGH_HISTORY;
+
     private final District parent;
 
     public CivilParish(final PlaceId id, final String name, final Place parent, final PlaceGroupId groupId, final PlaceHistory history) throws InvalidPlaceTypeException {
