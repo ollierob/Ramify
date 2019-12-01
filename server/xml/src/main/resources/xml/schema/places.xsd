@@ -596,36 +596,8 @@
             <xs:element ref="tns:inn"/>
                         
             <xs:element ref="tns:graveyard"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlHamlet">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:choice maxOccurs="unbounded" minOccurs="0">
-                        
-            <xs:element ref="tns:church"/>
-                        
-            <xs:element ref="tns:mill"/>
-                        
-            <xs:element ref="tns:inn"/>
                         
             <xs:element ref="tns:farmstead"/>
-                        
-            <xs:element ref="tns:graveyard"/>
                       
           </xs:choice>
                   
@@ -665,6 +637,36 @@
       
   </xs:complexType>
     
+  <xs:complexType name="xmlHamlet">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPlace">
+                
+        <xs:sequence>
+                    
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        
+            <xs:element ref="tns:church"/>
+                        
+            <xs:element ref="tns:mill"/>
+                        
+            <xs:element ref="tns:inn"/>
+                        
+            <xs:element ref="tns:farmstead"/>
+                        
+            <xs:element ref="tns:graveyard"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
   <xs:complexType name="places">
         
     <xs:sequence>
@@ -691,6 +693,8 @@
                 
         <xs:element ref="tns:village"/>
                 
+        <xs:element ref="tns:farmstead"/>
+                
         <xs:element ref="ns2:country"/>
                 
         <xs:element ref="ns2:county"/>
@@ -704,8 +708,6 @@
         <xs:element ref="ns2:township"/>
                 
         <xs:element ref="tns:hamlet"/>
-                
-        <xs:element ref="tns:farmstead"/>
                 
         <xs:element ref="ns2:manor"/>
                 

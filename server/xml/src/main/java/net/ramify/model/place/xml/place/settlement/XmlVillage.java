@@ -10,6 +10,7 @@ import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.settlement.Village;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.building.XmlChurch;
+import net.ramify.model.place.xml.place.building.XmlFarmstead;
 import net.ramify.model.place.xml.place.building.XmlGraveyard;
 import net.ramify.model.place.xml.place.building.XmlInn;
 import net.ramify.model.place.xml.place.building.XmlMill;
@@ -32,7 +33,8 @@ public class XmlVillage extends XmlSettlement {
             @XmlElementRef(type = XmlMill.class),
             @XmlElementRef(type = XmlSchool.class),
             @XmlElementRef(type = XmlInn.class),
-            @XmlElementRef(type = XmlGraveyard.class)
+            @XmlElementRef(type = XmlGraveyard.class),
+            @XmlElementRef(type = XmlFarmstead.class)
     })
     private List<XmlPlace> children;
 
