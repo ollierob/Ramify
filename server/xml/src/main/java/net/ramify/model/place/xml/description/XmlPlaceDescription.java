@@ -48,11 +48,15 @@ class XmlPlaceDescription {
     PlaceDescription description(final PlaceProvider places) {
         return new ResolvedPlaceDescription(
                 this.placeId(),
-                description.trim(),
+                this.description(),
                 this.alsoSee(places),
                 this.coterminous(places),
                 this.laterBecame(places),
                 this.links());
+    }
+
+    private String description() {
+        return description.replaceAll(" +", " ").trim();
     }
 
     @Nonnull
