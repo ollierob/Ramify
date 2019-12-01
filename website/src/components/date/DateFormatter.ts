@@ -1,5 +1,5 @@
 import {Date as DateProto} from "../../protobuf/generated/date_pb";
-import {dateToRange, formatDateRange} from "./DateRange";
+import {dateToRange, formatYearRange} from "./DateRange";
 
 //FIXME make this accept two values
 export type DateFormatter = {
@@ -9,7 +9,7 @@ export type DateFormatter = {
 
 export const YearFormatter: DateFormatter = {
     formatDate: d => d.year,
-    formatRange: (d1, d2) => formatDateRange(dateToRange(d1), dateToRange(d2))
+    formatRange: (d1, d2) => formatYearRange(dateToRange(d1), dateToRange(d2))
 };
 
 export const MonthYearFormatter: DateFormatter = {

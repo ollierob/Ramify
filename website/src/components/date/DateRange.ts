@@ -56,22 +56,23 @@ export function latestYear(date: DateRangeProto.AsObject): number {
 
 const DefaultRangeWords: Partial<PrefixWords> = {before: "before ", after: "after "};
 
-export function formatDateRange(start: DateRangeProto.AsObject, end: DateRangeProto.AsObject, words?: Partial<PrefixWords>): string {
+export function formatYearRange(start: DateRangeProto.AsObject, end: DateRangeProto.AsObject, words?: Partial<PrefixWords>): string {
     words = {...DefaultRangeWords, ...words};
     if (!start && !end) return null;
-    if (!start) return words.before + circa(end) + (latestYear(end) || "now");
-    if (!end) return words.after + circa(start) + (earliestYear(start) || "?");
-    return circa(start) + formatFromYear(start.earliest, start.latest)
-        + " - "
-        + circa(end) + formatToYear(end.earliest, end.latest);
+    if (!start) return words.before + circa(end) + (formatCloseOrEnd(end.earliest, end.latest) || "now");
+    if (!end) return words.after + circa(start) + (formatCloseOrStart(start.earliest, start.latest) || "?");
+    const left = formatCloseOrStart(start.earliest, start.latest);
+    const right = formatCloseOrEnd(end.earliest, end.latest);
+    if (left == right) return (start.approximate || end.approximate ? "c." : "") + left;
+    return circa(start) + left + " - " + circa(end) + right;
 }
 
-function formatFromYear(start: DateProto.AsObject, end: DateProto.AsObject) {
-    return formatCloseYears(start, end) || start.year;
+function formatCloseOrStart(start: DateProto.AsObject, end: DateProto.AsObject) {
+    return formatCloseYears(start, end) || start.year || end.year;
 }
 
-function formatToYear(start: DateProto.AsObject, end: DateProto.AsObject) {
-    return formatCloseYears(start, end) || end.year;
+function formatCloseOrEnd(start: DateProto.AsObject, end: DateProto.AsObject) {
+    return formatCloseYears(start, end) || end.year || start.year;
 }
 
 function formatCloseYears(start: DateProto.AsObject, end: DateProto.AsObject) {

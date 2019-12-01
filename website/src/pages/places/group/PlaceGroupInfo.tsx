@@ -6,7 +6,7 @@ import {PlaceId} from "../../../components/places/Place";
 import {ResolvedPlaceGroup, sortPlaceGroupChildren} from "../../../components/places/PlaceGroup";
 import {placeTypeName} from "../../../components/places/PlaceType";
 import {PlaceFavouritesHandler} from "../../../components/places/PlaceFavourites";
-import {formatDateRange} from "../../../components/date/DateRange";
+import {formatYearRange} from "../../../components/date/DateRange";
 import {PlaceGroupTab} from "./PlaceGroupTab";
 import {Flag} from "../../../components/images/Flag";
 
@@ -59,7 +59,7 @@ const History = (props: {history: PlaceHistory.AsObject}) => {
     if (!history.open && !history.close) return null;
     return <span className="history">
         {" "}
-        ({formatDateRange(history.open, history.close, {after: "since ", before: "until "})})
+        ({formatYearRange(history.open, history.close, {after: "since ", before: "until "})})
     </span>;
 };
 
