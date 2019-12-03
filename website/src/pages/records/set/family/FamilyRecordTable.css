@@ -1,5 +1,5 @@
 .records .ant-table .family .birth, .records .ant-table .family .death {
-    margin-left: 4px;
+    margin-left: .5em;
     color: #AAAAAA !important;
 }
 
