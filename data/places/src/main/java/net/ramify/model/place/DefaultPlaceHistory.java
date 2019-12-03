@@ -1,6 +1,7 @@
 package net.ramify.model.place;
 
 import net.ramify.model.date.DateRange;
+import net.ramify.model.place.history.PlaceHistory;
 
 import javax.annotation.CheckForNull;
 

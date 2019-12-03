@@ -4,7 +4,7 @@ import com.google.common.base.MoreObjects;
 import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
-import net.ramify.model.place.PlaceHistory;
+import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.region.CountyOrSubdivision;
 import net.ramify.model.place.region.Hundred;
 import net.ramify.model.place.xml.place.XmlArea;

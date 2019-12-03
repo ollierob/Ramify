@@ -3,7 +3,7 @@ package net.ramify.model.place.building;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.proto.PlaceProto;
-import net.ramify.model.place.type.BuildingHistory;
+import net.ramify.model.place.history.BuildingHistory;
 import net.ramify.model.place.type.SettlementOrRegion;
 
 import javax.annotation.CheckForNull;

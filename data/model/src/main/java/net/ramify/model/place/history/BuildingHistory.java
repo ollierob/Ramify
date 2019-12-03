@@ -1,6 +1,5 @@
-package net.ramify.model.place.type;
+package net.ramify.model.place.history;
 
-import net.ramify.model.place.PlaceHistory;
 import net.ramify.model.place.proto.PlaceProto;
 
 import javax.annotation.Nonnull;

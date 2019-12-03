@@ -1,4 +1,4 @@
-package net.ramify.model.place;
+package net.ramify.model.place.history;
 
 import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.date.DateRange;

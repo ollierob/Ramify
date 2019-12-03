@@ -1,6 +1,7 @@
 package net.ramify.model.place.type;
 
 import net.ramify.model.place.Place;
+import net.ramify.model.place.history.BuildingHistory;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;

@@ -2,12 +2,6 @@ package net.ramify.model.place.type;
 
 public interface Region extends SettlementOrRegion {
 
-    @Deprecated
-    @Override
-    default Region region() {
-        return this;
-    }
-
     @Override
     Region parent();
 

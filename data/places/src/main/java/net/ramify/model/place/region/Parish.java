@@ -3,7 +3,7 @@ package net.ramify.model.place.region;
 import com.google.common.collect.ImmutableSet;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
-import net.ramify.model.place.PlaceHistory;
+import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.building.Church;
 import net.ramify.model.place.proto.PlaceProto;

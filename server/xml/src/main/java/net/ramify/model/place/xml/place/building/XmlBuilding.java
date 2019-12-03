@@ -9,11 +9,11 @@ import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlInYear;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
-import net.ramify.model.place.PlaceHistory;
+import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.building.DefaultBuildingHistory;
 import net.ramify.model.place.id.Spid;
-import net.ramify.model.place.type.BuildingHistory;
+import net.ramify.model.place.history.BuildingHistory;
 import net.ramify.model.place.xml.place.XmlPlace;
 
 import javax.annotation.CheckForNull;

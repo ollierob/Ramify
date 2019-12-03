@@ -2,7 +2,7 @@ package net.ramify.model.place.building;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.place.DefaultPlaceHistory;
-import net.ramify.model.place.type.BuildingHistory;
+import net.ramify.model.place.history.BuildingHistory;
 
 public class DefaultBuildingHistory extends DefaultPlaceHistory implements BuildingHistory {
 

@@ -13,7 +13,7 @@ import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroup;
 import net.ramify.model.place.PlaceGroupId;
-import net.ramify.model.place.PlaceHistory;
+import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.provider.PlaceGroupProvider;
 import net.ramify.model.place.provider.PlaceProvider;

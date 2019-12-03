@@ -4,7 +4,7 @@ import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.building.Graveyard;
-import net.ramify.model.place.type.BuildingHistory;
+import net.ramify.model.place.history.BuildingHistory;
 import net.ramify.model.place.xml.place.XmlPlace;
 
 import javax.xml.bind.annotation.XmlRootElement;

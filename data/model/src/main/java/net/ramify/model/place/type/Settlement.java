@@ -9,9 +9,7 @@ import java.util.Set;
 public interface Settlement extends SettlementOrRegion {
 
     @Nonnull
-    default Region parent() {
-        return this.region();
-    }
+    SettlementOrRegion parent();
 
     @Nonnull
     @Override

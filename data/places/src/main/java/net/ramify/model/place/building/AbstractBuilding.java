@@ -4,7 +4,7 @@ import net.ramify.model.place.AbstractPlace;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.type.Building;
-import net.ramify.model.place.type.BuildingHistory;
+import net.ramify.model.place.history.BuildingHistory;
 
 import javax.annotation.CheckForNull;
 
