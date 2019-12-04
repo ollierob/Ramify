@@ -46,10 +46,6 @@ export function earliestYear(date: DateRangeProto.AsObject): number {
     return null;
 }
 
-export function isoDate(date: DateProto.AsObject): string {
-    return date.year + "-" + date.month + "-" + date.day;
-}
-
 export function latestYear(date: DateRangeProto.AsObject): number {
     if (!date) return null;
     if (date.latest) return date.latest.year;
