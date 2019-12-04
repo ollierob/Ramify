@@ -1,5 +1,4 @@
 import {Date as DateProto, DateRange as DateRangeProto} from "../../protobuf/generated/date_pb";
-import {PrefixWords} from "./FormattedDateRange";
 
 export type DateRange = DateRangeProto.AsObject;
 export type YearRange = {from: number, to: number}
@@ -47,45 +46,15 @@ export function earliestYear(date: DateRangeProto.AsObject): number {
     return null;
 }
 
+export function isoDate(date: DateProto.AsObject): string {
+    return date.year + "-" + date.month + "-" + date.day;
+}
+
 export function latestYear(date: DateRangeProto.AsObject): number {
     if (!date) return null;
     if (date.latest) return date.latest.year;
     if (date.earliest) return date.earliest.year;
     return null;
-}
-
-const DefaultRangeWords: Partial<PrefixWords> = {before: "before ", after: "after "};
-
-export function formatYearRange(start: DateRangeProto.AsObject, end: DateRangeProto.AsObject, words?: Partial<PrefixWords>): string {
-    words = {...DefaultRangeWords, ...words};
-    if (!start && !end) return null;
-    if (!start) return words.before + circa(end) + (formatCloseOrEnd(end.earliest, end.latest) || "now");
-    if (!end) return words.after + circa(start) + (formatCloseOrStart(start.earliest, start.latest) || "?");
-    const left = formatCloseOrStart(start.earliest, start.latest);
-    const right = formatCloseOrEnd(end.earliest, end.latest);
-    if (left == right) return (start.approximate || end.approximate ? "c." : "") + left;
-    return circa(start) + left + " - " + circa(end) + right;
-}
-
-function formatCloseOrStart(start: DateProto.AsObject, end: DateProto.AsObject) {
-    return formatCloseYears(start, end) || start.year || end.year;
-}
-
-function formatCloseOrEnd(start: DateProto.AsObject, end: DateProto.AsObject) {
-    return formatCloseYears(start, end) || end.year || start.year;
-}
-
-function formatCloseYears(start: DateProto.AsObject, end: DateProto.AsObject) {
-    if (!start && !end) return null;
-    const y1 = start ? start.year : end.year;
-    const y2 = end ? end.year : start.year;
-    if (y1 == y2) return y1;
-    if (y1 + 1 == y2) return y1 + "/" + (y2 % 100);
-    return null;
-}
-
-function circa(date: DateRangeProto.AsObject): string {
-    return date != null && date.approximate ? "c." : "";
 }
 
 export function dateToRange(date: DateProto.AsObject): DateRangeProto.AsObject {

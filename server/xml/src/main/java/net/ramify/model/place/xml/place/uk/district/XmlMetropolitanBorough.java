@@ -5,6 +5,7 @@ import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
+import net.ramify.model.place.region.CountryIso;
 import net.ramify.model.place.region.district.MetropolitanBorough;
 import net.ramify.model.place.xml.place.XmlArea;
 import net.ramify.model.place.xml.place.XmlPlace;
@@ -35,7 +36,7 @@ public class XmlMetropolitanBorough extends XmlArea<MetropolitanBorough> {
     private String iso;
 
     XmlMetropolitanBorough() {
-        super(MetropolitanBorough.class);
+        super(CountryIso.GB, MetropolitanBorough.class);
     }
 
     @Override

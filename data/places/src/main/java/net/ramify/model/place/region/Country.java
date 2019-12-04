@@ -17,15 +17,15 @@ public class Country extends AbstractRegion {
     private final Country parent;
     private final String iso;
 
-    public Country(final PlaceId id, final String name, final String iso) {
+    public Country(final PlaceId id, final String name, @Nonnull final String iso) {
         this(id, name, iso, null);
     }
 
-    public Country(final PlaceId id, final String name, final String iso, final Place parent) throws InvalidPlaceTypeException {
+    public Country(final PlaceId id, final String name, @Nonnull final String iso, final Place parent) throws InvalidPlaceTypeException {
         this(id, name, iso, Country.cast(parent));
     }
 
-    public Country(final PlaceId id, final String name, final String iso, final Country parent) {
+    public Country(final PlaceId id, final String name, @Nonnull final String iso, final Country parent) {
         super(id, name, null);
         this.parent = parent;
         this.iso = iso;

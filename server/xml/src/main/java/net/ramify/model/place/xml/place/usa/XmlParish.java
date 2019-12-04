@@ -3,9 +3,10 @@ package net.ramify.model.place.xml.place.usa;
 import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
-import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.id.Spid;
+import net.ramify.model.place.region.CountryIso;
 import net.ramify.model.place.region.Parish;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -15,7 +16,7 @@ class XmlParish extends XmlCounty {
 
     @Override
     protected PlaceId placeId(final String id) {
-        return new Spid(Parish.class, id);
+        return new Spid(CountryIso.US, Parish.class, id);
     }
 
     @Override

@@ -45,7 +45,7 @@ abstract class XmlBuilding<P extends Place> extends XmlPlace {
 
     @Override
     protected PlaceId placeId(final String id) {
-        return new Spid(type, id);
+        return new Spid(iso, type, id);
     }
 
     @Override

@@ -5,6 +5,7 @@ import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
+import net.ramify.model.place.region.CountryIso;
 import net.ramify.model.place.region.State;
 import net.ramify.model.place.xml.place.XmlArea;
 import net.ramify.model.place.xml.place.XmlPlace;
@@ -32,7 +33,7 @@ public class XmlState extends XmlArea<State> {
     private String iso;
 
     XmlState() {
-        super(State.class);
+        super(CountryIso.US, State.class);
     }
 
     @Nonnull

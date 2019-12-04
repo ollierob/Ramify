@@ -6,6 +6,7 @@ import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
+import net.ramify.model.place.region.CountryIso;
 import net.ramify.model.place.type.Region;
 
 import javax.xml.bind.annotation.XmlTransient;
@@ -13,15 +14,17 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlTransient
 public abstract class XmlArea<P extends Region> extends XmlPlace {
 
+    private final CountryIso countryIso;
     private final Class<P> type;
 
-    protected XmlArea(final Class<P> type) {
+    protected XmlArea(final CountryIso countryIso, final Class<P> type) {
+        this.countryIso = countryIso;
         this.type = type;
     }
 
     @Override
     protected PlaceId placeId(final String id) {
-        return new Spid(type, id);
+        return new Spid(countryIso, type, id);
     }
 
     @Override

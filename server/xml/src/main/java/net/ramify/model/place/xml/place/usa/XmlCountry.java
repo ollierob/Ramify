@@ -3,10 +3,11 @@ package net.ramify.model.place.xml.place.usa;
 import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
-import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.Country;
+import net.ramify.model.place.region.CountryIso;
 import net.ramify.model.place.xml.place.XmlPlace;
 
 import javax.annotation.Nonnull;
@@ -28,7 +29,7 @@ class XmlCountry extends XmlPlace {
 
     @Nonnull
     protected PlaceId placeId(final String id) {
-        return new Spid(Country.class, id);
+        return new Spid(CountryIso.US, Country.class, id);
     }
 
     @Override

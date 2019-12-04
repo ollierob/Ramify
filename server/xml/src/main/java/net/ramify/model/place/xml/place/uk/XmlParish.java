@@ -4,9 +4,10 @@ import com.google.common.base.MoreObjects;
 import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
-import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.id.Spid;
+import net.ramify.model.place.region.CountryIso;
 import net.ramify.model.place.region.Parish;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.settlement.XmlCity;
@@ -35,7 +36,7 @@ public class XmlParish extends XmlPlace {
 
     @Override
     protected PlaceId placeId(final String id) {
-        return new Spid(Parish.class, id);
+        return new Spid(CountryIso.GB, Parish.class, id);
     }
 
     @Override

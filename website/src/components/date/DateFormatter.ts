@@ -1,15 +1,14 @@
 import {Date as DateProto} from "../../protobuf/generated/date_pb";
-import {dateToRange, formatYearRange} from "./DateRange";
 
 //FIXME make this accept two values
 export type DateFormatter = {
-    formatDate: (date: DateProto.AsObject) => string | number;
-    formatRange: (from: DateProto.AsObject, to: DateProto.AsObject) => string | number
+    formatDate: (date: DateProto.AsObject) => string;
+    formatRange: (from: DateProto.AsObject, to: DateProto.AsObject) => string;
 }
 
 export const YearFormatter: DateFormatter = {
-    formatDate: d => d.year,
-    formatRange: (d1, d2) => formatYearRange(dateToRange(d1), dateToRange(d2))
+    formatDate: d => String(d.year),
+    formatRange: (d1, d2) => d1.year == d2.year ? String(d1.year) : d1.year + " - " + d2.year
 };
 
 export const MonthYearFormatter: DateFormatter = {
@@ -22,10 +21,19 @@ export const DayMonthYearFormatter: DateFormatter = {
     formatRange: (d1, d2) => formatDayMonthYear(d1) + " - " + formatDayMonthYear(d2)
 };
 
+export const MonthDayYearFormatter: DateFormatter = {
+    formatDate: formatMonthDayYear,
+    formatRange: (d1, d2) => formatMonthDayYear(d1) + " - " + formatMonthDayYear(d2)
+};
+
 function formatMonthYear(d: DateProto.AsObject) {
     return d.month + "/" + d.year;
 }
 
 function formatDayMonthYear(d: DateProto.AsObject) {
     return d.day + "/" + d.month + "/" + d.year;
+}
+
+function formatMonthDayYear(d: DateProto.AsObject) {
+    return d.month + "/" + d.day + "/" + d.year;
 }

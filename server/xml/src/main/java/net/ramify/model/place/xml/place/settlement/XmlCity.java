@@ -7,6 +7,7 @@ import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
+import net.ramify.model.place.region.CountryIso;
 import net.ramify.model.place.settlement.City;
 import net.ramify.model.place.type.Region;
 import net.ramify.model.place.xml.place.XmlPlace;
@@ -27,7 +28,7 @@ import java.util.List;
 import java.util.Objects;
 
 @XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "city")
-public class XmlCity extends XmlPlace {
+public class XmlCity extends XmlSettlement {
 
     @XmlElementRefs({
             @XmlElementRef(type = XmlStreet.class),
@@ -41,8 +42,8 @@ public class XmlCity extends XmlPlace {
     private List<XmlPlace> children;
 
     @Override
-    protected PlaceId placeId(final String id) {
-        return new Spid(City.class, id);
+    protected PlaceId placeId(final String id, final CountryIso countryIso) {
+        return new Spid(countryIso, City.class, id);
     }
 
     @Override

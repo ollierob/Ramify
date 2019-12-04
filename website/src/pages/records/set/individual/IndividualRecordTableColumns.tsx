@@ -2,13 +2,13 @@ import * as React from "react";
 import {RecordSet} from "../../../../protobuf/generated/record_pb";
 import {ColumnProps} from "antd/es/table";
 import {Button, Icon} from "antd";
-import {FormattedDateRange, FormattedYearRange} from "../../../../components/date/FormattedDateRange";
 import {PlaceLink} from "../../../../components/places/PlaceLink";
 import {recordTypeFromValue} from "../../../../components/records/RecordType";
 import {IndividualRecord, IndividualRecordProperties} from "./IndividualRecord";
 import {placeTypeName} from "../../../../components/places/PlaceType";
 import {ColumnSubstringLocalSearch} from "../../../../components/table/ant/ColumnSubstringLocalSearch";
 import {isFemale, isMale} from "../../../../components/people/Gender";
+import {EmptyPrefixWords, formatDateRange, formatYearRange} from "../../../../components/date/DateFormat";
 
 export type IndividualRecordColumn = ColumnProps<IndividualRecord>;
 
@@ -81,9 +81,7 @@ const BirthYear: IndividualRecordColumn = {
     key: "birthDate",
     title: "Born",
     dataIndex: "birth.date",
-    render: (t, r) => r.birth && <>
-        <FormattedYearRange date={r.birth.date}/>
-    </>,
+    render: (t, r) => r.birth && <>{formatYearRange(r.birth.date)}</>,
     width: 110
 };
 
@@ -91,14 +89,14 @@ const BaptismYear: IndividualRecordColumn = {
     key: "baptismDate",
     title: "Baptized",
     dataIndex: "baptism.date",
-    render: (t, r) => r.baptism && <FormattedYearRange date={r.baptism.date}/>,
+    render: (t, r) => r.baptism && <>{formatYearRange(r.baptism.date)}</>,
     width: 150
 };
 
 const ResidenceYear: IndividualRecordColumn = {
     key: "residenceDate",
     title: "Residence date",
-    render: (t, r) => r.residence && r.residence.length > 0 && <FormattedYearRange date={r.residence[0].date} words={{in: ""}}/>,
+    render: (t, r) => r.residence && r.residence.length > 0 && <>{formatYearRange(r.residence[0].date, EmptyPrefixWords)}</>,
     width: 150
 };
 
@@ -116,7 +114,7 @@ const ResidencePlace: IndividualRecordColumn = {
 const MentionYear: IndividualRecordColumn = {
     key: "mentionDate",
     title: "Mentioned",
-    render: (t, r) => r.mention && r.mention.length > 0 && <FormattedYearRange date={r.mention[0].date} words={{in: ""}}/>,
+    render: (t, r) => r.mention && r.mention.length > 0 && <>{formatYearRange(r.mention[0].date, EmptyPrefixWords)}</>,
     width: 150
 };
 
@@ -124,7 +122,7 @@ const DeathDateColumn: IndividualRecordColumn = {
     key: "deathDate",
     title: "Died",
     dataIndex: "death.date",
-    render: (t, r) => r.death && <FormattedDateRange date={r.death.date} accuracy="day"/>,
+    render: (t, r) => r.death && <>{formatDateRange(r.death.date, "day")}</>,
     width: 120
 };
 
@@ -141,7 +139,7 @@ const BurialDateColumn: IndividualRecordColumn = {
     key: "burialDate",
     title: "Buried",
     dataIndex: "burial.date",
-    render: (t, r) => r.burial && <FormattedDateRange date={r.burial.date} accuracy="day"/>,
+    render: (t, r) => r.burial && <>{formatDateRange(r.burial.date, "day")}</>,
     width: 110
 };
 

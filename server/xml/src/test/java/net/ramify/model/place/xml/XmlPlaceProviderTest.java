@@ -29,14 +29,14 @@ class XmlPlaceProviderTest {
         final var parserContext = mock(ParserContext.class, Mockito.RETURNS_MOCKS);
         final var placeProvider = XmlPlaceProvider.readPlacesInDirectory(context, file, groups, parserContext);
 
-        assertNotNull(placeProvider.get(new Spid(Country.class, "england")));
-        assertNotNull(placeProvider.get(new Spid(Parish.class, "halifax")));
-        assertNotNull(placeProvider.get(new Spid(Parish.class, "heptonstall")));
+        assertNotNull(placeProvider.get(new Spid(iso, Country.class, "england")));
+        assertNotNull(placeProvider.get(new Spid(iso, Parish.class, "halifax")));
+        assertNotNull(placeProvider.get(new Spid(iso, Parish.class, "heptonstall")));
 
-        final var heptonstall = placeProvider.get(new Spid(Village.class, "heptonstall"));
+        final var heptonstall = placeProvider.get(new Spid(iso, Village.class, "heptonstall"));
         assertNotNull(heptonstall);
 
-        final var church = placeProvider.get(new Spid(Church.class, "heptonstall_st-thomas"));
+        final var church = placeProvider.get(new Spid(iso, Church.class, "heptonstall_st-thomas"));
         assertNotNull(church);
         assertEquals(heptonstall, church.parent());
 

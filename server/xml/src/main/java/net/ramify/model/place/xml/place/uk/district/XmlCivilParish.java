@@ -5,6 +5,7 @@ import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
+import net.ramify.model.place.region.CountryIso;
 import net.ramify.model.place.region.district.CivilParish;
 import net.ramify.model.place.xml.place.XmlArea;
 import net.ramify.model.place.xml.place.XmlPlace;
@@ -28,7 +29,7 @@ public class XmlCivilParish extends XmlArea<CivilParish> {
     private List<XmlPlace> children;
 
     XmlCivilParish() {
-        super(CivilParish.class);
+        super(CountryIso.GB, CivilParish.class);
     }
 
     @Override

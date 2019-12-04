@@ -5,6 +5,7 @@ import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
+import net.ramify.model.place.region.CountryIso;
 import net.ramify.model.place.region.Township;
 import net.ramify.model.place.xml.place.XmlArea;
 import net.ramify.model.place.xml.place.XmlPlace;
@@ -28,7 +29,7 @@ class XmlTownship extends XmlArea<Township> {
     private List<XmlPlace> children;
 
     public XmlTownship() {
-        super(Township.class);
+        super(CountryIso.US, Township.class);
     }
 
     @Override

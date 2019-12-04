@@ -4,12 +4,11 @@ import {RecordSet} from "../../../protobuf/generated/record_pb";
 import {Table} from "antd";
 import {ErrorMessage} from "../../../components/style/Error";
 import {ColumnProps} from "antd/es/table";
-import {EmptyPlaceWords, FormattedYearRange} from "../../../components/date/FormattedDateRange";
 import {recordSetHref} from "../RecordLinks";
 import {HasClass} from "../../../components/style/HasClass";
 import {recordTypeName} from "../../../components/records/RecordType";
 import {sortDatesByEarliestThenLatest} from "../../../components/date/DateRange";
-import {PlaceLink} from "../../../components/places/PlaceLink";
+import {EmptyPrefixWords, formatYearRange} from "../../../components/date/DateFormat";
 
 type Props = {
     recordSets: AsyncData<ReadonlyArray<RecordSet.AsObject>>
@@ -67,7 +66,7 @@ const Columns: ColumnProps<RecordSet.AsObject>[] = [
     {
         key: "date",
         title: "Date",
-        render: (t, r) => <FormattedYearRange date={r.date} words={EmptyPlaceWords}/>,
+        render: (t, r) => formatYearRange(r.date, EmptyPrefixWords),
         sorter: (a, b) => sortDatesByEarliestThenLatest(a.date, b.date),
         width: 120,
     },

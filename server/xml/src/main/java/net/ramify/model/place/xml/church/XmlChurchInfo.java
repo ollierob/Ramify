@@ -35,7 +35,7 @@ public class XmlChurchInfo implements HasPlaceId {
 
     @Override
     public PlaceId placeId() {
-        return new Spid(Church.class, placeId);
+        return new Spid(iso, Church.class, placeId);
     }
 
     public String denomination() {

@@ -3,11 +3,11 @@ import {ColumnProps} from "antd/es/table";
 import {FamilyRecord} from "./FamilyRecord";
 import {Button, Icon} from "antd";
 import {recordTypeName} from "../../../../components/records/RecordType";
-import {FormattedDateRange} from "../../../../components/date/FormattedDateRange";
 import {renderFamilyRecord} from "./FamilyRecordTableCell";
 import {RecordSet} from "../../../../protobuf/generated/record_pb";
 import {PlaceLink} from "../../../../components/places/PlaceLink";
 import {placeTypeName} from "../../../../components/places/PlaceType";
+import {formatDateRange} from "../../../../components/date/DateFormat";
 
 export type FamilyRecordColumn = ColumnProps<FamilyRecord>;
 
@@ -35,7 +35,7 @@ const TypeColumn: FamilyRecordColumn = {
 const DateColumn: FamilyRecordColumn = {
     key: "date",
     title: "Date",
-    render: (t, r) => <FormattedDateRange date={r.date} accuracy="day"/>,
+    render: (t, r) => <>{formatDateRange(r.date, "day")}</>,
     width: 120
 };
 

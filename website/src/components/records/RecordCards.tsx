@@ -3,7 +3,6 @@ import {Place} from "../../protobuf/generated/place_pb";
 import {Card} from "antd";
 import {placeTypeName} from "../places/PlaceType";
 import {ExternalRecordReference, RecordSet} from "../../protobuf/generated/record_pb";
-import {FormattedYearRange} from "../date/FormattedDateRange";
 import {placeHref} from "../../pages/places/PlaceLinks";
 import {recordSetHref} from "../../pages/records/RecordLinks";
 import "./RecordCards.css";
@@ -11,7 +10,8 @@ import {recordTypeName} from "./RecordType";
 import {HasClass} from "../style/HasClass";
 import {Link} from "../style/Links";
 import {Loading} from "../style/Loading";
-import {sortRecordSetByDateThenTitle, sortRecordSetByTitle} from "./RecordSet";
+import {sortRecordSetByTitle} from "./RecordSet";
+import {formatYearRange} from "../date/DateFormat";
 
 type Titling = {
     shortTitle?: boolean;
@@ -51,7 +51,7 @@ const RecordCard = (props: {record: RecordSet.AsObject} & Titling) => {
     return <Card
         title={<a href={recordSetHref(record)}>{title}</a>}
         className="recordCard">
-        Available <FormattedYearRange date={record.date}/>
+        Available {formatYearRange(record.date)}
         <br/>
         {record.numrecords.toLocaleString()} records, {record.numindividuals.toLocaleString()} individuals
         {record.externalreferenceList.map(ref => <RecordReference key={ref.reference} reference={ref}/>)}

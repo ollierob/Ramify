@@ -1,8 +1,8 @@
 import * as React from "react";
 import {Event} from "../../protobuf/generated/event_pb";
 import {Card} from "antd";
-import {FormattedDateRange} from "../date/FormattedDateRange";
 import {isBirthEvent, isDeathEvent, isPostDeathEvent} from "./Event";
+import {formatDateRange} from "../date/DateFormat";
 
 type Props = {
     events: ReadonlyArray<Event.AsObject>
@@ -32,7 +32,7 @@ const EventBox = (props: {event: Event.AsObject}) => {
                 {event.title}
             </div>
             <div className="date">
-                <FormattedDateRange accuracy="day" date={event.date}/>
+                {formatDateRange(event.date, "day")}
             </div>
         </div>
     </Card>;

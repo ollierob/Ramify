@@ -57,6 +57,14 @@ public abstract class XmlPlace implements HasPlaceId {
 
     protected abstract PlaceId placeId(String id);
 
+    protected PlaceId placeId(final String id, final Place parent) {
+        return this.placeId(id);
+    }
+
+    protected PlaceId placeId(final Place parent) {
+        return this.placeId(id, parent);
+    }
+
     @Nonnull
     @Override
     public PlaceId placeId() {
@@ -76,7 +84,7 @@ public abstract class XmlPlace implements HasPlaceId {
     }
 
     private Place parent(final PlaceId id, final PlaceProvider placeProvider) {
-        return Functions.ifNonNull(placeProvider.get(id), Place::parent);
+        return placeProvider.maybeGet(id).map(Place::parent).orElse(null);
     }
 
     void addPlaces(final PlaceProvider placeProvider, final Place parent, final Consumer<Place> addPlace, final PlaceGroupProvider groupProvider, final ParserContext context) {
@@ -91,7 +99,7 @@ public abstract class XmlPlace implements HasPlaceId {
     }
 
     private Place place(final PlaceProvider placeProvider, final Place parent, final PlaceGroupProvider groupProvider, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        final var id = this.placeId();
+        final var id = this.placeId(parent);
         return name == null ? placeProvider.require(id) : this.place(parent, Functions.ifNonNull(groupProvider.getGroup(id), PlaceGroup::id), this.history(context), context);
     }
 

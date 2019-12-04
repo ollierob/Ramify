@@ -5,6 +5,7 @@ import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
+import net.ramify.model.place.region.CountryIso;
 import net.ramify.model.place.region.CountyOrSubdivision;
 import net.ramify.model.place.region.Hundred;
 import net.ramify.model.place.xml.place.XmlArea;
@@ -31,7 +32,7 @@ class XmlHundred extends XmlArea<Hundred> {
     private List<XmlPlace> children;
 
     XmlHundred() {
-        super(Hundred.class);
+        super(CountryIso.GB, Hundred.class);
     }
 
     @Override

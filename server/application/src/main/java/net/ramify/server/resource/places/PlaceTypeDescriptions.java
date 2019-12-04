@@ -10,7 +10,7 @@ import javax.annotation.CheckForNull;
 
 class PlaceTypeDescriptions {
 
-    private static final PlaceId ENGLAND = new Spid(Country.class, "england");
+    private static final PlaceId ENGLAND = new Spid(iso, Country.class, "england");
 
     private static final ImmutableTable<PlaceProto.PlaceType, PlaceId, String> DESCRIPTIONS;
 

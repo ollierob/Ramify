@@ -7,6 +7,7 @@ import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
+import net.ramify.model.place.region.CountryIso;
 import net.ramify.model.place.settlement.Hamlet;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.building.XmlChurch;
@@ -23,7 +24,7 @@ import java.util.Collections;
 import java.util.List;
 
 @XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "hamlet")
-public class XmlHamlet extends XmlPlace {
+public class XmlHamlet extends XmlSettlement {
 
     @XmlElementRefs({
             @XmlElementRef(type = XmlChurch.class),
@@ -35,13 +36,13 @@ public class XmlHamlet extends XmlPlace {
     private List<XmlPlace> children;
 
     @Override
-    protected PlaceId placeId(final String id) {
-        return new Spid(Hamlet.class, id);
+    protected PlaceId placeId(final String id, final CountryIso iso) {
+        return new Spid(iso, Hamlet.class, id);
     }
 
     @Override
     protected Hamlet place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new Hamlet(this.placeId(), this.name(), parent, groupId, history);
+        return new Hamlet(this.placeId(parent), this.name(), parent, groupId, history);
     }
 
     @Override
