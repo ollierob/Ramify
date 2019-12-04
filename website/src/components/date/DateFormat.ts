@@ -1,6 +1,6 @@
 import {Date as DateProto, DateRange as DateRangeProto} from "../../protobuf/generated/date_pb";
 import {DateFormatter, DayMonthYearFormatter, MonthYearFormatter, YearFormatter} from "./DateFormatter";
-import {earliestYear, isoDate, latestYear} from "./DateRange";
+import {datesToRange, earliestYear, isoDate, latestYear} from "./DateRange";
 
 type FormatType = "year" | "month" | "day";
 
@@ -70,5 +70,8 @@ export function formatYearRanges(r1: DateRangeProto.AsObject, r2: DateRangeProto
 }
 
 export function formatDateRanges(r1: DateRangeProto.AsObject, r2: DateRangeProto.AsObject, type: FormatType, words?: Partial<PrefixWords>): string {
-    throw new Error(); //TODO
+    if (!r1 && !r2) return null;
+    if (!r1) return formatDateRange(r1, type, words);
+    if (!r2) return formatDateRange(r2, type, words);
+    return formatDateRange(datesToRange(r1.earliest, r2.latest, r1.approximate || r2.approximate), type, words);
 }
