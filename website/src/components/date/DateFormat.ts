@@ -43,9 +43,22 @@ function formatter(type: FormatType | DateFormatter): DateFormatter {
     }
 }
 
+export function formatYear(d: DateProto.AsObject): string {
+    return formatDate(d, "year");
+}
+
 export function formatDate(d: DateProto.AsObject, type: FormatType | DateFormatter): string {
     if (!d) return null;
     return formatter(type).formatDate(d);
+}
+
+function formatShortYearRange(r: DateRangeProto.AsObject, words: Partial<PrefixWords>, preferEarly: boolean): string {
+    words = words ? {...DefaultPrefixWords, ...words} : DefaultPrefixWords;
+    const y1 = earliestYear(r);
+    const y2 = latestYear(r);
+    if (y1 == y2) return words.in + y1;
+    if (y1 + 1 == y2) return words.in + y1 + "/" + (y2 % 10);
+    return preferEarly ? formatYear(r.earliest,) : formatYear(r.latest);
 }
 
 export function formatYearRange(r: DateRangeProto.AsObject, words?: Partial<PrefixWords>): string {
@@ -73,5 +86,10 @@ export function formatDateRanges(r1: DateRangeProto.AsObject, r2: DateRangeProto
     if (!r1 && !r2) return null;
     if (!r1) return formatDateRange(r1, type, words);
     if (!r2) return formatDateRange(r2, type, words);
+    if (type == "year") {
+        const y1 = formatShortYearRange(r1, EmptyPrefixWords, true);
+        const y2 = formatShortYearRange(r2, EmptyPrefixWords, false);
+        return y1 == y2 ? y1 : y1 + " - " + y2;
+    }
     return formatDateRange(datesToRange(r1.earliest, r2.latest, r1.approximate || r2.approximate), type, words);
 }
