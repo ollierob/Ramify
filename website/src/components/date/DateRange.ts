@@ -62,6 +62,7 @@ export function dateToRange(date: DateProto.AsObject): DateRangeProto.AsObject {
 }
 
 export function datesToRange(d1: DateProto.AsObject, d2: DateProto.AsObject, approximate?: boolean): DateRangeProto.AsObject {
-    if (d1 > d2) return datesToRange(d2, d1, approximate);
+    if (!d1 && !d2) return null;
+    if (d1 && d2 && d1 > d2) return datesToRange(d2, d1, approximate);
     return {earliest: d1, latest: d2, approximate: approximate};
 }
