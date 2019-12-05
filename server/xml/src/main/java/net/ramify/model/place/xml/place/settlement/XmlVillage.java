@@ -10,16 +10,9 @@ import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.settlement.Village;
 import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
-import net.ramify.model.place.xml.place.building.XmlChurch;
-import net.ramify.model.place.xml.place.building.XmlFarmstead;
-import net.ramify.model.place.xml.place.building.XmlGraveyard;
-import net.ramify.model.place.xml.place.building.XmlInn;
-import net.ramify.model.place.xml.place.building.XmlMill;
-import net.ramify.model.place.xml.place.building.XmlSchool;
-import net.ramify.model.place.xml.place.building.XmlStreet;
+import net.ramify.model.place.xml.place.building.XmlBuilding;
 
 import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.Collections;
@@ -28,15 +21,7 @@ import java.util.List;
 @XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "village")
 public class XmlVillage extends XmlSettlement {
 
-    @XmlElementRefs({
-            @XmlElementRef(type = XmlStreet.class),
-            @XmlElementRef(type = XmlChurch.class),
-            @XmlElementRef(type = XmlMill.class),
-            @XmlElementRef(type = XmlSchool.class),
-            @XmlElementRef(type = XmlInn.class),
-            @XmlElementRef(type = XmlGraveyard.class),
-            @XmlElementRef(type = XmlFarmstead.class)
-    })
+    @XmlElementRef(type = XmlBuilding.class)
     private List<XmlPlace> children;
 
     @Override

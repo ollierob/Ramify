@@ -207,8 +207,6 @@
                         
             <xs:element ref="ns1:village"/>
                         
-            <xs:element ref="ns1:street"/>
-                        
             <xs:element ref="ns1:church"/>
                         
             <xs:element ref="ns1:graveyard"/>
@@ -222,6 +220,8 @@
             <xs:element ref="ns1:monastery"/>
                         
             <xs:element ref="ns1:school"/>
+                        
+            <xs:element ref="ns1:street"/>
                       
           </xs:choice>
                   
@@ -313,11 +313,15 @@
                         
             <xs:element ref="tns:manor"/>
                         
+            <xs:element ref="tns:hundred"/>
+                        
             <xs:element ref="ns1:city"/>
                         
             <xs:element ref="ns1:town"/>
                         
-            <xs:element ref="tns:hundred"/>
+            <xs:element ref="ns1:village"/>
+                        
+            <xs:element ref="ns1:hamlet"/>
                       
           </xs:choice>
                   
