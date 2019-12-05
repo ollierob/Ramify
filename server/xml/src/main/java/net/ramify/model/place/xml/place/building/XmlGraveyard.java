@@ -18,7 +18,7 @@ public class XmlGraveyard extends XmlBuilding<Graveyard> {
 
     @Override
     protected Graveyard place(final Place parent, final PlaceGroupId groupId, final BuildingHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new Graveyard(this.placeId(), this.name(), parent, groupId, history);
+        return new Graveyard(this.placeId(parent), this.name(), parent, groupId, history);
     }
 
 }

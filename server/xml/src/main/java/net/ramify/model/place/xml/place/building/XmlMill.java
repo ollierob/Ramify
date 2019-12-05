@@ -18,7 +18,7 @@ public class XmlMill extends XmlBuilding<Mill> {
 
     @Override
     protected Mill place(final Place parent, final PlaceGroupId groupId, final BuildingHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new Mill(this.placeId(), this.name(), parent, groupId, history);
+        return new Mill(this.placeId(parent), this.name(), parent, groupId, history);
     }
 
 }

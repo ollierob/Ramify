@@ -18,7 +18,7 @@ public class XmlInn extends XmlBuilding<Inn> {
 
     @Override
     protected Inn place(final Place parent, final PlaceGroupId groupId, final BuildingHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new Inn(this.placeId(), this.name(), parent, groupId, history);
+        return new Inn(this.placeId(parent), this.name(), parent, groupId, history);
     }
 
 }

@@ -5,8 +5,9 @@ import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
-import net.ramify.model.place.region.CountryIso;
+import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.region.State;
+import net.ramify.model.place.region.iso.CountrySubdivisionIso;
 import net.ramify.model.place.xml.place.XmlArea;
 import net.ramify.model.place.xml.place.XmlPlace;
 
@@ -39,7 +40,11 @@ public class XmlState extends XmlArea<State> {
     @Nonnull
     @Override
     protected State place(Place parent, PlaceGroupId groupId, final PlaceHistory history, ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new State(this.placeId(), this.name(), parent, iso, groupId);
+        return new State(this.placeId(), this.name(), parent, this.iso(), groupId);
+    }
+
+    protected CountrySubdivisionIso iso() {
+        return CountrySubdivisionIso.valueOf(iso);
     }
 
     @CheckForNull

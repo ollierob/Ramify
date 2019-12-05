@@ -6,7 +6,7 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.region.Chapelry;
-import net.ramify.model.place.region.CountryIso;
+import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.xml.place.XmlArea;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.building.XmlChurch;

@@ -5,10 +5,11 @@ import net.ramify.model.date.ExactDate;
 import net.ramify.model.place.DefaultPlaceHistory;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
-import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.region.AbstractRegion;
+import net.ramify.model.place.region.iso.CountrySubdivisionIso;
 import net.ramify.model.place.type.Region;
 import net.ramify.model.place.type.Settlement;
 
@@ -23,14 +24,14 @@ public class MetropolitanBorough extends AbstractRegion implements District {
     public static final PlaceHistory BOROUGH_HISTORY = new DefaultPlaceHistory(ExactDate.on(1974, Month.APRIL, 1), null);
 
     private final Region parent;
-    private final String iso;
+    private final CountrySubdivisionIso iso;
 
     public MetropolitanBorough(
             final PlaceId id,
             final String name,
             final Place parent,
             final PlaceGroupId groupId,
-            final String iso,
+            final CountrySubdivisionIso iso,
             final PlaceHistory history) throws InvalidPlaceTypeException {
         this(id, name, parent.requireAs(Region.class), groupId, iso, history);
     }
@@ -40,7 +41,7 @@ public class MetropolitanBorough extends AbstractRegion implements District {
             final String name,
             final Region parent,
             final PlaceGroupId groupId,
-            final String iso,
+            final CountrySubdivisionIso iso,
             final PlaceHistory history) {
         super(id, name, groupId, history);
         this.parent = parent;
@@ -60,7 +61,7 @@ public class MetropolitanBorough extends AbstractRegion implements District {
 
     @Nonnull
     @Override
-    public Optional<String> iso() {
+    public Optional<CountrySubdivisionIso> iso() {
         return Optional.ofNullable(iso);
     }
 

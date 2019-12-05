@@ -5,6 +5,7 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.proto.PlaceProto;
+import net.ramify.model.place.region.iso.CountrySubdivisionIso;
 import net.ramify.model.place.settlement.City;
 
 import javax.annotation.Nonnull;
@@ -16,13 +17,13 @@ public class State extends AbstractRegion {
     static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(County.class, City.class);
 
     private final Country country;
-    private final String iso;
+    private final CountrySubdivisionIso iso;
 
-    public State(final PlaceId id, final String name, final Place parent, String iso, final PlaceGroupId groupId) throws InvalidPlaceTypeException {
+    public State(final PlaceId id, final String name, final Place parent, final CountrySubdivisionIso iso, final PlaceGroupId groupId) throws InvalidPlaceTypeException {
         this(id, name, parent.requireAs(Country.class), iso, groupId);
     }
 
-    public State(final PlaceId id, final String name, final Country country, final String iso, final PlaceGroupId groupId) {
+    public State(final PlaceId id, final String name, final Country country, final CountrySubdivisionIso iso, final PlaceGroupId groupId) {
         super(id, name, groupId);
         this.country = country;
         this.iso = iso;
@@ -42,7 +43,7 @@ public class State extends AbstractRegion {
 
     @Nonnull
     @Override
-    public Optional<String> iso() {
+    public Optional<CountrySubdivisionIso> iso() {
         return Optional.ofNullable(iso);
     }
 

@@ -13,12 +13,6 @@
     
   <xs:element name="church" type="tns:xmlChurch"/>
     
-  <xs:element name="churchInfo" type="tns:xmlChurchInfo"/>
-    
-  <xs:element name="churchInfos" type="tns:churchInfos"/>
-    
-  <xs:element name="churchRecordSet" type="tns:xmlChurchRecordSetInfo"/>
-    
   <xs:element name="city" type="tns:xmlCity"/>
     
   <xs:element name="farmstead" type="tns:xmlFarmstead"/>
@@ -167,38 +161,6 @@
       
   </xs:complexType>
     
-  <xs:complexType name="xmlChurchInfo">
-        
-    <xs:sequence>
-            
-      <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:churchRecordSet"/>
-          
-    </xs:sequence>
-        
-    <xs:attribute name="id" type="xs:string" use="required"/>
-        
-    <xs:attribute name="denomination" type="xs:string"/>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlChurchRecordSetInfo">
-        
-    <xs:sequence/>
-        
-    <xs:attribute name="id" type="xs:string" use="required"/>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="churchInfos">
-        
-    <xs:sequence>
-            
-      <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:churchInfo"/>
-          
-    </xs:sequence>
-      
-  </xs:complexType>
-    
   <xs:complexType name="xmlPlaceDescription">
         
     <xs:sequence>
@@ -302,6 +264,8 @@
       <xs:extension base="tns:xmlPlace">
                 
         <xs:sequence/>
+                
+        <xs:attribute name="countryIso" type="xs:string"/>
               
       </xs:extension>
           
@@ -313,7 +277,7 @@
         
     <xs:complexContent>
             
-      <xs:extension base="tns:xmlPlace">
+      <xs:extension base="tns:xmlSettlement">
                 
         <xs:sequence>
                     
@@ -363,6 +327,8 @@
                   
         </xs:sequence>
                 
+        <xs:attribute name="countryIso" type="xs:string"/>
+                
         <xs:attribute name="demolished" type="xs:boolean"/>
               
       </xs:extension>
@@ -393,6 +359,8 @@
                   
         </xs:sequence>
                 
+        <xs:attribute name="countryIso" type="xs:string"/>
+                
         <xs:attribute name="demolished" type="xs:boolean"/>
               
       </xs:extension>
@@ -420,6 +388,8 @@
           </xs:choice>
                   
         </xs:sequence>
+                
+        <xs:attribute name="countryIso" type="xs:string"/>
                 
         <xs:attribute name="demolished" type="xs:boolean"/>
               
@@ -449,6 +419,8 @@
                   
         </xs:sequence>
                 
+        <xs:attribute name="countryIso" type="xs:string"/>
+                
         <xs:attribute name="demolished" type="xs:boolean"/>
               
       </xs:extension>
@@ -476,6 +448,8 @@
           </xs:choice>
                   
         </xs:sequence>
+                
+        <xs:attribute name="countryIso" type="xs:string"/>
                 
         <xs:attribute name="demolished" type="xs:boolean"/>
               
@@ -505,6 +479,8 @@
                   
         </xs:sequence>
                 
+        <xs:attribute name="countryIso" type="xs:string"/>
+                
         <xs:attribute name="demolished" type="xs:boolean"/>
               
       </xs:extension>
@@ -532,6 +508,8 @@
           </xs:choice>
                   
         </xs:sequence>
+                
+        <xs:attribute name="countryIso" type="xs:string"/>
                 
         <xs:attribute name="demolished" type="xs:boolean"/>
               
@@ -629,6 +607,8 @@
                   
         </xs:sequence>
                 
+        <xs:attribute name="countryIso" type="xs:string"/>
+                
         <xs:attribute name="demolished" type="xs:boolean"/>
               
       </xs:extension>
@@ -641,7 +621,7 @@
         
     <xs:complexContent>
             
-      <xs:extension base="tns:xmlPlace">
+      <xs:extension base="tns:xmlSettlement">
                 
         <xs:sequence>
                     

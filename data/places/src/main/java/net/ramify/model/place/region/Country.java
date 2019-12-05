@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.proto.PlaceProto;
+import net.ramify.model.place.region.iso.CountryIso;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -15,17 +16,19 @@ public class Country extends AbstractRegion {
     private static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(State.class, County.class);
 
     private final Country parent;
-    private final String iso;
+    private final CountryIso iso;
 
-    public Country(final PlaceId id, final String name, @Nonnull final String iso) {
-        this(id, name, iso, null);
+    public Country(final PlaceId id, final String name, @Nonnull final CountryIso iso) {
+        super(id, name, null);
+        this.parent = null;
+        this.iso = iso;
     }
 
-    public Country(final PlaceId id, final String name, @Nonnull final String iso, final Place parent) throws InvalidPlaceTypeException {
+    public Country(final PlaceId id, final String name, @Nonnull final CountryIso iso, final Place parent) throws InvalidPlaceTypeException {
         this(id, name, iso, Country.cast(parent));
     }
 
-    public Country(final PlaceId id, final String name, @Nonnull final String iso, final Country parent) {
+    public Country(final PlaceId id, final String name, @Nonnull final CountryIso iso, final Country parent) {
         super(id, name, null);
         this.parent = parent;
         this.iso = iso;
@@ -43,9 +46,13 @@ public class Country extends AbstractRegion {
         return CHILD_TYPES;
     }
 
+    public CountryIso countryIso() {
+        return iso;
+    }
+
     @Nonnull
     @Override
-    public Optional<String> iso() {
+    public Optional<CountryIso> iso() {
         return Optional.of(iso);
     }
 

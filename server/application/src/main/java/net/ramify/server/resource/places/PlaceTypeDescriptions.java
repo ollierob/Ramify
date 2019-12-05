@@ -5,12 +5,13 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.region.Country;
+import net.ramify.model.place.region.iso.CountryIso;
 
 import javax.annotation.CheckForNull;
 
 class PlaceTypeDescriptions {
 
-    private static final PlaceId ENGLAND = new Spid(iso, Country.class, "england");
+    private static final PlaceId ENGLAND = new Spid(CountryIso.GB, Country.class, "england");
 
     private static final ImmutableTable<PlaceProto.PlaceType, PlaceId, String> DESCRIPTIONS;
 

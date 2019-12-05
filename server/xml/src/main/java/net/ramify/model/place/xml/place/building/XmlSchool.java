@@ -18,7 +18,7 @@ public class XmlSchool extends XmlBuilding<School> {
 
     @Override
     protected School place(final Place parent, final PlaceGroupId groupId, final BuildingHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new School(this.placeId(), this.name(), parent, groupId, history);
+        return new School(this.placeId(parent), this.name(), parent, groupId, history);
     }
 
 }

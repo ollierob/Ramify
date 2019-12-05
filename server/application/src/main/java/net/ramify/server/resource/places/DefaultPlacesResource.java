@@ -29,7 +29,6 @@ public class DefaultPlacesResource implements PlacesResource {
     private final PlaceGroupProvider placeGroupProvider;
     private final PositionProvider positionProvider;
     private final PlaceDescriptionProvider descriptionProvider;
-    private final ChurchesResource churchesResource;
     private final PlaceFavouritesResource favouritesResource;
 
     @Inject
@@ -38,13 +37,11 @@ public class DefaultPlacesResource implements PlacesResource {
             final PlaceGroupProvider placeGroupProvider,
             final PositionProvider positionProvider,
             final PlaceDescriptionProvider descriptionProvider,
-            final ChurchesResource churchesResource,
             final PlaceFavouritesResource favouritesResource) {
         this.placeProvider = placeProvider;
         this.placeGroupProvider = placeGroupProvider;
         this.positionProvider = positionProvider;
         this.descriptionProvider = descriptionProvider;
-        this.churchesResource = churchesResource;
         this.favouritesResource = favouritesResource;
     }
 
@@ -124,11 +121,6 @@ public class DefaultPlacesResource implements PlacesResource {
     public Places find(final String name, final PlaceId within, final int limit) {
         if (isEmpty(name)) return Places.of();
         return Places.of(placeProvider.findByName(name, limit, within), true);
-    }
-
-    @Override
-    public ChurchesResource churches() {
-        return churchesResource;
     }
 
     @Override

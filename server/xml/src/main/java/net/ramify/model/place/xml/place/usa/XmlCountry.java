@@ -7,7 +7,7 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.Country;
-import net.ramify.model.place.region.CountryIso;
+import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.xml.place.XmlPlace;
 
 import javax.annotation.Nonnull;
@@ -34,7 +34,11 @@ class XmlCountry extends XmlPlace {
 
     @Override
     protected Place place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new Country(this.placeId(), this.name(), iso, parent);
+        return new Country(this.placeId(), this.name(), this.iso(), parent);
+    }
+
+    protected CountryIso iso() {
+        return CountryIso.valueOf(iso);
     }
 
     @Override

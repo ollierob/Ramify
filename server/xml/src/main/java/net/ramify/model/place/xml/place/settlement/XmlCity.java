@@ -7,7 +7,7 @@ import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
-import net.ramify.model.place.region.CountryIso;
+import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.settlement.City;
 import net.ramify.model.place.type.Region;
 import net.ramify.model.place.xml.place.XmlPlace;
@@ -49,7 +49,7 @@ public class XmlCity extends XmlSettlement {
     @Override
     protected City place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
-        return new City(this.placeId(), this.name(), parent.requireAs(Region.class), groupId, history);
+        return new City(this.placeId(parent), this.name(), parent.requireAs(Region.class), groupId, history);
     }
 
     @Override

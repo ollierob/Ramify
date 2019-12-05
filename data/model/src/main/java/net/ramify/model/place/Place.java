@@ -4,6 +4,7 @@ import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.type.PlaceHandler;
+import net.ramify.model.util.Iso;
 import net.ramify.utils.objects.Castable;
 import net.ramify.utils.objects.Consumers;
 
@@ -26,7 +27,7 @@ public interface Place extends HasPlaceId, Castable<Place>, BuildsProto<PlacePro
     PlaceGroupId groupId();
 
     @Nonnull
-    default Optional<String> iso() {
+    default Optional<? extends Iso> iso() {
         return Optional.empty();
     }
 
@@ -82,7 +83,7 @@ public interface Place extends HasPlaceId, Castable<Place>, BuildsProto<PlacePro
                 .setType(this.protoType())
                 .setDefunct(this.isDefunct());
         if (includeParent) Consumers.ifNonNull(this.parent(), parent -> builder.setParent(parent.toProto()));
-        this.iso().ifPresent(builder::setIso);
+        this.iso().map(Iso::value).ifPresent(builder::setIso);
         Consumers.ifNonNull(this.groupId(), groupId -> builder.setGroupId(groupId.value()));
         Consumers.ifNonNull(this.history(), history -> builder.setHistory(history.toProto()));
         return builder;

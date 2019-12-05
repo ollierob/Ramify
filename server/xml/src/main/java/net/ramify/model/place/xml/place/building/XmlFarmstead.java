@@ -18,7 +18,7 @@ public class XmlFarmstead extends XmlBuilding<Farmstead> {
 
     @Override
     protected Farmstead place(final Place parent, final PlaceGroupId groupId, final BuildingHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new Farmstead(this.placeId(), this.name(), parent, groupId, history);
+        return new Farmstead(this.placeId(parent), this.name(), parent, groupId, history);
     }
 
 }

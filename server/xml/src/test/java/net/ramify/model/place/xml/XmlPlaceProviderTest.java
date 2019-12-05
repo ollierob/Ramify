@@ -6,6 +6,7 @@ import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.provider.PlaceGroupProvider;
 import net.ramify.model.place.region.Country;
 import net.ramify.model.place.region.Parish;
+import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.settlement.Village;
 import net.ramify.model.place.xml.place.XmlPlaces;
 import org.junit.jupiter.api.Test;
@@ -29,14 +30,14 @@ class XmlPlaceProviderTest {
         final var parserContext = mock(ParserContext.class, Mockito.RETURNS_MOCKS);
         final var placeProvider = XmlPlaceProvider.readPlacesInDirectory(context, file, groups, parserContext);
 
-        assertNotNull(placeProvider.get(new Spid(iso, Country.class, "england")));
-        assertNotNull(placeProvider.get(new Spid(iso, Parish.class, "halifax")));
-        assertNotNull(placeProvider.get(new Spid(iso, Parish.class, "heptonstall")));
+        assertNotNull(placeProvider.get(new Spid(CountryIso.GB, Country.class, "england")));
+        assertNotNull(placeProvider.get(new Spid(CountryIso.GB, Parish.class, "halifax")));
+        assertNotNull(placeProvider.get(new Spid(CountryIso.GB, Parish.class, "heptonstall")));
 
-        final var heptonstall = placeProvider.get(new Spid(iso, Village.class, "heptonstall"));
+        final var heptonstall = placeProvider.get(new Spid(CountryIso.GB, Village.class, "heptonstall"));
         assertNotNull(heptonstall);
 
-        final var church = placeProvider.get(new Spid(iso, Church.class, "heptonstall_st-thomas"));
+        final var church = placeProvider.get(new Spid(CountryIso.GB, Church.class, "heptonstall_st-thomas"));
         assertNotNull(church);
         assertEquals(heptonstall, church.parent());
 

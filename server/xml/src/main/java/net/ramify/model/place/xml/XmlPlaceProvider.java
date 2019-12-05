@@ -136,6 +136,8 @@ class XmlPlaceProvider implements PlaceProvider {
             placeProvider.addAll(places.places(placeProvider, groupProvider, context));
         } catch (final JAXBException jex) {
             logger.warn("Could not read places in file " + file + ": " + jex.getMessage());
+        } catch (final RuntimeException rex) {
+            throw new RuntimeException("Error reading places in file: " + file, rex);
         }
     }
 

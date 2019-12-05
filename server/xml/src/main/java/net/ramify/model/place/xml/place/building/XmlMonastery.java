@@ -18,7 +18,7 @@ public class XmlMonastery extends XmlBuilding<Monastery> {
 
     @Override
     protected Monastery place(final Place parent, final PlaceGroupId groupId, final BuildingHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new Monastery(this.placeId(), this.name(), parent, groupId, history);
+        return new Monastery(this.placeId(parent), this.name(), parent, groupId, history);
     }
 
 }

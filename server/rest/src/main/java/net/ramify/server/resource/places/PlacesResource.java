@@ -70,9 +70,6 @@ public interface PlacesResource extends RootResource {
     @Path("bundle/{id}")
     PlaceProto.PlaceBundle bundle(@PathParam("id") PlaceId id);
 
-    @Path("churches")
-    ChurchesResource churches();
-
     @Path("favourites")
     PlaceFavouritesResource favourites();
 

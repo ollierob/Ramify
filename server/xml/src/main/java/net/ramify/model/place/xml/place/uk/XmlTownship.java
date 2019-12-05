@@ -7,7 +7,7 @@ import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.id.Spid;
-import net.ramify.model.place.region.CountryIso;
+import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.region.Township;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.building.XmlChurch;

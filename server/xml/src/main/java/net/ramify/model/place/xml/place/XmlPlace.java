@@ -32,6 +32,8 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.function.Consumer;
 
+import static net.ramify.utils.StringUtils.isEmpty;
+
 @XmlSeeAlso({XmlSettlement.class, XmlUkPlace.class, XmlUsaPlace.class})
 public abstract class XmlPlace implements HasPlaceId {
 
@@ -71,6 +73,10 @@ public abstract class XmlPlace implements HasPlaceId {
         return this.placeId(id);
     }
 
+    protected String id() {
+        return id;
+    }
+
     public String name() {
         return name;
     }
@@ -100,7 +106,9 @@ public abstract class XmlPlace implements HasPlaceId {
 
     private Place place(final PlaceProvider placeProvider, final Place parent, final PlaceGroupProvider groupProvider, final ParserContext context) throws Place.InvalidPlaceTypeException {
         final var id = this.placeId(parent);
-        return name == null ? placeProvider.require(id) : this.place(parent, Functions.ifNonNull(groupProvider.getGroup(id), PlaceGroup::id), this.history(context), context);
+        return isEmpty(name)
+                ? placeProvider.require(id)
+                : this.place(parent, Functions.ifNonNull(groupProvider.getGroup(id), PlaceGroup::id), this.history(context), context);
     }
 
     @Nonnull

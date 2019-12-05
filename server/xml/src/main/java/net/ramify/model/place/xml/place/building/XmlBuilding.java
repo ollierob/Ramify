@@ -9,14 +9,16 @@ import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlInYear;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
-import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.building.DefaultBuildingHistory;
-import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.history.BuildingHistory;
+import net.ramify.model.place.history.PlaceHistory;
+import net.ramify.model.place.id.Spid;
+import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.xml.place.XmlPlace;
 
 import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
@@ -26,6 +28,9 @@ import java.util.Collections;
 
 @XmlTransient
 abstract class XmlBuilding<P extends Place> extends XmlPlace {
+
+    @XmlAttribute(name = "countryIso")
+    private String countryIso;
 
     @XmlElements({
             @XmlElement(name = "builtInYear", type = XmlInYear.class, namespace = XmlDateRange.NAMESPACE),
@@ -43,17 +48,34 @@ abstract class XmlBuilding<P extends Place> extends XmlPlace {
         this.type = type;
     }
 
+    @Nonnull
+    @Deprecated
     @Override
+    public PlaceId placeId() {
+        return super.placeId();
+    }
+
+    @Override
+    @Deprecated
     protected PlaceId placeId(final String id) {
-        return new Spid(iso, type, id);
+        return this.placeId(id, CountryIso.valueOf(countryIso));
+    }
+
+    @Override
+    protected PlaceId placeId(final String id, final Place parent) {
+        return this.placeId(id, CountryIso.readFrom(parent));
+    }
+
+    protected PlaceId placeId(final String id, final CountryIso countryIso) {
+        return new Spid(countryIso, type, id);
     }
 
     @Override
     protected P place(
-            Place parent,
-            PlaceGroupId groupId,
-            PlaceHistory history,
-            ParserContext context)
+            final Place parent,
+            final PlaceGroupId groupId,
+            final PlaceHistory history,
+            final ParserContext context)
             throws Place.InvalidPlaceTypeException {
         return this.place(parent, groupId, history instanceof BuildingHistory ? (BuildingHistory) history : this.history(context), context);
     }

@@ -5,9 +5,8 @@ import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
-import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.id.Spid;
-import net.ramify.model.place.region.CountryIso;
+import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.region.County;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.settlement.XmlCity;
@@ -31,7 +30,7 @@ class XmlCounty extends XmlPlace {
     private List<XmlPlace> children;
 
     @Override
-    protected PlaceId placeId(final String id) {
+    protected Spid placeId(final String id) {
         return new Spid(CountryIso.US, County.class, id);
     }
 
