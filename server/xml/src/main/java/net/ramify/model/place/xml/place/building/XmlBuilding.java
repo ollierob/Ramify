@@ -22,12 +22,14 @@ import javax.annotation.CheckForNull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 import java.util.Collection;
 import java.util.Collections;
 
 @XmlTransient
-abstract class XmlBuilding<P extends Place> extends XmlPlace {
+@XmlSeeAlso({XmlChurch.class, XmlFarmstead.class, XmlGraveyard.class, XmlInn.class, XmlMill.class, XmlMonastery.class, XmlSchool.class, XmlStreet.class})
+public abstract class XmlBuilding<P extends Place> extends XmlPlace {
 
     @XmlAttribute(name = "countryIso")
     private String countryIso;

@@ -10,9 +10,7 @@ import net.ramify.model.place.region.Parish;
 import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
-import net.ramify.model.place.xml.place.settlement.XmlCity;
-import net.ramify.model.place.xml.place.settlement.XmlTown;
-import net.ramify.model.place.xml.place.settlement.XmlVillage;
+import net.ramify.model.place.xml.place.settlement.XmlSettlement;
 
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
@@ -28,9 +26,7 @@ public class XmlParish extends XmlPlace {
             @XmlElementRef(type = XmlParish.class),
             @XmlElementRef(type = XmlChapelry.class),
             @XmlElementRef(type = XmlTownship.class),
-            @XmlElementRef(type = XmlCity.class),
-            @XmlElementRef(type = XmlTown.class),
-            @XmlElementRef(type = XmlVillage.class)
+            @XmlElementRef(type = XmlSettlement.class)
     })
     private List<XmlPlace> children;
 

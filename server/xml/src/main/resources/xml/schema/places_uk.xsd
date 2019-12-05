@@ -150,6 +150,8 @@
             <xs:element ref="ns1:town"/>
                         
             <xs:element ref="ns1:village"/>
+                        
+            <xs:element ref="ns1:hamlet"/>
                       
           </xs:choice>
                   
@@ -201,19 +203,25 @@
                     
           <xs:choice maxOccurs="unbounded" minOccurs="0">
                         
+            <xs:element ref="ns1:hamlet"/>
+                        
             <xs:element ref="ns1:village"/>
                         
-            <xs:element ref="ns1:hamlet"/>
+            <xs:element ref="ns1:street"/>
                         
             <xs:element ref="ns1:church"/>
                         
-            <xs:element ref="ns1:school"/>
+            <xs:element ref="ns1:graveyard"/>
                         
             <xs:element ref="ns1:farmstead"/>
                         
+            <xs:element ref="ns1:inn"/>
+                        
             <xs:element ref="ns1:mill"/>
                         
-            <xs:element ref="ns1:inn"/>
+            <xs:element ref="ns1:monastery"/>
+                        
+            <xs:element ref="ns1:school"/>
                       
           </xs:choice>
                   
