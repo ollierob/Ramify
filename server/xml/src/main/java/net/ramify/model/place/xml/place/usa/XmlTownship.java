@@ -1,12 +1,11 @@
 package net.ramify.model.place.xml.place.usa;
 
 import com.google.common.base.MoreObjects;
-import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
-import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.region.Township;
+import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlArea;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.settlement.XmlCity;
@@ -29,12 +28,12 @@ class XmlTownship extends XmlArea<Township> {
     private List<XmlPlace> children;
 
     public XmlTownship() {
-        super(CountryIso.US, Township.class);
+        super(Township.class);
     }
 
     @Override
-    protected Township place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new Township(this.placeId(), this.name(), parent, groupId, history);
+    protected Township place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+        return new Township(this.placeId(context), this.name(), parent, groupId, history);
     }
 
     @Override

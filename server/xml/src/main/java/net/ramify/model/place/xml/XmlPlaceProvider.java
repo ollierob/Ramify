@@ -14,6 +14,7 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.provider.PlaceGroupProvider;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.region.Country;
+import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.xml.place.XmlPlaces;
 import net.ramify.utils.file.FileTraverseUtils;
 import net.ramify.utils.objects.Consumers;
@@ -110,12 +111,24 @@ class XmlPlaceProvider implements PlaceProvider {
         return new XmlPlaceProvider(ImmutableMap.copyOf(places), ImmutableSetMultimap.copyOf(children), ImmutableSet.copyOf(countries));
     }
 
-    static PlaceProvider readPlacesInDirectory(final JAXBContext jaxbContext, final File root, final PlaceGroupProvider groupProvider, final ParserContext context) throws JAXBException {
+    static PlaceProvider readPlacesInCountryRoot(
+            final JAXBContext jaxbContext,
+            final File countryRoot,
+            final PlaceGroupProvider groupProvider,
+            final ParserContext context) throws JAXBException {
         final var provider = new XmlPlaceProvider(Maps.newHashMap(), HashMultimap.create(), Sets.newHashSet());
         final var unmarshaller = jaxbContext.createUnmarshaller();
-        FileTraverseUtils.traverseSubdirectories(root, XmlPlaceProvider::includeFile, file -> readPlacesInFile(unmarshaller, file, provider, groupProvider, context));
-        logger.info("Loaded {} places from {}.", provider.size(), root);
+        for (final File dir : countryRoots(countryRoot)) {
+            final var countryIso = CountryIso.valueOf(dir.getName());
+            final var placeContext = new PlaceParserContext(context.nameParser(), context.dateParser(), countryIso, provider, groupProvider);
+            FileTraverseUtils.traverseSubdirectories(dir, XmlPlaceProvider::includeFile, file -> readPlacesInFile(unmarshaller, file, provider, placeContext));
+            logger.info("Loaded {} places from {}.", provider.size(), dir);
+        }
         return provider.immutable();
+    }
+
+    private static File[] countryRoots(final File root) {
+        return root.listFiles(File::isDirectory);
     }
 
     private static boolean includeFile(final File file) {
@@ -124,7 +137,7 @@ class XmlPlaceProvider implements PlaceProvider {
                 && !name.contains("_records");
     }
 
-    private static void readPlacesInFile(final Unmarshaller unmarshaller, final File file, final XmlPlaceProvider placeProvider, final PlaceGroupProvider groupProvider, final ParserContext context) {
+    private static void readPlacesInFile(final Unmarshaller unmarshaller, final File file, final XmlPlaceProvider placeProvider, final PlaceParserContext context) {
         Preconditions.checkArgument(file.isFile(), "Not a file: %s", file);
         Preconditions.checkArgument(file.canRead(), "Not a readable file: %s", file);
         Preconditions.checkArgument(file.getName().endsWith(".xml"), "Not an XML file: %s", file);
@@ -133,7 +146,7 @@ class XmlPlaceProvider implements PlaceProvider {
             final var unmarshalled = unmarshaller.unmarshal(file);
             if (!(unmarshalled instanceof XmlPlaces)) return;
             final var places = (XmlPlaces) unmarshalled;
-            placeProvider.addAll(places.places(placeProvider, groupProvider, context));
+            placeProvider.addAll(places.places(context));
         } catch (final JAXBException jex) {
             logger.warn("Could not read places in file " + file + ": " + jex.getMessage());
         } catch (final RuntimeException rex) {

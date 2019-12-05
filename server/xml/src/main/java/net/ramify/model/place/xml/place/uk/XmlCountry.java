@@ -2,13 +2,13 @@ package net.ramify.model.place.xml.place.uk;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
-import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.Country;
 import net.ramify.model.place.region.iso.CountryIso;
+import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
 
 import javax.annotation.Nonnull;
@@ -29,14 +29,14 @@ class XmlCountry extends XmlPlace {
     private List<XmlCounty> counties;
 
     @Nonnull
-    protected Spid placeId(final String id) {
-        return new Spid(CountryIso.GB, Country.class, id);
+    protected Spid placeId(final String id, final CountryIso iso) {
+        return new Spid(iso, Country.class, id);
     }
 
     @Override
-    protected Place place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
+    protected Place place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         Preconditions.checkArgument(parent == null);
-        return new Country(this.placeId(), this.name(), this.iso());
+        return new Country(this.placeId(context), this.name(), this.iso());
     }
 
     protected CountryIso iso() {

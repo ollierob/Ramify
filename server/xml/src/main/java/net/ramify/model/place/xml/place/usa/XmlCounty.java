@@ -1,13 +1,13 @@
 package net.ramify.model.place.xml.place.usa;
 
 import com.google.common.base.MoreObjects;
-import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.id.Spid;
-import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.region.County;
+import net.ramify.model.place.region.iso.CountryIso;
+import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.settlement.XmlCity;
 import net.ramify.model.place.xml.place.settlement.XmlTown;
@@ -30,13 +30,13 @@ class XmlCounty extends XmlPlace {
     private List<XmlPlace> children;
 
     @Override
-    protected Spid placeId(final String id) {
-        return new Spid(CountryIso.US, County.class, id);
+    protected Spid placeId(final String id, final CountryIso iso) {
+        return new Spid(iso, County.class, id);
     }
 
     @Override
-    protected Place place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new County(this.placeId(), this.name(), parent, null, groupId, null);
+    protected Place place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+        return new County(this.placeId(context), this.name(), parent, null, groupId, null);
     }
 
     @Override

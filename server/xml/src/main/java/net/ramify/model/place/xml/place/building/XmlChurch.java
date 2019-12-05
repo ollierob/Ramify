@@ -1,10 +1,10 @@
 package net.ramify.model.place.xml.place.building;
 
-import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.building.Church;
 import net.ramify.model.place.history.BuildingHistory;
+import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
 
 import javax.xml.bind.annotation.XmlElementRef;
@@ -24,8 +24,8 @@ public class XmlChurch extends XmlBuilding<Church> {
     }
 
     @Override
-    protected Church place(final Place parent, final PlaceGroupId groupId, final BuildingHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new Church(this.placeId(parent), this.name(), parent, groupId, history);
+    protected Church place(final Place parent, final PlaceGroupId groupId, final BuildingHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+        return new Church(this.placeId(context), this.name(), parent, groupId, history);
     }
 
     @Override

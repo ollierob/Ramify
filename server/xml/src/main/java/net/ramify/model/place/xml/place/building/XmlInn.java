@@ -1,10 +1,10 @@
 package net.ramify.model.place.xml.place.building;
 
-import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.building.Inn;
 import net.ramify.model.place.history.BuildingHistory;
+import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -17,8 +17,8 @@ public class XmlInn extends XmlBuilding<Inn> {
     }
 
     @Override
-    protected Inn place(final Place parent, final PlaceGroupId groupId, final BuildingHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new Inn(this.placeId(parent), this.name(), parent, groupId, history);
+    protected Inn place(final Place parent, final PlaceGroupId groupId, final BuildingHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+        return new Inn(this.placeId(context), this.name(), parent, groupId, history);
     }
 
 }

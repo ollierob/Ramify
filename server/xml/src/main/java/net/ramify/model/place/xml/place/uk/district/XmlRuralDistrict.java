@@ -5,8 +5,8 @@ import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
-import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.region.district.RuralDistrict;
+import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlArea;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.uk.XmlUkPlace;
@@ -26,12 +26,12 @@ public class XmlRuralDistrict extends XmlArea<RuralDistrict> {
     private List<XmlPlace> children;
 
     XmlRuralDistrict() {
-        super(CountryIso.GB, RuralDistrict.class);
+        super(RuralDistrict.class);
     }
 
     @Override
-    protected RuralDistrict place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new RuralDistrict(this.placeId(), this.name(), parent, groupId, history);
+    protected RuralDistrict place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+        return new RuralDistrict(this.placeId(context), this.name(), parent, groupId, history);
     }
 
     @Override

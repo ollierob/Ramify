@@ -1,5 +1,7 @@
 package net.ramify.model.place.region.iso;
 
+import com.google.common.base.Preconditions;
+
 public class CountrySubdivisionIso extends CountryIso {
 
     public static CountrySubdivisionIso valueOf(final String iso) {
@@ -11,6 +13,8 @@ public class CountrySubdivisionIso extends CountryIso {
 
     CountrySubdivisionIso(final String country, final String subdivision) {
         super(country + '-' + subdivision);
+        Preconditions.checkArgument(country.length() == 2, "Invalid country ISO: %s", country);
+        Preconditions.checkArgument(subdivision.length() <= 3, "Invalid country subdivision ISO: %s-%s", country, subdivision);
         this.country = country;
     }
 

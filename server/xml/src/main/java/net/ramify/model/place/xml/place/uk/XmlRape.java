@@ -1,12 +1,11 @@
 package net.ramify.model.place.xml.place.uk;
 
 import com.google.common.base.MoreObjects;
-import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
-import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.region.Rape;
+import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlArea;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.settlement.XmlCity;
@@ -34,13 +33,13 @@ class XmlRape extends XmlArea<Rape> {
     private List<XmlPlace> children;
 
     XmlRape() {
-        super(CountryIso.GB, Rape.class);
+        super(Rape.class);
     }
 
     @Override
-    protected Rape place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
+    protected Rape place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
-        return new Rape(this.placeId(), this.name(), parent, groupId, history);
+        return new Rape(this.placeId(context), this.name(), parent, groupId, history);
     }
 
     @Override

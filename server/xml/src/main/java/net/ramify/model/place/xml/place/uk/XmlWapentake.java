@@ -1,12 +1,11 @@
 package net.ramify.model.place.xml.place.uk;
 
 import com.google.common.base.MoreObjects;
-import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
-import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.region.Wapentake;
+import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlArea;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.settlement.XmlCity;
@@ -31,13 +30,13 @@ class XmlWapentake extends XmlArea<Wapentake> {
     private List<XmlPlace> children;
 
     XmlWapentake() {
-        super(CountryIso.GB, Wapentake.class);
+        super(Wapentake.class);
     }
 
     @Override
-    protected Wapentake place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
+    protected Wapentake place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
-        return new Wapentake(this.placeId(), this.name(), parent, groupId, history);
+        return new Wapentake(this.placeId(context), this.name(), parent, groupId, history);
     }
 
     @Override

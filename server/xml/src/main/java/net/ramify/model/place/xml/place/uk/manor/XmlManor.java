@@ -9,6 +9,7 @@ import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.region.manor.Manor;
+import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.uk.XmlUkPlace;
 
@@ -29,13 +30,13 @@ public class XmlManor extends XmlPlace {
     private List<XmlPlace> children;
 
     @Override
-    protected PlaceId placeId(final String id) {
-        return new Spid(CountryIso.GB, Manor.class, id);
+    protected PlaceId placeId(final String id, final CountryIso iso) {
+        return new Spid(iso, Manor.class, id);
     }
 
     @Override
-    protected Manor place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new Manor(this.placeId(), this.name(), parent, groupId, history);
+    protected Manor place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+        return new Manor(this.placeId(context), this.name(), parent, groupId, history);
     }
 
     @Override

@@ -28,7 +28,7 @@ class XmlPlaceProviderTest {
         final var file = new File(XmlPlaceProviderTest.class.getResource("/xml/data").toURI());
         final var groups = mock(PlaceGroupProvider.class);
         final var parserContext = mock(ParserContext.class, Mockito.RETURNS_MOCKS);
-        final var placeProvider = XmlPlaceProvider.readPlacesInDirectory(context, file, groups, parserContext);
+        final var placeProvider = XmlPlaceProvider.readPlacesInCountryRoot(context, file, groups, parserContext);
 
         assertNotNull(placeProvider.get(new Spid(CountryIso.GB, Country.class, "england")));
         assertNotNull(placeProvider.get(new Spid(CountryIso.GB, Parish.class, "halifax")));

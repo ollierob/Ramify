@@ -53,8 +53,12 @@ public class XmlPlaceModule extends PrivateModule {
 
     @Provides
     @Singleton
-    PlaceProvider providePlaceProvider(final JAXBContext jaxbContext, @Named("data") final File data, final PlaceGroupProvider groupProvider, final ParserContext context) throws JAXBException {
-        return XmlPlaceProvider.readPlacesInDirectory(jaxbContext, data, groupProvider, context);
+    PlaceProvider providePlaceProvider(
+            final JAXBContext jaxbContext,
+            @Named("data") final File data,
+            final PlaceGroupProvider groupProvider,
+            final ParserContext context) throws JAXBException {
+        return XmlPlaceProvider.readPlacesInCountryRoot(jaxbContext, data, groupProvider, context);
     }
 
     @Provides
@@ -80,7 +84,7 @@ public class XmlPlaceModule extends PrivateModule {
     @Singleton
     @Named("data")
     File provideXmlDirectory() throws URISyntaxException {
-        final var places = XmlPlaceModule.class.getResource("/xml/data");
+        final var places = XmlPlaceModule.class.getResource("/xml/data/places");
         Preconditions.checkState(places != null, "Could not load XML data");
         return new File(places.toURI());
     }

@@ -9,18 +9,17 @@ import net.ramify.model.date.xml.XmlBetweenYears;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlInYear;
 import net.ramify.model.place.DefaultPlaceHistory;
-import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroup;
 import net.ramify.model.place.PlaceGroupId;
-import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.PlaceId;
-import net.ramify.model.place.provider.PlaceGroupProvider;
+import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.provider.PlaceProvider;
+import net.ramify.model.place.region.iso.CountryIso;
+import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.settlement.XmlSettlement;
 import net.ramify.model.place.xml.place.uk.XmlUkPlace;
 import net.ramify.model.place.xml.place.usa.XmlUsaPlace;
-import net.ramify.utils.objects.Functions;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -35,7 +34,7 @@ import java.util.function.Consumer;
 import static net.ramify.utils.StringUtils.isEmpty;
 
 @XmlSeeAlso({XmlSettlement.class, XmlUkPlace.class, XmlUsaPlace.class})
-public abstract class XmlPlace implements HasPlaceId {
+public abstract class XmlPlace {
 
     public static final String NAMESPACE = "http://ramify.net/places";
 
@@ -57,21 +56,16 @@ public abstract class XmlPlace implements HasPlaceId {
     })
     private XmlDateRange closed;
 
-    protected abstract PlaceId placeId(String id);
-
-    protected PlaceId placeId(final String id, final Place parent) {
-        return this.placeId(id);
-    }
-
-    protected PlaceId placeId(final Place parent) {
-        return this.placeId(id, parent);
+    protected PlaceId placeId(final PlaceParserContext context) {
+        return this.placeId(context.countryIso());
     }
 
     @Nonnull
-    @Override
-    public PlaceId placeId() {
-        return this.placeId(id);
+    public PlaceId placeId(final CountryIso iso) {
+        return this.placeId(id, iso);
     }
+
+    protected abstract PlaceId placeId(String id, CountryIso iso);
 
     protected String id() {
         return id;
@@ -81,11 +75,11 @@ public abstract class XmlPlace implements HasPlaceId {
         return name;
     }
 
-    public Set<Place> places(final PlaceProvider placeProvider, final PlaceGroupProvider groupProvider, final ParserContext context) {
+    public Set<Place> places(final PlaceParserContext context) {
         final var places = Sets.<Place>newHashSet();
-        final var id = this.placeId();
-        final var parent = this.parent(id, placeProvider);
-        this.addPlaces(placeProvider, parent, places::add, groupProvider, context);
+        final var id = this.placeId(context.countryIso());
+        final var parent = this.parent(id, context.places());
+        this.addPlaces(parent, places::add, context);
         return places;
     }
 
@@ -93,26 +87,26 @@ public abstract class XmlPlace implements HasPlaceId {
         return placeProvider.maybeGet(id).map(Place::parent).orElse(null);
     }
 
-    void addPlaces(final PlaceProvider placeProvider, final Place parent, final Consumer<Place> addPlace, final PlaceGroupProvider groupProvider, final ParserContext context) {
+    void addPlaces(final Place parent, final Consumer<Place> addPlace, final PlaceParserContext context) {
         try {
-            final var self = this.place(placeProvider, parent, groupProvider, context);
+            final var self = this.place(parent, context);
             addPlace.accept(self);
             final var children = this.children();
-            if (children != null) children.forEach(child -> child.addPlaces(placeProvider, self, addPlace, groupProvider, context));
+            if (children != null) children.forEach(child -> child.addPlaces(self, addPlace, context));
         } catch (final Place.InvalidPlaceTypeException | RuntimeException rex) {
             throw new RuntimeException("Error reading " + this, rex);
         }
     }
 
-    private Place place(final PlaceProvider placeProvider, final Place parent, final PlaceGroupProvider groupProvider, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        final var id = this.placeId(parent);
+    private Place place(final Place parent, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+        final var id = this.placeId(context.countryIso());
         return isEmpty(name)
-                ? placeProvider.require(id)
-                : this.place(parent, Functions.ifNonNull(groupProvider.getGroup(id), PlaceGroup::id), this.history(context), context);
+                ? context.places().require(id)
+                : this.place(parent, context.group(id).map(PlaceGroup::id).orElse(null), this.history(context), context);
     }
 
     @Nonnull
-    protected abstract Place place(Place parent, PlaceGroupId groupId, PlaceHistory history, ParserContext context) throws Place.InvalidPlaceTypeException;
+    protected abstract Place place(Place parent, PlaceGroupId groupId, PlaceHistory history, PlaceParserContext context) throws Place.InvalidPlaceTypeException;
 
     @CheckForNull
     protected abstract Collection<? extends XmlPlace> children();

@@ -15,10 +15,10 @@ import net.ramify.model.place.history.BuildingHistory;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.iso.CountryIso;
+import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
@@ -48,24 +48,6 @@ abstract class XmlBuilding<P extends Place> extends XmlPlace {
         this.type = type;
     }
 
-    @Nonnull
-    @Deprecated
-    @Override
-    public PlaceId placeId() {
-        return super.placeId();
-    }
-
-    @Override
-    @Deprecated
-    protected PlaceId placeId(final String id) {
-        return this.placeId(id, CountryIso.valueOf(countryIso));
-    }
-
-    @Override
-    protected PlaceId placeId(final String id, final Place parent) {
-        return this.placeId(id, CountryIso.readFrom(parent));
-    }
-
     protected PlaceId placeId(final String id, final CountryIso countryIso) {
         return new Spid(countryIso, type, id);
     }
@@ -75,7 +57,7 @@ abstract class XmlBuilding<P extends Place> extends XmlPlace {
             final Place parent,
             final PlaceGroupId groupId,
             final PlaceHistory history,
-            final ParserContext context)
+            final PlaceParserContext context)
             throws Place.InvalidPlaceTypeException {
         return this.place(parent, groupId, history instanceof BuildingHistory ? (BuildingHistory) history : this.history(context), context);
     }
@@ -84,7 +66,7 @@ abstract class XmlBuilding<P extends Place> extends XmlPlace {
             Place parent,
             PlaceGroupId groupId,
             BuildingHistory history,
-            ParserContext context)
+            PlaceParserContext context)
             throws Place.InvalidPlaceTypeException;
 
     @Override

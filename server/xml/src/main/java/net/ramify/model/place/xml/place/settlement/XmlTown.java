@@ -1,14 +1,14 @@
 package net.ramify.model.place.xml.place.settlement;
 
 import com.google.common.base.MoreObjects;
-import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
-import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.settlement.Town;
+import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.building.XmlChurch;
 import net.ramify.model.place.xml.place.building.XmlGraveyard;
@@ -45,8 +45,8 @@ public class XmlTown extends XmlSettlement {
     }
 
     @Override
-    protected Town place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new Town(this.placeId(parent), this.name(), parent, groupId, history);
+    protected Town place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+        return new Town(this.placeId(context), this.name(), parent, groupId, history);
     }
 
     @Override

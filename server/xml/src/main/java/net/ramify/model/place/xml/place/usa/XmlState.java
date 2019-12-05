@@ -1,13 +1,12 @@
 package net.ramify.model.place.xml.place.usa;
 
 import com.google.common.base.MoreObjects;
-import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
-import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.region.State;
 import net.ramify.model.place.region.iso.CountrySubdivisionIso;
+import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlArea;
 import net.ramify.model.place.xml.place.XmlPlace;
 
@@ -34,13 +33,13 @@ public class XmlState extends XmlArea<State> {
     private String iso;
 
     XmlState() {
-        super(CountryIso.US, State.class);
+        super(State.class);
     }
 
     @Nonnull
     @Override
-    protected State place(Place parent, PlaceGroupId groupId, final PlaceHistory history, ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new State(this.placeId(), this.name(), parent, this.iso(), groupId);
+    protected State place(Place parent, PlaceGroupId groupId, final PlaceHistory history, PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+        return new State(this.placeId(context), this.name(), parent, this.iso(), groupId);
     }
 
     protected CountrySubdivisionIso iso() {

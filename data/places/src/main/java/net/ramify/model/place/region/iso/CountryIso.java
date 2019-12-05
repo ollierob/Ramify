@@ -1,5 +1,6 @@
 package net.ramify.model.place.region.iso;
 
+import com.google.common.base.Preconditions;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.region.Country;
 import net.ramify.model.util.Iso;
@@ -30,8 +31,9 @@ public class CountryIso extends Iso {
                 : place.find(Country.class).flatMap(Country::iso).map(CountryIso::withoutSubdivision).get();
     }
 
-    public CountryIso(final String country) {
-        super(country);
+    CountryIso(final String iso) {
+        super(iso);
+        Preconditions.checkArgument(iso.length() <= 6, "Invalid country ISO: %s", iso);
     }
 
     public CountryIso withoutSubdivision() {

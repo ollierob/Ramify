@@ -1,7 +1,6 @@
 package net.ramify.model.place.xml.place.uk.manor;
 
 import com.google.common.base.MoreObjects;
-import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
@@ -9,6 +8,7 @@ import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.region.manor.Graveship;
+import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.uk.XmlUkPlace;
 
@@ -28,13 +28,13 @@ class XmlGraveship extends XmlPlace {
     private List<XmlPlace> children;
 
     @Override
-    protected PlaceId placeId(final String id) {
-        return new Spid(CountryIso.GB, Graveship.class, id);
+    protected PlaceId placeId(final String id, final CountryIso iso) {
+        return new Spid(iso, Graveship.class, id);
     }
 
     @Override
-    protected Graveship place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new Graveship(this.placeId(), this.name(), parent, groupId, history);
+    protected Graveship place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+        return new Graveship(this.placeId(context), this.name(), parent, groupId, history);
     }
 
     @Override

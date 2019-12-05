@@ -5,9 +5,9 @@ import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
-import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.region.district.MetropolitanBorough;
 import net.ramify.model.place.region.iso.CountrySubdivisionIso;
+import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlArea;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.settlement.XmlCity;
@@ -37,12 +37,12 @@ public class XmlMetropolitanBorough extends XmlArea<MetropolitanBorough> {
     private String iso;
 
     XmlMetropolitanBorough() {
-        super(CountryIso.GB, MetropolitanBorough.class);
+        super(MetropolitanBorough.class);
     }
 
     @Override
-    protected MetropolitanBorough place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final ParserContext context) throws Place.InvalidPlaceTypeException {
-        return new MetropolitanBorough(this.placeId(), this.name(), parent, groupId, this.iso(), history);
+    protected MetropolitanBorough place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+        return new MetropolitanBorough(this.placeId(context), this.name(), parent, groupId, this.iso(), history);
     }
 
     @Override
