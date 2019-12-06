@@ -8,6 +8,7 @@ import {RecordSet} from "../../../../protobuf/generated/record_pb";
 import {PlaceLink} from "../../../../components/places/PlaceLink";
 import {placeTypeName} from "../../../../components/places/PlaceType";
 import {formatDateRange} from "../../../../components/date/DateFormat";
+import {sortDatesByEarliest} from "../../../../components/date/DateRange";
 
 export type FamilyRecordColumn = ColumnProps<FamilyRecord>;
 
@@ -29,13 +30,15 @@ const TypeColumn: FamilyRecordColumn = {
     key: "type",
     title: "Type",
     render: (t, r) => recordTypeName(r.type),
-    width: 120
+    sorter: (r1, r2) => recordTypeName(r1.type).localeCompare(recordTypeName(r2.type)),
+    width: 130
 };
 
 const DateColumn: FamilyRecordColumn = {
     key: "date",
     title: "Date",
-    render: (t, r) => <>{formatDateRange(r.date, "day")}</>,
+    render: (t, r) => <>{formatDateRange(r.date, "day", {in: ""})}</>,
+    sorter: (r1, r2) => sortDatesByEarliest(r1.date, r2.date),
     width: 120
 };
 

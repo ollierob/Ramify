@@ -62,3 +62,20 @@ export function datesToRange(d1: DateProto.AsObject, d2: DateProto.AsObject, app
     if (d1 && d2 && d1 > d2) return datesToRange(d2, d1, approximate);
     return {earliest: d1, latest: d2, approximate: approximate};
 }
+
+export function isStartOfYear(d: DateProto.AsObject) {
+    return d != null && d.day == 1 && d.month == 1;
+}
+
+export function isEndOfYear(d: DateProto.AsObject) {
+    return d != null && d.month == 12 && d.day == 31;
+}
+
+export function isWholeYear(r: DateRangeProto.AsObject) {
+    return !!r
+        && r.earliest
+        && r.latest
+        && r.earliest.year == r.latest.year
+        && isStartOfYear(r.earliest)
+        && isEndOfYear(r.latest);
+}

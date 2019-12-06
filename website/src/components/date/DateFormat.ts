@@ -1,6 +1,6 @@
 import {Date as DateProto, DateRange as DateRangeProto} from "../../protobuf/generated/date_pb";
 import {DateFormatter, DayMonthYearFormatter, MonthYearFormatter, YearFormatter} from "./DateFormatter";
-import {datesToRange, earliestYear, latestYear} from "./DateRange";
+import {datesToRange, earliestYear, isStartOfYear, isWholeYear, latestYear} from "./DateRange";
 
 type FormatType = "year" | "month" | "day";
 
@@ -72,9 +72,15 @@ export function formatDateRange(r: DateRangeProto.AsObject, type: FormatType | D
     const format = formatter(type);
     if (!r.earliest) return words.before + format.formatDate(r.latest);
     if (!r.latest) return words.after + format.formatDate(r.earliest);
-    if (type == "day" && isoDate(r.earliest) == isoDate(r.latest)) return words.on + format.formatDate(r.earliest);
-    //TODO in month
-    if (type == "year" && earliestYear(r) == latestYear(r)) return words.in + earliestYear(r);
+    switch (type) {
+        case "day":
+            if (isoDate(r.earliest) == isoDate(r.latest)) return words.on + format.formatDate(r.earliest);
+            if (isWholeYear(r)) return words.in + r.earliest.year;
+            break;
+        case "year":
+            if (earliestYear(r) == latestYear(r)) return words.in + earliestYear(r);
+            break;
+    }
     return words.between + format.formatRange(r.earliest, r.latest);
 }
 
