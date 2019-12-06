@@ -12,9 +12,10 @@ public class CountryIso extends Iso {
     public static final CountryIso GB = new CountryIso("GB");
     public static final CountryIso US = new CountryIso("US");
 
-    public static CountryIso valueOf(final String iso) {
+    public static CountryIso valueOf(String iso) {
         if (isEmpty(iso)) return null;
-        switch (iso.trim().toUpperCase()) {
+        iso = iso.trim().toUpperCase();
+        switch (iso) {
             case "GB":
                 return GB;
             case "US":
