@@ -9,6 +9,7 @@ import {placeTypeName} from "../../../../components/places/PlaceType";
 import {ColumnSubstringLocalSearch} from "../../../../components/table/ant/ColumnSubstringLocalSearch";
 import {isFemale, isMale} from "../../../../components/people/Gender";
 import {EmptyPrefixWords, formatDateRange, formatYearRange} from "../../../../components/date/DateFormat";
+import {sortDatesByEarliest} from "../../../../components/date/DateRange";
 
 export type IndividualRecordColumn = ColumnProps<IndividualRecord>;
 
@@ -96,9 +97,14 @@ const BaptismYear: IndividualRecordColumn = {
 const ResidenceYear: IndividualRecordColumn = {
     key: "residenceDate",
     title: "Residence date",
-    render: (t, r) => r.residence && r.residence.length > 0 && <>{formatYearRange(r.residence[0].date, EmptyPrefixWords)}</>,
+    render: (t, r) => hasResidence(r) && <>{formatYearRange(r.residence[0].date, EmptyPrefixWords)}</>,
+    sorter: (r1, r2) => sortDatesByEarliest(hasResidence(r1) && r1.residence[0].date, hasResidence(r2) && r2.residence[0].date),
     width: 150
 };
+
+function hasResidence(r: IndividualRecord) {
+    return r.residence && r.residence.length > 0;
+}
 
 const ResidencePlace: IndividualRecordColumn = {
     key: "residencePlace",
