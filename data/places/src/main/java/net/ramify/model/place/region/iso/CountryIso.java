@@ -3,7 +3,7 @@ package net.ramify.model.place.region.iso;
 import com.google.common.base.Preconditions;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.region.Country;
-import net.ramify.model.util.Iso;
+import net.ramify.model.Iso;
 
 import static net.ramify.utils.StringUtils.isEmpty;
 

@@ -1,4 +1,4 @@
-package net.ramify.model;
+package net.ramify.model.util;
 
 import com.google.common.collect.Maps;
 

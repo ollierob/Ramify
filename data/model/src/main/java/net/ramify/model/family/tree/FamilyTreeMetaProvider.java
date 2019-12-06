@@ -1,6 +1,6 @@
 package net.ramify.model.family.tree;
 
-import net.ramify.model.Provider;
+import net.ramify.model.util.Provider;
 
 import javax.annotation.Nonnull;
 import java.util.Set;

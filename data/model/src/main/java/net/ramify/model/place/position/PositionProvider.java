@@ -1,6 +1,6 @@
 package net.ramify.model.place.position;
 
-import net.ramify.model.Provider;
+import net.ramify.model.util.Provider;
 import net.ramify.model.place.PlaceId;
 
 import javax.annotation.Nonnull;

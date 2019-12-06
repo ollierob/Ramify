@@ -2,6 +2,7 @@ package net.ramify.model;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import net.ramify.model.util.Provider;
 
 import javax.annotation.CheckForNull;
 import javax.xml.bind.annotation.XmlTransient;

@@ -1,4 +1,4 @@
-package net.ramify.model.util;
+package net.ramify.model;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;

@@ -1,6 +1,6 @@
 package net.ramify.model.place.provider;
 
-import net.ramify.model.Provider;
+import net.ramify.model.util.Provider;
 import net.ramify.model.place.PlaceGroup;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
