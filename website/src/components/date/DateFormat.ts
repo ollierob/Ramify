@@ -58,20 +58,28 @@ function formatShortYearRange(r: DateRangeProto.AsObject, words: Partial<PrefixW
     const y2 = latestYear(r);
     if (y1 == y2) return words.in + y1;
     if (y1 + 1 == y2) return words.in + y1 + "/" + (y2 % 10);
-    return preferEarly ? formatYear(r.earliest,) : formatYear(r.latest);
+    return preferEarly ? formatYear(r.earliest) : formatYear(r.latest);
 }
 
 export function formatYearRange(r: DateRangeProto.AsObject, words?: Partial<PrefixWords>): string {
     return formatDateRange(r, "year", words);
 }
 
+function ensureWords(words: Partial<PrefixWords>): PrefixWords {
+    return words ? {...DefaultPrefixWords, ...words} : DefaultPrefixWords;
+}
+
+function ensureWord(words: Partial<PrefixWords>, key: keyof PrefixWords): string {
+    return words[key] || DefaultPrefixWords[key];
+}
+
 export function formatDateRange(r: DateRangeProto.AsObject, type: FormatType | DateFormatter, words?: Partial<PrefixWords>): string {
     if (!r) return null;
-    words = words ? {...DefaultPrefixWords, ...words} : DefaultPrefixWords;
+    words = ensureWords(words);
     if (!r.earliest && !r.latest) return words.unknown;
     const format = formatter(type);
-    if (!r.earliest) return words.before + format.formatDate(r.latest);
-    if (!r.latest) return words.after + format.formatDate(r.earliest);
+    if (!r.earliest) return words.after + format.formatDate(r.latest);
+    if (!r.latest) return words.before + format.formatDate(r.earliest);
     switch (type) {
         case "day":
             if (isoDate(r.earliest) == isoDate(r.latest)) return words.on + format.formatDate(r.earliest);
@@ -90,8 +98,8 @@ export function formatYearRanges(r1: DateRangeProto.AsObject, r2: DateRangeProto
 
 export function formatDateRanges(r1: DateRangeProto.AsObject, r2: DateRangeProto.AsObject, type: FormatType, words?: Partial<PrefixWords>): string {
     if (!r1 && !r2) return null;
-    if (!r1) return formatDateRange(r1, type, words);
-    if (!r2) return formatDateRange(r2, type, words);
+    if (!r1) return ensureWord(words, "before") + formatDateRange(r2, type, EmptyPrefixWords);
+    if (!r2) return ensureWord(words, "after") + formatDateRange(r1, type, EmptyPrefixWords);
     if (type == "year") {
         const y1 = formatShortYearRange(r1, EmptyPrefixWords, true);
         const y2 = formatShortYearRange(r2, EmptyPrefixWords, false);

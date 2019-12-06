@@ -8,7 +8,7 @@ import {placeTypeName} from "../../../components/places/PlaceType";
 import {PlaceFavouritesHandler} from "../../../components/places/PlaceFavourites";
 import {PlaceGroupTab} from "./PlaceGroupTab";
 import {Flag} from "../../../components/images/Flag";
-import {formatYearRange, formatYearRanges} from "../../../components/date/DateFormat";
+import {formatYearRanges} from "../../../components/date/DateFormat";
 
 type Props = {
     group: AsyncData<ResolvedPlaceGroup>
