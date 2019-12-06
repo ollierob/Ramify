@@ -38,8 +38,8 @@
     vertical-align: top;
 }
 
-.placeGroup .places.ant-card .ant-card-head, .placeGroup .records.ant-card .ant-card-head {
-    padding-left: 8px;
+.placeGroup .places.ant-card > .ant-card-head, .placeGroup .records.ant-card > .ant-card-head {
+    padding-left: 0;
 }
 
 .placeGroup .places.ant-card .ant-card-body, .placeGroup .records.ant-card .ant-card-body {
