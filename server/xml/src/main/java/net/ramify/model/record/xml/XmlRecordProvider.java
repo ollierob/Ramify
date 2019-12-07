@@ -111,13 +111,14 @@ class XmlRecordProvider implements RecordsProvider {
 
         @CheckForNull
         @Override
-        public Records get(final PlaceId key) {
-            final var ids = index.get(key);
+        public Records get(final PlaceId id) {
+            final var ids = index.get(id);
             if (ids.isEmpty()) return Records.none();
             return () -> ids.stream()
                     .map(XmlRecordProvider.this::get)
                     .filter(Objects::nonNull)
-                    .flatMap(Records::records);
+                    .flatMap(Records::records)
+                    .filter(record -> record.hasPlace(id));
         }
 
     }
