@@ -10,6 +10,7 @@ import {ColumnSubstringLocalSearch} from "../../../../components/table/ant/Colum
 import {isFemale, isMale} from "../../../../components/people/Gender";
 import {EmptyPrefixWords, formatDateRange, formatYearRange} from "../../../../components/date/DateFormat";
 import {sortDatesByEarliest} from "../../../../components/date/DateRange";
+import {recordSetHref} from "../../RecordLinks";
 
 export type IndividualRecordColumn = ColumnProps<IndividualRecord>;
 
@@ -152,7 +153,7 @@ const BurialDateColumn: IndividualRecordColumn = {
 const RecordSetColumn: IndividualRecordColumn = {
     key: "recordSet",
     title: "Record set",
-    render: (t, r) => r.record.recordSet && r.record.recordSet.longtitle,
+    render: (t, r) => r.record.recordSet && <a href={recordSetHref(r.record.recordSet)}>{r.record.recordSet.longtitle}</a>,
     width: 220
 };
 
