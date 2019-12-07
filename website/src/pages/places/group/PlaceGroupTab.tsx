@@ -46,9 +46,11 @@ export class PlaceGroupTab extends React.PureComponent<Props, State> {
         const group = this.props.group;
 
         return <>
+
             <PlaceBreadcrumb
                 place={place.place}
                 showLastName={group && place.place.name != group.name}/>
+
             <PlaceInfo
                 {...this.props.favourites}
                 card={false}
@@ -56,6 +58,7 @@ export class PlaceGroupTab extends React.PureComponent<Props, State> {
                 description={place.description}
                 childPlaces={place.childList}
                 records={this.state.records}/>
+                
         </>;
 
     }

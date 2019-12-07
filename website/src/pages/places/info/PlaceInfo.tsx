@@ -4,7 +4,7 @@ import {Place, PlaceDescription} from "../../../protobuf/generated/place_pb";
 import ChildPlaceCards from "../../../components/places/ChildPlaceCards";
 import {PlaceTitle} from "../../../components/places/PlaceTitle";
 import {PlaceFavouritesHandler} from "../../../components/places/PlaceFavourites";
-import {RecordCards} from "../../../components/records/RecordCards";
+import {RecordSetCards} from "../../../components/records/RecordSetCards";
 import {RecordSet} from "../../../protobuf/generated/record_pb";
 import {AsyncData} from "../../../components/fetch/AsyncData";
 import {isBuilding} from "../../../components/places/PlaceType";
@@ -20,42 +20,46 @@ type Props = PlaceFavouritesHandler & {
     showAlsoSee?: boolean;
 }
 
-export const PlaceInfo = (props: Props) => {
+export class PlaceInfo extends React.PureComponent<Props> {
 
-    const place = props.place;
-    if (!place) return null;
+    render() {
 
-    const description = props.description;
+        const place = this.props.place;
+        if (!place) return null;
 
-    const inner = <>
+        const description = this.props.description;
 
-        <div className="description">
-            {description ? <Markdown text={description.description}/> : NoDescription}
-        </div>
+        const inner = <>
 
-        {props.childPlaces && (props.childPlaces.length || !isBuilding(place)) && <Card className="places" title={<b>Places</b>} bordered={false}>
-            <ChildPlaceCards
-                {...props}
-                childPlaces={props.childPlaces}
-                alsoSeePlaces={props.showAlsoSee && description && description.alsoseeList}
-                loading={props.loadingChildren}
-                noPlacesMessage={<>No further places within this area have been registered.</>}/>
-        </Card>}
+            <div className="description">
+                {description ? <Markdown text={description.description}/> : NoDescription}
+            </div>
 
-        <Card className="records" title={<b>Records</b>} bordered={false}>
-            <RecordCards
-                removePrefix={place.name + " "}
-                loading={props.records && props.records.loading}
-                records={props.records && props.records.data}/>
-        </Card></>;
+            {this.props.childPlaces && (this.props.childPlaces.length || !isBuilding(place)) && <Card className="places" title={<b>Places</b>} bordered={false}>
+                <ChildPlaceCards
+                    {...this.props}
+                    childPlaces={this.props.childPlaces}
+                    alsoSeePlaces={this.props.showAlsoSee && description && description.alsoseeList}
+                    loading={this.props.loadingChildren}
+                    noPlacesMessage={<>No further places within this area have been registered.</>}/>
+            </Card>}
 
-    if (props.card) return <Card
-        className="info"
-        title={<PlaceTitle {...props}/>}>
-        {inner}
-    </Card>;
+            <Card className="records" title={<b>Records</b>} bordered={false}>
+                <RecordSetCards
+                    removePrefix={place.name + " "}
+                    loading={this.props.records && this.props.records.loading}
+                    records={this.props.records && this.props.records.data}/>
+            </Card></>;
 
-    return inner;
+        if (this.props.card) return <Card
+            className="info"
+            title={<PlaceTitle {...this.props}/>}>
+            {inner}
+        </Card>;
+
+        return inner;
+
+    }
 
 };
 

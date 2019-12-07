@@ -26,23 +26,32 @@ type Props = HasClass & Titling & {
     ignoreNone?: boolean;
 }
 
-export const RecordCards = (props: Props) => {
+export class RecordSetCards extends React.PureComponent<Props> {
 
-    if (!props.records) return null;
+    render() {
 
-    const records = [...props.records].sort(sortRecordSetByTitle);
-    //if (props.groupByParent && props.relatives && props.relatives.length) return <GroupedRecordCards {...props}/>;
+        if (!this.props.records) return null;
 
-    return <div
-        className={"recordCards" + (props.fixedWidth ? " fixedWidth" : "")}
-        style={props.style}>
-        {props.loading && <Loading/>}
-        {records.map(record => <RecordCard {...props} key={record.id} record={record}/>)}
-        {!props.loading && !records.length && !props.ignoreNone && <NoRecordCards/>}
-        {props.alsoSee && <AlsoSeeCard alsoSee={props.alsoSee}/>}
-    </div>;
+        const records = [...this.props.records].sort(sortRecordSetByTitle);
+        //if (props.groupByParent && props.relatives && props.relatives.length) return <GroupedRecordCards {...props}/>;
 
-};
+        return <div
+            className={"recordCards" + (this.props.fixedWidth ? " fixedWidth" : "")}
+            style={this.props.style}>
+
+            {this.props.loading && <Loading/>}
+
+            {records.map(record => <RecordCard {...this.props} key={record.id} record={record}/>)}
+
+            {!this.props.loading && !records.length && !this.props.ignoreNone && <NoRecordCards/>}
+
+            {this.props.alsoSee && <AlsoSeeCard alsoSee={this.props.alsoSee}/>}
+
+        </div>;
+
+    }
+
+}
 
 const RecordCard = (props: {record: RecordSet.AsObject} & Titling) => {
     const record = props.record;
