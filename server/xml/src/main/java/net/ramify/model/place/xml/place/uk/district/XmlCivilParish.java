@@ -22,6 +22,8 @@ import java.util.List;
 @XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "civilParish")
 public class XmlCivilParish extends XmlArea<CivilParish> {
 
+    static final PlaceHistory HISTORY = XmlMetropolitanBorough.BOROUGH_HISTORY;
+
     @XmlElementRefs({
             @XmlElementRef(type = XmlTown.class),
             @XmlElementRef(type = XmlVillage.class),
@@ -39,7 +41,7 @@ public class XmlCivilParish extends XmlArea<CivilParish> {
 
     @Override
     protected PlaceHistory history(ParserContext context) {
-        return MoreObjects.firstNonNull(super.history(context), CivilParish.HISTORY);
+        return MoreObjects.firstNonNull(super.history(context), HISTORY);
     }
 
     @Override

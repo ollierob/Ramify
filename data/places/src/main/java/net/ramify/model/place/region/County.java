@@ -6,6 +6,7 @@ import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.proto.PlaceProto;
+import net.ramify.model.place.region.district.Borough;
 import net.ramify.model.place.region.district.MetropolitanBorough;
 import net.ramify.model.place.region.iso.CountrySubdivisionIso;
 import net.ramify.model.place.region.manor.Manor;
@@ -19,7 +20,9 @@ import java.util.Set;
 
 public class County extends AbstractRegion implements CountyOrSubdivision {
 
-    private static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(Manor.class, Parish.class, City.class, Hundred.class, MetropolitanBorough.class);
+    private static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(
+            Manor.class, Parish.class, City.class, Hundred.class,
+            MetropolitanBorough.class, Borough.class);
 
     private final Region parent;
     private final CountrySubdivisionIso iso;

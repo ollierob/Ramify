@@ -2,6 +2,8 @@ package net.ramify.model.place.xml.place.uk.district;
 
 import com.google.common.base.MoreObjects;
 import net.ramify.model.ParserContext;
+import net.ramify.model.date.ExactDate;
+import net.ramify.model.place.DefaultPlaceHistory;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
@@ -19,11 +21,14 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.time.Month;
 import java.util.Collection;
 import java.util.List;
 
 @XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "metropolitanBorough")
 public class XmlMetropolitanBorough extends XmlArea<MetropolitanBorough> {
+
+    static final PlaceHistory BOROUGH_HISTORY = new DefaultPlaceHistory(ExactDate.on(1974, Month.APRIL, 1), null);
 
     @XmlElementRefs({
             @XmlElementRef(type = XmlCivilParish.class),
@@ -47,7 +52,7 @@ public class XmlMetropolitanBorough extends XmlArea<MetropolitanBorough> {
 
     @Override
     protected PlaceHistory history(final ParserContext context) {
-        return MoreObjects.firstNonNull(super.history(context), MetropolitanBorough.BOROUGH_HISTORY);
+        return MoreObjects.firstNonNull(super.history(context), BOROUGH_HISTORY);
     }
 
     protected CountrySubdivisionIso iso() {

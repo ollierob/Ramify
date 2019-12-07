@@ -11,6 +11,8 @@ import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.region.iso.CountrySubdivisionIso;
 import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
+import net.ramify.model.place.xml.place.settlement.XmlCity;
+import net.ramify.model.place.xml.place.uk.district.XmlLondonBorough;
 import net.ramify.model.place.xml.place.uk.district.XmlMetropolitanBorough;
 import net.ramify.model.place.xml.place.uk.district.XmlRuralDistrict;
 import net.ramify.model.place.xml.place.uk.district.XmlUrbanDistrict;
@@ -29,6 +31,7 @@ import java.util.Objects;
 class XmlCounty extends XmlPlace {
 
     @XmlElementRefs({
+            @XmlElementRef(type = XmlCity.class),
             @XmlElementRef(type = XmlWapentake.class),
             @XmlElementRef(type = XmlParish.class),
             @XmlElementRef(type = XmlManor.class),
@@ -36,7 +39,8 @@ class XmlCounty extends XmlPlace {
             @XmlElementRef(type = XmlRape.class),
             @XmlElementRef(type = XmlMetropolitanBorough.class),
             @XmlElementRef(type = XmlUrbanDistrict.class),
-            @XmlElementRef(type = XmlRuralDistrict.class)
+            @XmlElementRef(type = XmlRuralDistrict.class),
+            @XmlElementRef(type = XmlLondonBorough.class)
     })
     private List<XmlPlace> children;
 

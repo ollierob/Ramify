@@ -1,20 +1,39 @@
 package net.ramify.model.place.settlement;
 
 import net.ramify.model.place.PlaceGroupId;
-import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.proto.PlaceProto;
+import net.ramify.model.place.region.iso.CountrySubdivisionIso;
 import net.ramify.model.place.type.Region;
+
+import javax.annotation.Nonnull;
+import java.util.Optional;
 
 public class City extends AbstractSettlement {
 
-    public City(PlaceId id, String name, Region region, final PlaceGroupId groupId, final PlaceHistory history) {
+    private final CountrySubdivisionIso iso;
+
+    public City(
+            final PlaceId id,
+            final String name,
+            final Region region,
+            final PlaceGroupId groupId,
+            final PlaceHistory history,
+            final CountrySubdivisionIso iso) {
         super(id, name, region, groupId, history);
+        this.iso = iso;
     }
 
     @Override
     public PlaceProto.PlaceType protoType() {
         return PlaceProto.PlaceType.CITY;
+    }
+
+    @Nonnull
+    @Override
+    public Optional<CountrySubdivisionIso> iso() {
+        return Optional.ofNullable(iso);
     }
 
 }

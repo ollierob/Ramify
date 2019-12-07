@@ -15,6 +15,8 @@
     
   <xs:element name="hundred" type="tns:xmlHundred"/>
     
+  <xs:element name="londonBorough" type="tns:xmlLondonBorough"/>
+    
   <xs:element name="manor" type="tns:xmlManor"/>
     
   <xs:element name="metropolitanBorough" type="tns:xmlMetropolitanBorough"/>
@@ -75,6 +77,8 @@
                     
           <xs:choice maxOccurs="unbounded" minOccurs="0">
                         
+            <xs:element ref="ns1:city"/>
+                        
             <xs:element ref="tns:wapentake"/>
                         
             <xs:element ref="tns:parish"/>
@@ -90,6 +94,8 @@
             <xs:element ref="tns:urbanDistrict"/>
                         
             <xs:element ref="tns:ruralDistrict"/>
+                        
+            <xs:element ref="tns:londonBorough"/>
                       
           </xs:choice>
                   
@@ -416,6 +422,22 @@
           <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:civilParish"/>
                   
         </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlLondonBorough">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="ns1:xmlPlace">
+                
+        <xs:sequence/>
+                
+        <xs:attribute name="iso" type="xs:string"/>
               
       </xs:extension>
           
