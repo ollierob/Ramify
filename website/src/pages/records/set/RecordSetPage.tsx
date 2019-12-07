@@ -41,7 +41,6 @@ export default class RecordSetPage extends RecordBasePage<State> {
             recordSetHierarchy: {loading: true},
             searchResults: {}
         };
-        this.search = this.search.bind(this);
     }
 
     body() {
@@ -73,10 +72,6 @@ export default class RecordSetPage extends RecordBasePage<State> {
                     recordSet={recordSet}
                     relatives={mapAsyncData(this.state.recordSetHierarchy, h => h.self)}
                     paginate={null}
-                    search={this.state.search}
-                    searching={this.state.searchResults.loading}
-                    doSearch={this.search}
-                    searchResults={this.state.searchResults}
                     creatorPlace={this.state.recordSetSource}/>
 
             </div>
@@ -115,11 +110,6 @@ export default class RecordSetPage extends RecordBasePage<State> {
         else this.setState({recordSetCoversPlace: {}});
         if (source) asyncLoadData(source, this.placeLoader.loadPlaceBundle, place => this.setState({recordSetSource: place}));
         else this.setState({recordSetSource: {}});
-    }
-
-    private search(search: RecordSearch) {
-        if (this.state.recordSetId) search.setRecordsetid(this.state.recordSetId);
-        asyncLoadData(search, this.recordLoader.searchIndividualRecords, searchResults => this.setState({searchResults}));
     }
 
 }

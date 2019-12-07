@@ -1,16 +1,13 @@
 import * as React from "react";
 import {Tabs} from "antd";
-import {AsyncData} from "../../../components/fetch/AsyncData";
 import {RecordSet} from "../../../protobuf/generated/record_pb";
 import {RecordPaginationHandler} from "../../../components/records/RecordPaginationHandler";
 import RecordImageGallery from "./RecordImageGallery";
-import {EnrichedIndividualRecord} from "../../../components/records/RecordLoader";
 import FamilyRecordTable from "./family/FamilyRecordTable";
 import IndividualRecordTable from "./individual/IndividualRecordTable";
 
 type Props = RecordPaginationHandler & {
     recordSet: RecordSet.AsObject;
-    searchResults: AsyncData<ReadonlyArray<EnrichedIndividualRecord>>;
     showRecordSet?: boolean;
 }
 
@@ -53,21 +50,7 @@ export class RecordBrowser extends React.PureComponent<Props, State> {
                 <RecordImageGallery {...this.props}/>
             </Tabs.TabPane>
 
-            <Tabs.TabPane
-                key="search"
-                tab={"Search results"}
-                disabled={!this.props.searchResults.query}>
-                <IndividualRecordTable {...this.props}/>
-            </Tabs.TabPane>
-
         </Tabs>;
-
-    }
-
-    componentDidUpdate(prevProps: Readonly<Props>) {
-
-        if (this.props.searchResults.loading && !prevProps.searchResults.loading && this.state.activeTab != "search")
-            this.setState({activeTab: "search"});
 
     }
 

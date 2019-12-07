@@ -3,7 +3,6 @@ import {CSSProperties} from "react";
 import {ExternalRecordReference, RecordSet, RecordSetRelatives} from "../../../protobuf/generated/record_pb";
 import {Card, Icon} from "antd";
 import {RecordSetCards} from "../../../components/records/RecordSetCards";
-import {RecordSearchHandler} from "../../../components/search/RecordSearchHandler";
 import {RecordBrowser} from "./RecordBrowser";
 import {AsyncData} from "../../../components/fetch/AsyncData";
 import {RecordPaginationHandler} from "../../../components/records/RecordPaginationHandler";
@@ -12,15 +11,13 @@ import {Loading} from "../../../components/style/Loading";
 import {stringMultimap} from "../../../components/Maps";
 import {RecordSetReferences} from "../../../components/records/RecordSetReference";
 import {joinComponents} from "../../../components/Components";
-import {EnrichedIndividualRecord} from "../../../components/records/RecordLoader";
 import {PlaceBundle} from "../../../protobuf/generated/place_pb";
 import {PlaceLink} from "../../../components/places/PlaceLink";
 
-type Props = RecordPaginationHandler & RecordSearchHandler & RouteComponentProps<any> & {
+type Props = RecordPaginationHandler & RouteComponentProps<any> & {
     loading: boolean;
     recordSet: Readonly<RecordSet.AsObject>
     relatives: AsyncData<RecordSetRelatives.AsObject>;
-    searchResults: AsyncData<ReadonlyArray<EnrichedIndividualRecord>>;
     creatorPlace: AsyncData<Readonly<PlaceBundle.AsObject>>
 }
 
