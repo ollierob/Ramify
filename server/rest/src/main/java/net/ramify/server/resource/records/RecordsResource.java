@@ -37,4 +37,7 @@ public interface RecordsResource extends RootResource {
     @Path("images/{id}")
     RecordImages images(@PathParam("id") RecordSetId id);
 
+    @Path("places")
+    PlaceRecordResource places();
+
 }

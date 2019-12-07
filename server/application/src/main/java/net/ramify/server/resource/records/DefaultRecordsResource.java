@@ -22,6 +22,7 @@ public class DefaultRecordsResource implements RecordsResource {
     private final RecordSetResource recordSets;
     private final IndividualRecordResource individuals;
     private final RecordImageProvider imageProvider;
+    private final PlaceRecordResource placeRecords;
 
     @Inject
     DefaultRecordsResource(
@@ -29,12 +30,14 @@ public class DefaultRecordsResource implements RecordsResource {
             final RecordSetRelativesProvider relatives,
             final RecordSetResource recordSets,
             final IndividualRecordResource individuals,
-            final RecordImageProvider imageProvider) {
+            final RecordImageProvider imageProvider,
+            final PlaceRecordResource placeRecords) {
         this.records = records;
         this.relatives = relatives;
         this.recordSets = recordSets;
         this.individuals = individuals;
         this.imageProvider = imageProvider;
+        this.placeRecords = placeRecords;
     }
 
     @Override
@@ -66,6 +69,11 @@ public class DefaultRecordsResource implements RecordsResource {
     @Override
     public RecordImages images(final RecordSetId id) {
         return imageProvider.get(id);
+    }
+
+    @Override
+    public PlaceRecordResource places() {
+        return placeRecords;
     }
 
 }

@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static net.ramify.model.record.xml.record.XmlRecord.NAMESPACE;
 
@@ -37,11 +38,10 @@ public class XmlRecordSets {
     public Collection<Record> records(final RecordSetId id, final RecordContext context) {
         if (this.recordSets == null || this.recordSets.isEmpty()) return Collections.emptySet();
         return this.recordSets.stream()
-                .map(set -> set.find(id).orElse(null))
                 .filter(Objects::nonNull)
-                .findAny()
-                .map(target -> target.records(context))
-                .orElseGet(Collections::emptySet);
+                .flatMap(target -> target.records(context).stream())
+                .filter(record -> record.recordSetId().equals(id))
+                .collect(Collectors.toList());
     }
 
 }

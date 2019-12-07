@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.time.Month;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "burial")
@@ -58,14 +59,15 @@ public class XmlBurialRecord extends XmlPersonOnDateRecord {
     @XmlElementRef
     private List<XmlRelationship> relationships;
 
-    public BurialRecord build(final PlaceId placeId, final RecordContext context, final RecordSet recordSet) {
+    public BurialRecord build(final PlaceId burialPlaceId, final RecordContext context, final RecordSet recordSet) {
+        Objects.requireNonNull(burialPlaceId, "burial place ID");
         final var burialDate = ExactDate.on(year, Month.of(month), dayOfMonth);
         return new ChurchBurialRecord(
                 this.recordId(),
                 recordSet,
                 burialDate,
-                placeId,
-                this.family(burialDate, context.onDate(burialDate), placeId));
+                burialPlaceId,
+                this.family(burialDate, context.onDate(burialDate), burialPlaceId));
     }
 
     Family family(final ExactDate burialDate, final RecordContext context, final PlaceId burialPlaceId) {

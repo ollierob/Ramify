@@ -1,5 +1,6 @@
 package net.ramify.model.util;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Maps;
 
 import javax.annotation.CheckForNull;
@@ -12,7 +13,12 @@ import java.util.function.Function;
 public interface Provider<K, V> {
 
     @CheckForNull
-    V get(K key);
+    V get(@Nonnull K key);
+
+    @Nonnull
+    default V getOrDefault(@Nonnull final K key, @Nonnull final V defaultValue) {
+        return MoreObjects.firstNonNull(this.get(key), defaultValue);
+    }
 
     @Nonnull
     default V require(final K key) {

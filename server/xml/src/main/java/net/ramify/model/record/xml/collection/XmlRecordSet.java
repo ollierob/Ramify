@@ -31,8 +31,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "recordSet")
@@ -137,6 +135,7 @@ class XmlRecordSet implements HasRecordSetId {
         return Functions.ifNonNull(parent, RecordSet::createdBy);
     }
 
+    @CheckForNull
     PlaceId coversPlaceId(final RecordSet parent) {
         if (coversPlaceId != null) return new PlaceId(coversPlaceId);
         return Functions.ifNonNull(parent, RecordSet::covers);
@@ -178,17 +177,15 @@ class XmlRecordSet implements HasRecordSetId {
     }
 
     Collection<Record> records(final RecordContext context) {
-        if (records == null) return Collections.emptySet();
-        final var records = Lists.<Record>newArrayList();
-        final var self = this.buildSelf(null, context); //FIXME null parent as record sets may not yet have been generated
-        this.records.forEach(record -> records.addAll(record.build(self, context)));
-        return records;
+        return this.records(context, null);
     }
 
-    Optional<XmlRecordSet> find(final RecordSetId id) {
-        if (this.id.equals(id.value())) return Optional.of(this);
-        if (children == null || children.isEmpty()) return Optional.empty();
-        return children.stream().map(child -> child.find(id).orElse(null)).filter(Objects::nonNull).findAny();
+    Collection<Record> records(final RecordContext context, final RecordSet parent) {
+        final var out = Lists.<Record>newArrayList();
+        final var self = this.buildSelf(parent, context);
+        if (records != null) records.forEach(record -> out.addAll(record.build(self, context)));
+        if (children != null) children.forEach(child -> out.addAll(child.records(context, self)));
+        return out;
     }
 
 }

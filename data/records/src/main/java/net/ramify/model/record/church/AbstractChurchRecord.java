@@ -7,6 +7,8 @@ import net.ramify.model.record.ExactDateRecord;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.collection.RecordSet;
 
+import java.util.Objects;
+
 public abstract class AbstractChurchRecord extends ExactDateRecord implements HasPlaceId {
 
     private final PlaceId church;
@@ -17,7 +19,7 @@ public abstract class AbstractChurchRecord extends ExactDateRecord implements Ha
             final ExactDate date,
             final PlaceId church) {
         super(id, recordSet, date);
-        this.church = church;
+        this.church = Objects.requireNonNull(church);
     }
 
     @Override
