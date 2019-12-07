@@ -177,12 +177,12 @@ class XmlRecordSet implements HasRecordSetId {
     }
 
     @CheckForNull
-    RecordSet parentRecordSet(final RecordSetProvider recordSets) {
-        return this.parentRecordSetId().map(recordSets::require).orElse(null);
+    RecordSet parentRecordSet(final RecordSetProvider recordSetProvider) {
+        return this.parentRecordSetId().map(recordSetProvider::require).orElse(null);
     }
 
-    Collection<Record> records(final RecordContext context) {
-        return this.records(context, null); //FIXME pass in RSP and lookup from parent ID
+    Collection<Record> records(final RecordContext context, final RecordSetProvider recordSetProvider) {
+        return this.records(context, this.parentRecordSet(recordSetProvider)); //FIXME pass in RSP and lookup from parent ID
     }
 
     Collection<Record> records(final RecordContext context, final RecordSet parent) {

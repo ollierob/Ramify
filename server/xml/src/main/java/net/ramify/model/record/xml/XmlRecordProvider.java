@@ -39,17 +39,17 @@ class XmlRecordProvider implements RecordsProvider {
     private final JAXBContext context;
     private final RecordContext recordContext;
     private PlaceIndex placeIndex;
-    private final RecordSetProvider recordSets;
+    private final RecordSetProvider recordSetProvider;
 
     XmlRecordProvider(
             final Map<RecordSetId, File> xmlFiles,
             final JAXBContext context,
             final RecordContext recordContext,
-            final RecordSetProvider recordSets) {
+            final RecordSetProvider recordSetProvider) {
         this.xmlFiles = xmlFiles;
         this.context = context;
         this.recordContext = recordContext;
-        this.recordSets = recordSets;
+        this.recordSetProvider = recordSetProvider;
     }
 
     @CheckForNull
@@ -63,7 +63,7 @@ class XmlRecordProvider implements RecordsProvider {
         logger.info("Reading records for {} in {}", id, file);
         try {
             final var recordSets = (XmlRecordSets) context.createUnmarshaller().unmarshal(file);
-            final var records = recordSets.records(id, recordContext);
+            final var records = recordSets.records(id, recordContext, recordSetProvider);
             return Records.of(records);
         } catch (final Exception ex) {
             throw new RuntimeException("Error reading records for " + id + " from " + file, ex);

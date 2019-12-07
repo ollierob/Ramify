@@ -35,11 +35,11 @@ public class XmlRecordSets {
     }
 
     @Nonnull
-    public Collection<Record> records(final RecordSetId id, final RecordContext context) {
+    public Collection<Record> records(final RecordSetId id, final RecordContext context, final RecordSetProvider recordSetProvider) {
         if (this.recordSets == null || this.recordSets.isEmpty()) return Collections.emptySet();
         return this.recordSets.stream()
                 .filter(Objects::nonNull)
-                .flatMap(set -> set.records(context).stream())
+                .flatMap(set -> set.records(context, recordSetProvider).stream())
                 .filter(record -> record.recordSetId().equals(id))
                 .collect(Collectors.toList());
     }
