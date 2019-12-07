@@ -7,7 +7,6 @@ import {PlaceFavouritesHandler} from "../../../components/places/PlaceFavourites
 import {RecordSetCards} from "../../../components/records/RecordSetCards";
 import {RecordSet} from "../../../protobuf/generated/record_pb";
 import {AsyncData} from "../../../components/fetch/AsyncData";
-import {isBuilding} from "../../../components/places/PlaceType";
 import {Markdown} from "../../../components/layout/Markdown";
 
 type Props = PlaceFavouritesHandler & {
@@ -35,7 +34,7 @@ export class PlaceInfo extends React.PureComponent<Props> {
                 {description ? <Markdown text={description.description}/> : NoDescription}
             </div>
 
-            {this.props.childPlaces && (this.props.childPlaces.length || !isBuilding(place)) && <Card className="places" title={<b>Places</b>} bordered={false}>
+            {this.props.childPlaces && (this.props.childPlaces.length || !place.isbuilding) && <Card className="places" title={<b>Places</b>} bordered={false}>
                 <ChildPlaceCards
                     {...this.props}
                     childPlaces={this.props.childPlaces}

@@ -4,7 +4,7 @@ import {Place, PlaceType as PlaceTypeProtoValues, PlaceTypeMap} from "../../prot
 import {NumberMap, numberMap} from "../Maps";
 
 export type PlaceType = keyof PlaceTypeMap;
-type PlaceInfo = {s: string, p?: string, d?: string, isBuilding?: boolean}
+type PlaceInfo = {s: string, p?: string, d?: string}
 
 const PlaceTypeInfo: { [key in PlaceType]: PlaceInfo } = {
     BOROUGH: {s: "Borough"},
@@ -14,29 +14,29 @@ const PlaceTypeInfo: { [key in PlaceType]: PlaceInfo } = {
     COUNTRY: {s: "Country", p: "Countries"},
     COUNTY: {s: "County", p: "Counties"},
     COURT: {s: "Court"},
-    CHURCH: {s: "Church", p: "Churches", isBuilding: true},
+    CHURCH: {s: "Church", p: "Churches"},
     DISTRICT: {s: "District"},
-    FARMSTEAD: {s: "Farmstead", isBuilding: true},
-    GRAVEYARD: {s: "Graveyard", isBuilding: true},
+    FARMSTEAD: {s: "Farmstead"},
+    GRAVEYARD: {s: "Graveyard"},
     GRAVESHIP: {s: "Graveship"},
     HAMLET: {s: "Hamlet"},
-    HOSPITAL: {s: "Hospital", isBuilding: true},
-    HOUSE: {s: "House", isBuilding: true},
+    HOSPITAL: {s: "Hospital"},
+    HOUSE: {s: "House"},
     HUNDRED: {s: "Hundred"},
-    INN: {s: "Inn", isBuilding: true},
+    INN: {s: "Inn"},
     LATHE: {s: "Lathe"},
     MANOR: {s: "Manor"},
-    MILL: {s: "Mill", isBuilding: true},
-    MONASTERY: {s: "Monastery", p: "Monasteries", isBuilding: true},
+    MILL: {s: "Mill"},
+    MONASTERY: {s: "Monastery", p: "Monasteries"},
     NEIGHBOURHOOD: {s: "Neighbourhood"},
     PARISH: {s: "Church Parish", p: "Church Parishes"},
     RAPE: {s: "Rape"},
     RIDING: {s: "Riding"},
     RURAL_DISTRICT: {s: "Rural District"},
-    SCHOOL: {s: "School", isBuilding: true},
+    SCHOOL: {s: "School"},
     STATE: {s: "State"},
-    STREET: {s: "Street", isBuilding: true},
-    TOWN: {s: "Town", isBuilding: true},
+    STREET: {s: "Street"},
+    TOWN: {s: "Town"},
     TOWNSHIP: {s: "Township"},
     URBAN_DISTRICT: {s: "Urban District"},
     VILLAGE: {s: "Village"},
@@ -68,8 +68,4 @@ export function sortByPlaceType(t1: PlaceType, t2: PlaceType): number {
 
 export function sortByPlaceName(p1: Place.AsObject, p2: Place.AsObject): number {
     return p1.name.localeCompare(p2.name);
-}
-
-export function isBuilding(p1: Place.AsObject): boolean {
-    return placeInfo(p1.type).isBuilding;
 }

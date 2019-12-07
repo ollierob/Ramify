@@ -31,6 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "recordSet")
@@ -83,7 +84,7 @@ class XmlRecordSet implements HasRecordSetId {
 
     Collection<DefaultRecordSet> build(final RecordSetProvider recordSets, final RecordContext context) {
         try {
-            final var parent = Functions.ifNonNull(this.parentRecordSetId(), recordSets::require);
+            final var parent = this.parentRecordSet(recordSets);
             return this.build(parent, context);
         } catch (final Exception ex) {
             throw new RuntimeException("Error building record set " + id, ex);
@@ -171,13 +172,17 @@ class XmlRecordSet implements HasRecordSetId {
         return new RecordSetId(id);
     }
 
+    Optional<RecordSetId> parentRecordSetId() {
+        return Optional.ofNullable(parentId).map(RecordSetId::new);
+    }
+
     @CheckForNull
-    RecordSetId parentRecordSetId() {
-        return Functions.ifNonNull(parentId, RecordSetId::new);
+    RecordSet parentRecordSet(final RecordSetProvider recordSets) {
+        return this.parentRecordSetId().map(recordSets::require).orElse(null);
     }
 
     Collection<Record> records(final RecordContext context) {
-        return this.records(context, null);
+        return this.records(context, null); //FIXME pass in RSP and lookup from parent ID
     }
 
     Collection<Record> records(final RecordContext context, final RecordSet parent) {

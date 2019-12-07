@@ -27,6 +27,7 @@ message Place {
     bool defunct = 6;
     string groupId = 7;
     PlaceHistory history = 8;
+    bool isBuilding = 9;
 
 }
 

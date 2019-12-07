@@ -2,6 +2,7 @@ package net.ramify.model.place.type;
 
 import net.ramify.model.place.Place;
 import net.ramify.model.place.history.BuildingHistory;
+import net.ramify.model.place.proto.PlaceProto;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -29,6 +30,12 @@ public interface Building extends Place {
     @Override
     default <R> R handleWith(final PlaceHandler<R> handler) {
         return handler.handle(this);
+    }
+
+    @Nonnull
+    @Override
+    default PlaceProto.Place.Builder toProtoBuilder(final boolean includeParent) {
+        return Place.super.toProtoBuilder(includeParent).setIsBuilding(true);
     }
 
 }
