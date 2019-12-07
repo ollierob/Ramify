@@ -24,7 +24,7 @@ public class GenericResidenceRecord extends GenericLifeEventRecord implements Re
     @Override
     public RecordProto.Record.Builder toProtoBuilder() {
         final var builder = ResidenceRecord.super.toProtoBuilder();
-        Consumers.ifNonNull(place, p -> builder.setPlace(p.toProto()));
+        Consumers.ifNonNull(place, p -> builder.setPlace(p.toProto(false)));
         return builder;
     }
 
