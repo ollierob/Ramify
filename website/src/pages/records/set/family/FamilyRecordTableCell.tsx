@@ -31,6 +31,7 @@ function renderPerson(person: Person.AsObject, root: Person.AsObject, relationsh
         {renderName(person.name)}
         {renderLifespan(person)}
         {renderRelationship(person, root, relationships)}
+        {renderNotes(person)}
     </>;
 }
 
@@ -51,4 +52,8 @@ function renderRelationship(person: Person.AsObject, root: Person.AsObject, rela
     const relationship = findRelationship(person, root, relationships, true);
     if (!relationship || !relationship.type) return null;
     return <span className="relationship">{relationshipName(relationship, person)}</span>;
+}
+
+function renderNotes(person: Person.AsObject) {
+    return person.notes && <span className="notes">{person.notes}</span>;
 }
