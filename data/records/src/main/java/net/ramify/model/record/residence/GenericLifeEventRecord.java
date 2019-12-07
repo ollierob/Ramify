@@ -1,11 +1,9 @@
 package net.ramify.model.record.residence;
 
 import net.ramify.model.date.DateRange;
-import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.family.Family;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.collection.RecordSet;
-import net.ramify.model.record.proto.RecordProto;
 import net.ramify.model.record.type.LifeEventRecord;
 
 import javax.annotation.Nonnull;
@@ -50,14 +48,6 @@ public abstract class GenericLifeEventRecord implements LifeEventRecord {
     @Override
     public RecordId recordId() {
         return recordId;
-    }
-
-    protected abstract EventProto.RecordType type();
-
-    @Nonnull
-    @Override
-    public RecordProto.Record.Builder toProtoBuilder() {
-        return LifeEventRecord.super.toProtoBuilder().setType(this.type());
     }
 
 }
