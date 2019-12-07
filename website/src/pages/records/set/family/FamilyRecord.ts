@@ -27,7 +27,7 @@ function buildFamilyRecord(record: Record.AsObject): FamilyRecord[] {
         date: record.date,
         type: recordTypeFromValue(record.type),
         family: family,
-        recordSet: null,
+        recordSet: null, //FIXME
         place: record.place
     }));
 }
