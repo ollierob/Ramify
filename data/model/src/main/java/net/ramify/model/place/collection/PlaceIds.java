@@ -2,6 +2,7 @@ package net.ramify.model.place.collection;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
+import com.google.common.collect.Streams;
 import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.Id;
 import net.ramify.model.place.PlaceId;
@@ -10,7 +11,9 @@ import net.ramify.utils.collections.SetUtils;
 
 import javax.annotation.Nonnull;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public interface PlaceIds extends Iterable<PlaceId>, BuildsProto<PlaceProto.PlaceIdList> {
 
@@ -27,9 +30,26 @@ public interface PlaceIds extends Iterable<PlaceId>, BuildsProto<PlaceProto.Plac
                 .build();
     }
 
+    @Nonnull
+    default Stream<PlaceId> stream() {
+        return Streams.stream(this);
+    }
+
     static PlaceIds of(final Collection<PlaceId> placeIds) {
         final var set = SetUtils.asSet(placeIds);
-        return set::iterator;
+        return new PlaceIds() {
+
+            @Override
+            public Iterator<PlaceId> iterator() {
+                return set.iterator();
+            }
+
+            @Nonnull
+            @Override
+            public Stream<PlaceId> stream() {
+                return set.stream();
+            }
+        };
     }
 
 }

@@ -40,8 +40,13 @@ public interface Records extends BuildsProto<RecordProto.RecordList> {
     }
 
     static Records of(final Collection<Record> records) {
+        if (records.isEmpty()) return none();
         final var immutable = ImmutableList.copyOf(records);
         return immutable::stream;
+    }
+
+    static Records none() {
+        return Stream::empty;
     }
 
 }

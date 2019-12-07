@@ -8,7 +8,7 @@ import net.ramify.utils.collections.SetUtils;
 import javax.annotation.Nonnull;
 import java.util.Set;
 
-public interface HasPlaces {
+public interface HasPlaces extends HasPlaceIds {
 
     @Nonnull
     Set<? extends Place> places();

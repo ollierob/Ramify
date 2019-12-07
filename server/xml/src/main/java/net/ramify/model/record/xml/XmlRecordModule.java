@@ -8,7 +8,6 @@ import net.ramify.model.date.XmlDateParser;
 import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.person.XmlNameParser;
 import net.ramify.model.person.name.NameParser;
-import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.xml.XmlPlaceModule;
 import net.ramify.model.record.provider.RecordSetProvider;
 import net.ramify.model.record.provider.RecordSetRelativesProvider;
@@ -67,8 +66,8 @@ public class XmlRecordModule extends PrivateModule {
 
     @Provides
     @Singleton
-    XmlRecordProvider provideRecordProvider(final JAXBContext context, final PlaceProvider places, final RecordContext recordContext) {
-        return new XmlRecordProvider(Maps.newHashMap(), context, places, recordContext);
+    XmlRecordProvider provideRecordProvider(final JAXBContext context, final RecordContext recordContext) {
+        return new XmlRecordProvider(Maps.newHashMap(), context, recordContext);
     }
 
     @Provides

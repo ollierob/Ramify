@@ -12,4 +12,7 @@ public interface RecordsProvider extends Provider<RecordSetId, Records> {
     @Nonnull
     Collection<Records> all();
 
+    @Nonnull
+    RecordsByPlaceIndex placeIndex();
+
 }

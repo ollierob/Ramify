@@ -1,11 +1,15 @@
 package net.ramify.model.record.xml;
 
 import com.google.common.collect.Collections2;
-import net.ramify.model.place.provider.PlaceProvider;
+import com.google.common.collect.Multimap;
+import net.ramify.model.place.PlaceId;
+import net.ramify.model.record.Record;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.Records;
+import net.ramify.model.record.provider.RecordsByPlaceIndex;
 import net.ramify.model.record.provider.RecordsProvider;
 import net.ramify.model.record.xml.collection.XmlRecordSets;
+import net.ramify.utils.collections.MultimapCollectors;
 import net.ramify.utils.file.FileUtils;
 import net.ramify.utils.objects.Functions;
 import org.slf4j.Logger;
@@ -17,9 +21,12 @@ import javax.inject.Singleton;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.File;
+import java.util.AbstractMap;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 @XmlTransient
 @Singleton
@@ -29,17 +36,15 @@ class XmlRecordProvider implements RecordsProvider {
 
     private final Map<RecordSetId, File> xmlFiles;
     private final JAXBContext context;
-    private final PlaceProvider places;
     private final RecordContext recordContext;
+    private PlaceIndex placeIndex;
 
     XmlRecordProvider(
             final Map<RecordSetId, File> xmlFiles,
             final JAXBContext context,
-            final PlaceProvider places,
             final RecordContext recordContext) {
         this.xmlFiles = xmlFiles;
         this.context = context;
-        this.places = places;
         this.recordContext = recordContext;
     }
 
@@ -70,4 +75,51 @@ class XmlRecordProvider implements RecordsProvider {
     public Collection<Records> all() {
         return Collections.unmodifiableCollection(Collections2.transform(xmlFiles.keySet(), this::get));
     }
+
+    @Nonnull
+    @Override
+    public synchronized RecordsByPlaceIndex placeIndex() {
+        return placeIndex == null ? placeIndex = this.index() : placeIndex;
+    }
+
+    private PlaceIndex index() {
+        logger.info("Indexing record places ...");
+        final Multimap<PlaceId, RecordSetId> index = xmlFiles.keySet()
+                .stream()
+                .map(this::get)
+                .flatMap(Records::records)
+                .flatMap(XmlRecordProvider::streamRecordPlaces)
+                .parallel()
+                .collect(MultimapCollectors.collector(Map.Entry::getKey, Map.Entry::getValue));
+        logger.info("Indexed {} record places.", index.size());
+        return new PlaceIndex(index);
+    }
+
+    private static Stream<Map.Entry<PlaceId, RecordSetId>> streamRecordPlaces(final Record record) {
+        final var recordSetId = record.recordSetId();
+        return record.placeIds().stream().map(id -> new AbstractMap.SimpleImmutableEntry<>(id, recordSetId));
+    }
+
+    @XmlTransient
+    private class PlaceIndex implements RecordsByPlaceIndex {
+
+        private final Multimap<PlaceId, RecordSetId> index;
+
+        PlaceIndex(final Multimap<PlaceId, RecordSetId> index) {
+            this.index = index;
+        }
+
+        @CheckForNull
+        @Override
+        public Records get(final PlaceId key) {
+            final var ids = index.get(key);
+            if (ids.isEmpty()) return Records.none();
+            return () -> ids.stream()
+                    .map(XmlRecordProvider.this::get)
+                    .filter(Objects::nonNull)
+                    .flatMap(Records::records);
+        }
+
+    }
+
 }
