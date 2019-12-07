@@ -13,7 +13,7 @@ import net.ramify.model.event.type.misc.Flourished;
 import net.ramify.model.family.SinglePersonFamily;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.record.collection.RecordSet;
-import net.ramify.model.record.residence.GenericLifeEventRecord;
+import net.ramify.model.record.residence.GenericMentionRecord;
 import net.ramify.model.record.type.LifeEventRecord;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlPersonOnDateRecord;
@@ -46,7 +46,7 @@ public class XmlMentionRecord extends XmlPersonOnDateRecord {
         final var recordId = this.recordId();
         final var date = MoreObjects.firstNonNull(this.date(context.dateParser()), parentDate);
         final var family = new SinglePersonFamily(this.person(date, context));
-        return new GenericLifeEventRecord(
+        return new GenericMentionRecord(
                 recordId,
                 recordSet,
                 family,

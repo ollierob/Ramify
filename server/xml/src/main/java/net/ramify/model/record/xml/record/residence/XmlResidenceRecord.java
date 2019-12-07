@@ -10,7 +10,7 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.GenericRecordPerson;
 import net.ramify.model.record.collection.RecordSet;
-import net.ramify.model.record.residence.GenericLifeEventRecord;
+import net.ramify.model.record.residence.GenericResidenceRecord;
 import net.ramify.model.record.type.LifeEventRecord;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlPersonOnDateRecord;
@@ -35,7 +35,7 @@ public class XmlResidenceRecord extends XmlPersonOnDateRecord {
             final var place = Functions.ifNonNull(placeId, id -> context.places().require(new PlaceId(id)), parentPlace);
             final var person = this.person(place, date, context);
             final var family = this.family(person, place, date, context).build();
-            return new GenericLifeEventRecord(recordId, recordSet, family, date);
+            return new GenericResidenceRecord(recordId, recordSet, family, date);
         } catch (final Exception ex) {
             throw new RuntimeException("Error building residence record for " + recordId, ex);
         }
