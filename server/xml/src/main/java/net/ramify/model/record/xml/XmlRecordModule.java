@@ -9,6 +9,7 @@ import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.person.XmlNameParser;
 import net.ramify.model.person.name.NameParser;
 import net.ramify.model.place.xml.XmlPlaceModule;
+import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.provider.RecordSetProvider;
 import net.ramify.model.record.provider.RecordSetRelativesProvider;
 import net.ramify.model.record.provider.RecordsProvider;
@@ -22,6 +23,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.File;
 import java.net.URISyntaxException;
+import java.util.Map;
 
 @XmlTransient
 public class XmlRecordModule extends PrivateModule {
@@ -55,19 +57,34 @@ public class XmlRecordModule extends PrivateModule {
 
     @Provides
     @Singleton
-    RecordSetProvider provideRecordSetProvider(
+    XmlRecordSetProvider provideRecordSetProvider(
             final JAXBContext context,
             @Named("data") final File data,
-            final XmlRecordProvider recordProvider,
             final XmlRecordSetRelativesProvider relatives,
             final RecordContext recordContext) throws JAXBException {
-        return XmlRecordSetProvider.readRecordsInDirectory(context, data, recordProvider, relatives, recordContext);
+        return XmlRecordSetProvider.readRecordsInDirectory(context, data, relatives, recordContext);
     }
 
     @Provides
     @Singleton
-    XmlRecordProvider provideRecordProvider(final JAXBContext context, final RecordContext recordContext) {
-        return new XmlRecordProvider(Maps.newHashMap(), context, recordContext);
+    RecordSetProvider provideRecordSetProvider(final XmlRecordSetProvider recordSetProvider) {
+        return recordSetProvider.immutable();
+    }
+
+    @Provides
+    @Singleton
+    Map<RecordSetId, File> provideRecordSetFiles(final XmlRecordSetProvider recordSetProvider) {
+        return recordSetProvider.recordSetFiles();
+    }
+
+    @Provides
+    @Singleton
+    XmlRecordProvider provideRecordProvider(
+            final JAXBContext context,
+            final RecordContext recordContext,
+            final Map<RecordSetId, File> recordSetFiles,
+            final RecordSetProvider recordSets) {
+        return new XmlRecordProvider(recordSetFiles, context, recordContext, recordSets);
     }
 
     @Provides

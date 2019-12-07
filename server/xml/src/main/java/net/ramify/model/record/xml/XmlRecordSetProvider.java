@@ -37,15 +37,17 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
     private static final Logger logger = LoggerFactory.getLogger(XmlRecordSetProvider.class);
 
     private final XmlRecordSetRelativesProvider relatives;
+    private final Map<RecordSetId, File> recordSetFiles = Maps.newHashMap();
 
     XmlRecordSetProvider(final Map<RecordSetId, RecordSet> recordSets, final XmlRecordSetRelativesProvider relatives) {
         super(recordSets);
         this.relatives = relatives;
     }
 
-    void addAll(final Collection<DefaultRecordSet> recordSets) {
+    void addAll(final File file, final Collection<DefaultRecordSet> recordSets) {
         super.putAll(MapUtils.toMapLastKey(recordSets, HasRecordSetId::recordSetId));
         recordSets.forEach(relatives::add);
+        recordSets.forEach(rs -> recordSetFiles.put(rs.recordSetId(), file));
     }
 
     @Nonnull
@@ -80,6 +82,10 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
 
     }
 
+    Map<RecordSetId, File> recordSetFiles() {
+        return recordSetFiles;
+    }
+
     @Nonnull
     RecordSetProvider immutable() {
         final var records = this.mutableMap();
@@ -97,10 +103,9 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
         }
     }
 
-    static RecordSetProvider readRecordsInDirectory(
+    static XmlRecordSetProvider readRecordsInDirectory(
             final JAXBContext jaxbContext,
             final File root,
-            final XmlRecordProvider recordProvider,
             final XmlRecordSetRelativesProvider relatives,
             final RecordContext recordContext) throws JAXBException {
         final var provider = new XmlRecordSetProvider(Maps.newLinkedHashMap(), relatives);
@@ -108,12 +113,12 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
         FileTraverseUtils.traverseSubdirectories(
                 root,
                 file -> file.getName().endsWith(".xml") && file.getPath().contains("record"),
-                file -> readRecordsInFile(unmarshaller, file, provider, recordProvider, recordContext));
+                file -> readRecordsInFile(unmarshaller, file, provider, recordContext));
         logger.info("Loaded {} record sets from {}.", provider.size(), root);
-        return provider.immutable();
+        return provider;
     }
 
-    private static void readRecordsInFile(final Unmarshaller unmarshaller, final File file, final XmlRecordSetProvider provider, final XmlRecordProvider recordProvider, final RecordContext context) {
+    private static void readRecordsInFile(final Unmarshaller unmarshaller, final File file, final XmlRecordSetProvider setProvider, final RecordContext context) {
         FileUtils.checkReadableFile(file);
         Preconditions.checkArgument(file.getName().endsWith(".xml"), "Not an XML file: %s", file);
         try {
@@ -121,9 +126,8 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
             final var unmarshalled = unmarshaller.unmarshal(file);
             if (!(unmarshalled instanceof XmlRecordSets)) return;
             final var records = (XmlRecordSets) unmarshalled;
-            final var recordSets = records.recordSets(provider, context);
-            provider.addAll(recordSets);
-            recordSets.forEach(rs -> recordProvider.add(rs.recordSetId(), file));
+            final var recordSets = records.recordSets(setProvider, context);
+            setProvider.addAll(file, recordSets);
         } catch (final JAXBException jex) {
             logger.warn("Could not read records in file " + file + ": " + jex.getMessage());
         } catch (final Exception ex) {

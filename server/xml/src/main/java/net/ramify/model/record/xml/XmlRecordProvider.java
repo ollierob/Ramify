@@ -6,6 +6,7 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.Record;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.Records;
+import net.ramify.model.record.provider.RecordSetProvider;
 import net.ramify.model.record.provider.RecordsByPlaceIndex;
 import net.ramify.model.record.provider.RecordsProvider;
 import net.ramify.model.record.xml.collection.XmlRecordSets;
@@ -38,14 +39,17 @@ class XmlRecordProvider implements RecordsProvider {
     private final JAXBContext context;
     private final RecordContext recordContext;
     private PlaceIndex placeIndex;
+    private final RecordSetProvider recordSets;
 
     XmlRecordProvider(
             final Map<RecordSetId, File> xmlFiles,
             final JAXBContext context,
-            final RecordContext recordContext) {
+            final RecordContext recordContext,
+            final RecordSetProvider recordSets) {
         this.xmlFiles = xmlFiles;
         this.context = context;
         this.recordContext = recordContext;
+        this.recordSets = recordSets;
     }
 
     @CheckForNull
@@ -64,10 +68,6 @@ class XmlRecordProvider implements RecordsProvider {
         } catch (final Exception ex) {
             throw new RuntimeException("Error reading records for " + id + " from " + file, ex);
         }
-    }
-
-    void add(final RecordSetId id, final File file) {
-        xmlFiles.put(id, file);
     }
 
     @Nonnull
