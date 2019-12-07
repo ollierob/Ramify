@@ -39,7 +39,7 @@ public class XmlRecordSets {
         if (this.recordSets == null || this.recordSets.isEmpty()) return Collections.emptySet();
         return this.recordSets.stream()
                 .filter(Objects::nonNull)
-                .flatMap(target -> target.records(context).stream())
+                .flatMap(set -> set.records(context).stream())
                 .filter(record -> record.recordSetId().equals(id))
                 .collect(Collectors.toList());
     }
