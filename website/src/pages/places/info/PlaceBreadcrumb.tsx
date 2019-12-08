@@ -15,6 +15,7 @@ export const PlaceBreadcrumb = (props: {loading?: boolean, place: Place.AsObject
             {hierarchy.map((place, i) => <Breadcrumb
                 key={place ? place.id : i}
                 place={place}
+                link={i < hierarchy.length - 1}
                 separator={i < hierarchy.length - 1}
                 showType={i < hierarchy.length - 1 || !props.showLastName}/>)}
         </div>
@@ -34,20 +35,22 @@ function listHierarchy(place: Place.AsObject, max: number): ReadonlyArray<Place.
     return [list[0], null].concat(list.slice(list.length - max));
 }
 
-const Breadcrumb = (props: {place: Place.AsObject, separator: boolean, showType: boolean}) => {
+const Breadcrumb = (props: {place: Place.AsObject, separator: boolean, showType: boolean, link?: boolean}) => {
 
     const place = props.place;
     if (!place) return <> ... &raquo; </>;
 
-    const type = place.type.name;
-    const prefix = props.showType && !place.name.endsWith(type) && type != "Country";
+    const type = place.type;
+    const prefix = props.showType && place.type.canprefix && !place.name.endsWith(type.name);
+    const suffix = !prefix && props.showType && place.type.cansuffix;
 
     return <>
         <span className="place">
-            {prefix && <>{type} of </>}
-            <a href={placeHref(place)}>
-                <b>{place.name}</b>
-            </a>
+            {prefix && <>{type.name} of </>}
+            {props.link
+                ? <a href={placeHref(place)}><b>{place.name}</b></a>
+                : place.name}
+            {suffix && <> {type.name}</>}
         </span>
         {props.separator && " » "}
     </>;

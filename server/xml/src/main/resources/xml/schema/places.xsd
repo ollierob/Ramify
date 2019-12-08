@@ -47,6 +47,8 @@
     
   <xs:element name="street" type="tns:xmlStreet"/>
     
+  <xs:element name="suburb" type="tns:xmlSuburb"/>
+    
   <xs:element name="textLink" type="tns:xmlTextLink"/>
     
   <xs:element name="town" type="tns:xmlTown"/>
@@ -254,6 +256,8 @@
     <xs:attribute name="id" type="xs:string" use="required"/>
         
     <xs:attribute name="name" type="xs:string"/>
+        
+    <xs:attribute name="major" type="xs:boolean"/>
       
   </xs:complexType>
     
@@ -659,6 +663,20 @@
       
   </xs:complexType>
     
+  <xs:complexType name="xmlSuburb">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlSettlement">
+                
+        <xs:sequence/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
   <xs:complexType name="places">
         
     <xs:sequence>
@@ -689,11 +707,11 @@
                 
         <xs:element ref="tns:hamlet"/>
                 
+        <xs:element ref="tns:suburb"/>
+                
         <xs:element ref="ns2:country"/>
                 
         <xs:element ref="ns2:county"/>
-                
-        <xs:element ref="ns2:wapentake"/>
                 
         <xs:element ref="ns2:parish"/>
                 
@@ -709,7 +727,11 @@
                 
         <xs:element ref="ns2:rape"/>
                 
+        <xs:element ref="ns2:wapentake"/>
+                
         <xs:element ref="ns2:lathe"/>
+                
+        <xs:element ref="ns2:ward"/>
                 
         <xs:element ref="ns2:metropolitanBorough"/>
                 
