@@ -11,6 +11,8 @@
     
   <xs:element name="event" type="tns:xmlEvent"/>
     
+  <xs:element name="marriage" type="tns:xmlMarriageEvent"/>
+    
   <xs:element name="residence" type="tns:xmlResidenceEvent"/>
     
   <xs:complexType name="xmlBirthEvent">
@@ -51,6 +53,8 @@
           
     </xs:sequence>
         
+    <xs:attribute name="id" type="xs:string"/>
+        
     <xs:attribute name="placeId" type="xs:string"/>
         
     <xs:attribute name="age" type="xs:int"/>
@@ -78,6 +82,22 @@
       <xs:extension base="tns:xmlEvent">
                 
         <xs:sequence/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlMarriageEvent">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlEvent">
+                
+        <xs:sequence/>
+                
+        <xs:attribute name="spouse" type="xs:string"/>
               
       </xs:extension>
           

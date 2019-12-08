@@ -5,13 +5,33 @@ import net.ramify.model.event.AbstractEvent;
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.event.type.LifeEvent;
 import net.ramify.model.person.PersonId;
+import net.ramify.model.person.age.Age;
 
 import javax.annotation.Nonnull;
+import java.util.Optional;
 
-public class GenericMarriage extends AbstractEvent<GenericMarriage> implements LifeEvent, Marriage {
+public class GenericMarriage extends AbstractEvent<GenericMarriage> implements LifeEvent, MarriageEvent {
 
-    public GenericMarriage(final PersonId personId, final DateRange date) {
+    private final Age givenAge;
+
+    public GenericMarriage(
+            final PersonId personId,
+            final DateRange date) {
+        this(personId, date, null);
+    }
+
+    public GenericMarriage(
+            final PersonId personId,
+            final DateRange date,
+            final Age givenAge) {
         super(personId, date);
+        this.givenAge = givenAge;
+    }
+
+    @Nonnull
+    @Override
+    public Optional<Age> givenAge() {
+        return Optional.ofNullable(givenAge);
     }
 
     @Nonnull
@@ -23,7 +43,7 @@ public class GenericMarriage extends AbstractEvent<GenericMarriage> implements L
     @Nonnull
     @Override
     public EventProto.Event.Builder toProtoBuilder() {
-        return Marriage.super.toProtoBuilder();
+        return MarriageEvent.super.toProtoBuilder();
     }
 
 }

@@ -6,7 +6,7 @@ import net.ramify.model.event.type.LifeEvent;
 
 import javax.annotation.Nonnull;
 
-public interface Marriage extends LifeEvent {
+public interface MarriageEvent extends LifeEvent {
 
     @Override
     default <R> R handleWith(final EventHandler<R> handler) {

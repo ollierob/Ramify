@@ -46,6 +46,8 @@
             <xs:element ref="ns1:death"/>
                         
             <xs:element ref="ns1:residence"/>
+                        
+            <xs:element ref="ns1:marriage"/>
                       
           </xs:choice>
                     
@@ -102,6 +104,8 @@
         <xs:element ref="ns1:death"/>
                 
         <xs:element ref="ns1:residence"/>
+                
+        <xs:element ref="ns1:marriage"/>
               
       </xs:choice>
           

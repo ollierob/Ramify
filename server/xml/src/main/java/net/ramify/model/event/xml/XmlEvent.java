@@ -6,6 +6,8 @@ import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlExactDate;
 import net.ramify.model.date.xml.XmlInYear;
 import net.ramify.model.event.Event;
+import net.ramify.model.event.type.BirthEvent;
+import net.ramify.model.event.type.birth.GenericBirth;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
 import net.ramify.model.person.xml.XmlAge;
@@ -25,14 +27,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.Collections;
 import java.util.Set;
+import java.util.UUID;
 
-@XmlSeeAlso({XmlBirthEvent.class, XmlDeathEvent.class, XmlResidenceEvent.class})
+@XmlSeeAlso({XmlBirthEvent.class, XmlDeathEvent.class, XmlResidenceEvent.class, XmlMarriageEvent.class})
 @XmlRootElement(namespace = XmlEvent.NAMESPACE, name = "event")
 public abstract class XmlEvent {
 
     public static final String NAMESPACE = "http://ramify.net/events";
 
-    @XmlAttribute(name = "placeId", required = false)
+    @XmlAttribute(name = "id")
+    private String eventId = UUID.randomUUID().toString();
+
+    @XmlAttribute(name = "placeId")
     private String placeId;
 
     @XmlElements({
@@ -46,6 +52,9 @@ public abstract class XmlEvent {
 
     @XmlElementRef(required = false)
     private XmlAge complexAge;
+
+    @XmlAttribute(name = "occupation")
+    private String occupation;
 
     @Nonnull
     private DateRange date(final DateParser dates) {
@@ -70,7 +79,15 @@ public abstract class XmlEvent {
 
     public abstract Event toEvent(PersonId personId, RecordContext context);
 
-    public abstract Set<Event> inferredEvents(PersonId personId, RecordContext context);
+    public Set<Event> inferredEvents(PersonId personId, RecordContext context) {
+        final var birth = this.birth(personId, context);
+        return birth == null ? Collections.emptySet() : Collections.singleton(birth);
+    }
+
+    protected BirthEvent birth(final PersonId personId, final RecordContext context) {
+        final var age = this.age();
+        return age == null ? null : new GenericBirth(personId, age.birthDate(this.date(context)));
+    }
 
     public Set<Event> allEvents(final PersonId personId, final RecordContext context, final boolean inferredEvents) {
         final var event = this.toEvent(personId, context);
