@@ -13,7 +13,7 @@
     <artifactId>application</artifactId>
 
     <properties>
-        <jetty.version>9.4.15.v20190215</jetty.version>
+        <jetty.version>9.4.24.v20191120</jetty.version>
     </properties>
 
     <dependencies>
