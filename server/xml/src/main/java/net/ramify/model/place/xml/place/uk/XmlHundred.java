@@ -4,6 +4,7 @@ import com.google.common.base.MoreObjects;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
+import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.region.CountyOrSubdivision;
 import net.ramify.model.place.region.Hundred;
 import net.ramify.model.place.xml.PlaceParserContext;
@@ -24,6 +25,8 @@ import java.util.Objects;
 @XmlSeeAlso({XmlRape.class})
 class XmlHundred extends XmlArea<Hundred> {
 
+    static final PlaceProto.PlaceType TYPE = PlaceProto.PlaceType.newBuilder().setName("Hundred").setCanPrefix(true).setCanSuffix(true).build();
+
     @XmlElementRefs({
             @XmlElementRef(type = XmlParish.class),
             @XmlElementRef(type = XmlManor.class)
@@ -37,7 +40,7 @@ class XmlHundred extends XmlArea<Hundred> {
     @Override
     protected Hundred place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
-        return new Hundred(this.placeId(context), this.name(), parent.requireAs(CountyOrSubdivision.class), groupId, history);
+        return new Hundred(this.placeId(context), this.name(), parent.requireAs(CountyOrSubdivision.class), groupId, history, TYPE);
     }
 
     @Override

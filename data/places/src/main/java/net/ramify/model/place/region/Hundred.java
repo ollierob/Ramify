@@ -9,18 +9,34 @@ import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.region.manor.Manor;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 import java.util.Set;
 
-public class Hundred extends AbstractRegion {
+public class Hundred extends AbstractRegion implements CountyOrSubdivision {
 
-    static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(Parish.class, Manor.class);
-    private static final PlaceProto.PlaceType PLACE_TYPE = placeType("Hundred");
+    static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(Hundred.class, Parish.class, Manor.class);
 
     private final CountyOrSubdivision parent;
+    private final PlaceProto.PlaceType type;
 
-    public Hundred(final PlaceId id, final String name, final CountyOrSubdivision parent, final PlaceGroupId groupId, final PlaceHistory history) {
+    public Hundred(
+            final PlaceId id,
+            final String name,
+            final Place parent,
+            final PlaceGroupId groupId,
+            final PlaceHistory history, PlaceProto.PlaceType type) throws InvalidPlaceTypeException {
+        this(id, name, Objects.requireNonNull(parent, "parent").requireAs(CountyOrSubdivision.class), groupId, history, type);
+    }
+
+    public Hundred(
+            final PlaceId id,
+            final String name,
+            final CountyOrSubdivision parent,
+            final PlaceGroupId groupId,
+            final PlaceHistory history, PlaceProto.PlaceType type) {
         super(id, name, groupId, history);
         this.parent = parent;
+        this.type = type;
     }
 
     @Nonnull
@@ -38,7 +54,7 @@ public class Hundred extends AbstractRegion {
     @Nonnull
     @Override
     public PlaceProto.PlaceType protoType() {
-        return PLACE_TYPE;
+        return type;
     }
 
 }
