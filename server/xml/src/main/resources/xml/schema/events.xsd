@@ -7,6 +7,8 @@
     
   <xs:element name="birth" type="tns:xmlBirthEvent"/>
     
+  <xs:element name="burial" type="tns:xmlBurialEvent"/>
+    
   <xs:element name="death" type="tns:xmlDeathEvent"/>
     
   <xs:element name="event" type="tns:xmlEvent"/>
@@ -58,16 +60,20 @@
     <xs:attribute name="placeId" type="xs:string"/>
         
     <xs:attribute name="age" type="xs:int"/>
+        
+    <xs:attribute name="occupation" type="xs:string"/>
       
   </xs:complexType>
     
-  <xs:complexType name="xmlDeathEvent">
+  <xs:complexType name="xmlMarriageEvent">
         
     <xs:complexContent>
             
       <xs:extension base="tns:xmlEvent">
                 
         <xs:sequence/>
+                
+        <xs:attribute name="spouse" type="xs:string"/>
               
       </xs:extension>
           
@@ -89,15 +95,27 @@
       
   </xs:complexType>
     
-  <xs:complexType name="xmlMarriageEvent">
+  <xs:complexType name="xmlDeathEvent">
         
     <xs:complexContent>
             
       <xs:extension base="tns:xmlEvent">
                 
         <xs:sequence/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlBurialEvent">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlEvent">
                 
-        <xs:attribute name="spouse" type="xs:string"/>
+        <xs:sequence/>
               
       </xs:extension>
           

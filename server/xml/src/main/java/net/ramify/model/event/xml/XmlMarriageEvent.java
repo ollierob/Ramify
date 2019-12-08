@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(namespace = XmlEvent.NAMESPACE, name = "marriage")
-public class XmlMarriageEvent extends XmlEvent {
+public class XmlMarriageEvent extends XmlLifeEvent {
 
     @XmlAttribute(name = "spouse")
     private String spouseId;

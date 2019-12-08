@@ -10,12 +10,12 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.util.Optional;
 
-public class ChurchBurial extends AbstractEvent<ChurchBurial> implements Burial {
+public class GenericBurial extends AbstractEvent<GenericBurial> implements Burial {
 
     private final Age givenAge;
     private final Place burialPlace;
 
-    public ChurchBurial(final PersonId personId, final DateRange date, @CheckForNull final Age givenAge, final Place burialPlace) {
+    public GenericBurial(final PersonId personId, final DateRange date, @CheckForNull final Age givenAge, final Place burialPlace) {
         super(personId, date);
         this.givenAge = givenAge;
         this.burialPlace = burialPlace;

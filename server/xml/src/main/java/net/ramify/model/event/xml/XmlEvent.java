@@ -29,7 +29,7 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.UUID;
 
-@XmlSeeAlso({XmlBirthEvent.class, XmlDeathEvent.class, XmlResidenceEvent.class, XmlMarriageEvent.class})
+@XmlSeeAlso({XmlBirthEvent.class, XmlLifeEvent.class, XmlDeathEvent.class, XmlPostDeathEvent.class})
 @XmlRootElement(namespace = XmlEvent.NAMESPACE, name = "event")
 public abstract class XmlEvent {
 

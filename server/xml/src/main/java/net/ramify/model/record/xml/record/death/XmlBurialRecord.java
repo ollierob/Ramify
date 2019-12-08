@@ -8,7 +8,7 @@ import net.ramify.model.date.xml.XmlExactDate;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.type.DeathEvent;
 import net.ramify.model.event.type.burial.Burial;
-import net.ramify.model.event.type.burial.ChurchBurial;
+import net.ramify.model.event.type.burial.GenericBurial;
 import net.ramify.model.event.type.death.GenericDeathEvent;
 import net.ramify.model.event.type.residence.GenericResidenceEvent;
 import net.ramify.model.event.type.residence.ResidenceEvent;
@@ -104,7 +104,7 @@ public class XmlBurialRecord extends XmlPersonOnDateRecord {
     }
 
     Burial burial(final PersonId personId, final ExactDate date, final Place burialPlace) {
-        return new ChurchBurial(personId, date, this.age(), burialPlace);
+        return new GenericBurial(personId, date, this.age(), burialPlace);
     }
 
     int numIndividuals() {

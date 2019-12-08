@@ -43,11 +43,13 @@
                         
             <xs:element ref="ns1:birth"/>
                         
-            <xs:element ref="ns1:death"/>
+            <xs:element ref="ns1:marriage"/>
                         
             <xs:element ref="ns1:residence"/>
                         
-            <xs:element ref="ns1:marriage"/>
+            <xs:element ref="ns1:death"/>
+                        
+            <xs:element ref="ns1:burial"/>
                       
           </xs:choice>
                     
@@ -101,11 +103,13 @@
                 
         <xs:element ref="ns1:birth"/>
                 
-        <xs:element ref="ns1:death"/>
+        <xs:element ref="ns1:marriage"/>
                 
         <xs:element ref="ns1:residence"/>
                 
-        <xs:element ref="ns1:marriage"/>
+        <xs:element ref="ns1:death"/>
+                
+        <xs:element ref="ns1:burial"/>
               
       </xs:choice>
           

@@ -8,7 +8,7 @@ import net.ramify.model.record.xml.RecordContext;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(namespace = XmlEvent.NAMESPACE, name = "residence")
-public class XmlResidenceEvent extends XmlEvent {
+public class XmlResidenceEvent extends XmlLifeEvent {
 
     @Override
     public ResidenceEvent toEvent(final PersonId personId, final RecordContext context) {
