@@ -16,6 +16,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import static net.ramify.utils.StringUtils.isEmpty;
+
 @Singleton
 @Path("images")
 public class ImageResource extends AbstractResource {
@@ -32,13 +34,57 @@ public class ImageResource extends AbstractResource {
     }
 
     @GET
+    @Path("flags/{flag}")
+    @Produces("image/*")
+    public Response flagImage(
+            @Context final UserSessionContext context,
+            @PathParam("flag") String flag) {
+        if (isEmpty(flag)) return notFound();
+        //TODO cache
+        {
+            if (flag.endsWith(".svg")) flag = flag.substring(0, flag.length() - 4);
+            final var svg = this.webrootImage(context, "flags/" + flag + ".svg");
+            if (svg.getStatus() == 200) return svg;
+        }
+        {
+            if (flag.endsWith(".png")) flag = flag.substring(0, flag.length() - 4);
+            final var png = this.webrootImage(context, "flags/" + flag + ".png");
+            if (png.getStatus() == 200) return png;
+        }
+        {
+            if (flag.endsWith(".jpg")) flag = flag.substring(0, flag.length() - 4);
+            final var jpg = this.webrootImage(context, "flags/" + flag + ".jpg");
+            if (jpg.getStatus() == 200) return jpg;
+        }
+        return null;
+    }
+
+    Response webrootImage(final UserSessionContext context, String path) {
+        if (isEmpty(path)) return notFound();
+        path = path.trim();
+        if (path.startsWith(".") || path.length() < 3) return notFound();
+        switch (path.substring(path.length() - 3)) {
+            case "jpg":
+                return this.readSessionResource(context.session(), "/webroot/images/" + path, JPG);
+            case "png":
+                return this.readSessionResource(context.session(), "/webroot/images/" + path, PNG);
+            case "svg":
+                return this.readSessionResource(context.session(), "/webroot/images/" + path, SVG);
+            default:
+                return notFound();
+        }
+    }
+
+    @GET
     @Path("{file}")
     @Produces("image/*")
     @Cached(maxAgeDays = 1)
     public Response generalImage(
             @Context final UserSessionContext context,
-            @PathParam("file") final String filename) {
-        if (filename.startsWith(".") || filename.contains("/") || filename.length() < 5) return notFound();
+            @PathParam("file") String filename) {
+        if (isEmpty(filename)) return notFound();
+        filename = filename.trim();
+        if (filename.startsWith(".") || filename.length() < 3) return notFound();
         switch (filename.substring(filename.length() - 3)) {
             case "jpg":
                 return this.readSessionResource(context.session(), "/images/" + filename, JPG);
