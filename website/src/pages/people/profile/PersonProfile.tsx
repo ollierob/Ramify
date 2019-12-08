@@ -4,6 +4,7 @@ import {EventList} from "../../../components/event/EventList";
 import {Card} from "antd";
 import {Family} from "../../../protobuf/generated/family_pb";
 import {Event} from "../../../protobuf/generated/event_pb";
+import {PersonName} from "../../../components/people/PersonName";
 
 type Props = {
     person: Person.AsObject;
@@ -21,7 +22,7 @@ export class PersonProfile extends React.PureComponent<Props> {
 
                 <ProfileGallery/>
 
-                <ProfileEvents events={this.props.person.eventsList}/>
+                <ProfileEvents {...this.props} events={this.props.person.eventsList}/>
 
                 <ProfileRelatives family={this.props.family}/>
 
@@ -41,9 +42,9 @@ const ProfileGallery = () => {
     </Card>;
 };
 
-const ProfileEvents = (props: {events: ReadonlyArray<Event.AsObject>}) => {
+const ProfileEvents = (props: {person: Person.AsObject, events: ReadonlyArray<Event.AsObject>}) => {
     return <Card
-        title="Events"
+        title={props.person.name ? <PersonName name={props.person.name}/> : "Events"}
         className="eventList large">
         <EventList events={props.events}/>
     </Card>;

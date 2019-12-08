@@ -6,12 +6,12 @@ import net.ramify.model.date.ExactDate;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlExactDate;
 import net.ramify.model.event.Event;
-import net.ramify.model.event.type.Death;
+import net.ramify.model.event.type.DeathEvent;
 import net.ramify.model.event.type.burial.Burial;
 import net.ramify.model.event.type.burial.ChurchBurial;
-import net.ramify.model.event.type.death.GenericDeath;
-import net.ramify.model.event.type.residence.GenericResidence;
-import net.ramify.model.event.type.residence.Residence;
+import net.ramify.model.event.type.death.GenericDeathEvent;
+import net.ramify.model.event.type.residence.GenericResidenceEvent;
+import net.ramify.model.event.type.residence.ResidenceEvent;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.family.xml.XmlRelationship;
@@ -95,12 +95,12 @@ public class XmlBurialRecord extends XmlPersonOnDateRecord {
         return events;
     }
 
-    Residence residence(final PersonId personId, final DateRange burialDate, final Place place) {
-        return new GenericResidence(personId, BeforeDate.strictlyBefore(burialDate), place);
+    ResidenceEvent residence(final PersonId personId, final DateRange burialDate, final Place place) {
+        return new GenericResidenceEvent(personId, BeforeDate.strictlyBefore(burialDate), place);
     }
 
-    Death death(final PersonId personId, final ExactDate date) {
-        return new GenericDeath(personId, date);
+    DeathEvent death(final PersonId personId, final ExactDate date) {
+        return new GenericDeathEvent(personId, date);
     }
 
     Burial burial(final PersonId personId, final ExactDate date, final Place burialPlace) {

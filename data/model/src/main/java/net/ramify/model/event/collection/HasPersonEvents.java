@@ -1,7 +1,7 @@
 package net.ramify.model.event.collection;
 
-import net.ramify.model.event.type.Birth;
-import net.ramify.model.event.type.Death;
+import net.ramify.model.event.type.BirthEvent;
+import net.ramify.model.event.type.DeathEvent;
 import net.ramify.model.event.type.UniqueEvent;
 import net.ramify.utils.collections.IterableUtils;
 
@@ -16,13 +16,13 @@ public interface HasPersonEvents extends HasEvents {
     }
 
     @Nonnull
-    default Optional<Birth> findBirth() {
-        return this.find(Birth.class);
+    default Optional<BirthEvent> findBirth() {
+        return this.find(BirthEvent.class);
     }
 
     @Nonnull
-    default Optional<Death> findDeath() {
-        return this.find(Death.class);
+    default Optional<DeathEvent> findDeath() {
+        return this.find(DeathEvent.class);
     }
 
 }

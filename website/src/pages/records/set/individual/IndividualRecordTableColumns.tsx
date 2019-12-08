@@ -10,6 +10,7 @@ import {isFemale, isMale} from "../../../../components/people/Gender";
 import {EmptyPrefixWords, formatDateRange, formatYearRange} from "../../../../components/date/DateFormat";
 import {sortDatesByEarliest} from "../../../../components/date/DateRange";
 import {recordSetHref} from "../../RecordLinks";
+import {sortAges} from "../../../../components/people/Age";
 
 export type IndividualRecordColumn = ColumnProps<IndividualRecord>;
 
@@ -137,7 +138,7 @@ const DeathAgeColumn: IndividualRecordColumn = {
     title: "Age",
     dataIndex: "death.givenage",
     render: (t, r) => r.death && r.death.givenage > 0 && <>{r.death.givenage}</>,
-    sorter: (r1, r2) => (r1.death ? r1.death.givenage : 0) - (r2.death ? r2.death.givenage : 0),
+    sorter: (r1, r2) => sortAges(r1.death && r1.death.givenage, r2.death && r2.death.givenage),
     width: 80
 };
 

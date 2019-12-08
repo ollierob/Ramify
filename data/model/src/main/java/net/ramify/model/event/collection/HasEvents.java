@@ -3,8 +3,8 @@ package net.ramify.model.event.collection;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import net.ramify.model.event.Event;
-import net.ramify.model.event.type.Birth;
-import net.ramify.model.event.type.Death;
+import net.ramify.model.event.type.BirthEvent;
+import net.ramify.model.event.type.DeathEvent;
 import net.ramify.model.event.type.EventComparator;
 import net.ramify.model.place.HasPlace;
 import net.ramify.model.place.Place;
@@ -43,11 +43,11 @@ public interface HasEvents extends HasPlaces {
     }
 
     default boolean hasBirth() {
-        return this.has(Birth.class);
+        return this.has(BirthEvent.class);
     }
 
     default boolean hasDeath() {
-        return this.has(Death.class);
+        return this.has(DeathEvent.class);
     }
 
     @Nonnull

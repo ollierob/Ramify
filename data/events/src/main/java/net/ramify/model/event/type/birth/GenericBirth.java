@@ -3,13 +3,13 @@ package net.ramify.model.event.type.birth;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.AbstractEvent;
 import net.ramify.model.event.proto.EventProto;
-import net.ramify.model.event.type.Birth;
+import net.ramify.model.event.type.BirthEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.place.Place;
 
 import javax.annotation.Nonnull;
 
-public class GenericBirth extends AbstractEvent<GenericBirth> implements Birth {
+public class GenericBirth extends AbstractEvent<GenericBirth> implements BirthEvent {
 
     private final PersonId personId;
 
@@ -25,14 +25,14 @@ public class GenericBirth extends AbstractEvent<GenericBirth> implements Birth {
     }
 
     @Override
-    public Birth with(final Place place) {
+    public BirthEvent with(final Place place) {
         return place == null ? this : new BirthWithPlace(this, place);
     }
 
     @Nonnull
     @Override
     public EventProto.Event.Builder toProtoBuilder() {
-        return Birth.super.toProtoBuilder();
+        return BirthEvent.super.toProtoBuilder();
     }
 
 }

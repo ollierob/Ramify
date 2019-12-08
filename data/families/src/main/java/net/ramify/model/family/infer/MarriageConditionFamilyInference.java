@@ -5,7 +5,7 @@ import com.google.common.collect.Multimap;
 import net.ramify.model.date.BeforeDate;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.infer.MarriageConditionEventInference;
-import net.ramify.model.event.type.death.GenericDeath;
+import net.ramify.model.event.type.death.GenericDeathEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.record.Record;
 import net.ramify.model.relationship.Relationship;
@@ -37,7 +37,7 @@ public interface MarriageConditionFamilyInference {
         final var events = ArrayListMultimap.<PersonId, Event>create();
         events.putAll(person, MarriageConditionEventInference.WIDOWED.inferEvents(person, record));
         events.putAll(deceased, MarriageConditionEventInference.WIDOWED.inferEvents(deceased, record));
-        events.put(deceased, new GenericDeath(deceased, date));
+        events.put(deceased, new GenericDeathEvent(deceased, date));
         return Optional.of(new Inference(relationship, events));
     };
 

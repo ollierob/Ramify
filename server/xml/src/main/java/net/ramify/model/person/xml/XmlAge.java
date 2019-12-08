@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlType(namespace = XmlPerson.NAMESPACE)
-@XmlSeeAlso({XmlExactAge.class, XmlApproximateAge.class})
+@XmlSeeAlso({XmlExactAge.class, XmlApproximateAge.class, XmlAgeRange.class})
 public abstract class XmlAge {
 
     public abstract Age age();

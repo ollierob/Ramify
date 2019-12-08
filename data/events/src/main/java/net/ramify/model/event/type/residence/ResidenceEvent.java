@@ -6,7 +6,7 @@ import net.ramify.model.place.HasPlace;
 
 import javax.annotation.Nonnull;
 
-public interface Residence extends LifeEvent, HasPlace {
+public interface ResidenceEvent extends LifeEvent, HasPlace {
 
     @Nonnull
     @Override

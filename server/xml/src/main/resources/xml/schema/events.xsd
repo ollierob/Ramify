@@ -38,10 +38,22 @@
         <xs:element ref="ns1:onDate"/>
               
       </xs:choice>
+            
+      <xs:choice minOccurs="0">
+                
+        <xs:element ref="ns2:exactAge"/>
+                
+        <xs:element ref="ns2:approximateAge"/>
+                
+        <xs:element ref="ns2:ageRange"/>
+              
+      </xs:choice>
           
     </xs:sequence>
         
     <xs:attribute name="placeId" type="xs:string"/>
+        
+    <xs:attribute name="age" type="xs:int"/>
       
   </xs:complexType>
     
@@ -51,19 +63,7 @@
             
       <xs:extension base="tns:xmlEvent">
                 
-        <xs:sequence>
-                    
-          <xs:choice minOccurs="0">
-                        
-            <xs:element ref="ns2:exactAge"/>
-                        
-            <xs:element ref="ns2:approximateAge"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-                
-        <xs:attribute name="age" type="xs:int"/>
+        <xs:sequence/>
               
       </xs:extension>
           

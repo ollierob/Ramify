@@ -4,7 +4,7 @@ import net.ramify.model.event.proto.EventProto;
 
 import javax.annotation.Nonnull;
 
-public interface Death extends UniqueEvent {
+public interface BirthEvent extends UniqueEvent {
 
     @Override
     default <R> R handleWith(final EventHandler<R> handler) {
@@ -14,14 +14,14 @@ public interface Death extends UniqueEvent {
     @Nonnull
     @Override
     default String title() {
-        return "Death";
+        return "Birth";
     }
 
     @Nonnull
     @Override
     default EventProto.Event.Builder toProtoBuilder() {
         return UniqueEvent.super.toProtoBuilder()
-                .setType(EventProto.RecordType.DEATH);
+                .setType(EventProto.RecordType.BIRTH);
     }
 
 }

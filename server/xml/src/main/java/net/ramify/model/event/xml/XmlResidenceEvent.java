@@ -1,8 +1,8 @@
 package net.ramify.model.event.xml;
 
 import net.ramify.model.event.Event;
-import net.ramify.model.event.type.residence.GenericResidence;
-import net.ramify.model.event.type.residence.Residence;
+import net.ramify.model.event.type.residence.GenericResidenceEvent;
+import net.ramify.model.event.type.residence.ResidenceEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.record.xml.RecordContext;
 
@@ -14,11 +14,12 @@ import java.util.Set;
 public class XmlResidenceEvent extends XmlEvent {
 
     @Override
-    public Residence toEvent(final PersonId personId, final RecordContext context) {
-        return new GenericResidence(
+    public ResidenceEvent toEvent(final PersonId personId, final RecordContext context) {
+        return new GenericResidenceEvent(
                 personId,
                 this.date(context),
-                context.places().require(this.placeId()));
+                this.place(context),
+                this.age());
     }
 
     @Override

@@ -6,7 +6,7 @@ import net.ramify.model.date.DateRange;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.type.birth.GenericBirth;
-import net.ramify.model.event.type.residence.GenericResidence;
+import net.ramify.model.event.type.residence.GenericResidenceEvent;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyOfUnknownRelationships;
 import net.ramify.model.person.AbstractPerson;
@@ -93,7 +93,7 @@ public class Census1841Record extends CensusRecord implements HasPlace {
         }
 
         Census1841Person build(final Census1841Record record) {
-            return new Census1841Person(id, name, gender, record.place(), record.inferBirthDate(age), birthPlace, occupation);
+            return new Census1841Person(id, name, gender, record.place(), record.inferBirthDate(age), birthPlace, age, occupation);
         }
 
     }
@@ -102,6 +102,7 @@ public class Census1841Record extends CensusRecord implements HasPlace {
 
         private final Place residencePlace;
         private final Place birthPlace;
+        private final Age age;
         private final DateRange birthDate;
         private final String occupation;
 
@@ -112,11 +113,13 @@ public class Census1841Record extends CensusRecord implements HasPlace {
                 final Place residencePlace,
                 final DateRange birthDate,
                 final Place birthPlace,
+                final Age age,
                 final String occupation) {
             super(id, name, gender);
             this.residencePlace = residencePlace;
             this.birthPlace = birthPlace;
             this.birthDate = birthDate;
+            this.age = age;
             this.occupation = occupation;
         }
 
@@ -125,7 +128,7 @@ public class Census1841Record extends CensusRecord implements HasPlace {
         public Set<? extends Event> events() {
             return Sets.newHashSet(
                     new GenericBirth(this.personId(), birthDate).with(birthPlace),
-                    new GenericResidence(this.personId(), CENSUS_DATE, residencePlace));
+                    new GenericResidenceEvent(this.personId(), CENSUS_DATE, residencePlace, age));
         }
 
         @Nonnull

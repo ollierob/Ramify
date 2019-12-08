@@ -4,7 +4,7 @@ import com.google.common.collect.Sets;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.type.birth.GenericBirth;
-import net.ramify.model.event.type.residence.GenericResidence;
+import net.ramify.model.event.type.residence.GenericResidenceEvent;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyOfUnknownRelationships;
 import net.ramify.model.occupation.Occupation;
@@ -102,7 +102,7 @@ public class Register1939Record extends CensusRecord {
         public Set<? extends Event> events() {
             return Sets.newHashSet(
                     new GenericBirth(this.personId(), birthDate),
-                    new GenericResidence(this.personId(), CENSUS_DATE, residence));
+                    new GenericResidenceEvent(this.personId(), CENSUS_DATE, residence));
         }
 
     }

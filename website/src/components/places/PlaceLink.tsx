@@ -12,13 +12,14 @@ export const PlaceLink = (props: {place: Place.AsObject, showType?: boolean, loa
     const place = props.place;
     if (!place) return null;
 
-    const type = props.showType && place.type.name;
+    //Prefix suffix
+    const prefix = props.showType && place.type.canprefix && !place.type.cansuffix && <>{place.type} of </>;
+    const suffix = props.showType && place.type.cansuffix && !place.name.endsWith(place.type.name) && <> {place.type.name}</>;
 
     return <span className="place">
-        <a href={placeHref(place)}>
-            {place.name}
-            {props.showType && !place.name.endsWith(type) && <> {type}</>}
-        </a>
+        {prefix}
+        <a href={placeHref(place)}>{place.name}</a>
+        {suffix}
     </span>;
 
 };

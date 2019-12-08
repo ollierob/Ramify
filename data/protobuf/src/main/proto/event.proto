@@ -5,6 +5,7 @@ option java_outer_classname = "EventProto";
 
 import "date.proto";
 import "place.proto";
+import "age.proto";
 
 message Event {
 
@@ -13,7 +14,8 @@ message Event {
     Place place = 3;
     RecordType type = 4;
 
-    uint32 givenAge = 10;
+    Age givenAge = 10;
+    Age computedAge = 11;
 
 }
 

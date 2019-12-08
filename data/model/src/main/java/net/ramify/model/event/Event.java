@@ -4,19 +4,22 @@ import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.HasDate;
 import net.ramify.model.event.proto.EventProto;
-import net.ramify.model.event.type.Birth;
-import net.ramify.model.event.type.Death;
+import net.ramify.model.event.type.BirthEvent;
+import net.ramify.model.event.type.DeathEvent;
 import net.ramify.model.event.type.EventHandler;
 import net.ramify.model.event.type.LifeEvent;
 import net.ramify.model.event.type.PostDeathEvent;
 import net.ramify.model.event.type.UniqueEvent;
 import net.ramify.model.person.HasPersonId;
+import net.ramify.model.person.age.Age;
+import net.ramify.model.person.age.HasAges;
 import net.ramify.model.place.HasPlace;
 import net.ramify.utils.objects.Castable;
 
 import javax.annotation.Nonnull;
+import java.util.Optional;
 
-public interface Event extends HasDate, HasPersonId, Castable<Event>, BuildsProto<EventProto.Event> {
+public interface Event extends HasAges, HasDate, HasPersonId, Castable<Event>, BuildsProto<EventProto.Event> {
 
     @Nonnull
     DateRange date();
@@ -24,7 +27,7 @@ public interface Event extends HasDate, HasPersonId, Castable<Event>, BuildsProt
     <R> R handleWith(@Nonnull EventHandler<R> handler);
 
     default boolean isBirth() {
-        return this.is(Birth.class);
+        return this.is(BirthEvent.class);
     }
 
     default boolean isLife() {
@@ -32,7 +35,7 @@ public interface Event extends HasDate, HasPersonId, Castable<Event>, BuildsProt
     }
 
     default boolean isDeath() {
-        return this.is(Death.class);
+        return this.is(DeathEvent.class);
     }
 
     default boolean isPostDeath() {
@@ -47,11 +50,25 @@ public interface Event extends HasDate, HasPersonId, Castable<Event>, BuildsProt
     String title();
 
     @Nonnull
+    @Override
+    default Optional<Age> givenAge() {
+        return Optional.empty();
+    }
+
+    @Nonnull
+    @Override
+    default Optional<Age> computedAge() {
+        return Optional.empty();
+    }
+
+    @Nonnull
     default EventProto.Event.Builder toProtoBuilder() {
         final var builder = EventProto.Event.newBuilder()
                 .setTitle(this.title())
                 .setDate(this.date().toProto());
         HasPlace.place(this).ifPresent(place -> builder.setPlace(place.toProto()));
+        this.givenAge().ifPresent(age -> builder.setGivenAge(age.toProto()));
+        this.computedAge().ifPresent(age -> builder.setComputedAge(age.toProto()));
         return builder;
     }
 

@@ -2,7 +2,6 @@ package net.ramify.model.event;
 
 import net.ramify.model.SelfTyped;
 import net.ramify.model.date.DateRange;
-import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.event.type.misc.EventWithPlace;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.place.Place;
@@ -38,9 +37,5 @@ public abstract class AbstractEvent<T extends AbstractEvent<T>> implements Event
         if (place == null) return this.self();
         return new EventWithPlace<>(this.self(), place);
     }
-
-    @Nonnull
-    @Override
-    public abstract EventProto.Event.Builder toProtoBuilder();
 
 }

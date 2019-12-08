@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/events" xmlns:ns2="http://ramify.net/dates" xmlns:ns3="http://ramify.net/records" xmlns:ns4="http://ramify.net/people" xmlns:tns="http://ramify.net/families" targetNamespace="http://ramify.net/families" version="1.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/events" xmlns:ns2="http://ramify.net/dates" xmlns:ns3="http://ramify.net/people" xmlns:ns4="http://ramify.net/records" xmlns:tns="http://ramify.net/families" targetNamespace="http://ramify.net/families" version="1.0">
     
   <xs:import namespace="http://ramify.net/events" schemaLocation="events.xsd"/>
     
   <xs:import namespace="http://ramify.net/dates" schemaLocation="dates.xsd"/>
     
-  <xs:import namespace="http://ramify.net/records" schemaLocation="records.xsd"/>
-    
   <xs:import namespace="http://ramify.net/people" schemaLocation="people.xsd"/>
+    
+  <xs:import namespace="http://ramify.net/records" schemaLocation="records.xsd"/>
     
   <xs:element name="family" type="tns:xmlFamily"/>
     
@@ -33,7 +33,7 @@
         
     <xs:complexContent>
             
-      <xs:extension base="ns3:xmlPersonRecord">
+      <xs:extension base="ns4:xmlPersonRecord">
                 
         <xs:sequence>
                     
@@ -91,7 +91,7 @@
         
     <xs:sequence>
             
-      <xs:element minOccurs="0" ref="ns4:nameTranscription"/>
+      <xs:element minOccurs="0" ref="ns3:nameTranscription"/>
             
       <xs:choice maxOccurs="unbounded" minOccurs="0">
                 

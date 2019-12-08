@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option java_package = "net.ramify.model.person.proto";
+option java_outer_classname = "AgeProto";
+
+message Age {
+
+    Period min = 1;
+    Period max = 2;
+
+}
+
+message Period {
+
+    uint32 years = 1;
+    uint32 months = 2;
+    uint32 days = 3;
+    
+}

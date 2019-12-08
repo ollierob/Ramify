@@ -5,7 +5,7 @@ import net.ramify.model.date.ExactDate;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlExactDate;
 import net.ramify.model.event.Event;
-import net.ramify.model.event.type.death.GenericDeath;
+import net.ramify.model.event.type.death.GenericDeathEvent;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.family.SinglePersonFamily;
@@ -65,7 +65,7 @@ public class XmlDeathRecord extends XmlPersonOnDateRecord {
     @Override
     protected Set<Event> events(final PersonId personId, final DateRange date, final RecordContext context) {
         final var events = super.events(personId, date, context);
-        events.add(new GenericDeath(personId, date).with(this.age())); //FIXME add death place
+        events.add(new GenericDeathEvent(personId, date, this.age())); //FIXME add death place
         return events;
     }
 

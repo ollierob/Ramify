@@ -3,6 +3,8 @@ import {Event} from "../../protobuf/generated/event_pb";
 import {Card} from "antd";
 import {isBirthEvent, isDeathEvent, isPostDeathEvent} from "./Event";
 import {formatDateRange} from "../date/DateFormat";
+import {PlaceLink} from "../places/PlaceLink";
+import {renderAge} from "../people/Age";
 
 type Props = {
     events: ReadonlyArray<Event.AsObject>
@@ -34,6 +36,12 @@ const EventBox = (props: {event: Event.AsObject}) => {
             <div className="date">
                 {formatDateRange(event.date, "day")}
             </div>
+            {event.place && <div className="place">
+                <PlaceLink place={event.place} showType/>
+            </div>}
+            {event.givenage && <div className="givenAge">
+                Age {renderAge(event.givenage)}
+            </div>}
         </div>
     </Card>;
 

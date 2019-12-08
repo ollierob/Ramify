@@ -3,7 +3,7 @@ package net.ramify.model.record.xml.record.birth;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlExactDate;
-import net.ramify.model.event.type.Birth;
+import net.ramify.model.event.type.BirthEvent;
 import net.ramify.model.event.type.birth.GenericBirth;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.place.Place;
@@ -42,7 +42,7 @@ public class XmlBirthRecord extends XmlPersonOnDateWithFamilyRecord {
     }
 
     @Override
-    protected Birth inferBirth(final PersonId personId, final DateRange date, final RecordContext context) {
+    protected BirthEvent inferBirth(final PersonId personId, final DateRange date, final RecordContext context) {
         return new GenericBirth(personId, date).with(this.birthPlace(context));
     }
 

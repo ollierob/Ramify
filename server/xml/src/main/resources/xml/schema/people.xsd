@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ramify.net/people" targetNamespace="http://ramify.net/people" version="1.0">
     
+  <xs:element name="ageRange" type="tns:xmlAgeRange"/>
+    
   <xs:element name="approximateAge" type="tns:xmlApproximateAge"/>
     
   <xs:element name="exactAge" type="tns:xmlExactAge"/>
@@ -53,6 +55,24 @@
       
   </xs:complexType>
     
+  <xs:complexType name="xmlAgeRange">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlAge">
+                
+        <xs:sequence/>
+                
+        <xs:attribute name="minYears" type="xs:int"/>
+                
+        <xs:attribute name="maxYears" type="xs:int"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
   <xs:complexType abstract="true" name="xmlName">
         
     <xs:sequence/>
@@ -89,9 +109,9 @@
             
       <xs:enumeration value="male"/>
             
-      <xs:enumeration value="unknown"/>
-            
       <xs:enumeration value="female"/>
+            
+      <xs:enumeration value="unknown"/>
           
     </xs:restriction>
       

@@ -8,11 +8,11 @@ public interface EventHandler<R> {
         return event.handleWith(this);
     }
 
-    R handle(Birth birth);
+    R handle(BirthEvent birth);
 
     R handle(LifeEvent event);
 
-    R handle(Death death);
+    R handle(DeathEvent death);
 
     R handle(PostDeathEvent event);
 

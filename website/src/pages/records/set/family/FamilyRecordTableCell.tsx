@@ -9,6 +9,7 @@ import {findRelationship, relationshipName} from "../../../../components/relatio
 import {Name} from "../../../../protobuf/generated/name_pb";
 import {sortPeopleByBirthDate} from "../../../../components/people/Person";
 import {formatYearRange, formatYearRanges} from "../../../../components/date/DateFormat";
+import {PersonName} from "../../../../components/people/PersonName";
 
 export function renderFamilyRecord(record: FamilyRecord) {
     if (!record) return null;
@@ -36,7 +37,7 @@ function renderPerson(person: Person.AsObject, root: Person.AsObject, relationsh
 }
 
 function renderName(name: Name.AsObject) {
-    return name && <span className="name">{name.value}</span>;
+    return <PersonName name={name}/>;
 }
 
 function renderLifespan(person: Person.AsObject) {

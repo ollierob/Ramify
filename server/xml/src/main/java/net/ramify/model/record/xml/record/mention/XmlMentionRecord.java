@@ -8,7 +8,7 @@ import net.ramify.model.date.xml.XmlBetweenYears;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlInYear;
 import net.ramify.model.event.Event;
-import net.ramify.model.event.type.death.GenericDeath;
+import net.ramify.model.event.type.death.GenericDeathEvent;
 import net.ramify.model.event.type.misc.Flourished;
 import net.ramify.model.family.SinglePersonFamily;
 import net.ramify.model.person.PersonId;
@@ -61,7 +61,7 @@ public class XmlMentionRecord extends XmlPersonOnDateRecord {
     @Override
     protected Set<Event> events(final PersonId personId, final DateRange date, final RecordContext context) {
         final var events = super.events(personId, date, context);
-        if (this.deceased()) events.add(new GenericDeath(personId, BeforeDate.strictlyBefore(date)));
+        if (this.deceased()) events.add(new GenericDeathEvent(personId, BeforeDate.strictlyBefore(date)));
         else events.add(new Flourished(personId, date));
         return events;
     }

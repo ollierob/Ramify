@@ -1,20 +1,29 @@
 package net.ramify.model.person.age;
 
+import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.date.DateRange;
+import net.ramify.model.person.proto.AgeProto;
 
 import javax.annotation.Nonnull;
 import java.time.Period;
+import java.time.Year;
 import java.util.Optional;
 
 import static net.ramify.utils.time.PeriodUtils.approximateCompare;
 
-public interface Age {
+public interface Age extends BuildsProto<AgeProto.Age> {
 
     Age ZERO = exactly(Period.ZERO);
 
+    /**
+     * @return normalized lower bound (min age)
+     */
     @Nonnull
     Period lowerBound();
 
+    /**
+     * @return normalized upper bound (max age)
+     */
     @Nonnull
     Period upperBound();
 
@@ -23,6 +32,13 @@ public interface Age {
         final var lower = this.lowerBound().normalized();
         final var upper = this.upperBound().normalized();
         return lower.equals(upper) ? Optional.of(upper) : Optional.empty();
+    }
+
+    @Nonnull
+    default Optional<Year> exactYears() {
+        final var lower = this.lowerBound().getYears();
+        final var upper = this.upperBound().getYears();
+        return lower == upper ? Optional.of(Year.of(lower)) : Optional.empty();
     }
 
     default DateRange birthDate(final DateRange date) {
@@ -38,6 +54,19 @@ public interface Age {
 
     default boolean isSameOrOlderThan(final Period period) {
         return approximateCompare(period, this.upperBound()) <= 0;
+    }
+
+    @Nonnull
+    default AgeProto.Age.Builder toProtoBuilder() {
+        return AgeProto.Age.newBuilder()
+                .setMin(toProto(this.lowerBound()))
+                .setMax(toProto(this.upperBound()));
+    }
+
+    @Nonnull
+    @Override
+    default AgeProto.Age toProto() {
+        return this.toProtoBuilder().build();
     }
 
     static Age exactly(@Nonnull final Period period) {
@@ -68,6 +97,14 @@ public interface Age {
 
     static DateRange birthDate(final Period age, final DateRange on) {
         return Age.exactly(age).birthDate(on);
+    }
+
+    static AgeProto.Period toProto(final Period period) {
+        return AgeProto.Period.newBuilder()
+                .setYears(period.getYears())
+                .setMonths(period.getMonths())
+                .setDays(period.getDays())
+                .build();
     }
 
 }

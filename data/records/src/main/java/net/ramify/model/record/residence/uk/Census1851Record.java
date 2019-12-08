@@ -8,8 +8,8 @@ import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.infer.MarriageConditionEventInference;
 import net.ramify.model.event.type.birth.GenericBirth;
-import net.ramify.model.event.type.death.GenericDeath;
-import net.ramify.model.event.type.residence.GenericResidence;
+import net.ramify.model.event.type.death.GenericDeathEvent;
+import net.ramify.model.event.type.residence.GenericResidenceEvent;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.person.AbstractPerson;
@@ -81,7 +81,7 @@ public class Census1851Record extends CensusRecord {
                 id,
                 Name.UNKNOWN,
                 person.gender().inverse(),
-                Collections.singleton(new GenericDeath(id, ClosedDateRange.of(person.birthDate, CENSUS_DATE))), //FIXME tighter bounds
+                Collections.singleton(new GenericDeathEvent(id, ClosedDateRange.of(person.birthDate, CENSUS_DATE))), //FIXME tighter bounds
                 "Inferred ex-spouse of " + person.name()));
     }
 
@@ -206,7 +206,7 @@ public class Census1851Record extends CensusRecord {
         public Set<? extends Event> events() {
             final var events = Sets.newHashSet(
                     new GenericBirth(this.personId(), birthDate).with(birthPlace),
-                    new GenericResidence(this.personId(), CENSUS_DATE, residencePlace));
+                    new GenericResidenceEvent(this.personId(), CENSUS_DATE, residencePlace));
             events.addAll(extraEvents);
             return events;
         }
