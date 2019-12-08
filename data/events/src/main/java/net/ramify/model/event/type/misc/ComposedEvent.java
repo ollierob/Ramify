@@ -5,6 +5,7 @@ import net.ramify.model.event.Event;
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.event.type.EventHandler;
 import net.ramify.model.person.PersonId;
+import net.ramify.model.person.age.Age;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
@@ -36,6 +37,18 @@ public abstract class ComposedEvent<T extends Event> implements Event {
     }
 
     @Override
+    @Nonnull
+    public Optional<Age> givenAge() {
+        return delegate.givenAge();
+    }
+
+    @Override
+    @Nonnull
+    public Optional<Age> computedAge() {
+        return delegate.computedAge();
+    }
+
+    @Override
     public <R> R handleWith(final EventHandler<R> handler) {
         return delegate.handleWith(handler);
     }
@@ -58,4 +71,5 @@ public abstract class ComposedEvent<T extends Event> implements Event {
     public EventProto.Event.Builder toProtoBuilder() {
         return delegate.toProtoBuilder();
     }
+
 }

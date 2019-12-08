@@ -12,8 +12,8 @@ message Age {
 
 message Period {
 
-    uint32 years = 1;
-    uint32 months = 2;
-    uint32 days = 3;
-    
+    int32 years = 1;
+    int32 months = 2;
+    int32 days = 3;
+
 }

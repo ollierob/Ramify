@@ -17,7 +17,7 @@ public class XmlDeathEvent extends XmlEvent {
 
     @Override
     public DeathEvent toEvent(final PersonId personId, final RecordContext context) {
-        return new GenericDeathEvent(personId, this.date(context), this.age());
+        return new GenericDeathEvent(personId, this.date(context), this.age()).with(this.place(context));
     }
 
     @Override
