@@ -22,7 +22,7 @@ import java.util.List;
 @XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "civilParish")
 public class XmlCivilParish extends XmlArea<CivilParish> {
 
-    static final PlaceHistory HISTORY = XmlMetropolitanBorough.BOROUGH_HISTORY;
+    static final PlaceHistory HISTORY = XmlMetropolitanBorough.MODERN_HISTORY;
 
     @XmlElementRefs({
             @XmlElementRef(type = XmlTown.class),
