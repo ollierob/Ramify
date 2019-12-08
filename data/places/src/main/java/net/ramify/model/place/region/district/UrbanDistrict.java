@@ -13,6 +13,7 @@ import net.ramify.model.place.region.County;
 public class UrbanDistrict extends AbstractRegion implements District {
 
     public static final PlaceHistory HISTORY = new DefaultPlaceHistory(new InYears(1894), new InYears(1974));
+    private static final PlaceProto.PlaceType PLACE_TYPE = placeType("Urban District");
 
     private final County parent;
 
@@ -32,7 +33,7 @@ public class UrbanDistrict extends AbstractRegion implements District {
 
     @Override
     public PlaceProto.PlaceType protoType() {
-        return PlaceProto.PlaceType.URBAN_DISTRICT;
+        return PLACE_TYPE;
     }
 
 }

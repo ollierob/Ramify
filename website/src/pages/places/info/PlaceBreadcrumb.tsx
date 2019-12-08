@@ -1,7 +1,6 @@
 import {Place} from "../../../protobuf/generated/place_pb";
 import {SubMenu} from "../../SubMenu";
 import * as React from "react";
-import {placeTypeName} from "../../../components/places/PlaceType";
 import {placeHref} from "../PlaceLinks";
 import {PlacesIcon} from "../../../components/images/Icons";
 
@@ -40,7 +39,7 @@ const Breadcrumb = (props: {place: Place.AsObject, separator: boolean, showType:
     const place = props.place;
     if (!place) return <> ... &raquo; </>;
 
-    const type = placeTypeName(place.type);
+    const type = place.type.name;
     const prefix = props.showType && !place.name.endsWith(type) && type != "Country";
 
     return <>

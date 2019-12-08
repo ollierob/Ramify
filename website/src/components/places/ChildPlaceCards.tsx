@@ -2,10 +2,10 @@ import * as React from "react";
 import {Place} from "../../protobuf/generated/place_pb";
 import {stringMultimap} from "../Maps";
 import {Card} from "antd";
-import {PlaceType, placeTypeKey, placeTypeName, sortByPlaceName, sortByPlaceType} from "./PlaceType";
 import {Img} from "../style/Img";
 import {Loading} from "../style/Loading";
 import {placeHref} from "../../pages/places/PlaceLinks";
+import {sortPlacesByName} from "./Place";
 
 type Props = {
     loading: boolean;
@@ -35,9 +35,9 @@ export default class ChildPlaceCards extends React.PureComponent<Props, State> {
 
         return <div className="childPlaces">
 
-            {keys.sort(sortByPlaceType).map(type => <TypeCard
+            {keys.sort().map(type => <TypeCard
                 key={type}
-                type={type as PlaceType}
+                type={type}
                 places={this.state.groupedPlaces[type]}/>)}
 
             <AlsoSee
@@ -61,7 +61,7 @@ export default class ChildPlaceCards extends React.PureComponent<Props, State> {
 
     private group(places: ReadonlyArray<Place.AsObject>) {
         if (!places) return;
-        const grouped = stringMultimap(places, place => placeTypeKey(place.type), sortByPlaceName);
+        const grouped = stringMultimap(places, place => place.type.name, sortPlacesByName);
         this.setState({groupedPlaces: grouped});
     }
 
@@ -69,12 +69,12 @@ export default class ChildPlaceCards extends React.PureComponent<Props, State> {
 
 type PlaceTypeMap = {[type: string]: ReadonlyArray<Place.AsObject>}
 
-const TypeCard = (props: {type: PlaceType, places: ReadonlyArray<Place.AsObject>}) => {
+const TypeCard = (props: {type: string, places: ReadonlyArray<Place.AsObject>}) => {
     let places = props.places;
     if (!places || !places.length) return null;
     return <Card
         className="placeCard"
-        title={<><Img src={"/images/" + props.type.toLowerCase() + ".svg"}/> {placeTypeName(props.type, true)}</>}>
+        title={<><Img src={"/images/" + props.type.toLocaleLowerCase() + ".svg"}/> {props.type}</>}>
         <ul>
             {places.map(place => <li key={place.id}><PlaceLink place={place}/></li>)}
         </ul>
@@ -85,7 +85,7 @@ const PlaceLink = (props: {place: Readonly<Place.AsObject>, showType?: boolean})
     if (!props.place) return null;
     const link = <>
         <a href={placeHref(props.place)}>{props.place.name}</a>
-        {props.showType && <> {placeTypeName(props.place.type)}</>}
+        {props.showType && <> {props.place.type.name}</>}
     </>;
     return props.place.defunct ? <i>{link}</i> : link;
 };

@@ -1,7 +1,6 @@
 import * as React from "react";
 import {Place} from "../../protobuf/generated/place_pb";
 import {Card} from "antd";
-import {placeTypeName} from "../places/PlaceType";
 import {ExternalRecordReference, RecordSet} from "../../protobuf/generated/record_pb";
 import {placeHref} from "../../pages/places/PlaceLinks";
 import {recordSetHref} from "../../pages/records/RecordLinks";
@@ -84,7 +83,7 @@ const AlsoSeeCard = (props: {alsoSee: ReadonlyArray<Place.AsObject>}) => {
             {alsoSee.map(place => <li>
                 <a href={placeHref(place)}>{place.name}</a>
                 {" "}
-                ({placeTypeName(place.type)})
+                ({place.type.name})
             </li>)}
         </ul>
     </Card>;

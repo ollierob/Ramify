@@ -13,6 +13,7 @@ import java.util.Set;
 public class Lathe extends Hundred implements CountyOrSubdivision {
 
     static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(Hundred.class);
+    private static final PlaceProto.PlaceType PLACE_TYPE = placeType("Lathe");
 
     public Lathe(final PlaceId id, final String name, final Place parent, final PlaceGroupId groupId, final PlaceHistory history) throws InvalidPlaceTypeException {
         this(id, name, parent.requireAs(County.class), groupId, history);
@@ -24,7 +25,7 @@ public class Lathe extends Hundred implements CountyOrSubdivision {
 
     @Override
     public PlaceProto.PlaceType protoType() {
-        return PlaceProto.PlaceType.LATHE;
+        return PLACE_TYPE;
     }
 
     @Nonnull

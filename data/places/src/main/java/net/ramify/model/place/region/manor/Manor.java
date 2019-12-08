@@ -18,6 +18,7 @@ public class Manor extends AbstractRegion {
 
     public static final PlaceHistory DEFAULT_HISTORY = new DefaultPlaceHistory(null, BeforeDate.approximatelyBefore(1925));
     static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(Manor.class, Graveship.class);
+    private static final PlaceProto.PlaceType PLACE_TYPE = placeType("Manor");
 
     private final Region parent;
 
@@ -54,7 +55,7 @@ public class Manor extends AbstractRegion {
     @Nonnull
     @Override
     public PlaceProto.PlaceType protoType() {
-        return PlaceProto.PlaceType.MANOR;
+        return PLACE_TYPE;
     }
 
 }

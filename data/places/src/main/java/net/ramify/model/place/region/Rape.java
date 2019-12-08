@@ -13,6 +13,7 @@ import java.util.Set;
 public class Rape extends Hundred implements CountyOrSubdivision {
 
     static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(Hundred.class);
+    private static final PlaceProto.PlaceType PLACE_TYPE = placeTypeBuilder("Rape").setCanSuffix(false).build();
 
     public Rape(final PlaceId id, final String name, final Place parent, final PlaceGroupId groupId, final PlaceHistory history) throws InvalidPlaceTypeException {
         this(id, name, parent.requireAs(County.class), groupId, history);
@@ -24,7 +25,7 @@ public class Rape extends Hundred implements CountyOrSubdivision {
 
     @Override
     public PlaceProto.PlaceType protoType() {
-        return PlaceProto.PlaceType.RAPE;
+        return PLACE_TYPE;
     }
 
     @Nonnull

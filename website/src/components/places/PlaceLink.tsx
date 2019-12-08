@@ -1,7 +1,6 @@
 import * as React from "react";
 import {Place} from "../../protobuf/generated/place_pb";
 import {placeHref} from "../../pages/places/PlaceLinks";
-import {placeTypeName} from "./PlaceType";
 import {LoadingIcon} from "../images/Icons";
 
 export const PlaceLink = (props: {place: Place.AsObject, showType?: boolean, loading?: boolean}) => {
@@ -13,7 +12,7 @@ export const PlaceLink = (props: {place: Place.AsObject, showType?: boolean, loa
     const place = props.place;
     if (!place) return null;
 
-    const type = props.showType && placeTypeName(place.type);
+    const type = props.showType && place.type.name;
 
     return <span className="place">
         <a href={placeHref(place)}>

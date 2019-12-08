@@ -24,6 +24,8 @@ public class County extends AbstractRegion implements CountyOrSubdivision {
             Manor.class, Parish.class, City.class, Hundred.class,
             MetropolitanBorough.class, Borough.class);
 
+    private static final PlaceProto.PlaceType PLACE_TYPE = placeTypeBuilder("County").setCanPrefix(true).setCanSuffix(false).build();
+
     private final Region parent;
     private final CountrySubdivisionIso iso;
 
@@ -51,7 +53,7 @@ public class County extends AbstractRegion implements CountyOrSubdivision {
     @Nonnull
     @Override
     public PlaceProto.PlaceType protoType() {
-        return PlaceProto.PlaceType.COUNTY;
+        return PLACE_TYPE;
     }
 
     @Nonnull

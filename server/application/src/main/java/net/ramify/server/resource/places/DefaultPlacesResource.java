@@ -71,13 +71,8 @@ public class DefaultPlacesResource implements PlacesResource {
     }
 
     private int maxDepth(final Place place) {
-        switch (place.protoType()) {
-            case COUNTRY:
-            case COUNTY:
-                return 1;
-            default:
-                return 5;
-        }
+        if (place instanceof Country) return 1;
+        return 5;
     }
 
     @Override

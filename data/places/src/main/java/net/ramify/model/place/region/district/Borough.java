@@ -14,6 +14,8 @@ import java.util.Optional;
 
 public class Borough extends AbstractRegion implements District {
 
+    private static final PlaceProto.PlaceType PLACE_TYPE = placeType("Borough");
+
     private final Region parent;
     private final CountrySubdivisionIso iso;
 
@@ -40,7 +42,7 @@ public class Borough extends AbstractRegion implements District {
 
     @Override
     public PlaceProto.PlaceType protoType() {
-        return PlaceProto.PlaceType.BOROUGH;
+        return PLACE_TYPE;
     }
 
 }

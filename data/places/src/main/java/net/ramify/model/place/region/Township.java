@@ -13,6 +13,8 @@ import java.util.Set;
 
 public class Township extends AbstractRegion {
 
+    public static final PlaceProto.PlaceType PLACE_TYPE = placeType("Township");
+
     private final Region parent;
 
     public Township(final PlaceId id, final String name, final Place parent, final PlaceGroupId groupId, final PlaceHistory history) throws InvalidPlaceTypeException {
@@ -37,7 +39,7 @@ public class Township extends AbstractRegion {
 
     @Override
     public PlaceProto.PlaceType protoType() {
-        return PlaceProto.PlaceType.TOWNSHIP;
+        return PLACE_TYPE;
     }
 
 }

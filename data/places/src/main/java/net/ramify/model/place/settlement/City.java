@@ -12,6 +12,8 @@ import java.util.Optional;
 
 public class City extends AbstractSettlement {
 
+    private static final PlaceProto.PlaceType PLACE_TYPE = placeType("City");
+
     private final CountrySubdivisionIso iso;
 
     public City(
@@ -27,7 +29,7 @@ public class City extends AbstractSettlement {
 
     @Override
     public PlaceProto.PlaceType protoType() {
-        return PlaceProto.PlaceType.CITY;
+        return PLACE_TYPE;
     }
 
     @Nonnull

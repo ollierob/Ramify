@@ -12,6 +12,8 @@ import java.util.Set;
 
 public class Graveship extends AbstractRegion {
 
+    private static final PlaceProto.PlaceType PLACE_TYPE = placeType("Graveship");
+
     private final Manor parent;
 
     public Graveship(final PlaceId id, final String name, final Place parent, final PlaceGroupId groupId, final PlaceHistory history) throws InvalidPlaceTypeException {
@@ -37,7 +39,7 @@ public class Graveship extends AbstractRegion {
     @Nonnull
     @Override
     public PlaceProto.PlaceType protoType() {
-        return PlaceProto.PlaceType.GRAVESHIP;
+        return PLACE_TYPE;
     }
 
 }

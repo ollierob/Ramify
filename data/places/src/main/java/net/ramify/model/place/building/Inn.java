@@ -12,6 +12,8 @@ import java.util.Objects;
 
 public class Inn extends AbstractBuilding implements Building {
 
+    private static final PlaceProto.PlaceType PLACE_TYPE = placeType("Inn");
+
     private final SettlementOrRegion parent;
 
     public Inn(
@@ -40,7 +42,7 @@ public class Inn extends AbstractBuilding implements Building {
 
     @Override
     public PlaceProto.PlaceType protoType() {
-        return PlaceProto.PlaceType.INN;
+        return PLACE_TYPE;
     }
 
 }

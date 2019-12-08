@@ -4,7 +4,7 @@ import {Point, Position} from "../../protobuf/generated/location_pb";
 import {Map, Marker, Popup, TileLayer} from 'react-leaflet';
 import {LatLngLiteral} from "leaflet";
 import {Loading} from "../style/Loading";
-import {Place, PlaceType} from "../../protobuf/generated/place_pb";
+import {Place} from "../../protobuf/generated/place_pb";
 import "./PlaceMap.css";
 
 require('leaflet/dist/leaflet.css');
@@ -25,7 +25,7 @@ export const PlaceMap = (props: Props) => {
 
         {props.position && <MapComponent
             {...props}
-            zoom={props.position.zoom || props.defaultZoom || defaultZoom(props.place)}
+            zoom={props.position.zoom || props.defaultZoom}
             center={props.position.center}
             markers={!props.area && markerPoints(props.place, props.position)}
         />}
@@ -71,30 +71,3 @@ function toLatLong(point: Point.AsObject): LatLngLiteral {
 }
 
 type MarkerPoint = {point: Point.AsObject, label: React.ReactNode}
-
-function defaultZoom(place: Place.AsObject): number {
-    switch (place.type) {
-        case PlaceType.COUNTRY:
-            return 4;
-        case PlaceType.COUNTY:
-            return 8;
-        case PlaceType.PARISH:
-        case PlaceType.CHAPELRY:
-            return 11;
-        case PlaceType.TOWNSHIP:
-            return 12;
-        case PlaceType.TOWN:
-            return 13;
-        case PlaceType.VILLAGE:
-        case PlaceType.HAMLET:
-            return 14;
-        case PlaceType.FARMSTEAD:
-            return 15;
-        case PlaceType.SCHOOL:
-            return 16;
-        case PlaceType.INN:
-            return 17;
-        default:
-            return 10;
-    }
-}

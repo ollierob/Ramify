@@ -1,6 +1,5 @@
 import * as React from "react";
 import {Place, PlaceDescription} from "../../protobuf/generated/place_pb";
-import {placeTypeName} from "./PlaceType";
 import {LinkTags} from "../style/Links";
 import {isPlaceFavourite, PlaceFavouritesHandler} from "./PlaceFavourites";
 import {FavouritesIcon} from "../images/Icons";
@@ -46,7 +45,7 @@ export class PlaceTitle extends React.PureComponent<Props, State> {
             {" "}
 
             <span className="unimportant">
-                {placeTypeName(place.type)}
+                {place.type.name}
             </span>
 
             {" "}

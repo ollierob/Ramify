@@ -8,6 +8,8 @@ import net.ramify.model.place.proto.PlaceProto;
 
 public class Wapentake extends Hundred implements CountyOrSubdivision {
 
+    private static final PlaceProto.PlaceType PLACE_TYPE = placeType("Wapentake");
+
     public Wapentake(final PlaceId id, final String name, final Place parent, final PlaceGroupId groupId, final PlaceHistory history) throws InvalidPlaceTypeException {
         this(id, name, parent.requireAs(County.class), groupId, history);
     }
@@ -18,7 +20,7 @@ public class Wapentake extends Hundred implements CountyOrSubdivision {
 
     @Override
     public PlaceProto.PlaceType protoType() {
-        return PlaceProto.PlaceType.WAPENTAKE;
+        return PLACE_TYPE;
     }
-
+    
 }

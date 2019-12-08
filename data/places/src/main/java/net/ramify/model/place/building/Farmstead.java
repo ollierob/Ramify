@@ -12,6 +12,8 @@ import java.util.Objects;
 
 public class Farmstead extends AbstractBuilding implements Building {
 
+    private static final PlaceProto.PlaceType PLACE_TYPE = placeTypeBuilder("Farmstead").setCanPrefix(false).build();
+
     private final SettlementOrRegion parent;
 
     public Farmstead(
@@ -40,7 +42,7 @@ public class Farmstead extends AbstractBuilding implements Building {
 
     @Override
     public PlaceProto.PlaceType protoType() {
-        return PlaceProto.PlaceType.FARMSTEAD;
+        return PLACE_TYPE;
     }
 
 }

@@ -5,7 +5,6 @@ import {Button, Icon} from "antd";
 import {PlaceLink} from "../../../../components/places/PlaceLink";
 import {recordTypeFromValue} from "../../../../components/records/RecordType";
 import {IndividualRecord, IndividualRecordProperties} from "./IndividualRecord";
-import {placeTypeName} from "../../../../components/places/PlaceType";
 import {ColumnSubstringLocalSearch} from "../../../../components/table/ant/ColumnSubstringLocalSearch";
 import {isFemale, isMale} from "../../../../components/people/Gender";
 import {EmptyPrefixWords, formatDateRange, formatYearRange} from "../../../../components/date/DateFormat";
@@ -112,7 +111,7 @@ const ResidencePlace: IndividualRecordColumn = {
     title: "Residence",
     render: (t, r) => r.residence && r.residence.length > 0 && r.residence[0].place && <>
         <PlaceLink place={r.residence[0].place}/>
-        <Minor>{placeTypeName(r.residence[0].place.type)}</Minor>
+        <Minor>{r.residence[0].place.type.name}</Minor>
     </>,
     width: 200,
     ...ColumnSubstringLocalSearch(r => r.residence && r.residence.length && r.residence[0].place && r.residence[0].place.name)

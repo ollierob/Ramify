@@ -1,13 +1,11 @@
 import * as React from "react";
+import {ChangeEvent, FormEvent} from "react";
 import {AsyncData, asyncLoadData} from "../../../fetch/AsyncData";
 import {Place} from "../../../../protobuf/generated/place_pb";
 import {DEFAULT_PLACE_LOADER} from "../../../places/PlaceLoader";
 import {Button, Form, Input, List} from "antd";
-import {ChangeEvent, FormEvent} from "react";
 import {SearchIcon} from "../../../images/Icons";
-import {Loading} from "../../../style/Loading";
 import {PlaceLink} from "../../../places/PlaceLink";
-import {placeTypeName} from "../../../places/PlaceType";
 import {PlaceId} from "../../../places/Place";
 import RegionCascader from "../../../places/RegionCascader";
 
@@ -110,7 +108,7 @@ const SearchResult = (props: {place: Place.AsObject}) => {
     return <>
         <PlaceLink place={place} showType={false}/>
         &nbsp;
-        <span className="unimportant">{placeTypeName(place.type)}</span>
+        <span className="unimportant">{place.type.name}</span>
         {place.parent && <>&nbsp;in <PlaceLink place={place.parent}/></>}
     </>;
 };

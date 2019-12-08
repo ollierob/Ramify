@@ -9,6 +9,8 @@ import net.ramify.model.place.type.Region;
 
 public class Town extends AbstractSettlement {
 
+    private static final PlaceProto.PlaceType PLACE_TYPE = placeType("Town");
+
     public Town(
             final PlaceId id,
             final String name,
@@ -29,7 +31,7 @@ public class Town extends AbstractSettlement {
 
     @Override
     public PlaceProto.PlaceType protoType() {
-        return PlaceProto.PlaceType.TOWN;
+        return PLACE_TYPE;
     }
 
 }

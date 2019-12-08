@@ -10,6 +10,8 @@ import java.util.Objects;
 
 public class Graveyard extends AbstractBuilding implements Institution {
 
+    private static final PlaceProto.PlaceType PLACE_TYPE = placeType("Graveyard");
+
     private final Place parent;
 
     public Graveyard(
@@ -29,7 +31,7 @@ public class Graveyard extends AbstractBuilding implements Institution {
 
     @Override
     public PlaceProto.PlaceType protoType() {
-        return PlaceProto.PlaceType.GRAVEYARD;
+        return PLACE_TYPE;
     }
 
 }

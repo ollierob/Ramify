@@ -11,6 +11,8 @@ import java.util.Objects;
 
 public class Mill extends AbstractBuilding implements Institution {
 
+    private static final PlaceProto.PlaceType PLACE_TYPE = placeType("Mill");
+
     private final SettlementOrRegion parent;
 
     public Mill(
@@ -39,7 +41,7 @@ public class Mill extends AbstractBuilding implements Institution {
 
     @Override
     public PlaceProto.PlaceType protoType() {
-        return PlaceProto.PlaceType.MILL;
+        return PLACE_TYPE;
     }
 
 }

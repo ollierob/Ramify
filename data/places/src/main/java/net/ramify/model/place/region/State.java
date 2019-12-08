@@ -15,6 +15,7 @@ import java.util.Set;
 public class State extends AbstractRegion {
 
     static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(County.class, City.class);
+    private static final PlaceProto.PlaceType PLACE_TYPE = placeType("State");
 
     private final Country country;
     private final CountrySubdivisionIso iso;
@@ -49,7 +50,7 @@ public class State extends AbstractRegion {
 
     @Override
     public PlaceProto.PlaceType protoType() {
-        return PlaceProto.PlaceType.STATE;
+        return PLACE_TYPE;
     }
 
 }

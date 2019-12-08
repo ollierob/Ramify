@@ -4,7 +4,6 @@ import {Place, PlaceHistory} from "../../../protobuf/generated/place_pb";
 import {Card, Tabs} from "antd";
 import {PlaceId} from "../../../components/places/Place";
 import {ResolvedPlaceGroup, sortPlaceGroupChildren} from "../../../components/places/PlaceGroup";
-import {placeTypeName} from "../../../components/places/PlaceType";
 import {PlaceFavouritesHandler} from "../../../components/places/PlaceFavourites";
 import {PlaceGroupTab} from "./PlaceGroupTab";
 import {Flag} from "../../../components/images/Flag";
@@ -48,7 +47,7 @@ export const PlaceGroupInfo = (props: Props) => {
 const Title = (props: {place: Place.AsObject}) => {
     const place = props.place;
     return <>
-        {placeTypeName(place.type)}
+        {place.type.name}
         <History history={place.history}/>
     </>;
 };

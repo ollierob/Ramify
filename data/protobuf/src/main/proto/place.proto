@@ -39,52 +39,13 @@ message PlaceHistory {
 
 }
 
-enum PlaceType {
+message PlaceType {
 
-    COUNTRY = 0;
+    string name = 1;
 
-    STATE = 10;
-    COUNTY = 11;
-
-    RIDING = 20;
-    RAPE = 21;
-    LATHE = 22;
-
-    HUNDRED = 30;
-    WAPENTAKE = 31;
-
-    PARISH = 40;
-    BOROUGH = 41;
-    CITY = 42;
-    CHAPELRY = 43;
-
-    TOWNSHIP = 50;
-    DISTRICT = 51;
-    URBAN_DISTRICT = 52;
-    RURAL_DISTRICT = 53;
-
-    CIVIL_PARISH = 60;
-    TOWN = 61;
-    VILLAGE = 62;
-    HAMLET = 63;
-    NEIGHBOURHOOD = 64;
-    STREET = 65;
-
-    //Manors
-    MANOR = 70;
-    GRAVESHIP = 71;
-
-    //Specific places
-    HOUSE = 100;
-    FARMSTEAD = 101;
-    CHURCH = 102;
-    HOSPITAL = 103;
-    SCHOOL = 104;
-    MILL = 105;
-    INN = 106;
-    GRAVEYARD = 107;
-    MONASTERY = 108;
-    COURT = 109;
+    bool isCountry = 10;
+    bool canPrefix = 11;
+    bool canSuffix = 12;
 
 }
 

@@ -9,6 +9,8 @@ import net.ramify.model.place.type.Region;
 
 public class Hamlet extends AbstractSettlement {
 
+    private static final PlaceProto.PlaceType PLACE_TYPE = placeType("Hamlet");
+
     public Hamlet(final PlaceId id, final String name, final Place parent, final PlaceGroupId groupId, final PlaceHistory history) throws InvalidPlaceTypeException {
         this(id, name, parent.requireAs(Region.class), groupId, history);
     }
@@ -19,7 +21,7 @@ public class Hamlet extends AbstractSettlement {
 
     @Override
     public PlaceProto.PlaceType protoType() {
-        return PlaceProto.PlaceType.HAMLET;
+        return PLACE_TYPE;
     }
 
 }

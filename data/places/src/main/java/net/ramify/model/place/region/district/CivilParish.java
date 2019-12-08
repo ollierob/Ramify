@@ -11,6 +11,8 @@ import javax.annotation.Nonnull;
 
 public class CivilParish extends AbstractRegion {
 
+    private static final PlaceProto.PlaceType PLACE_TYPE = placeType("Civil Parish");
+
     private final District parent;
 
     public CivilParish(final PlaceId id, final String name, final Place parent, final PlaceGroupId groupId, final PlaceHistory history) throws InvalidPlaceTypeException {
@@ -30,7 +32,7 @@ public class CivilParish extends AbstractRegion {
     @Nonnull
     @Override
     public PlaceProto.PlaceType protoType() {
-        return PlaceProto.PlaceType.CIVIL_PARISH;
+        return PLACE_TYPE;
     }
 
 }

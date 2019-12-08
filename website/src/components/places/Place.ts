@@ -16,6 +16,10 @@ function sortPlacesByDate(p1: Place.AsObject, p2: Place.AsObject) {
     return (latestYear(p1.history.close) || 9999) - (latestYear(p2.history.close) || 9999);
 }
 
+export function sortPlacesByType(p1: Place.AsObject, p2: Place.AsObject) {
+    return p1.type.name.localeCompare(p2.type.name);
+}
+
 export function sortPlacesByName(p1: Place.AsObject, p2: Place.AsObject) {
     return p1.name.localeCompare(p2.name);
 }

@@ -11,6 +11,8 @@ import java.util.Objects;
 
 public class School extends AbstractBuilding implements Institution {
 
+    private static final PlaceProto.PlaceType PLACE_TYPE = placeType("School");
+
     private final SettlementOrRegion parent;
 
     public School(
@@ -39,7 +41,7 @@ public class School extends AbstractBuilding implements Institution {
 
     @Override
     public PlaceProto.PlaceType protoType() {
-        return PlaceProto.PlaceType.SCHOOL;
+        return PLACE_TYPE;
     }
 
 }

@@ -6,7 +6,6 @@ import {recordTypeName} from "../../../../components/records/RecordType";
 import {renderFamilyRecord} from "./FamilyRecordTableCell";
 import {RecordSet} from "../../../../protobuf/generated/record_pb";
 import {PlaceLink} from "../../../../components/places/PlaceLink";
-import {placeTypeName} from "../../../../components/places/PlaceType";
 import {formatDateRange} from "../../../../components/date/DateFormat";
 import {sortDatesByEarliest} from "../../../../components/date/DateRange";
 
@@ -47,7 +46,7 @@ const PlaceColumn: FamilyRecordColumn = {
     title: "Place",
     render: (t, r) => r.place && <>
         <PlaceLink place={r.place}/>
-        <Minor>{placeTypeName(r.place.type)}</Minor>
+        <Minor>{r.place.type.name}</Minor>
     </>,
     width: 140
 };
