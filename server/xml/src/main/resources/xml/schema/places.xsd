@@ -721,6 +721,8 @@
                 
         <xs:element ref="ns2:londonBorough"/>
                 
+        <xs:element ref="ns2:cityDistrict"/>
+                
         <xs:element ref="ns3:country"/>
                 
         <xs:element ref="ns3:state"/>

@@ -16,9 +16,12 @@ import net.ramify.model.place.xml.place.uk.XmlUkPlace;
 
 import javax.annotation.CheckForNull;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "londonBorough")
 public class XmlLondonBorough extends XmlArea<Borough> {
@@ -27,6 +30,11 @@ public class XmlLondonBorough extends XmlArea<Borough> {
 
     @XmlAttribute(name = "iso")
     private String iso;
+
+    @XmlElementRefs({
+            @XmlElementRef(type = XmlCityDistrict.class)
+    })
+    private List<XmlPlace> children;
 
     XmlLondonBorough() {
         super(Borough.class);
@@ -53,7 +61,7 @@ public class XmlLondonBorough extends XmlArea<Borough> {
     @CheckForNull
     @Override
     protected Collection<? extends XmlPlace> children() {
-        return Collections.emptyList(); //TODO
+        return MoreObjects.firstNonNull(children, Collections.emptyList());
     }
 
 }

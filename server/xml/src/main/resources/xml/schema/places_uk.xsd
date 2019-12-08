@@ -5,6 +5,8 @@
     
   <xs:element name="chapelry" type="tns:xmlChapelry"/>
     
+  <xs:element name="cityDistrict" type="tns:xmlCityDistrict"/>
+    
   <xs:element name="civilParish" type="tns:xmlCivilParish"/>
     
   <xs:element name="country" type="tns:xmlCountry"/>
@@ -473,9 +475,27 @@
             
       <xs:extension base="ns1:xmlPlace">
                 
-        <xs:sequence/>
+        <xs:sequence>
+                    
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:cityDistrict"/>
+                  
+        </xs:sequence>
                 
         <xs:attribute name="iso" type="xs:string"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlCityDistrict">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="ns1:xmlPlace">
+                
+        <xs:sequence/>
               
       </xs:extension>
           
