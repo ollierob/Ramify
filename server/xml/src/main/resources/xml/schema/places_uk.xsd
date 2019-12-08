@@ -15,6 +15,8 @@
     
   <xs:element name="hundred" type="tns:xmlHundred"/>
     
+  <xs:element name="lathe" type="tns:xmlLathe"/>
+    
   <xs:element name="londonBorough" type="tns:xmlLondonBorough"/>
     
   <xs:element name="manor" type="tns:xmlManor"/>
@@ -88,6 +90,8 @@
             <xs:element ref="tns:hundred"/>
                         
             <xs:element ref="tns:rape"/>
+                        
+            <xs:element ref="tns:lathe"/>
                         
             <xs:element ref="tns:metropolitanBorough"/>
                         
@@ -306,6 +310,40 @@
   </xs:complexType>
     
   <xs:complexType name="xmlRape">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="ns1:xmlPlace">
+                
+        <xs:sequence>
+                    
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        
+            <xs:element ref="tns:parish"/>
+                        
+            <xs:element ref="tns:manor"/>
+                        
+            <xs:element ref="tns:hundred"/>
+                        
+            <xs:element ref="ns1:city"/>
+                        
+            <xs:element ref="ns1:town"/>
+                        
+            <xs:element ref="ns1:village"/>
+                        
+            <xs:element ref="ns1:hamlet"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlLathe">
         
     <xs:complexContent>
             

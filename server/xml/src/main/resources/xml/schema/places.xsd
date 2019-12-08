@@ -709,6 +709,8 @@
                 
         <xs:element ref="ns2:rape"/>
                 
+        <xs:element ref="ns2:lathe"/>
+                
         <xs:element ref="ns2:metropolitanBorough"/>
                 
         <xs:element ref="ns2:civilParish"/>

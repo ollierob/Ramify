@@ -36,6 +36,7 @@ public class ImageResource extends AbstractResource {
     @GET
     @Path("flags/{flag}")
     @Produces("image/*")
+    @Cached(maxAgeDays = 1)
     public Response flagImage(
             @Context final UserSessionContext context,
             @PathParam("flag") String flag) {

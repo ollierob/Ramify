@@ -1,0 +1,48 @@
+package net.ramify.model.place.xml.place.uk;
+
+import com.google.common.base.MoreObjects;
+import net.ramify.model.place.Place;
+import net.ramify.model.place.PlaceGroupId;
+import net.ramify.model.place.history.PlaceHistory;
+import net.ramify.model.place.region.Lathe;
+import net.ramify.model.place.xml.PlaceParserContext;
+import net.ramify.model.place.xml.place.XmlArea;
+import net.ramify.model.place.xml.place.XmlPlace;
+import net.ramify.model.place.xml.place.settlement.XmlSettlement;
+import net.ramify.model.place.xml.place.uk.manor.XmlManor;
+
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementRefs;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+
+@XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "lathe")
+class XmlLathe extends XmlArea<Lathe> {
+
+    @XmlElementRefs({
+            @XmlElementRef(type = XmlParish.class),
+            @XmlElementRef(type = XmlManor.class),
+            @XmlElementRef(type = XmlHundred.class),
+            @XmlElementRef(type = XmlSettlement.class)
+    })
+    private List<XmlPlace> children;
+
+    XmlLathe() {
+        super(Lathe.class);
+    }
+
+    @Override
+    protected Lathe place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+        Objects.requireNonNull(parent, "parent");
+        return new Lathe(this.placeId(context), this.name(), parent, groupId, history);
+    }
+
+    @Override
+    protected Collection<XmlPlace> children() {
+        return MoreObjects.firstNonNull(children, Collections.emptyList());
+    }
+
+}
