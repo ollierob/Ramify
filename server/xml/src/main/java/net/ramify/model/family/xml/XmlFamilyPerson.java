@@ -48,7 +48,7 @@ public class XmlFamilyPerson extends XmlPersonRecord {
     protected Set<Event> events(final PersonId personId, final RecordContext context) {
         if (events == null || events.isEmpty()) return Collections.emptySet();
         final var events = Sets.<Event>newHashSet();
-        this.events.forEach(event -> events.addAll(event.allEvents(personId, context)));
+        this.events.forEach(event -> events.addAll(event.allEvents(personId, context, false)));
         return events;
     }
 

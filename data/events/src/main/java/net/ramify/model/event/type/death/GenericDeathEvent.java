@@ -22,7 +22,7 @@ public class GenericDeathEvent extends AbstractEvent<GenericDeathEvent> implemen
     }
 
     public GenericDeathEvent(
-            final PersonId persoGenericDeathEvetnId,
+            final PersonId personId,
             final DateRange date,
             final Age givenAge) {
         super(personId, date);

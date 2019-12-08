@@ -56,7 +56,7 @@ public abstract class XmlRelationship {
     protected Set<Event> events(final PersonId personId, final DateRange date, final RecordContext context) {
         final var events = Sets.<Event>newHashSet();
         events.add(new Flourished(personId, date));
-        if (this.events != null) this.events.forEach(event -> events.addAll(event.allEvents(personId, context)));
+        if (this.events != null) this.events.forEach(event -> events.addAll(event.allEvents(personId, context, true)));
         if (Boolean.TRUE.equals(deceased) && !IterableUtils.has(events, DeathEvent.class)) events.add(new GenericDeathEvent(personId, BeforeDate.strictlyBefore(date)));
         return events;
     }

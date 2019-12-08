@@ -72,10 +72,11 @@ public abstract class XmlEvent {
 
     public abstract Set<Event> inferredEvents(PersonId personId, RecordContext context);
 
-    public Set<Event> allEvents(final PersonId personId, final RecordContext context) {
+    public Set<Event> allEvents(final PersonId personId, final RecordContext context, final boolean inferredEvents) {
         final var event = this.toEvent(personId, context);
-        final var inferred = this.inferredEvents(personId, context);
-        return inferred.isEmpty() ? Collections.singleton(event) : SetUtils.with(inferred, event);
+        return inferredEvents
+                ? SetUtils.with(this.inferredEvents(personId, context), event)
+                : Collections.singleton(event);
     }
 
     @CheckForNull
