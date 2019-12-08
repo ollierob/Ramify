@@ -27,7 +27,8 @@ message Place {
     bool defunct = 6;
     string groupId = 7;
     PlaceHistory history = 8;
-    bool isBuilding = 9;
+
+    bool isMajor = 10;
 
 }
 
@@ -46,6 +47,7 @@ message PlaceType {
     bool isCountry = 10;
     bool canPrefix = 11;
     bool canSuffix = 12;
+    bool isBuilding = 13;
 
 }
 

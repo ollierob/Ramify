@@ -56,6 +56,9 @@ public abstract class XmlPlace {
     })
     private XmlDateRange closed;
 
+    @XmlAttribute(name = "major")
+    private Boolean major;
+
     protected PlaceId placeId(final PlaceParserContext context) {
         return this.placeId(context.countryIso());
     }

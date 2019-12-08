@@ -32,7 +32,8 @@ public abstract class AbstractBuilding extends AbstractPlace implements Building
         return PlaceProto.PlaceType.newBuilder()
                 .setName(name)
                 .setCanPrefix(false)
-                .setCanSuffix(true);
+                .setCanSuffix(true)
+                .setIsBuilding(true);
     }
 
     protected static PlaceProto.PlaceType placeType(final String name) {

@@ -35,7 +35,9 @@ public interface Building extends Place {
     @Nonnull
     @Override
     default PlaceProto.Place.Builder toProtoBuilder(final boolean includeParent) {
-        return Place.super.toProtoBuilder(includeParent).setIsBuilding(true);
+        final var builder = Place.super.toProtoBuilder(includeParent);
+        builder.getTypeBuilder().setIsBuilding(true);
+        return builder;
     }
 
 }

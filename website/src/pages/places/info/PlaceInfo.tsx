@@ -34,7 +34,7 @@ export class PlaceInfo extends React.PureComponent<Props> {
                 {description ? <Markdown text={description.description}/> : NoDescription}
             </div>
 
-            {this.props.childPlaces && (this.props.childPlaces.length || !place.isbuilding) && <Card className="places" title={<b>Places</b>} bordered={false}>
+            {this.props.childPlaces && (this.props.childPlaces.length || !place.type.isbuilding) && <Card className="places" title={<b>Places</b>} bordered={false}>
                 <ChildPlaceCards
                     {...this.props}
                     childPlaces={this.props.childPlaces}
