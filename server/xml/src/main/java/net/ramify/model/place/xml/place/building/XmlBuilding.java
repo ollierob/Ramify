@@ -28,7 +28,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 @XmlTransient
-@XmlSeeAlso({XmlChurch.class, XmlFarmstead.class, XmlGraveyard.class, XmlInn.class, XmlMill.class, XmlMonastery.class, XmlSchool.class, XmlStreet.class})
+@XmlSeeAlso({XmlChurch.class, XmlFarmstead.class, XmlGraveyard.class, XmlInn.class, XmlMill.class, XmlMonastery.class, XmlSchool.class, XmlStreet.class, XmlWorkhouse.class})
 public abstract class XmlBuilding<P extends Place> extends XmlPlace {
 
     @XmlAttribute(name = "countryIso")

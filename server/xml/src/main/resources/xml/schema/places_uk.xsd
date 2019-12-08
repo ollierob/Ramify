@@ -214,6 +214,8 @@
             <xs:element ref="ns1:school"/>
                         
             <xs:element ref="ns1:street"/>
+                        
+            <xs:element ref="ns1:workhouse"/>
                       
           </xs:choice>
                   

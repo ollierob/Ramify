@@ -59,6 +59,8 @@
     
   <xs:element name="wikipediaLink" type="tns:xmlWikipediaLink"/>
     
+  <xs:element name="workhouse" type="tns:xmlWorkhouse"/>
+    
   <xs:complexType name="xmlArchive">
         
     <xs:sequence>
@@ -300,6 +302,8 @@
             <xs:element ref="tns:school"/>
                         
             <xs:element ref="tns:street"/>
+                        
+            <xs:element ref="tns:workhouse"/>
                       
           </xs:choice>
                   
@@ -555,6 +559,36 @@
       
   </xs:complexType>
     
+  <xs:complexType name="xmlWorkhouse">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPlace">
+                
+        <xs:sequence>
+                    
+          <xs:choice minOccurs="0">
+                        
+            <xs:element ref="ns1:builtInYear"/>
+                        
+            <xs:element ref="ns1:builtBetwweenYears"/>
+                        
+            <xs:element ref="ns1:builtBeforeYear"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+                
+        <xs:attribute name="countryIso" type="xs:string"/>
+                
+        <xs:attribute name="demolished" type="xs:boolean"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
   <xs:complexType name="xmlTown">
         
     <xs:complexContent>
@@ -580,6 +614,8 @@
             <xs:element ref="tns:school"/>
                         
             <xs:element ref="tns:street"/>
+                        
+            <xs:element ref="tns:workhouse"/>
                       
           </xs:choice>
                   
@@ -616,6 +652,8 @@
             <xs:element ref="tns:school"/>
                         
             <xs:element ref="tns:street"/>
+                        
+            <xs:element ref="tns:workhouse"/>
                       
           </xs:choice>
                   
@@ -652,6 +690,8 @@
             <xs:element ref="tns:school"/>
                         
             <xs:element ref="tns:street"/>
+                        
+            <xs:element ref="tns:workhouse"/>
                       
           </xs:choice>
                   
@@ -700,6 +740,8 @@
         <xs:element ref="tns:school"/>
                 
         <xs:element ref="tns:street"/>
+                
+        <xs:element ref="tns:workhouse"/>
                 
         <xs:element ref="tns:town"/>
                 

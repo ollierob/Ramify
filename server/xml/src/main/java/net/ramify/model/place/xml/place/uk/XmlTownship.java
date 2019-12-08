@@ -1,6 +1,9 @@
 package net.ramify.model.place.xml.place.uk;
 
 import com.google.common.base.MoreObjects;
+import net.ramify.model.ParserContext;
+import net.ramify.model.date.InYears;
+import net.ramify.model.place.DefaultPlaceHistory;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
@@ -24,6 +27,8 @@ import java.util.List;
 @XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "township")
 class XmlTownship extends XmlPlace {
 
+    static final PlaceHistory DEFAULT_HISTORY = new DefaultPlaceHistory(null, new InYears(1866));
+
     @XmlElementRefs({
             @XmlElementRef(type = XmlHamlet.class),
             @XmlElementRef(type = XmlVillage.class),
@@ -44,6 +49,11 @@ class XmlTownship extends XmlPlace {
     @Override
     protected Collection<XmlPlace> children() {
         return MoreObjects.firstNonNull(children, Collections.emptyList());
+    }
+
+    @Override
+    protected PlaceHistory history(final ParserContext context) {
+        return MoreObjects.firstNonNull(super.history(context), DEFAULT_HISTORY);
     }
 
 }
