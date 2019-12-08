@@ -3,8 +3,8 @@ import {addNewPlace} from "./PlaceHistory";
 
 test("addNewPlace", () => {
 
-    const placeA: Place.AsObject = {id: "a", name: "Place A", iso: null, type: null, defunct: false, groupid: null};
-    const placeB: Place.AsObject = {id: "b", name: "Place B", iso: null, type: null, defunct: false, groupid: null};
+    const placeA: Place.AsObject = {id: "a", name: "Place A", iso: null, type: null, defunct: false, groupid: null, ismajor: false};
+    const placeB: Place.AsObject = {id: "b", name: "Place B", iso: null, type: null, defunct: false, groupid: null, ismajor: false};
 
     const history = [placeB, placeA];
 
