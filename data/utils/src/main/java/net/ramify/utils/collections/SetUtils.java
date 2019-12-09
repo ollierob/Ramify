@@ -52,7 +52,8 @@ public class SetUtils {
     public static <T> Set<T> with(final Set<T> set, final T element) {
         if (set.isEmpty()) return Collections.singleton(element);
         if (set.contains(element)) return set;
-        final var copy = Sets.newHashSet(set);
+        final var copy = Sets.<T>newHashSetWithExpectedSize(set.size() + 1);
+        copy.addAll(set);
         copy.add(element);
         return copy;
     }

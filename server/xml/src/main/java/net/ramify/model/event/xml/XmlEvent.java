@@ -8,12 +8,14 @@ import net.ramify.model.date.xml.XmlInYear;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.type.BirthEvent;
 import net.ramify.model.event.type.birth.GenericBirth;
+import net.ramify.model.person.HasPersonId;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
 import net.ramify.model.person.xml.XmlAge;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.xml.RecordContext;
+import net.ramify.model.relationship.Relationship;
 import net.ramify.utils.collections.SetUtils;
 import net.ramify.utils.objects.Functions;
 
@@ -94,6 +96,10 @@ public abstract class XmlEvent {
         return inferredEvents
                 ? SetUtils.with(this.inferredEvents(personId, context), event)
                 : Collections.singleton(event);
+    }
+
+    public Set<Relationship> inferredRelationships(final HasPersonId personId) {
+        return Collections.emptySet();
     }
 
     @CheckForNull

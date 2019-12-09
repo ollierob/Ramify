@@ -16,6 +16,12 @@ import java.util.stream.Stream;
 
 public class IterableUtils {
 
+    public static boolean isEmpty(final Iterable<?> iterable) {
+        return iterable instanceof Collection
+                ? CollectionUtils.isEmpty((Collection<?>) iterable)
+                : iterable == null || !iterable.iterator().hasNext();
+    }
+
     public static <T> boolean any(final Collection<T> collection, final Predicate<? super T> predicate) {
         if (collection.isEmpty()) return false;
         if (collection instanceof List && collection instanceof RandomAccess) return any((List<T>) collection, predicate);

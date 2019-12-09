@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static net.ramify.utils.collections.CollectionUtils.isEmpty;
+
 @XmlRootElement(namespace = XmlFamily.NAMESPACE, name = "person")
 public class XmlFamilyPerson extends XmlPersonRecord {
 
@@ -56,6 +58,7 @@ public class XmlFamilyPerson extends XmlPersonRecord {
         final var relationships = Sets.<Relationship>newHashSet();
         relationships.addAll(relatives(self, people, parents, ParentChild::new));
         relationships.addAll(relatives(self, people, spouses, Married::new));
+        relationships.addAll(relatives(self, events));
         return relationships;
     }
 
@@ -66,6 +69,14 @@ public class XmlFamilyPerson extends XmlPersonRecord {
                 .map(PersonId::new)
                 .map(people::require)
                 .map(person -> factory.relationshipBetween(person, self))
+                .collect(Collectors.toList());
+    }
+
+    private static Collection<Relationship> relatives(final Person self, final Collection<? extends XmlEvent> events) {
+        if (isEmpty(events)) return Collections.emptyList();
+        return events.stream()
+                .map(event -> event.inferredRelationships(self))
+                .flatMap(Collection::stream)
                 .collect(Collectors.toList());
     }
 
