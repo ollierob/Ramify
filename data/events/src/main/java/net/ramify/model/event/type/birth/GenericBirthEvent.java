@@ -9,11 +9,11 @@ import net.ramify.model.place.Place;
 
 import javax.annotation.Nonnull;
 
-public class GenericBirth extends AbstractPersonEvent<GenericBirth> implements BirthEvent {
+public class GenericBirthEvent extends AbstractPersonEvent<GenericBirthEvent> implements BirthEvent {
 
     private final PersonId personId;
 
-    public GenericBirth(final PersonId personId, final DateRange date) {
+    public GenericBirthEvent(final PersonId personId, final DateRange date) {
         super(personId, date);
         this.personId = personId;
     }

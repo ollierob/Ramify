@@ -19,6 +19,10 @@ public abstract class ComposedEvent<T extends Event> implements Event {
         this.delegate = delegate;
     }
 
+    protected T delegate() {
+        return delegate;
+    }
+
     @Nonnull
     @Override
     public DateRange date() {

@@ -1,7 +1,7 @@
 package net.ramify.model.event.xml;
 
 import net.ramify.model.event.Event;
-import net.ramify.model.event.type.birth.GenericBirth;
+import net.ramify.model.event.type.birth.GenericBirthEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.record.xml.RecordContext;
 
@@ -14,7 +14,7 @@ public class XmlBirthEvent extends XmlEvent {
 
     @Override
     public Event toEvent(final PersonId personId, final RecordContext context) {
-        return new GenericBirth(personId, this.date(context));
+        return new GenericBirthEvent(personId, this.date(context)).with(this.place(context));
     }
 
     @Override

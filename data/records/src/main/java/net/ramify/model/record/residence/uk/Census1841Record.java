@@ -5,7 +5,7 @@ import com.google.common.collect.Sets;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.Event;
-import net.ramify.model.event.type.birth.GenericBirth;
+import net.ramify.model.event.type.birth.GenericBirthEvent;
 import net.ramify.model.event.type.residence.GenericResidenceEvent;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyOfUnknownRelationships;
@@ -127,7 +127,7 @@ public class Census1841Record extends CensusRecord implements HasPlace {
         @Override
         public Set<? extends Event> events() {
             return Sets.newHashSet(
-                    new GenericBirth(this.personId(), birthDate).with(birthPlace),
+                    new GenericBirthEvent(this.personId(), birthDate).with(birthPlace),
                     new GenericResidenceEvent(this.personId(), CENSUS_DATE, residencePlace, age));
         }
 

@@ -6,7 +6,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 import net.ramify.model.date.ExactDate;
-import net.ramify.model.event.type.birth.GenericBirth;
+import net.ramify.model.event.type.birth.GenericBirthEvent;
 import net.ramify.model.event.type.residence.GenericResidenceEvent;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
@@ -85,13 +85,13 @@ public class Census1821Record extends CensusRecord implements HasPlace {
 
     private Person anonymousPerson(final Gender gender, final Age age) {
         final var id = PersonId.random();
-        final var birth = new GenericBirth(id, age.birthDate(CENSUS_DATE));
+        final var birth = new GenericBirthEvent(id, age.birthDate(CENSUS_DATE));
         final var residence = new GenericResidenceEvent(id, CENSUS_DATE, this.place());
         return new GenericRecordPerson(id, Name.UNKNOWN, gender, ImmutableSet.of(birth, residence), "Anonymous");
     }
 
     private Person agedPerson(final Person person, final Age age) {
-        final var birth = new GenericBirth(person.personId(), age.birthDate(CENSUS_DATE));
+        final var birth = new GenericBirthEvent(person.personId(), age.birthDate(CENSUS_DATE));
         return new PersonWithAdditionalEvents(person, birth);
     }
 

@@ -2,7 +2,7 @@ package net.ramify.model.record.civil.uk;
 
 import com.google.common.collect.Sets;
 import net.ramify.model.event.Event;
-import net.ramify.model.event.type.birth.GenericBirth;
+import net.ramify.model.event.type.birth.GenericBirthEvent;
 import net.ramify.model.event.type.death.GenericDeathEvent;
 import net.ramify.model.occupation.Occupation;
 import net.ramify.model.person.Person;
@@ -41,7 +41,7 @@ public class GeneralRegisterRecordDeathEntry extends GenericRecordEntry {
     Set<Event> events(final GeneralRegisterDeath record) {
         final var events = Sets.<Event>newHashSet();
         events.add(new GenericDeathEvent(this.personId(), record.deathDate()));
-        if (age != null) events.add(new GenericBirth(this.personId(), age.birthDate(record.deathDate())));
+        if (age != null) events.add(new GenericBirthEvent(this.personId(), age.birthDate(record.deathDate())));
         return events;
     }
 

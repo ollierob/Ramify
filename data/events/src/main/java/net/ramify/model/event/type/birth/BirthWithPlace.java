@@ -18,7 +18,7 @@ public class BirthWithPlace extends EventWithPlace<BirthEvent> implements BirthE
     @Nonnull
     @Override
     public PersonId personId() {
-        throw new UnsupportedOperationException(); //TODO
+        return this.delegate().personId();
     }
 
     @Nonnull

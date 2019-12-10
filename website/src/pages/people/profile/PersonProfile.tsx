@@ -6,6 +6,7 @@ import {Family} from "../../../protobuf/generated/family_pb";
 import {Event} from "../../../protobuf/generated/event_pb";
 import {PersonName} from "../../../components/people/PersonName";
 import {FamilyTreeId} from "../../../components/tree/FamilyTree";
+import {RelativesList} from "./RelativesList";
 
 type Props = {
     person: Person.AsObject;
@@ -26,7 +27,7 @@ export class PersonProfile extends React.PureComponent<Props> {
 
                 <ProfileEvents {...this.props} events={this.props.person.eventsList}/>
 
-                <ProfileRelatives family={this.props.family}/>
+                <ProfileRelatives {...this.props}/>
 
             </>}
 
@@ -52,10 +53,10 @@ const ProfileEvents = (props: {person: Person.AsObject, family: Family.AsObject,
     </Card>;
 };
 
-const ProfileRelatives = (props: {family: Family.AsObject}) => {
+const ProfileRelatives = (props: Props) => {
     return <Card
         title="Relatives"
         className="relatives large">
-
+        <RelativesList {...props}/>
     </Card>;
 };

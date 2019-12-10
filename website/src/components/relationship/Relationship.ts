@@ -1,6 +1,8 @@
 import {Relationship} from "../../protobuf/generated/relationship_pb";
 import {Person} from "../../protobuf/generated/person_pb";
 import {isFemale, isMale} from "../people/Gender";
+import {PersonId} from "../people/PersonId";
+import {Family} from "../../protobuf/generated/family_pb";
 
 export type RelationshipType = keyof Relationship.TypeMap;
 
@@ -56,6 +58,10 @@ export function isParentChild(relationship: Relationship.AsObject): boolean {
     return relationship.type == Relationship.Type.PARENT_CHILD;
 }
 
+export function isChildParent(relationship: Relationship.AsObject): boolean {
+    return relationship.type == Relationship.Type.CHILD_PARENT;
+}
+
 export function findRelationship(from: Person.AsObject, to: Person.AsObject, relationships: ReadonlyArray<Relationship.AsObject>, tryReverse: boolean): Relationship.AsObject {
     if (from == to) return null;
     const relationship = relationships.find(r => r.fromid == from.id && r.toid == to.id);
@@ -82,4 +88,8 @@ function invertRelationshipType(relationship: Relationship.AsObject) {
         default:
             return relationship.type;
     }
+}
+
+export function findPerson(id: PersonId, family: Family.AsObject): Person.AsObject {
+    return family.personList.find(p => p.id == id);
 }

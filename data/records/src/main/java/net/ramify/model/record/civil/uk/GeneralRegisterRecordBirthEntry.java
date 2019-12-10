@@ -1,7 +1,7 @@
 package net.ramify.model.record.civil.uk;
 
 import net.ramify.model.event.Event;
-import net.ramify.model.event.type.birth.GenericBirth;
+import net.ramify.model.event.type.birth.GenericBirthEvent;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
@@ -26,7 +26,7 @@ public class GeneralRegisterRecordBirthEntry extends GenericRecordEntry {
     }
 
     Set<Event> events(final GeneralRegisterBirth record) {
-        return Collections.singleton(new GenericBirth(this.personId(), record.birthDate()).with(record.birthPlace()));
+        return Collections.singleton(new GenericBirthEvent(this.personId(), record.birthDate()).with(record.birthPlace()));
     }
 
 }
