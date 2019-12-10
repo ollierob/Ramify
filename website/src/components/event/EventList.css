@@ -32,5 +32,9 @@
 .eventList .event .main .person {
     padding: 12px;
     margin-top: 8px;
-    font-size: 18px;
+    font-size: 16px;
+}
+
+.eventList .event .main .person .birth, .eventList .event .main .person .death {
+    margin-left: 0.5em;
 }

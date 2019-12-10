@@ -13,7 +13,7 @@ export type PrefixWords = {
     between: string
 }
 
-const DefaultPrefixWords: PrefixWords = {
+export const DefaultPrefixWords: PrefixWords = {
     unknown: "?",
     before: "before ",
     after: "after ",
