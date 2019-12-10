@@ -4,7 +4,7 @@ import {EventBox} from "./EventBox";
 import {Person} from "../../protobuf/generated/person_pb";
 import {Family} from "../../protobuf/generated/family_pb";
 import {FamilyTreeId} from "../tree/FamilyTree";
-import "./EventList.css"
+import "./EventList.css";
 
 type Props = {
     person: Person.AsObject;
