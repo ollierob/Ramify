@@ -6,7 +6,7 @@ import {PersonName} from "../people/PersonName";
 
 export const EventPersonBox = (props: {prefix: string, person: Person.AsObject, tree: FamilyTreeId}) => {
     if (!props.person) return null;
-    return <div className="person">
+    return <div className="person bordered">
         {props.prefix}
         {" "}
         <a href={personProfileHref(props.tree, props.person.id)}>
