@@ -1,7 +1,7 @@
 package net.ramify.model.event.type.residence;
 
 import net.ramify.model.date.DateRange;
-import net.ramify.model.event.AbstractEvent;
+import net.ramify.model.event.AbstractPersonEvent;
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
@@ -11,7 +11,7 @@ import javax.annotation.Nonnull;
 import java.util.Objects;
 import java.util.Optional;
 
-public class GenericResidenceEvent extends AbstractEvent<GenericResidenceEvent> implements ResidenceEvent {
+public class GenericResidenceEvent extends AbstractPersonEvent<GenericResidenceEvent> implements ResidenceEvent {
 
     private final Place place;
     private final Age givenAge;

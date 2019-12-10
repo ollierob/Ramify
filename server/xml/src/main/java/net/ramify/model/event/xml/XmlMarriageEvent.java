@@ -23,8 +23,10 @@ public class XmlMarriageEvent extends XmlLifeEvent {
     public Event toEvent(final PersonId personId, final RecordContext context) {
         return new GenericMarriage(
                 personId,
+                this.spouseId(),
                 this.date(context),
-                this.age()).with(this.place(context));
+                this.age())
+                .with(this.place(context));
     }
 
     @Override

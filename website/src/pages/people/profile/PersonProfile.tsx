@@ -5,10 +5,12 @@ import {Card} from "antd";
 import {Family} from "../../../protobuf/generated/family_pb";
 import {Event} from "../../../protobuf/generated/event_pb";
 import {PersonName} from "../../../components/people/PersonName";
+import {FamilyTreeId} from "../../../components/tree/FamilyTree";
 
 type Props = {
     person: Person.AsObject;
     family: Family.AsObject;
+    tree: FamilyTreeId;
     loading: boolean;
 }
 
@@ -42,11 +44,11 @@ const ProfileGallery = () => {
     </Card>;
 };
 
-const ProfileEvents = (props: {person: Person.AsObject, events: ReadonlyArray<Event.AsObject>}) => {
+const ProfileEvents = (props: {person: Person.AsObject, family: Family.AsObject, tree: FamilyTreeId, events: ReadonlyArray<Event.AsObject>}) => {
     return <Card
         title={props.person.name ? <PersonName name={props.person.name}/> : "Events"}
         className="eventList large">
-        <EventList events={props.events}/>
+        <EventList {...props}/>
     </Card>;
 };
 

@@ -16,7 +16,7 @@ public interface MarriageConditionEventInference {
     Set<Event> inferEvents(PersonId personId, Record record);
 
     MarriageConditionEventInference UNMARRIED = (id, record) -> Collections.emptySet();
-    MarriageConditionEventInference MARRIED = (id, record) -> Collections.singleton(new GenericMarriage(id, BeforeDate.strictlyBefore(record.date())));
+    MarriageConditionEventInference MARRIED = (id, record) -> Collections.singleton(new GenericMarriage(id, PersonId.random(), BeforeDate.strictlyBefore(record.date())));
     MarriageConditionEventInference WIDOWED = MARRIED;
     MarriageConditionEventInference NONE = UNMARRIED;
 

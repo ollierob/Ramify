@@ -1,30 +1,38 @@
 package net.ramify.model.event.type.marriage;
 
+import com.google.common.collect.ImmutableSet;
 import net.ramify.model.date.DateRange;
-import net.ramify.model.event.AbstractEvent;
-import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.event.type.LifeEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
+import net.ramify.model.place.Place;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
+import java.util.Set;
 
-public class GenericMarriage extends AbstractEvent<GenericMarriage> implements LifeEvent, MarriageEvent {
+public class GenericMarriage implements LifeEvent, MarriageEvent {
 
+    private final DateRange date;
     private final Age givenAge;
+    private final PersonId firstSpouse;
+    private final PersonId secondSpouse;
 
     public GenericMarriage(
-            final PersonId personId,
+            final PersonId firstSpouse,
+            final PersonId secondSpouse,
             final DateRange date) {
-        this(personId, date, null);
+        this(firstSpouse, secondSpouse, date, null);
     }
 
     public GenericMarriage(
-            final PersonId personId,
+            final PersonId firstSpouse,
+            final PersonId secondSpouse,
             final DateRange date,
             final Age givenAge) {
-        super(personId, date);
+        this.firstSpouse = firstSpouse;
+        this.secondSpouse = secondSpouse;
+        this.date = date;
         this.givenAge = givenAge;
     }
 
@@ -36,14 +44,24 @@ public class GenericMarriage extends AbstractEvent<GenericMarriage> implements L
 
     @Nonnull
     @Override
-    public String title() {
-        return "Marriage";
+    public DateRange date() {
+        return date;
     }
 
     @Nonnull
     @Override
-    public EventProto.Event.Builder toProtoBuilder() {
-        return MarriageEvent.super.toProtoBuilder();
+    public Set<PersonId> personIds() {
+        return ImmutableSet.of(firstSpouse, secondSpouse);
+    }
+
+    public MarriageEvent with(final Place place) {
+        return place == null ? this : new GenericMarriageWithPlace(firstSpouse, secondSpouse, date, givenAge, place);
+    }
+
+    @Nonnull
+    @Override
+    public String title() {
+        return "Marriage";
     }
 
 }

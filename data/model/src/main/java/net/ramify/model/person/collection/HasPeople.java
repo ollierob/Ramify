@@ -5,13 +5,14 @@ import net.ramify.model.event.collection.HasEvents;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
 import net.ramify.utils.collections.IterableUtils;
+import net.ramify.utils.collections.SetUtils;
 
 import javax.annotation.Nonnull;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-public interface HasPeople extends HasEvents {
+public interface HasPeople extends HasEvents, HasPersonIds {
 
     @Nonnull
     Set<? extends Person> people();
@@ -27,6 +28,12 @@ public interface HasPeople extends HasEvents {
     @Nonnull
     default Optional<? extends Person> find(final PersonId id) {
         return IterableUtils.findFirst(this.people(), p -> id.equals(p.personId()));
+    }
+
+    @Nonnull
+    @Override
+    default Set<PersonId> personIds() {
+        return SetUtils.transform(this.people(), Person::personId);
     }
 
     @Nonnull

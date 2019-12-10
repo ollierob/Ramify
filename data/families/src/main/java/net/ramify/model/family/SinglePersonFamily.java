@@ -42,7 +42,14 @@ public class SinglePersonFamily implements Family, HasPersonId {
 
     @Nonnull
     @Override
+    public Set<PersonId> personIds() {
+        return HasPersonId.super.personIds();
+    }
+
+    @Nonnull
+    @Override
     public Optional<Relationship> between(PersonId from, PersonId to) {
         return Optional.empty();
     }
+
 }

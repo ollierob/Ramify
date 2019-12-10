@@ -13,13 +13,14 @@ import net.ramify.model.event.type.UniqueEvent;
 import net.ramify.model.person.HasPersonId;
 import net.ramify.model.person.age.Age;
 import net.ramify.model.person.age.HasAges;
+import net.ramify.model.person.collection.HasPersonIds;
 import net.ramify.model.place.HasPlace;
 import net.ramify.utils.objects.Castable;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
 
-public interface Event extends HasAges, HasDate, HasPersonId, Castable<Event>, BuildsProto<EventProto.Event> {
+public interface Event extends HasAges, HasDate, HasPersonIds, Castable<Event>, BuildsProto<EventProto.Event> {
 
     @Nonnull
     DateRange date();
@@ -66,6 +67,11 @@ public interface Event extends HasAges, HasDate, HasPersonId, Castable<Event>, B
         final var builder = EventProto.Event.newBuilder()
                 .setTitle(this.title())
                 .setDate(this.date().toProto());
+        if (this instanceof HasPersonId) {
+            builder.addPersonId(((HasPersonId) this).personId().value());
+        } else {
+            this.personIds().forEach(id -> builder.addPersonId(id.value()));
+        }
         HasPlace.place(this).ifPresent(place -> builder.setPlace(place.toProto()));
         this.givenAge().ifPresent(age -> builder.setGivenAge(age.toProto()));
         this.computedAge().ifPresent(age -> builder.setComputedAge(age.toProto()));

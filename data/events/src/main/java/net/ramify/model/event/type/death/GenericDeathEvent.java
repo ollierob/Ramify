@@ -1,7 +1,7 @@
 package net.ramify.model.event.type.death;
 
 import net.ramify.model.date.DateRange;
-import net.ramify.model.event.AbstractEvent;
+import net.ramify.model.event.AbstractPersonEvent;
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.event.type.DeathEvent;
 import net.ramify.model.person.PersonId;
@@ -11,7 +11,7 @@ import net.ramify.model.place.Place;
 import javax.annotation.Nonnull;
 import java.util.Optional;
 
-public class GenericDeathEvent extends AbstractEvent<GenericDeathEvent> implements DeathEvent {
+public class GenericDeathEvent extends AbstractPersonEvent<GenericDeathEvent> implements DeathEvent {
 
     private final Age givenAge;
 

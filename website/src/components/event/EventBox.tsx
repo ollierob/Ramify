@@ -4,16 +4,28 @@ import {Card} from "antd";
 import {formatDateRange} from "../date/DateFormat";
 import {PlaceLink} from "../places/PlaceLink";
 import {renderAge} from "../people/Age";
-import {isBirthEvent, isDeathEvent, isPostDeathEvent} from "./Event";
+import {eventType, isBirthEvent, isDeathEvent, isPostDeathEvent} from "./Event";
+import {EventTitle} from "./EventTitle";
+import {Person} from "../../protobuf/generated/person_pb";
+import {Family} from "../../protobuf/generated/family_pb";
+import {FamilyTreeId} from "../tree/FamilyTree";
+import {EventPersonBox} from "./EventPersonBox";
 
-export const EventBox = (props: {event: Event.AsObject}) => {
+export type EventBoxProps = {
+    person: Person.AsObject
+    family: Family.AsObject
+    tree: FamilyTreeId
+    event: Event.AsObject
+}
+
+export const EventBox = (props: EventBoxProps) => {
 
     const event = props.event;
 
     return <Card className={"event " + eventClass(event)}>
         <div className="top">
             <div className="title">
-                {event.title}
+                <EventTitle {...props}/>
             </div>
             <div className="date">
                 {formatDateRange(event.date, "day")}
@@ -25,6 +37,9 @@ export const EventBox = (props: {event: Event.AsObject}) => {
                 Age {renderAge(event.givenage)}
             </div>}
         </div>
+        <div className="main">
+            {typeBox(props)}
+        </div>
     </Card>;
 
 };
@@ -34,4 +49,24 @@ function eventClass(event: Event.AsObject): string {
     if (isDeathEvent(event)) return "death";
     if (isPostDeathEvent(event)) return "postDeath";
     return "postBirth";
+}
+
+function typeBox(props: EventBoxProps) {
+    switch (eventType(props.event)) {
+        case "MARRIAGE":
+            return <OtherPersonBox {...props} prefix="Spouse"/>;
+        default:
+            return null;
+    }
+}
+
+const OtherPersonBox = (props: EventBoxProps & {prefix: string}) => {
+    const other = findOther(props.person, props.family, props.event);
+    return <EventPersonBox {...props} person={other}/>;
+};
+
+function findOther(person: Person.AsObject, family: Family.AsObject, event: Event.AsObject): Person.AsObject {
+    if (event.personidList.length != 2) return null;
+    const otherId = event.personidList.find(i => i != person.id);
+    return otherId != null && family.personList.find(p => p.id == otherId);
 }

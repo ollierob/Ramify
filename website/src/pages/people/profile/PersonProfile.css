@@ -28,43 +28,12 @@
     min-width: 400px;
 }
 
-.personProfile .profile .eventList .event {
-    margin-bottom: 1em;
-}
-
-.personProfile .profile .eventList .event .ant-card-body {
-    padding: 20px;
-}
-
 .personProfile .profile .eventList .event.birth {
     border: 1px solid #4caf50 !important;
 }
 
 .personProfile .profile .eventList .event.death {
     border: 1px solid #b76337 !important;
-}
-
-.personProfile .profile .eventList .event .top {
-    font-size: 16px;
-}
-
-.personProfile .profile .eventList .event .title {
-    display: inline-block;
-    font-weight: bold;
-    font-size: 1.25em;
-}
-
-.personProfile .profile .eventList .event .date {
-    color: #AAAAAA !important;
-    display: inline-block;
-    margin-left: .5em
-}
-
-.personProfile .profile .eventList .event .givenAge {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 1.1em;
 }
 
 .personProfile .profile .relatives {

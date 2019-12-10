@@ -81,11 +81,6 @@ public abstract class XmlEvent {
 
     public abstract Event toEvent(PersonId personId, RecordContext context);
 
-    public Set<Event> inferredEvents(PersonId personId, RecordContext context) {
-        final var birth = this.birth(personId, context);
-        return birth == null ? Collections.emptySet() : Collections.singleton(birth);
-    }
-
     protected BirthEvent birth(final PersonId personId, final RecordContext context) {
         final var age = this.age();
         return age == null ? null : new GenericBirth(personId, age.birthDate(this.date(context)));
@@ -96,6 +91,11 @@ public abstract class XmlEvent {
         return inferredEvents
                 ? SetUtils.with(this.inferredEvents(personId, context), event)
                 : Collections.singleton(event);
+    }
+
+    protected Set<Event> inferredEvents(PersonId personId, RecordContext context) {
+        final var birth = this.birth(personId, context);
+        return birth == null ? Collections.emptySet() : Collections.singleton(birth);
     }
 
     public Set<Relationship> inferredRelationships(final HasPersonId personId) {

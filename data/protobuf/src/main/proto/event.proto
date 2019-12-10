@@ -13,6 +13,7 @@ message Event {
     DateRange date = 2;
     Place place = 3;
     RecordType type = 4;
+    repeated string personId = 5;
 
     Age givenAge = 10;
     Age computedAge = 11;

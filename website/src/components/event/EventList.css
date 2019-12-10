@@ -1,0 +1,36 @@
+.eventList .event {
+    margin-bottom: 1em;
+}
+
+.eventList .event .ant-card-body {
+    padding: 20px;
+}
+
+.eventList .event .top {
+    font-size: 16px;
+}
+
+.eventList .event .title {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1.25em;
+}
+
+.eventList .event .date {
+    color: #AAAAAA !important;
+    display: inline-block;
+    margin-left: .5em
+}
+
+.eventList .event .givenAge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.1em;
+}
+
+.eventList .event .main .person {
+    padding: 12px;
+    margin-top: 8px;
+    font-size: 18px;
+}

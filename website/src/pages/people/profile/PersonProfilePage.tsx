@@ -43,9 +43,10 @@ export default class PersonProfilePage extends PeopleBasePage<State> {
                 tree={this.state.tree.data}
                 loading={this.state.tree.loading}/>
             <PersonProfile
+                loading={this.state.tree.loading}
                 person={this.state.person}
                 family={this.state.family}
-                loading={this.state.tree.loading}/>
+                tree={this.state.treeId}/>
         </div>;
     }
 

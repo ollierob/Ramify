@@ -9,6 +9,7 @@ import net.ramify.model.person.age.Age;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
+import java.util.Set;
 
 public abstract class ComposedEvent<T extends Event> implements Event {
 
@@ -26,8 +27,8 @@ public abstract class ComposedEvent<T extends Event> implements Event {
 
     @Nonnull
     @Override
-    public PersonId personId() {
-        return delegate.personId();
+    public Set<PersonId> personIds() {
+        return delegate.personIds();
     }
 
     @Nonnull

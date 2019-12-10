@@ -204,7 +204,7 @@ public class Census1851Record extends CensusRecord {
         @Nonnull
         @Override
         public Set<? extends Event> events() {
-            final var events = Sets.newHashSet(
+            final var events = Sets.<Event>newHashSet(
                     new GenericBirth(this.personId(), birthDate).with(birthPlace),
                     new GenericResidenceEvent(this.personId(), CENSUS_DATE, residencePlace));
             events.addAll(extraEvents);

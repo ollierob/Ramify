@@ -17,7 +17,7 @@ public class XmlBurialEvent extends XmlPostDeathEvent {
     }
 
     @Override
-    public Set<Event> inferredEvents(final PersonId personId, final RecordContext context) {
+    protected Set<Event> inferredEvents(final PersonId personId, final RecordContext context) {
         return super.inferredEvents(personId, context); //FIXME infer "recent" death
     }
 

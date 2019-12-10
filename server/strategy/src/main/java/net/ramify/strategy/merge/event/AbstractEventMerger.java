@@ -1,7 +1,7 @@
 package net.ramify.strategy.merge.event;
 
 import net.ramify.model.date.DateRange;
-import net.ramify.model.event.Event;
+import net.ramify.model.event.type.UniqueEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.place.HasPlace;
 import net.ramify.model.place.Place;
@@ -9,7 +9,7 @@ import net.ramify.strategy.merge.place.PlaceMerger;
 
 import javax.annotation.Nonnull;
 
-abstract class AbstractEventMerger<E extends Event> implements EventMerger<E> {
+abstract class AbstractEventMerger<E extends UniqueEvent> implements EventMerger<E> {
 
     private final PlaceMerger placeMerger;
 
