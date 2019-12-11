@@ -1,24 +1,17 @@
 import * as React from "react";
 import {Person} from "../../../protobuf/generated/person_pb";
-import {Family} from "../../../protobuf/generated/family_pb";
 import {FamilyTreeId} from "../../../components/tree/FamilyTree";
-import {findChildren, findFather, findMother} from "../../../components/relationship/Family";
 import {personProfileHref} from "../PeopleLinks";
 import {PersonName} from "../../../components/people/PersonName";
+import {Relatives} from "../../../components/relationship/Relatives";
 
 type Props = {
     person: Person.AsObject
-    family: Family.AsObject
     tree: FamilyTreeId
+    relatives: Relatives
 }
 
-type State = {
-    father?: Person.AsObject
-    mother?: Person.AsObject
-    children?: ReadonlyArray<Person.AsObject>
-}
-
-export class RelativesList extends React.PureComponent<Props, State> {
+export class RelativesList extends React.PureComponent<Props> {
 
     constructor(props) {
         super(props);
@@ -27,32 +20,14 @@ export class RelativesList extends React.PureComponent<Props, State> {
 
     render() {
 
-        if (!this.props.person || !this.props.family) return null;
+        if (!this.props.person || !this.props.relatives) return null;
+        const relatives = this.props.relatives;
 
         return <ul>
-            {this.state.father && <li>Father <RenderPerson {...this.props} person={this.state.father}/></li>}
-            {this.state.mother && <li>Mother <RenderPerson {...this.props} person={this.state.mother}/></li>}
-            {this.state.children && this.state.children.map(child => <li key={child.id}>Child <RenderPerson {...this.props} person={child}/></li>)}
+            {relatives.father && <li>Father <RenderPerson {...this.props} person={relatives.father}/></li>}
+            {relatives.mother && <li>Mother <RenderPerson {...this.props} person={relatives.mother}/></li>}
         </ul>;
 
-    }
-
-    componentDidMount() {
-        this.updateRelatives();
-    }
-
-    componentDidUpdate(prevProps: Readonly<Props>) {
-        if (this.props.person != prevProps.person || this.props.family != prevProps.family)
-            this.updateRelatives();
-    }
-
-    private updateRelatives(person: Person.AsObject = this.props.person, family: Family.AsObject = this.props.family) {
-        if (!person || !family) return;
-        this.setState({
-            father: findFather(person.id, family),
-            mother: findMother(person.id, family),
-            children: findChildren(person.id, family)
-        });
     }
 
 }

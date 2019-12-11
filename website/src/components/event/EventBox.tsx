@@ -1,6 +1,6 @@
 import * as React from "react";
 import {Event} from "../../protobuf/generated/event_pb";
-import {Card} from "antd";
+import {Card, Icon} from "antd";
 import {formatDateRange} from "../date/DateFormat";
 import {PlaceLink} from "../places/PlaceLink";
 import {renderAge} from "../people/Age";
@@ -9,16 +9,20 @@ import {EventTitle} from "./EventTitle";
 import {Person} from "../../protobuf/generated/person_pb";
 import {Family} from "../../protobuf/generated/family_pb";
 import {FamilyTreeId} from "../tree/FamilyTree";
-import {EventPersonBox} from "./EventPersonBox";
+import {EventRelatedPeopleBox} from "./EventRelatedPeopleBox";
+import {Relatives} from "../relationship/Relatives";
 
 export type EventBoxProps = {
     person: Person.AsObject
     family: Family.AsObject
     tree: FamilyTreeId
     event: Event.AsObject
+    relatives: Relatives
 }
 
 export const EventBox = (props: EventBoxProps) => {
+
+    if (!props.person || !props.relatives) return null;
 
     const event = props.event;
 
@@ -53,16 +57,18 @@ function eventClass(event: Event.AsObject): string {
 
 function typeBox(props: EventBoxProps) {
     switch (eventType(props.event)) {
+        case "BIRTH":
+            return <EventRelatedPeopleBox {...props} prefix={"Parents"} people={[props.relatives.father, props.relatives.mother]}/>;
         case "MARRIAGE":
-            return <OtherPersonBox {...props} prefix="Spouse"/>;
+            return <RelatedPersonBox {...props} prefix={<><Icon type="swap"/> Spouse</>}/>;
         default:
             return null;
     }
 }
 
-const OtherPersonBox = (props: EventBoxProps & {prefix: string}) => {
+const RelatedPersonBox = (props: EventBoxProps & {prefix: React.ReactNode}) => {
     const other = findOther(props.person, props.family, props.event);
-    return <EventPersonBox {...props} person={other}/>;
+    return <EventRelatedPeopleBox {...props} people={[other]}/>;
 };
 
 function findOther(person: Person.AsObject, family: Family.AsObject, event: Event.AsObject): Person.AsObject {

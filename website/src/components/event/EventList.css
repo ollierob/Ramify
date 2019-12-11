@@ -3,7 +3,7 @@
 }
 
 .eventList .controls .ant-tag {
-    font-size: 1em;
+    font-size: 1.2em;
     line-height: 1.5em;
 }
 
@@ -38,7 +38,7 @@
     font-size: 1.1em;
 }
 
-.eventList .event .main .person {
+.eventList .event .main .related {
     padding: 12px;
     margin-top: 8px;
     font-size: 16px;

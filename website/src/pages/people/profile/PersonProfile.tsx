@@ -7,6 +7,7 @@ import {Event} from "../../../protobuf/generated/event_pb";
 import {PersonName} from "../../../components/people/PersonName";
 import {FamilyTreeId} from "../../../components/tree/FamilyTree";
 import {RelativesList} from "./RelativesList";
+import {determineRelatives, Relatives} from "../../../components/relationship/Relatives";
 
 const {CheckableTag} = Tag;
 
@@ -17,7 +18,18 @@ type Props = {
     loading: boolean;
 }
 
-export class PersonProfile extends React.PureComponent<Props> {
+type State = {
+    relatives: Readonly<Relatives>
+}
+
+export class PersonProfile extends React.PureComponent<Props, State> {
+
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            relatives: props.person && determineRelatives(props.person.id, props.family)
+        };
+    }
 
     render() {
 
@@ -27,14 +39,19 @@ export class PersonProfile extends React.PureComponent<Props> {
 
                 <ProfileGallery/>
 
-                <ProfileEvents {...this.props} events={this.props.person.eventsList}/>
+                <ProfileEvents {...this.props} events={this.props.person.eventsList} relatives={this.state.relatives}/>
 
-                <ProfileRelatives {...this.props}/>
+                <ProfileRelatives {...this.props} {...this.state}/>
 
             </>}
 
         </div>;
 
+    }
+
+    componentDidUpdate(prevProps: Readonly<Props>) {
+        if (this.props.person != prevProps.person || this.props.family != prevProps.family)
+            this.setState({relatives: this.props.person && determineRelatives(this.props.person.id, this.props.family)});
     }
 
 }
@@ -53,12 +70,14 @@ type EventListOptions = {
     historicEvents?: boolean;
 }
 
-const ProfileEvents = (props: {person: Person.AsObject, family: Family.AsObject, tree: FamilyTreeId, events: ReadonlyArray<Event.AsObject>}) => {
+const ProfileEvents = (props: Props & {events: ReadonlyArray<Event.AsObject>, relatives: Relatives}) => {
 
     const [state, setState] = React.useState<EventListOptions>(() => ({ownEvents: true}));
 
+    if (!props.person) return null;
+
     return <Card
-        title={props.person.name ? <PersonName name={props.person.name}/> : "Events"}
+        title={<PersonName name={props.person.name}/> || "Events"}
         className="eventList large">
         <EventListControls state={state} setState={setState}/>
         <EventList {...props} {...state}/>
@@ -66,7 +85,7 @@ const ProfileEvents = (props: {person: Person.AsObject, family: Family.AsObject,
 
 };
 
-const ProfileRelatives = (props: Props) => {
+const ProfileRelatives = (props: Props & State) => {
     return <Card
         title="Relatives"
         className="relatives large">
@@ -84,11 +103,11 @@ const EventListControls = (props: {state: EventListOptions, setState: (s: EventL
             Own events
         </CheckableTag>
 
-        <CheckableTag checked={state.familyEvents}>
+        <CheckableTag checked={state.familyEvents} onChange={c => setState({...state, familyEvents: c})}>
             Family events
         </CheckableTag>
 
-        <CheckableTag checked={state.historicEvents}>
+        <CheckableTag checked={state.historicEvents} onChange={c => setState({...state, historicEvents: c})}>
             Historic events
         </CheckableTag>
 
