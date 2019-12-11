@@ -78,7 +78,7 @@ const EventListControls = (props: {state: EventListOptions, setState: (s: EventL
 
     const {state, setState} = props;
 
-    return <div>
+    return <div className="controls">
 
         <CheckableTag checked={state.ownEvents} onChange={c => setState({...state, ownEvents: c})}>
             Own events
