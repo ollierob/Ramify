@@ -2,20 +2,26 @@ import {PersonId} from "../people/PersonId";
 import {Family} from "../../protobuf/generated/family_pb";
 import {Person} from "../../protobuf/generated/person_pb";
 import {isFemale, isMale} from "../people/Gender";
-import {findPerson, isChildParent, isParentChild} from "./Relationship";
+import {findPerson, isChildParent, isParentChild, isSpouse} from "./Relationship";
 
-export function findParents(person: PersonId, family: Family.AsObject): ReadonlyArray<Person.AsObject> {
-    const parentChild = family.relationshipList.filter(isParentChild).filter(r => r.toid == person).map(r => r.fromid);
-    const childParent = family.relationshipList.filter(isChildParent).filter(r => r.fromid == person).map(r => r.toid);
+export function findParents(id: PersonId, family: Family.AsObject): ReadonlyArray<Person.AsObject> {
+    const parentChild = family.relationshipList.filter(isParentChild).filter(r => r.toid == id).map(r => r.fromid);
+    const childParent = family.relationshipList.filter(isChildParent).filter(r => r.fromid == id).map(r => r.toid);
     return parentChild.concat(childParent).map(id => findPerson(id, family));
 }
 
-export function findFather(person: PersonId, family: Family.AsObject): Person.AsObject {
-    return findParents(person, family).filter(isMale)[0] || null;
+export function findFather(id: PersonId, family: Family.AsObject): Person.AsObject {
+    return findParents(id, family).filter(isMale)[0] || null;
 }
 
-export function findMother(person: PersonId, family: Family.AsObject): Person.AsObject {
-    return findParents(person, family).filter(isFemale)[0] || null;
+export function findMother(id: PersonId, family: Family.AsObject): Person.AsObject {
+    return findParents(id, family).filter(isFemale)[0] || null;
+}
+
+export function findSpouses(id: PersonId, family: Family.AsObject): ReadonlyArray<Person.AsObject> {
+    const spouses = family.relationshipList.filter(isSpouse);
+    const ids = (spouses.filter(r => r.fromid == id).map(r => r.toid)).concat(spouses.filter(r => r.toid == id).map(r => r.fromid));
+    return ids.map(id => findPerson(id, family));
 }
 
 export function findChildren(person: PersonId, family: Family.AsObject): ReadonlyArray<Person.AsObject> {

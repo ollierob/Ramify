@@ -44,14 +44,16 @@ export function relationshipName(relationship: Relationship.AsObject, person?: P
     return RelationshipNames[RelationshipTypeIndexes[relationship.type]];
 }
 
+export function isSpouse(relationship: Relationship.AsObject): boolean {
+    return relationship.type == Relationship.Type.SPOUSE;
+}
+
+export function isSibling(relationship: Relationship.AsObject): boolean {
+    return relationship.type == Relationship.Type.SIBLING;
+}
+
 export function isSpouseOrSibling(relationship: Relationship.AsObject): boolean {
-    switch (relationship.type) {
-        case Relationship.Type.SPOUSE:
-        case Relationship.Type.SIBLING:
-            return true;
-        default:
-            return false;
-    }
+    return isSpouse(relationship) || isSibling(relationship);
 }
 
 export function isParentChild(relationship: Relationship.AsObject): boolean {

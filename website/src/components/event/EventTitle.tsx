@@ -25,6 +25,14 @@ function renderRelationship(relationship: RelativeRelationship, person: Person.A
             if (isMale(person)) return "father";
             if (isFemale(person)) return "mother";
             return "parent";
+        case "spouse":
+            if (isMale(person)) return "husband";
+            if (isFemale(person)) return "wife";
+            return "spouse";
+        case "child":
+            if (isMale(person)) return "son";
+            if (isFemale(person)) return "daughter";
+            return "child";
         default:
             return null;
     }
