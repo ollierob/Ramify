@@ -3,7 +3,14 @@ import {FamilyTreeId} from "../tree/FamilyTree";
 import {Person} from "../../protobuf/generated/person_pb";
 import {EventRelatedPerson} from "./EventRelatedPerson";
 
-export const EventRelatedPeopleBox = (props: {prefix?: React.ReactNode, tree: FamilyTreeId, people: ReadonlyArray<Person.AsObject>}) => {
+type Props = {
+    prefix?: React.ReactNode
+    separator?: React.ReactNode;
+    tree: FamilyTreeId;
+    people: ReadonlyArray<Person.AsObject>;
+}
+
+export const EventRelatedPeopleBox = (props: Props) => {
 
     let people = props.people;
     if (!people) return null;

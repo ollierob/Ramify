@@ -22,7 +22,7 @@ export type EventBoxProps = {
 
 export const EventBox = (props: EventBoxProps) => {
 
-    if (!props.person || !props.relatives) return null;
+    if (!props.person) return null;
 
     const event = props.event;
 
@@ -56,9 +56,10 @@ function eventClass(event: Event.AsObject): string {
 }
 
 function typeBox(props: EventBoxProps) {
+    if (!props.relatives) return null;
     switch (eventType(props.event)) {
         case "BIRTH":
-            return <EventRelatedPeopleBox {...props} prefix={"Parents"} people={[props.relatives.father, props.relatives.mother]}/>;
+            return <EventRelatedPeopleBox {...props} prefix="Parents" separator=" &amp; " people={[props.relatives.father, props.relatives.mother]}/>;
         case "MARRIAGE":
             return <RelatedPersonBox {...props} prefix={<><Icon type="swap"/> Spouse</>}/>;
         default:
@@ -67,6 +68,7 @@ function typeBox(props: EventBoxProps) {
 }
 
 const RelatedPersonBox = (props: EventBoxProps & {prefix: React.ReactNode}) => {
+    if (!props.relatives) return null;
     const other = findOther(props.person, props.family, props.event);
     return <EventRelatedPeopleBox {...props} people={[other]}/>;
 };

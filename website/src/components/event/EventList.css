@@ -39,7 +39,8 @@
 }
 
 .eventList .event .main .related {
-    padding: 12px;
+    padding: 0;
+    border: 0 !important;
     margin-top: 8px;
     font-size: 16px;
 }
