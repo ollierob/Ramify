@@ -7,6 +7,7 @@ import net.ramify.model.event.collection.HasPersonEvents;
 import net.ramify.model.person.gender.HasGender;
 import net.ramify.model.person.name.HasName;
 import net.ramify.model.person.proto.PersonProto;
+import net.ramify.utils.collections.IterableUtils;
 
 import javax.annotation.Nonnull;
 import java.util.Set;
@@ -21,7 +22,7 @@ public interface Person extends HasPerson, HasName, HasGender, HasPersonEvents, 
 
     @Nonnull
     default <E extends Event> Set<E> events(final Class<E> eventType) {
-        return net.meerkat.collections.Iterables.findAll(this.events(), eventType);
+        return IterableUtils.findAll(this.events(), eventType);
     }
 
     @Override

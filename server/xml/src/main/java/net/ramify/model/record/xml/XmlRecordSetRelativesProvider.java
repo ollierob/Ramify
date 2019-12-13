@@ -3,6 +3,7 @@ package net.ramify.model.record.xml;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import net.meerkat.functions.consumers.Consumers;
 import net.ramify.model.AbstractMappedProvider;
 import net.ramify.model.record.collection.HasRecordSetId;
 import net.ramify.model.record.collection.RecordSet;
@@ -12,7 +13,6 @@ import net.ramify.model.record.provider.RecordSetProvider;
 import net.ramify.model.record.provider.RecordSetRelativesProvider;
 import net.ramify.model.record.xml.collection.DefaultRecordSet;
 import net.ramify.utils.collections.SetUtils;
-import net.ramify.utils.objects.Consumers;
 import net.ramify.utils.objects.Functions;
 
 import javax.annotation.CheckForNull;

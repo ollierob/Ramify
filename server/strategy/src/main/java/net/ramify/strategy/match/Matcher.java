@@ -1,6 +1,6 @@
 package net.ramify.strategy.match;
 
-import net.ramify.utils.objects.OptionalBoolean;
+import net.meerkat.functions.optionals.OptionalBoolean;
 
 import javax.annotation.Nonnull;
 

@@ -1,8 +1,8 @@
 package net.ramify.strategy.match.person.name;
 
+import net.meerkat.functions.optionals.OptionalBoolean;
 import net.ramify.model.person.name.Name;
 import net.ramify.strategy.merge.person.name.NameMerger;
-import net.ramify.utils.objects.OptionalBoolean;
 
 import javax.annotation.Nonnull;
 

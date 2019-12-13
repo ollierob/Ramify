@@ -1,11 +1,11 @@
 package net.ramify.model.record.collection;
 
+import net.meerkat.functions.consumers.Consumers;
 import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.record.archive.Archive;
 import net.ramify.model.record.archive.HasArchive;
 import net.ramify.model.record.proto.RecordProto;
 import net.ramify.model.util.Link;
-import net.ramify.utils.objects.Consumers;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;

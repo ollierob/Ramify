@@ -2,7 +2,6 @@ package net.ramify.model.event.collection;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import net.meerkat.collections.Iterables;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.type.BirthEvent;
 import net.ramify.model.event.type.DeathEvent;
@@ -10,6 +9,7 @@ import net.ramify.model.event.type.EventComparator;
 import net.ramify.model.place.HasPlace;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.collection.HasPlaces;
+import net.ramify.utils.collections.IterableUtils;
 
 import javax.annotation.Nonnull;
 import java.util.Comparator;
@@ -23,7 +23,7 @@ public interface HasEvents extends HasPlaces {
 
     @Nonnull
     default <E extends Event> Set<E> findAllEvents(final Class<E> clazz) {
-        return Iterables.findAll(this.events(), clazz);
+        return IterableUtils.findAll(this.events(), clazz);
     }
 
     @Nonnull
@@ -39,7 +39,7 @@ public interface HasEvents extends HasPlaces {
     }
 
     default boolean has(final Class<? extends Event> type) {
-        return Iterables.has(this.events(), type);
+        return IterableUtils.has(this.events(), type);
     }
 
     default boolean hasBirth() {

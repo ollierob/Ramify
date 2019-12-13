@@ -3,6 +3,7 @@ package net.ramify.model.record.xml.record.census.england;
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
+import net.meerkat.functions.consumers.Consumers;
 import net.ramify.model.person.age.Age;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.place.Place;
@@ -11,7 +12,6 @@ import net.ramify.model.record.residence.uk.Census1821Record;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlRecord;
 import net.ramify.model.record.xml.record.residence.XmlResidenceRecord;
-import net.ramify.utils.objects.Consumers;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;

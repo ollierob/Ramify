@@ -1,7 +1,6 @@
 package net.ramify.model.family.xml;
 
 import com.google.common.collect.Sets;
-import net.meerkat.collections.Iterables;
 import net.ramify.model.date.BeforeDate;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.Event;
@@ -20,6 +19,7 @@ import net.ramify.model.person.xml.XmlName;
 import net.ramify.model.record.GenericRecordPerson;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.relationship.Relationship;
+import net.ramify.utils.collections.IterableUtils;
 import net.ramify.utils.objects.Functions;
 
 import javax.annotation.CheckForNull;
@@ -57,7 +57,7 @@ public abstract class XmlRelationship {
         final var events = Sets.<Event>newHashSet();
         events.add(new Flourished(personId, date));
         if (this.events != null) this.events.forEach(event -> events.addAll(event.allEvents(personId, context, true)));
-        if (Boolean.TRUE.equals(deceased) && !Iterables.has(events, DeathEvent.class)) events.add(new GenericDeathEvent(personId, BeforeDate.strictlyBefore(date)));
+        if (Boolean.TRUE.equals(deceased) && !IterableUtils.has(events, DeathEvent.class)) events.add(new GenericDeathEvent(personId, BeforeDate.strictlyBefore(date)));
         return events;
     }
 

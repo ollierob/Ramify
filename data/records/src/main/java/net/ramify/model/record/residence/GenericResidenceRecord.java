@@ -1,5 +1,6 @@
 package net.ramify.model.record.residence;
 
+import net.meerkat.functions.consumers.Consumers;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.family.Family;
 import net.ramify.model.place.Place;
@@ -7,7 +8,6 @@ import net.ramify.model.record.RecordId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.proto.RecordProto;
 import net.ramify.model.record.type.ResidenceRecord;
-import net.ramify.utils.objects.Consumers;
 
 import javax.annotation.Nonnull;
 

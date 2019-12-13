@@ -1,7 +1,7 @@
 package net.ramify.strategy.merge;
 
 import com.google.common.base.Preconditions;
-import net.ramify.utils.objects.OptionalBoolean;
+import net.meerkat.functions.optionals.OptionalBoolean;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;

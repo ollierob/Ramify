@@ -32,6 +32,11 @@
             <artifactId>object-utils</artifactId>
             <version>${meerkat.version}</version>
         </dependency>
+        <dependency>
+            <groupId>net.meerkat</groupId>
+            <artifactId>date-utils</artifactId>
+            <version>${meerkat.version}</version>
+        </dependency>
     </dependencies>
 
 </project>

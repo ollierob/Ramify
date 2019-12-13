@@ -8,6 +8,7 @@ import com.google.common.collect.ImmutableSetMultimap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
+import net.meerkat.functions.consumers.Consumers;
 import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
@@ -17,7 +18,6 @@ import net.ramify.model.place.region.Country;
 import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.xml.place.XmlPlaces;
 import net.ramify.utils.file.FileTraverseUtils;
-import net.ramify.utils.objects.Consumers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

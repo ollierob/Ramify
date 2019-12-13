@@ -1,10 +1,10 @@
 package net.ramify.model.relationship;
 
+import net.meerkat.objects.Castable;
 import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.relationship.proto.RelationshipProto;
 import net.ramify.model.relationship.type.RelationshipHandler;
-import net.ramify.utils.objects.Castable;
 
 import javax.annotation.Nonnull;
 import java.util.List;

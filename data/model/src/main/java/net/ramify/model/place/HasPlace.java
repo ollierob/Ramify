@@ -1,7 +1,7 @@
 package net.ramify.model.place;
 
+import net.meerkat.objects.Castable;
 import net.ramify.model.place.provider.PlaceProvider;
-import net.ramify.utils.objects.Castable;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;

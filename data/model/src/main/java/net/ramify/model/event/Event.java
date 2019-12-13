@@ -1,5 +1,6 @@
 package net.ramify.model.event;
 
+import net.meerkat.objects.Castable;
 import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.HasDate;
@@ -15,7 +16,6 @@ import net.ramify.model.person.age.Age;
 import net.ramify.model.person.age.HasAges;
 import net.ramify.model.person.collection.HasPersonIds;
 import net.ramify.model.place.HasPlace;
-import net.ramify.utils.objects.Castable;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;

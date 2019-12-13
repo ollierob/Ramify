@@ -1,5 +1,6 @@
 package net.ramify.server.resource.places;
 
+import net.meerkat.functions.consumers.Consumers;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceDescription;
 import net.ramify.model.place.PlaceGroup;
@@ -14,7 +15,6 @@ import net.ramify.model.place.provider.PlaceGroupProvider;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.region.Country;
 import net.ramify.utils.collections.ListUtils;
-import net.ramify.utils.objects.Consumers;
 
 import javax.annotation.CheckForNull;
 import javax.inject.Inject;

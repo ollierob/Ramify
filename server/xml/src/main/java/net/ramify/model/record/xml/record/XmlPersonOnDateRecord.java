@@ -1,6 +1,7 @@
 package net.ramify.model.record.xml.record;
 
 import com.google.common.collect.Sets;
+import net.meerkat.functions.consumers.Consumers;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.type.BirthEvent;
@@ -12,7 +13,6 @@ import net.ramify.model.person.xml.XmlAge;
 import net.ramify.model.record.GenericRecordPerson;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.xml.RecordContext;
-import net.ramify.utils.objects.Consumers;
 import net.ramify.utils.objects.Functions;
 
 import javax.annotation.CheckForNull;

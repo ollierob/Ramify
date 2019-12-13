@@ -9,7 +9,7 @@ import java.time.Period;
 import java.time.Year;
 import java.util.Optional;
 
-import static net.ramify.utils.time.PeriodUtils.approximateCompare;
+import static net.meerkat.temporal.date.Periods.approximateCompare;
 
 public interface Age extends BuildsProto<AgeProto.Age> {
 

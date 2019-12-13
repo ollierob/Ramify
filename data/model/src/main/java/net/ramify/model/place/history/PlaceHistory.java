@@ -1,9 +1,9 @@
 package net.ramify.model.place.history;
 
+import net.meerkat.functions.consumers.Consumers;
 import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.place.proto.PlaceProto;
-import net.ramify.utils.objects.Consumers;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;

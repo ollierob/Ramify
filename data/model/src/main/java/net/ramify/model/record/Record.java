@@ -1,6 +1,7 @@
 package net.ramify.model.record;
 
 import com.google.common.collect.Iterables;
+import net.meerkat.objects.Castable;
 import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.date.HasDate;
 import net.ramify.model.family.Family;
@@ -9,7 +10,6 @@ import net.ramify.model.place.HasPlace;
 import net.ramify.model.record.collection.HasRecordSet;
 import net.ramify.model.record.proto.RecordProto;
 import net.ramify.model.record.type.RecordHandler;
-import net.ramify.utils.objects.Castable;
 
 import javax.annotation.Nonnull;
 import java.util.stream.Stream;
