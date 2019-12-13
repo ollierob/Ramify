@@ -28,6 +28,10 @@
     min-width: 400px;
 }
 
+.personProfile .profile .eventList .event:hover {
+    border: 1px solid black !important;
+}
+
 .personProfile .profile .eventList .event.birth {
     border: 1px solid #4caf50 !important;
 }
