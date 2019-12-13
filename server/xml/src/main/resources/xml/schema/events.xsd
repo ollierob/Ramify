@@ -73,7 +73,7 @@
                 
         <xs:sequence/>
                 
-        <xs:attribute name="spouse" type="xs:string"/>
+        <xs:attribute name="spouse" type="xs:string" use="required"/>
               
       </xs:extension>
           

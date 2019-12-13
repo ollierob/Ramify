@@ -1,6 +1,8 @@
 import {Event} from "../../protobuf/generated/event_pb";
 import {RecordType, recordTypeFromValue} from "../records/RecordType";
 import {earliestYear, latestYear} from "../date/DateRange";
+import {Person} from "../../protobuf/generated/person_pb";
+import {Family} from "../../protobuf/generated/family_pb";
 
 export type EventType = RecordType;
 
@@ -75,4 +77,14 @@ export function findBirth(events: ReadonlyArray<Event.AsObject>): Event.AsObject
 
 export function findDeath(events: ReadonlyArray<Event.AsObject>): Event.AsObject {
     return events ? events.find(isDeathEvent) : null;
+}
+
+export function findOtherEventPeople(person: Person.AsObject, family: Family.AsObject, event: Event.AsObject): ReadonlyArray<Person.AsObject> {
+    const people: Person.AsObject[] = [];
+    for (const p of family.personList) {
+        if (person.id == p.id) continue;
+        const e = p.eventsList.find(e => e.id == event.id);
+        if (e) people.push(p);
+    }
+    return people;
 }

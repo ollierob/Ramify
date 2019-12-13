@@ -8,17 +8,16 @@ import net.ramify.model.place.Place;
 
 import javax.annotation.Nonnull;
 
-class GenericMarriageWithPlace extends GenericMarriage implements HasPlace {
+class GenericMarriageEventWithPlace extends GenericMarriageEvent implements HasPlace {
 
     private final Place place;
 
-    GenericMarriageWithPlace(
+    GenericMarriageEventWithPlace(
             final EventId id,
-            final PersonId firstSpouse,
-            final PersonId secondSpouse,
+            final PersonId personId,
             final EventProperties properties,
             @Nonnull final Place place) {
-        super(id, firstSpouse, secondSpouse, properties);
+        super(id, personId, properties);
         this.place = place;
     }
 

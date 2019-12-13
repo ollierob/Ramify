@@ -45,6 +45,10 @@
     font-size: 16px;
 }
 
+.eventList .event .main .person {
+    text-transform: capitalize;
+}
+
 .eventList .event .main .person .life {
     margin-left: 0.5em;
 }

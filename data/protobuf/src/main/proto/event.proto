@@ -13,7 +13,7 @@ message Event {
     string title = 2;
     DateRange date = 3;
     Place place = 4;
-    repeated string personId = 5;
+    string personId = 5;
 
     Age givenAge = 10;
     Age computedAge = 11;

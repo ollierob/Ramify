@@ -32,6 +32,12 @@ public abstract class ComposedEvent<T extends Event> implements Event {
 
     @Nonnull
     @Override
+    public PersonId personId() {
+        return delegate.personId();
+    }
+
+    @Nonnull
+    @Override
     public DateRange date() {
         return delegate.date();
     }

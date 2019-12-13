@@ -4,7 +4,7 @@ import {Card, Icon} from "antd";
 import {formatDateRange} from "../date/DateFormat";
 import {PlaceLink} from "../places/PlaceLink";
 import {renderAge} from "../people/Age";
-import {eventType, isBirthEvent, isDeathEvent, isPostDeathEvent} from "./Event";
+import {eventType, findOtherEventPeople, isBirthEvent, isDeathEvent, isPostDeathEvent} from "./Event";
 import {EventTitle} from "./EventTitle";
 import {Person} from "../../protobuf/generated/person_pb";
 import {Family} from "../../protobuf/generated/family_pb";
@@ -58,25 +58,34 @@ function eventClass(event: Event.AsObject): string {
 }
 
 function typeBox(props: EventBoxProps) {
-    if (!props.relatives) return null;
+    if (!props.family || !props.relatives) return null;
     switch (eventType(props.event)) {
         case "BIRTH":
-            return <EventRelatedPeopleBox {...props} prefix="Parents" separator=" &amp; " people={[props.relatives.father, props.relatives.mother]}/>;
+            return <EventRelatedPeopleBox {...props} separator=" &amp; " people={[props.relatives.father, props.relatives.mother]}/>;
         case "MARRIAGE":
-            return <RelatedPersonBox {...props} prefix={<><Icon type="swap"/> Spouse</>}/>;
+            return <RelatedPersonBox {...props}/>;
         default:
-            return null;
+            return <RelatedPeopleBox {...props}/>;
     }
 }
 
-const RelatedPersonBox = (props: EventBoxProps & {prefix: React.ReactNode}) => {
+const RelatedPersonBox = (props: EventBoxProps & {prefix?: React.ReactNode}) => {
     if (!props.relatives) return null;
     const other = findOther(props.person, props.family, props.event);
     return <EventRelatedPeopleBox {...props} people={[other]}/>;
 };
 
 function findOther(person: Person.AsObject, family: Family.AsObject, event: Event.AsObject): Person.AsObject {
-    if (event.personidList.length != 2) return null;
-    const otherId = event.personidList.find(i => i != person.id);
-    return otherId != null && family.personList.find(p => p.id == otherId);
+    for (const p of family.personList) {
+        if (person.id == p.id) continue;
+        const events = p.eventsList.filter(e => e.id == event.id);
+        if (events.length == 1) return p;
+    }
+    return null;
 }
+
+const RelatedPeopleBox = (props: EventBoxProps & {prefix?: React.ReactNode}) => {
+    if (!props.relatives) return null;
+    const others = findOtherEventPeople(props.person, props.family, props.event);
+    return <EventRelatedPeopleBox {...props} people={others}/>;
+};

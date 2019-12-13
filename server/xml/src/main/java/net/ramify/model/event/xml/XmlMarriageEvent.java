@@ -20,7 +20,7 @@ public class XmlMarriageEvent extends XmlLifeEvent {
 
     @Override
     public Event toEvent(final PersonId personId, final RecordContext context) {
-        return this.eventBuilder(context).toMarriage(personId, this.spouseId());
+        return this.eventBuilder(context).toMarriage(personId);
     }
 
     @Override

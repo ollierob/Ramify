@@ -13,12 +13,11 @@ import net.ramify.model.event.type.PostDeathEvent;
 import net.ramify.model.event.type.UniqueEvent;
 import net.ramify.model.person.HasPersonId;
 import net.ramify.model.person.age.HasAges;
-import net.ramify.model.person.collection.HasPersonIds;
 import net.ramify.model.place.HasPlace;
 
 import javax.annotation.Nonnull;
 
-public interface Event extends HasEventId, HasAges, HasDate, HasPersonIds, Castable<Event>, BuildsProto<EventProto.Event> {
+public interface Event extends HasEventId, HasAges, HasDate, HasPersonId, Castable<Event>, BuildsProto<EventProto.Event> {
 
     @Nonnull
     String title();
@@ -54,12 +53,8 @@ public interface Event extends HasEventId, HasAges, HasDate, HasPersonIds, Casta
                 .setId(this.eventId().value())
                 .setTitle(this.title())
                 .setDate(this.date().toProto())
-                .setIsUnique(this.isUnique());
-        if (this instanceof HasPersonId) {
-            builder.addPersonId(((HasPersonId) this).personId().value());
-        } else {
-            this.personIds().forEach(id -> builder.addPersonId(id.value()));
-        }
+                .setIsUnique(this.isUnique())
+                .setPersonId(this.personId().value());
         HasPlace.place(this).ifPresent(place -> builder.setPlace(place.toProto()));
         this.givenAge().ifPresent(age -> builder.setGivenAge(age.toProto()));
         this.computedAge().ifPresent(age -> builder.setComputedAge(age.toProto()));
