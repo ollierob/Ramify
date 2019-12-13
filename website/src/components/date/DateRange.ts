@@ -79,3 +79,7 @@ export function isWholeYear(r: DateRangeProto.AsObject) {
         && isStartOfYear(r.earliest)
         && isEndOfYear(r.latest);
 }
+
+export function isDateOrdered(d1: DateRangeProto.AsObject, d2: DateRangeProto.AsObject, d3: DateRangeProto.AsObject): boolean {
+    return sortDatesByEarliestThenLatest(d1, d2) <= 0 && sortDatesByEarliest(d2, d3) <= 0;
+}

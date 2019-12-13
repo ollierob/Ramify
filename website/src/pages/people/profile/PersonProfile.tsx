@@ -9,7 +9,8 @@ import {RelativesList} from "./RelativesList";
 import {allRelatives, determineRelatives, Relatives} from "../../../components/relationship/Relatives";
 import {ProfileEvent, sortProfileEvents} from "../../../components/event/ProfileEvent";
 import {Event} from "../../../protobuf/generated/event_pb";
-import {eventType} from "../../../components/event/Event";
+import {findBirth, findDeath} from "../../../components/event/Event";
+import {isDateOrdered} from "../../../components/date/DateRange";
 
 const flatten = require('arr-flatten');
 const {CheckableTag} = Tag;
@@ -82,8 +83,13 @@ export class PersonProfile extends React.PureComponent<Props, State> {
 
     private determineFamilyEvents(person: Person.AsObject, relatives: Relatives): ReadonlyArray<ProfileEvent> {
         if (!person || !relatives) return [];
+        const birthDate = findBirth(person.eventsList)?.date;
+        const deathDate = findDeath(person.eventsList)?.date;
         const events: Event.AsObject[] = flatten(allRelatives(relatives).map(r => r.eventsList));
-        return events.filter(retainFamilyEvent).filter(e => !e.personidList.includes(person.id)).map<ProfileEvent>(event => ({event, type: "family"}));
+        return events.filter(retainFamilyEvent)
+            .filter(e => !e.personidList.includes(person.id))
+            .filter(e => isDateOrdered(birthDate, e.date, deathDate))
+            .map<ProfileEvent>(event => ({event, type: "family"}));
     }
 
     private determineHistoricEvents(): ReadonlyArray<ProfileEvent> {
