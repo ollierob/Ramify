@@ -13,8 +13,6 @@
     <packaging>pom</packaging>
 
     <name>data</name>
-
-    <groupId>net.ramify</groupId>
     <artifactId>data</artifactId>
 
     <modules>

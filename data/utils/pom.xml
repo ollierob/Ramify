@@ -12,4 +12,26 @@
 
     <artifactId>utils</artifactId>
 
+    <properties>
+        <meerkat.version>1.0-SNAPSHOT</meerkat.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>net.meerkat</groupId>
+            <artifactId>collection-utils</artifactId>
+            <version>${meerkat.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.meerkat</groupId>
+            <artifactId>function-utils</artifactId>
+            <version>${meerkat.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.meerkat</groupId>
+            <artifactId>object-utils</artifactId>
+            <version>${meerkat.version}</version>
+        </dependency>
+    </dependencies>
+
 </project>

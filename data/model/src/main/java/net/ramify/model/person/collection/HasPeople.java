@@ -1,10 +1,11 @@
 package net.ramify.model.person.collection;
 
+import net.meerkat.collections.Collections;
+import net.meerkat.collections.Iterables;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.collection.HasEvents;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
-import net.ramify.utils.collections.IterableUtils;
 import net.ramify.utils.collections.SetUtils;
 
 import javax.annotation.Nonnull;
@@ -22,12 +23,12 @@ public interface HasPeople extends HasEvents, HasPersonIds {
     }
 
     default boolean has(@Nonnull final PersonId id) {
-        return IterableUtils.any(this.people(), p -> id.equals(p.personId()));
+        return Collections.any(this.people(), p -> id.equals(p.personId()));
     }
 
     @Nonnull
     default Optional<? extends Person> find(final PersonId id) {
-        return IterableUtils.findFirst(this.people(), p -> id.equals(p.personId()));
+        return Iterables.findFirst(this.people(), p -> id.equals(p.personId()));
     }
 
     @Nonnull

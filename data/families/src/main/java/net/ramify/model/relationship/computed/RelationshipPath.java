@@ -2,11 +2,11 @@ package net.ramify.model.relationship.computed;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.relationship.Relationship;
 import net.ramify.model.relationship.RelationshipFactory;
 import net.ramify.model.relationship.type.IndirectRelationship;
-import net.ramify.utils.collections.IterableUtils;
 import net.ramify.utils.collections.ListUtils;
 
 import javax.annotation.Nonnull;
@@ -46,12 +46,12 @@ public class RelationshipPath implements IndirectRelationship {
 
     @Override
     public boolean isUnknown() {
-        return IterableUtils.any(relationships, Relationship::isUnknown);
+        return Iterables.any(relationships, Relationship::isUnknown);
     }
 
     @Override
     public boolean isDirected() {
-        return IterableUtils.all(relationships, Relationship::isDirected);
+        return Iterables.all(relationships, Relationship::isDirected);
     }
 
     @Nonnull

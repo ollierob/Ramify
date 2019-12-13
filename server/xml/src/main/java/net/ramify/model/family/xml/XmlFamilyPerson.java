@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static net.ramify.utils.collections.CollectionUtils.isEmpty;
+import static net.meerkat.collections.Collections.isEmpty;
 
 @XmlRootElement(namespace = XmlFamily.NAMESPACE, name = "person")
 public class XmlFamilyPerson extends XmlPersonRecord {

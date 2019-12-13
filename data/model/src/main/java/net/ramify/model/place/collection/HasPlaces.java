@@ -1,8 +1,9 @@
 package net.ramify.model.place.collection;
 
+import net.meerkat.collections.Collections;
+import net.meerkat.collections.Iterables;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
-import net.ramify.utils.collections.IterableUtils;
 import net.ramify.utils.collections.SetUtils;
 
 import javax.annotation.Nonnull;
@@ -19,11 +20,11 @@ public interface HasPlaces extends HasPlaceIds {
     }
 
     default boolean hasPlace(final PlaceId placeId) {
-        return IterableUtils.any(this.places(), p -> placeId.equals(p.placeId()));
+        return Collections.any(this.places(), p -> placeId.equals(p.placeId()));
     }
 
     default <P extends Place> boolean hasPlace(final Class<P> type) {
-        return IterableUtils.has(this.places(), type);
+        return Iterables.has(this.places(), type);
     }
 
 }
