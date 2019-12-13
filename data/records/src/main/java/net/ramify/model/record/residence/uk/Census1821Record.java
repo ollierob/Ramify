@@ -6,9 +6,6 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 import net.ramify.model.date.ExactDate;
-import net.ramify.model.event.EventId;
-import net.ramify.model.event.type.birth.GenericBirthEvent;
-import net.ramify.model.event.type.residence.GenericResidenceEvent;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.person.Person;
@@ -58,10 +55,6 @@ public class Census1821Record extends CensusRecord implements HasPlace {
         return builder.build();
     }
 
-    private EventId randomEventId() {
-        return EventId.random();
-    }
-
     private void enumerate(final FamilyBuilder builder) {
 
         var head = this.head;
@@ -89,14 +82,14 @@ public class Census1821Record extends CensusRecord implements HasPlace {
     }
 
     private Person anonymousPerson(final Gender gender, final Age age) {
-        final var id = PersonId.random();
-        final var birth = new GenericBirthEvent(this.randomEventId(), id, age.birthDate(CENSUS_DATE));
-        final var residence = new GenericResidenceEvent(this.randomEventId(), id, CENSUS_DATE, this.place());
-        return new GenericRecordPerson(id, Name.UNKNOWN, gender, ImmutableSet.of(birth, residence), "Anonymous");
+        final var personId = PersonId.random();
+        final var birth = this.birthEvent(personId, age);
+        final var residence = this.eventBuilder().toResidence(personId);
+        return new GenericRecordPerson(personId, Name.UNKNOWN, gender, ImmutableSet.of(birth, residence), "Anonymous");
     }
 
     private Person agedPerson(final Person person, final Age age) {
-        final var birth = new GenericBirthEvent(this.randomEventId(), person.personId(), age.birthDate(CENSUS_DATE));
+        final var birth = this.birthEvent(person.personId(), age);
         return new PersonWithAdditionalEvents(person, birth);
     }
 

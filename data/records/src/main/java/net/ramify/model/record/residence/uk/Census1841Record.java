@@ -1,13 +1,10 @@
 package net.ramify.model.record.residence.uk;
 
-import com.google.common.base.MoreObjects;
 import com.google.common.collect.Sets;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.Event;
-import net.ramify.model.event.EventId;
-import net.ramify.model.event.type.birth.GenericBirthEvent;
-import net.ramify.model.event.type.residence.GenericResidenceEvent;
+import net.ramify.model.event.EventBuilder;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyOfUnknownRelationships;
 import net.ramify.model.person.AbstractPerson;
@@ -15,7 +12,6 @@ import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.name.Name;
-import net.ramify.model.person.proto.PersonProto;
 import net.ramify.model.place.HasPlace;
 import net.ramify.model.place.Place;
 import net.ramify.model.record.RecordId;
@@ -124,22 +120,12 @@ public class Census1841Record extends CensusRecord implements HasPlace {
             this.occupation = occupation;
         }
 
-        private EventId randomEventId() {
-            return EventId.random();
-        }
-
         @Nonnull
         @Override
         public Set<? extends Event> events() {
             return Sets.newHashSet(
-                    new GenericBirthEvent(this.randomEventId(), this.personId(), birthDate).with(birthPlace),
-                    new GenericResidenceEvent(this.randomEventId(), this.personId(), CENSUS_DATE, residencePlace, age));
-        }
-
-        @Nonnull
-        @Override
-        public PersonProto.Person.Builder toProtoBuilder() {
-            return super.toProtoBuilder().setNotes(MoreObjects.firstNonNull(occupation, ""));
+                    EventBuilder.builderWithRandomId(birthDate).toBirth(this.personId()),
+                    EventBuilder.builderWithRandomId(CENSUS_DATE).withGivenAge(age).withPlace(residencePlace).toResidence(this.personId()));
         }
 
     }

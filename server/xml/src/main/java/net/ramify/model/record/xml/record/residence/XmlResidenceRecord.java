@@ -2,7 +2,6 @@ package net.ramify.model.record.xml.record.residence;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.Event;
-import net.ramify.model.event.type.residence.GenericResidenceEvent;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
@@ -52,7 +51,7 @@ public class XmlResidenceRecord extends XmlPersonOnDateRecord {
 
     protected Set<Event> events(final PersonId personId, final Place place, final DateRange date, final RecordContext context) {
         final var events = super.events(personId, date, context);
-        events.add(new GenericResidenceEvent(this.randomEventId(), personId, date, place));
+        events.add(this.eventBuilder(date).withPlace(place).toResidence(personId));
         return events;
     }
 

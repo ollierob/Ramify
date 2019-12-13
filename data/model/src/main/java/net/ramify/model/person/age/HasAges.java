@@ -6,9 +6,13 @@ import java.util.Optional;
 public interface HasAges {
 
     @Nonnull
-    Optional<Age> givenAge();
+    default Optional<Age> givenAge() {
+        return Optional.empty();
+    }
 
     @Nonnull
-    Optional<Age> computedAge();
+    default Optional<Age> computedAge() {
+        return Optional.empty();
+    }
 
 }

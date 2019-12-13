@@ -1,39 +1,26 @@
 package net.ramify.model.event.type.residence;
 
-import net.ramify.model.date.DateRange;
 import net.ramify.model.event.AbstractPersonEvent;
 import net.ramify.model.event.EventId;
+import net.ramify.model.event.EventProperties;
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.person.PersonId;
-import net.ramify.model.person.age.Age;
 import net.ramify.model.place.Place;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
-import java.util.Optional;
 
 public class GenericResidenceEvent extends AbstractPersonEvent<GenericResidenceEvent> implements ResidenceEvent {
 
     private final Place place;
-    private final Age givenAge;
 
     public GenericResidenceEvent(
             @Nonnull final EventId id,
             @Nonnull final PersonId personId,
-            @Nonnull final DateRange date,
+            final EventProperties properties,
             @Nonnull final Place place) {
-        this(id, personId, date, place, null);
-    }
-
-    public GenericResidenceEvent(
-            @Nonnull final EventId id,
-            @Nonnull final PersonId personId,
-            @Nonnull final DateRange date,
-            @Nonnull final Place place,
-            final Age givenAge) {
-        super(id, personId, date);
+        super(id, personId, properties);
         this.place = Objects.requireNonNull(place, "residence place");
-        this.givenAge = givenAge;
     }
 
     @Nonnull
@@ -50,8 +37,9 @@ public class GenericResidenceEvent extends AbstractPersonEvent<GenericResidenceE
 
     @Nonnull
     @Override
-    public Optional<Age> givenAge() {
-        return Optional.ofNullable(givenAge);
+    @Deprecated
+    public GenericResidenceEvent with(final Place place) {
+        return new GenericResidenceEvent(this.eventId(), this.personId(), this.properties(), place);
     }
 
     @Nonnull

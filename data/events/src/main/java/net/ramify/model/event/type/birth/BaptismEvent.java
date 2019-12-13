@@ -5,7 +5,7 @@ import net.ramify.model.event.type.LifeEvent;
 
 import javax.annotation.Nonnull;
 
-public interface Baptism extends LifeEvent {
+public interface BaptismEvent extends LifeEvent {
 
     @Nonnull
     @Override

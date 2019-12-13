@@ -4,13 +4,11 @@ import com.google.common.collect.Sets;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.EventId;
-import net.ramify.model.event.type.birth.GenericBirthEvent;
-import net.ramify.model.event.type.residence.GenericResidenceEvent;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyOfUnknownRelationships;
 import net.ramify.model.occupation.Occupation;
-import net.ramify.model.person.AbstractPerson;
 import net.ramify.model.person.PersonId;
+import net.ramify.model.person.age.Age;
 import net.ramify.model.person.gender.Sex;
 import net.ramify.model.person.name.Name;
 import net.ramify.model.place.Place;
@@ -84,7 +82,7 @@ public class Register1939Record extends CensusRecord {
 
     }
 
-    public static class Register1939Person extends AbstractPerson {
+    public static class Register1939Person extends AbstractCensusPerson {
 
         private final Place residence;
         private final ExactDate birthDate;
@@ -95,10 +93,12 @@ public class Register1939Record extends CensusRecord {
                 final PersonId id,
                 final Name name,
                 final Sex gender,
-                EventId birthEventId, EventId residenceEventId, final Place residence,
+                final EventId birthEventId,
+                final EventId residenceEventId,
+                final Place residence,
                 final ExactDate birthDate,
                 final Occupation occupation) {
-            super(id, name, gender);
+            super(id, name, gender, CENSUS_DATE);
             this.birthEventId = birthEventId;
             this.residenceEventId = residenceEventId;
             this.residence = residence;
@@ -110,8 +110,8 @@ public class Register1939Record extends CensusRecord {
         @Override
         public Set<? extends Event> events() {
             return Sets.newHashSet(
-                    new GenericBirthEvent(birthEventId, this.personId(), birthDate),
-                    new GenericResidenceEvent(residenceEventId, this.personId(), CENSUS_DATE, residence));
+                    this.birth(birthDate, null),
+                    this.residence(Age.fromDates(birthDate, CENSUS_DATE), residence));
         }
 
     }

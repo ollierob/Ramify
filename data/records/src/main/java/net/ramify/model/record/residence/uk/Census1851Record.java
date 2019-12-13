@@ -2,18 +2,12 @@ package net.ramify.model.record.residence.uk;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.Sets;
-import net.ramify.model.date.ClosedDateRange;
-import net.ramify.model.date.DateRange;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.EventId;
 import net.ramify.model.event.infer.MarriageConditionEventInference;
-import net.ramify.model.event.type.birth.GenericBirthEvent;
-import net.ramify.model.event.type.death.GenericDeathEvent;
-import net.ramify.model.event.type.residence.GenericResidenceEvent;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
-import net.ramify.model.person.AbstractPerson;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
@@ -82,12 +76,8 @@ public class Census1851Record extends CensusRecord {
                 id,
                 Name.UNKNOWN,
                 person.gender().inverse(),
-                Collections.singleton(new GenericDeathEvent(this.randomEventId(), id, ClosedDateRange.of(person.birthDate, CENSUS_DATE))), //FIXME tighter bounds
+                Collections.singleton(this.deathBeforeCensus(id)), //FIXME tighter bounds
                 "Inferred ex-spouse of " + person.name()));
-    }
-
-    private EventId randomEventId() {
-        return EventId.random();
     }
 
     public static abstract class Census1851Entry {
@@ -133,7 +123,7 @@ public class Census1851Record extends CensusRecord {
                     sex,
                     record.place(),
                     relationshipToHead.relationshipBetween(record.headId(), id),
-                    age.birthDate(CENSUS_DATE),
+                    age,
                     birthPlace,
                     condition.inferEvents(id, record),
                     condition);
@@ -170,10 +160,10 @@ public class Census1851Record extends CensusRecord {
 
     }
 
-    public static class Census1851Person extends AbstractPerson {
+    public static class Census1851Person extends AbstractCensusPerson {
 
         private final Place residencePlace;
-        private final DateRange birthDate;
+        private final Age age;
         private final Place birthPlace;
         private final Relationship relationshipToHead;
         private final Set<? extends Event> extraEvents;
@@ -185,13 +175,13 @@ public class Census1851Record extends CensusRecord {
                 final Gender gender,
                 final Place residencePlace,
                 final Relationship relationshipToHead,
-                final DateRange birthDate,
+                final Age age,
                 final Place birthPlace,
                 final Set<? extends Event> extraEvents,
                 final MarriageConditionEventInference condition) {
-            super(id, name, gender);
+            super(id, name, gender, CENSUS_DATE);
             this.residencePlace = Objects.requireNonNull(residencePlace, "residence place");
-            this.birthDate = birthDate;
+            this.age = age;
             this.birthPlace = birthPlace;
             this.relationshipToHead = relationshipToHead;
             this.extraEvents = extraEvents;
@@ -209,9 +199,7 @@ public class Census1851Record extends CensusRecord {
         @Nonnull
         @Override
         public Set<? extends Event> events() {
-            final var events = Sets.<Event>newHashSet(
-                    new GenericBirthEvent(this.randomEventId(), this.personId(), birthDate).with(birthPlace),
-                    new GenericResidenceEvent(this.randomEventId(), this.personId(), CENSUS_DATE, residencePlace));
+            final var events = Sets.<Event>newHashSet(this.birth(age, birthPlace), this.residence(age, residencePlace));
             events.addAll(extraEvents);
             return events;
         }

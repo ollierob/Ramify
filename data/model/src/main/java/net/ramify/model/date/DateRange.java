@@ -19,6 +19,15 @@ public interface DateRange extends BuildsProto<DateProto.DateRange> {
     @Nonnull
     Optional<? extends ChronoLocalDate> latestInclusive();
 
+    @Nonnull
+    default Optional<? extends ChronoLocalDate> exact() {
+        final var earliest = this.earliestInclusive().orElse(null);
+        if (earliest == null) return Optional.empty();
+        final var latest = this.latestInclusive().orElse(null);
+        if (latest == null) return Optional.empty();
+        return earliest.compareTo(latest) == 0 ? Optional.of(earliest) : Optional.empty();
+    }
+
     default boolean isApproximate() {
         return false;
     }

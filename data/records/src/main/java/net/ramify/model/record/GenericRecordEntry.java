@@ -2,12 +2,9 @@ package net.ramify.model.record;
 
 import com.google.common.collect.Sets;
 import net.ramify.model.date.BeforeDate;
+import net.ramify.model.date.DateRange;
 import net.ramify.model.event.Event;
-import net.ramify.model.event.EventId;
-import net.ramify.model.event.type.birth.GenericBirthEvent;
-import net.ramify.model.event.type.death.GenericDeathEvent;
-import net.ramify.model.event.type.misc.Flourished;
-import net.ramify.model.event.type.residence.GenericResidenceEvent;
+import net.ramify.model.event.EventBuilder;
 import net.ramify.model.occupation.Occupation;
 import net.ramify.model.person.HasPersonId;
 import net.ramify.model.person.Person;
@@ -72,15 +69,15 @@ public class GenericRecordEntry implements HasPersonId {
     @Nonnull
     public Set<Event> events(final Record record) {
         final var events = Sets.<Event>newHashSet();
-        if (age != null) events.add(new GenericBirthEvent(this.randomEventId(), personId, age.birthDate(record.date())));
-        if (residence != null) events.add(new GenericResidenceEvent(this.randomEventId(), personId, record.date(), residence));
-        if (predeceased) events.add(new GenericDeathEvent(this.randomEventId(), personId, BeforeDate.strictlyBefore(record.date())));
-        if (events.isEmpty()) events.add(new Flourished(this.randomEventId(), personId, record.date()));
+        if (age != null) events.add(this.eventBuilder(age.birthDate(record.date())).toBirth(personId));
+        if (residence != null) events.add(this.eventBuilder(record.date()).withPlace(residence).toResidence(personId));
+        if (predeceased) events.add(this.eventBuilder(BeforeDate.strictlyBefore(record.date())).toDeath(personId));
+        if (events.isEmpty()) events.add(this.eventBuilder(record.date()).toFlourished(personId));
         return events;
     }
 
-    private EventId randomEventId() {
-        return EventId.random();
+    protected EventBuilder eventBuilder(final DateRange date) {
+        return EventBuilder.builderWithRandomId(date);
     }
 
 }

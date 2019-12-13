@@ -7,10 +7,7 @@ import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlExactDate;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.type.DeathEvent;
-import net.ramify.model.event.type.burial.Burial;
-import net.ramify.model.event.type.burial.GenericBurial;
-import net.ramify.model.event.type.death.GenericDeathEvent;
-import net.ramify.model.event.type.residence.GenericResidenceEvent;
+import net.ramify.model.event.type.burial.BurialEvent;
 import net.ramify.model.event.type.residence.ResidenceEvent;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
@@ -36,12 +33,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.time.Month;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "burial")
 public class XmlBurialRecord extends XmlPersonOnDateRecord {
 
-    @XmlAttribute(name = "residence", required = false)
+    @XmlAttribute(name = "residence")
     private String residence;
 
     @XmlAttribute(name = "year")
@@ -55,6 +53,9 @@ public class XmlBurialRecord extends XmlPersonOnDateRecord {
 
     @XmlElement(name = "deathDate", required = false, namespace = XmlDateRange.NAMESPACE)
     private XmlExactDate deathDate;
+
+    @XmlAttribute(name = "deathPlace")
+    private String deathPlace;
 
     @XmlElementRef
     private List<XmlRelationship> relationships;
@@ -90,21 +91,35 @@ public class XmlBurialRecord extends XmlPersonOnDateRecord {
     Set<Event> events(final PersonId personId, final ExactDate burialDate, final RecordContext context, final PlaceId burialPlaceId) {
         final var events = super.events(personId, burialDate, context);
         events.add(this.burial(personId, burialDate, context.places().require(burialPlaceId)));
-        if (deathDate != null) events.add(this.death(personId, deathDate.resolve()));
-        if (residence != null) events.add(this.residence(personId, Functions.ifNonNull(deathDate, XmlExactDate::resolve, burialDate), context.places().require(new PlaceId(residence))));
+        if (deathDate != null) events.add(this.death(personId, deathDate.resolve(), context));
+        if (residence != null) events.add(this.residence(personId, Functions.ifNonNull(deathDate, XmlExactDate::resolve, burialDate), context));
         return events;
     }
 
-    ResidenceEvent residence(final PersonId personId, final DateRange burialDate, final Place place) {
-        return new GenericResidenceEvent(this.randomEventId(), personId, BeforeDate.strictlyBefore(burialDate), place);
+    ResidenceEvent residence(final PersonId personId, final DateRange burialDate, final RecordContext context) {
+        return this.eventBuilder(BeforeDate.strictlyBefore(burialDate))
+                .withPlace(this.residencePlace(context))
+                .toResidence(personId);
     }
 
-    DeathEvent death(final PersonId personId, final ExactDate date) {
-        return new GenericDeathEvent(this.randomEventId(), personId, date);
+    Place residencePlace(final RecordContext context) {
+        return Optional.ofNullable(residence).map(PlaceId::new).map(context.places()::require).orElse(null);
     }
 
-    Burial burial(final PersonId personId, final ExactDate date, final Place burialPlace) {
-        return new GenericBurial(this.randomEventId(), personId, date, this.age(), burialPlace);
+    DeathEvent death(final PersonId personId, final ExactDate date, final RecordContext context) {
+        return this.eventBuilder(date)
+                .withPlace(this.deathPlace(context))
+                .toDeath(personId);
+    }
+
+    Place deathPlace(final RecordContext context) {
+        return Optional.ofNullable(deathPlace).map(PlaceId::new).map(context.places()::require).orElse(null);
+    }
+
+    BurialEvent burial(final PersonId personId, final ExactDate date, final Place burialPlace) {
+        return this.eventBuilder(date)
+                .withPlace(burialPlace)
+                .toBurial(personId);
     }
 
     int numIndividuals() {

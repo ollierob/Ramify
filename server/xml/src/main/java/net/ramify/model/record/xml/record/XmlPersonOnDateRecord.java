@@ -4,8 +4,8 @@ import com.google.common.collect.Sets;
 import net.meerkat.functions.consumers.Consumers;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.Event;
+import net.ramify.model.event.EventBuilder;
 import net.ramify.model.event.type.BirthEvent;
-import net.ramify.model.event.type.birth.GenericBirthEvent;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
@@ -67,7 +67,12 @@ public class XmlPersonOnDateRecord extends XmlPersonRecord {
     protected BirthEvent inferBirth(final PersonId personId, final DateRange date, final RecordContext context) {
         final var age = this.age();
         if (age == null) return null;
-        return new GenericBirthEvent(this.randomEventId(), personId, age.birthDate(date));
+        return this.eventBuilder(age.birthDate(date)).toBirth(personId);
+    }
+
+    protected EventBuilder eventBuilder(final DateRange date) {
+        return EventBuilder.builderWithRandomId(date)
+                .withGivenAge(this.age());
     }
 
 }

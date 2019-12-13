@@ -6,9 +6,9 @@ import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlExactDate;
 import net.ramify.model.date.xml.XmlInYear;
 import net.ramify.model.event.Event;
+import net.ramify.model.event.EventBuilder;
 import net.ramify.model.event.EventId;
 import net.ramify.model.event.type.BirthEvent;
-import net.ramify.model.event.type.birth.GenericBirthEvent;
 import net.ramify.model.person.HasPersonId;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
@@ -89,7 +89,10 @@ public abstract class XmlEvent {
 
     protected BirthEvent birth(final PersonId personId, final RecordContext context) {
         final var age = this.age();
-        return age == null ? null : new GenericBirthEvent(this.randomEventId(), personId, age.birthDate(this.date(context)));
+        if (age == null) return null;
+        return this.eventBuilder(this.randomEventId(), age.birthDate(this.date(context)))
+                .withGivenAge(age)
+                .toBirth(personId);
     }
 
     public Set<Event> allEvents(final PersonId personId, final RecordContext context, final boolean inferredEvents) {
@@ -117,6 +120,20 @@ public abstract class XmlEvent {
 
     protected EventId randomEventId() {
         return EventId.random();
+    }
+
+    protected String occupation() {
+        return occupation;
+    }
+
+    protected EventBuilder eventBuilder(final RecordContext context) {
+        return this.eventBuilder(this.eventId(), this.date(context))
+                .withPlace(this.place(context));
+    }
+
+    protected EventBuilder eventBuilder(final EventId eventId, final DateRange date) {
+        return EventBuilder.builder(eventId, date)
+                .withGivenAge(this.age());
     }
 
 }

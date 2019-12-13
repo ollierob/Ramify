@@ -99,6 +99,10 @@ public interface Age extends BuildsProto<AgeProto.Age> {
         return Age.exactly(age).birthDate(on);
     }
 
+    static Age fromDates(final DateRange birthDate, final DateRange ageDate) {
+        return DateRangeAge.of(birthDate, ageDate);
+    }
+
     static AgeProto.Period toProto(final Period period) {
         return AgeProto.Period.newBuilder()
                 .setYears(period.getYears())

@@ -1,7 +1,6 @@
 package net.ramify.model.event;
 
 import net.ramify.model.SelfTyped;
-import net.ramify.model.date.DateRange;
 import net.ramify.model.event.type.misc.EventWithPlace;
 import net.ramify.model.person.HasPersonId;
 import net.ramify.model.person.PersonId;
@@ -10,16 +9,22 @@ import net.ramify.model.place.Place;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
-public abstract class AbstractPersonEvent<T extends AbstractPersonEvent<T>> implements Event, HasPersonId, SelfTyped<T> {
+public abstract class AbstractPersonEvent<T extends AbstractPersonEvent<T>> implements EventWithProperties, HasPersonId, SelfTyped<T> {
 
     private final EventId id;
     private final PersonId personId;
-    private final DateRange date;
+    private final EventProperties properties;
 
-    protected AbstractPersonEvent(final EventId id, final PersonId personId, final DateRange date) {
+    protected AbstractPersonEvent(final EventId id, final PersonId personId, final EventProperties properties) {
         this.id = id;
         this.personId = personId;
-        this.date = date;
+        this.properties = properties;
+    }
+
+    @Nonnull
+    @Override
+    public EventProperties properties() {
+        return properties;
     }
 
     @Nonnull
@@ -32,12 +37,6 @@ public abstract class AbstractPersonEvent<T extends AbstractPersonEvent<T>> impl
     @Override
     public PersonId personId() {
         return personId;
-    }
-
-    @Nonnull
-    @Override
-    public DateRange date() {
-        return date;
     }
 
     @Nonnull

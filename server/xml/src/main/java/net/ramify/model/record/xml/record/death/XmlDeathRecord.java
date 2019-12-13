@@ -5,13 +5,14 @@ import net.ramify.model.date.ExactDate;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlExactDate;
 import net.ramify.model.event.Event;
-import net.ramify.model.event.type.death.GenericDeathEvent;
+import net.ramify.model.event.type.DeathEvent;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.family.SinglePersonFamily;
 import net.ramify.model.family.xml.XmlRelationship;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
+import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.GenericDeathRecord;
 import net.ramify.model.record.collection.RecordSet;
@@ -27,6 +28,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "death")
@@ -65,8 +67,18 @@ public class XmlDeathRecord extends XmlPersonOnDateRecord {
     @Override
     protected Set<Event> events(final PersonId personId, final DateRange date, final RecordContext context) {
         final var events = super.events(personId, date, context);
-        events.add(new GenericDeathEvent(this.randomEventId(), personId, date, this.age())); //FIXME add death place
+        events.add(this.death(personId, date, context));
         return events;
+    }
+
+    protected DeathEvent death(final PersonId personId, final DateRange date, final RecordContext context) {
+        return this.eventBuilder(date)
+                .withPlace(this.deathPlace(context))
+                .toDeath(personId);
+    }
+
+    protected Place deathPlace(final RecordContext context) {
+        return Optional.ofNullable(deathPlace).map(PlaceId::new).map(context.places()::require).orElse(null);
     }
 
     public ExactDate deathDate() {

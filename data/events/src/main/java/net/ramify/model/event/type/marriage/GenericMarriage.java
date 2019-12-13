@@ -1,44 +1,38 @@
 package net.ramify.model.event.type.marriage;
 
 import com.google.common.collect.ImmutableSet;
-import net.ramify.model.date.DateRange;
 import net.ramify.model.event.EventId;
+import net.ramify.model.event.EventProperties;
+import net.ramify.model.event.EventWithProperties;
 import net.ramify.model.event.type.LifeEvent;
 import net.ramify.model.person.PersonId;
-import net.ramify.model.person.age.Age;
 import net.ramify.model.place.Place;
 
 import javax.annotation.Nonnull;
-import java.util.Optional;
 import java.util.Set;
 
-public class GenericMarriage implements LifeEvent, MarriageEvent {
+public class GenericMarriage implements EventWithProperties, LifeEvent, MarriageEvent {
 
-    private final DateRange date;
-    private final Age givenAge;
     private final EventId eventId;
     private final PersonId firstSpouse;
     private final PersonId secondSpouse;
+    private final EventProperties properties;
 
     public GenericMarriage(
             final EventId eventId,
             final PersonId firstSpouse,
             final PersonId secondSpouse,
-            final DateRange date) {
-        this(eventId, firstSpouse, secondSpouse, date, null);
-    }
-
-    public GenericMarriage(
-            final EventId eventId,
-            final PersonId firstSpouse,
-            final PersonId secondSpouse,
-            final DateRange date,
-            final Age givenAge) {
+            final EventProperties properties) {
         this.eventId = eventId;
         this.firstSpouse = firstSpouse;
         this.secondSpouse = secondSpouse;
-        this.date = date;
-        this.givenAge = givenAge;
+        this.properties = properties;
+    }
+
+    @Nonnull
+    @Override
+    public EventProperties properties() {
+        return properties;
     }
 
     @Nonnull
@@ -49,24 +43,12 @@ public class GenericMarriage implements LifeEvent, MarriageEvent {
 
     @Nonnull
     @Override
-    public Optional<Age> givenAge() {
-        return Optional.ofNullable(givenAge);
-    }
-
-    @Nonnull
-    @Override
-    public DateRange date() {
-        return date;
-    }
-
-    @Nonnull
-    @Override
     public Set<PersonId> personIds() {
         return ImmutableSet.of(firstSpouse, secondSpouse);
     }
 
     public MarriageEvent with(final Place place) {
-        return place == null ? this : new GenericMarriageWithPlace(eventId, firstSpouse, secondSpouse, date, givenAge, place);
+        return place == null ? this : new GenericMarriageWithPlace(eventId, firstSpouse, secondSpouse, properties, place);
     }
 
     @Nonnull

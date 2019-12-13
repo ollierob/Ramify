@@ -1,7 +1,7 @@
 package net.ramify.model.event.xml;
 
 import net.ramify.model.event.Event;
-import net.ramify.model.event.type.burial.GenericBurial;
+import net.ramify.model.event.type.burial.BurialEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.record.xml.RecordContext;
 
@@ -12,8 +12,10 @@ import java.util.Set;
 public class XmlBurialEvent extends XmlPostDeathEvent {
 
     @Override
-    public Event toEvent(final PersonId personId, final RecordContext context) {
-        return new GenericBurial(this.eventId(), personId, this.date(context), this.age(), this.place(context));
+    public BurialEvent toEvent(final PersonId personId, final RecordContext context) {
+        return this.eventBuilder(context)
+                .withPlace(this.place(context))
+                .toBurial(personId);
     }
 
     @Override

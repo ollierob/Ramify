@@ -5,8 +5,7 @@ import net.ramify.model.date.ExactDate;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlExactDate;
 import net.ramify.model.event.Event;
-import net.ramify.model.event.type.birth.Baptism;
-import net.ramify.model.event.type.birth.GenericBaptism;
+import net.ramify.model.event.type.birth.BaptismEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.place.Place;
 import net.ramify.model.record.church.ChurchBaptismRecord;
@@ -45,8 +44,8 @@ public class XmlBaptismRecord extends XmlPersonOnDateWithFamilyRecord {
         return Collections.singleton(this.baptism(id, date, church));
     }
 
-    Baptism baptism(final PersonId personId, final DateRange date, final Place church) {
-        return new GenericBaptism(this.randomEventId(), personId, date).with(church);
+    BaptismEvent baptism(final PersonId personId, final DateRange date, final Place church) {
+        return this.eventBuilder(date).withPlace(church).toBaptism(personId);
     }
 
 }

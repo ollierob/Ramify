@@ -12,15 +12,16 @@ import net.ramify.model.event.type.LifeEvent;
 import net.ramify.model.event.type.PostDeathEvent;
 import net.ramify.model.event.type.UniqueEvent;
 import net.ramify.model.person.HasPersonId;
-import net.ramify.model.person.age.Age;
 import net.ramify.model.person.age.HasAges;
 import net.ramify.model.person.collection.HasPersonIds;
 import net.ramify.model.place.HasPlace;
 
 import javax.annotation.Nonnull;
-import java.util.Optional;
 
 public interface Event extends HasEventId, HasAges, HasDate, HasPersonIds, Castable<Event>, BuildsProto<EventProto.Event> {
+
+    @Nonnull
+    String title();
 
     @Nonnull
     DateRange date();
@@ -45,21 +46,6 @@ public interface Event extends HasEventId, HasAges, HasDate, HasPersonIds, Casta
 
     default boolean isUnique() {
         return this.is(UniqueEvent.class);
-    }
-
-    @Nonnull
-    String title();
-
-    @Nonnull
-    @Override
-    default Optional<Age> givenAge() {
-        return Optional.empty();
-    }
-
-    @Nonnull
-    @Override
-    default Optional<Age> computedAge() {
-        return Optional.empty();
     }
 
     @Nonnull

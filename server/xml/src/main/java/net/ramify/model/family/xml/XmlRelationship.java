@@ -4,10 +4,10 @@ import com.google.common.collect.Sets;
 import net.ramify.model.date.BeforeDate;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.Event;
+import net.ramify.model.event.EventBuilder;
 import net.ramify.model.event.EventId;
 import net.ramify.model.event.type.DeathEvent;
-import net.ramify.model.event.type.death.GenericDeathEvent;
-import net.ramify.model.event.type.misc.Flourished;
+import net.ramify.model.event.type.LifeEvent;
 import net.ramify.model.event.xml.XmlEvent;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.person.HasPersonId;
@@ -56,10 +56,19 @@ public abstract class XmlRelationship {
 
     protected Set<Event> events(final PersonId personId, final DateRange date, final RecordContext context) {
         final var events = Sets.<Event>newHashSet();
-        events.add(new Flourished(this.randomEventId(), personId, date));
         if (this.events != null) this.events.forEach(event -> events.addAll(event.allEvents(personId, context, true)));
-        if (Boolean.TRUE.equals(deceased) && !IterableUtils.has(events, DeathEvent.class)) events.add(new GenericDeathEvent(this.randomEventId(), personId, BeforeDate.strictlyBefore(date)));
+        if (deceased != Boolean.TRUE) events.add(flourished(personId, date));
+        if (deceased == Boolean.TRUE && !IterableUtils.has(events, DeathEvent.class)) events.add(death(personId, date));
         return events;
+    }
+
+    private static LifeEvent flourished(final PersonId personId, final DateRange date) {
+        return EventBuilder.builderWithRandomId(date).toFlourished(personId);
+    }
+
+    private static DeathEvent death(PersonId personId, DateRange date) {
+        return EventBuilder.builderWithRandomId(BeforeDate.strictlyBefore(date))
+                .toDeath(personId);
     }
 
     @CheckForNull

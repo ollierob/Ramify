@@ -8,7 +8,7 @@ import net.ramify.model.place.HasPlace;
 
 import javax.annotation.Nonnull;
 
-public interface Burial extends UniqueEvent, PostDeathEvent, HasPlace {
+public interface BurialEvent extends UniqueEvent, PostDeathEvent, HasPlace {
 
     @Override
     default <R> R handleWith(final EventHandler<R> handler) {

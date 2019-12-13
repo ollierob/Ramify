@@ -1,6 +1,7 @@
 package net.ramify.model.record;
 
 import net.ramify.model.date.DateRange;
+import net.ramify.model.event.EventBuilder;
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.proto.RecordProto;
@@ -41,6 +42,10 @@ public abstract class DateRecord implements Record {
     }
 
     protected abstract EventProto.RecordType protoType();
+
+    protected EventBuilder eventBuilder() {
+        return EventBuilder.builderWithRandomId(this.date());
+    }
 
     @Nonnull
     @Override

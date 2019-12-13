@@ -31,6 +31,12 @@ public class ExactDate implements DateRange {
 
     @Nonnull
     @Override
+    public Optional<? extends ChronoLocalDate> exact() {
+        return Optional.of(date);
+    }
+
+    @Nonnull
+    @Override
     public Optional<? extends ChronoLocalDate> earliestInclusive() {
         return Optional.of(date);
     }
