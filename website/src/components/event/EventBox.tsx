@@ -11,6 +11,7 @@ import {Family} from "../../protobuf/generated/family_pb";
 import {FamilyTreeId} from "../tree/FamilyTree";
 import {EventRelatedPeopleBox} from "./EventRelatedPeopleBox";
 import {Relatives} from "../relationship/Relatives";
+import {RelativeRelationship} from "../relationship/RelativeRelationship";
 
 export type EventBoxProps = {
     person: Person.AsObject
@@ -18,6 +19,7 @@ export type EventBoxProps = {
     tree: FamilyTreeId
     event: Event.AsObject
     relatives: Relatives
+    relationshipToMain: RelativeRelationship
 }
 
 export const EventBox = (props: EventBoxProps) => {
@@ -29,7 +31,7 @@ export const EventBox = (props: EventBoxProps) => {
     return <Card className={"event " + eventClass(event)}>
         <div className="top">
             <div className="title">
-                <EventTitle {...props}/>
+                <EventTitle {...props} relationship={props.relationshipToMain}/>
             </div>
             <div className="date">
                 {formatDateRange(event.date, "day")}

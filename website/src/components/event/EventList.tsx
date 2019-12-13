@@ -8,10 +8,10 @@ import {Relatives} from "../relationship/Relatives";
 import {ProfileEvent} from "./ProfileEvent";
 
 type Props = {
+    events: ReadonlyArray<ProfileEvent>;
     person: Person.AsObject;
     family: Family.AsObject;
     tree: FamilyTreeId;
-    events: ReadonlyArray<ProfileEvent>;
     relatives: Relatives
 }
 
@@ -25,7 +25,7 @@ export class EventList extends React.PureComponent<Props> {
         return <>
             {events.map(e => <EventBox
                 {...this.props}
-                event={e.event}
+                {...e}
                 relatives={e.type == "person" && this.props.relatives}/>)}
         </>;
 

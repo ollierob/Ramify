@@ -11,6 +11,7 @@ import {ProfileEvent, sortProfileEvents} from "../../../components/event/Profile
 import {Event} from "../../../protobuf/generated/event_pb";
 import {findBirth, findDeath} from "../../../components/event/Event";
 import {isDateOrdered} from "../../../components/date/DateRange";
+import {RelativeRelationship} from "../../../components/relationship/RelativeRelationship";
 
 const flatten = require('arr-flatten');
 const {CheckableTag} = Tag;
@@ -78,24 +79,33 @@ export class PersonProfile extends React.PureComponent<Props, State> {
 
     private determinePersonEvents(person: Person.AsObject): ReadonlyArray<ProfileEvent> {
         if (!person) return [];
-        return person.eventsList.map(event => ({event, type: "person"}));
+        return person.eventsList.map(event => ({event, person, type: "person", relationshipToMain: "self"}));
     }
 
     private determineFamilyEvents(person: Person.AsObject, relatives: Relatives): ReadonlyArray<ProfileEvent> {
         if (!person || !relatives) return [];
-        const birthDate = findBirth(person.eventsList)?.date;
-        const deathDate = findDeath(person.eventsList)?.date;
-        const events: Event.AsObject[] = flatten(allRelatives(relatives).map(r => r.eventsList));
-        return events.filter(retainFamilyEvent)
-            .filter(e => !e.personidList.includes(person.id))
-            .filter(e => isDateOrdered(birthDate, e.date, deathDate))
-            .map<ProfileEvent>(event => ({event, type: "family"}));
+        const birth = findBirth(person.eventsList);
+        const death = findDeath(person.eventsList);
+        const events: ProfileEvent[] = [];
+        if (relatives.father) events.push(...relativeEvents(relatives.father, "parent", person, birth, death));
+        if (relatives.mother) events.push(...relativeEvents(relatives.mother, "parent", person, birth, death));
+        return events;
     }
 
     private determineHistoricEvents(): ReadonlyArray<ProfileEvent> {
         return []; //TODO
     }
 
+}
+
+function relativeEvents(relative: Person.AsObject, relationship: RelativeRelationship, mainPerson: Person.AsObject, mainBirth: Event.AsObject, mainDeath: Event.AsObject): ReadonlyArray<ProfileEvent> {
+    const events: ProfileEvent[] = [];
+    for (const event of relative.eventsList) {
+        if (!retainFamilyEvent(event)) continue;
+        if (!isDateOrdered(mainBirth?.date, event.date, mainDeath?.date)) continue;
+        events.push({event, person: relative, type: "family", relationshipToMain: relationship});
+    }
+    return events;
 }
 
 function retainFamilyEvent(event: Event.AsObject): boolean {

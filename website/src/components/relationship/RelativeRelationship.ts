@@ -1,0 +1,1 @@
+export type RelativeRelationship = "self" | "parent" | "spouse" | "child"
