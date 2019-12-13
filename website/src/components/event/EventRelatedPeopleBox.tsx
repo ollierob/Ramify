@@ -5,10 +5,13 @@ import {EventRelatedPerson} from "./EventRelatedPerson";
 
 export const EventRelatedPeopleBox = (props: {prefix?: React.ReactNode, tree: FamilyTreeId, people: ReadonlyArray<Person.AsObject>}) => {
 
-    if (!props.people || !props.people.length) return null;
+    let people = props.people;
+    if (!people) return null;
+    people = people.filter(p => p != null);
+    if (!people.length) return null;
 
     return <div className="related bordered">
-        {props.people.map(p => <EventRelatedPerson key={p.id} {...props} person={p}/>)}
+        {people.map(p => <EventRelatedPerson key={p.id} {...props} person={p}/>)}
     </div>;
 
 };
