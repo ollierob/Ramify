@@ -52,7 +52,7 @@ public class XmlResidenceRecord extends XmlPersonOnDateRecord {
 
     protected Set<Event> events(final PersonId personId, final Place place, final DateRange date, final RecordContext context) {
         final var events = super.events(personId, date, context);
-        events.add(new GenericResidenceEvent(personId, date, place));
+        events.add(new GenericResidenceEvent(this.randomEventId(), personId, date, place));
         return events;
     }
 

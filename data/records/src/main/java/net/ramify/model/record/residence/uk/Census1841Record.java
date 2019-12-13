@@ -5,6 +5,7 @@ import com.google.common.collect.Sets;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.Event;
+import net.ramify.model.event.EventId;
 import net.ramify.model.event.type.birth.GenericBirthEvent;
 import net.ramify.model.event.type.residence.GenericResidenceEvent;
 import net.ramify.model.family.Family;
@@ -123,12 +124,16 @@ public class Census1841Record extends CensusRecord implements HasPlace {
             this.occupation = occupation;
         }
 
+        private EventId randomEventId() {
+            return EventId.random();
+        }
+
         @Nonnull
         @Override
         public Set<? extends Event> events() {
             return Sets.newHashSet(
-                    new GenericBirthEvent(this.personId(), birthDate).with(birthPlace),
-                    new GenericResidenceEvent(this.personId(), CENSUS_DATE, residencePlace, age));
+                    new GenericBirthEvent(this.randomEventId(), this.personId(), birthDate).with(birthPlace),
+                    new GenericResidenceEvent(this.randomEventId(), this.personId(), CENSUS_DATE, residencePlace, age));
         }
 
         @Nonnull

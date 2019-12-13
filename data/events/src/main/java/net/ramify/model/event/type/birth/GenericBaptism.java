@@ -2,6 +2,7 @@ package net.ramify.model.event.type.birth;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.AbstractPersonEvent;
+import net.ramify.model.event.EventId;
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.place.Place;
@@ -10,8 +11,8 @@ import javax.annotation.Nonnull;
 
 public class GenericBaptism extends AbstractPersonEvent<GenericBaptism> implements Baptism {
 
-    public GenericBaptism(final PersonId personId, final DateRange date) {
-        super(personId, date);
+    public GenericBaptism(final EventId eventId, final PersonId personId, final DateRange date) {
+        super(eventId, personId, date);
     }
 
     @Nonnull

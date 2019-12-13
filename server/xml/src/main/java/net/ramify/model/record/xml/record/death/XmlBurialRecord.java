@@ -96,15 +96,15 @@ public class XmlBurialRecord extends XmlPersonOnDateRecord {
     }
 
     ResidenceEvent residence(final PersonId personId, final DateRange burialDate, final Place place) {
-        return new GenericResidenceEvent(personId, BeforeDate.strictlyBefore(burialDate), place);
+        return new GenericResidenceEvent(this.randomEventId(), personId, BeforeDate.strictlyBefore(burialDate), place);
     }
 
     DeathEvent death(final PersonId personId, final ExactDate date) {
-        return new GenericDeathEvent(personId, date);
+        return new GenericDeathEvent(this.randomEventId(), personId, date);
     }
 
     Burial burial(final PersonId personId, final ExactDate date, final Place burialPlace) {
-        return new GenericBurial(personId, date, this.age(), burialPlace);
+        return new GenericBurial(this.randomEventId(), personId, date, this.age(), burialPlace);
     }
 
     int numIndividuals() {

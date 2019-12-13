@@ -1,6 +1,7 @@
 package net.ramify.model.event.type.civil;
 
 import net.ramify.model.date.DateRange;
+import net.ramify.model.event.EventId;
 import net.ramify.model.event.type.birth.GenericBirthEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.place.HasPlaceId;
@@ -15,7 +16,7 @@ class GenericBirthEventTest {
     @Test
     void testWithPlace() {
 
-        final var birth = new GenericBirthEvent(mock(PersonId.class), mock(DateRange.class));
+        final var birth = new GenericBirthEvent(mock(EventId.class), mock(PersonId.class), mock(DateRange.class));
         final var place = mock(Place.class);
 
         //When

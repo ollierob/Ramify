@@ -2,6 +2,7 @@ package net.ramify.model.event.type.marriage;
 
 import com.google.common.collect.ImmutableSet;
 import net.ramify.model.date.DateRange;
+import net.ramify.model.event.EventId;
 import net.ramify.model.event.type.LifeEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
@@ -15,25 +16,35 @@ public class GenericMarriage implements LifeEvent, MarriageEvent {
 
     private final DateRange date;
     private final Age givenAge;
+    private final EventId eventId;
     private final PersonId firstSpouse;
     private final PersonId secondSpouse;
 
     public GenericMarriage(
+            final EventId eventId,
             final PersonId firstSpouse,
             final PersonId secondSpouse,
             final DateRange date) {
-        this(firstSpouse, secondSpouse, date, null);
+        this(eventId, firstSpouse, secondSpouse, date, null);
     }
 
     public GenericMarriage(
+            final EventId eventId,
             final PersonId firstSpouse,
             final PersonId secondSpouse,
             final DateRange date,
             final Age givenAge) {
+        this.eventId = eventId;
         this.firstSpouse = firstSpouse;
         this.secondSpouse = secondSpouse;
         this.date = date;
         this.givenAge = givenAge;
+    }
+
+    @Nonnull
+    @Override
+    public EventId eventId() {
+        return eventId;
     }
 
     @Nonnull
@@ -55,7 +66,7 @@ public class GenericMarriage implements LifeEvent, MarriageEvent {
     }
 
     public MarriageEvent with(final Place place) {
-        return place == null ? this : new GenericMarriageWithPlace(firstSpouse, secondSpouse, date, givenAge, place);
+        return place == null ? this : new GenericMarriageWithPlace(eventId, firstSpouse, secondSpouse, date, givenAge, place);
     }
 
     @Nonnull

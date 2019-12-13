@@ -46,7 +46,7 @@ public class XmlBaptismRecord extends XmlPersonOnDateWithFamilyRecord {
     }
 
     Baptism baptism(final PersonId personId, final DateRange date, final Place church) {
-        return new GenericBaptism(personId, date).with(church);
+        return new GenericBaptism(this.randomEventId(), personId, date).with(church);
     }
 
 }

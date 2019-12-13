@@ -6,6 +6,7 @@ import net.ramify.model.date.ClosedDateRange;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.Event;
+import net.ramify.model.event.EventId;
 import net.ramify.model.event.infer.MarriageConditionEventInference;
 import net.ramify.model.event.type.birth.GenericBirthEvent;
 import net.ramify.model.event.type.death.GenericDeathEvent;
@@ -81,8 +82,12 @@ public class Census1851Record extends CensusRecord {
                 id,
                 Name.UNKNOWN,
                 person.gender().inverse(),
-                Collections.singleton(new GenericDeathEvent(id, ClosedDateRange.of(person.birthDate, CENSUS_DATE))), //FIXME tighter bounds
+                Collections.singleton(new GenericDeathEvent(this.randomEventId(), id, ClosedDateRange.of(person.birthDate, CENSUS_DATE))), //FIXME tighter bounds
                 "Inferred ex-spouse of " + person.name()));
+    }
+
+    private EventId randomEventId() {
+        return EventId.random();
     }
 
     public static abstract class Census1851Entry {
@@ -205,10 +210,14 @@ public class Census1851Record extends CensusRecord {
         @Override
         public Set<? extends Event> events() {
             final var events = Sets.<Event>newHashSet(
-                    new GenericBirthEvent(this.personId(), birthDate).with(birthPlace),
-                    new GenericResidenceEvent(this.personId(), CENSUS_DATE, residencePlace));
+                    new GenericBirthEvent(this.randomEventId(), this.personId(), birthDate).with(birthPlace),
+                    new GenericResidenceEvent(this.randomEventId(), this.personId(), CENSUS_DATE, residencePlace));
             events.addAll(extraEvents);
             return events;
+        }
+
+        private EventId randomEventId() {
+            return EventId.random();
         }
 
     }

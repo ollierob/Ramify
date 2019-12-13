@@ -6,6 +6,7 @@ import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlExactDate;
 import net.ramify.model.date.xml.XmlInYear;
 import net.ramify.model.event.Event;
+import net.ramify.model.event.EventId;
 import net.ramify.model.event.type.BirthEvent;
 import net.ramify.model.event.type.birth.GenericBirthEvent;
 import net.ramify.model.person.HasPersonId;
@@ -59,6 +60,11 @@ public abstract class XmlEvent {
     private String occupation;
 
     @Nonnull
+    protected EventId eventId() {
+        return new EventId(eventId);
+    }
+
+    @Nonnull
     private DateRange date(final DateParser dates) {
         return date.resolve(dates);
     }
@@ -83,7 +89,7 @@ public abstract class XmlEvent {
 
     protected BirthEvent birth(final PersonId personId, final RecordContext context) {
         final var age = this.age();
-        return age == null ? null : new GenericBirthEvent(personId, age.birthDate(this.date(context)));
+        return age == null ? null : new GenericBirthEvent(this.randomEventId(), personId, age.birthDate(this.date(context)));
     }
 
     public Set<Event> allEvents(final PersonId personId, final RecordContext context, final boolean inferredEvents) {
@@ -107,6 +113,10 @@ public abstract class XmlEvent {
         if (simpleAge != null) return Age.ofYears(simpleAge);
         if (complexAge != null) return complexAge.age();
         return null;
+    }
+
+    protected EventId randomEventId() {
+        return EventId.random();
     }
 
 }

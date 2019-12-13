@@ -13,7 +13,7 @@ public class XmlBurialEvent extends XmlPostDeathEvent {
 
     @Override
     public Event toEvent(final PersonId personId, final RecordContext context) {
-        return new GenericBurial(personId, this.date(context), this.age(), this.place(context));
+        return new GenericBurial(this.eventId(), personId, this.date(context), this.age(), this.place(context));
     }
 
     @Override

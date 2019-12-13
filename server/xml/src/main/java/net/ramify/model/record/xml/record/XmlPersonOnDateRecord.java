@@ -67,7 +67,7 @@ public class XmlPersonOnDateRecord extends XmlPersonRecord {
     protected BirthEvent inferBirth(final PersonId personId, final DateRange date, final RecordContext context) {
         final var age = this.age();
         if (age == null) return null;
-        return new GenericBirthEvent(personId, age.birthDate(date));
+        return new GenericBirthEvent(this.randomEventId(), personId, age.birthDate(date));
     }
 
 }

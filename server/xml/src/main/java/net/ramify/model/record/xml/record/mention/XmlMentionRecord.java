@@ -61,8 +61,8 @@ public class XmlMentionRecord extends XmlPersonOnDateRecord {
     @Override
     protected Set<Event> events(final PersonId personId, final DateRange date, final RecordContext context) {
         final var events = super.events(personId, date, context);
-        if (this.deceased()) events.add(new GenericDeathEvent(personId, BeforeDate.strictlyBefore(date)));
-        else events.add(new Flourished(personId, date));
+        if (this.deceased()) events.add(new GenericDeathEvent(this.randomEventId(), personId, BeforeDate.strictlyBefore(date)));
+        else events.add(new Flourished(this.randomEventId(), personId, date));
         return events;
     }
 

@@ -2,6 +2,7 @@ package net.ramify.model.event.type.death;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.AbstractPersonEvent;
+import net.ramify.model.event.EventId;
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.event.type.DeathEvent;
 import net.ramify.model.person.PersonId;
@@ -16,16 +17,18 @@ public class GenericDeathEvent extends AbstractPersonEvent<GenericDeathEvent> im
     private final Age givenAge;
 
     public GenericDeathEvent(
+            final EventId id,
             final PersonId personId,
             final DateRange date) {
-        this(personId, date, null);
+        this(id, personId, date, null);
     }
 
     public GenericDeathEvent(
+            final EventId id,
             final PersonId personId,
             final DateRange date,
             final Age givenAge) {
-        super(personId, date);
+        super(id, personId, date);
         this.givenAge = givenAge;
     }
 

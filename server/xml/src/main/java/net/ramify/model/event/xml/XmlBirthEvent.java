@@ -14,7 +14,7 @@ public class XmlBirthEvent extends XmlEvent {
 
     @Override
     public Event toEvent(final PersonId personId, final RecordContext context) {
-        return new GenericBirthEvent(personId, this.date(context)).with(this.place(context));
+        return new GenericBirthEvent(this.eventId(), personId, this.date(context)).with(this.place(context));
     }
 
     @Override

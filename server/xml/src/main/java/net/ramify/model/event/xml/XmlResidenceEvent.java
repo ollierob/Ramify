@@ -13,6 +13,7 @@ public class XmlResidenceEvent extends XmlLifeEvent {
     @Override
     public ResidenceEvent toEvent(final PersonId personId, final RecordContext context) {
         return new GenericResidenceEvent(
+                this.eventId(),
                 personId,
                 this.date(context),
                 this.place(context),

@@ -9,14 +9,17 @@ import "age.proto";
 
 message Event {
 
-    string title = 1;
-    DateRange date = 2;
-    Place place = 3;
-    RecordType type = 4;
+    string id = 1;
+    string title = 2;
+    DateRange date = 3;
+    Place place = 4;
     repeated string personId = 5;
 
     Age givenAge = 10;
     Age computedAge = 11;
+
+    RecordType type = 20;
+    bool isUnique = 21;
 
 }
 

@@ -1,6 +1,7 @@
 package net.ramify.model.record.civil.uk;
 
 import net.ramify.model.event.Event;
+import net.ramify.model.event.EventId;
 import net.ramify.model.event.type.birth.GenericBirthEvent;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
@@ -14,6 +15,8 @@ import java.util.Set;
 
 public class GeneralRegisterRecordBirthEntry extends GenericRecordEntry {
 
+    private final EventId birthEventId = EventId.random(); //FIXME inject
+
     public GeneralRegisterRecordBirthEntry(
             final PersonId id,
             final Name name,
@@ -26,7 +29,7 @@ public class GeneralRegisterRecordBirthEntry extends GenericRecordEntry {
     }
 
     Set<Event> events(final GeneralRegisterBirth record) {
-        return Collections.singleton(new GenericBirthEvent(this.personId(), record.birthDate()).with(record.birthPlace()));
+        return Collections.singleton(new GenericBirthEvent(birthEventId, this.personId(), record.birthDate()).with(record.birthPlace()));
     }
 
 }

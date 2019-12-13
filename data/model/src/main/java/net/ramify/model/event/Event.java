@@ -20,7 +20,7 @@ import net.ramify.model.place.HasPlace;
 import javax.annotation.Nonnull;
 import java.util.Optional;
 
-public interface Event extends HasAges, HasDate, HasPersonIds, Castable<Event>, BuildsProto<EventProto.Event> {
+public interface Event extends HasEventId, HasAges, HasDate, HasPersonIds, Castable<Event>, BuildsProto<EventProto.Event> {
 
     @Nonnull
     DateRange date();
@@ -65,8 +65,10 @@ public interface Event extends HasAges, HasDate, HasPersonIds, Castable<Event>, 
     @Nonnull
     default EventProto.Event.Builder toProtoBuilder() {
         final var builder = EventProto.Event.newBuilder()
+                .setId(this.eventId().value())
                 .setTitle(this.title())
-                .setDate(this.date().toProto());
+                .setDate(this.date().toProto())
+                .setIsUnique(this.isUnique());
         if (this instanceof HasPersonId) {
             builder.addPersonId(((HasPersonId) this).personId().value());
         } else {

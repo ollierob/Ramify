@@ -12,12 +12,20 @@ import javax.annotation.Nonnull;
 
 public abstract class AbstractPersonEvent<T extends AbstractPersonEvent<T>> implements Event, HasPersonId, SelfTyped<T> {
 
+    private final EventId id;
     private final PersonId personId;
     private final DateRange date;
 
-    protected AbstractPersonEvent(final PersonId personId, final DateRange date) {
+    protected AbstractPersonEvent(final EventId id, final PersonId personId, final DateRange date) {
+        this.id = id;
         this.personId = personId;
         this.date = date;
+    }
+
+    @Nonnull
+    @Override
+    public EventId eventId() {
+        return id;
     }
 
     @Nonnull

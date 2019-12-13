@@ -3,6 +3,7 @@ package net.ramify.model.record.residence.uk;
 import com.google.common.collect.Sets;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.Event;
+import net.ramify.model.event.EventId;
 import net.ramify.model.event.type.birth.GenericBirthEvent;
 import net.ramify.model.event.type.residence.GenericResidenceEvent;
 import net.ramify.model.family.Family;
@@ -58,22 +59,27 @@ public class Register1939Record extends CensusRecord {
         private final Sex gender;
         private final LocalDate birthDate;
         private final Occupation occupation;
+        private final EventId birthEventId, residenceEventId;
 
         public Register1939Entry(
                 final PersonId id,
                 final Name name,
                 final Sex sex,
                 final LocalDate birthDate,
-                final Occupation occupation) {
+                final Occupation occupation,
+                final EventId birthEventId,
+                final EventId residenceEventId) {
             this.id = id;
             this.name = name;
             this.gender = sex;
             this.birthDate = birthDate;
             this.occupation = occupation;
+            this.birthEventId = birthEventId;
+            this.residenceEventId = residenceEventId;
         }
 
         Register1939Person build(final Register1939Record record) {
-            return new Register1939Person(id, name, gender, record.place(), ExactDate.on(birthDate), occupation);
+            return new Register1939Person(id, name, gender, birthEventId, residenceEventId, record.place(), ExactDate.on(birthDate), occupation);
         }
 
     }
@@ -83,15 +89,18 @@ public class Register1939Record extends CensusRecord {
         private final Place residence;
         private final ExactDate birthDate;
         private final Occupation occupation;
+        private final EventId birthEventId, residenceEventId;
 
         Register1939Person(
                 final PersonId id,
                 final Name name,
                 final Sex gender,
-                final Place residence,
+                EventId birthEventId, EventId residenceEventId, final Place residence,
                 final ExactDate birthDate,
                 final Occupation occupation) {
             super(id, name, gender);
+            this.birthEventId = birthEventId;
+            this.residenceEventId = residenceEventId;
             this.residence = residence;
             this.birthDate = birthDate;
             this.occupation = occupation;
@@ -101,8 +110,8 @@ public class Register1939Record extends CensusRecord {
         @Override
         public Set<? extends Event> events() {
             return Sets.newHashSet(
-                    new GenericBirthEvent(this.personId(), birthDate),
-                    new GenericResidenceEvent(this.personId(), CENSUS_DATE, residence));
+                    new GenericBirthEvent(birthEventId, this.personId(), birthDate),
+                    new GenericResidenceEvent(residenceEventId, this.personId(), CENSUS_DATE, residence));
         }
 
     }

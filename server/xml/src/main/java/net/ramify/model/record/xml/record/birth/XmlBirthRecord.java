@@ -43,7 +43,7 @@ public class XmlBirthRecord extends XmlPersonOnDateWithFamilyRecord {
 
     @Override
     protected BirthEvent inferBirth(final PersonId personId, final DateRange date, final RecordContext context) {
-        return new GenericBirthEvent(personId, date).with(this.birthPlace(context));
+        return new GenericBirthEvent(this.randomEventId(), personId, date).with(this.birthPlace(context));
     }
 
     @CheckForNull

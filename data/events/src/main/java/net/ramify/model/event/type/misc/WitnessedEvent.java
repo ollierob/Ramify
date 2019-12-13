@@ -3,6 +3,7 @@ package net.ramify.model.event.type.misc;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.AbstractPersonEvent;
 import net.ramify.model.event.Event;
+import net.ramify.model.event.EventId;
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.event.type.LifeEvent;
 import net.ramify.model.person.PersonId;
@@ -13,8 +14,8 @@ public class WitnessedEvent<T extends Event> extends AbstractPersonEvent<Witness
 
     private final T observed;
 
-    public WitnessedEvent(final PersonId personId, final DateRange date, final T observed) {
-        super(personId, date);
+    public WitnessedEvent(final EventId id, final PersonId personId, final DateRange date, final T observed) {
+        super(id, personId, date);
         this.observed = observed;
     }
 

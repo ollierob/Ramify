@@ -15,7 +15,7 @@ public class DeathMerger extends AbstractEventMerger<DeathEvent> {
 
     @Override
     DeathEvent merge(final PersonId id, final DateRange date, final Place place) {
-        return new GenericDeathEvent(id, date).with(place);
+        return new GenericDeathEvent(this.randomEventId(), id, date).with(place);
     }
 
 }

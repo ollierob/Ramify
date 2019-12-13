@@ -1,5 +1,6 @@
 package net.ramify.model.record.xml.record;
 
+import net.ramify.model.event.EventId;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.xml.record.residence.XmlResidenceRecord;
 
@@ -13,6 +14,10 @@ public abstract class XmlRecord {
 
     protected RecordId recordId() {
         return new RecordId(UUID.randomUUID().toString()); //FIXME
+    }
+
+    protected EventId randomEventId() {
+        return EventId.random();
     }
 
 }
