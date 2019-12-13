@@ -1,7 +1,7 @@
 import {Person} from "../../protobuf/generated/person_pb";
 import {Family} from "../../protobuf/generated/family_pb";
 import {PersonId} from "../people/PersonId";
-import {findFather, findMother, findSpouses} from "./Family";
+import {findFather, findMother, findSharedChildren, findSpouses} from "./Family";
 
 const flatten = require('arr-flatten');
 
@@ -26,13 +26,13 @@ type SpouseAndChildren = {
     children: ReadonlyArray<Person.AsObject>
 }
 
-export function determineRelatives(person: PersonId, family: Family.AsObject): Relatives {
-    if (!person || !family) return null;
+export function determineRelatives(id: PersonId, family: Family.AsObject): Relatives {
+    if (!id || !family) return null;
     const relatives: Relatives = {spouses: []};
-    relatives.father = findFather(person, family);
-    relatives.mother = findMother(person, family);
-    for (const spouse of findSpouses(person, family)) {
-        relatives.spouses.push({spouse, children: []}); //TODO children
+    relatives.father = findFather(id, family);
+    relatives.mother = findMother(id, family);
+    for (const spouse of findSpouses(id, family)) {
+        relatives.spouses.push({spouse, children: findSharedChildren(id, spouse.id, family)});
     }
     return relatives;
 }

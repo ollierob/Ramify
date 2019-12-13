@@ -29,3 +29,9 @@ export function findChildren(person: PersonId, family: Family.AsObject): Readonl
     const childParent = family.relationshipList.filter(isChildParent).filter(r => r.toid == person).map(r => r.fromid);
     return parentChild.concat(childParent).map(id => findPerson(id, family));
 }
+
+export function findSharedChildren(p1: PersonId, p2: PersonId, family: Family.AsObject): ReadonlyArray<Person.AsObject> {
+    const p1Children = findChildren(p1, family);
+    const p2Children = findChildren(p2, family);
+    return p1Children.filter(c1 => p2Children.some(c2 => c2.id == c1.id));
+}
