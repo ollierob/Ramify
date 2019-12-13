@@ -6,10 +6,10 @@ import {Family} from "../../../protobuf/generated/family_pb";
 import {PersonName} from "../../../components/people/PersonName";
 import {FamilyTreeId} from "../../../components/tree/FamilyTree";
 import {RelativesList} from "./RelativesList";
-import {allRelatives, determineRelatives, Relatives} from "../../../components/relationship/Relatives";
+import {determineRelatives, Relatives} from "../../../components/relationship/Relatives";
 import {ProfileEvent, sortProfileEvents} from "../../../components/event/ProfileEvent";
 import {Event} from "../../../protobuf/generated/event_pb";
-import {findBirth, findDeath} from "../../../components/event/Event";
+import {eventType, findBirth, findDeath} from "../../../components/event/Event";
 import {isDateOrdered} from "../../../components/date/DateRange";
 import {RelativeRelationship} from "../../../components/relationship/RelativeRelationship";
 
@@ -113,7 +113,13 @@ function relativeEvents(relative: Person.AsObject, relationship: RelativeRelatio
 }
 
 function retainFamilyEvent(event: Event.AsObject): boolean {
-    return event.isunique;
+    switch (eventType(event)) {
+        case "BIRTH":
+        case "DEATH":
+            return true;
+        default:
+            return false;
+    }
 }
 
 const ProfileGallery = () => {
