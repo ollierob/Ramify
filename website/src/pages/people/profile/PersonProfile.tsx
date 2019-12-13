@@ -71,7 +71,7 @@ export class PersonProfile extends React.PureComponent<Props, State> {
     }
 
     private determineEvents(person: Person.AsObject, relatives: Relatives): ReadonlyArray<ProfileEvent> {
-        return this.determinePersonEvents(person).concat(this.determineFamilyEvents(relatives)).concat(this.determineHistoricEvents()).sort(sortProfileEvents);
+        return this.determinePersonEvents(person).concat(this.determineFamilyEvents(person, relatives)).concat(this.determineHistoricEvents()).sort(sortProfileEvents);
     }
 
     private determinePersonEvents(person: Person.AsObject): ReadonlyArray<ProfileEvent> {
@@ -79,10 +79,10 @@ export class PersonProfile extends React.PureComponent<Props, State> {
         return person.eventsList.map(event => ({event, type: "person"}));
     }
 
-    private determineFamilyEvents(relatives: Relatives): ReadonlyArray<ProfileEvent> {
-        if (!relatives) return [];
+    private determineFamilyEvents(person: Person.AsObject, relatives: Relatives): ReadonlyArray<ProfileEvent> {
+        if (!person || !relatives) return [];
         const events: Event.AsObject[] = flatten(allRelatives(relatives).map(r => r.eventsList));
-        return events.map<ProfileEvent>(event => ({event, type: "family"}));
+        return events.filter(e => !e.personidList.includes(person.id)).map<ProfileEvent>(event => ({event, type: "family"}));
     }
 
     private determineHistoricEvents(): ReadonlyArray<ProfileEvent> {
