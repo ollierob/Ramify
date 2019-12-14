@@ -10,7 +10,7 @@ import {Person} from "../../protobuf/generated/person_pb";
 import {Family} from "../../protobuf/generated/family_pb";
 import {FamilyTreeId} from "../tree/FamilyTree";
 import {EventRelatedPeopleBox} from "./EventRelatedPeopleBox";
-import {Relatives} from "../relationship/Relatives";
+import {findEventSpouse, Relatives} from "../relationship/Relatives";
 import {RelativeRelationship} from "../relationship/RelativeRelationship";
 
 export type EventBoxProps = {
@@ -61,30 +61,15 @@ function typeBox(props: EventBoxProps) {
     if (!props.family || !props.relatives) return null;
     switch (eventType(props.event)) {
         case "BIRTH":
-            return <EventRelatedPeopleBox {...props} separator=" &amp; " people={[props.relatives.father, props.relatives.mother]}/>;
+            return <EventRelatedPeopleBox {...props} people={[props.relatives.father, props.relatives.mother]}/>;
         case "MARRIAGE":
-            return <RelatedPersonBox {...props}/>;
+            return <EventRelatedPeopleBox {...props} people={[findEventSpouse(props.relatives, props.event)]}/>;
         default:
-            return <RelatedPeopleBox {...props}/>;
+            return <FindRelatedPeopleBox {...props}/>;
     }
 }
 
-const RelatedPersonBox = (props: EventBoxProps & {prefix?: React.ReactNode}) => {
-    if (!props.relatives) return null;
-    const other = findOther(props.person, props.family, props.event);
-    return <EventRelatedPeopleBox {...props} people={[other]}/>;
-};
-
-function findOther(person: Person.AsObject, family: Family.AsObject, event: Event.AsObject): Person.AsObject {
-    for (const p of family.personList) {
-        if (person.id == p.id) continue;
-        const events = p.eventsList.filter(e => e.id == event.id);
-        if (events.length == 1) return p;
-    }
-    return null;
-}
-
-const RelatedPeopleBox = (props: EventBoxProps & {prefix?: React.ReactNode}) => {
+const FindRelatedPeopleBox = (props: EventBoxProps & {prefix?: React.ReactNode}) => {
     if (!props.relatives) return null;
     const others = findOtherEventPeople(props.person, props.family, props.event);
     return <EventRelatedPeopleBox {...props} people={others}/>;

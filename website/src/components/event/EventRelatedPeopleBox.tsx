@@ -7,7 +7,6 @@ import {Relatives} from "../relationship/Relatives";
 
 type Props = {
     prefix?: React.ReactNode
-    separator?: React.ReactNode;
     tree: FamilyTreeId;
     people: ReadonlyArray<Person.AsObject>;
     relatives: Relatives

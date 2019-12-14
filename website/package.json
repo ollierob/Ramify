@@ -6,7 +6,7 @@
   "dependencies": {
     "antd": "^3.26.2",
     "arr-flatten": "^1.1.0",
-    "google-protobuf": "^3.11.1",
+    "google-protobuf": "^3.11.2",
     "leaflet": "^1.6.0",
     "react-leaflet": "^2.6.0",
     "react-markdown": "^4.2.2",

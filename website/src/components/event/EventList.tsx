@@ -21,7 +21,7 @@ export class EventList extends React.PureComponent<Props> {
 
         const events = this.props.events || [];
 
-        //FIXME add event ID as key
+        //FIXME add event ID as keyEventList
         return <>
             {events.map(e => <EventBox
                 {...this.props}
