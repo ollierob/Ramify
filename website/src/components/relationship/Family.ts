@@ -3,6 +3,7 @@ import {Family} from "../../protobuf/generated/family_pb";
 import {Person} from "../../protobuf/generated/person_pb";
 import {isFemale, isMale} from "../people/Gender";
 import {findPerson, isChildParent, isParentChild, isSpouse} from "./Relationship";
+import {distinct} from "../Arrays";
 
 export function findParents(id: PersonId, family: Family.AsObject): ReadonlyArray<Person.AsObject> {
     const parentChild = family.relationshipList.filter(isParentChild).filter(r => r.toid == id).map(r => r.fromid);
@@ -19,8 +20,8 @@ export function findMother(id: PersonId, family: Family.AsObject): Person.AsObje
 }
 
 export function findSpouses(id: PersonId, family: Family.AsObject): ReadonlyArray<Person.AsObject> {
-    const spouses = family.relationshipList.filter(isSpouse);
-    const ids = (spouses.filter(r => r.fromid == id).map(r => r.toid)).concat(spouses.filter(r => r.toid == id).map(r => r.fromid));
+    const spouses = family.relationshipList.filter(isSpouse).filter(r => r.fromid == id || r.toid == id);
+    const ids = distinct(spouses.map(r => r.fromid == id ? r.toid : r.fromid));
     return ids.map(id => findPerson(id, family));
 }
 

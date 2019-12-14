@@ -87,8 +87,8 @@ export class PersonProfile extends React.PureComponent<Props, State> {
         const birth = findBirth(person.eventsList);
         const death = findDeath(person.eventsList);
         const events: ProfileEvent[] = [];
-        if (relatives.father) events.push(...relativeEvents(relatives.father, "parent", person, birth, death));
-        if (relatives.mother) events.push(...relativeEvents(relatives.mother, "parent", person, birth, death));
+        events.push(...relativeEvents(relatives.father, "parent", person, birth, death));
+        events.push(...relativeEvents(relatives.mother, "parent", person, birth, death));
         for (const s of relatives.spouses) {
             events.push(...relativeEvents(s.spouse, "spouse", person, birth, death));
             s.children.forEach(child => events.push(...relativeEvents(child, "child", person, birth, death)));
@@ -103,6 +103,7 @@ export class PersonProfile extends React.PureComponent<Props, State> {
 }
 
 function relativeEvents(relative: Person.AsObject, relationship: RelativeRelationship, mainPerson: Person.AsObject, mainBirth: Event.AsObject, mainDeath: Event.AsObject): ReadonlyArray<ProfileEvent> {
+    if (!relative) return [];
     const events: ProfileEvent[] = [];
     for (const event of relative.eventsList) {
         if (!retainFamilyEvent(event)) continue;
