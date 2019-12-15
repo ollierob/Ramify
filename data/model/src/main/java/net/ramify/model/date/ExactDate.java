@@ -8,7 +8,7 @@ import java.time.chrono.ChronoLocalDate;
 import java.util.Objects;
 import java.util.Optional;
 
-public class ExactDate extends AbstractDateRange {
+public class ExactDate implements DateRange {
 
     public static ExactDate on(final int year, final Month month, final int dayOfMonth) {
         return on(LocalDate.of(year, month, dayOfMonth));

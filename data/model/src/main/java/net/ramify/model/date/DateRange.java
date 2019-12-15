@@ -64,7 +64,9 @@ public interface DateRange extends BuildsProto<DateProto.DateRange> {
     }
 
     @Nonnull
-    Optional<DateRange> intersection(DateRange that);
+    default Optional<DateRange> intersection(DateRange that) {
+        return Optional.ofNullable(DateRanges.intersection(this, that));
+    }
 
     default boolean intersects(final DateRange that) {
         return this.intersection(that).isPresent();
@@ -81,6 +83,14 @@ public interface DateRange extends BuildsProto<DateProto.DateRange> {
     @Override
     default DateProto.DateRange toProto() {
         return this.toProtoBuilder().build();
+    }
+
+    static DateRange of(final ChronoLocalDate date) {
+        return ExactDate.on(date);
+    }
+
+    static DateRange closed(final ChronoLocalDate d1, final ChronoLocalDate d2) {
+        return ClosedDateRange.of(d1, d2);
     }
 
     static <T extends ChronoLocalDate> ChronoLocalDate covariant(final T date) {
