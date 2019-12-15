@@ -7,7 +7,7 @@ import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.region.district.RuralDistrict;
 import net.ramify.model.place.region.district.UrbanDistrict;
 import net.ramify.model.place.xml.PlaceParserContext;
-import net.ramify.model.place.xml.place.area.XmlArea;
+import net.ramify.model.place.xml.place.region.XmlRegion;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.uk.XmlUkPlace;
 
@@ -18,7 +18,7 @@ import java.util.Collection;
 import java.util.List;
 
 @XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "ruralDistrict")
-public class XmlRuralDistrict extends XmlArea<RuralDistrict> {
+public class XmlRuralDistrict extends XmlRegion<RuralDistrict> {
 
     public static final PlaceHistory DEFAULT_HISTORY = UrbanDistrict.HISTORY;
 

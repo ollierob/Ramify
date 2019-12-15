@@ -7,7 +7,7 @@ import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.region.Hundred;
 import net.ramify.model.place.xml.PlaceParserContext;
-import net.ramify.model.place.xml.place.area.XmlArea;
+import net.ramify.model.place.xml.place.region.XmlRegion;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.settlement.XmlSettlement;
 import net.ramify.model.place.xml.place.uk.manor.XmlManor;
@@ -20,7 +20,7 @@ import java.util.Collections;
 import java.util.List;
 
 @XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "rape")
-class XmlRape extends XmlArea<Hundred> {
+class XmlRape extends XmlRegion<Hundred> {
 
     static final PlaceProto.PlaceType TYPE = PlaceProto.PlaceType.newBuilder().setName("Rape").setCanPrefix(true).build();
 

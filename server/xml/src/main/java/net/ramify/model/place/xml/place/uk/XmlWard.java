@@ -7,7 +7,7 @@ import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.region.Hundred;
 import net.ramify.model.place.xml.PlaceParserContext;
-import net.ramify.model.place.xml.place.area.XmlArea;
+import net.ramify.model.place.xml.place.region.XmlRegion;
 import net.ramify.model.place.xml.place.XmlPlace;
 
 import javax.xml.bind.annotation.XmlElementRef;
@@ -18,7 +18,7 @@ import java.util.Collections;
 import java.util.List;
 
 @XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "ward")
-class XmlWard extends XmlArea<Hundred> {
+class XmlWard extends XmlRegion<Hundred> {
 
     static final PlaceProto.PlaceType TYPE = PlaceProto.PlaceType.newBuilder().setName("Ward").setCanPrefix(true).setCanSuffix(true).build();
 

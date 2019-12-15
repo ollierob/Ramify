@@ -10,7 +10,7 @@ import net.ramify.model.place.region.district.MunicipalBorough;
 import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.type.Region;
 import net.ramify.model.place.xml.PlaceParserContext;
-import net.ramify.model.place.xml.place.area.XmlArea;
+import net.ramify.model.place.xml.place.region.XmlRegion;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.settlement.XmlCity;
 import net.ramify.model.place.xml.place.settlement.XmlTown;
@@ -28,7 +28,7 @@ import java.util.List;
 import static net.ramify.model.place.xml.place.uk.XmlUkPlace.GB_ENG;
 
 @XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "municipalBorough")
-public class XmlMunicipalBorough extends XmlArea<MunicipalBorough> {
+public class XmlMunicipalBorough extends XmlRegion<MunicipalBorough> {
 
     private static final PlaceHistory DEFAULT_ENGLAND_HISTORY = new DefaultPlaceHistory(new InYears(1833), new InYears(1974));
     private static final PlaceHistory DEFAULT_IRELAND_HISTORY = new DefaultPlaceHistory(new InYears(1840), new InYears(1973));

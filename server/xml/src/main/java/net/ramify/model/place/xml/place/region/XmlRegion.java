@@ -1,4 +1,4 @@
-package net.ramify.model.place.xml.place.area;
+package net.ramify.model.place.xml.place.region;
 
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
@@ -13,11 +13,11 @@ import net.ramify.model.place.xml.place.XmlPlace;
 import javax.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
-public abstract class XmlArea<P extends Region> extends XmlPlace {
+public abstract class XmlRegion<P extends Region> extends XmlPlace {
 
     private final Class<P> type;
 
-    protected XmlArea(final Class<P> type) {
+    protected XmlRegion(final Class<P> type) {
         this.type = type;
     }
 

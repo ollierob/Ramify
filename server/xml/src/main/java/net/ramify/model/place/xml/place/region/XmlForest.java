@@ -1,11 +1,11 @@
-package net.ramify.model.place.xml.place.uk.district;
+package net.ramify.model.place.xml.place.region;
 
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
-import net.ramify.model.place.region.district.CityDistrict;
+import net.ramify.model.place.region.CountyOrSubdivision;
+import net.ramify.model.place.region.Forest;
 import net.ramify.model.place.xml.PlaceParserContext;
-import net.ramify.model.place.xml.place.region.XmlRegion;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.uk.XmlUkPlace;
 
@@ -14,20 +14,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.Collections;
 
-@XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "cityDistrict")
-public class XmlCityDistrict extends XmlRegion<CityDistrict> {
+@XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "forest")
+public class XmlForest extends XmlRegion<Forest> {
 
-    XmlCityDistrict() {
-        super(CityDistrict.class);
+    XmlForest() {
+        super(Forest.class);
     }
 
     @Override
-    protected CityDistrict place(
+    protected Forest place(
             final Place parent,
             final PlaceGroupId groupId,
             final PlaceHistory history,
             final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
-        return new CityDistrict(this.placeId(context), this.name(), parent, groupId, history);
+        return new Forest(this.placeId(context), this.name(), parent.requireAs(CountyOrSubdivision.class), groupId, history);
     }
 
     @CheckForNull
@@ -37,4 +37,3 @@ public class XmlCityDistrict extends XmlRegion<CityDistrict> {
     }
 
 }
-

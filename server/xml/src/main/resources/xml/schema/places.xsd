@@ -717,6 +717,20 @@
       
   </xs:complexType>
     
+  <xs:complexType name="xmlForest">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPlace">
+                
+        <xs:sequence/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
   <xs:complexType name="places">
         
     <xs:sequence>
@@ -764,6 +778,8 @@
         <xs:element ref="ns2:manor"/>
                 
         <xs:element ref="ns2:graveship"/>
+                
+        <xs:element ref="ns2:forest"/>
                 
         <xs:element ref="ns2:hundred"/>
                 

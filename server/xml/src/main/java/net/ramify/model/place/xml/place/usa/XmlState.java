@@ -7,7 +7,7 @@ import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.region.State;
 import net.ramify.model.place.region.iso.CountrySubdivisionIso;
 import net.ramify.model.place.xml.PlaceParserContext;
-import net.ramify.model.place.xml.place.area.XmlArea;
+import net.ramify.model.place.xml.place.region.XmlRegion;
 import net.ramify.model.place.xml.place.XmlPlace;
 
 import javax.annotation.CheckForNull;
@@ -21,7 +21,7 @@ import java.util.Collections;
 import java.util.List;
 
 @XmlRootElement(namespace = XmlUsaPlace.NAMESPACE, name = "state")
-public class XmlState extends XmlArea<State> {
+public class XmlState extends XmlRegion<State> {
 
     @XmlElementRefs({
             @XmlElementRef(type = XmlCounty.class),

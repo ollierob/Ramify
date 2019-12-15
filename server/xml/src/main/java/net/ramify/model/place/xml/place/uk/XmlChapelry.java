@@ -6,7 +6,7 @@ import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.region.Chapelry;
 import net.ramify.model.place.xml.PlaceParserContext;
-import net.ramify.model.place.xml.place.area.XmlArea;
+import net.ramify.model.place.xml.place.region.XmlRegion;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.building.XmlChurch;
 import net.ramify.model.place.xml.place.building.XmlSchool;
@@ -21,7 +21,7 @@ import java.util.Collections;
 import java.util.List;
 
 @XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "chapelry")
-public class XmlChapelry extends XmlArea<Chapelry> {
+public class XmlChapelry extends XmlRegion<Chapelry> {
 
     @XmlElementRefs({
             @XmlElementRef(type = XmlTownship.class),

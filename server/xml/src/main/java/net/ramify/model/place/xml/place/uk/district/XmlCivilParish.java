@@ -6,7 +6,7 @@ import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.region.district.CivilParish;
 import net.ramify.model.place.xml.PlaceParserContext;
-import net.ramify.model.place.xml.place.area.XmlArea;
+import net.ramify.model.place.xml.place.region.XmlRegion;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.settlement.XmlTown;
 import net.ramify.model.place.xml.place.settlement.XmlVillage;
@@ -19,7 +19,7 @@ import java.util.Collection;
 import java.util.List;
 
 @XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "civilParish")
-public class XmlCivilParish extends XmlArea<CivilParish> {
+public class XmlCivilParish extends XmlRegion<CivilParish> {
 
     static final PlaceHistory HISTORY = XmlMetropolitanBorough.MODERN_HISTORY;
 

@@ -10,6 +10,7 @@ import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.region.manor.Manor;
 import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
+import net.ramify.model.place.xml.place.region.XmlForest;
 import net.ramify.model.place.xml.place.uk.XmlUkPlace;
 
 import javax.xml.bind.annotation.XmlElementRef;
@@ -24,7 +25,8 @@ public class XmlManor extends XmlPlace {
 
     @XmlElementRefs({
             @XmlElementRef(type = XmlManor.class),
-            @XmlElementRef(type = XmlGraveship.class)
+            @XmlElementRef(type = XmlGraveship.class),
+            @XmlElementRef(type = XmlForest.class)
     })
     private List<XmlPlace> children;
 

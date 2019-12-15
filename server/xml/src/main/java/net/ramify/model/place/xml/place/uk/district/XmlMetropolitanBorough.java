@@ -10,7 +10,7 @@ import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.region.district.MetropolitanBorough;
 import net.ramify.model.place.region.iso.CountrySubdivisionIso;
 import net.ramify.model.place.xml.PlaceParserContext;
-import net.ramify.model.place.xml.place.area.XmlArea;
+import net.ramify.model.place.xml.place.region.XmlRegion;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.settlement.XmlCity;
 import net.ramify.model.place.xml.place.settlement.XmlTown;
@@ -26,7 +26,7 @@ import java.util.Collection;
 import java.util.List;
 
 @XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "metropolitanBorough")
-public class XmlMetropolitanBorough extends XmlArea<MetropolitanBorough> {
+public class XmlMetropolitanBorough extends XmlRegion<MetropolitanBorough> {
 
     static final PlaceHistory MODERN_HISTORY = new DefaultPlaceHistory(ExactDate.on(1974, Month.APRIL, 1), null);
     static final PlaceHistory LONDON_HISTORY = new DefaultPlaceHistory(new InYears(1900), new InYears(1965));
