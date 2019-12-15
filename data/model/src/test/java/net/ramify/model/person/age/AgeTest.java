@@ -56,6 +56,12 @@ class AgeTest {
                 return Optional.of(date);
             }
 
+            @Nonnull
+            @Override
+            public Optional<DateRange> intersection(DateRange that) {
+                throw new UnsupportedOperationException(); //TODO
+            }
+
         };
 
         final var birthDate = Age.birthDate(1, dateRange);

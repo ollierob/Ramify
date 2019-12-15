@@ -6,11 +6,11 @@ import javax.annotation.Nonnull;
 import java.time.chrono.ChronoLocalDate;
 import java.util.Optional;
 
-class AgeDateRange implements DateRange {
+public class AgeDateRange implements DateRange {
 
     private final Optional<? extends ChronoLocalDate> earliest, latest;
 
-    AgeDateRange(Optional<? extends ChronoLocalDate> earliest, Optional<? extends ChronoLocalDate> latest) {
+    public AgeDateRange(Optional<? extends ChronoLocalDate> earliest, Optional<? extends ChronoLocalDate> latest) {
         this.earliest = earliest;
         this.latest = latest;
     }
@@ -26,4 +26,11 @@ class AgeDateRange implements DateRange {
     public Optional<? extends ChronoLocalDate> latestInclusive() {
         return latest;
     }
+
+    @Nonnull
+    @Override
+    public Optional<DateRange> intersection(final DateRange that) {
+        throw new UnsupportedOperationException(); //TODO
+    }
+
 }

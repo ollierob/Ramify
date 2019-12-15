@@ -29,6 +29,11 @@ public class GenericBirthEvent extends AbstractPersonEvent<GenericBirthEvent> im
         return BirthEvent.super.givenAge();
     }
 
+    @Override
+    public Optional<String> occupation() {
+        return BirthEvent.super.occupation();
+    }
+
     @Nonnull
     @Override
     public EventProto.Event.Builder toProtoBuilder() {

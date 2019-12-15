@@ -5,7 +5,7 @@ import java.time.chrono.ChronoLocalDate;
 import java.util.Collection;
 import java.util.Optional;
 
-public class ClosedDateRange implements DateRange {
+public class ClosedDateRange extends AbstractDateRange {
 
     public static DateRange of(final DateRange s, final DateRange e) {
         final var earliest = s.earliestInclusive().orElse(null);
