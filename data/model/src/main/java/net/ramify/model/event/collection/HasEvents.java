@@ -22,8 +22,8 @@ public interface HasEvents extends HasPlaces {
     Set<? extends Event> events();
 
     @Nonnull
-    default <E extends Event> Set<E> findAllEvents(final Class<E> clazz) {
-        return IterableUtils.findAll(this.events(), clazz);
+    default <E extends Event> Set<E> findEvents(final Class<E> eventType) {
+        return IterableUtils.findAll(this.events(), eventType);
     }
 
     @Nonnull
