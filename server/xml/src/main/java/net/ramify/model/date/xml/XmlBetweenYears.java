@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDate;
 
-@XmlRootElement(namespace = XmlDateRange.NAMESPACE)
+@XmlRootElement(namespace = XmlDateRange.NAMESPACE, name = "betweenYears")
 public class XmlBetweenYears extends XmlDateRange {
 
     @XmlAttribute(name = "start", required = true)

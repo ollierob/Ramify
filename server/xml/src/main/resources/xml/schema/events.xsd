@@ -47,9 +47,9 @@
                 
         <xs:element ref="ns1:inQuarter"/>
                 
-        <xs:element ref="ns1:xmlBeforeYear"/>
+        <xs:element ref="ns1:betweenYears"/>
                 
-        <xs:element ref="ns1:xmlBetweenYears"/>
+        <xs:element ref="ns1:xmlBeforeYear"/>
               
       </xs:choice>
             

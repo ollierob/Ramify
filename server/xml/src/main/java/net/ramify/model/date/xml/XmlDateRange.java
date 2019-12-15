@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlType(namespace = XmlDateRange.NAMESPACE)
-@XmlSeeAlso({XmlBeforeDate.class, XmlInYear.class, XmlExactDate.class, XmlInQuarter.class})
+@XmlSeeAlso({XmlBeforeDate.class, XmlInYear.class, XmlExactDate.class, XmlInQuarter.class, XmlBetweenYears.class})
 public abstract class XmlDateRange {
 
     public static final String NAMESPACE = "http://ramify.net/dates";

@@ -167,9 +167,9 @@
                 
         <xs:element ref="ns2:inQuarter"/>
                 
-        <xs:element ref="ns2:xmlBeforeYear"/>
+        <xs:element ref="ns2:betweenYears"/>
                 
-        <xs:element ref="ns2:xmlBetweenYears"/>
+        <xs:element ref="ns2:xmlBeforeYear"/>
               
       </xs:choice>
             
@@ -275,9 +275,9 @@
                         
             <xs:element ref="ns2:inQuarter"/>
                         
-            <xs:element ref="ns2:xmlBeforeYear"/>
+            <xs:element ref="ns2:betweenYears"/>
                         
-            <xs:element ref="ns2:xmlBetweenYears"/>
+            <xs:element ref="ns2:xmlBeforeYear"/>
                       
           </xs:choice>
                     
@@ -307,9 +307,9 @@
                     
           <xs:element ref="ns2:inQuarter"/>
                     
-          <xs:element ref="ns2:xmlBeforeYear"/>
+          <xs:element ref="ns2:betweenYears"/>
                     
-          <xs:element ref="ns2:xmlBetweenYears"/>
+          <xs:element ref="ns2:xmlBeforeYear"/>
                   
         </xs:choice>
                 
@@ -339,9 +339,9 @@
                         
             <xs:element ref="ns2:inQuarter"/>
                         
-            <xs:element ref="ns2:xmlBeforeYear"/>
+            <xs:element ref="ns2:betweenYears"/>
                         
-            <xs:element ref="ns2:xmlBetweenYears"/>
+            <xs:element ref="ns2:xmlBeforeYear"/>
                       
           </xs:choice>
                     
@@ -843,9 +843,9 @@
                     
           <xs:element ref="ns2:inQuarter"/>
                     
-          <xs:element ref="ns2:xmlBeforeYear"/>
+          <xs:element ref="ns2:betweenYears"/>
                     
-          <xs:element ref="ns2:xmlBetweenYears"/>
+          <xs:element ref="ns2:xmlBeforeYear"/>
                   
         </xs:choice>
               
@@ -947,9 +947,9 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="church"/>
-            
       <xs:enumeration value="government"/>
+            
+      <xs:enumeration value="church"/>
             
       <xs:enumeration value="manor"/>
           
@@ -963,11 +963,9 @@
             
       <xs:enumeration value="burial"/>
             
-      <xs:enumeration value="birth"/>
+      <xs:enumeration value="marriage"/>
             
       <xs:enumeration value="census"/>
-            
-      <xs:enumeration value="death"/>
             
       <xs:enumeration value="payment"/>
             
@@ -975,13 +973,15 @@
             
       <xs:enumeration value="baptism"/>
             
+      <xs:enumeration value="residence"/>
+            
       <xs:enumeration value="mixed"/>
             
       <xs:enumeration value="membership"/>
             
-      <xs:enumeration value="marriage"/>
+      <xs:enumeration value="death"/>
             
-      <xs:enumeration value="residence"/>
+      <xs:enumeration value="birth"/>
           
     </xs:restriction>
       
@@ -991,13 +991,13 @@
         
     <xs:restriction base="xs:string">
             
+      <xs:enumeration value="parent"/>
+            
       <xs:enumeration value="child"/>
             
       <xs:enumeration value="spouse"/>
             
       <xs:enumeration value="head"/>
-            
-      <xs:enumeration value="parent"/>
           
     </xs:restriction>
       
@@ -1007,9 +1007,9 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="widowed"/>
-            
       <xs:enumeration value="unmarried"/>
+            
+      <xs:enumeration value="widowed"/>
             
       <xs:enumeration value="married"/>
           
