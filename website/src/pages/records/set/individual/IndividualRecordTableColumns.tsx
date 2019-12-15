@@ -130,7 +130,7 @@ const DeathDateColumn: IndividualRecordColumn = {
     title: "Died",
     dataIndex: "death.date",
     render: (t, r) => r.death && <>{formatDateRange(r.death.date, "day")}</>,
-    width: 120
+    width: 130
 };
 
 const DeathAgeColumn: IndividualRecordColumn = {
