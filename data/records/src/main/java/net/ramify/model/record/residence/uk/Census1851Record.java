@@ -7,6 +7,7 @@ import net.ramify.model.event.collection.MutablePersonEventSet;
 import net.ramify.model.event.collection.PersonEventSet;
 import net.ramify.model.event.collection.SingletonPersonEventSet;
 import net.ramify.model.event.infer.MarriageConditionEventInference;
+import net.ramify.model.event.merge.UniqueEventMerger;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.person.Person;
@@ -38,16 +39,19 @@ public class Census1851Record extends CensusRecord {
 
     private final Census1851Head head;
     private final List<Census1851Resident> residents;
+    private final UniqueEventMerger eventMerger;
 
     public Census1851Record(
             final RecordId id,
             final RecordSet recordSet,
             final Place place,
             final Census1851Head head,
-            final List<Census1851Resident> residents) {
+            final List<Census1851Resident> residents,
+            final UniqueEventMerger eventMerger) {
         super(id, recordSet, CENSUS_DATE, place);
         this.head = head;
         this.residents = residents;
+        this.eventMerger = eventMerger;
     }
 
     PersonId headId() {
@@ -130,7 +134,8 @@ public class Census1851Record extends CensusRecord {
                     birthPlace,
                     condition.inferEvents(id, record),
                     condition,
-                    occupation);
+                    occupation,
+                    record.eventMerger);
         }
 
     }
@@ -174,6 +179,7 @@ public class Census1851Record extends CensusRecord {
         private final Relationship relationshipToHead;
         private final Set<? extends Event> extraEvents;
         private final MarriageConditionEventInference condition;
+        private final UniqueEventMerger eventMerger;
 
         Census1851Person(
                 final PersonId id,
@@ -185,7 +191,8 @@ public class Census1851Record extends CensusRecord {
                 final Place birthPlace,
                 final Set<? extends Event> extraEvents,
                 final MarriageConditionEventInference condition,
-                final String occupation) {
+                final String occupation,
+                final UniqueEventMerger eventMerger) {
             super(id, name, gender, CENSUS_DATE, occupation);
             this.residencePlace = Objects.requireNonNull(residencePlace, "residence place");
             this.age = age;
@@ -193,6 +200,7 @@ public class Census1851Record extends CensusRecord {
             this.relationshipToHead = relationshipToHead;
             this.extraEvents = extraEvents;
             this.condition = condition;
+            this.eventMerger = eventMerger;
         }
 
         boolean isHead() {
@@ -206,7 +214,7 @@ public class Census1851Record extends CensusRecord {
         @Nonnull
         @Override
         public PersonEventSet events() {
-            final var events = new MutablePersonEventSet(this.birth(age, birthPlace), this.residence(age, residencePlace));
+            final var events = new MutablePersonEventSet(eventMerger, this.birth(age, birthPlace), this.residence(age, residencePlace));
             events.addAll(extraEvents);
             return events;
         }

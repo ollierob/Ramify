@@ -63,11 +63,12 @@ public class RecordContext extends ParserContext {
     }
 
     @Nonnull
-    public UniqueEventMerger eventMergers() {
+    public UniqueEventMerger uniqueEventMerger() {
         return eventMergers;
     }
 
     public RecordContext onDate(final DateRange date) {
+        if (date == this.recordDate) return this;
         return new RecordContext(nameParser(), dateParser(), places, archives, date, eventMergers);
     }
 

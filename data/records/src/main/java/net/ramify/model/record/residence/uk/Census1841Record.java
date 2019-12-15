@@ -5,6 +5,7 @@ import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.EventBuilder;
 import net.ramify.model.event.collection.MutablePersonEventSet;
 import net.ramify.model.event.collection.PersonEventSet;
+import net.ramify.model.event.merge.UniqueEventMerger;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyOfUnknownRelationships;
 import net.ramify.model.person.AbstractPerson;
@@ -30,14 +31,17 @@ public class Census1841Record extends CensusRecord implements HasPlace {
     public static final ExactDate CENSUS_DATE = ExactDate.on(1841, Month.JUNE, 6);
 
     private final List<Census1841Entry> entries;
+    private final UniqueEventMerger eventMerger;
 
     public Census1841Record(
             final RecordId id,
             final RecordSet recordSet,
             final Place place,
-            final List<Census1841Entry> entries) {
+            final List<Census1841Entry> entries,
+            final UniqueEventMerger eventMerger) {
         super(id, recordSet, CENSUS_DATE, place);
         this.entries = entries;
+        this.eventMerger = eventMerger;
     }
 
     @Nonnull
@@ -90,7 +94,7 @@ public class Census1841Record extends CensusRecord implements HasPlace {
         }
 
         Census1841Person build(final Census1841Record record) {
-            return new Census1841Person(id, name, gender, record.place(), record.inferBirthDate(age), birthPlace, age, occupation);
+            return new Census1841Person(id, name, gender, record.place(), record.inferBirthDate(age), birthPlace, age, occupation, record.eventMerger);
         }
 
     }
@@ -102,6 +106,7 @@ public class Census1841Record extends CensusRecord implements HasPlace {
         private final Age age;
         private final DateRange birthDate;
         private final String occupation;
+        private final UniqueEventMerger eventMerger;
 
         Census1841Person(
                 final PersonId id,
@@ -111,19 +116,22 @@ public class Census1841Record extends CensusRecord implements HasPlace {
                 final DateRange birthDate,
                 final Place birthPlace,
                 final Age age,
-                final String occupation) {
+                final String occupation,
+                final UniqueEventMerger eventMerger) {
             super(id, name, gender);
             this.residencePlace = residencePlace;
             this.birthPlace = birthPlace;
             this.birthDate = birthDate;
             this.age = age;
             this.occupation = occupation;
+            this.eventMerger = eventMerger;
         }
 
         @Nonnull
         @Override
         public PersonEventSet events() {
             return new MutablePersonEventSet(
+                    eventMerger,
                     EventBuilder.builderWithRandomId(birthDate).withPlace(birthPlace).toBirth(this.personId()),
                     EventBuilder.builderWithRandomId(CENSUS_DATE).withGivenAge(age).withPlace(residencePlace).withOccupation(occupation).toResidence(this.personId()));
         }

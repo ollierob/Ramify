@@ -32,7 +32,7 @@ public class XmlEngland1851CensusRecord extends XmlEnglandCensus {
         final var place = this.place(context.places(), censusPlace);
         final var head = this.head(context);
         final var others = this.others(context);
-        return new Census1851Record(this.recordId(), recordSet, place, head, others);
+        return new Census1851Record(this.recordId(), recordSet, place, head, others, context.uniqueEventMerger());
     }
 
     Place place(final PlaceProvider places, final Place censusPlace) {

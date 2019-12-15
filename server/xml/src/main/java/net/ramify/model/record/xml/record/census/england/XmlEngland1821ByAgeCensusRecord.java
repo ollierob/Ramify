@@ -78,7 +78,8 @@ public class XmlEngland1821ByAgeCensusRecord extends XmlEnglandCensus {
                 recordSet,
                 place,
                 head,
-                ageCounts);
+                ageCounts,
+                context.uniqueEventMerger());
     }
 
     @Nonnull
