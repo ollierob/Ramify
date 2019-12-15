@@ -10,7 +10,6 @@ import net.ramify.model.place.region.County;
 
 public class RuralDistrict extends AbstractRegion implements District {
 
-    public static final PlaceHistory HISTORY = UrbanDistrict.HISTORY;
     private static final PlaceProto.PlaceType PLACE_TYPE = placeType("Rural District");
 
     private final County parent;

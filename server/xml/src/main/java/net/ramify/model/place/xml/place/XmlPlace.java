@@ -1,7 +1,6 @@
 package net.ramify.model.place.xml.place;
 
 import com.google.common.collect.Sets;
-import net.ramify.model.ParserContext;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.date.xml.XmlBeforeYear;
@@ -122,7 +121,7 @@ public abstract class XmlPlace {
         return closed == null ? null : closed.resolve(dates);
     }
 
-    protected PlaceHistory history(final ParserContext context) {
+    protected PlaceHistory history(final PlaceParserContext context) {
         return opened == null && closed == null
                 ? null
                 : new DefaultPlaceHistory(this.opened(context.dateParser()), this.closed(context.dateParser()));

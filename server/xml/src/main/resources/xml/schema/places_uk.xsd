@@ -3,6 +3,8 @@
     
   <xs:import namespace="http://ramify.net/places" schemaLocation="places.xsd"/>
     
+  <xs:element name="borough" type="tns:xmlBorough"/>
+    
   <xs:element name="chapelry" type="tns:xmlChapelry"/>
     
   <xs:element name="cityDistrict" type="tns:xmlCityDistrict"/>
@@ -24,6 +26,8 @@
   <xs:element name="manor" type="tns:xmlManor"/>
     
   <xs:element name="metropolitanBorough" type="tns:xmlMetropolitanBorough"/>
+    
+  <xs:element name="municipalBorough" type="tns:xmlMunicipalBorough"/>
     
   <xs:element name="parish" type="tns:xmlParish"/>
     
@@ -99,7 +103,11 @@
                         
             <xs:element ref="tns:ward"/>
                         
+            <xs:element ref="tns:borough"/>
+                        
             <xs:element ref="tns:metropolitanBorough"/>
+                        
+            <xs:element ref="tns:municipalBorough"/>
                         
             <xs:element ref="tns:urbanDistrict"/>
                         
@@ -409,6 +417,30 @@
       
   </xs:complexType>
     
+  <xs:complexType name="xmlBorough">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="ns1:xmlPlace">
+                
+        <xs:sequence>
+                    
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        
+            <xs:element ref="ns1:town"/>
+                        
+            <xs:element ref="ns1:village"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
   <xs:complexType name="xmlMetropolitanBorough">
         
     <xs:complexContent>
@@ -448,6 +480,34 @@
         <xs:sequence>
                     
           <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        
+            <xs:element ref="ns1:town"/>
+                        
+            <xs:element ref="ns1:village"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlMunicipalBorough">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="ns1:xmlPlace">
+                
+        <xs:sequence>
+                    
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        
+            <xs:element ref="tns:civilParish"/>
+                        
+            <xs:element ref="ns1:city"/>
                         
             <xs:element ref="ns1:town"/>
                         

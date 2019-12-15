@@ -1,11 +1,11 @@
 package net.ramify.model.place.xml.place.uk.district;
 
 import com.google.common.base.MoreObjects;
-import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.region.district.RuralDistrict;
+import net.ramify.model.place.region.district.UrbanDistrict;
 import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlArea;
 import net.ramify.model.place.xml.place.XmlPlace;
@@ -19,6 +19,8 @@ import java.util.List;
 
 @XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "ruralDistrict")
 public class XmlRuralDistrict extends XmlArea<RuralDistrict> {
+
+    public static final PlaceHistory DEFAULT_HISTORY = UrbanDistrict.HISTORY;
 
     @XmlElementRefs({
             @XmlElementRef(type = XmlCivilParish.class),
@@ -40,8 +42,8 @@ public class XmlRuralDistrict extends XmlArea<RuralDistrict> {
     }
 
     @Override
-    protected PlaceHistory history(final ParserContext context) {
-        return MoreObjects.firstNonNull(super.history(context), RuralDistrict.HISTORY);
+    protected PlaceHistory history(final PlaceParserContext context) {
+        return MoreObjects.firstNonNull(super.history(context), DEFAULT_HISTORY);
     }
 
 }

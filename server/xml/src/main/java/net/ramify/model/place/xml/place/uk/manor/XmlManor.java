@@ -1,7 +1,6 @@
 package net.ramify.model.place.xml.place.uk.manor;
 
 import com.google.common.base.MoreObjects;
-import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
@@ -40,7 +39,7 @@ public class XmlManor extends XmlPlace {
     }
 
     @Override
-    protected PlaceHistory history(ParserContext context) {
+    protected PlaceHistory history(final PlaceParserContext context) {
         return MoreObjects.firstNonNull(super.history(context), Manor.DEFAULT_HISTORY);
     }
 

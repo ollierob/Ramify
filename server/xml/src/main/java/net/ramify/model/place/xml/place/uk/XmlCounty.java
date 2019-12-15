@@ -12,8 +12,10 @@ import net.ramify.model.place.region.iso.CountrySubdivisionIso;
 import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.settlement.XmlCity;
+import net.ramify.model.place.xml.place.uk.district.XmlBorough;
 import net.ramify.model.place.xml.place.uk.district.XmlLondonBorough;
 import net.ramify.model.place.xml.place.uk.district.XmlMetropolitanBorough;
+import net.ramify.model.place.xml.place.uk.district.XmlMunicipalBorough;
 import net.ramify.model.place.xml.place.uk.district.XmlRuralDistrict;
 import net.ramify.model.place.xml.place.uk.district.XmlUrbanDistrict;
 import net.ramify.model.place.xml.place.uk.manor.XmlManor;
@@ -39,7 +41,9 @@ class XmlCounty extends XmlPlace {
             @XmlElementRef(type = XmlRape.class),
             @XmlElementRef(type = XmlLathe.class),
             @XmlElementRef(type = XmlWard.class),
+            @XmlElementRef(type = XmlBorough.class),
             @XmlElementRef(type = XmlMetropolitanBorough.class),
+            @XmlElementRef(type = XmlMunicipalBorough.class),
             @XmlElementRef(type = XmlUrbanDistrict.class),
             @XmlElementRef(type = XmlRuralDistrict.class),
             @XmlElementRef(type = XmlLondonBorough.class)

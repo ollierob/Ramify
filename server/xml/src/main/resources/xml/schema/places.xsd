@@ -775,9 +775,13 @@
                 
         <xs:element ref="ns2:ward"/>
                 
+        <xs:element ref="ns2:borough"/>
+                
         <xs:element ref="ns2:metropolitanBorough"/>
                 
         <xs:element ref="ns2:civilParish"/>
+                
+        <xs:element ref="ns2:municipalBorough"/>
                 
         <xs:element ref="ns2:urbanDistrict"/>
                 

@@ -1,7 +1,6 @@
 package net.ramify.model.place.xml.place.uk.district;
 
 import com.google.common.base.MoreObjects;
-import net.ramify.model.ParserContext;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.date.InYears;
 import net.ramify.model.place.DefaultPlaceHistory;
@@ -53,7 +52,7 @@ public class XmlMetropolitanBorough extends XmlArea<MetropolitanBorough> {
     }
 
     @Override
-    protected PlaceHistory history(final ParserContext context) {
+    protected PlaceHistory history(final PlaceParserContext context) {
         return MoreObjects.firstNonNull(super.history(context), MODERN_HISTORY);
     }
 

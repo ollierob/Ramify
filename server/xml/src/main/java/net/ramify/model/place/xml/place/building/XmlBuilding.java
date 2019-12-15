@@ -1,6 +1,5 @@
 package net.ramify.model.place.xml.place.building;
 
-import net.ramify.model.ParserContext;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.date.xml.XmlBeforeYear;
@@ -86,7 +85,7 @@ public abstract class XmlBuilding<P extends Place> extends XmlPlace {
     }
 
     @Override
-    protected BuildingHistory history(final ParserContext context) {
+    protected BuildingHistory history(final PlaceParserContext context) {
         return new DefaultBuildingHistory(this.built(context.dateParser()), this.closed(context.dateParser()), this.isDemolished());
     }
 
