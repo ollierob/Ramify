@@ -1,4 +1,4 @@
-package net.ramify.model.place.xml.place;
+package net.ramify.model.place.xml.place.area;
 
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
@@ -8,6 +8,7 @@ import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.type.Region;
 import net.ramify.model.place.xml.PlaceParserContext;
+import net.ramify.model.place.xml.place.XmlPlace;
 
 import javax.xml.bind.annotation.XmlTransient;
 

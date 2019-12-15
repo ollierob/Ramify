@@ -9,7 +9,7 @@ import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.region.district.Borough;
 import net.ramify.model.place.region.iso.CountrySubdivisionIso;
 import net.ramify.model.place.xml.PlaceParserContext;
-import net.ramify.model.place.xml.place.XmlArea;
+import net.ramify.model.place.xml.place.area.XmlArea;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.uk.XmlUkPlace;
 

@@ -10,7 +10,7 @@ import net.ramify.model.place.region.district.MunicipalBorough;
 import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.type.Region;
 import net.ramify.model.place.xml.PlaceParserContext;
-import net.ramify.model.place.xml.place.XmlArea;
+import net.ramify.model.place.xml.place.area.XmlArea;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.settlement.XmlCity;
 import net.ramify.model.place.xml.place.settlement.XmlTown;

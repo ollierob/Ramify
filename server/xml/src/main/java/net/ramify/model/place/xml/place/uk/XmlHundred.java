@@ -8,7 +8,7 @@ import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.region.CountyOrSubdivision;
 import net.ramify.model.place.region.Hundred;
 import net.ramify.model.place.xml.PlaceParserContext;
-import net.ramify.model.place.xml.place.XmlArea;
+import net.ramify.model.place.xml.place.area.XmlArea;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.uk.manor.XmlManor;
 
