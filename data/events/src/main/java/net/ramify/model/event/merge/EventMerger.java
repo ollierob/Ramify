@@ -10,4 +10,8 @@ public interface EventMerger<E extends Event> extends Merger<E, E> {
         return event;
     }
 
+    static <E extends Event> EventMerger<E> useRight() {
+        return (e1, e2) -> Result.of(e2);
+    }
+
 }

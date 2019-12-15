@@ -3,6 +3,7 @@ package net.ramify.model.strategy;
 import com.google.common.base.Preconditions;
 import net.meerkat.functions.optionals.OptionalBoolean;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -33,6 +34,11 @@ public interface Merger<F, T> {
 
         default T orElse(final T value) {
             return this.value().orElse(value);
+        }
+
+        @CheckForNull
+        default T orNull() {
+            return this.value().orElse(null);
         }
 
         default boolean isMergeable() {
