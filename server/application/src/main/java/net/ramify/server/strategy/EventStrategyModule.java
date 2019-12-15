@@ -7,6 +7,9 @@ import net.ramify.model.event.merge.EventMerger;
 import net.ramify.model.event.merge.UniqueEventMerger;
 import net.ramify.model.event.type.BirthEvent;
 import net.ramify.model.event.type.DeathEvent;
+import net.ramify.model.place.merge.PlaceMerger;
+import net.ramify.strategy.merge.event.BirthEventMerger;
+import net.ramify.strategy.merge.event.DeathEventMerger;
 
 import javax.annotation.Nonnull;
 import javax.inject.Singleton;
@@ -19,14 +22,14 @@ class EventStrategyModule extends PrivateModule {
 
     @Provides
     @Singleton
-    EventMerger<BirthEvent> provideBirthMerger() {
-        return EventMerger.useNonInferred(EventMerger.useRight());
+    EventMerger<BirthEvent> provideBirthMerger(final PlaceMerger placeMerger) {
+        return new BirthEventMerger(placeMerger);
     }
 
     @Provides
     @Singleton
-    EventMerger<DeathEvent> provideDeathMerger() {
-        return EventMerger.useNonInferred(EventMerger.useRight());
+    EventMerger<DeathEvent> provideDeathMerger(final PlaceMerger placeMerger) {
+        return new DeathEventMerger(placeMerger);
     }
 
     @Provides

@@ -5,9 +5,9 @@ import net.ramify.model.event.type.burial.BurialEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.place.merge.PlaceMerger;
 
-public class BurialMerger extends AbstractEventMerger<BurialEvent> {
+public class BurialEventMerger extends AbstractEventMerger<BurialEvent> {
 
-    BurialMerger(final PlaceMerger placeMerger) {
+    BurialEventMerger(final PlaceMerger placeMerger) {
         super(placeMerger);
     }
 

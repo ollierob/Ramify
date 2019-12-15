@@ -5,9 +5,9 @@ import net.ramify.model.event.type.BirthEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.place.merge.PlaceMerger;
 
-public class BirthMerger extends AbstractEventMerger<BirthEvent> {
+public class BirthEventMerger extends AbstractEventMerger<BirthEvent> {
 
-    public BirthMerger(final PlaceMerger placeMerger) {
+    public BirthEventMerger(final PlaceMerger placeMerger) {
         super(placeMerger);
     }
 

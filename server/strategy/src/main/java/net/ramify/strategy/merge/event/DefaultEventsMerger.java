@@ -10,10 +10,10 @@ import javax.annotation.Nonnull;
 
 public class DefaultEventsMerger implements EventsMerger {
 
-    private final BirthMerger births;
-    private final DeathMerger deaths;
+    private final BirthEventMerger births;
+    private final DeathEventMerger deaths;
 
-    public DefaultEventsMerger(final BirthMerger births, final DeathMerger deaths) {
+    public DefaultEventsMerger(final BirthEventMerger births, final DeathEventMerger deaths) {
         this.births = births;
         this.deaths = deaths;
     }

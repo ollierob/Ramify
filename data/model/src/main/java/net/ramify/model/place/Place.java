@@ -46,6 +46,10 @@ public interface Place extends HasPlaceId, Castable<Place>, BuildsProto<PlacePro
         return this.isParentOf(that.parent());
     }
 
+    default boolean isChildOf(final Place that) {
+        return that != null && that.isParentOf(this);
+    }
+
     @Nonnull
     default <P extends Place> Optional<P> find(final Class<P> type) {
         if (this.is(type)) return this.as(type);
