@@ -777,9 +777,9 @@
                 
         <xs:element ref="ns2:borough"/>
                 
-        <xs:element ref="ns2:metropolitanBorough"/>
-                
         <xs:element ref="ns2:civilParish"/>
+                
+        <xs:element ref="ns2:metropolitanBorough"/>
                 
         <xs:element ref="ns2:municipalBorough"/>
                 

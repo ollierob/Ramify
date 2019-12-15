@@ -58,7 +58,9 @@ public class XmlMunicipalBorough extends XmlArea<MunicipalBorough> {
 
     @Override
     protected PlaceHistory history(final PlaceParserContext context) {
-        return MoreObjects.firstNonNull(super.history(context), this.defaultHistory(context.countryIso()));
+        var history = super.history(context);
+        if (history == null) history = this.defaultHistory(context.countryIso());
+        return history;
     }
 
     protected PlaceHistory defaultHistory(final CountryIso iso) {

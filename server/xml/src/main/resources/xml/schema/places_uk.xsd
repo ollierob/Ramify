@@ -430,6 +430,32 @@
             <xs:element ref="ns1:town"/>
                         
             <xs:element ref="ns1:village"/>
+                        
+            <xs:element ref="tns:civilParish"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlCivilParish">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="ns1:xmlPlace">
+                
+        <xs:sequence>
+                    
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        
+            <xs:element ref="ns1:town"/>
+                        
+            <xs:element ref="ns1:village"/>
                       
           </xs:choice>
                   
@@ -464,30 +490,6 @@
         </xs:sequence>
                 
         <xs:attribute name="iso" type="xs:string"/>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlCivilParish">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="ns1:xmlPlace">
-                
-        <xs:sequence>
-                    
-          <xs:choice maxOccurs="unbounded" minOccurs="0">
-                        
-            <xs:element ref="ns1:town"/>
-                        
-            <xs:element ref="ns1:village"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
               
       </xs:extension>
           

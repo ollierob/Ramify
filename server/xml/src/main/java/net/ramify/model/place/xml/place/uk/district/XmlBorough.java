@@ -27,6 +27,7 @@ public class XmlBorough extends XmlArea<Borough> {
     @XmlElementRefs({
             @XmlElementRef(type = XmlTown.class),
             @XmlElementRef(type = XmlVillage.class),
+            @XmlElementRef(type = XmlCivilParish.class),
     })
     private List<XmlPlace> children;
 
