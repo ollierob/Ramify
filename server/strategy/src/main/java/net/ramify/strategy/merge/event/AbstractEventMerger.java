@@ -1,6 +1,7 @@
 package net.ramify.strategy.merge.event;
 
 import net.ramify.model.date.DateRange;
+import net.ramify.model.event.EventBuilder;
 import net.ramify.model.event.EventId;
 import net.ramify.model.event.merge.EventMerger;
 import net.ramify.model.event.type.UniqueEvent;
@@ -29,11 +30,18 @@ abstract class AbstractEventMerger<E extends UniqueEvent> implements EventMerger
         final var place = placeMerger.merge(HasPlace.place(e1), HasPlace.place(e2));
         if (place.isImpossibleMerge()) return Result.impossible();
 
-        return Result.of(this.merge(e1.personId(), date.get(), place.orElse(null)));
+        final var builder = this.eventBuilder(date.get(), place.orElse(null))
+                .setInferred(e1.isInferred() && e2.isInferred());
+        
+        return Result.of(this.merge(e1.personId(), builder));
 
     }
 
-    abstract E merge(PersonId id, DateRange date, Place place);
+    EventBuilder eventBuilder(final DateRange date, final Place place) {
+        return EventBuilder.builderWithRandomId(date).withPlace(place);
+    }
+
+    abstract E merge(PersonId id, EventBuilder builder);
 
     EventId randomEventId() {
         return EventId.random();

@@ -1,9 +1,8 @@
 package net.ramify.strategy.merge.event;
 
-import net.ramify.model.date.DateRange;
+import net.ramify.model.event.EventBuilder;
 import net.ramify.model.event.type.BirthEvent;
 import net.ramify.model.person.PersonId;
-import net.ramify.model.place.Place;
 import net.ramify.strategy.merge.place.PlaceMerger;
 
 public class BirthMerger extends AbstractEventMerger<BirthEvent> {
@@ -13,8 +12,8 @@ public class BirthMerger extends AbstractEventMerger<BirthEvent> {
     }
 
     @Override
-    BirthEvent merge(final PersonId id, final DateRange date, final Place place) {
-        throw new UnsupportedOperationException();
+    BirthEvent merge(final PersonId person, final EventBuilder builder) {
+        return builder.toBirth(person);
     }
 
 }

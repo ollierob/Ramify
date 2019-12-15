@@ -14,6 +14,12 @@ public interface BirthEvent extends UniqueEvent {
         return Optional.of(Age.ZERO);
     }
 
+    @Nonnull
+    @Override
+    default Optional<String> occupation() {
+        return Optional.empty();
+    }
+
     @Override
     default <R> R handleWith(final EventHandler<R> handler) {
         return handler.handle(this);
