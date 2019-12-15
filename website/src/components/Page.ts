@@ -4,8 +4,8 @@ type QueryableType = string | number | boolean;
 
 export type QueryMap = StringMap<QueryableType> & {base: string}
 
-export function updatePageHash(delta: QueryMap, current: StringMap = readPageHash(), update: (hash: string) => void = setPageHashString): void {
-    const total: QueryMap = {...current, ...delta, base: delta.base};
+export function updatePageHash(delta: StringMap, current: StringMap = readPageHash(), update: (hash: string) => void = setPageHashString): void {
+    const total: QueryMap = {...current, ...delta, base: delta.base || readPageBase()};
     Object.keys(delta).filter(k => k != "base").forEach(key => {
         const n = delta[key];
         if (!n) delete total[key];
@@ -19,10 +19,18 @@ export function readPageHash(): StringMap {
     if (hash.charAt(0) == "#") hash = hash.substring(1);
     if (hash.charAt(0) == "/") hash = hash.substring(1);
     const q = hash.indexOf("?");
-    const map: StringMap = {base: hash.substring(q)};
+    const map: StringMap = {base: hash.substring(0, q)};
     const s = new URLSearchParams(hash.substring(q + 1));
     s.forEach((v, k) => map[k] = v);
     return map;
+}
+
+function readPageBase(hash: string = document.location.hash): string {
+    if (!hash || hash.length <= 1) return null;
+    if (hash.charAt(0) == "#") return readPageBase(hash.substring(1));
+    if (hash.charAt(0) == "/") return readPageBase(hash.substring(1));
+    const q = hash.indexOf("?");
+    return hash.substring(0, q);
 }
 
 function createPageHash(map: QueryMap): string {

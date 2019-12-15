@@ -5,15 +5,11 @@ import net.ramify.model.place.merge.PlaceMerger;
 
 import javax.annotation.Nonnull;
 
-public class PlaceHierarchyMerger implements PlaceMerger {
+public class ChildPlaceMerger implements PlaceMerger {
 
     private final PlaceMerger fallback;
 
-    public PlaceHierarchyMerger() {
-        this(NO_MERGE);
-    }
-
-    public PlaceHierarchyMerger(final PlaceMerger fallback) {
+    public ChildPlaceMerger(final PlaceMerger fallback) {
         this.fallback = fallback;
     }
 

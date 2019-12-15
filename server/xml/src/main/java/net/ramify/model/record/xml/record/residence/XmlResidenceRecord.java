@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "residence")
 public class XmlResidenceRecord extends XmlPersonOnDateRecord {
 
-    @XmlAttribute(name = "placeId", required = false)
+    @XmlAttribute(name = "placeId")
     private String placeId;
 
     @Nonnull

@@ -5,6 +5,7 @@ import {RecordPaginationHandler} from "../../../components/records/RecordPaginat
 import RecordImageGallery from "./RecordImageGallery";
 import FamilyRecordTable from "./family/FamilyRecordTable";
 import IndividualRecordTable from "./individual/IndividualRecordTable";
+import {readPageHash, updatePageHash} from "../../../components/Page";
 
 type Props = RecordPaginationHandler & {
     recordSet: RecordSet.AsObject;
@@ -12,16 +13,29 @@ type Props = RecordPaginationHandler & {
 }
 
 type State = {
-    activeTab?: string;
+    activeTab?: ActiveTab;
 }
+
+type ActiveTab = "families" | "individuals" | "images"
 
 export class RecordBrowser extends React.PureComponent<Props, State> {
 
     constructor(props: Props) {
         super(props);
         this.state = {
-            activeTab: "families",
+            activeTab: this.activeTab(readPageHash().view) || "families"
         };
+    }
+
+    private activeTab(active: string): ActiveTab {
+        switch (active) {
+            case "families":
+            case "individuals":
+            case "images":
+                return active;
+            default:
+                return null;
+        }
     }
 
     render() {
@@ -30,17 +44,17 @@ export class RecordBrowser extends React.PureComponent<Props, State> {
             className="records bordered"
             size="large"
             activeKey={this.state.activeTab}
-            onChange={activeTab => this.setState({activeTab})}>
+            onChange={activeTab => this.setState({activeTab: activeTab as ActiveTab})}>
 
             <Tabs.TabPane
                 key="families"
-                tab="Family records">
+                tab="Families">
                 <FamilyRecordTable {...this.props}/>
             </Tabs.TabPane>
 
             <Tabs.TabPane
                 key="individuals"
-                tab="Individual records">
+                tab="Individuals">
                 <IndividualRecordTable {...this.props}/>
             </Tabs.TabPane>
 
@@ -52,6 +66,11 @@ export class RecordBrowser extends React.PureComponent<Props, State> {
 
         </Tabs>;
 
+    }
+
+    componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>) {
+        if (this.state.activeTab != prevState.activeTab)
+            updatePageHash({view: this.state.activeTab});
     }
 
 }
