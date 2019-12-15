@@ -27,7 +27,7 @@ public class DateRangeParamConverterProvider implements ParamConverterProvider {
         @Override
         public DateRange fromString(final String value) {
             final var slash = value.indexOf('/');
-            if (slash > 0) return new ClosedDateRange(LocalDate.parse(value.substring(0, slash)), LocalDate.parse(value.substring(slash + 1)));
+            if (slash > 0) return ClosedDateRange.of(LocalDate.parse(value.substring(0, slash)), LocalDate.parse(value.substring(slash + 1)));
             throw new UnsupportedOperationException(); //TODO
         }
 

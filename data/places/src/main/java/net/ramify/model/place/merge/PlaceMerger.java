@@ -1,4 +1,4 @@
-package net.ramify.strategy.merge.place;
+package net.ramify.model.place.merge;
 
 import net.ramify.model.place.Place;
 import net.ramify.model.strategy.Merger;

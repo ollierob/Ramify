@@ -8,7 +8,7 @@ import net.ramify.model.event.type.UniqueEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.place.HasPlace;
 import net.ramify.model.place.Place;
-import net.ramify.strategy.merge.place.PlaceMerger;
+import net.ramify.model.place.merge.PlaceMerger;
 
 import javax.annotation.Nonnull;
 
@@ -32,7 +32,7 @@ abstract class AbstractEventMerger<E extends UniqueEvent> implements EventMerger
 
         final var builder = this.eventBuilder(date.get(), place.orElse(null))
                 .setInferred(e1.isInferred() && e2.isInferred());
-        
+
         return Result.of(this.merge(e1.personId(), builder));
 
     }

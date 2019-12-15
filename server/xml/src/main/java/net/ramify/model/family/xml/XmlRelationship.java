@@ -19,7 +19,6 @@ import net.ramify.model.person.xml.XmlName;
 import net.ramify.model.record.GenericRecordPerson;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.relationship.Relationship;
-import net.ramify.utils.collections.IterableUtils;
 import net.ramify.utils.objects.Functions;
 
 import javax.annotation.CheckForNull;
@@ -55,18 +54,17 @@ public abstract class XmlRelationship {
     protected MutablePersonEventSet events(final PersonId personId, final DateRange date, final RecordContext context) {
         final var events = new MutablePersonEventSet(context.uniqueEventMerger());
         if (this.events != null) this.events.forEach(event -> events.addAll(event.allEvents(personId, context, true)));
-        if (deceased != Boolean.TRUE) events.add(flourished(personId, date));
-        if (deceased == Boolean.TRUE && !IterableUtils.has(events, DeathEvent.class)) events.add(death(personId, date));
+        if (deceased != Boolean.TRUE) events.add(inferMention(personId, date));
+        if (deceased == Boolean.TRUE) events.add(inferDeath(personId, date));
         return events;
     }
 
-    private static LifeEvent flourished(final PersonId personId, final DateRange date) {
+    private static LifeEvent inferMention(final PersonId personId, final DateRange date) {
         return EventBuilder.builderWithRandomId(date).toFlourished(personId);
     }
 
-    private static DeathEvent death(PersonId personId, DateRange date) {
-        return EventBuilder.builderWithRandomId(BeforeDate.strictlyBefore(date))
-                .toDeath(personId);
+    private static DeathEvent inferDeath(final PersonId personId, final DateRange date) {
+        return EventBuilder.builderWithRandomId(BeforeDate.strictlyBefore(date)).toDeath(personId);
     }
 
     @CheckForNull

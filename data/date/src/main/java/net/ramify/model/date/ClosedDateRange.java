@@ -12,7 +12,7 @@ public class ClosedDateRange implements DateRange {
         if (earliest == null) return s;
         final var latest = e.latestInclusive().orElse(null);
         if (latest == null) return e;
-        return new ClosedDateRange(earliest, latest);
+        return ClosedDateRange.of(earliest, latest);
     }
 
     public static DateRange of(final Collection<? extends HasDate> dates) {
@@ -45,9 +45,15 @@ public class ClosedDateRange implements DateRange {
         return d1.isBefore(d2) ? d1 : d2;
     }
 
+    public static DateRange of(final ChronoLocalDate earliest, final ChronoLocalDate latest) {
+        if (earliest.isAfter(latest)) return DateRange.NEVER;
+        if (earliest.compareTo(latest) == 0) return ExactDate.on(earliest);
+        return new ClosedDateRange(earliest, latest);
+    }
+
     private final ChronoLocalDate earliest, latest;
 
-    public ClosedDateRange(final ChronoLocalDate earliest, final ChronoLocalDate latest) {
+    ClosedDateRange(final ChronoLocalDate earliest, final ChronoLocalDate latest) {
         this.earliest = earliest;
         this.latest = latest;
     }

@@ -3,7 +3,7 @@ package net.ramify.strategy.merge.event;
 import net.ramify.model.event.EventBuilder;
 import net.ramify.model.event.type.burial.BurialEvent;
 import net.ramify.model.person.PersonId;
-import net.ramify.strategy.merge.place.PlaceMerger;
+import net.ramify.model.place.merge.PlaceMerger;
 
 public class BurialMerger extends AbstractEventMerger<BurialEvent> {
 

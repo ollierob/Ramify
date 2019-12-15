@@ -5,7 +5,7 @@ import java.time.Period;
 import java.time.chrono.ChronoLocalDate;
 import java.util.Optional;
 
-public class ApproximateDate implements DateRange {
+public class ApproximateDate extends AbstractDateRange {
 
     private final ChronoLocalDate date;
     private final Period delta;

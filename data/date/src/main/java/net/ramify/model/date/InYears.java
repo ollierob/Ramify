@@ -8,7 +8,7 @@ import java.time.Year;
 import java.time.chrono.ChronoLocalDate;
 import java.util.Optional;
 
-public class InYears implements DateRange {
+public class InYears extends AbstractDateRange {
 
     private final Year start, end;
     private final boolean approximate;

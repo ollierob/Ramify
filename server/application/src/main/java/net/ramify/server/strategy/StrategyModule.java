@@ -9,6 +9,7 @@ public class StrategyModule extends AbstractModule {
         super.configure();
         this.install(new NameStrategyModule());
         this.install(new EventStrategyModule());
+        this.install(new PlaceStrategyModule());
     }
 
 }

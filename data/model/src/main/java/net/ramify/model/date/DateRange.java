@@ -20,6 +20,16 @@ public interface DateRange extends BuildsProto<DateProto.DateRange> {
     Optional<? extends ChronoLocalDate> latestInclusive();
 
     @Nonnull
+    default LocalDate earliestIsoDate() {
+        return this.earliestInclusive().map(LocalDate::from).orElse(LocalDate.MIN);
+    }
+
+    @Nonnull
+    default LocalDate latestIsoDate() {
+        return this.latestInclusive().map(LocalDate::from).orElse(LocalDate.MAX);
+    }
+
+    @Nonnull
     default Optional<? extends ChronoLocalDate> exact() {
         final var earliest = this.earliestInclusive().orElse(null);
         if (earliest == null) return Optional.empty();
@@ -46,16 +56,15 @@ public interface DateRange extends BuildsProto<DateProto.DateRange> {
     }
 
     default DateRange minus(final Period period) {
-        throw new UnsupportedOperationException(); //TODO
+        return this.minus(period, period);
     }
 
     default DateRange minus(final Period max, final Period min) {
         throw new UnsupportedOperationException(); //TODO
     }
 
-    default Optional<DateRange> intersection(final DateRange that) {
-        throw new UnsupportedOperationException(); //TODO
-    }
+    @Nonnull
+    Optional<DateRange> intersection(DateRange that);
 
     default boolean intersects(final DateRange that) {
         return this.intersection(that).isPresent();
@@ -97,6 +106,11 @@ public interface DateRange extends BuildsProto<DateProto.DateRange> {
             return true;
         }
 
+        @Nonnull
+        @Override
+        public Optional<DateRange> intersection(final DateRange that) {
+            return Optional.of(that);
+        }
     };
 
     DateRange NEVER = new DateRange() {
@@ -118,6 +132,16 @@ public interface DateRange extends BuildsProto<DateProto.DateRange> {
             return false;
         }
 
+        @Nonnull
+        @Override
+        public Optional<DateRange> intersection(final DateRange that) {
+            return Optional.empty();
+        }
+
+        @Override
+        public boolean intersects(DateRange that) {
+            return false;
+        }
     };
 
 }

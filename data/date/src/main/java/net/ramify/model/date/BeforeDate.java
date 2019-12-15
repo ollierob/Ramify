@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.chrono.ChronoLocalDate;
 import java.util.Optional;
 
-public class BeforeDate<D extends ChronoLocalDate> implements DateRange {
+public class BeforeDate<D extends ChronoLocalDate> extends AbstractDateRange {
 
     public static DateRange strictlyBefore(final DateRange range) {
         final var latest = range.latestInclusive();

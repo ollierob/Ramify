@@ -19,7 +19,7 @@ public class XmlBetweenYears extends XmlDateRange {
 
     @Override
     public DateRange resolve(final DateParser parser) {
-        return new ClosedDateRange(LocalDate.ofYearDay(startYear, 1), LocalDate.of(endYear, 12, 31));
+        return ClosedDateRange.of(LocalDate.ofYearDay(startYear, 1), LocalDate.of(endYear, 12, 31));
     }
 
 }

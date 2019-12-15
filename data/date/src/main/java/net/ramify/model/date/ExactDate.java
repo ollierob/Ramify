@@ -8,7 +8,7 @@ import java.time.chrono.ChronoLocalDate;
 import java.util.Objects;
 import java.util.Optional;
 
-public class ExactDate implements DateRange {
+public class ExactDate extends AbstractDateRange {
 
     public static ExactDate on(final int year, final Month month, final int dayOfMonth) {
         return on(LocalDate.of(year, month, dayOfMonth));
@@ -49,7 +49,17 @@ public class ExactDate implements DateRange {
 
     public DateRange yearsAgo(final int years) {
         final var period = Period.ofYears(years);
-        return new ClosedDateRange(date.minus(period.plusYears(1)), date.minus(period));
+        return ClosedDateRange.of(date.minus(period.plusYears(1)), date.minus(period));
+    }
+
+    @Override
+    public Optional<DateRange> intersection(final DateRange that) {
+        return this.intersects(that) ? Optional.of(this) : Optional.empty();
+    }
+
+    @Override
+    public boolean intersects(final DateRange that) {
+        return that.contains(date);
     }
 
 }

@@ -21,13 +21,13 @@ public class XmlInQuarter extends XmlDateRange {
     public DateRange resolve(final DateParser parser) {
         switch (quarter) {
             case 1:
-                return new ClosedDateRange(LocalDate.of(year, 1, 1), LocalDate.of(year, 3, 31));
+                return ClosedDateRange.of(LocalDate.of(year, 1, 1), LocalDate.of(year, 3, 31));
             case 2:
-                return new ClosedDateRange(LocalDate.of(year, 4, 1), LocalDate.of(year, 6, 30));
+                return ClosedDateRange.of(LocalDate.of(year, 4, 1), LocalDate.of(year, 6, 30));
             case 3:
-                return new ClosedDateRange(LocalDate.of(year, 7, 1), LocalDate.of(year, 9, 30));
+                return ClosedDateRange.of(LocalDate.of(year, 7, 1), LocalDate.of(year, 9, 30));
             case 4:
-                return new ClosedDateRange(LocalDate.of(year, 10, 1), LocalDate.of(year, 12, 31));
+                return ClosedDateRange.of(LocalDate.of(year, 10, 1), LocalDate.of(year, 12, 31));
             default:
                 throw new IllegalStateException("Invalid quarter: " + quarter);
         }
