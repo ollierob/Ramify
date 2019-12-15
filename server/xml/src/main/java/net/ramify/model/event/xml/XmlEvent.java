@@ -1,7 +1,6 @@
 package net.ramify.model.event.xml;
 
 import net.ramify.model.date.DateRange;
-import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.EventBuilder;
@@ -57,14 +56,8 @@ public abstract class XmlEvent {
         return new EventId(eventId);
     }
 
-    @Nonnull
-    private DateRange date(final DateParser dates) {
-        return date.resolve(dates);
-    }
-
     protected DateRange date(final RecordContext context) {
-        if (date != null) return this.date(context.dateParser());
-        return context.recordDate();
+        return date == null ? context.recordDate() : date.resolve(context.dateParser());
     }
 
     @CheckForNull

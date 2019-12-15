@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.time.Month;
 
-@XmlRootElement(namespace = XmlDateRange.NAMESPACE)
+@XmlRootElement(namespace = XmlDateRange.NAMESPACE, name = "onDate")
 public class XmlExactDate extends XmlDateRange {
 
     @XmlAttribute(name = "year")
