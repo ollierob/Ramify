@@ -1,7 +1,7 @@
 package net.ramify.strategy.merge.person;
 
 import net.ramify.model.person.Person;
-import net.ramify.strategy.merge.Merger;
+import net.ramify.model.strategy.Merger;
 
 public interface PersonMerger extends Merger<Person, Person> {
 

@@ -19,6 +19,12 @@ public interface DeathEvent extends UniqueEvent {
 
     @Nonnull
     @Override
+    default Class<? extends UniqueEvent> uniqueType() {
+        return DeathEvent.class;
+    }
+
+    @Nonnull
+    @Override
     default EventProto.Event.Builder toProtoBuilder() {
         return UniqueEvent.super.toProtoBuilder().setType(EventProto.RecordType.DEATH);
     }

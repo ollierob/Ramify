@@ -2,7 +2,7 @@ package net.ramify.strategy.merge.person;
 
 import net.ramify.model.person.Person;
 import net.ramify.model.record.GenericRecordPerson;
-import net.ramify.strategy.merge.event.EventsMerger;
+import net.ramify.model.event.merge.EventsMerger;
 import net.ramify.strategy.merge.person.gender.GenderMerger;
 import net.ramify.strategy.merge.person.name.PersonNamesMerger;
 

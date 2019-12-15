@@ -4,6 +4,7 @@ import net.ramify.model.event.Event;
 import net.ramify.model.event.collection.HasPersonEvents;
 import net.ramify.model.event.collection.MutablePersonEventSet;
 import net.ramify.model.event.collection.PersonEventSet;
+import net.ramify.model.event.merge.EventsMerger;
 
 import javax.annotation.Nonnull;
 

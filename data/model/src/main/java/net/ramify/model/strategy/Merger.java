@@ -1,4 +1,4 @@
-package net.ramify.strategy.merge;
+package net.ramify.model.strategy;
 
 import com.google.common.base.Preconditions;
 import net.meerkat.functions.optionals.OptionalBoolean;

@@ -1,7 +1,7 @@
 package net.ramify.strategy.merge.person.name;
 
 import net.ramify.model.person.name.Name;
-import net.ramify.strategy.merge.Merger;
+import net.ramify.model.strategy.Merger;
 
 import javax.annotation.Nonnull;
 

@@ -2,6 +2,7 @@ package net.ramify.strategy.merge.event;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.EventId;
+import net.ramify.model.event.merge.EventMerger;
 import net.ramify.model.event.type.UniqueEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.place.HasPlace;
