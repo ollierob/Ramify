@@ -38,7 +38,7 @@ const DateColumn: FamilyRecordColumn = {
     title: "Date",
     render: (t, r) => <>{formatDateRange(r.date, "day", {in: ""})}</>,
     sorter: (r1, r2) => sortDatesByEarliest(r1.date, r2.date),
-    width: 120
+    width: 130
 };
 
 const PlaceColumn: FamilyRecordColumn = {

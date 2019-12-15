@@ -122,7 +122,7 @@ const MentionYear: IndividualRecordColumn = {
     key: "mentionDate",
     title: "Mentioned",
     render: (t, r) => r.mention && r.mention.length > 0 && <>{formatYearRange(r.mention[0].date, EmptyPrefixWords)}</>,
-    width: 150
+    width: 110
 };
 
 const DeathDateColumn: IndividualRecordColumn = {
