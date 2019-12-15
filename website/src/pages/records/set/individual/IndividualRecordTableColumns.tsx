@@ -11,6 +11,7 @@ import {EmptyPrefixWords, formatDateRange, formatYearRange} from "../../../../co
 import {sortDatesByEarliest} from "../../../../components/date/DateRange";
 import {recordSetHref} from "../../RecordLinks";
 import {sortAges} from "../../../../components/people/Age";
+import {DeathDatePlaceCell} from "./IndividualRecordTableCell";
 
 export type IndividualRecordColumn = ColumnProps<IndividualRecord>;
 
@@ -37,7 +38,7 @@ function genericColumns(properties: IndividualRecordProperties) {
     if (properties.hasBaptism) columns.push(BaptismYear);
     if (properties.hasResidence) columns.push(ResidenceYear, ResidencePlace);
     if (properties.hasMention) columns.push(MentionYear);
-    if (properties.hasDeath) columns.push(DeathDateColumn, DeathAgeColumn);
+    if (properties.hasDeath) columns.push(DeathDatePlaceColumn, DeathAgeColumn);
     if (properties.hasBurial) columns.push(BurialDateColumn);
     return columns;
 }
@@ -47,7 +48,7 @@ function burialColumns(properties: IndividualRecordProperties) {
     if (properties.hasBirth) columns.push(BirthYear);
     if (properties.hasResidence) columns.push(ResidenceYear, ResidencePlace);
     if (properties.hasMention) columns.push(MentionYear);
-    if (properties.hasDeath) columns.push(DeathDateColumn, DeathAgeColumn);
+    if (properties.hasDeath) columns.push(DeathDatePlaceColumn, DeathAgeColumn);
     if (properties.hasBurial) columns.push(BurialDateColumn);
     return columns;
 }
@@ -125,11 +126,11 @@ const MentionYear: IndividualRecordColumn = {
     width: 110
 };
 
-const DeathDateColumn: IndividualRecordColumn = {
+const DeathDatePlaceColumn: IndividualRecordColumn = {
     key: "deathDate",
     title: "Died",
     dataIndex: "death.date",
-    render: (t, r) => r.death && <>{formatDateRange(r.death.date, "day")}</>,
+    render: (t, r) => <DeathDatePlaceCell record={r}/>,
     width: 130
 };
 
