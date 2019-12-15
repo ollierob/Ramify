@@ -10,6 +10,17 @@ public interface EventMerger<E extends Event> extends Merger<E, E> {
         return event;
     }
 
+    static <E extends Event> EventMerger<E> useNonInferred(final EventMerger<E> delegate) {
+        return (e1, e2) -> {
+            if (e1 == null) return Result.ofNullable(e2);
+            if (e2 == null) return Result.of(e1);
+            if (e1.isInferred() == e2.isInferred()) return delegate.merge(e1, e2);
+            if (e1.isInferred()) return Result.of(e2);
+            assert !e1.isInferred();
+            return Result.of(e1);
+        };
+    }
+
     static <E extends Event> EventMerger<E> useRight() {
         return (e1, e2) -> Result.of(e2);
     }

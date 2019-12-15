@@ -2,8 +2,8 @@ package net.ramify.model.record.civil.uk;
 
 import net.ramify.model.event.EventBuilder;
 import net.ramify.model.event.EventId;
-import net.ramify.model.event.collection.MutablePersonEventSet;
 import net.ramify.model.event.collection.PersonEventSet;
+import net.ramify.model.event.collection.SingletonPersonEventSet;
 import net.ramify.model.event.type.BirthEvent;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
@@ -28,7 +28,7 @@ public class GeneralRegisterRecordBirthEntry extends GenericRecordEntry {
     }
 
     PersonEventSet events(final GeneralRegisterBirth record) {
-        return new MutablePersonEventSet(this.birth(record));
+        return new SingletonPersonEventSet(this.birth(record));
     }
 
     private BirthEvent birth(final GeneralRegisterBirth record) {

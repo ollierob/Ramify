@@ -1,4 +1,4 @@
-package net.ramify.server.data.merge;
+package net.ramify.server.strategy;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
@@ -10,7 +10,7 @@ import net.ramify.strategy.merge.person.name.NameVariationMerger;
 
 import javax.inject.Singleton;
 
-public class MergeStrategyModule extends AbstractModule {
+class NameStrategyModule extends AbstractModule {
 
     @Provides
     @Singleton

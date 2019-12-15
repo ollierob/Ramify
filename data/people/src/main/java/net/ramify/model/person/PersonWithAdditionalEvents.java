@@ -3,15 +3,14 @@ package net.ramify.model.person;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.collection.MutablePersonEventSet;
 import net.ramify.model.event.collection.PersonEventSet;
-
-import java.util.Set;
+import net.ramify.model.event.collection.SingletonPersonEventSet;
 
 public class PersonWithAdditionalEvents extends DelegatedPerson {
 
-    private final Set<? extends Event> events;
+    private final PersonEventSet events;
 
     public PersonWithAdditionalEvents(final Person person, final Event event) {
-        this(person, new MutablePersonEventSet(event));
+        this(person, new SingletonPersonEventSet(event));
     }
 
     public PersonWithAdditionalEvents(final Person person, final PersonEventSet events) {
@@ -21,8 +20,9 @@ public class PersonWithAdditionalEvents extends DelegatedPerson {
 
     @Override
     public PersonEventSet events() {
-        //return Sets.union(super.events(), events);
-        throw new UnsupportedOperationException(); //TODO
+        final var union = new MutablePersonEventSet(events);
+        union.addAll(super.events());
+        return union;
     }
 
 }

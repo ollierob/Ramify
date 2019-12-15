@@ -71,6 +71,10 @@ public interface Merger<F, T> {
             return () -> Optional.of(value);
         }
 
+        static <T> Result<T> ofNullable(@CheckForNull final T value) {
+            return () -> Optional.ofNullable(value);
+        }
+
         static <T> Result<T> unknown() {
             return Optional::empty;
         }

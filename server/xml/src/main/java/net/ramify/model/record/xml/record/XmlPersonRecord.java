@@ -77,7 +77,7 @@ public class XmlPersonRecord extends XmlRecord {
     }
 
     protected MutablePersonEventSet events(final PersonId personId, final RecordContext context) {
-        final var events = new MutablePersonEventSet();
+        final var events = new MutablePersonEventSet(context.eventMergers());
         this.events().forEach(event -> events.addAll(event.allEvents(personId, context, false)));
         return events;
     }

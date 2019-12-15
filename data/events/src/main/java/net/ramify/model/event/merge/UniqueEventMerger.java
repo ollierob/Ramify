@@ -6,7 +6,7 @@ import net.ramify.model.strategy.Merger;
 
 import javax.annotation.Nonnull;
 
-public interface EventMergers {
+public interface UniqueEventMerger {
 
     @Nonnull
     EventMerger<BirthEvent> births();

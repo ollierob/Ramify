@@ -47,7 +47,7 @@ public class XmlPersonOnDateRecord extends XmlPersonRecord {
 
     @OverridingMethodsMustInvokeSuper
     protected MutablePersonEventSet events(final PersonId personId, final DateRange date, final RecordContext context) {
-        final var events = new MutablePersonEventSet();
+        final var events = new MutablePersonEventSet(context.eventMergers());
         events.addAll(this.events(personId, context));
         //FIXME only infer birth if not already added
         Consumers.ifNonNull(this.inferBirth(personId, date, context), events::add);

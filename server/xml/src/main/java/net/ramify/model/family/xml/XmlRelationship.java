@@ -53,7 +53,7 @@ public abstract class XmlRelationship {
     protected abstract Gender gender();
 
     protected MutablePersonEventSet events(final PersonId personId, final DateRange date, final RecordContext context) {
-        final var events = new MutablePersonEventSet();
+        final var events = new MutablePersonEventSet(context.eventMergers());
         if (this.events != null) this.events.forEach(event -> events.addAll(event.allEvents(personId, context, true)));
         if (deceased != Boolean.TRUE) events.add(flourished(personId, date));
         if (deceased == Boolean.TRUE && !IterableUtils.has(events, DeathEvent.class)) events.add(death(personId, date));

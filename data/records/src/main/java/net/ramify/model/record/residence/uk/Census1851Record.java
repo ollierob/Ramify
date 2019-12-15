@@ -5,6 +5,7 @@ import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.collection.MutablePersonEventSet;
 import net.ramify.model.event.collection.PersonEventSet;
+import net.ramify.model.event.collection.SingletonPersonEventSet;
 import net.ramify.model.event.infer.MarriageConditionEventInference;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
@@ -75,7 +76,7 @@ public class Census1851Record extends CensusRecord {
                 id,
                 Name.UNKNOWN,
                 person.gender().inverse(),
-                new MutablePersonEventSet(this.deathBeforeCensus(id)), //FIXME tighter bounds
+                new SingletonPersonEventSet(this.deathBeforeCensus(id)), //FIXME tighter bounds
                 "Inferred ex-spouse of " + person.name()));
     }
 
