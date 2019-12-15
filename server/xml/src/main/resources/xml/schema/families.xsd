@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/records" xmlns:ns2="http://ramify.net/people" xmlns:ns3="http://ramify.net/dates" xmlns:ns4="http://ramify.net/events" xmlns:tns="http://ramify.net/families" targetNamespace="http://ramify.net/families" version="1.0">
-    
-  <xs:import namespace="http://ramify.net/records" schemaLocation="records.xsd"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/people" xmlns:ns2="http://ramify.net/dates" xmlns:ns3="http://ramify.net/events" xmlns:ns4="http://ramify.net/records" xmlns:tns="http://ramify.net/families" targetNamespace="http://ramify.net/families" version="1.0">
     
   <xs:import namespace="http://ramify.net/people" schemaLocation="people.xsd"/>
     
   <xs:import namespace="http://ramify.net/dates" schemaLocation="dates.xsd"/>
     
   <xs:import namespace="http://ramify.net/events" schemaLocation="events.xsd"/>
+    
+  <xs:import namespace="http://ramify.net/records" schemaLocation="records.xsd"/>
+    
+  <xs:element name="daughter" type="tns:xmlDaughter"/>
     
   <xs:element name="family" type="tns:xmlFamily"/>
     
@@ -18,6 +20,96 @@
   <xs:element name="mother" type="tns:xmlMother"/>
     
   <xs:element name="person" type="tns:xmlFamilyPerson"/>
+    
+  <xs:element name="son" type="tns:xmlSon"/>
+    
+  <xs:complexType name="xmlDaughter">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlRelationship">
+                
+        <xs:sequence/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType abstract="true" name="xmlRelationship">
+        
+    <xs:sequence>
+            
+      <xs:element minOccurs="0" ref="ns1:nameTranscription"/>
+            
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+                
+        <xs:element ref="ns3:event"/>
+                
+        <xs:element ref="ns3:birth"/>
+                
+        <xs:element ref="ns3:marriage"/>
+                
+        <xs:element ref="ns3:residence"/>
+                
+        <xs:element ref="ns3:death"/>
+                
+        <xs:element ref="ns3:burial"/>
+                
+        <xs:element ref="ns3:probate"/>
+              
+      </xs:choice>
+          
+    </xs:sequence>
+        
+    <xs:attribute name="name" type="xs:string"/>
+        
+    <xs:attribute name="deceased" type="xs:boolean"/>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlFather">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlRelationship">
+                
+        <xs:sequence/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlMother">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlRelationship">
+                
+        <xs:sequence/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlSon">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlRelationship">
+                
+        <xs:sequence/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
     
   <xs:complexType name="xmlFamily">
         
@@ -33,7 +125,7 @@
         
     <xs:complexContent>
             
-      <xs:extension base="ns1:xmlPersonRecord">
+      <xs:extension base="ns4:xmlPersonRecord">
                 
         <xs:sequence>
                     
@@ -58,66 +150,6 @@
     </xs:sequence>
         
     <xs:attribute name="name" type="xs:string" use="required"/>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlFather">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlRelationship">
-                
-        <xs:sequence/>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType abstract="true" name="xmlRelationship">
-        
-    <xs:sequence>
-            
-      <xs:element minOccurs="0" ref="ns2:nameTranscription"/>
-            
-      <xs:choice maxOccurs="unbounded" minOccurs="0">
-                
-        <xs:element ref="ns4:event"/>
-                
-        <xs:element ref="ns4:birth"/>
-                
-        <xs:element ref="ns4:marriage"/>
-                
-        <xs:element ref="ns4:residence"/>
-                
-        <xs:element ref="ns4:death"/>
-                
-        <xs:element ref="ns4:burial"/>
-                
-        <xs:element ref="ns4:probate"/>
-              
-      </xs:choice>
-          
-    </xs:sequence>
-        
-    <xs:attribute name="name" type="xs:string"/>
-        
-    <xs:attribute name="deceased" type="xs:boolean"/>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlMother">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlRelationship">
-                
-        <xs:sequence/>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
       
   </xs:complexType>
   

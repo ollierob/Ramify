@@ -1,5 +1,6 @@
 package net.ramify.model.record.xml.record.wills;
 
+import net.meerkat.collections.list.Lists;
 import net.ramify.model.record.Record;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.xml.RecordContext;
@@ -10,6 +11,7 @@ import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "probateRecords")
@@ -31,7 +33,7 @@ public class XmlProbateRecords extends XmlRecords {
     @Nonnull
     @Override
     public Collection<? extends Record> build(final RecordSet recordSet, final RecordContext context) {
-        throw new UnsupportedOperationException(); //TODO
+        return records == null ? Collections.emptyList() : Lists.eagerlyTransform(records, record -> record.build(context, recordSet));
     }
 
 }
