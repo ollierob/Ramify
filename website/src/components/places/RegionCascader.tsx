@@ -5,7 +5,6 @@ import {CascaderOptionType} from "antd/es/cascader";
 import {Flag} from "../images/Flag";
 import {PlaceLoader} from "./PlaceLoader";
 import {Place} from "../../protobuf/generated/place_pb";
-import {RefObject} from "react";
 
 type Props = {
     placeHolder?: string;

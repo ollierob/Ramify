@@ -13,7 +13,7 @@ export const PlaceLink = (props: {place: Place.AsObject, showType?: boolean, loa
     if (!place) return null;
 
     //Prefix suffix
-    const prefix = props.showType && place.type.canprefix && !place.type.cansuffix && <>{place.type} of </>;
+    const prefix = props.showType && place.type.canprefix && !place.type.cansuffix && <>{place.type.name} of </>;
     const suffix = props.showType && place.type.cansuffix && !place.name.endsWith(place.type.name) && <> {place.type.name}</>;
 
     return <span className="place">

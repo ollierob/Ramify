@@ -12,18 +12,22 @@ type Props = HasClass & {
     preTitle?: React.ReactNode;
 }
 
-export const RecordPlaceInfo = (props: Props) => {
+export class RecordPlaceInfo extends React.PureComponent<Props> {
 
-    if (props.loading) return <Loading/>;
-    if (!props.place) return null;
+    render() {
 
-    return <Card
-        className={"placeInfo " + (props.className || "")}
-        style={props.style}
-        title={<>{props.preTitle}<PlaceLink place={props.place} showType/></>}>
+        if (this.props.loading) return <Loading/>;
+        if (!this.props.place) return null;
 
-        {props.description && props.description.description || <i>No description available.</i>}
+        return <Card
+            className={"placeInfo " + (this.props.className || "")}
+            style={this.props.style}
+            title={<>{this.props.preTitle}<PlaceLink place={this.props.place} showType/></>}>
 
-    </Card>;
+            {this.props.description && this.props.description.description || <i>No description available.</i>}
+
+        </Card>;
+
+    }
 
 };
