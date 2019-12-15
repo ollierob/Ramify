@@ -52,7 +52,7 @@ public class XmlEngland1841CensusRecord extends XmlEnglandCensus {
                     this.name(context.nameParser()),
                     this.age(),
                     this.gender(),
-                    this.notes(),
+                    this.occupation(),
                     this.birthPlace(censusPlace));
         }
 

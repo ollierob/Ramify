@@ -12,6 +12,7 @@ import {FamilyTreeId} from "../tree/FamilyTree";
 import {EventRelatedPeopleBox} from "./EventRelatedPeopleBox";
 import {findEventSpouse, Relatives} from "../relationship/Relatives";
 import {RelativeRelationship} from "../relationship/RelativeRelationship";
+import {EventNotes} from "./EventNotes";
 
 export type EventBoxProps = {
     person: Person.AsObject
@@ -44,7 +45,8 @@ export const EventBox = (props: EventBoxProps) => {
             </div>}
         </div>
         <div className="main">
-            {peopleBox(props)}
+            {renderPeople(props)}
+            <EventNotes event={event}/>
         </div>
     </Card>;
 
@@ -57,7 +59,7 @@ function eventClass(event: Event.AsObject): string {
     return "postBirth";
 }
 
-function peopleBox(props: EventBoxProps) {
+function renderPeople(props: EventBoxProps) {
     if (!props.family || !props.relatives) return null;
     switch (eventType(props.event)) {
         case "BIRTH":

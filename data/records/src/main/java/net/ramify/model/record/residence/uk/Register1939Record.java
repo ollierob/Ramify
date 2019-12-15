@@ -6,7 +6,6 @@ import net.ramify.model.event.Event;
 import net.ramify.model.event.EventId;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyOfUnknownRelationships;
-import net.ramify.model.occupation.Occupation;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
 import net.ramify.model.person.gender.Sex;
@@ -56,7 +55,7 @@ public class Register1939Record extends CensusRecord {
         private final Name name;
         private final Sex gender;
         private final LocalDate birthDate;
-        private final Occupation occupation;
+        private final String occupation;
         private final EventId birthEventId, residenceEventId;
 
         public Register1939Entry(
@@ -64,7 +63,7 @@ public class Register1939Record extends CensusRecord {
                 final Name name,
                 final Sex sex,
                 final LocalDate birthDate,
-                final Occupation occupation,
+                final String occupation,
                 final EventId birthEventId,
                 final EventId residenceEventId) {
             this.id = id;
@@ -86,7 +85,6 @@ public class Register1939Record extends CensusRecord {
 
         private final Place residence;
         private final ExactDate birthDate;
-        private final Occupation occupation;
         private final EventId birthEventId, residenceEventId;
 
         Register1939Person(
@@ -97,13 +95,12 @@ public class Register1939Record extends CensusRecord {
                 final EventId residenceEventId,
                 final Place residence,
                 final ExactDate birthDate,
-                final Occupation occupation) {
-            super(id, name, gender, CENSUS_DATE);
+                final String occupation) {
+            super(id, name, gender, CENSUS_DATE, occupation);
             this.birthEventId = birthEventId;
             this.residenceEventId = residenceEventId;
             this.residence = residence;
             this.birthDate = birthDate;
-            this.occupation = occupation;
         }
 
         @Nonnull

@@ -2,7 +2,6 @@ package net.ramify.model.record.civil.uk;
 
 import com.google.common.collect.Sets;
 import net.ramify.model.event.Event;
-import net.ramify.model.occupation.Occupation;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
@@ -24,7 +23,7 @@ public class GeneralRegisterRecordDeathEntry extends GenericRecordEntry {
             @Nonnull final Name name,
             @Nonnull final Sex gender,
             @CheckForNull final Place deathPlace,
-            @CheckForNull final Occupation occupation,
+            @CheckForNull final String occupation,
             @CheckForNull final Age age) {
         super(id, name, gender, deathPlace, occupation, age, true);
         this.age = age;

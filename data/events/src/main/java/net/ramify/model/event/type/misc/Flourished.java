@@ -18,8 +18,7 @@ public class Flourished extends AbstractPersonEvent<Flourished> implements LifeE
     @Nonnull
     @Override
     public EventProto.Event.Builder toProtoBuilder() {
-        return LifeEvent.super.toProtoBuilder()
-                .setType(EventProto.RecordType.MENTION);
+        return super.toProtoBuilder().setType(EventProto.RecordType.MENTION);
     }
 
     @Nonnull

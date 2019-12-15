@@ -114,7 +114,8 @@ public abstract class XmlEvent {
 
     protected EventBuilder eventBuilder(final RecordContext context) {
         return this.eventBuilder(this.eventId(), this.date(context))
-                .withPlace(this.place(context));
+                .withPlace(this.place(context))
+                .withOccupation(this.occupation());
     }
 
     protected EventBuilder eventBuilder(final EventId eventId, final DateRange date) {

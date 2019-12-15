@@ -28,6 +28,7 @@ public class EventBuilder {
     private final DateRange date;
     private Place place;
     private Age givenAge;
+    private String occupation;
 
     private EventBuilder(final EventId eventId, final DateRange date) {
         this.eventId = eventId;
@@ -52,8 +53,13 @@ public class EventBuilder {
         return this;
     }
 
+    public EventBuilder withOccupation(final String occupation) {
+        this.occupation = occupation;
+        return this;
+    }
+
     protected EventProperties eventProperties() {
-        return new EventProperties(date, givenAge);
+        return new EventProperties(date, givenAge, occupation);
     }
 
     public BirthEvent toBirth(final HasPersonId person) {

@@ -29,4 +29,9 @@ public interface EventWithProperties extends Event {
         return this.properties().computedAge();
     }
 
+    @Override
+    default Optional<String> occupation() {
+        return this.properties().occupation();
+    }
+
 }

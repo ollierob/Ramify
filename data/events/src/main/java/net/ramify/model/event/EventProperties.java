@@ -5,16 +5,19 @@ import net.ramify.model.date.HasDate;
 import net.ramify.model.person.age.Age;
 import net.ramify.model.person.age.HasAges;
 
+import javax.annotation.Nonnull;
 import java.util.Optional;
 
 public class EventProperties implements HasDate, HasAges {
 
     private final DateRange date;
     private final Age givenAge;
+    private final String occupation;
 
-    EventProperties(final DateRange date, final Age givenAge) {
+    EventProperties(final DateRange date, final Age givenAge, final String occupation) {
         this.date = date;
         this.givenAge = givenAge;
+        this.occupation = occupation;
     }
 
     @Override
@@ -25,6 +28,11 @@ public class EventProperties implements HasDate, HasAges {
     @Override
     public Optional<Age> givenAge() {
         return Optional.ofNullable(givenAge);
+    }
+
+    @Nonnull
+    public Optional<String> occupation() {
+        return Optional.ofNullable(occupation);
     }
 
 }

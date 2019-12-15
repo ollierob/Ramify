@@ -13,6 +13,7 @@ import net.ramify.model.person.xml.XmlGender;
 import net.ramify.model.person.xml.XmlName;
 import net.ramify.model.record.xml.RecordContext;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
@@ -38,6 +39,9 @@ public class XmlPersonRecord extends XmlRecord {
     @XmlAttribute(name = "notes")
     private String notes;
 
+    @XmlAttribute(name = "occupation")
+    private String occupation;
+
     @XmlElementRef
     private List<XmlEvent> events;
 
@@ -60,8 +64,14 @@ public class XmlPersonRecord extends XmlRecord {
         return gender.sex();
     }
 
+    @CheckForNull
     protected String notes() {
         return notes;
+    }
+
+    @CheckForNull
+    protected String occupation() {
+        return occupation;
     }
 
     protected List<XmlEvent> events() {

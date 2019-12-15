@@ -89,6 +89,7 @@ public class Census1851Record extends CensusRecord {
         private final MarriageConditionEventInference condition;
         private final Age age;
         private final Place birthPlace;
+        private final String occupation;
 
         protected Census1851Entry(
                 final PersonId id,
@@ -97,7 +98,8 @@ public class Census1851Record extends CensusRecord {
                 final RelationshipFactory relationshipToHead,
                 final MarriageConditionEventInference condition,
                 final Age age,
-                final Place birthPlace) {
+                final Place birthPlace,
+                final String occupation) {
             this.id = id;
             this.name = name;
             this.sex = sex;
@@ -105,6 +107,7 @@ public class Census1851Record extends CensusRecord {
             this.condition = MoreObjects.firstNonNull(condition, MarriageConditionEventInference.NONE);
             this.age = age;
             this.birthPlace = birthPlace;
+            this.occupation = occupation;
         }
 
         public PersonId id() {
@@ -126,7 +129,8 @@ public class Census1851Record extends CensusRecord {
                     age,
                     birthPlace,
                     condition.inferEvents(id, record),
-                    condition);
+                    condition,
+                    occupation);
         }
 
     }
@@ -139,8 +143,9 @@ public class Census1851Record extends CensusRecord {
                 final Sex sex,
                 final MarriageConditionEventInference condition,
                 final Age age,
-                final Place birthPlace) {
-            super(id, name, sex, (a, b) -> null, condition, age, birthPlace);
+                final Place birthPlace,
+                final String occupation) {
+            super(id, name, sex, (a, b) -> null, condition, age, birthPlace, occupation);
         }
 
     }
@@ -154,8 +159,9 @@ public class Census1851Record extends CensusRecord {
                 final RelationshipFactory relationshipToHead,
                 final MarriageConditionEventInference condition,
                 final Age age,
-                final Place birthPlace) {
-            super(id, name, sex, Objects.requireNonNull(relationshipToHead), condition, age, birthPlace);
+                final Place birthPlace,
+                final String occupation) {
+            super(id, name, sex, Objects.requireNonNull(relationshipToHead), condition, age, birthPlace, occupation);
         }
 
     }
@@ -178,8 +184,9 @@ public class Census1851Record extends CensusRecord {
                 final Age age,
                 final Place birthPlace,
                 final Set<? extends Event> extraEvents,
-                final MarriageConditionEventInference condition) {
-            super(id, name, gender, CENSUS_DATE);
+                final MarriageConditionEventInference condition,
+                final String occupation) {
+            super(id, name, gender, CENSUS_DATE, occupation);
             this.residencePlace = Objects.requireNonNull(residencePlace, "residence place");
             this.age = age;
             this.birthPlace = birthPlace;

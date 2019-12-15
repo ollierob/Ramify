@@ -17,14 +17,16 @@ import javax.annotation.Nonnull;
 public abstract class AbstractCensusPerson extends AbstractPerson {
 
     private final DateRange censusDate;
+    private final String occupation;
 
     protected AbstractCensusPerson(
             final PersonId id,
             final Name name,
             final Gender gender,
-            final DateRange censusDate) {
+            final DateRange censusDate, String occupation) {
         super(id, name, gender);
         this.censusDate = censusDate;
+        this.occupation = occupation;
     }
 
     @CheckForNull
@@ -44,6 +46,7 @@ public abstract class AbstractCensusPerson extends AbstractPerson {
         return EventBuilder.builderWithRandomId(censusDate)
                 .withGivenAge(age)
                 .withPlace(residencePlace)
+                .withOccupation(occupation)
                 .toResidence(this);
     }
 

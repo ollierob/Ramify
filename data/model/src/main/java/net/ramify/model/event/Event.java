@@ -16,6 +16,7 @@ import net.ramify.model.person.age.HasAges;
 import net.ramify.model.place.HasPlace;
 
 import javax.annotation.Nonnull;
+import java.util.Optional;
 
 public interface Event extends HasEventId, HasAges, HasDate, HasPersonId, Castable<Event>, BuildsProto<EventProto.Event> {
 
@@ -48,6 +49,9 @@ public interface Event extends HasEventId, HasAges, HasDate, HasPersonId, Castab
     }
 
     @Nonnull
+    Optional<String> occupation();
+
+    @Nonnull
     default EventProto.Event.Builder toProtoBuilder() {
         final var builder = EventProto.Event.newBuilder()
                 .setId(this.eventId().value())
@@ -58,6 +62,7 @@ public interface Event extends HasEventId, HasAges, HasDate, HasPersonId, Castab
         HasPlace.place(this).ifPresent(place -> builder.setPlace(place.toProto()));
         this.givenAge().ifPresent(age -> builder.setGivenAge(age.toProto()));
         this.computedAge().ifPresent(age -> builder.setComputedAge(age.toProto()));
+        this.occupation().ifPresent(builder::setOccupation);
         return builder;
     }
 

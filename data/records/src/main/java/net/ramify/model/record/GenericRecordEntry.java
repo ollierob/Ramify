@@ -5,7 +5,6 @@ import net.ramify.model.date.BeforeDate;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.EventBuilder;
-import net.ramify.model.occupation.Occupation;
 import net.ramify.model.person.HasPersonId;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
@@ -23,7 +22,7 @@ public class GenericRecordEntry implements HasPersonId {
     private final PersonId personId;
     private final Name name;
     private final Sex gender;
-    private final Occupation occupation;
+    private final String occupation;
     private final Place residence;
     private final Age age;
     final boolean predeceased;
@@ -33,7 +32,7 @@ public class GenericRecordEntry implements HasPersonId {
             @Nonnull final Name name,
             @Nonnull final Sex gender,
             @CheckForNull final Place residence,
-            @CheckForNull final Occupation occupation,
+            @CheckForNull final String occupation,
             @CheckForNull final Age age,
             final boolean predeceased) {
         this.personId = personId;

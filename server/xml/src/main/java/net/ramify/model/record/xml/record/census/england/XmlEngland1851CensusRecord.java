@@ -59,7 +59,8 @@ public class XmlEngland1851CensusRecord extends XmlEnglandCensus {
                     this.sex(),
                     this.marriageCondition(),
                     this.age(),
-                    this.placeOfBirth(context.places()));
+                    this.placeOfBirth(context.places()),
+                    this.occupation());
         }
 
         Census1851Record.Census1851Resident toOther(final RecordContext context) {
@@ -71,7 +72,8 @@ public class XmlEngland1851CensusRecord extends XmlEnglandCensus {
                     this.relationshipToHead(),
                     this.marriageCondition(),
                     this.age(),
-                    this.placeOfBirth(context.places()));
+                    this.placeOfBirth(context.places()),
+                    this.occupation());
         }
 
     }

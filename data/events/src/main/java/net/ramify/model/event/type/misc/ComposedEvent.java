@@ -66,6 +66,12 @@ public abstract class ComposedEvent<T extends Event> implements Event {
         return delegate.computedAge();
     }
 
+    @Nonnull
+    @Override
+    public Optional<String> occupation() {
+        return delegate.occupation();
+    }
+
     @Override
     public <R> R handleWith(final EventHandler<R> handler) {
         return delegate.handleWith(handler);

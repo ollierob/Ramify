@@ -1,6 +1,5 @@
 package net.ramify.model.record.civil.uk;
 
-import net.ramify.model.occupation.Occupation;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.gender.Sex;
 import net.ramify.model.person.name.Name;
@@ -20,7 +19,7 @@ public class GeneralRegisterRecordDeathInformant extends GenericRecordEntry {
             @Nonnull final Name name,
             @Nonnull final Sex gender,
             @CheckForNull final Place residence,
-            @CheckForNull final Occupation occupation,
+            @CheckForNull final String occupation,
             final RelationshipFactory relationshipToDeceased) {
         super(id, name, gender, residence, occupation, null, false);
         this.relationshipToDeceased = relationshipToDeceased;

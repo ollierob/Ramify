@@ -124,8 +124,8 @@ public class Census1841Record extends CensusRecord implements HasPlace {
         @Override
         public Set<? extends Event> events() {
             return Sets.newHashSet(
-                    EventBuilder.builderWithRandomId(birthDate).toBirth(this.personId()),
-                    EventBuilder.builderWithRandomId(CENSUS_DATE).withGivenAge(age).withPlace(residencePlace).toResidence(this.personId()));
+                    EventBuilder.builderWithRandomId(birthDate).withPlace(birthPlace).toBirth(this.personId()),
+                    EventBuilder.builderWithRandomId(CENSUS_DATE).withGivenAge(age).withPlace(residencePlace).withOccupation(occupation).toResidence(this.personId()));
         }
 
     }
