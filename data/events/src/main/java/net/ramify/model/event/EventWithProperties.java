@@ -34,4 +34,9 @@ public interface EventWithProperties extends Event {
         return this.properties().occupation();
     }
 
+    @Override
+    default boolean isInferred() {
+        return this.properties().isInferred();
+    }
+
 }

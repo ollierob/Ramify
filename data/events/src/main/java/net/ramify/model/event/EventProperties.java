@@ -13,11 +13,13 @@ public class EventProperties implements HasDate, HasAges {
     private final DateRange date;
     private final Age givenAge;
     private final String occupation;
+    private final boolean inferred;
 
-    EventProperties(final DateRange date, final Age givenAge, final String occupation) {
+    EventProperties(final DateRange date, final Age givenAge, final String occupation, boolean inferred) {
         this.date = date;
         this.givenAge = givenAge;
         this.occupation = occupation;
+        this.inferred = inferred;
     }
 
     @Override
@@ -33,6 +35,10 @@ public class EventProperties implements HasDate, HasAges {
     @Nonnull
     public Optional<String> occupation() {
         return Optional.ofNullable(occupation);
+    }
+
+    public boolean isInferred() {
+        return inferred;
     }
 
 }

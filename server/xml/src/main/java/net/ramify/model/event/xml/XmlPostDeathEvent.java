@@ -23,6 +23,7 @@ public abstract class XmlPostDeathEvent extends XmlEvent {
 
     protected DeathEvent inferDeath(final PersonId personId, final RecordContext context) {
         return this.eventBuilder(this.randomEventId(), BeforeDate.strictlyBefore(context.recordDate()))
+                .setInferred(true)
                 .toDeath(personId);
     }
 

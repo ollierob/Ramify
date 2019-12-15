@@ -29,6 +29,7 @@ public class EventBuilder {
     private Place place;
     private Age givenAge;
     private String occupation;
+    private boolean inferred;
 
     private EventBuilder(final EventId eventId, final DateRange date) {
         this.eventId = eventId;
@@ -58,8 +59,13 @@ public class EventBuilder {
         return this;
     }
 
+    public EventBuilder setInferred(final boolean inferred) {
+        this.inferred = inferred;
+        return this;
+    }
+
     protected EventProperties eventProperties() {
-        return new EventProperties(date, givenAge, occupation);
+        return new EventProperties(date, givenAge, occupation, inferred);
     }
 
     public BirthEvent toBirth(final HasPersonId person) {

@@ -73,6 +73,11 @@ public abstract class ComposedEvent<T extends Event> implements Event {
     }
 
     @Override
+    public boolean isInferred() {
+        return delegate.isInferred();
+    }
+
+    @Override
     public <R> R handleWith(final EventHandler<R> handler) {
         return delegate.handleWith(handler);
     }

@@ -27,7 +27,7 @@ public interface MarriageConditionEventInference {
     }
 
     static MarriageEvent marriageToUnknown(final PersonId personId, final DateRange date) {
-        return EventBuilder.builderWithRandomId(date).toMarriage(personId);
+        return EventBuilder.builderWithRandomId(date).setInferred(true).toMarriage(personId);
     }
 
 }
