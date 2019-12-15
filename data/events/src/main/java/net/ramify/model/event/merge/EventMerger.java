@@ -25,4 +25,12 @@ public interface EventMerger<E extends Event> extends Merger<E, E> {
         return (e1, e2) -> Result.of(e2);
     }
 
+    static <E extends Event> EventMerger<E> notPermitted() {
+        return (e1, e2) -> {
+            if (e1 == null) return Result.ofNullable(e2);
+            if (e2 == null) return Result.of(e1);
+            throw new IllegalArgumentException(String.format("Merge not permitted: %s and %s", e1, e2));
+        };
+    }
+
 }

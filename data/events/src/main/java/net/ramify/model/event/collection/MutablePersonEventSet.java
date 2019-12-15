@@ -1,7 +1,6 @@
 package net.ramify.model.event.collection;
 
 import net.ramify.model.event.Event;
-import net.ramify.model.event.merge.EventMerger;
 import net.ramify.model.event.merge.UniqueEventMerger;
 import net.ramify.model.event.type.BirthEvent;
 import net.ramify.model.event.type.DeathEvent;
@@ -15,42 +14,19 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
 
+import static net.ramify.model.event.merge.UniqueEventMerger.NOT_ALLOWED;
+
 public class MutablePersonEventSet extends HashSet<Event> implements PersonEventSet {
-
-    private static final UniqueEventMerger DEFAULT_MERGER = new UniqueEventMerger() {
-
-        final EventMerger<BirthEvent> births = EventMerger.useNonInferred(EventMerger.useRight());
-        final EventMerger<DeathEvent> deaths = EventMerger.useNonInferred(EventMerger.useRight());
-
-        @Nonnull
-        @Override
-        public EventMerger<BirthEvent> births() {
-            return births;
-        }
-
-        @Nonnull
-        @Override
-        public EventMerger<DeathEvent> deaths() {
-            return deaths;
-        }
-
-    };
 
     private final Handler handler = new Handler();
     private final UniqueEventMerger merger;
 
-    @Deprecated
-    public MutablePersonEventSet() {
-        this(DEFAULT_MERGER);
+    public static MutablePersonEventSet notPermittingMerge() {
+        return new MutablePersonEventSet(NOT_ALLOWED);
     }
 
     public MutablePersonEventSet(final UniqueEventMerger merger) {
         this(merger, Event.EMPTY_ARRAY);
-    }
-
-    @Deprecated
-    public MutablePersonEventSet(final Event... events) {
-        this(DEFAULT_MERGER, events);
     }
 
     public MutablePersonEventSet(final UniqueEventMerger merger, final Event... events) {
@@ -62,7 +38,7 @@ public class MutablePersonEventSet extends HashSet<Event> implements PersonEvent
 
     @Deprecated
     public MutablePersonEventSet(final Collection<? extends Event> events) {
-        this(DEFAULT_MERGER, events);
+        this(null, events);
     }
 
     public MutablePersonEventSet(final UniqueEventMerger merger, final Collection<? extends Event> events) {
@@ -120,6 +96,7 @@ public class MutablePersonEventSet extends HashSet<Event> implements PersonEvent
         }
 
         private BirthEvent merge(final BirthEvent prev, final BirthEvent next) {
+            if (prev == null) return next;
             remove(prev);
             return merger.merge(prev, next).orElse(next);
         }
@@ -136,6 +113,7 @@ public class MutablePersonEventSet extends HashSet<Event> implements PersonEvent
         }
 
         private DeathEvent merge(final DeathEvent prev, final DeathEvent next) {
+            if (prev == null) return next;
             remove(prev);
             return merger.merge(prev, next).orElse(next);
         }

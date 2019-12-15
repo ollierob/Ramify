@@ -28,7 +28,7 @@ public class DefaultEventsMerger implements EventsMerger {
         final var death = deaths.merge(e1.events().findDeath(), e2.events().findDeath());
         if (death.isImpossibleMerge()) return Result.impossible();
 
-        final var events = new MutablePersonEventSet();
+        final var events = MutablePersonEventSet.notPermittingMerge();
         events.addAll(e1.events());
         events.addAll(e2.events());
         events.removeIf(Event::isUnique);

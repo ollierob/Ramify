@@ -35,7 +35,7 @@ public class GeneralRegisterRecordDeathEntry extends GenericRecordEntry {
 
     @Nonnull
     PersonEventSet events(final GeneralRegisterDeath record) {
-        final var events = new MutablePersonEventSet();
+        final var events = MutablePersonEventSet.notPermittingMerge();
         events.add(this.eventBuilder(record.deathDate()).withGivenAge(age).toDeath(this.personId()));
         if (age != null) events.add(this.eventBuilder(age.birthDate(record.deathDate())).toBirth(this.personId()));
         return events;

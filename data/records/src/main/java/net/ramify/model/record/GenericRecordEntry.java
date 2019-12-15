@@ -66,7 +66,7 @@ public class GenericRecordEntry implements HasPersonId {
 
     @Nonnull
     public PersonEventSet events(final Record record) {
-        final var events = new MutablePersonEventSet();
+        final var events = MutablePersonEventSet.notPermittingMerge();
         if (age != null) events.add(this.eventBuilder(age.birthDate(record.date())).toBirth(personId));
         if (residence != null) events.add(this.eventBuilder(record.date()).withPlace(residence).toResidence(personId));
         if (predeceased) events.add(this.eventBuilder(BeforeDate.strictlyBefore(record.date())).toDeath(personId));
