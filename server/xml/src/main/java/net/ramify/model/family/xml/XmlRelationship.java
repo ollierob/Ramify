@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.List;
 import java.util.Set;
 
-@XmlSeeAlso({XmlFather.class, XmlMother.class, XmlSon.class, XmlDaughter.class})
+@XmlSeeAlso({XmlFather.class, XmlMother.class, XmlSon.class, XmlDaughter.class, XmlUnknownRelation.class})
 public abstract class XmlRelationship {
 
     @XmlAttribute(name = "name", required = false)
