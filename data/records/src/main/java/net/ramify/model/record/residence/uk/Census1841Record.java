@@ -1,10 +1,10 @@
 package net.ramify.model.record.residence.uk;
 
-import com.google.common.collect.Sets;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.ExactDate;
-import net.ramify.model.event.Event;
 import net.ramify.model.event.EventBuilder;
+import net.ramify.model.event.collection.MutablePersonEventSet;
+import net.ramify.model.event.collection.PersonEventSet;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyOfUnknownRelationships;
 import net.ramify.model.person.AbstractPerson;
@@ -122,8 +122,8 @@ public class Census1841Record extends CensusRecord implements HasPlace {
 
         @Nonnull
         @Override
-        public Set<? extends Event> events() {
-            return Sets.newHashSet(
+        public PersonEventSet events() {
+            return new MutablePersonEventSet(
                     EventBuilder.builderWithRandomId(birthDate).withPlace(birthPlace).toBirth(this.personId()),
                     EventBuilder.builderWithRandomId(CENSUS_DATE).withGivenAge(age).withPlace(residencePlace).withOccupation(occupation).toResidence(this.personId()));
         }

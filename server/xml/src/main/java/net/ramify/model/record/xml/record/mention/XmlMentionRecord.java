@@ -5,7 +5,7 @@ import net.ramify.model.date.BeforeDate;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.date.xml.XmlDateRange;
-import net.ramify.model.event.Event;
+import net.ramify.model.event.collection.MutablePersonEventSet;
 import net.ramify.model.family.SinglePersonFamily;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.record.collection.RecordSet;
@@ -19,7 +19,6 @@ import javax.annotation.CheckForNull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Set;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "mention")
 public class XmlMentionRecord extends XmlPersonOnDateRecord {
@@ -51,7 +50,7 @@ public class XmlMentionRecord extends XmlPersonOnDateRecord {
     }
 
     @Override
-    protected Set<Event> events(final PersonId personId, final DateRange date, final RecordContext context) {
+    protected MutablePersonEventSet events(final PersonId personId, final DateRange date, final RecordContext context) {
         final var events = super.events(personId, date, context);
         if (this.deceased()) {
             events.add(this.eventBuilder(BeforeDate.strictlyBefore(date)).toDeath(personId));

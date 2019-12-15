@@ -1,9 +1,9 @@
 package net.ramify.model.record.residence.uk;
 
-import com.google.common.collect.Sets;
 import net.ramify.model.date.ExactDate;
-import net.ramify.model.event.Event;
 import net.ramify.model.event.EventId;
+import net.ramify.model.event.collection.MutablePersonEventSet;
+import net.ramify.model.event.collection.PersonEventSet;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyOfUnknownRelationships;
 import net.ramify.model.person.PersonId;
@@ -105,8 +105,8 @@ public class Register1939Record extends CensusRecord {
 
         @Nonnull
         @Override
-        public Set<? extends Event> events() {
-            return Sets.newHashSet(
+        public PersonEventSet events() {
+            return new MutablePersonEventSet(
                     this.birth(birthDate, null),
                     this.residence(Age.fromDates(birthDate, CENSUS_DATE), residence));
         }

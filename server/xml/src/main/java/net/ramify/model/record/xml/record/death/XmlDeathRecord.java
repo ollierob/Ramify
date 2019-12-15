@@ -4,7 +4,7 @@ import net.ramify.model.date.DateRange;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlExactDate;
-import net.ramify.model.event.Event;
+import net.ramify.model.event.collection.MutablePersonEventSet;
 import net.ramify.model.event.type.DeathEvent;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
@@ -28,7 +28,6 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "death")
 public class XmlDeathRecord extends XmlPersonOnDateRecord {
@@ -64,7 +63,7 @@ public class XmlDeathRecord extends XmlPersonOnDateRecord {
     }
 
     @Override
-    protected Set<Event> events(final PersonId personId, final DateRange date, final RecordContext context) {
+    protected MutablePersonEventSet events(final PersonId personId, final DateRange date, final RecordContext context) {
         final var events = super.events(personId, date, context);
         events.add(this.death(personId, date, context));
         return events;

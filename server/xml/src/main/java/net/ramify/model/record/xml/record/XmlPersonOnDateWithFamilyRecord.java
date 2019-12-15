@@ -1,7 +1,7 @@
 package net.ramify.model.record.xml.record;
 
 import net.ramify.model.date.DateRange;
-import net.ramify.model.event.Event;
+import net.ramify.model.event.collection.PersonEventSet;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.family.xml.XmlRelationship;
@@ -11,7 +11,6 @@ import net.ramify.model.record.xml.RecordContext;
 
 import javax.xml.bind.annotation.XmlElementRef;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Function;
 
 public class XmlPersonOnDateWithFamilyRecord extends XmlPersonOnDateRecord {
@@ -23,7 +22,7 @@ public class XmlPersonOnDateWithFamilyRecord extends XmlPersonOnDateRecord {
         return this.family(context, recordDate, id -> this.events(id, recordDate, context));
     }
 
-    protected Family family(final RecordContext context, final DateRange recordDate, final Function<PersonId, Set<? extends Event>> createEvents) {
+    protected Family family(final RecordContext context, final DateRange recordDate, final Function<PersonId, ? extends PersonEventSet> createEvents) {
         final var root = this.person(context, createEvents);
         final var builder = new FamilyBuilder(root);
         this.addFamily(root, builder, context, recordDate);

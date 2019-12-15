@@ -1,10 +1,10 @@
 package net.ramify.model.record.xml.record;
 
-import com.google.common.collect.Sets;
 import net.meerkat.functions.consumers.Consumers;
 import net.ramify.model.date.DateRange;
-import net.ramify.model.event.Event;
 import net.ramify.model.event.EventBuilder;
+import net.ramify.model.event.collection.MutablePersonEventSet;
+import net.ramify.model.event.collection.PersonEventSet;
 import net.ramify.model.event.type.BirthEvent;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
@@ -19,7 +19,6 @@ import javax.annotation.CheckForNull;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
-import java.util.Set;
 import java.util.UUID;
 import java.util.function.Function;
 
@@ -37,7 +36,7 @@ public class XmlPersonOnDateRecord extends XmlPersonRecord {
         return this.person(context, id -> this.events(id, date, context));
     }
 
-    protected Person person(final RecordContext context, final Function<PersonId, Set<? extends Event>> createEvents) {
+    protected Person person(final RecordContext context, final Function<PersonId, ? extends PersonEventSet> createEvents) {
         final var personId = this.personId();
         final var name = this.name(context.nameParser());
         final var gender = this.gender();
@@ -47,8 +46,8 @@ public class XmlPersonOnDateRecord extends XmlPersonRecord {
     }
 
     @OverridingMethodsMustInvokeSuper
-    protected Set<Event> events(final PersonId personId, final DateRange date, final RecordContext context) {
-        final var events = Sets.<Event>newHashSet();
+    protected MutablePersonEventSet events(final PersonId personId, final DateRange date, final RecordContext context) {
+        final var events = new MutablePersonEventSet();
         events.addAll(this.events(personId, context));
         //FIXME only infer birth if not already added
         Consumers.ifNonNull(this.inferBirth(personId, date, context), events::add);

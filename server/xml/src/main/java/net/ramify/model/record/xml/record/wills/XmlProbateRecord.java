@@ -2,7 +2,7 @@ package net.ramify.model.record.xml.record.wills;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.xml.XmlDateRange;
-import net.ramify.model.event.Event;
+import net.ramify.model.event.collection.MutablePersonEventSet;
 import net.ramify.model.event.type.will.ProbateEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.record.collection.RecordSet;
@@ -14,7 +14,6 @@ import net.ramify.model.record.xml.record.XmlRecord;
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Set;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "probate")
 public class XmlProbateRecord extends XmlPersonOnDateWithFamilyRecord {
@@ -33,7 +32,7 @@ public class XmlProbateRecord extends XmlPersonOnDateWithFamilyRecord {
     }
 
     @Override
-    protected Set<Event> events(final PersonId personId, final DateRange date, final RecordContext context) {
+    protected MutablePersonEventSet events(final PersonId personId, final DateRange date, final RecordContext context) {
         final var events = super.events(personId, date, context);
         events.add(this.probate(personId, date));
         return events;

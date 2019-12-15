@@ -5,7 +5,7 @@ import net.ramify.model.date.DateRange;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlExactDate;
-import net.ramify.model.event.Event;
+import net.ramify.model.event.collection.MutablePersonEventSet;
 import net.ramify.model.event.type.DeathEvent;
 import net.ramify.model.event.type.burial.BurialEvent;
 import net.ramify.model.event.type.residence.ResidenceEvent;
@@ -34,7 +34,6 @@ import java.time.Month;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "burial")
 public class XmlBurialRecord extends XmlPersonOnDateRecord {
@@ -88,7 +87,7 @@ public class XmlBurialRecord extends XmlPersonOnDateRecord {
                 this.notes());
     }
 
-    Set<Event> events(final PersonId personId, final ExactDate burialDate, final RecordContext context, final PlaceId burialPlaceId) {
+    MutablePersonEventSet events(final PersonId personId, final ExactDate burialDate, final RecordContext context, final PlaceId burialPlaceId) {
         final var events = super.events(personId, burialDate, context);
         events.add(this.burial(personId, burialDate, context.places().require(burialPlaceId)));
         if (deathDate != null) events.add(this.death(personId, deathDate.resolve(), context));

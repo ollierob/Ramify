@@ -2,10 +2,10 @@ package net.ramify.model.record.residence.uk;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 import net.ramify.model.date.ExactDate;
+import net.ramify.model.event.collection.MutablePersonEventSet;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.person.Person;
@@ -85,7 +85,7 @@ public class Census1821Record extends CensusRecord implements HasPlace {
         final var personId = PersonId.random();
         final var birth = this.birthEvent(personId, age);
         final var residence = this.eventBuilder().toResidence(personId);
-        return new GenericRecordPerson(personId, Name.UNKNOWN, gender, ImmutableSet.of(birth, residence), "Anonymous");
+        return new GenericRecordPerson(personId, Name.UNKNOWN, gender, new MutablePersonEventSet(birth, residence), "Anonymous");
     }
 
     private Person agedPerson(final Person person, final Age age) {

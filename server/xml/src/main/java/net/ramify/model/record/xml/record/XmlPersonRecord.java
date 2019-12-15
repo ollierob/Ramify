@@ -1,8 +1,7 @@
 package net.ramify.model.record.xml.record;
 
 import com.google.common.base.MoreObjects;
-import com.google.common.collect.Sets;
-import net.ramify.model.event.Event;
+import net.ramify.model.event.collection.MutablePersonEventSet;
 import net.ramify.model.event.xml.XmlEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.gender.Gender;
@@ -19,7 +18,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 public class XmlPersonRecord extends XmlRecord {
@@ -78,8 +76,8 @@ public class XmlPersonRecord extends XmlRecord {
         return MoreObjects.firstNonNull(events, Collections.emptyList());
     }
 
-    protected Set<Event> events(final PersonId personId, final RecordContext context) {
-        final var events = Sets.<Event>newHashSet();
+    protected MutablePersonEventSet events(final PersonId personId, final RecordContext context) {
+        final var events = new MutablePersonEventSet();
         this.events().forEach(event -> events.addAll(event.allEvents(personId, context, false)));
         return events;
     }

@@ -1,11 +1,10 @@
 package net.ramify.model.person;
 
-import net.ramify.model.event.Event;
+import net.ramify.model.event.collection.PersonEventSet;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.name.Name;
 
 import javax.annotation.Nonnull;
-import java.util.Set;
 
 public class DelegatedPerson implements Person {
 
@@ -33,7 +32,7 @@ public class DelegatedPerson implements Person {
     }
 
     @Override
-    public Set<? extends Event> events() {
+    public PersonEventSet events() {
         return person.events();
     }
 

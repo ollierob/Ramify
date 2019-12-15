@@ -1,11 +1,10 @@
 package net.ramify.model.family.xml;
 
-import com.google.common.collect.Sets;
 import net.ramify.model.date.BeforeDate;
 import net.ramify.model.date.DateRange;
-import net.ramify.model.event.Event;
 import net.ramify.model.event.EventBuilder;
 import net.ramify.model.event.EventId;
+import net.ramify.model.event.collection.MutablePersonEventSet;
 import net.ramify.model.event.type.DeathEvent;
 import net.ramify.model.event.type.LifeEvent;
 import net.ramify.model.event.xml.XmlEvent;
@@ -28,7 +27,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.List;
-import java.util.Set;
 
 @XmlSeeAlso({XmlFather.class, XmlMother.class, XmlSon.class, XmlDaughter.class, XmlUnknownRelation.class})
 public abstract class XmlRelationship {
@@ -54,8 +52,8 @@ public abstract class XmlRelationship {
 
     protected abstract Gender gender();
 
-    protected Set<Event> events(final PersonId personId, final DateRange date, final RecordContext context) {
-        final var events = Sets.<Event>newHashSet();
+    protected MutablePersonEventSet events(final PersonId personId, final DateRange date, final RecordContext context) {
+        final var events = new MutablePersonEventSet();
         if (this.events != null) this.events.forEach(event -> events.addAll(event.allEvents(personId, context, true)));
         if (deceased != Boolean.TRUE) events.add(flourished(personId, date));
         if (deceased == Boolean.TRUE && !IterableUtils.has(events, DeathEvent.class)) events.add(death(personId, date));

@@ -1,7 +1,7 @@
 package net.ramify.model.record.xml.record.residence;
 
 import net.ramify.model.date.DateRange;
-import net.ramify.model.event.Event;
+import net.ramify.model.event.collection.MutablePersonEventSet;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
@@ -19,7 +19,6 @@ import net.ramify.utils.objects.Functions;
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Set;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "residence")
 public class XmlResidenceRecord extends XmlPersonOnDateRecord {
@@ -49,7 +48,7 @@ public class XmlResidenceRecord extends XmlPersonOnDateRecord {
         return new GenericRecordPerson(id, name, gender, events, notes);
     }
 
-    protected Set<Event> events(final PersonId personId, final Place place, final DateRange date, final RecordContext context) {
+    protected MutablePersonEventSet events(final PersonId personId, final Place place, final DateRange date, final RecordContext context) {
         final var events = super.events(personId, date, context);
         events.add(this.eventBuilder(date).withPlace(place).toResidence(personId));
         return events;

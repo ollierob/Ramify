@@ -1,10 +1,10 @@
 package net.ramify.model.record.residence.uk;
 
 import com.google.common.base.MoreObjects;
-import com.google.common.collect.Sets;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.Event;
-import net.ramify.model.event.EventId;
+import net.ramify.model.event.collection.MutablePersonEventSet;
+import net.ramify.model.event.collection.PersonEventSet;
 import net.ramify.model.event.infer.MarriageConditionEventInference;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
@@ -26,7 +26,6 @@ import net.ramify.model.relationship.type.Married;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.time.Month;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -76,7 +75,7 @@ public class Census1851Record extends CensusRecord {
                 id,
                 Name.UNKNOWN,
                 person.gender().inverse(),
-                Collections.singleton(this.deathBeforeCensus(id)), //FIXME tighter bounds
+                new MutablePersonEventSet(this.deathBeforeCensus(id)), //FIXME tighter bounds
                 "Inferred ex-spouse of " + person.name()));
     }
 
@@ -205,14 +204,10 @@ public class Census1851Record extends CensusRecord {
 
         @Nonnull
         @Override
-        public Set<? extends Event> events() {
-            final var events = Sets.<Event>newHashSet(this.birth(age, birthPlace), this.residence(age, residencePlace));
+        public PersonEventSet events() {
+            final var events = new MutablePersonEventSet(this.birth(age, birthPlace), this.residence(age, residencePlace));
             events.addAll(extraEvents);
             return events;
-        }
-
-        private EventId randomEventId() {
-            return EventId.random();
         }
 
     }

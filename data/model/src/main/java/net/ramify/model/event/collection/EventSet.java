@@ -5,10 +5,9 @@ import net.ramify.model.event.Event;
 import java.util.Set;
 
 /**
- * @param <E>
  * @see net.ramify.model.person.Person
  */
-public interface EventSet<E extends Event> extends Set<E>, HasEvents {
+public interface EventSet extends Set<Event>, HasEvents {
 
     @Override
     @Deprecated

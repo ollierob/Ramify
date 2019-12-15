@@ -1,10 +1,9 @@
 package net.ramify.model.person;
 
-import net.ramify.model.event.Event;
 import net.ramify.model.event.collection.HasPersonEvents;
+import net.ramify.model.event.collection.PersonEventSet;
 
 import javax.annotation.Nonnull;
-import java.util.Set;
 
 public interface HasPerson extends HasPersonId, HasPersonEvents {
 
@@ -19,7 +18,7 @@ public interface HasPerson extends HasPersonId, HasPersonEvents {
 
     @Nonnull
     @Override
-    default Set<? extends Event> events() {
+    default PersonEventSet events() {
         return this.person().events();
     }
 

@@ -1,10 +1,10 @@
 package net.ramify.model.record;
 
-import com.google.common.collect.Sets;
 import net.ramify.model.date.BeforeDate;
 import net.ramify.model.date.DateRange;
-import net.ramify.model.event.Event;
 import net.ramify.model.event.EventBuilder;
+import net.ramify.model.event.collection.MutablePersonEventSet;
+import net.ramify.model.event.collection.PersonEventSet;
 import net.ramify.model.person.HasPersonId;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
@@ -15,7 +15,6 @@ import net.ramify.model.place.Place;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
-import java.util.Set;
 
 public class GenericRecordEntry implements HasPersonId {
 
@@ -61,13 +60,13 @@ public class GenericRecordEntry implements HasPersonId {
     }
 
     @Nonnull
-    public Person build(final Set<Event> events) {
+    public Person build(final PersonEventSet events) {
         return new GenericRecordPerson(personId, name, gender, events, null);
     }
 
     @Nonnull
-    public Set<Event> events(final Record record) {
-        final var events = Sets.<Event>newHashSet();
+    public PersonEventSet events(final Record record) {
+        final var events = new MutablePersonEventSet();
         if (age != null) events.add(this.eventBuilder(age.birthDate(record.date())).toBirth(personId));
         if (residence != null) events.add(this.eventBuilder(record.date()).withPlace(residence).toResidence(personId));
         if (predeceased) events.add(this.eventBuilder(BeforeDate.strictlyBefore(record.date())).toDeath(personId));

@@ -2,10 +2,10 @@ package net.ramify.strategy.merge.event;
 
 import net.ramify.model.event.Event;
 import net.ramify.model.event.collection.HasPersonEvents;
+import net.ramify.model.event.collection.MutablePersonEventSet;
+import net.ramify.model.event.collection.PersonEventSet;
 
 import javax.annotation.Nonnull;
-import java.util.HashSet;
-import java.util.Set;
 
 public class DefaultEventsMerger implements EventsMerger {
 
@@ -19,15 +19,15 @@ public class DefaultEventsMerger implements EventsMerger {
 
     @Nonnull
     @Override
-    public Result<Set<? extends Event>> merge(final HasPersonEvents e1, final HasPersonEvents e2) {
+    public Result<PersonEventSet> merge(final HasPersonEvents e1, final HasPersonEvents e2) {
 
-        final var birth = births.merge(e1.findBirth(), e2.findBirth());
+        final var birth = births.merge(e1.events().findBirth(), e2.events().findBirth());
         if (birth.isImpossibleMerge()) return Result.impossible();
 
-        final var death = deaths.merge(e1.findDeath(), e2.findDeath());
+        final var death = deaths.merge(e1.events().findDeath(), e2.events().findDeath());
         if (death.isImpossibleMerge()) return Result.impossible();
 
-        final var events = new HashSet<Event>();
+        final var events = new MutablePersonEventSet();
         events.addAll(e1.events());
         events.addAll(e2.events());
         events.removeIf(Event::isUnique);
@@ -40,7 +40,7 @@ public class DefaultEventsMerger implements EventsMerger {
     }
 
     @Override
-    public Set<? extends Event> just(final HasPersonEvents events) {
+    public PersonEventSet just(final HasPersonEvents events) {
         return events.events();
     }
 
