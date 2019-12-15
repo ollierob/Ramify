@@ -37,11 +37,19 @@
         
     <xs:sequence>
             
-      <xs:choice minOccurs="0">
+      <xs:choice>
+                
+        <xs:element ref="ns1:xmlBeforeDate"/>
                 
         <xs:element ref="ns1:inYear"/>
                 
-        <xs:element ref="ns1:onDate"/>
+        <xs:element ref="ns1:xmlExactDate"/>
+                
+        <xs:element ref="ns1:inQuarter"/>
+                
+        <xs:element ref="ns1:xmlBeforeYear"/>
+                
+        <xs:element ref="ns1:xmlBetweenYears"/>
               
       </xs:choice>
             
@@ -104,6 +112,8 @@
       <xs:extension base="tns:xmlEvent">
                 
         <xs:sequence/>
+                
+        <xs:attribute name="cause" type="xs:string"/>
               
       </xs:extension>
           

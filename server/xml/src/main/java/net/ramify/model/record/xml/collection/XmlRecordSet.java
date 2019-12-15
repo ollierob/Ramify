@@ -4,9 +4,7 @@ import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.parse.DateParser;
-import net.ramify.model.date.xml.XmlBetweenYears;
 import net.ramify.model.date.xml.XmlDateRange;
-import net.ramify.model.date.xml.XmlInYear;
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.Record;
@@ -26,7 +24,6 @@ import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.Collections;
@@ -67,10 +64,7 @@ class XmlRecordSet implements HasRecordSetId {
     @XmlElement(name = "nextRecord", namespace = XmlRecord.NAMESPACE)
     private List<XmlRecordSetId> nextIds;
 
-    @XmlElements({
-            @XmlElement(name = "inYear", type = XmlInYear.class, namespace = XmlDateRange.NAMESPACE),
-            @XmlElement(name = "betweenYears", type = XmlBetweenYears.class, namespace = XmlDateRange.NAMESPACE)
-    })
+    @XmlElementRef(namespace = XmlDateRange.NAMESPACE)
     private XmlDateRange date;
 
     @XmlElementRef

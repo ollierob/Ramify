@@ -3,8 +3,6 @@ package net.ramify.model.event.xml;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.date.xml.XmlDateRange;
-import net.ramify.model.date.xml.XmlExactDate;
-import net.ramify.model.date.xml.XmlInYear;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.EventBuilder;
 import net.ramify.model.event.EventId;
@@ -23,9 +21,7 @@ import net.ramify.utils.objects.Functions;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.Collections;
@@ -44,10 +40,7 @@ public abstract class XmlEvent {
     @XmlAttribute(name = "placeId")
     private String placeId;
 
-    @XmlElements({
-            @XmlElement(name = "inYear", type = XmlInYear.class, namespace = XmlDateRange.NAMESPACE),
-            @XmlElement(name = "onDate", type = XmlExactDate.class, namespace = XmlDateRange.NAMESPACE)
-    })
+    @XmlElementRef(namespace = XmlDateRange.NAMESPACE)
     private XmlDateRange date;
 
     @XmlAttribute(name = "age")

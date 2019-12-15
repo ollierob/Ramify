@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ramify.net/dates" targetNamespace="http://ramify.net/dates" version="1.0">
     
-  <xs:element name="betweenYears" type="tns:xmlBetweenYears"/>
-    
   <xs:element name="birthDate" type="tns:xmlExactDate"/>
     
   <xs:element name="builtBeforeYear" type="tns:xmlBeforeYear"/>
@@ -21,9 +19,9 @@
     
   <xs:element name="deathDate" type="tns:xmlExactDate"/>
     
-  <xs:element name="inYear" type="tns:xmlInYear"/>
+  <xs:element name="inQuarter" type="tns:xmlInQuarter"/>
     
-  <xs:element name="onDate" type="tns:xmlExactDate"/>
+  <xs:element name="inYear" type="tns:xmlInYear"/>
     
   <xs:element name="openedInYear" type="tns:xmlInYear"/>
     
@@ -34,8 +32,6 @@
   <xs:element name="xmlBetweenYears" type="tns:xmlBetweenYears"/>
     
   <xs:element name="xmlExactDate" type="tns:xmlExactDate"/>
-    
-  <xs:element name="xmlInYear" type="tns:xmlInYear"/>
     
   <xs:complexType name="xmlBeforeDate">
         
@@ -90,6 +86,24 @@
         <xs:attribute name="month" type="xs:int" use="required"/>
                 
         <xs:attribute name="dayOfMonth" type="xs:int" use="required"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlInQuarter">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlDateRange">
+                
+        <xs:sequence/>
+                
+        <xs:attribute name="year" type="xs:int" use="required"/>
+                
+        <xs:attribute name="quarter" type="xs:int" use="required"/>
               
       </xs:extension>
           

@@ -74,7 +74,11 @@ public class EventBuilder {
     }
 
     public DeathEvent toDeath(final HasPersonId person) {
-        return new GenericDeathEvent(eventId, person.personId(), this.eventProperties()).with(place);
+        return this.toDeath(person, null);
+    }
+
+    public DeathEvent toDeath(final HasPersonId person, final String cause) {
+        return new GenericDeathEvent(eventId, person.personId(), this.eventProperties(), cause).with(place);
     }
 
     public BurialEvent toBurial(final PersonId personId) {

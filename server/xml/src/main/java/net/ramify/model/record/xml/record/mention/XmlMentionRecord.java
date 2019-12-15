@@ -4,9 +4,7 @@ import com.google.common.base.MoreObjects;
 import net.ramify.model.date.BeforeDate;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.parse.DateParser;
-import net.ramify.model.date.xml.XmlBetweenYears;
 import net.ramify.model.date.xml.XmlDateRange;
-import net.ramify.model.date.xml.XmlInYear;
 import net.ramify.model.event.Event;
 import net.ramify.model.family.SinglePersonFamily;
 import net.ramify.model.person.PersonId;
@@ -19,8 +17,7 @@ import net.ramify.model.record.xml.record.XmlRecord;
 
 import javax.annotation.CheckForNull;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Set;
 
@@ -30,10 +27,7 @@ public class XmlMentionRecord extends XmlPersonOnDateRecord {
     @XmlAttribute(name = "deceased")
     private Boolean deceased;
 
-    @XmlElements({
-            @XmlElement(name = "betweenYears", type = XmlBetweenYears.class, namespace = XmlDateRange.NAMESPACE),
-            @XmlElement(name = "inYear", type = XmlInYear.class, namespace = XmlDateRange.NAMESPACE)
-    })
+    @XmlElementRef(namespace = XmlDateRange.NAMESPACE)
     private XmlDateRange date;
 
     protected boolean deceased() {

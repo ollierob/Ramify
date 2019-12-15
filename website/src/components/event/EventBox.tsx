@@ -44,7 +44,7 @@ export const EventBox = (props: EventBoxProps) => {
             </div>}
         </div>
         <div className="main">
-            {typeBox(props)}
+            {peopleBox(props)}
         </div>
     </Card>;
 
@@ -57,7 +57,7 @@ function eventClass(event: Event.AsObject): string {
     return "postBirth";
 }
 
-function typeBox(props: EventBoxProps) {
+function peopleBox(props: EventBoxProps) {
     if (!props.family || !props.relatives) return null;
     switch (eventType(props.event)) {
         case "BIRTH":

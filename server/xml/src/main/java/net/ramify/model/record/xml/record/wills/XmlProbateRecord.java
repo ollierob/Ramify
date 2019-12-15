@@ -2,8 +2,6 @@ package net.ramify.model.record.xml.record.wills;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.xml.XmlDateRange;
-import net.ramify.model.date.xml.XmlExactDate;
-import net.ramify.model.date.xml.XmlInYear;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.type.will.ProbateEvent;
 import net.ramify.model.person.PersonId;
@@ -14,18 +12,14 @@ import net.ramify.model.record.xml.record.XmlPersonOnDateWithFamilyRecord;
 import net.ramify.model.record.xml.record.XmlRecord;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Set;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "probate")
 public class XmlProbateRecord extends XmlPersonOnDateWithFamilyRecord {
 
-    @XmlElements({
-            @XmlElement(name = "inYear", type = XmlInYear.class, namespace = XmlDateRange.NAMESPACE),
-            @XmlElement(name = "onDate", type = XmlExactDate.class, namespace = XmlDateRange.NAMESPACE)
-    })
+    @XmlElementRef(namespace = XmlDateRange.NAMESPACE)
     private XmlDateRange date;
 
     @Nonnull

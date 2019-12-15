@@ -21,6 +21,8 @@ message Event {
     RecordType type = 20;
     bool isUnique = 21;
 
+    string cause = 30;
+
 }
 
 message EventList {
