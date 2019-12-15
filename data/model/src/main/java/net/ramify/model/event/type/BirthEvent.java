@@ -1,10 +1,18 @@
 package net.ramify.model.event.type;
 
 import net.ramify.model.event.proto.EventProto;
+import net.ramify.model.person.age.Age;
 
 import javax.annotation.Nonnull;
+import java.util.Optional;
 
 public interface BirthEvent extends UniqueEvent {
+
+    @Nonnull
+    @Override
+    default Optional<Age> givenAge() {
+        return Optional.of(Age.ZERO);
+    }
 
     @Override
     default <R> R handleWith(final EventHandler<R> handler) {
