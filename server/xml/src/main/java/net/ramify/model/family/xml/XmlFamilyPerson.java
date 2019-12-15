@@ -1,7 +1,6 @@
 package net.ramify.model.family.xml;
 
 import com.google.common.collect.Sets;
-import net.ramify.model.event.Event;
 import net.ramify.model.event.xml.XmlEvent;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
@@ -15,7 +14,6 @@ import net.ramify.model.relationship.type.Married;
 import net.ramify.model.relationship.type.ParentChild;
 
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.Collections;
@@ -27,9 +25,6 @@ import static net.meerkat.collections.Collections.isEmpty;
 
 @XmlRootElement(namespace = XmlFamily.NAMESPACE, name = "person")
 public class XmlFamilyPerson extends XmlPersonRecord {
-
-    @XmlElementRef
-    private List<XmlEvent> events;
 
     @XmlElement(name = "parent", namespace = XmlFamily.NAMESPACE)
     private List<String> parents;
@@ -47,18 +42,11 @@ public class XmlFamilyPerson extends XmlPersonRecord {
                 this.notes());
     }
 
-    protected Set<Event> events(final PersonId personId, final RecordContext context) {
-        if (events == null || events.isEmpty()) return Collections.emptySet();
-        final var events = Sets.<Event>newHashSet();
-        this.events.forEach(event -> events.addAll(event.allEvents(personId, context, false)));
-        return events;
-    }
-
     protected Set<Relationship> relationships(final Person self, final PersonProvider people) {
         final var relationships = Sets.<Relationship>newHashSet();
         relationships.addAll(relatives(self, people, parents, ParentChild::new));
         relationships.addAll(relatives(self, people, spouses, Married::new));
-        relationships.addAll(relatives(self, events));
+        relationships.addAll(relatives(self, this.events()));
         return relationships;
     }
 

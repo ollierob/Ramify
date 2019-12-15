@@ -24,7 +24,7 @@ public class XmlPersonOnDateWithFamilyRecord extends XmlPersonOnDateRecord {
     }
 
     protected Family family(final RecordContext context, final DateRange recordDate, final Function<PersonId, Set<? extends Event>> createEvents) {
-        final var root = this.person(recordDate, context, createEvents);
+        final var root = this.person(context, createEvents);
         final var builder = new FamilyBuilder(root);
         this.addFamily(root, builder, context, recordDate);
         return builder.build();

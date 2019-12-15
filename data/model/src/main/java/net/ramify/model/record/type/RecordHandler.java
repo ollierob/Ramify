@@ -12,6 +12,6 @@ public interface RecordHandler<R> {
 
     R handle(DeathRecord death);
 
-    R handle(BurialRecord burial);
+    R handle(PostDeathRecord record);
 
 }

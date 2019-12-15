@@ -11,6 +11,7 @@ import net.ramify.model.record.xml.record.death.XmlMemorialInscriptions;
 import net.ramify.model.record.xml.record.marriage.XmlMarriageRecords;
 import net.ramify.model.record.xml.record.mention.XmlMentionRecords;
 import net.ramify.model.record.xml.record.residence.XmlResidenceRecords;
+import net.ramify.model.record.xml.record.wills.XmlProbateRecords;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlSeeAlso;
@@ -20,8 +21,10 @@ import java.util.Collection;
         XmlMentionRecords.class, XmlResidenceRecords.class,
         XmlBirthRecords.class, XmlBaptismRecords.class,
         XmlMarriageRecords.class,
-        XmlBurialRecords.class,
-        XmlCensusRecords.class, XmlMemorialInscriptions.class})
+        XmlCensusRecords.class,
+        XmlBurialRecords.class, XmlMemorialInscriptions.class,
+        XmlProbateRecords.class
+})
 public abstract class XmlRecords {
 
     public abstract int numRecords();

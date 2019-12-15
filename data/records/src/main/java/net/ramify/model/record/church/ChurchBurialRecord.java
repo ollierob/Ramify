@@ -20,7 +20,7 @@ public class ChurchBurialRecord extends AbstractChurchRecord implements BurialRe
             final ExactDate date,
             final PlaceId church,
             final Family family) {
-        super(id, recordSet, date, church);
+        super(id, recordSet, date, family, church);
         this.family = family;
     }
 

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/events" xmlns:ns2="http://ramify.net/dates" xmlns:ns3="http://ramify.net/people" xmlns:ns4="http://ramify.net/records" xmlns:tns="http://ramify.net/families" targetNamespace="http://ramify.net/families" version="1.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/records" xmlns:ns2="http://ramify.net/people" xmlns:ns3="http://ramify.net/dates" xmlns:ns4="http://ramify.net/events" xmlns:tns="http://ramify.net/families" targetNamespace="http://ramify.net/families" version="1.0">
     
-  <xs:import namespace="http://ramify.net/events" schemaLocation="events.xsd"/>
-    
-  <xs:import namespace="http://ramify.net/dates" schemaLocation="dates.xsd"/>
+  <xs:import namespace="http://ramify.net/records" schemaLocation="records.xsd"/>
     
   <xs:import namespace="http://ramify.net/people" schemaLocation="people.xsd"/>
     
-  <xs:import namespace="http://ramify.net/records" schemaLocation="records.xsd"/>
+  <xs:import namespace="http://ramify.net/dates" schemaLocation="dates.xsd"/>
+    
+  <xs:import namespace="http://ramify.net/events" schemaLocation="events.xsd"/>
     
   <xs:element name="family" type="tns:xmlFamily"/>
     
@@ -33,25 +33,9 @@
         
     <xs:complexContent>
             
-      <xs:extension base="ns4:xmlPersonRecord">
+      <xs:extension base="ns1:xmlPersonRecord">
                 
         <xs:sequence>
-                    
-          <xs:choice maxOccurs="unbounded" minOccurs="0">
-                        
-            <xs:element ref="ns1:event"/>
-                        
-            <xs:element ref="ns1:birth"/>
-                        
-            <xs:element ref="ns1:marriage"/>
-                        
-            <xs:element ref="ns1:residence"/>
-                        
-            <xs:element ref="ns1:death"/>
-                        
-            <xs:element ref="ns1:burial"/>
-                      
-          </xs:choice>
                     
           <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="parent" type="xs:string"/>
                     
@@ -95,21 +79,23 @@
         
     <xs:sequence>
             
-      <xs:element minOccurs="0" ref="ns3:nameTranscription"/>
+      <xs:element minOccurs="0" ref="ns2:nameTranscription"/>
             
       <xs:choice maxOccurs="unbounded" minOccurs="0">
                 
-        <xs:element ref="ns1:event"/>
+        <xs:element ref="ns4:event"/>
                 
-        <xs:element ref="ns1:birth"/>
+        <xs:element ref="ns4:birth"/>
                 
-        <xs:element ref="ns1:marriage"/>
+        <xs:element ref="ns4:marriage"/>
                 
-        <xs:element ref="ns1:residence"/>
+        <xs:element ref="ns4:residence"/>
                 
-        <xs:element ref="ns1:death"/>
+        <xs:element ref="ns4:death"/>
                 
-        <xs:element ref="ns1:burial"/>
+        <xs:element ref="ns4:burial"/>
+                
+        <xs:element ref="ns4:probate"/>
               
       </xs:choice>
           

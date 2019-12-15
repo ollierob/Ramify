@@ -8,11 +8,7 @@ import net.ramify.model.record.RecordId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.type.BaptismRecord;
 
-import javax.annotation.Nonnull;
-
 public class ChurchBaptismRecord extends AbstractChurchRecord implements BaptismRecord {
-
-    private final Family family;
 
     public ChurchBaptismRecord(
             final RecordId id,
@@ -20,14 +16,7 @@ public class ChurchBaptismRecord extends AbstractChurchRecord implements Baptism
             final ExactDate date,
             final PlaceId church,
             final Family family) {
-        super(id, recordSet, date, church);
-        this.family = family;
-    }
-
-    @Nonnull
-    @Override
-    public Family family() {
-        return family;
+        super(id, recordSet, date, family, church);
     }
 
     @Override

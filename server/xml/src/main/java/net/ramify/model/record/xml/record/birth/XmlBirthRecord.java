@@ -13,12 +13,12 @@ import net.ramify.model.record.type.BirthRecord;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlPersonOnDateWithFamilyRecord;
 import net.ramify.model.record.xml.record.XmlRecord;
-import net.ramify.utils.objects.Functions;
 
 import javax.annotation.CheckForNull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Optional;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "birthRecord")
 public class XmlBirthRecord extends XmlPersonOnDateWithFamilyRecord {
@@ -29,15 +29,15 @@ public class XmlBirthRecord extends XmlPersonOnDateWithFamilyRecord {
     @XmlElement(name = "birthDate", required = true, namespace = XmlDateRange.NAMESPACE)
     private XmlExactDate birthDate;
 
-    public BirthRecord build(final PlaceId recordCovers, final RecordContext context, final RecordSet recordSet) {
+    public BirthRecord build(final PlaceId recordSetCovers, final RecordContext context, final RecordSet recordSet) {
         final var birthDate = this.birthDate.resolve();
-        final var birthPlace = this.birthPlace();
+        final var birthPlace = this.birthPlace().orElse(recordSetCovers);
         return new GenericBirthRecord(
                 this.recordId(),
                 recordSet,
                 birthDate,
-                birthPlace,
-                this.family(context.onDate(birthDate), birthDate));
+                this.family(context.onDate(birthDate), birthDate),
+                birthPlace);
     }
 
     @Override
@@ -48,12 +48,12 @@ public class XmlBirthRecord extends XmlPersonOnDateWithFamilyRecord {
     }
 
     @CheckForNull
-    PlaceId birthPlace() {
-        return birthPlace == null ? null : new PlaceId(birthPlace);
+    protected Optional<PlaceId> birthPlace() {
+        return Optional.ofNullable(birthPlace).map(PlaceId::new);
     }
 
-    Place birthPlace(final RecordContext context) {
-        return Functions.ifNonNull(this.birthPlace(), id -> context.places().require(id));
+    protected Place birthPlace(final RecordContext context) {
+        return this.birthPlace().map(context.places()::require).orElse(null);
     }
 
 }

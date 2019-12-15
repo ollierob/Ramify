@@ -34,10 +34,10 @@ public class XmlPersonOnDateRecord extends XmlPersonRecord {
     private XmlAge complexAge;
 
     protected Person person(final DateRange date, final RecordContext context) {
-        return this.person(date, context, id -> this.events(id, date, context));
+        return this.person(context, id -> this.events(id, date, context));
     }
 
-    protected Person person(final DateRange date, final RecordContext context, final Function<PersonId, Set<? extends Event>> createEvents) {
+    protected Person person(final RecordContext context, final Function<PersonId, Set<? extends Event>> createEvents) {
         final var personId = this.personId();
         final var name = this.name(context.nameParser());
         final var gender = this.gender();
@@ -49,6 +49,8 @@ public class XmlPersonOnDateRecord extends XmlPersonRecord {
     @OverridingMethodsMustInvokeSuper
     protected Set<Event> events(final PersonId personId, final DateRange date, final RecordContext context) {
         final var events = Sets.<Event>newHashSet();
+        events.addAll(this.events(personId, context));
+        //FIXME only infer birth if not already added
         Consumers.ifNonNull(this.inferBirth(personId, date, context), events::add);
         return events;
     }

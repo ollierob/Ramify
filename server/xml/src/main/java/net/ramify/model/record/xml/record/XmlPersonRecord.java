@@ -1,5 +1,9 @@
 package net.ramify.model.record.xml.record;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.collect.Sets;
+import net.ramify.model.event.Event;
+import net.ramify.model.event.xml.XmlEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.gender.Sex;
@@ -7,13 +11,20 @@ import net.ramify.model.person.name.Name;
 import net.ramify.model.person.name.NameParser;
 import net.ramify.model.person.xml.XmlGender;
 import net.ramify.model.person.xml.XmlName;
+import net.ramify.model.record.xml.RecordContext;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public class XmlPersonRecord extends XmlRecord {
+
+    @XmlAttribute(name = "id")
+    private String id = UUID.randomUUID().toString();
 
     @XmlAttribute(name = "name")
     private String name;
@@ -27,8 +38,8 @@ public class XmlPersonRecord extends XmlRecord {
     @XmlAttribute(name = "notes")
     private String notes;
 
-    @XmlAttribute(name = "id")
-    private String id = UUID.randomUUID().toString();
+    @XmlElementRef
+    private List<XmlEvent> events;
 
     public PersonId personId() {
         return new PersonId(id);
@@ -51,6 +62,16 @@ public class XmlPersonRecord extends XmlRecord {
 
     protected String notes() {
         return notes;
+    }
+
+    protected List<XmlEvent> events() {
+        return MoreObjects.firstNonNull(events, Collections.emptyList());
+    }
+
+    protected Set<Event> events(final PersonId personId, final RecordContext context) {
+        final var events = Sets.<Event>newHashSet();
+        this.events().forEach(event -> events.addAll(event.allEvents(personId, context, false)));
+        return events;
     }
 
 }

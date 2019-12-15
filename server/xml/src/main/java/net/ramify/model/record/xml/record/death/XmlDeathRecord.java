@@ -20,7 +20,6 @@ import net.ramify.model.record.type.DeathRecord;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlPersonOnDateRecord;
 import net.ramify.model.record.xml.record.XmlRecord;
-import net.ramify.utils.objects.Functions;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -47,7 +46,7 @@ public class XmlDeathRecord extends XmlPersonOnDateRecord {
     public DeathRecord build(final PlaceId recordSetCovers, final RecordContext context, final RecordSet recordSet) {
         final var date = this.deathDate();
         final var person = this.person(date, context);
-        final var deathPlace = Functions.ifNonNull(this.deathPlace, PlaceId::new, recordSetCovers);
+        final var deathPlace = this.deathPlace().orElse(recordSetCovers);
         return new GenericDeathRecord(
                 this.recordId(),
                 recordSet,
@@ -77,8 +76,12 @@ public class XmlDeathRecord extends XmlPersonOnDateRecord {
                 .toDeath(personId);
     }
 
+    protected Optional<PlaceId> deathPlace() {
+        return Optional.ofNullable(deathPlace).map(PlaceId::new);
+    }
+
     protected Place deathPlace(final RecordContext context) {
-        return Optional.ofNullable(deathPlace).map(PlaceId::new).map(context.places()::require).orElse(null);
+        return this.deathPlace().map(context.places()::require).orElse(null);
     }
 
     public ExactDate deathDate() {

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/people" xmlns:ns2="http://ramify.net/dates" xmlns:ns3="http://ramify.net/places" xmlns:ns4="http://ramify.net/families" xmlns:tns="http://ramify.net/records" targetNamespace="http://ramify.net/records" version="1.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/people" xmlns:ns2="http://ramify.net/dates" xmlns:ns3="http://ramify.net/events" xmlns:ns4="http://ramify.net/places" xmlns:ns5="http://ramify.net/families" xmlns:tns="http://ramify.net/records" targetNamespace="http://ramify.net/records" version="1.0">
     
   <xs:import namespace="http://ramify.net/people" schemaLocation="people.xsd"/>
     
   <xs:import namespace="http://ramify.net/dates" schemaLocation="dates.xsd"/>
+    
+  <xs:import namespace="http://ramify.net/events" schemaLocation="events.xsd"/>
     
   <xs:import namespace="http://ramify.net/places" schemaLocation="places.xsd"/>
     
@@ -39,6 +41,10 @@
     
   <xs:element name="mentionRecords" type="tns:xmlMentionRecords"/>
     
+  <xs:element name="probate" type="tns:xmlProbateRecord"/>
+    
+  <xs:element name="probateRecords" type="tns:xmlProbateRecords"/>
+    
   <xs:element name="recordSet" type="tns:xmlRecordSet"/>
     
   <xs:element name="recordSetReference" type="tns:xmlRecordSetReference"/>
@@ -58,16 +64,34 @@
         <xs:sequence>
                     
           <xs:element minOccurs="0" ref="ns1:nameTranscription"/>
+                    
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        
+            <xs:element ref="ns3:event"/>
+                        
+            <xs:element ref="ns3:birth"/>
+                        
+            <xs:element ref="ns3:marriage"/>
+                        
+            <xs:element ref="ns3:residence"/>
+                        
+            <xs:element ref="ns3:death"/>
+                        
+            <xs:element ref="ns3:burial"/>
+                        
+            <xs:element ref="ns3:probate"/>
+                      
+          </xs:choice>
                   
         </xs:sequence>
+                
+        <xs:attribute name="id" type="xs:string"/>
                 
         <xs:attribute name="name" type="xs:string"/>
                 
         <xs:attribute name="gender" type="ns1:xmlGender" use="required"/>
                 
         <xs:attribute name="notes" type="xs:string"/>
-                
-        <xs:attribute name="id" type="xs:string"/>
               
       </xs:extension>
           
@@ -157,11 +181,13 @@
                 
         <xs:element ref="tns:marriageRecords"/>
                 
-        <xs:element ref="tns:burialRecords"/>
-                
         <xs:element ref="tns:englandCensus"/>
                 
+        <xs:element ref="tns:burialRecords"/>
+                
         <xs:element ref="tns:memorialInscriptions"/>
+                
+        <xs:element ref="tns:probateRecords"/>
               
       </xs:choice>
           
@@ -199,13 +225,13 @@
             
       <xs:choice minOccurs="0">
                 
-        <xs:element ref="ns3:textLink"/>
+        <xs:element ref="ns4:textLink"/>
                 
-        <xs:element ref="ns3:wikipediaLink"/>
+        <xs:element ref="ns4:wikipediaLink"/>
                 
-        <xs:element ref="ns3:nationalArchivesLink"/>
+        <xs:element ref="ns4:nationalArchivesLink"/>
                 
-        <xs:element ref="ns3:websiteLink"/>
+        <xs:element ref="ns4:websiteLink"/>
               
       </xs:choice>
           
@@ -345,9 +371,9 @@
                     
           <xs:choice maxOccurs="unbounded" minOccurs="0">
                         
-            <xs:element ref="ns4:father"/>
+            <xs:element ref="ns5:father"/>
                         
-            <xs:element ref="ns4:mother"/>
+            <xs:element ref="ns5:mother"/>
                       
           </xs:choice>
                   
@@ -436,60 +462,6 @@
       <xs:extension base="tns:xmlMarriageRecord">
                 
         <xs:sequence/>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlBurialRecords">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlRecords">
-                
-        <xs:sequence>
-                    
-          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:burial"/>
-                  
-        </xs:sequence>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlBurialRecord">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPersonOnDateRecord">
-                
-        <xs:sequence>
-                    
-          <xs:element minOccurs="0" ref="ns2:deathDate"/>
-                    
-          <xs:choice maxOccurs="unbounded" minOccurs="0">
-                        
-            <xs:element ref="ns4:father"/>
-                        
-            <xs:element ref="ns4:mother"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-                
-        <xs:attribute name="residence" type="xs:string"/>
-                
-        <xs:attribute name="year" type="xs:int" use="required"/>
-                
-        <xs:attribute name="month" type="xs:int" use="required"/>
-                
-        <xs:attribute name="day" type="xs:int" use="required"/>
-                
-        <xs:attribute name="deathPlace" type="xs:string"/>
               
       </xs:extension>
           
@@ -693,6 +665,60 @@
       
   </xs:complexType>
     
+  <xs:complexType name="xmlBurialRecords">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlRecords">
+                
+        <xs:sequence>
+                    
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:burial"/>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlBurialRecord">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPersonOnDateRecord">
+                
+        <xs:sequence>
+                    
+          <xs:element minOccurs="0" ref="ns2:deathDate"/>
+                    
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        
+            <xs:element ref="ns5:father"/>
+                        
+            <xs:element ref="ns5:mother"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+                
+        <xs:attribute name="residence" type="xs:string"/>
+                
+        <xs:attribute name="year" type="xs:int" use="required"/>
+                
+        <xs:attribute name="month" type="xs:int" use="required"/>
+                
+        <xs:attribute name="day" type="xs:int" use="required"/>
+                
+        <xs:attribute name="deathPlace" type="xs:string"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
   <xs:complexType name="xmlMemorialInscriptions">
         
     <xs:complexContent>
@@ -721,9 +747,41 @@
                     
           <xs:element form="qualified" name="text" type="xs:string"/>
                     
-          <xs:element maxOccurs="unbounded" minOccurs="0" ref="ns4:family"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="ns5:family"/>
                   
         </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlProbateRecords">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlRecords">
+                
+        <xs:sequence>
+                    
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:probate"/>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlProbateRecord">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPersonOnDateWithFamilyRecord">
+                
+        <xs:sequence/>
               
       </xs:extension>
           
@@ -753,9 +811,9 @@
                     
           <xs:choice maxOccurs="unbounded" minOccurs="0">
                         
-            <xs:element ref="ns4:father"/>
+            <xs:element ref="ns5:father"/>
                         
-            <xs:element ref="ns4:mother"/>
+            <xs:element ref="ns5:mother"/>
                       
           </xs:choice>
                   
@@ -793,9 +851,9 @@
                     
           <xs:choice maxOccurs="unbounded" minOccurs="0">
                         
-            <xs:element ref="ns4:father"/>
+            <xs:element ref="ns5:father"/>
                         
-            <xs:element ref="ns4:mother"/>
+            <xs:element ref="ns5:mother"/>
                       
           </xs:choice>
                   
@@ -825,27 +883,27 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="mixed"/>
-            
-      <xs:enumeration value="death"/>
-            
-      <xs:enumeration value="residence"/>
-            
-      <xs:enumeration value="burial"/>
-            
-      <xs:enumeration value="census"/>
-            
-      <xs:enumeration value="baptism"/>
+      <xs:enumeration value="membership"/>
             
       <xs:enumeration value="marriage"/>
             
+      <xs:enumeration value="death"/>
+            
+      <xs:enumeration value="payment"/>
+            
+      <xs:enumeration value="census"/>
+            
       <xs:enumeration value="birth"/>
             
-      <xs:enumeration value="membership"/>
+      <xs:enumeration value="baptism"/>
+            
+      <xs:enumeration value="burial"/>
+            
+      <xs:enumeration value="mixed"/>
             
       <xs:enumeration value="mention"/>
             
-      <xs:enumeration value="payment"/>
+      <xs:enumeration value="residence"/>
           
     </xs:restriction>
       
@@ -855,13 +913,13 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="parent"/>
+      <xs:enumeration value="child"/>
             
       <xs:enumeration value="spouse"/>
             
       <xs:enumeration value="head"/>
             
-      <xs:enumeration value="child"/>
+      <xs:enumeration value="parent"/>
           
     </xs:restriction>
       
@@ -871,9 +929,9 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="unmarried"/>
-            
       <xs:enumeration value="married"/>
+            
+      <xs:enumeration value="unmarried"/>
             
       <xs:enumeration value="widowed"/>
           

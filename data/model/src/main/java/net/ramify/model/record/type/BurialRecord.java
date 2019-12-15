@@ -7,17 +7,12 @@ import net.ramify.model.record.proto.RecordProto;
 
 import javax.annotation.Nonnull;
 
-public interface BurialRecord extends SingleFamilyRecord, HasPlaceId {
-
-    @Override
-    default <R> R handleWith(@Nonnull final RecordHandler<R> handler) {
-        return handler.handle(this);
-    }
+public interface BurialRecord extends PostDeathRecord, HasPlaceId {
 
     @Nonnull
     @Override
     default RecordProto.Record.Builder toProtoBuilder() {
-        return SingleFamilyRecord.super.toProtoBuilder().setType(EventProto.RecordType.BURIAL);
+        return PostDeathRecord.super.toProtoBuilder().setType(EventProto.RecordType.BURIAL);
     }
 
 }

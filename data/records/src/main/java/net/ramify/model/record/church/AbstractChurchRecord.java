@@ -1,30 +1,21 @@
 package net.ramify.model.record.church;
 
-import net.ramify.model.date.ExactDate;
-import net.ramify.model.place.HasPlaceId;
+import net.ramify.model.date.DateRange;
+import net.ramify.model.family.Family;
 import net.ramify.model.place.PlaceId;
-import net.ramify.model.record.ExactDateRecord;
+import net.ramify.model.record.DateFamilyPlaceRecord;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.collection.RecordSet;
 
-import java.util.Objects;
-
-public abstract class AbstractChurchRecord extends ExactDateRecord implements HasPlaceId {
-
-    private final PlaceId church;
+public abstract class AbstractChurchRecord extends DateFamilyPlaceRecord {
 
     protected AbstractChurchRecord(
             final RecordId id,
             final RecordSet recordSet,
-            final ExactDate date,
-            final PlaceId church) {
-        super(id, recordSet, date);
-        this.church = Objects.requireNonNull(church);
-    }
-
-    @Override
-    public PlaceId placeId() {
-        return church;
+            final DateRange date,
+            final Family family,
+            final PlaceId churchId) {
+        super(id, recordSet, date, family, churchId);
     }
 
 }

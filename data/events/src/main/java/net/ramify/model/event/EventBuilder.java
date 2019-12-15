@@ -15,6 +15,8 @@ import net.ramify.model.event.type.marriage.MarriageEvent;
 import net.ramify.model.event.type.misc.Flourished;
 import net.ramify.model.event.type.residence.GenericResidenceEvent;
 import net.ramify.model.event.type.residence.ResidenceEvent;
+import net.ramify.model.event.type.will.GenericProbateEvent;
+import net.ramify.model.event.type.will.ProbateEvent;
 import net.ramify.model.person.HasPersonId;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
@@ -81,6 +83,10 @@ public class EventBuilder {
 
     public BaptismEvent toBaptism(final HasPersonId person) {
         return new GenericBaptismEvent(eventId, person.personId(), this.eventProperties()).with(place);
+    }
+
+    public ProbateEvent toProbate(final HasPersonId person) {
+        return new GenericProbateEvent(eventId, person.personId(), this.eventProperties());
     }
 
 }
