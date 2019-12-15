@@ -20,6 +20,8 @@ import java.util.Optional;
 
 public interface Event extends HasEventId, HasAges, HasDate, HasPersonId, Castable<Event>, BuildsProto<EventProto.Event> {
 
+    Event[] EMPTY_ARRAY = new Event[0];
+
     @Nonnull
     String title();
 

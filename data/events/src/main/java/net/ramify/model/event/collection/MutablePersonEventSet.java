@@ -18,6 +18,7 @@ public class MutablePersonEventSet extends HashSet<Event> implements PersonEvent
     private final Handler handler = new Handler();
 
     public MutablePersonEventSet() {
+        this(Event.EMPTY_ARRAY);
     }
 
     public MutablePersonEventSet(final Event... events) {
