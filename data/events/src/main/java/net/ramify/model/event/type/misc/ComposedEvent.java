@@ -4,7 +4,6 @@ import net.ramify.model.date.DateRange;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.EventId;
 import net.ramify.model.event.proto.EventProto;
-import net.ramify.model.event.type.EventHandler;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
 
@@ -75,11 +74,6 @@ public abstract class ComposedEvent<T extends Event> implements Event {
     @Override
     public boolean isInferred() {
         return delegate.isInferred();
-    }
-
-    @Override
-    public <R> R handleWith(final EventHandler<R> handler) {
-        return delegate.handleWith(handler);
     }
 
     @Override

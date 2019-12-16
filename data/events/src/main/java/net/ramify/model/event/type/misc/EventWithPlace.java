@@ -7,7 +7,7 @@ import net.ramify.model.place.Place;
 
 import javax.annotation.Nonnull;
 
-public class EventWithPlace<E extends Event> extends ComposedEvent<E> implements HasPlace {
+public abstract class EventWithPlace<E extends Event> extends ComposedEvent<E> implements HasPlace {
 
     private final Place place;
 

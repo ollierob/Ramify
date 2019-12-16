@@ -24,7 +24,7 @@ public class BirthWithPlace extends EventWithPlace<BirthEvent> implements BirthE
     @Nonnull
     @Override
     public EventProto.Event.Builder toProtoBuilder() {
-        return BirthEvent.super.toProtoBuilder();
+        return super.toProtoBuilder();
     }
 
 }

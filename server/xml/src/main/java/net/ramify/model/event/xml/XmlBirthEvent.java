@@ -1,6 +1,7 @@
 package net.ramify.model.event.xml;
 
 import net.ramify.model.event.Event;
+import net.ramify.model.event.type.BirthEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.record.xml.RecordContext;
 
@@ -12,10 +13,8 @@ import java.util.Set;
 public class XmlBirthEvent extends XmlEvent {
 
     @Override
-    public Event toEvent(final PersonId personId, final RecordContext context) {
-        return this.eventBuilder(context)
-                .withPlace(this.place(context))
-                .toBirth(personId);
+    public BirthEvent toEvent(final PersonId personId, final RecordContext context) {
+        return this.eventBuilder(context).toBirth(personId);
     }
 
     @Override

@@ -69,7 +69,6 @@ public class EventBuilder {
     }
 
     public BirthEvent toBirth(final HasPersonId person) {
-        this.withGivenAge(Age.ZERO);
         return new GenericBirthEvent(eventId, person.personId(), this.eventProperties()).with(place);
     }
 

@@ -1,7 +1,6 @@
 package net.ramify.model.event;
 
 import net.ramify.model.SelfTyped;
-import net.ramify.model.event.type.misc.EventWithPlace;
 import net.ramify.model.person.HasPersonId;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.place.Place;
@@ -41,9 +40,6 @@ public abstract class AbstractPersonEvent<T extends AbstractPersonEvent<T>> impl
 
     @Nonnull
     @CheckReturnValue
-    public Event with(final Place place) {
-        if (place == null) return this.self();
-        return new EventWithPlace<>(this.self(), place);
-    }
+    public abstract Event with(Place place);
 
 }
