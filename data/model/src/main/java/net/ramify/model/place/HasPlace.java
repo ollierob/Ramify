@@ -24,8 +24,9 @@ public interface HasPlace extends HasPlaceId {
         return this.place();
     }
 
-    static Optional<Place> place(final Object object) {
-        return Castable.cast(object, HasPlace.class).map(p -> p.place());
+    @Nonnull
+    static Optional<Place> getPlace(final Object object) {
+        return Castable.cast(object, HasPlace.class).map(HasPlace::place);
     }
 
 }

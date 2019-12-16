@@ -26,7 +26,7 @@ abstract class AbstractEventMerger<E extends UniqueEvent> implements EventMerger
         final var date = e1.date().intersection(e2.date());
         if (date.isEmpty()) return this.impossible(e1, e2);
 
-        final var place = placeMerger.merge(HasPlace.place(e1), HasPlace.place(e2));
+        final var place = placeMerger.merge(HasPlace.getPlace(e1), HasPlace.getPlace(e2));
         if (place.isImpossibleMerge()) return this.impossible(e1, e2);
 
         final var builder = this.eventBuilder(date.get(), place.orElse(null))

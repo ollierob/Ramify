@@ -8,6 +8,7 @@ import {SearchIcon} from "../../../images/Icons";
 import {PlaceLink} from "../../../places/PlaceLink";
 import {PlaceId} from "../../../places/Place";
 import RegionCascader from "../../../places/RegionCascader";
+import {PlaceAndParent} from "../../../places/PlaceAndParent";
 
 type Props = {
     parentOpen: boolean;
@@ -104,11 +105,5 @@ const SearchResults = (props: {searchResults: AsyncData<ReadonlyArray<Place.AsOb
 };
 
 const SearchResult = (props: {place: Place.AsObject}) => {
-    const place = props.place;
-    return <>
-        <PlaceLink place={place} showType={false}/>
-        &nbsp;
-        <span className="unimportant">{place.type.name}</span>
-        {place.parent && <>&nbsp;in <PlaceLink place={place.parent}/></>}
-    </>;
+    return <PlaceAndParent {...props}/>;
 };

@@ -12,7 +12,6 @@ public interface ResidenceEvent extends LifeEvent, HasPlace {
     @Override
     default EventProto.Event.Builder toProtoBuilder() {
         return LifeEvent.super.toProtoBuilder()
-                .setPlace(this.place().toProto(false))
                 .setType(EventProto.RecordType.RESIDENCE);
     }
 

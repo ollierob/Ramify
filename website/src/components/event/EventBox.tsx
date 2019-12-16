@@ -13,6 +13,7 @@ import {EventRelatedPeopleBox} from "./EventRelatedPeopleBox";
 import {findEventSpouse, Relatives} from "../relationship/Relatives";
 import {RelativeRelationship} from "../relationship/RelativeRelationship";
 import {EventNotes} from "./EventNotes";
+import {PlaceAndParent} from "../places/PlaceAndParent";
 
 export type EventBoxProps = {
     person: Person.AsObject
@@ -38,7 +39,7 @@ export const EventBox = (props: EventBoxProps) => {
                 {formatDateRange(event.date, "day")}
             </div>
             {event.place && <div className="place">
-                <PlaceLink place={event.place} showType/>
+                <PlaceAndParent place={event.place}/>
             </div>}
             {event.givenage && <div className="givenAge">
                 Age {renderAge(event.givenage)}

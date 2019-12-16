@@ -64,7 +64,7 @@ public interface Event extends HasEventId, HasAges, HasDate, HasPersonId, Castab
                 .setIsUnique(this.isUnique())
                 .setPersonId(this.personId().value())
                 .setInferred(this.isInferred());
-        HasPlace.place(this).ifPresent(place -> builder.setPlace(place.toProto()));
+        HasPlace.getPlace(this).ifPresent(place -> builder.setPlace(place.toProto()));
         this.givenAge().ifPresent(age -> builder.setGivenAge(age.toProto()));
         this.computedAge().ifPresent(age -> builder.setComputedAge(age.toProto()));
         this.occupation().ifPresent(builder::setOccupation);
