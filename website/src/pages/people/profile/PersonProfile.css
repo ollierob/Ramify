@@ -18,25 +18,25 @@
     width: 50%;
 }
 
-.personProfile .profile .events .event:hover {
-    border: 1px solid black !important;
-}
-
-.personProfile .profile .events .event.birth {
-    border: 1px solid #4caf50;
-}
-
-.personProfile .profile .events .event.death {
-    border: 1px solid #b76337;
-}
-
-.personProfile .profile .events .eventList .controls {
+.personProfile .profile .events .controls {
     margin-bottom: 1em;
 }
 
-.personProfile .profile .events .eventList .controls .ant-tag {
+.personProfile .profile .events .controls .ant-tag {
     font-size: 1.2em;
     line-height: 1.5em;
+}
+
+.personProfile .profile .events .eventList .event:hover {
+    border: 1px solid black !important;
+}
+
+.personProfile .profile .events .eventList .event.birth {
+    border: 1px solid #4caf50;
+}
+
+.personProfile .profile .events .eventList .event.death {
+    border: 1px solid #b76337;
 }
 
 .personProfile .profile .relatives {
