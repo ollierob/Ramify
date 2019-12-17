@@ -1,22 +1,11 @@
-import {Age, Period} from "../../protobuf/generated/age_pb";
+import {Age} from "../../protobuf/generated/age_pb";
+import {periodToString} from "../date/Period";
 
 export function renderAge(age: Age.AsObject): string {
     if (!age) return null;
-    const min = render(age.min);
-    const max = render(age.max);
+    const min = periodToString(age.min);
+    const max = periodToString(age.max);
     return min == max || !max ? min : min + " - " + max;
-}
-
-function render(period: Period.AsObject): string {
-    if (!period) return null;
-    if (period.years == 0) {
-        if (period.months > 0) return period.months + "m";
-        if (period.days > 0) return period.days + "d";
-        return "0";
-    }
-    let years = period.years;
-    if (period.months < 0 || period.days < 0) years--;
-    return String(years);
 }
 
 export function sortAges(a1: Age.AsObject, a2: Age.AsObject): number {

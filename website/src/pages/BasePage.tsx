@@ -46,11 +46,12 @@ export default abstract class BasePage<S = any> extends React.PureComponent<Base
         return new URLSearchParams(location.search).get(key);
     }
 
-    setPageTitle(title: string) {
-        document.title = "Ramify | " + title;
+    setPageTitle(title?: string) {
+        document.title = "Ramify" + (title && " | " + title);
     }
 
     componentDidMount() {
+        this.setPageTitle();
         window.addEventListener("hashchange", this.onHashChange, false);
     }
 

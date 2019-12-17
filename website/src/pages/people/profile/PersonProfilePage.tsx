@@ -70,6 +70,8 @@ export default class PersonProfilePage extends PeopleBasePage<State> {
             const find = findPersonInTree(this.state.personId, this.state.tree.data);
             this.setState({family: find && find.family, person: find && find.person});
         }
+        if (this.state.person != prevState.person && this.state.person && this.state.person.name)
+            this.setPageTitle(this.state.person.name.value);
     }
 
     private updatePerson() {

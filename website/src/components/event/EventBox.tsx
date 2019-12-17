@@ -41,8 +41,8 @@ export const EventBox = (props: EventBoxProps) => {
             {event.place && <div className="place">
                 <PlaceAndParent place={event.place}/>
             </div>}
-            {event.givenage && <div className="givenAge">
-                Age {renderAge(event.givenage)}
+            {event.computedage && <div className="computedAge">
+                Age {renderAge(event.computedage)}
             </div>}
         </div>
         <div className="main">
