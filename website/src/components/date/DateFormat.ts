@@ -52,7 +52,7 @@ export function formatDate(d: DateProto.AsObject, type: FormatType | DateFormatt
     return formatter(type).formatDate(d);
 }
 
-function formatShortYearRange(r: DateRangeProto.AsObject, words: Partial<PrefixWords>, preferEarly: boolean): string {
+export function formatShortYearRange(r: DateRangeProto.AsObject, words?: Partial<PrefixWords>, preferEarly?: boolean): string {
     words = words ? {...DefaultPrefixWords, ...words} : DefaultPrefixWords;
     const y1 = earliestYear(r);
     const y2 = latestYear(r);

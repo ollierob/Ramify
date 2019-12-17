@@ -1,4 +1,5 @@
 import {Date as DateProto, DateRange as DateRangeProto} from "../../protobuf/generated/date_pb";
+import {areDatesEqual} from "./Date";
 
 export type DateRange = DateRangeProto.AsObject;
 export type YearRange = {from: number, to: number}
@@ -82,4 +83,8 @@ export function isWholeYear(r: DateRangeProto.AsObject) {
 
 export function isDateOrdered(d1: DateRangeProto.AsObject, d2: DateRangeProto.AsObject, d3: DateRangeProto.AsObject): boolean {
     return sortDatesByEarliestThenLatest(d1, d2) <= 0 && sortDatesByEarliest(d2, d3) <= 0;
+}
+
+export function isExactRange(d: DateRangeProto.AsObject) {
+    return d != null && areDatesEqual(d.earliest, d.latest);
 }

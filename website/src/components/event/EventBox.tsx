@@ -1,8 +1,7 @@
 import * as React from "react";
 import {Event} from "../../protobuf/generated/event_pb";
-import {Card, Icon} from "antd";
-import {formatDateRange} from "../date/DateFormat";
-import {PlaceLink} from "../places/PlaceLink";
+import {Card} from "antd";
+import {EmptyPrefixWords, formatDateRange, formatShortYearRange, formatYear, formatYearRange} from "../date/DateFormat";
 import {renderAge} from "../people/Age";
 import {eventType, findOtherEventPeople, isBirthEvent, isDeathEvent, isPostDeathEvent} from "./Event";
 import {EventTitle} from "./EventTitle";
@@ -14,6 +13,9 @@ import {findEventSpouse, Relatives} from "../relationship/Relatives";
 import {RelativeRelationship} from "../relationship/RelativeRelationship";
 import {EventNotes} from "./EventNotes";
 import {PlaceAndParent} from "../places/PlaceAndParent";
+import {DateRange} from "../../protobuf/generated/date_pb";
+import {isExactRange} from "../date/DateRange";
+import {MonthDayWordsFormatter} from "../date/DateFormatter";
 
 export type EventBoxProps = {
     person: Person.AsObject
@@ -31,23 +33,25 @@ export const EventBox = (props: EventBoxProps) => {
     const event = props.event;
 
     return <Card className={"event " + eventClass(event)}>
-        <div className="top">
-            <div className="title">
-                <EventTitle {...props} relationship={props.relationshipToMain}/>
-            </div>
-            <div className="date">
-                {formatDateRange(event.date, "day")}
-            </div>
-            {event.place && <div className="place">
-                <PlaceAndParent place={event.place}/>
-            </div>}
-            {event.computedage && <div className="computedAge">
-                Age {renderAge(event.computedage)}
-            </div>}
+        <div className="left">
+            {renderDate(event.date)}
         </div>
-        <div className="main">
-            {renderPeople(props)}
-            <EventNotes event={event}/>
+        <div className="right">
+            <div className="top">
+                <div className="title">
+                    <EventTitle {...props} relationship={props.relationshipToMain}/>
+                </div>
+                {event.place && <div className="place">
+                    <PlaceAndParent place={event.place}/>
+                </div>}
+                {event.computedage && <div className="computedAge">
+                    Age {renderAge(event.computedage)}
+                </div>}
+            </div>
+            <div className="main">
+                {renderPeople(props)}
+                <EventNotes event={event}/>
+            </div>
         </div>
     </Card>;
 
@@ -77,3 +81,10 @@ const FindRelatedPeopleBox = (props: EventBoxProps & {prefix?: React.ReactNode})
     const others = findOtherEventPeople(props.person, props.family, props.event);
     return <EventRelatedPeopleBox {...props} people={others}/>;
 };
+
+function renderDate(date: DateRange.AsObject) {
+    return <>
+        <div className="year">{formatYearRange(date, EmptyPrefixWords)}</div>
+        {isExactRange(date) && <div className="date">{formatDateRange(date, MonthDayWordsFormatter, EmptyPrefixWords)}</div>}
+    </>;
+}
