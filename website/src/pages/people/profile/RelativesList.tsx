@@ -23,7 +23,7 @@ export class RelativesList extends React.PureComponent<Props> {
         if (!this.props.person || !this.props.relatives) return null;
         const relatives = this.props.relatives;
 
-        return <ul>
+        return <ul className="relatives">
             {relatives.father && <li>Father <RenderPerson {...this.props} person={relatives.father}/></li>}
             {relatives.mother && <li>Mother <RenderPerson {...this.props} person={relatives.mother}/></li>}
         </ul>;

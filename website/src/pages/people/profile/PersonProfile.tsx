@@ -41,11 +41,14 @@ export class PersonProfile extends React.PureComponent<Props, State> {
 
     render() {
 
-        return <div className="profile content">
+        const person = this.props.person;
+        if (!person) return null;
 
-            {this.props.person && <>
+        return <Card
+            title={<PersonName name={person.name}/>}
+            className="profile large">
 
-                <ProfileGallery/>
+            {person && <>
 
                 <ProfileEvents
                     {...this.props}
@@ -57,7 +60,7 @@ export class PersonProfile extends React.PureComponent<Props, State> {
 
             </>}
 
-        </div>;
+        </Card>;
 
     }
 
@@ -143,9 +146,7 @@ const ProfileEvents = (props: Props & {relatives: Relatives, events: ReadonlyArr
 
     if (!props.person) return null;
 
-    return <Card
-        title={<PersonName name={props.person.name}/> || "Events"}
-        className="eventList large">
+    return <div className="events">
 
         <EventListControls
             state={state}
@@ -156,7 +157,7 @@ const ProfileEvents = (props: Props & {relatives: Relatives, events: ReadonlyArr
             {...state}
             events={props.events.filter(e => showEvent(e, state))}/>
 
-    </Card>;
+    </div>;
 
 };
 
@@ -172,11 +173,9 @@ function showEvent(event: ProfileEvent, options: EventListOptions): boolean {
 }
 
 const ProfileRelatives = (props: Props & State) => {
-    return <Card
-        title="Relatives"
-        className="relatives large">
+    return <div className="relatives">
         <RelativesList {...props}/>
-    </Card>;
+    </div>;
 };
 
 const EventListControls = (props: {state: EventListOptions, setState: (s: EventListOptions) => void}) => {

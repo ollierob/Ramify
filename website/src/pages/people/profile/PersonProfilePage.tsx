@@ -37,7 +37,7 @@ export default class PersonProfilePage extends PeopleBasePage<State> {
     }
 
     body() {
-        return <div className="personProfile">
+        return <div className="personProfile content">
             <PersonProfileSubmenu
                 person={this.state.person}
                 tree={this.state.tree.data}

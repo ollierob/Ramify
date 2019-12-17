@@ -13,36 +13,34 @@
     margin-left: 32px;
 }
 
-.personProfile .profile .gallery {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 300px;
+.personProfile .profile .events {
+    display: inline-block;
+    width: 50%;
 }
 
-.personProfile .profile .eventList {
-    position: absolute;
-    left: 306px;
-    top: 0;
-    width: calc(100% - 712px);
-    min-width: 400px;
-}
-
-.personProfile .profile .eventList .event:hover {
+.personProfile .profile .events .event:hover {
     border: 1px solid black !important;
 }
 
-.personProfile .profile .eventList .event.birth {
+.personProfile .profile .events .event.birth {
     border: 1px solid #4caf50;
 }
 
-.personProfile .profile .eventList .event.death {
+.personProfile .profile .events .event.death {
     border: 1px solid #b76337;
 }
 
+.personProfile .profile .events .eventList .controls {
+    margin-bottom: 1em;
+}
+
+.personProfile .profile .events .eventList .controls .ant-tag {
+    font-size: 1.2em;
+    line-height: 1.5em;
+}
+
 .personProfile .profile .relatives {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 400px;
+    display: inline-block;
+    width: 40%;
+    vertical-align: top;
 }
