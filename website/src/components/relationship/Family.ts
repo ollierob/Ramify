@@ -26,6 +26,7 @@ export function findSpouses(id: PersonId, family: Family.AsObject): ReadonlyArra
 }
 
 export function findChildren(person: PersonId, family: Family.AsObject): ReadonlyArray<Person.AsObject> {
+    if (!person) return [];
     const parentChild = family.relationshipList.filter(isParentChild).filter(r => r.fromid == person).map(r => r.toid);
     const childParent = family.relationshipList.filter(isChildParent).filter(r => r.toid == person).map(r => r.fromid);
     return parentChild.concat(childParent).map(id => findPerson(id, family));
@@ -35,4 +36,16 @@ export function findSharedChildren(p1: PersonId, p2: PersonId, family: Family.As
     const p1Children = findChildren(p1, family);
     const p2Children = findChildren(p2, family);
     return p1Children.filter(c1 => p2Children.some(c2 => c2.id == c1.id));
+}
+
+export function findSiblings(id: PersonId, parents: ReadonlyArray<PersonId>, family: Family.AsObject): ReadonlyArray<Person.AsObject> {
+    if (!id) return [];
+    if (!parents) parents = findParents(id, family).map(p => p.id);
+    if (!parents.length) return [];
+    const siblings: {[id: string]: Person.AsObject} = {};
+    for (const parent of parents) {
+        findChildren(parent, family).forEach(child => siblings[child.id] = child);
+    }
+    delete siblings[id];
+    return Object.values(siblings);
 }

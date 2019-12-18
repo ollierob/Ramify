@@ -96,6 +96,9 @@ export class PersonProfile extends React.PureComponent<Props, State> {
             events.push(...relativeEvents(s.spouse, "spouse", person, birth, death));
             s.children.forEach(child => events.push(...relativeEvents(child, "child", person, birth, death)));
         }
+        for (const s of relatives.siblings) {
+            events.push(...relativeEvents(s, "sibling", person, birth, death));
+        }
         return events;
     }
 

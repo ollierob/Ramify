@@ -3,7 +3,7 @@ import {isFemale, isMale} from "../people/Gender";
 import {PersonId} from "../people/PersonId";
 import {Relatives} from "./Relatives";
 
-export type RelativeRelationship = "self" | "parent" | "spouse" | "child"
+export type RelativeRelationship = "self" | "parent" | "spouse" | "child" | "sibling"
 
 export function determineRelationship(id: PersonId, relatives: Relatives): RelativeRelationship {
     if (!id || !relatives) return null;
@@ -14,19 +14,10 @@ export function determineRelationship(id: PersonId, relatives: Relatives): Relat
             if (id == c.id) return "child";
         }
     }
+    for (const s of relatives.siblings) {
+        if (id == s.id) return "sibling";
+    }
     return null;
-}
-
-export type RelationshipNames = {
-    father: string,
-    mother: string,
-    parent: string,
-    husband: string,
-    wife: string,
-    spouse: string,
-    son: string,
-    daughter: string,
-    child: string
 }
 
 export function renderRelationship(relationship: RelativeRelationship, person: Person.AsObject): string {
@@ -43,6 +34,10 @@ export function renderRelationship(relationship: RelativeRelationship, person: P
             if (isMale(person)) return "son";
             if (isFemale(person)) return "daughter";
             return "child";
+        case "sibling":
+            if (isMale(person)) return "brother";
+            if (isFemale(person)) return "sister";
+            return "sibling";
         default:
             return null;
     }
