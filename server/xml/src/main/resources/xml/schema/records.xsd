@@ -155,10 +155,6 @@
         
     <xs:sequence>
             
-      <xs:element form="qualified" minOccurs="0" name="description" type="xs:string"/>
-            
-      <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="nextRecord" type="tns:recordSetId"/>
-            
       <xs:choice>
                 
         <xs:element ref="ns2:xmlBeforeDate"/>
@@ -174,6 +170,10 @@
         <xs:element ref="ns2:xmlBeforeYear"/>
               
       </xs:choice>
+            
+      <xs:element form="qualified" minOccurs="0" name="description" type="xs:string"/>
+            
+      <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="nextRecord" type="tns:recordSetId"/>
             
       <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:recordSetReference"/>
             
@@ -947,11 +947,11 @@
         
     <xs:restriction base="xs:string">
             
+      <xs:enumeration value="church"/>
+            
       <xs:enumeration value="manor"/>
             
       <xs:enumeration value="government"/>
-            
-      <xs:enumeration value="church"/>
           
     </xs:restriction>
       
@@ -961,27 +961,27 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="census"/>
-            
       <xs:enumeration value="burial"/>
-            
-      <xs:enumeration value="death"/>
-            
-      <xs:enumeration value="payment"/>
-            
-      <xs:enumeration value="baptism"/>
-            
-      <xs:enumeration value="marriage"/>
             
       <xs:enumeration value="mixed"/>
             
-      <xs:enumeration value="mention"/>
+      <xs:enumeration value="payment"/>
             
       <xs:enumeration value="membership"/>
             
+      <xs:enumeration value="death"/>
+            
       <xs:enumeration value="residence"/>
             
+      <xs:enumeration value="mention"/>
+            
+      <xs:enumeration value="baptism"/>
+            
       <xs:enumeration value="birth"/>
+            
+      <xs:enumeration value="marriage"/>
+            
+      <xs:enumeration value="census"/>
           
     </xs:restriction>
       
@@ -991,13 +991,13 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="child"/>
-            
       <xs:enumeration value="spouse"/>
+            
+      <xs:enumeration value="parent"/>
             
       <xs:enumeration value="head"/>
             
-      <xs:enumeration value="parent"/>
+      <xs:enumeration value="child"/>
           
     </xs:restriction>
       
@@ -1007,11 +1007,11 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="married"/>
-            
       <xs:enumeration value="unmarried"/>
             
       <xs:enumeration value="widowed"/>
+            
+      <xs:enumeration value="married"/>
           
     </xs:restriction>
       

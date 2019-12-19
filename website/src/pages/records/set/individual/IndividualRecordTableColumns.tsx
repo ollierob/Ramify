@@ -38,7 +38,8 @@ function genericColumns(properties: IndividualRecordProperties) {
     if (properties.hasBaptism) columns.push(BaptismYear);
     if (properties.hasResidence) columns.push(ResidenceYear, ResidencePlace);
     if (properties.hasMention) columns.push(MentionYear);
-    if (properties.hasDeath) columns.push(DeathDatePlaceColumn, DeathAgeColumn);
+    if (properties.hasDeath) columns.push(DeathDatePlaceColumn);
+    if (properties.hasDeath && !properties.hasMention && !properties.hasBirth) columns.push(DeathAgeColumn);
     if (properties.hasBurial) columns.push(BurialDateColumn);
     return columns;
 }
@@ -82,26 +83,26 @@ const NameColumn: IndividualRecordColumn = {
 
 const BirthYear: IndividualRecordColumn = {
     key: "birthDate",
-    title: "Born",
+    title: "Birth year",
     dataIndex: "birth.date",
     render: (t, r) => r.birth && <>{formatYearRange(r.birth.date)}</>,
-    width: 110
+    width: 100
 };
 
 const BaptismYear: IndividualRecordColumn = {
     key: "baptismDate",
-    title: "Baptized",
+    title: "Baptism date",
     dataIndex: "baptism.date",
-    render: (t, r) => r.baptism && <>{formatYearRange(r.baptism.date)}</>,
-    width: 150
+    render: (t, r) => r.baptism && <>{formatDateRange(r.baptism.date, "month")}</>,
+    width: 100
 };
 
 const ResidenceYear: IndividualRecordColumn = {
     key: "residenceDate",
     title: "Residence date",
-    render: (t, r) => hasResidence(r) && <>{formatYearRange(r.residence[0].date, EmptyPrefixWords)}</>,
+    render: (t, r) => hasResidence(r) && <>{formatDateRange(r.residence[0].date, "month", EmptyPrefixWords)}</>,
     sorter: (r1, r2) => sortDatesByEarliest(hasResidence(r1) && r1.residence[0].date, hasResidence(r2) && r2.residence[0].date),
-    width: 150
+    width: 110
 };
 
 function hasResidence(r: IndividualRecord) {
@@ -121,22 +122,22 @@ const ResidencePlace: IndividualRecordColumn = {
 
 const MentionYear: IndividualRecordColumn = {
     key: "mentionDate",
-    title: "Mentioned",
+    title: "Mention",
     render: (t, r) => r.mention && r.mention.length > 0 && <>{formatYearRange(r.mention[0].date, EmptyPrefixWords)}</>,
-    width: 110
+    width: 100
 };
 
 const DeathDatePlaceColumn: IndividualRecordColumn = {
     key: "deathDate",
-    title: "Died",
+    title: "Death date",
     dataIndex: "death.date",
     render: (t, r) => <DeathDatePlaceCell record={r}/>,
-    width: 130
+    width: 100
 };
 
 const DeathAgeColumn: IndividualRecordColumn = {
     key: "deathAge",
-    title: "Age",
+    title: "Death age",
     dataIndex: "death.givenage",
     render: (t, r) => r.death && r.death.givenage > 0 && <>{r.death.givenage}</>,
     sorter: (r1, r2) => sortAges(r1.death && r1.death.givenage, r2.death && r2.death.givenage),
@@ -145,10 +146,10 @@ const DeathAgeColumn: IndividualRecordColumn = {
 
 const BurialDateColumn: IndividualRecordColumn = {
     key: "burialDate",
-    title: "Buried",
+    title: "Burial date",
     dataIndex: "burial.date",
     render: (t, r) => r.burial && <>{formatDateRange(r.burial.date, "day")}</>,
-    width: 110
+    width: 100
 };
 
 const RecordSetColumn: IndividualRecordColumn = {

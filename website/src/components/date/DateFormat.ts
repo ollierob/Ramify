@@ -85,6 +85,9 @@ export function formatDateRange(r: DateRangeProto.AsObject, type: FormatType | D
             if (isoDate(r.earliest) == isoDate(r.latest)) return words.on + format.formatDate(r.earliest);
             if (isWholeYear(r)) return words.in + r.earliest.year;
             break;
+        case "month":
+            if (isoDate(r.earliest, 1) == isoDate(r.latest, 1)) return words.in + format.formatDate(r.earliest);
+            break;
         case "year":
             if (earliestYear(r) == latestYear(r)) return words.in + earliestYear(r);
             break;
@@ -108,8 +111,8 @@ export function formatDateRanges(r1: DateRangeProto.AsObject, r2: DateRangeProto
     return formatDateRange(datesToRange(r1.earliest, r2.latest, r1.approximate || r2.approximate), type, words);
 }
 
-export function isoDate(date: DateProto.AsObject): string {
-    return date.year + "-" + zeroPad(date.month, 2) + "-" + zeroPad(date.day, 2);
+export function isoDate(date: DateProto.AsObject, d?: number): string {
+    return date.year + "-" + zeroPad(date.month, 2) + "-" + zeroPad(d || date.day, 2);
 }
 
 function zeroPad(n: number, length: number = 2): string {
