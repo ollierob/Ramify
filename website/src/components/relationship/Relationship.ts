@@ -64,7 +64,7 @@ export function isChildParent(relationship: Relationship.AsObject): boolean {
     return relationship.type == Relationship.Type.CHILD_PARENT;
 }
 
-export function findRelationship(from: Person.AsObject, to: Person.AsObject, relationships: ReadonlyArray<Relationship.AsObject>, tryReverse: boolean): Relationship.AsObject {
+export function findRelationship(from: Person.AsObject, to: Person.AsObject, relationships: ReadonlyArray<Relationship.AsObject>, tryReverse: boolean = true): Relationship.AsObject {
     if (from == to) return null;
     const relationship = relationships.find(r => r.fromid == from.id && r.toid == to.id);
     if (!relationship) return tryReverse ? invertRelationship(findRelationship(to, from, relationships, false)) : null;

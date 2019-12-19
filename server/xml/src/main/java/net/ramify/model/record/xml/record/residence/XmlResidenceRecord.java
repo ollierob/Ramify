@@ -55,9 +55,7 @@ public class XmlResidenceRecord extends XmlPersonOnDateRecord {
     }
 
     public FamilyBuilder family(final Person person, final Place place, final DateRange date, final RecordContext context) {
-        final var builder = new FamilyBuilder();
-        builder.addPerson(person);
-        return builder;
+        return new FamilyBuilder(person);
     }
 
 }

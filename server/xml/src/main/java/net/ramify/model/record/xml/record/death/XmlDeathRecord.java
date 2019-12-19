@@ -56,8 +56,7 @@ public class XmlDeathRecord extends XmlPersonOnDateRecord {
 
     Family family(final Person person, final RecordContext context, final ExactDate date) {
         if (relationships == null || relationships.isEmpty()) return new SinglePersonFamily(person);
-        final var builder = new FamilyBuilder();
-        builder.addPerson(person);
+        final var builder = new FamilyBuilder(person);
         relationships.forEach(relationship -> relationship.addRelationship(person, builder, context, date));
         return builder.build();
     }

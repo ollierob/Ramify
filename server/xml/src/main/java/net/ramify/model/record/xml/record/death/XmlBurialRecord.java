@@ -72,7 +72,7 @@ public class XmlBurialRecord extends XmlPersonOnDateRecord {
 
     Family family(final ExactDate burialDate, final RecordContext context, final PlaceId burialPlaceId) {
         final var person = this.person(context.nameParser(), burialDate, context, burialPlaceId);
-        final var builder = new FamilyBuilder().addPerson(person);
+        final var builder = new FamilyBuilder(person);
         if (relationships != null) relationships.forEach(relationship -> relationship.addRelationship(person, builder, context, burialDate));
         return builder.build();
     }

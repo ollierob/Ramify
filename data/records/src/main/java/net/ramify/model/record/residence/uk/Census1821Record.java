@@ -54,12 +54,6 @@ public class Census1821Record extends CensusRecord implements HasPlace {
     @Nonnull
     @Override
     public Family family() {
-        final var builder = new FamilyBuilder();
-        this.enumerate(builder);
-        return builder.build();
-    }
-
-    private void enumerate(final FamilyBuilder builder) {
 
         var head = this.head;
         var ageCounts = this.ageCounts;
@@ -70,10 +64,9 @@ public class Census1821Record extends CensusRecord implements HasPlace {
             ageCounts = HashBasedTable.create(ageCounts);
             ageCounts.put(head.gender(), age, ageCounts.get(head.gender(), age) - 1);
             head = this.agedPerson(head, age);
-            builder.addPerson(head);
-        } else {
-            builder.addPerson(head);
         }
+
+        final var builder = new FamilyBuilder(head);
 
         for (final var cell : ageCounts.cellSet()) {
             for (int i = 0; i < cell.getValue(); i++) {
@@ -82,6 +75,8 @@ public class Census1821Record extends CensusRecord implements HasPlace {
                 builder.addRelationship(head, this.anonymousPerson(gender, age), RelationshipFactory.UNKNOWN);
             }
         }
+
+        return builder.build();
 
     }
 

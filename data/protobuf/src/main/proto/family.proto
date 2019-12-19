@@ -10,6 +10,7 @@ message Family {
 
     repeated Person person = 1;
     repeated Relationship relationship = 2;
+    Person root = 3;
 
 }
 

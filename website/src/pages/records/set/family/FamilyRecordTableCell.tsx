@@ -9,6 +9,7 @@ import {Name} from "../../../../protobuf/generated/name_pb";
 import {sortPeopleByBirthDate} from "../../../../components/people/Person";
 import {PersonName} from "../../../../components/people/PersonName";
 import {renderLifespan} from "../../../../components/people/Lifespan";
+import {moveToFront} from "../../../../components/Arrays";
 
 export function renderFamilyRecord(record: FamilyRecord) {
     if (!record) return null;
@@ -21,9 +22,11 @@ export function renderFamilyRecord(record: FamilyRecord) {
 function renderFamily(family: Family.AsObject) {
     if (!family || !family.personList || !family.personList.length) return null;
     const list = [...family.personList].filter(p => p.name && !p.name.unknown).sort(sortPeopleByBirthDate);
+    if (family.root) moveToFront(list, p => p.id == family.root.id);
+    const root = list[0];
     return <List
         dataSource={list}
-        renderItem={person => <List.Item key={person.id}>{renderPerson(person, family.personList[0], family.relationshipList)}</List.Item>}/>;
+        renderItem={person => <List.Item key={person.id}>{renderPerson(person, root, family.relationshipList)}</List.Item>}/>;
 }
 
 function renderPerson(person: Person.AsObject, root: Person.AsObject, relationships: ReadonlyArray<Relationship.AsObject>) {
@@ -40,7 +43,7 @@ function renderName(name: Name.AsObject) {
 }
 
 function renderRelationship(person: Person.AsObject, root: Person.AsObject, relationships: ReadonlyArray<Relationship.AsObject>) {
-    const relationship = findRelationship(person, root, relationships, true);
+    const relationship = findRelationship(person, root, relationships);
     if (!relationship || !relationship.type) return null;
     return <span className="relationship">{relationshipName(relationship, person)}</span>;
 }

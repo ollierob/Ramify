@@ -24,6 +24,12 @@ public class SinglePersonFamily implements Family, HasPersonId {
 
     @Nonnull
     @Override
+    public Person root() {
+        return person;
+    }
+
+    @Nonnull
+    @Override
     public Set<? extends Person> people() {
         return Collections.singleton(person);
     }

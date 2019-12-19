@@ -26,6 +26,12 @@ public class FamilyOfUnknownRelationships implements Family {
 
     @Nonnull
     @Override
+    public Person root() {
+        return null; //FIXME
+    }
+
+    @Nonnull
+    @Override
     public Set<? extends Relationship> relationships() {
         return Collections.emptySet();
     }

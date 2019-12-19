@@ -50,9 +50,8 @@ public class GeneralRegisterBirth extends AbstractCivilRecord implements General
     @Nonnull
     @Override
     public Family family() {
-        final var builder = new FamilyBuilder();
         final var child = this.child.build(this);
-        builder.addPerson(child);
+        final var builder = new FamilyBuilder(child);
         if (this.father != null) {
             final var father = this.father.build(this);
             builder.addRelationship(child, father, ChildParent::new);

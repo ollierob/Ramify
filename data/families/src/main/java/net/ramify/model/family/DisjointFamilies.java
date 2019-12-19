@@ -20,6 +20,12 @@ public class DisjointFamilies implements Family {
 
     @Nonnull
     @Override
+    public Person root() {
+        return families.size() == 1 ? families.iterator().next().root() : null;
+    }
+
+    @Nonnull
+    @Override
     public Set<? extends Person> people() {
         return families.stream().map(Family::people).flatMap(Collection::stream).collect(Collectors.toSet());
     }

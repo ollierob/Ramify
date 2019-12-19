@@ -11,12 +11,15 @@ import net.ramify.model.relationship.RelationshipFactory;
 public class FamilyBuilder {
 
     private final MutableNetwork<Person, Relationship> network = NetworkBuilder.directed().build();
+    private final Person root;
 
+    @Deprecated
     public FamilyBuilder() {
-
+        this.root = null;
     }
 
     public FamilyBuilder(final Person root) {
+        this.root = root;
         network.addNode(root);
     }
 
@@ -44,7 +47,7 @@ public class FamilyBuilder {
     public Family build() {
         if (network.nodes().size() == 1) return new SinglePersonFamily(network.nodes().iterator().next());
         //FIXME lazily determine if directed
-        return new NetworkedFamily(ImmutableNetwork.copyOf(network));
+        return new NetworkedFamily(ImmutableNetwork.copyOf(network), root);
     }
 
 }

@@ -4,6 +4,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.graph.Network;
 import com.google.common.graph.NetworkBuilder;
+import net.meerkat.functions.consumers.Consumers;
 import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.family.proto.FamilyProto;
 import net.ramify.model.person.Person;
@@ -21,6 +22,9 @@ public interface Family extends HasPeople, HasRelationships, BuildsProto<FamilyP
     @Nonnull
     @Override
     Set<? extends Person> people();
+
+    @Nonnull
+    Person root();
 
     @Nonnull
     @Override
@@ -47,9 +51,11 @@ public interface Family extends HasPeople, HasRelationships, BuildsProto<FamilyP
 
     @Nonnull
     default FamilyProto.Family.Builder toProtoBuilder() {
-        return FamilyProto.Family.newBuilder()
+        final var builder = FamilyProto.Family.newBuilder()
                 .addAllPerson(Iterables.transform(this.people(), Person::toProto))
                 .addAllRelationship(Iterables.transform(this.relationships(), Relationship::toProto));
+        Consumers.ifNonNull(this.root(), root -> builder.setRoot(root.toProto()));
+        return builder;
     }
 
     @Nonnull

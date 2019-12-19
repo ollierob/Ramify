@@ -56,9 +56,9 @@ public class GeneralRegisterMarriage extends AbstractCivilRecord implements Gene
     @Nonnull
     @Override
     public Family family() {
-        final var builder = new FamilyBuilder();
         final var groom = this.groom.build(this);
         final var bride = this.bride.build(this);
+        final var builder = new FamilyBuilder(bride);
         builder.addRelationship(bride, groom, Married::new);
         if (groomFather != null) {
             final var father = groomFather.build(this);

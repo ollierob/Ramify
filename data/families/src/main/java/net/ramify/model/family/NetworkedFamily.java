@@ -13,18 +13,26 @@ import javax.annotation.Nonnull;
 import java.util.Optional;
 import java.util.Set;
 
-public class NetworkedFamily implements Family {
+class NetworkedFamily implements Family {
 
     private final ImmutableNetwork<Person, Relationship> network;
+    private final Person root;
 
-    public NetworkedFamily(final Network<Person, Relationship> network) {
+    NetworkedFamily(final Network<Person, Relationship> network, final Person root) {
         this.network = ImmutableNetwork.copyOf(network);
+        this.root = root;
     }
 
     @Nonnull
     @Override
     public Set<? extends Person> people() {
         return network.nodes();
+    }
+
+    @Nonnull
+    @Override
+    public Person root() {
+        return root;
     }
 
     @Nonnull
@@ -51,4 +59,5 @@ public class NetworkedFamily implements Family {
                 ? new Unknown(from, to)
                 : new RelationshipPath(path));
     }
+
 }

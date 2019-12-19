@@ -51,7 +51,7 @@ public class GeneralRegisterDeath extends AbstractCivilRecord implements General
         final var deceased = this.deceased.build(this);
         if (informant == null) return new SinglePersonFamily(deceased);
         final var informant = this.informant.build(this);
-        return new FamilyBuilder()
+        return new FamilyBuilder(deceased)
                 .addRelationship(deceased, informant, this.informant.relationshipToDeceased())
                 .build();
     }
