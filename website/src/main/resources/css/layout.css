@@ -42,6 +42,9 @@ body {
     width: 100%;
     background-color: white;
     border-bottom: 1px solid #D7D7D7;
+    line-height: 48px;
+    font-size: 18px;
+    padding-left: 24px;
 }
 
 .body .content {

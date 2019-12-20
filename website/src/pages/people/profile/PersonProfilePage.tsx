@@ -37,17 +37,24 @@ export default class PersonProfilePage extends PeopleBasePage<State> {
     }
 
     body() {
-        return <div className="personProfile content">
+
+        return <div className="personProfile">
+
             <PersonProfileSubmenu
                 person={this.state.person}
                 tree={this.state.tree.data}
                 loading={this.state.tree.loading}/>
-            <PersonProfile
-                loading={this.state.tree.loading}
-                person={this.state.person}
-                family={this.state.family}
-                tree={this.state.treeId}/>
+
+            <div className="content">
+                <PersonProfile
+                    loading={this.state.tree.loading}
+                    person={this.state.person}
+                    family={this.state.family}
+                    tree={this.state.treeId}/>
+            </div>
+
         </div>;
+
     }
 
     private readIds(): IdState {
