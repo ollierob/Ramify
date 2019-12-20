@@ -302,6 +302,8 @@
             <xs:element ref="tns:parish"/>
                         
             <xs:element ref="tns:manor"/>
+                        
+            <xs:element ref="ns1:town"/>
                       
           </xs:choice>
                   

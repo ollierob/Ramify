@@ -10,6 +10,7 @@ import net.ramify.model.place.region.Hundred;
 import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.region.XmlRegion;
 import net.ramify.model.place.xml.place.XmlPlace;
+import net.ramify.model.place.xml.place.settlement.XmlTown;
 import net.ramify.model.place.xml.place.uk.manor.XmlManor;
 
 import javax.xml.bind.annotation.XmlElementRef;
@@ -29,7 +30,8 @@ class XmlHundred extends XmlRegion<Hundred> {
 
     @XmlElementRefs({
             @XmlElementRef(type = XmlParish.class),
-            @XmlElementRef(type = XmlManor.class)
+            @XmlElementRef(type = XmlManor.class),
+            @XmlElementRef(type = XmlTown.class)
     })
     private List<XmlPlace> children;
 
