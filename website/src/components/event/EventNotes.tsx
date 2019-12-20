@@ -12,6 +12,7 @@ export const EventNotes = (props: {event: Event.AsObject}) => {
         {event.notes && <li>Notes: {event.notes}</li>}
         {event.cause && <li>Cause: {event.cause}</li>}
         {event.occupation && <li>Occupation: {event.occupation}</li>}
+        {event.description && <li><i>{event.description}</i></li>}
     </ul>;
 
 };
