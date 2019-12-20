@@ -51,10 +51,10 @@ public abstract class XmlPersonEvent extends XmlEvent {
         return Functions.ifNonNull(placeId, context.places()::require);
     }
 
-    public abstract PersonEvent toEvent(PersonId personId, RecordContext context);
+    public abstract PersonEvent build(PersonId personId, RecordContext context);
 
     public Set<PersonEvent> allEvents(final PersonId personId, final RecordContext context, final boolean inferredEvents) {
-        final var event = this.toEvent(personId, context);
+        final var event = this.build(personId, context);
         return inferredEvents
                 ? SetUtils.with(this.inferredEvents(personId, context), event)
                 : Collections.singleton(event);
@@ -100,8 +100,7 @@ public abstract class XmlPersonEvent extends XmlEvent {
     }
 
     protected EventBuilder eventBuilder(final EventId eventId, final DateRange date) {
-        return EventBuilder.builder(eventId, date)
-                .withGivenAge(this.age());
+        return super.eventBuilder(eventId, date).withGivenAge(this.age());
     }
 
 }

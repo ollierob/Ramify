@@ -25,6 +25,7 @@ message Event {
     string notes = 30;
     string occupation = 31;
     string cause = 32;
+    string description = 33;
 
 }
 

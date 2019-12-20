@@ -2,6 +2,7 @@ package net.ramify.model.event.xml;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.xml.XmlDateRange;
+import net.ramify.model.event.EventBuilder;
 import net.ramify.model.event.EventId;
 import net.ramify.model.record.xml.RecordContext;
 
@@ -29,6 +30,14 @@ public abstract class XmlEvent {
 
     protected DateRange date(final RecordContext context) {
         return date == null ? context.recordDate() : date.resolve(context.dateParser());
+    }
+
+    protected EventBuilder eventBuilder(final RecordContext context) {
+        return this.eventBuilder(this.eventId(), this.date(context));
+    }
+
+    protected EventBuilder eventBuilder(final EventId eventId, final DateRange date) {
+        return EventBuilder.builder(eventId, date);
     }
 
 }

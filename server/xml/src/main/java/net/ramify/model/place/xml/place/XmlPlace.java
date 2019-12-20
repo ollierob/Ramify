@@ -30,7 +30,7 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.function.Consumer;
 
-import static net.ramify.utils.StringUtils.isEmpty;
+import static net.ramify.utils.StringUtils.isBlank;
 
 @XmlSeeAlso({XmlSettlement.class, XmlUkPlace.class, XmlUsaPlace.class})
 public abstract class XmlPlace {
@@ -102,7 +102,7 @@ public abstract class XmlPlace {
 
     private Place place(final Place parent, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         final var id = this.placeId(context.countryIso());
-        return isEmpty(name)
+        return isBlank(name)
                 ? context.places().require(id)
                 : this.place(parent, context.group(id).map(PlaceGroup::id).orElse(null), this.history(context), context);
     }

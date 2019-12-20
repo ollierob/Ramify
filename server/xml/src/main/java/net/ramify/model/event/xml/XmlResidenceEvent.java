@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class XmlResidenceEvent extends XmlLifeEvent {
 
     @Override
-    public ResidenceEvent toEvent(final PersonId personId, final RecordContext context) {
+    public ResidenceEvent build(final PersonId personId, final RecordContext context) {
         return this.eventBuilder(context).toResidence(personId);
     }
 

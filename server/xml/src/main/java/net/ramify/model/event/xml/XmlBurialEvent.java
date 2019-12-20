@@ -16,7 +16,7 @@ public class XmlBurialEvent extends XmlPostDeathEvent {
     private String plot;
 
     @Override
-    public BurialEvent toEvent(final PersonId personId, final RecordContext context) {
+    public BurialEvent build(final PersonId personId, final RecordContext context) {
         return this.eventBuilder(context).toBurial(personId);
     }
 

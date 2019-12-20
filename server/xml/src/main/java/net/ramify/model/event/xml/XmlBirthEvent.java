@@ -13,7 +13,7 @@ import java.util.Set;
 public class XmlBirthEvent extends XmlPersonEvent {
 
     @Override
-    public BirthEvent toEvent(final PersonId personId, final RecordContext context) {
+    public BirthEvent build(final PersonId personId, final RecordContext context) {
         return this.eventBuilder(context).toBirth(personId);
     }
 

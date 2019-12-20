@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class XmlBaptismEvent extends XmlLifeEvent {
 
     @Override
-    public BaptismEvent toEvent(final PersonId personId, final RecordContext context) {
+    public BaptismEvent build(final PersonId personId, final RecordContext context) {
         return this.eventBuilder(context).toBaptism(personId);
     }
 

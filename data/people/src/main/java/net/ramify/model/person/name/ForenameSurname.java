@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import static net.ramify.utils.StringUtils.isEmpty;
+import static net.ramify.utils.StringUtils.isBlank;
 
 public class ForenameSurname implements Name {
 
@@ -58,7 +58,7 @@ public class ForenameSurname implements Name {
     }
 
     private static void append(final String part, final StringBuilder sb) {
-        if (isEmpty(part)) return;
+        if (isBlank(part)) return;
         if (sb.length() > 0 && sb.charAt(sb.length() - 1) != ' ') sb.append(' ');
         sb.append(part).append(' ');
     }

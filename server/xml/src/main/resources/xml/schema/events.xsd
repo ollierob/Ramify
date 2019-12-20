@@ -15,6 +15,10 @@
     
   <xs:element name="event" type="tns:xmlEvent"/>
     
+  <xs:element name="historicEvent" type="tns:xmlHistoricEvent"/>
+    
+  <xs:element name="historicEvents" type="tns:xmlHistoricEvents"/>
+    
   <xs:element name="marriage" type="tns:xmlMarriageEvent"/>
     
   <xs:element name="personEvent" type="tns:xmlPersonEvent"/>
@@ -69,7 +73,7 @@
       
   </xs:complexType>
     
-  <xs:complexType name="xmlEvent">
+  <xs:complexType abstract="true" name="xmlEvent">
         
     <xs:choice>
             
@@ -180,6 +184,38 @@
       </xs:extension>
           
     </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlHistoricEvent">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlEvent">
+                
+        <xs:sequence>
+                    
+          <xs:element form="qualified" name="description" type="xs:string"/>
+                  
+        </xs:sequence>
+                
+        <xs:attribute name="title" type="xs:string" use="required"/>
+                
+        <xs:attribute name="place" type="xs:string" use="required"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlHistoricEvents">
+        
+    <xs:sequence>
+            
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:historicEvent"/>
+          
+    </xs:sequence>
       
   </xs:complexType>
   

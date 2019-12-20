@@ -5,7 +5,7 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.region.Country;
 import net.ramify.model.Iso;
 
-import static net.ramify.utils.StringUtils.isEmpty;
+import static net.ramify.utils.StringUtils.isBlank;
 
 public class CountryIso extends Iso {
 
@@ -13,7 +13,7 @@ public class CountryIso extends Iso {
     public static final CountryIso US = new CountryIso("US");
 
     public static CountryIso valueOf(String iso) {
-        if (isEmpty(iso)) return null;
+        if (isBlank(iso)) return null;
         iso = iso.trim().toUpperCase();
         switch (iso) {
             case "GB":

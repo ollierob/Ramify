@@ -14,7 +14,7 @@ public class XmlDeathEvent extends XmlPersonEvent {
     private String cause;
 
     @Override
-    public DeathEvent toEvent(final PersonId personId, final RecordContext context) {
+    public DeathEvent build(final PersonId personId, final RecordContext context) {
         return this.eventBuilder(context).toDeath(personId, cause);
     }
 

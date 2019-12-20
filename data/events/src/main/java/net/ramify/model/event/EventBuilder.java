@@ -1,6 +1,7 @@
 package net.ramify.model.event;
 
 import net.ramify.model.date.DateRange;
+import net.ramify.model.event.historic.HistoricEvent;
 import net.ramify.model.event.type.BirthEvent;
 import net.ramify.model.event.type.DeathEvent;
 import net.ramify.model.event.type.LifeEvent;
@@ -10,6 +11,7 @@ import net.ramify.model.event.type.birth.GenericBirthEvent;
 import net.ramify.model.event.type.burial.BurialEvent;
 import net.ramify.model.event.type.burial.GenericBurialEvent;
 import net.ramify.model.event.type.death.GenericDeathEvent;
+import net.ramify.model.event.type.historic.GenericHistoricEvent;
 import net.ramify.model.event.type.marriage.GenericMarriageEvent;
 import net.ramify.model.event.type.marriage.MarriageEvent;
 import net.ramify.model.event.type.misc.Flourished;
@@ -102,6 +104,10 @@ public class EventBuilder {
 
     public ProbateEvent toProbate(final HasPersonId person) {
         return new GenericProbateEvent(eventId, person.personId(), this.eventProperties());
+    }
+
+    public HistoricEvent toHistoric(final String title, final String description) {
+        return new GenericHistoricEvent(eventId, date, place, title, description);
     }
 
 }

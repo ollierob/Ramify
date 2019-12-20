@@ -8,7 +8,7 @@ import net.ramify.model.place.Place;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
-public abstract class AbstractPersonEvent<T extends AbstractPersonEvent<T>> implements EventWithProperties, HasPersonId, SelfTyped<T> {
+public abstract class AbstractPersonEvent<T extends AbstractPersonEvent<T>> implements PersonEventWithProperties, HasPersonId, SelfTyped<T> {
 
     private final EventId id;
     private final PersonId personId;

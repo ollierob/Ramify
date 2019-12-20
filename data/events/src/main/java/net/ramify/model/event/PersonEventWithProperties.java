@@ -6,7 +6,7 @@ import net.ramify.model.person.age.Age;
 import javax.annotation.Nonnull;
 import java.util.Optional;
 
-public interface EventWithProperties extends PersonEvent {
+public interface PersonEventWithProperties extends PersonEvent {
 
     @Nonnull
     EventProperties properties();

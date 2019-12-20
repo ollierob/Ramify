@@ -20,7 +20,7 @@ import javax.annotation.CheckForNull;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import static net.ramify.utils.StringUtils.isEmpty;
+import static net.ramify.utils.StringUtils.isBlank;
 
 @Singleton
 public class DefaultPlacesResource implements PlacesResource {
@@ -114,7 +114,7 @@ public class DefaultPlacesResource implements PlacesResource {
 
     @Override
     public Places find(final String name, final PlaceId within, final int limit) {
-        if (isEmpty(name)) return Places.of();
+        if (isBlank(name)) return Places.of();
         return Places.of(placeProvider.findByName(name, limit, within), true);
     }
 

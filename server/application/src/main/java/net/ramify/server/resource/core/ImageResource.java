@@ -16,7 +16,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import static net.ramify.utils.StringUtils.isEmpty;
+import static net.ramify.utils.StringUtils.isBlank;
 
 @Singleton
 @Path("images")
@@ -40,7 +40,7 @@ public class ImageResource extends AbstractResource {
     public Response flagImage(
             @Context final UserSessionContext context,
             @PathParam("flag") String flag) {
-        if (isEmpty(flag)) return notFound();
+        if (isBlank(flag)) return notFound();
         //TODO cache
         {
             if (flag.endsWith(".svg")) flag = flag.substring(0, flag.length() - 4);
@@ -61,7 +61,7 @@ public class ImageResource extends AbstractResource {
     }
 
     Response webrootImage(final UserSessionContext context, String path) {
-        if (isEmpty(path)) return notFound();
+        if (isBlank(path)) return notFound();
         path = path.trim();
         if (path.startsWith(".") || path.length() < 3) return notFound();
         switch (path.substring(path.length() - 3)) {
@@ -83,7 +83,7 @@ public class ImageResource extends AbstractResource {
     public Response generalImage(
             @Context final UserSessionContext context,
             @PathParam("file") String filename) {
-        if (isEmpty(filename)) return notFound();
+        if (isBlank(filename)) return notFound();
         filename = filename.trim();
         if (filename.startsWith(".") || filename.length() < 3) return notFound();
         switch (filename.substring(filename.length() - 3)) {
