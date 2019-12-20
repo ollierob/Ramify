@@ -1,6 +1,8 @@
 package net.ramify.server.resource.events;
 
+import com.google.common.collect.Sets;
 import net.ramify.model.date.ClosedDateRange;
+import net.ramify.model.event.historic.HistoricEvent;
 import net.ramify.model.event.historic.HistoricEventProvider;
 import net.ramify.model.event.historic.HistoricEvents;
 import net.ramify.model.place.PlaceId;
@@ -9,6 +11,7 @@ import net.ramify.model.place.provider.PlaceProvider;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Singleton
 public class DefaultHistoricEventsResource implements HistoricEventsResource {
@@ -23,8 +26,14 @@ public class DefaultHistoricEventsResource implements HistoricEventsResource {
     }
 
     @Override
-    public HistoricEvents events(final LocalDate start, final LocalDate end, final PlaceId placeId) {
-        return HistoricEvents.of(eventProvider.within(placeProvider.require(placeId), ClosedDateRange.of(start, end)));
+    public HistoricEvents events(final LocalDate start, final LocalDate end, final Set<PlaceId> placeIds) {
+        final var date = ClosedDateRange.of(start, end);
+        final var events = Sets.<HistoricEvent>newHashSet();
+        for (final var placeId : placeIds) {
+            final var place = placeProvider.require(placeId);
+            events.addAll(eventProvider.within(place, date));
+        }
+        return HistoricEvents.of(events);
     }
-    
+
 }
