@@ -1,4 +1,4 @@
-package net.ramify.model.event.xml;
+package net.ramify.model.event.xml.person;
 
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;

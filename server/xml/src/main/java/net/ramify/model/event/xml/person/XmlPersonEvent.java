@@ -1,10 +1,11 @@
-package net.ramify.model.event.xml;
+package net.ramify.model.event.xml.person;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.PersonEvent;
 import net.ramify.model.event.EventBuilder;
 import net.ramify.model.event.EventId;
 import net.ramify.model.event.type.BirthEvent;
+import net.ramify.model.event.xml.XmlEvent;
 import net.ramify.model.person.HasPersonId;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;

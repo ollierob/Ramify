@@ -61,34 +61,6 @@
     
   <xs:element name="workhouse" type="tns:xmlWorkhouse"/>
     
-  <xs:complexType name="xmlArchive">
-        
-    <xs:sequence>
-            
-      <xs:element form="qualified" minOccurs="0" name="description" type="xs:string"/>
-            
-      <xs:choice minOccurs="0">
-                
-        <xs:element ref="tns:textLink"/>
-                
-        <xs:element ref="tns:wikipediaLink"/>
-                
-        <xs:element ref="tns:nationalArchivesLink"/>
-                
-        <xs:element ref="tns:websiteLink"/>
-              
-      </xs:choice>
-          
-    </xs:sequence>
-        
-    <xs:attribute name="id" type="xs:string" use="required"/>
-        
-    <xs:attribute name="name" type="xs:string" use="required"/>
-        
-    <xs:attribute name="iconHref" type="xs:string"/>
-      
-  </xs:complexType>
-    
   <xs:complexType abstract="true" name="xmlLink">
         
     <xs:sequence/>
@@ -152,6 +124,34 @@
       </xs:extension>
           
     </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlArchive">
+        
+    <xs:sequence>
+            
+      <xs:element form="qualified" minOccurs="0" name="description" type="xs:string"/>
+            
+      <xs:choice minOccurs="0">
+                
+        <xs:element ref="tns:textLink"/>
+                
+        <xs:element ref="tns:wikipediaLink"/>
+                
+        <xs:element ref="tns:nationalArchivesLink"/>
+                
+        <xs:element ref="tns:websiteLink"/>
+              
+      </xs:choice>
+          
+    </xs:sequence>
+        
+    <xs:attribute name="id" type="xs:string" use="required"/>
+        
+    <xs:attribute name="name" type="xs:string" use="required"/>
+        
+    <xs:attribute name="iconHref" type="xs:string"/>
       
   </xs:complexType>
     

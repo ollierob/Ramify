@@ -23,6 +23,7 @@ import net.ramify.model.person.HasPersonId;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
 import net.ramify.model.place.Place;
+import net.ramify.model.util.Link;
 
 public class EventBuilder {
 
@@ -32,6 +33,7 @@ public class EventBuilder {
     private Age givenAge;
     private String occupation;
     private boolean inferred;
+    private Link link;
 
     private EventBuilder(final EventId eventId, final DateRange date) {
         this.eventId = eventId;
@@ -58,6 +60,11 @@ public class EventBuilder {
 
     public EventBuilder withOccupation(final String occupation) {
         this.occupation = occupation;
+        return this;
+    }
+
+    public EventBuilder withLink(final Link link) {
+        this.link = link;
         return this;
     }
 

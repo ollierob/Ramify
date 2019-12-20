@@ -3,8 +3,8 @@ package net.ramify.model.place.provider;
 import net.ramify.model.place.PlaceGroup;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
-import net.ramify.model.util.MissingValueException;
-import net.ramify.model.util.Provider;
+import net.ramify.model.util.provider.MissingValueException;
+import net.ramify.model.util.provider.Provider;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;

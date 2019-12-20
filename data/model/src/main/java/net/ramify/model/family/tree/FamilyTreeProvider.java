@@ -1,7 +1,7 @@
 package net.ramify.model.family.tree;
 
-import net.ramify.model.util.MissingValueException;
-import net.ramify.model.util.Provider;
+import net.ramify.model.util.provider.MissingValueException;
+import net.ramify.model.util.provider.Provider;
 import net.ramify.model.person.PersonId;
 
 import javax.annotation.CheckForNull;

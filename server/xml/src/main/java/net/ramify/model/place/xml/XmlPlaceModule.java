@@ -5,8 +5,6 @@ import com.google.inject.PrivateModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import net.ramify.model.ParserContext;
-import net.ramify.model.date.XmlDateParser;
-import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.place.position.PositionProvider;
 import net.ramify.model.place.provider.PlaceDescriptionProvider;
 import net.ramify.model.place.provider.PlaceGroupProvider;
@@ -36,7 +34,6 @@ public class XmlPlaceModule extends PrivateModule {
         this.expose(PositionProvider.class);
         this.expose(PlaceDescriptionProvider.class);
         this.expose(ArchiveProvider.class);
-        this.bind(DateParser.class).to(XmlDateParser.class);
     }
 
     @Provides

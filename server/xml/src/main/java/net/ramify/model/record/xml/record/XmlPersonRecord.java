@@ -2,7 +2,7 @@ package net.ramify.model.record.xml.record;
 
 import com.google.common.base.MoreObjects;
 import net.ramify.model.event.collection.MutablePersonEventSet;
-import net.ramify.model.event.xml.XmlPersonEvent;
+import net.ramify.model.event.xml.person.XmlPersonEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.gender.Sex;

@@ -3,8 +3,8 @@ package net.ramify.model.record.provider;
 import net.ramify.model.record.collection.HasRecordSetId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
-import net.ramify.model.util.MissingValueException;
-import net.ramify.model.util.Provider;
+import net.ramify.model.util.provider.MissingValueException;
+import net.ramify.model.util.provider.Provider;
 
 import javax.annotation.Nonnull;
 import java.util.Set;

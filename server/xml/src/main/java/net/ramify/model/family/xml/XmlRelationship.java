@@ -7,7 +7,7 @@ import net.ramify.model.event.EventId;
 import net.ramify.model.event.collection.MutablePersonEventSet;
 import net.ramify.model.event.type.DeathEvent;
 import net.ramify.model.event.type.LifeEvent;
-import net.ramify.model.event.xml.XmlPersonEvent;
+import net.ramify.model.event.xml.person.XmlPersonEvent;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.person.HasPersonId;
 import net.ramify.model.person.Person;

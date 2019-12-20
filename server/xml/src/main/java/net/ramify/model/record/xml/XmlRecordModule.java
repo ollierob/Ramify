@@ -4,9 +4,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.google.inject.PrivateModule;
 import com.google.inject.Provides;
-import net.ramify.model.date.XmlDateParser;
-import net.ramify.model.date.parse.DateParser;
-import net.ramify.model.person.XmlNameParser;
 import net.ramify.model.person.name.NameParser;
 import net.ramify.model.place.xml.XmlPlaceModule;
 import net.ramify.model.record.collection.RecordSetId;
@@ -31,9 +28,6 @@ public class XmlRecordModule extends PrivateModule {
     @Override
     protected void configure() {
         this.expose(RecordSetProvider.class);
-        this.bind(DateParser.class).to(XmlDateParser.class);
-        this.bind(NameParser.class).to(XmlNameParser.class);
-        this.expose(NameParser.class);
         this.bind(RecordsProvider.class).to(XmlRecordProvider.class);
         this.expose(RecordsProvider.class);
         this.expose(RecordSetRelativesProvider.class);

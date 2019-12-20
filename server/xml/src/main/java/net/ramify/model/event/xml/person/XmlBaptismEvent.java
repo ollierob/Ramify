@@ -1,6 +1,7 @@
-package net.ramify.model.event.xml;
+package net.ramify.model.event.xml.person;
 
 import net.ramify.model.event.type.birth.BaptismEvent;
+import net.ramify.model.event.xml.XmlEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.record.xml.RecordContext;
 

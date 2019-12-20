@@ -1,4 +1,4 @@
-package net.ramify.model.event.xml;
+package net.ramify.model.event.xml.person;
 
 import net.ramify.model.date.BeforeDate;
 import net.ramify.model.event.PersonEvent;

@@ -1,7 +1,7 @@
 package net.ramify.model.family.xml;
 
 import com.google.common.collect.Sets;
-import net.ramify.model.event.xml.XmlPersonEvent;
+import net.ramify.model.event.xml.person.XmlPersonEvent;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.provider.PersonProvider;

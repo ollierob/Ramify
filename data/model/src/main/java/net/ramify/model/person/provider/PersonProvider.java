@@ -1,6 +1,6 @@
 package net.ramify.model.person.provider;
 
-import net.ramify.model.util.Provider;
+import net.ramify.model.util.provider.Provider;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
 

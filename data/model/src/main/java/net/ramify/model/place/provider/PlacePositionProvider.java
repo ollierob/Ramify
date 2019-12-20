@@ -1,6 +1,6 @@
 package net.ramify.model.place.provider;
 
-import net.ramify.model.util.Provider;
+import net.ramify.model.util.provider.Provider;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.position.Point;
 

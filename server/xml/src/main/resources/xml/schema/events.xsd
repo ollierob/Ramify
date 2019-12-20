@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/people" xmlns:ns2="http://ramify.net/dates" xmlns:tns="http://ramify.net/events" targetNamespace="http://ramify.net/events" version="1.0">
-    
-  <xs:import namespace="http://ramify.net/people" schemaLocation="people.xsd"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/dates" xmlns:ns2="http://ramify.net/places" xmlns:ns3="http://ramify.net/people" xmlns:tns="http://ramify.net/events" targetNamespace="http://ramify.net/events" version="1.0">
     
   <xs:import namespace="http://ramify.net/dates" schemaLocation="dates.xsd"/>
+    
+  <xs:import namespace="http://ramify.net/places" schemaLocation="places.xsd"/>
+    
+  <xs:import namespace="http://ramify.net/people" schemaLocation="people.xsd"/>
     
   <xs:element name="baptism" type="tns:xmlBaptismEvent"/>
     
@@ -26,6 +28,74 @@
   <xs:element name="probate" type="tns:xmlProbateEvent"/>
     
   <xs:element name="residence" type="tns:xmlResidenceEvent"/>
+    
+  <xs:complexType abstract="true" name="xmlEvent">
+        
+    <xs:choice>
+            
+      <xs:element ref="ns1:xmlBeforeDate"/>
+            
+      <xs:element ref="ns1:inYear"/>
+            
+      <xs:element ref="ns1:onDate"/>
+            
+      <xs:element ref="ns1:inQuarter"/>
+            
+      <xs:element ref="ns1:betweenYears"/>
+            
+      <xs:element ref="ns1:inMonth"/>
+            
+      <xs:element ref="ns1:xmlBeforeYear"/>
+          
+    </xs:choice>
+        
+    <xs:attribute name="id" type="xs:string"/>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlHistoricEvent">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlEvent">
+                
+        <xs:sequence>
+                    
+          <xs:element form="qualified" name="description" type="xs:string"/>
+                    
+          <xs:choice minOccurs="0">
+                        
+            <xs:element ref="ns2:textLink"/>
+                        
+            <xs:element ref="ns2:wikipediaLink"/>
+                        
+            <xs:element ref="ns2:nationalArchivesLink"/>
+                        
+            <xs:element ref="ns2:websiteLink"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+                
+        <xs:attribute name="title" type="xs:string" use="required"/>
+                
+        <xs:attribute name="place" type="xs:string" use="required"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlHistoricEvents">
+        
+    <xs:sequence>
+            
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:historicEvent"/>
+          
+    </xs:sequence>
+      
+  </xs:complexType>
     
   <xs:complexType name="xmlBaptismEvent">
         
@@ -51,11 +121,11 @@
                     
           <xs:choice minOccurs="0">
                         
-            <xs:element ref="ns1:exactAge"/>
+            <xs:element ref="ns3:exactAge"/>
                         
-            <xs:element ref="ns1:approximateAge"/>
+            <xs:element ref="ns3:approximateAge"/>
                         
-            <xs:element ref="ns1:ageRange"/>
+            <xs:element ref="ns3:ageRange"/>
                       
           </xs:choice>
                   
@@ -70,30 +140,6 @@
       </xs:extension>
           
     </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType abstract="true" name="xmlEvent">
-        
-    <xs:choice>
-            
-      <xs:element ref="ns2:xmlBeforeDate"/>
-            
-      <xs:element ref="ns2:inYear"/>
-            
-      <xs:element ref="ns2:onDate"/>
-            
-      <xs:element ref="ns2:inQuarter"/>
-            
-      <xs:element ref="ns2:betweenYears"/>
-            
-      <xs:element ref="ns2:inMonth"/>
-            
-      <xs:element ref="ns2:xmlBeforeYear"/>
-          
-    </xs:choice>
-        
-    <xs:attribute name="id" type="xs:string"/>
       
   </xs:complexType>
     
@@ -184,38 +230,6 @@
       </xs:extension>
           
     </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlHistoricEvent">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlEvent">
-                
-        <xs:sequence>
-                    
-          <xs:element form="qualified" name="description" type="xs:string"/>
-                  
-        </xs:sequence>
-                
-        <xs:attribute name="title" type="xs:string" use="required"/>
-                
-        <xs:attribute name="place" type="xs:string" use="required"/>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlHistoricEvents">
-        
-    <xs:sequence>
-            
-      <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:historicEvent"/>
-          
-    </xs:sequence>
       
   </xs:complexType>
   

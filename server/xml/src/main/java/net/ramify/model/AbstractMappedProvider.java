@@ -2,10 +2,11 @@ package net.ramify.model;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import net.ramify.model.util.Provider;
+import net.ramify.model.util.provider.Provider;
 
 import javax.annotation.CheckForNull;
 import javax.xml.bind.annotation.XmlTransient;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
@@ -51,6 +52,10 @@ public abstract class AbstractMappedProvider<K, V> implements Provider<K, V> {
 
     protected ImmutableMap<K, V> immutableMap() {
         return ImmutableMap.copyOf(this.map());
+    }
+
+    protected Collection<V> values() {
+        return map.values();
     }
 
 }
