@@ -2,7 +2,7 @@ package net.ramify.model.record.xml.record;
 
 import com.google.common.base.MoreObjects;
 import net.ramify.model.event.collection.MutablePersonEventSet;
-import net.ramify.model.event.xml.XmlEvent;
+import net.ramify.model.event.xml.XmlPersonEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.gender.Sex;
@@ -41,7 +41,7 @@ public class XmlPersonRecord extends XmlRecord {
     private String occupation;
 
     @XmlElementRef
-    private List<XmlEvent> events;
+    private List<XmlPersonEvent> events;
 
     public PersonId personId() {
         return new PersonId(id);
@@ -72,7 +72,7 @@ public class XmlPersonRecord extends XmlRecord {
         return occupation;
     }
 
-    protected List<XmlEvent> events() {
+    protected List<XmlPersonEvent> events() {
         return MoreObjects.firstNonNull(events, Collections.emptyList());
     }
 

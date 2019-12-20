@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/people" xmlns:ns2="http://ramify.net/dates" xmlns:ns3="http://ramify.net/events" xmlns:ns4="http://ramify.net/records" xmlns:tns="http://ramify.net/families" targetNamespace="http://ramify.net/families" version="1.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/people" xmlns:ns2="http://ramify.net/events" xmlns:ns3="http://ramify.net/records" xmlns:tns="http://ramify.net/families" targetNamespace="http://ramify.net/families" version="1.0">
     
   <xs:import namespace="http://ramify.net/people" schemaLocation="people.xsd"/>
-    
-  <xs:import namespace="http://ramify.net/dates" schemaLocation="dates.xsd"/>
     
   <xs:import namespace="http://ramify.net/events" schemaLocation="events.xsd"/>
     
@@ -47,21 +45,21 @@
             
       <xs:choice maxOccurs="unbounded" minOccurs="0">
                 
-        <xs:element ref="ns3:event"/>
+        <xs:element ref="ns2:personEvent"/>
                 
-        <xs:element ref="ns3:baptism"/>
+        <xs:element ref="ns2:baptism"/>
                 
-        <xs:element ref="ns3:birth"/>
+        <xs:element ref="ns2:birth"/>
                 
-        <xs:element ref="ns3:marriage"/>
+        <xs:element ref="ns2:marriage"/>
                 
-        <xs:element ref="ns3:residence"/>
+        <xs:element ref="ns2:residence"/>
                 
-        <xs:element ref="ns3:death"/>
+        <xs:element ref="ns2:death"/>
                 
-        <xs:element ref="ns3:burial"/>
+        <xs:element ref="ns2:burial"/>
                 
-        <xs:element ref="ns3:probate"/>
+        <xs:element ref="ns2:probate"/>
               
       </xs:choice>
           
@@ -145,7 +143,7 @@
         
     <xs:complexContent>
             
-      <xs:extension base="ns4:xmlPersonRecord">
+      <xs:extension base="ns3:xmlPersonRecord">
                 
         <xs:sequence>
                     

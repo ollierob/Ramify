@@ -12,7 +12,7 @@ import java.util.Set;
 
 @XmlTransient
 @XmlSeeAlso({XmlBurialEvent.class, XmlProbateEvent.class})
-public abstract class XmlPostDeathEvent extends XmlEvent {
+public abstract class XmlPostDeathEvent extends XmlPersonEvent {
 
     @Override
     protected Set<Event> inferredEvents(final PersonId personId, final RecordContext context) {

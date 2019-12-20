@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.Set;
 
 @XmlRootElement(namespace = XmlEvent.NAMESPACE, name = "birth")
-public class XmlBirthEvent extends XmlEvent {
+public class XmlBirthEvent extends XmlPersonEvent {
 
     @Override
     public BirthEvent toEvent(final PersonId personId, final RecordContext context) {

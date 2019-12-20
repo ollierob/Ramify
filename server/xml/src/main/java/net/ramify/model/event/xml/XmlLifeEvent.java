@@ -5,6 +5,6 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 @XmlSeeAlso({XmlBaptismEvent.class, XmlMarriageEvent.class, XmlResidenceEvent.class})
-public abstract class XmlLifeEvent extends XmlEvent {
+public abstract class XmlLifeEvent extends XmlPersonEvent {
 
 }

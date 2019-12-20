@@ -7,7 +7,7 @@ import net.ramify.model.event.EventId;
 import net.ramify.model.event.collection.MutablePersonEventSet;
 import net.ramify.model.event.type.DeathEvent;
 import net.ramify.model.event.type.LifeEvent;
-import net.ramify.model.event.xml.XmlEvent;
+import net.ramify.model.event.xml.XmlPersonEvent;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.person.HasPersonId;
 import net.ramify.model.person.Person;
@@ -40,7 +40,7 @@ public abstract class XmlRelationship {
     private Boolean deceased;
 
     @XmlElementRef
-    private List<XmlEvent> events;
+    private List<XmlPersonEvent> events;
 
     public void addRelationship(final Person from, final FamilyBuilder builder, final RecordContext context, final DateRange date) {
         final var to = this.toPerson(date, context);

@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(namespace = XmlEvent.NAMESPACE, name = "death")
-public class XmlDeathEvent extends XmlEvent {
+public class XmlDeathEvent extends XmlPersonEvent {
 
     @XmlAttribute(name = "cause")
     private String cause;

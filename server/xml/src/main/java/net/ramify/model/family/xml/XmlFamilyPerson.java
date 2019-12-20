@@ -1,7 +1,7 @@
 package net.ramify.model.family.xml;
 
 import com.google.common.collect.Sets;
-import net.ramify.model.event.xml.XmlEvent;
+import net.ramify.model.event.xml.XmlPersonEvent;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.provider.PersonProvider;
@@ -60,7 +60,7 @@ public class XmlFamilyPerson extends XmlPersonRecord {
                 .collect(Collectors.toList());
     }
 
-    private static Collection<Relationship> relatives(final Person self, final Collection<? extends XmlEvent> events) {
+    private static Collection<Relationship> relatives(final Person self, final Collection<? extends XmlPersonEvent> events) {
         if (isEmpty(events)) return Collections.emptyList();
         return events.stream()
                 .map(event -> event.inferredRelationships(self))

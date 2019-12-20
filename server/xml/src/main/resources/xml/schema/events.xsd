@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/dates" xmlns:ns2="http://ramify.net/people" xmlns:tns="http://ramify.net/events" targetNamespace="http://ramify.net/events" version="1.0">
-    
-  <xs:import namespace="http://ramify.net/dates" schemaLocation="dates.xsd"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/people" xmlns:ns2="http://ramify.net/dates" xmlns:tns="http://ramify.net/events" targetNamespace="http://ramify.net/events" version="1.0">
     
   <xs:import namespace="http://ramify.net/people" schemaLocation="people.xsd"/>
+    
+  <xs:import namespace="http://ramify.net/dates" schemaLocation="dates.xsd"/>
     
   <xs:element name="baptism" type="tns:xmlBaptismEvent"/>
     
@@ -17,6 +17,8 @@
     
   <xs:element name="marriage" type="tns:xmlMarriageEvent"/>
     
+  <xs:element name="personEvent" type="tns:xmlPersonEvent"/>
+    
   <xs:element name="probate" type="tns:xmlProbateEvent"/>
     
   <xs:element name="residence" type="tns:xmlResidenceEvent"/>
@@ -25,7 +27,7 @@
         
     <xs:complexContent>
             
-      <xs:extension base="tns:xmlEvent">
+      <xs:extension base="tns:xmlPersonEvent">
                 
         <xs:sequence/>
               
@@ -35,47 +37,59 @@
       
   </xs:complexType>
     
-  <xs:complexType abstract="true" name="xmlEvent">
+  <xs:complexType abstract="true" name="xmlPersonEvent">
         
-    <xs:sequence>
+    <xs:complexContent>
             
-      <xs:choice>
+      <xs:extension base="tns:xmlEvent">
                 
-        <xs:element ref="ns1:xmlBeforeDate"/>
+        <xs:sequence>
+                    
+          <xs:choice minOccurs="0">
+                        
+            <xs:element ref="ns1:exactAge"/>
+                        
+            <xs:element ref="ns1:approximateAge"/>
+                        
+            <xs:element ref="ns1:ageRange"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
                 
-        <xs:element ref="ns1:inYear"/>
+        <xs:attribute name="placeId" type="xs:string"/>
                 
-        <xs:element ref="ns1:onDate"/>
+        <xs:attribute name="age" type="xs:int"/>
                 
-        <xs:element ref="ns1:inQuarter"/>
-                
-        <xs:element ref="ns1:betweenYears"/>
-                
-        <xs:element ref="ns1:inMonth"/>
-                
-        <xs:element ref="ns1:xmlBeforeYear"/>
+        <xs:attribute name="occupation" type="xs:string"/>
               
-      </xs:choice>
-            
-      <xs:choice minOccurs="0">
-                
-        <xs:element ref="ns2:exactAge"/>
-                
-        <xs:element ref="ns2:approximateAge"/>
-                
-        <xs:element ref="ns2:ageRange"/>
-              
-      </xs:choice>
+      </xs:extension>
           
-    </xs:sequence>
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlEvent">
+        
+    <xs:choice>
+            
+      <xs:element ref="ns2:xmlBeforeDate"/>
+            
+      <xs:element ref="ns2:inYear"/>
+            
+      <xs:element ref="ns2:onDate"/>
+            
+      <xs:element ref="ns2:inQuarter"/>
+            
+      <xs:element ref="ns2:betweenYears"/>
+            
+      <xs:element ref="ns2:inMonth"/>
+            
+      <xs:element ref="ns2:xmlBeforeYear"/>
+          
+    </xs:choice>
         
     <xs:attribute name="id" type="xs:string"/>
-        
-    <xs:attribute name="placeId" type="xs:string"/>
-        
-    <xs:attribute name="age" type="xs:int"/>
-        
-    <xs:attribute name="occupation" type="xs:string"/>
       
   </xs:complexType>
     
@@ -83,7 +97,7 @@
         
     <xs:complexContent>
             
-      <xs:extension base="tns:xmlEvent">
+      <xs:extension base="tns:xmlPersonEvent">
                 
         <xs:sequence/>
               
@@ -97,7 +111,7 @@
         
     <xs:complexContent>
             
-      <xs:extension base="tns:xmlEvent">
+      <xs:extension base="tns:xmlPersonEvent">
                 
         <xs:sequence/>
                 
@@ -113,7 +127,7 @@
         
     <xs:complexContent>
             
-      <xs:extension base="tns:xmlEvent">
+      <xs:extension base="tns:xmlPersonEvent">
                 
         <xs:sequence/>
               
@@ -127,7 +141,7 @@
         
     <xs:complexContent>
             
-      <xs:extension base="tns:xmlEvent">
+      <xs:extension base="tns:xmlPersonEvent">
                 
         <xs:sequence/>
                 
@@ -143,7 +157,7 @@
         
     <xs:complexContent>
             
-      <xs:extension base="tns:xmlEvent">
+      <xs:extension base="tns:xmlPersonEvent">
                 
         <xs:sequence/>
                 
@@ -159,7 +173,7 @@
         
     <xs:complexContent>
             
-      <xs:extension base="tns:xmlEvent">
+      <xs:extension base="tns:xmlPersonEvent">
                 
         <xs:sequence/>
               
