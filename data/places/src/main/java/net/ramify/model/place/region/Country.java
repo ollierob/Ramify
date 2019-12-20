@@ -3,6 +3,7 @@ package net.ramify.model.place.region;
 import com.google.common.collect.ImmutableSet;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.region.iso.CountryIso;
 
@@ -19,18 +20,19 @@ public class Country extends AbstractRegion {
     private final Country parent;
     private final CountryIso iso;
 
+    @Deprecated
     public Country(final PlaceId id, final String name, @Nonnull final CountryIso iso) {
         super(id, name, null);
         this.parent = null;
         this.iso = iso;
     }
 
-    public Country(final PlaceId id, final String name, @Nonnull final CountryIso iso, final Place parent) throws InvalidPlaceTypeException {
-        this(id, name, iso, Country.cast(parent));
+    public Country(final PlaceId id, final String name, @Nonnull final CountryIso iso, final Place parent, final PlaceHistory history) throws InvalidPlaceTypeException {
+        this(id, name, iso, Country.cast(parent), history);
     }
 
-    public Country(final PlaceId id, final String name, @Nonnull final CountryIso iso, final Country parent) {
-        super(id, name, null);
+    public Country(final PlaceId id, final String name, @Nonnull final CountryIso iso, final Country parent, final PlaceHistory history) {
+        super(id, name, null, history);
         this.parent = parent;
         this.iso = iso;
     }
