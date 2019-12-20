@@ -3,7 +3,6 @@ import {Person} from "../../../protobuf/generated/person_pb";
 import {EventList} from "../../../components/event/EventList";
 import {Card, Tag} from "antd";
 import {Family} from "../../../protobuf/generated/family_pb";
-import {PersonName} from "../../../components/people/PersonName";
 import {FamilyTreeId} from "../../../components/tree/FamilyTree";
 import {RelativesList} from "./RelativesList";
 import {determineRelatives, Relatives} from "../../../components/relationship/Relatives";
@@ -12,6 +11,7 @@ import {Event} from "../../../protobuf/generated/event_pb";
 import {eventType, findBirth, findDeath} from "../../../components/event/Event";
 import {isDateOrdered} from "../../../components/date/DateRange";
 import {RelativeRelationship} from "../../../components/relationship/RelativeRelationship";
+import {PersonProfileTitle} from "./PersonProfileTitle";
 
 const flatten = require('arr-flatten');
 const {CheckableTag} = Tag;
@@ -45,7 +45,7 @@ export class PersonProfile extends React.PureComponent<Props, State> {
         if (!person) return null;
 
         return <Card
-            title={<PersonName name={person.name}/>}
+            title={<PersonProfileTitle person={person}/>}
             className="profile large">
 
             {person && <>
@@ -128,14 +128,6 @@ function retainFamilyEvent(event: Event.AsObject): boolean {
             return false;
     }
 }
-
-const ProfileGallery = () => {
-    return <Card
-        title="Gallery"
-        className="gallery large">
-
-    </Card>;
-};
 
 type EventListOptions = {
     ownEvents: boolean;

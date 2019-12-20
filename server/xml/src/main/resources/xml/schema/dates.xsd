@@ -21,6 +21,8 @@
     
   <xs:element name="deathDate" type="tns:xmlExactDate"/>
     
+  <xs:element name="inMonth" type="tns:xmlInMonth"/>
+    
   <xs:element name="inQuarter" type="tns:xmlInQuarter"/>
     
   <xs:element name="inYear" type="tns:xmlInYear"/>
@@ -122,6 +124,28 @@
         <xs:attribute name="start" type="xs:int" use="required"/>
                 
         <xs:attribute name="end" type="xs:int" use="required"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlInMonth">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlDateRange">
+                
+        <xs:sequence/>
+                
+        <xs:attribute name="year" type="xs:int" use="required"/>
+                
+        <xs:attribute name="month" type="xs:int" use="required"/>
+                
+        <xs:attribute name="earliestDay" type="xs:int"/>
+                
+        <xs:attribute name="latestDay" type="xs:int"/>
               
       </xs:extension>
           

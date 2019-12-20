@@ -167,6 +167,8 @@
                 
         <xs:element ref="ns2:betweenYears"/>
                 
+        <xs:element ref="ns2:inMonth"/>
+                
         <xs:element ref="ns2:xmlBeforeYear"/>
               
       </xs:choice>
@@ -279,6 +281,8 @@
                         
             <xs:element ref="ns2:betweenYears"/>
                         
+            <xs:element ref="ns2:inMonth"/>
+                        
             <xs:element ref="ns2:xmlBeforeYear"/>
                       
           </xs:choice>
@@ -313,6 +317,8 @@
                         
             <xs:element ref="ns2:betweenYears"/>
                         
+            <xs:element ref="ns2:inMonth"/>
+                        
             <xs:element ref="ns2:xmlBeforeYear"/>
                       
           </xs:choice>
@@ -346,6 +352,8 @@
             <xs:element ref="ns2:inQuarter"/>
                         
             <xs:element ref="ns2:betweenYears"/>
+                        
+            <xs:element ref="ns2:inMonth"/>
                         
             <xs:element ref="ns2:xmlBeforeYear"/>
                       
@@ -849,6 +857,8 @@
                     
           <xs:element ref="ns2:betweenYears"/>
                     
+          <xs:element ref="ns2:inMonth"/>
+                    
           <xs:element ref="ns2:xmlBeforeYear"/>
                   
         </xs:choice>
@@ -965,25 +975,25 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="payment"/>
-            
-      <xs:enumeration value="membership"/>
-            
-      <xs:enumeration value="census"/>
-            
-      <xs:enumeration value="death"/>
-            
-      <xs:enumeration value="mention"/>
-            
-      <xs:enumeration value="mixed"/>
-            
       <xs:enumeration value="marriage"/>
             
       <xs:enumeration value="burial"/>
             
+      <xs:enumeration value="mention"/>
+            
       <xs:enumeration value="birth"/>
             
+      <xs:enumeration value="death"/>
+            
       <xs:enumeration value="baptism"/>
+            
+      <xs:enumeration value="payment"/>
+            
+      <xs:enumeration value="census"/>
+            
+      <xs:enumeration value="membership"/>
+            
+      <xs:enumeration value="mixed"/>
             
       <xs:enumeration value="residence"/>
           
@@ -995,13 +1005,13 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="head"/>
-            
       <xs:enumeration value="child"/>
             
-      <xs:enumeration value="parent"/>
-            
       <xs:enumeration value="spouse"/>
+            
+      <xs:enumeration value="head"/>
+            
+      <xs:enumeration value="parent"/>
           
     </xs:restriction>
       
@@ -1011,11 +1021,11 @@
         
     <xs:restriction base="xs:string">
             
+      <xs:enumeration value="widowed"/>
+            
       <xs:enumeration value="unmarried"/>
             
       <xs:enumeration value="married"/>
-            
-      <xs:enumeration value="widowed"/>
           
     </xs:restriction>
       

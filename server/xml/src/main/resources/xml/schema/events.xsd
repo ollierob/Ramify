@@ -49,6 +49,8 @@
                 
         <xs:element ref="ns1:betweenYears"/>
                 
+        <xs:element ref="ns1:inMonth"/>
+                
         <xs:element ref="ns1:xmlBeforeYear"/>
               
       </xs:choice>
@@ -128,6 +130,8 @@
       <xs:extension base="tns:xmlEvent">
                 
         <xs:sequence/>
+                
+        <xs:attribute name="plot" type="xs:string"/>
               
       </xs:extension>
           
