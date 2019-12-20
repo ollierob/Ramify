@@ -9,9 +9,9 @@ export function determineRelationship(id: PersonId, relatives: Relatives): Relat
     if (!id || !relatives) return null;
     if (id == relatives.father?.id || id == relatives.mother?.id) return "parent";
     for (const s of relatives.spouses) {
-        if (id == s.spouse.id) return "spouse";
+        if (s.spouse && s.spouse.id == id) return "spouse";
         for (const c of s.children) {
-            if (id == c.id) return "child";
+            if (c.id == id) return "child";
         }
     }
     for (const s of relatives.siblings) {
