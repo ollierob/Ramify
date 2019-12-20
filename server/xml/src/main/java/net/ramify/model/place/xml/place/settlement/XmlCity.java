@@ -16,6 +16,7 @@ import net.ramify.model.place.xml.place.building.XmlBuilding;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.Collections;
@@ -28,7 +29,9 @@ public class XmlCity extends XmlSettlement {
     @XmlAttribute(name = "iso")
     private String iso;
 
-    @XmlElementRef(type = XmlBuilding.class)
+    @XmlElementRefs({
+            @XmlElementRef(type = XmlBuilding.class)
+    })
     private List<XmlPlace> children;
 
     @Override
