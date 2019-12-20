@@ -43,7 +43,7 @@ export const EventBox = (props: EventBoxProps) => {
                 {event.place && <div className="place">
                     <PlaceAndParent place={event.place}/>
                 </div>}
-                {event.computedage && isSelf && <div className="computedAge">
+                {event.computedage && isSelf && eventType(event) != "BIRTH" && <div className="computedAge">
                     Age {renderAge(event.computedage)}
                 </div>}
             </div>
