@@ -49,6 +49,8 @@
                 
         <xs:element ref="ns3:event"/>
                 
+        <xs:element ref="ns3:baptism"/>
+                
         <xs:element ref="ns3:birth"/>
                 
         <xs:element ref="ns3:marriage"/>

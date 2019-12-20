@@ -5,6 +5,8 @@
     
   <xs:import namespace="http://ramify.net/people" schemaLocation="people.xsd"/>
     
+  <xs:element name="baptism" type="tns:xmlBaptismEvent"/>
+    
   <xs:element name="birth" type="tns:xmlBirthEvent"/>
     
   <xs:element name="burial" type="tns:xmlBurialEvent"/>
@@ -19,7 +21,7 @@
     
   <xs:element name="residence" type="tns:xmlResidenceEvent"/>
     
-  <xs:complexType name="xmlBirthEvent">
+  <xs:complexType name="xmlBaptismEvent">
         
     <xs:complexContent>
             
@@ -74,6 +76,20 @@
     <xs:attribute name="age" type="xs:int"/>
         
     <xs:attribute name="occupation" type="xs:string"/>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlBirthEvent">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlEvent">
+                
+        <xs:sequence/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
       
   </xs:complexType>
     
