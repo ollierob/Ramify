@@ -8,7 +8,7 @@ export const EventNotes = (props: {event: Event.AsObject}) => {
     if (!event) return null;
 
     return <ul className="notes">
-        {event.givenage && <li>Age: {renderAge(event.givenage)}</li>}
+        {event.givenage && <li>Given age: {renderAge(event.givenage)}</li>}
         {event.notes && <li>Notes: {event.notes}</li>}
         {event.cause && <li>Cause: {event.cause}</li>}
         {event.occupation && <li>Occupation: {event.occupation}</li>}
