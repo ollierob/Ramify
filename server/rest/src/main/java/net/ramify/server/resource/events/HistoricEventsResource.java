@@ -20,7 +20,7 @@ public interface HistoricEventsResource extends Resource {
 
     @SuppressWarnings("RestParamTypeInspection")
     @GET
-    @Path("{start}/{end}/{place}")
+    @Path("{start}/{end}")
     HistoricEvents events(
             @PathParam("start") LocalDate start,
             @PathParam("end") LocalDate end,

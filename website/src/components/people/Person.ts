@@ -1,6 +1,6 @@
 import {Person} from "../../protobuf/generated/person_pb";
-import {findBirth} from "../event/Event";
-import {sortDatesByEarliest} from "../date/DateRange";
+import {eventDateRange, findBirth, isPostDeathEvent} from "../event/Event";
+import {DateRange, sortDatesByEarliest} from "../date/DateRange";
 
 export function sortPeopleByBirthDate(p1: Person.AsObject, p2: Person.AsObject) {
     const b1 = findBirth(p1.eventsList);
@@ -12,4 +12,9 @@ export function sortPeopleByBirthDate(p1: Person.AsObject, p2: Person.AsObject) 
 
 export function sortPeopleByName(p1: Person.AsObject, p2: Person.AsObject) {
     return (p1.name && p1.name.value || "").localeCompare(p2.name && p2.name.value || "");
+}
+
+export function lifeDateRange(person: Person.AsObject): DateRange {
+    if (!person || !person.eventsList) return null;
+    return eventDateRange(person.eventsList.filter(e => !isPostDeathEvent(e)));
 }

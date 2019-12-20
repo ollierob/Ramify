@@ -22,11 +22,14 @@ export class EventList extends React.PureComponent<Props> {
         const events = this.props.events || [];
 
         return <div className="eventList">
+
             {events.map(e => <EventBox
-                key={e.event.id + "/" + e.person.id} //FIXME key
+                key={e.event.id + "/" + e.person?.id}
                 {...this.props}
                 {...e}
+                relationshipToMain={e.relationshipToMain}
                 relatives={e.type == "person" && this.props.relatives}/>)}
+
         </div>;
 
     }

@@ -5,8 +5,8 @@ import {RelativeRelationship} from "../relationship/RelativeRelationship";
 
 export type ProfileEvent = {
     event: Event.AsObject;
-    person: Person.AsObject;
-    relationshipToMain: RelativeRelationship;
+    person?: Person.AsObject;
+    relationshipToMain?: RelativeRelationship;
     type: "person" | "family" | "historic";
 }
 

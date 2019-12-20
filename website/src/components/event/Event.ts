@@ -1,8 +1,10 @@
 import {Event} from "../../protobuf/generated/event_pb";
 import {RecordType, recordTypeFromValue} from "../records/RecordType";
-import {earliestYear, latestYear} from "../date/DateRange";
+import {DateRange, earliestYear, latestYear} from "../date/DateRange";
 import {Person} from "../../protobuf/generated/person_pb";
 import {Family} from "../../protobuf/generated/family_pb";
+import {Date} from "../../protobuf/generated/date_pb";
+import {maxDate, minDate} from "../date/Date";
 
 export type EventType = RecordType;
 
@@ -87,4 +89,22 @@ export function findOtherEventPeople(person: Person.AsObject, family: Family.AsO
         if (e) people.push(p);
     }
     return people;
+}
+
+export function eventDateRange(events: ReadonlyArray<Event.AsObject>): DateRange {
+    switch (events.length) {
+        case 0:
+            return null;
+        case 1:
+            return events[0].date;
+        default:
+            let earliest: Date.AsObject = null;
+            let latest: Date.AsObject = null;
+            for (const event of events) {
+                if (!event.date) continue;
+                earliest = minDate(earliest, event.date.earliest);
+                latest = maxDate(latest, event.date.latest);
+            }
+            return {earliest, latest, approximate: false};
+    }
 }
