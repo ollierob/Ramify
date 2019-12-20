@@ -41,6 +41,7 @@ public interface Age extends BuildsProto<AgeProto.Age> {
         return lower == upper ? Optional.of(Year.of(lower)) : Optional.empty();
     }
 
+    @Nonnull
     default DateRange birthDate(final DateRange date) {
         final var earliest = date.earliestInclusive().map(d -> d.minus(this.upperBound()));
         final var latest = date.latestInclusive().map(d -> d.minus(this.lowerBound()));

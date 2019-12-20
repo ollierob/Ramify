@@ -13,6 +13,7 @@ import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import static net.ramify.model.event.merge.UniqueEventMerger.NOT_ALLOWED;
 
@@ -82,6 +83,16 @@ public class MutablePersonEventSet extends HashSet<Event> implements PersonEvent
     @Override
     public Optional<DeathEvent> findDeath() {
         return Optional.ofNullable(handler.death);
+    }
+
+    @Nonnull
+    @Override
+    public MutablePersonEventSet filteredCopy(@Nonnull final Predicate<? super Event> predicate) {
+        final var copy = new MutablePersonEventSet(merger);
+        for (final var event : this) {
+            if (predicate.test(event)) copy.add(event);
+        }
+        return copy;
     }
 
     private final class Handler implements EventHandler<Boolean> {

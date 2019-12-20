@@ -7,8 +7,10 @@ import net.ramify.model.event.type.DeathEvent;
 import net.ramify.model.event.type.UniqueEvent;
 import net.ramify.model.person.age.Age;
 
+import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public interface PersonEventSet extends EventSet, HasPersonEvents {
 
@@ -19,7 +21,7 @@ public interface PersonEventSet extends EventSet, HasPersonEvents {
     }
 
     @Nonnull
-    default <T extends UniqueEvent> Optional<T> find(final Class<T> type) {
+    default <T extends UniqueEvent> Optional<T> find(@Nonnull final Class<T> type) {
         return Iterables.findFirst(this.events(), e -> e.is(type)).flatMap(e -> e.as(type));
     }
 
@@ -34,10 +36,14 @@ public interface PersonEventSet extends EventSet, HasPersonEvents {
     }
 
     @Nonnull
-    default Optional<Age> inferAge(final Event event) {
+    default Optional<Age> inferAge(@Nonnull final Event event) {
         if (event.isBirth()) return Optional.of(Age.ZERO);
         if (event.isPostDeath()) return Optional.empty();
         return this.findBirth().map(birth -> Age.fromDates(birth.date(), event.date()));
     }
+
+    @Nonnull
+    @CheckReturnValue
+    PersonEventSet filteredCopy(@Nonnull Predicate<? super Event> predicate);
 
 }

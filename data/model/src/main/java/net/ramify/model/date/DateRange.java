@@ -42,6 +42,10 @@ public interface DateRange extends BuildsProto<DateProto.DateRange> {
         return false;
     }
 
+    default boolean isExact() {
+        return this.earliestIsoDate().compareTo(this.latestIsoDate()) == 0;
+    }
+
     default boolean isFinite() {
         return this.earliestInclusive().isPresent() && this.latestInclusive().isPresent();
     }
@@ -121,6 +125,12 @@ public interface DateRange extends BuildsProto<DateProto.DateRange> {
         public Optional<DateRange> intersection(final DateRange that) {
             return Optional.of(that);
         }
+
+        @Override
+        public String toString() {
+            return "ALWAYS";
+        }
+
     };
 
     DateRange NEVER = new DateRange() {
@@ -151,6 +161,11 @@ public interface DateRange extends BuildsProto<DateProto.DateRange> {
         @Override
         public boolean intersects(DateRange that) {
             return false;
+        }
+
+        @Override
+        public String toString() {
+            return "NEVER";
         }
     };
 

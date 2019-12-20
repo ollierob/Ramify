@@ -27,10 +27,4 @@ public class AgeDateRange implements DateRange {
         return latest;
     }
 
-    @Nonnull
-    @Override
-    public Optional<DateRange> intersection(final DateRange that) {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
 }

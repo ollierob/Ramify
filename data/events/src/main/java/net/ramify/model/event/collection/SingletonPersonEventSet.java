@@ -3,8 +3,10 @@ package net.ramify.model.event.collection;
 import com.google.common.collect.Iterators;
 import net.ramify.model.event.Event;
 
+import javax.annotation.Nonnull;
 import java.util.AbstractSet;
 import java.util.Iterator;
+import java.util.function.Predicate;
 
 public class SingletonPersonEventSet extends AbstractSet<Event> implements PersonEventSet {
 
@@ -27,6 +29,12 @@ public class SingletonPersonEventSet extends AbstractSet<Event> implements Perso
     @Override
     public Iterator<Event> iterator() {
         return Iterators.singletonIterator(event);
+    }
+
+    @Nonnull
+    @Override
+    public PersonEventSet filteredCopy(@Nonnull Predicate<? super Event> predicate) {
+        return predicate.test(event) ? this : EmptyPersonEventSet.INSTANCE;
     }
 
 }

@@ -43,8 +43,25 @@ public class ExactDate implements DateRange {
 
     @Nonnull
     @Override
+    public LocalDate earliestIsoDate() {
+        return LocalDate.from(date);
+    }
+
+    @Nonnull
+    @Override
+    public LocalDate latestIsoDate() {
+        return LocalDate.from(date);
+    }
+
+    @Nonnull
+    @Override
     public Optional<? extends ChronoLocalDate> latestInclusive() {
         return Optional.of(date);
+    }
+
+    @Override
+    public boolean isExact() {
+        return true;
     }
 
     public DateRange yearsAgo(final int years) {

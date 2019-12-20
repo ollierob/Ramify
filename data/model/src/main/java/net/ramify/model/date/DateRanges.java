@@ -2,16 +2,16 @@ package net.ramify.model.date;
 
 import javax.annotation.CheckForNull;
 
+import static net.ramify.utils.objects.ComparableUtils.max;
+import static net.ramify.utils.objects.ComparableUtils.min;
+
 class DateRanges {
 
     @CheckForNull
     static DateRange intersection(final DateRange d1, final DateRange d2) {
-        final var s1 = d1.earliestIsoDate();
-        final var s2 = d2.earliestIsoDate();
-        if (s1.isAfter(s2)) return intersection(d2, d1);
-        final var e1 = d1.latestIsoDate();
-        if (e1.isBefore(s2)) return null;
-        return ClosedDateRange.of(e1, s2);
+        final var start = max(d1.earliestIsoDate(), d2.earliestIsoDate());
+        final var end = min(d1.latestIsoDate(), d2.latestIsoDate());
+        return start.isAfter(end) ? null : ClosedDateRange.of(start, end);
     }
 
 }

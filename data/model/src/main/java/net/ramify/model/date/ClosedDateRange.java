@@ -70,4 +70,9 @@ public class ClosedDateRange implements DateRange {
         return Optional.of(latest);
     }
 
+    @Override
+    public String toString() {
+        return "[" + earliest + ":" + latest + "]";
+    }
+
 }
