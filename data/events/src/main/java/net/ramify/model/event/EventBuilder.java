@@ -23,6 +23,7 @@ import net.ramify.model.person.HasPersonId;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
 import net.ramify.model.place.Place;
+import net.ramify.model.place.type.SettlementOrRegion;
 import net.ramify.model.util.Link;
 
 public class EventBuilder {
@@ -113,8 +114,8 @@ public class EventBuilder {
         return new GenericProbateEvent(eventId, person.personId(), this.eventProperties());
     }
 
-    public HistoricEvent toHistoric(final String title, final String description) {
-        return new GenericHistoricEvent(eventId, date, place, title, description);
+    public HistoricEvent toHistoric(final String title, final String description, final SettlementOrRegion region) {
+        return new GenericHistoricEvent(eventId, date, place, region, title, description);
     }
 
 }
