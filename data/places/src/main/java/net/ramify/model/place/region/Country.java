@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class Country extends AbstractRegion {
 
-    private static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(State.class, County.class);
+    private static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(Country.class, State.class, County.class);
     private static final PlaceProto.PlaceType PLACE_TYPE = placeTypeBuilder("Country").setCanPrefix(false).setCanSuffix(false).setIsCountry(true).build();
 
     private final Country parent;

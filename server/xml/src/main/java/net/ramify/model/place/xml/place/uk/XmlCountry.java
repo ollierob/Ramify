@@ -1,7 +1,6 @@
 package net.ramify.model.place.xml.place.uk;
 
 import com.google.common.base.MoreObjects;
-import com.google.common.base.Preconditions;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
@@ -14,6 +13,7 @@ import net.ramify.model.place.xml.place.XmlPlace;
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.Collections;
@@ -25,8 +25,11 @@ class XmlCountry extends XmlPlace {
     @XmlAttribute(name = "iso", required = true)
     private String iso;
 
-    @XmlElementRef
-    private List<XmlCounty> counties;
+    @XmlElementRefs({
+            @XmlElementRef(type = XmlCountry.class),
+            @XmlElementRef(type = XmlCounty.class)
+    })
+    private List<XmlPlace> children;
 
     @Nonnull
     protected Spid placeId(final String id, final CountryIso iso) {
@@ -35,8 +38,7 @@ class XmlCountry extends XmlPlace {
 
     @Override
     protected Place place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
-        Preconditions.checkArgument(parent == null);
-        return new Country(this.placeId(context), this.name(), this.iso());
+        return new Country(this.placeId(context), this.name(), this.iso(), parent);
     }
 
     protected CountryIso iso() {
@@ -44,8 +46,8 @@ class XmlCountry extends XmlPlace {
     }
 
     @Override
-    protected Collection<XmlCounty> children() {
-        return MoreObjects.firstNonNull(counties, Collections.emptyList());
+    protected Collection<? extends XmlPlace> children() {
+        return MoreObjects.firstNonNull(children, Collections.emptyList());
     }
 
 }

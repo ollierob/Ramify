@@ -67,7 +67,13 @@
                 
         <xs:sequence>
                     
-          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:county"/>
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        
+            <xs:element ref="tns:country"/>
+                        
+            <xs:element ref="tns:county"/>
+                      
+          </xs:choice>
                   
         </xs:sequence>
                 
