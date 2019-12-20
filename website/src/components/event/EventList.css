@@ -67,3 +67,19 @@
 .eventList .event .main .notes:empty {
     display: none;
 }
+
+.inferBirth.ant-modal .ant-modal-title {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.inferBirth.ant-modal .ant-modal-body {
+    font-size: 16px;
+}
+
+.inferBirth.ant-modal .date.ant-checkbox-wrapper {
+    display: block !important;
+    margin: 8px 0;
+    font-size: 1em;
+}

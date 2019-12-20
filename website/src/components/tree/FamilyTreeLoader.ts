@@ -3,6 +3,7 @@ import {FamilyTree, FamilyTreeList} from "../../protobuf/generated/family_pb";
 import {protoGet} from "../fetch/ProtoFetch";
 import {PersonId} from "../people/PersonId";
 import {DateRange} from "../../protobuf/generated/date_pb";
+import {queryParameters} from "../fetch/Fetch";
 
 export interface FamilyTreeLoader {
 
@@ -12,7 +13,7 @@ export interface FamilyTreeLoader {
 
     loadFamilyTreeMeta(id: FamilyTreeId): Promise<FamilyTree.AsObject>
 
-    loadInferredBirthDate(id: FamilyTreeId, personId: PersonId): Promise<DateRange.AsObject>
+    loadInferredBirthDate(id: FamilyTreeId, personId: PersonId, events?: ReadonlyArray<string>): Promise<DateRange.AsObject>
 
 }
 
@@ -33,8 +34,10 @@ class ProtoFamilyTreeLoader implements FamilyTreeLoader {
             .then(t => t ? t.toObject() : null);
     }
 
-    loadInferredBirthDate(id: string, personId: string): Promise<DateRange.AsObject> {
-        return protoGet("/people/families/trees/load/" + id + "/" + personId + "/infer/birth", DateRange.deserializeBinary)
+    loadInferredBirthDate(id: string, personId: string, events: ReadonlyArray<string> = []): Promise<DateRange.AsObject> {
+        const url = "/people/families/trees/load/" + id + "/" + personId + "/infer/birth"
+            + queryParameters({event: events});
+        return protoGet(url, DateRange.deserializeBinary)
             .then(d => d ? d.toObject() : null);
     }
 

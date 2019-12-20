@@ -19,7 +19,7 @@ function parseHtmlResponse(html: string): string {
 
 type Queryable = string | number | boolean;
 
-export function queryParameters(query: {[key: string]: Queryable | Queryable[]}): string {
+export function queryParameters(query: {[key: string]: Queryable | Queryable[] | ReadonlyArray<Queryable>}): string {
     if (!query) return "";
     const queryParameters: string[] = [];
     Object.keys(query).forEach(key => {
