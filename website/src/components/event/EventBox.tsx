@@ -2,7 +2,7 @@ import * as React from "react";
 import {Event} from "../../protobuf/generated/event_pb";
 import {Card} from "antd";
 import {renderAge} from "../people/Age";
-import {eventType, findOtherEventPeople, isBirthEvent, isDeathEvent, isPostDeathEvent} from "./Event";
+import {eventType, findOtherEventPeople, isBirthEvent, isDeathEvent, isHistoricEvent, isPostDeathEvent} from "./Event";
 import {EventTitle} from "./EventTitle";
 import {Person} from "../../protobuf/generated/person_pb";
 import {Family} from "../../protobuf/generated/family_pb";
@@ -60,6 +60,7 @@ function eventClass(event: Event.AsObject): string {
     if (isBirthEvent(event)) return "birth";
     if (isDeathEvent(event)) return "death";
     if (isPostDeathEvent(event)) return "postDeath";
+    if (isHistoricEvent(event)) return "historic";
     return "postBirth";
 }
 

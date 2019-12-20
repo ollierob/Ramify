@@ -57,6 +57,10 @@ export function isPostDeathEvent(event: Event.AsObject): boolean {
     }
 }
 
+export function isHistoricEvent(event: Event.AsObject): boolean {
+    return eventType(event) == "HISTORIC";
+}
+
 export function eventType(event: Event.AsObject): EventType {
     return event ? recordTypeFromValue(event.type) : null;
 }

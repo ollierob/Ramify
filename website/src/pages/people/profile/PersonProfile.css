@@ -37,6 +37,10 @@
     border-color: #b76337;
 }
 
+.personProfile .profile .events .eventList .event.historic {
+    background-color: #EEEEEE;
+}
+
 .personProfile .profile .relatives {
     display: inline-block;
     width: 40%;
