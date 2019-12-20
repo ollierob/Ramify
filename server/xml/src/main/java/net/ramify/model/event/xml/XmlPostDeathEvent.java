@@ -1,7 +1,7 @@
 package net.ramify.model.event.xml;
 
 import net.ramify.model.date.BeforeDate;
-import net.ramify.model.event.Event;
+import net.ramify.model.event.PersonEvent;
 import net.ramify.model.event.type.DeathEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.record.xml.RecordContext;
@@ -15,7 +15,7 @@ import java.util.Set;
 public abstract class XmlPostDeathEvent extends XmlPersonEvent {
 
     @Override
-    protected Set<Event> inferredEvents(final PersonId personId, final RecordContext context) {
+    protected Set<PersonEvent> inferredEvents(final PersonId personId, final RecordContext context) {
         final var inferred = super.inferredEvents(personId, context);
         inferred.add(this.inferDeath(personId, context));
         return inferred;

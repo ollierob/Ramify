@@ -1,7 +1,7 @@
 package net.ramify.model.event.xml;
 
 import net.ramify.model.date.DateRange;
-import net.ramify.model.event.Event;
+import net.ramify.model.event.PersonEvent;
 import net.ramify.model.event.EventBuilder;
 import net.ramify.model.event.EventId;
 import net.ramify.model.event.type.BirthEvent;
@@ -51,16 +51,16 @@ public abstract class XmlPersonEvent extends XmlEvent {
         return Functions.ifNonNull(placeId, context.places()::require);
     }
 
-    public abstract Event toEvent(PersonId personId, RecordContext context);
+    public abstract PersonEvent toEvent(PersonId personId, RecordContext context);
 
-    public Set<Event> allEvents(final PersonId personId, final RecordContext context, final boolean inferredEvents) {
+    public Set<PersonEvent> allEvents(final PersonId personId, final RecordContext context, final boolean inferredEvents) {
         final var event = this.toEvent(personId, context);
         return inferredEvents
                 ? SetUtils.with(this.inferredEvents(personId, context), event)
                 : Collections.singleton(event);
     }
 
-    protected Set<Event> inferredEvents(PersonId personId, RecordContext context) {
+    protected Set<PersonEvent> inferredEvents(PersonId personId, RecordContext context) {
         final var birth = this.inferBirth(personId, context);
         return birth == null ? Collections.emptySet() : Collections.singleton(birth);
     }

@@ -1,10 +1,10 @@
 package net.ramify.model.event.type;
 
-import net.ramify.model.event.Event;
+import net.ramify.model.event.PersonEvent;
 
 public interface EventHandler<R> {
 
-    default R handle(final Event event) {
+    default R handle(final PersonEvent event) {
         return event.handleWith(this);
     }
 

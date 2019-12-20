@@ -1,13 +1,13 @@
 package net.ramify.model.event.type.misc;
 
-import net.ramify.model.event.Event;
+import net.ramify.model.event.PersonEvent;
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.place.HasPlace;
 import net.ramify.model.place.Place;
 
 import javax.annotation.Nonnull;
 
-public abstract class EventWithPlace<E extends Event> extends ComposedEvent<E> implements HasPlace {
+public abstract class EventWithPlace<E extends PersonEvent> extends ComposedEvent<E> implements HasPlace {
 
     private final Place place;
 

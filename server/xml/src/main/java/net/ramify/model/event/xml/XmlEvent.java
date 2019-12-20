@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.UUID;
 
 @XmlRootElement(namespace = XmlEvent.NAMESPACE, name = "event")
-public class XmlEvent {
+public abstract class XmlEvent {
 
     public static final String NAMESPACE = "http://ramify.net/events";
 

@@ -2,7 +2,7 @@ package net.ramify.model.person.collection;
 
 import net.meerkat.collections.Collections;
 import net.meerkat.collections.Iterables;
-import net.ramify.model.event.Event;
+import net.ramify.model.event.PersonEvent;
 import net.ramify.model.event.collection.HasEvents;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
@@ -39,13 +39,13 @@ public interface HasPeople extends HasEvents, HasPersonIds {
 
     @Nonnull
     @Override
-    default Set<? extends Event> events() {
-        final var events = new HashSet<Event>();
+    default Set<? extends PersonEvent> events() {
+        final var events = new HashSet<PersonEvent>();
         this.people().forEach(person -> events.addAll(person.events()));
         return events;
     }
 
-    default <E extends Event> Set<E> events(final Class<E> eventType) {
+    default <E extends PersonEvent> Set<E> events(final Class<E> eventType) {
         final var events = new HashSet<E>();
         this.people().forEach(person -> events.addAll(person.findEvents(eventType)));
         return events;

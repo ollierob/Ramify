@@ -1,6 +1,6 @@
 package net.ramify.model.event.collection;
 
-import net.ramify.model.event.Event;
+import net.ramify.model.event.PersonEvent;
 
 import javax.annotation.Nonnull;
 import java.util.AbstractSet;
@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.function.Predicate;
 
-class EmptyPersonEventSet extends AbstractSet<Event> implements PersonEventSet {
+class EmptyPersonEventSet extends AbstractSet<PersonEvent> implements PersonEventSet {
 
     static final EmptyPersonEventSet INSTANCE = new EmptyPersonEventSet();
 
@@ -17,7 +17,7 @@ class EmptyPersonEventSet extends AbstractSet<Event> implements PersonEventSet {
     }
 
     @Override
-    public Iterator<Event> iterator() {
+    public Iterator<PersonEvent> iterator() {
         return Collections.emptyIterator();
     }
 
@@ -29,7 +29,7 @@ class EmptyPersonEventSet extends AbstractSet<Event> implements PersonEventSet {
     @Nonnull
     @Override
     @Deprecated
-    public PersonEventSet filteredCopy(final Predicate<? super Event> predicate) {
+    public PersonEventSet filteredCopy(final Predicate<? super PersonEvent> predicate) {
         return this;
     }
 

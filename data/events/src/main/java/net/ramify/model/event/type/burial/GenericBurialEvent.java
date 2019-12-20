@@ -1,7 +1,7 @@
 package net.ramify.model.event.type.burial;
 
 import net.ramify.model.event.AbstractPersonEvent;
-import net.ramify.model.event.Event;
+import net.ramify.model.event.PersonEvent;
 import net.ramify.model.event.EventId;
 import net.ramify.model.event.EventProperties;
 import net.ramify.model.person.PersonId;
@@ -20,7 +20,7 @@ public class GenericBurialEvent extends AbstractPersonEvent<GenericBurialEvent> 
 
     @Nonnull
     @Override
-    public Event with(final Place place) {
+    public PersonEvent with(final Place place) {
         return new GenericBurialEvent(this.eventId(), this.personId(), this.properties(), place);
     }
 

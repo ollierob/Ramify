@@ -53,6 +53,7 @@ enum RecordType {
     PAYMENT = 23;
     MEMBERSHIP = 24;
 
+    HISTORIC = 98;
     MIXED = 99;
 
 }

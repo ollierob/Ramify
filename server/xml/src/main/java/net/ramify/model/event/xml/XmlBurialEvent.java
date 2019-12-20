@@ -1,6 +1,6 @@
 package net.ramify.model.event.xml;
 
-import net.ramify.model.event.Event;
+import net.ramify.model.event.PersonEvent;
 import net.ramify.model.event.type.burial.BurialEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.record.xml.RecordContext;
@@ -21,7 +21,7 @@ public class XmlBurialEvent extends XmlPostDeathEvent {
     }
 
     @Override
-    protected Set<Event> inferredEvents(final PersonId personId, final RecordContext context) {
+    protected Set<PersonEvent> inferredEvents(final PersonId personId, final RecordContext context) {
         return super.inferredEvents(personId, context); //FIXME infer "recent" death
     }
 

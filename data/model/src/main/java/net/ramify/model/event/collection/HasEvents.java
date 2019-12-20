@@ -2,7 +2,7 @@ package net.ramify.model.event.collection;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import net.ramify.model.event.Event;
+import net.ramify.model.event.PersonEvent;
 import net.ramify.model.event.type.BirthEvent;
 import net.ramify.model.event.type.DeathEvent;
 import net.ramify.model.event.type.EventComparator;
@@ -19,26 +19,26 @@ import java.util.Set;
 public interface HasEvents extends HasPlaces {
 
     @Nonnull
-    Set<? extends Event> events();
+    Set<? extends PersonEvent> events();
 
     @Nonnull
-    default <E extends Event> Set<E> findEvents(final Class<E> eventType) {
+    default <E extends PersonEvent> Set<E> findEvents(final Class<E> eventType) {
         return IterableUtils.findAll(this.events(), eventType);
     }
 
     @Nonnull
-    default List<? extends Event> sortedEvents() {
+    default List<? extends PersonEvent> sortedEvents() {
         return this.sortedEvents(EventComparator.DEFAULT);
     }
 
     @Nonnull
-    default List<? extends Event> sortedEvents(final Comparator<? super Event> comparator) {
+    default List<? extends PersonEvent> sortedEvents(final Comparator<? super PersonEvent> comparator) {
         final var list = Lists.newArrayList(this.events());
         list.sort(comparator);
         return list;
     }
 
-    default boolean has(final Class<? extends Event> type) {
+    default boolean has(final Class<? extends PersonEvent> type) {
         return IterableUtils.has(this.events(), type);
     }
 

@@ -2,7 +2,7 @@ package net.ramify.model.record.residence.uk;
 
 import com.google.common.base.MoreObjects;
 import net.ramify.model.date.ExactDate;
-import net.ramify.model.event.Event;
+import net.ramify.model.event.PersonEvent;
 import net.ramify.model.event.collection.MutablePersonEventSet;
 import net.ramify.model.event.collection.PersonEventSet;
 import net.ramify.model.event.collection.SingletonPersonEventSet;
@@ -177,7 +177,7 @@ public class Census1851Record extends CensusRecord {
         private final Age age;
         private final Place birthPlace;
         private final Relationship relationshipToHead;
-        private final Set<? extends Event> extraEvents;
+        private final Set<? extends PersonEvent> extraEvents;
         private final MarriageConditionEventInference condition;
         private final UniqueEventMerger eventMerger;
 
@@ -189,7 +189,7 @@ public class Census1851Record extends CensusRecord {
                 final Relationship relationshipToHead,
                 final Age age,
                 final Place birthPlace,
-                final Set<? extends Event> extraEvents,
+                final Set<? extends PersonEvent> extraEvents,
                 final MarriageConditionEventInference condition,
                 final String occupation,
                 final UniqueEventMerger eventMerger) {

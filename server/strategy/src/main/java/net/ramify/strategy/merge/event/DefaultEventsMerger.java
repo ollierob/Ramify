@@ -1,6 +1,6 @@
 package net.ramify.strategy.merge.event;
 
-import net.ramify.model.event.Event;
+import net.ramify.model.event.PersonEvent;
 import net.ramify.model.event.collection.HasPersonEvents;
 import net.ramify.model.event.collection.MutablePersonEventSet;
 import net.ramify.model.event.collection.PersonEventSet;
@@ -31,7 +31,7 @@ public class DefaultEventsMerger implements EventsMerger {
         final var events = MutablePersonEventSet.notPermittingMerge();
         events.addAll(e1.events());
         events.addAll(e2.events());
-        events.removeIf(Event::isUnique);
+        events.removeIf(PersonEvent::isUnique);
 
         birth.ifPresent(events::add);
         death.ifPresent(events::add);

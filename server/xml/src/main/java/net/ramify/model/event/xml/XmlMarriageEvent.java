@@ -1,6 +1,6 @@
 package net.ramify.model.event.xml;
 
-import net.ramify.model.event.Event;
+import net.ramify.model.event.PersonEvent;
 import net.ramify.model.person.HasPersonId;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.record.xml.RecordContext;
@@ -19,7 +19,7 @@ public class XmlMarriageEvent extends XmlLifeEvent {
     private String spouseId;
 
     @Override
-    public Event toEvent(final PersonId personId, final RecordContext context) {
+    public PersonEvent toEvent(final PersonId personId, final RecordContext context) {
         return this.eventBuilder(context).toMarriage(personId);
     }
 

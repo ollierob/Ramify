@@ -1,6 +1,6 @@
 package net.ramify.model.event.collection;
 
-import net.ramify.model.event.Event;
+import net.ramify.model.event.PersonEvent;
 import net.ramify.model.event.merge.UniqueEventMerger;
 import net.ramify.model.event.type.BirthEvent;
 import net.ramify.model.event.type.DeathEvent;
@@ -17,7 +17,7 @@ import java.util.function.Predicate;
 
 import static net.ramify.model.event.merge.UniqueEventMerger.NOT_ALLOWED;
 
-public class MutablePersonEventSet extends HashSet<Event> implements PersonEventSet {
+public class MutablePersonEventSet extends HashSet<PersonEvent> implements PersonEventSet {
 
     private final Handler handler = new Handler();
     private final UniqueEventMerger merger;
@@ -27,10 +27,10 @@ public class MutablePersonEventSet extends HashSet<Event> implements PersonEvent
     }
 
     public MutablePersonEventSet(final UniqueEventMerger merger) {
-        this(merger, Event.EMPTY_ARRAY);
+        this(merger, PersonEvent.EMPTY_ARRAY);
     }
 
-    public MutablePersonEventSet(final UniqueEventMerger merger, final Event... events) {
+    public MutablePersonEventSet(final UniqueEventMerger merger, final PersonEvent... events) {
         this.merger = merger;
         for (int i = 0; i < events.length; i++) {
             this.addToHandler(events[i]);
@@ -38,25 +38,25 @@ public class MutablePersonEventSet extends HashSet<Event> implements PersonEvent
     }
 
     @Deprecated
-    public MutablePersonEventSet(final Collection<? extends Event> events) {
+    public MutablePersonEventSet(final Collection<? extends PersonEvent> events) {
         this(null, events);
     }
 
-    public MutablePersonEventSet(final UniqueEventMerger merger, final Collection<? extends Event> events) {
+    public MutablePersonEventSet(final UniqueEventMerger merger, final Collection<? extends PersonEvent> events) {
         this.merger = merger;
         events.forEach(this::addToHandler);
     }
 
     @Override
-    public boolean add(final Event event) {
+    public boolean add(final PersonEvent event) {
         return this.addToHandler(event);
     }
 
-    private boolean addToHandler(final Event event) {
+    private boolean addToHandler(final PersonEvent event) {
         return event != null && handler.handle(event);
     }
 
-    private boolean addToSet(final Event event) {
+    private boolean addToSet(final PersonEvent event) {
         return super.add(event);
     }
 
@@ -87,7 +87,7 @@ public class MutablePersonEventSet extends HashSet<Event> implements PersonEvent
 
     @Nonnull
     @Override
-    public MutablePersonEventSet filteredCopy(@Nonnull final Predicate<? super Event> predicate) {
+    public MutablePersonEventSet filteredCopy(@Nonnull final Predicate<? super PersonEvent> predicate) {
         final var copy = new MutablePersonEventSet(merger);
         for (final var event : this) {
             if (predicate.test(event)) copy.add(event);
@@ -134,7 +134,7 @@ public class MutablePersonEventSet extends HashSet<Event> implements PersonEvent
             return this.add(event);
         }
 
-        private boolean add(final Event event) {
+        private boolean add(final PersonEvent event) {
             return event instanceof UniqueEvent
                     ? this.addUnique((UniqueEvent) event)
                     : addToSet(event);

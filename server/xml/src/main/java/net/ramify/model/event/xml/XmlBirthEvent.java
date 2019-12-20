@@ -1,6 +1,6 @@
 package net.ramify.model.event.xml;
 
-import net.ramify.model.event.Event;
+import net.ramify.model.event.PersonEvent;
 import net.ramify.model.event.type.BirthEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.record.xml.RecordContext;
@@ -18,7 +18,7 @@ public class XmlBirthEvent extends XmlPersonEvent {
     }
 
     @Override
-    public Set<Event> inferredEvents(PersonId personId, RecordContext context) {
+    public Set<PersonEvent> inferredEvents(PersonId personId, RecordContext context) {
         return Collections.emptySet();
     }
 

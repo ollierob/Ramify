@@ -1,7 +1,7 @@
 package net.ramify.model.event.type;
 
 import com.google.common.collect.ImmutableList;
-import net.ramify.model.event.Event;
+import net.ramify.model.event.PersonEvent;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -35,29 +35,29 @@ class EventComparatorTest {
 
     }
 
-    static Event mockEvent() {
-        return mock(Event.class);
+    static PersonEvent mockEvent() {
+        return mock(PersonEvent.class);
     }
 
-    static Event mockBirth() {
+    static PersonEvent mockBirth() {
         final var mock = mockEvent();
         when(mock.isBirth()).thenReturn(true);
         return mock;
     }
 
-    static Event mockLife() {
+    static PersonEvent mockLife() {
         final var mock = mockEvent();
         when(mock.isLife()).thenReturn(true);
         return mock;
     }
 
-    static Event mockDeath() {
+    static PersonEvent mockDeath() {
         final var mock = mockEvent();
         when(mock.isDeath()).thenReturn(true);
         return mock;
     }
 
-    static Event mockPostDeath() {
+    static PersonEvent mockPostDeath() {
         final var mock = mockEvent();
         when(mock.isPostDeath()).thenReturn(true);
         return mock;

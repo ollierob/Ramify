@@ -40,6 +40,6 @@ public abstract class AbstractPersonEvent<T extends AbstractPersonEvent<T>> impl
 
     @Nonnull
     @CheckReturnValue
-    public abstract Event with(Place place);
+    public abstract PersonEvent with(Place place);
 
 }

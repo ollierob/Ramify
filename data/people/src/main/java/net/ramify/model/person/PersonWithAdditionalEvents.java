@@ -1,6 +1,6 @@
 package net.ramify.model.person;
 
-import net.ramify.model.event.Event;
+import net.ramify.model.event.PersonEvent;
 import net.ramify.model.event.collection.MutablePersonEventSet;
 import net.ramify.model.event.collection.PersonEventSet;
 import net.ramify.model.event.collection.SingletonPersonEventSet;
@@ -9,7 +9,7 @@ public class PersonWithAdditionalEvents extends DelegatedPerson {
 
     private final PersonEventSet events;
 
-    public PersonWithAdditionalEvents(final Person person, final Event event) {
+    public PersonWithAdditionalEvents(final Person person, final PersonEvent event) {
         this(person, new SingletonPersonEventSet(event));
     }
 
