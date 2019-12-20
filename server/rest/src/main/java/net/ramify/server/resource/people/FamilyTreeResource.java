@@ -28,7 +28,7 @@ public interface FamilyTreeResource extends Resource {
 
     @GET
     @Path("load/{id}")
-    FamilyTree load(@PathParam("id") FamilyTreeId id);
+    FamilyTree loadTree(@PathParam("id") FamilyTreeId id);
 
     @GET
     @Path("load/{treeId}/{personId}")

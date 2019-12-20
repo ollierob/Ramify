@@ -1,7 +1,9 @@
 package net.ramify.model.place.position;
 
-import net.ramify.model.util.Provider;
+import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.util.MissingValueException;
+import net.ramify.model.util.Provider;
 
 import javax.annotation.Nonnull;
 
@@ -13,7 +15,7 @@ public interface PositionProvider extends Provider<PlaceId, Position> {
         return this.requireOrThrow(key, UnknownPositionException::new);
     }
 
-    class UnknownPositionException extends RuntimeException {
+    class UnknownPositionException extends MissingValueException implements HasPlaceId {
 
         private final PlaceId placeId;
 
@@ -21,6 +23,13 @@ public interface PositionProvider extends Provider<PlaceId, Position> {
             super("Unknown position for " + placeId);
             this.placeId = placeId;
         }
+
+        @Nonnull
+        @Override
+        public PlaceId placeId() {
+            return placeId;
+        }
+
     }
 
 }

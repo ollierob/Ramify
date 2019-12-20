@@ -1,8 +1,10 @@
 package net.ramify.model.record.provider;
 
-import net.ramify.model.util.Provider;
+import net.ramify.model.record.collection.HasRecordSetId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
+import net.ramify.model.util.MissingValueException;
+import net.ramify.model.util.Provider;
 
 import javax.annotation.Nonnull;
 import java.util.Set;
@@ -24,10 +26,19 @@ public interface RecordSetProvider extends Provider<RecordSetId, RecordSet> {
     @Nonnull
     Set<RecordSet> matching(Predicate<? super RecordSet> predicate, int limit, boolean onlyParents);
 
-    class UnknownRecordSetException extends RuntimeException {
+    class UnknownRecordSetException extends MissingValueException implements HasRecordSetId {
+
+        private final RecordSetId id;
 
         public UnknownRecordSetException(final RecordSetId id) {
             super("Unknown record set: " + id);
+            this.id = id;
+        }
+
+        @Nonnull
+        @Override
+        public RecordSetId recordSetId() {
+            return id;
         }
 
     }

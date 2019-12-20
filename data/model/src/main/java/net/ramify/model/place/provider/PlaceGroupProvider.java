@@ -1,9 +1,10 @@
 package net.ramify.model.place.provider;
 
-import net.ramify.model.util.Provider;
 import net.ramify.model.place.PlaceGroup;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.util.MissingValueException;
+import net.ramify.model.util.Provider;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -26,7 +27,7 @@ public interface PlaceGroupProvider extends Provider<PlaceGroupId, PlaceGroup> {
         return group;
     }
 
-    class UnknownPlaceGroupIdException extends RuntimeException {
+    class UnknownPlaceGroupIdException extends MissingValueException {
 
         UnknownPlaceGroupIdException(final PlaceGroupId id) {
             super("Unknown group: " + id);

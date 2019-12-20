@@ -23,7 +23,7 @@ export class EventList extends React.PureComponent<Props> {
 
         return <div className="eventList">
             {events.map(e => <EventBox
-                //key={e.event.id + "." + e.person.id} //FIXME key
+                key={e.event.id + "/" + e.person.id} //FIXME key
                 {...this.props}
                 {...e}
                 relatives={e.type == "person" && this.props.relatives}/>)}

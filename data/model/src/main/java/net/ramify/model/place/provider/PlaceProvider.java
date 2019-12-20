@@ -1,8 +1,10 @@
 package net.ramify.model.place.provider;
 
-import net.ramify.model.util.Provider;
+import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.util.MissingValueException;
+import net.ramify.model.util.Provider;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
@@ -43,13 +45,19 @@ public interface PlaceProvider extends Provider<PlaceId, Place> {
     @Nonnull
     Set<Place> findByName(String name, int limit, PlaceId within);
 
-    class UnknownPlaceException extends RuntimeException {
+    class UnknownPlaceException extends MissingValueException implements HasPlaceId {
 
         private final PlaceId placeId;
 
         public UnknownPlaceException(final PlaceId placeId) {
             super("Unknown place: " + placeId);
             this.placeId = placeId;
+        }
+
+        @Nonnull
+        @Override
+        public PlaceId placeId() {
+            return placeId;
         }
 
     }

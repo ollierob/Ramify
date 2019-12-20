@@ -22,7 +22,7 @@ public interface Provider<K, V> {
 
     @Nonnull
     default V require(final K key) {
-        return this.requireOrThrow(key, k -> new NullPointerException("Value not found for key: " + key));
+        return this.requireOrThrow(key, k -> new MissingValueException("Value not found for key: " + key));
     }
 
     @Nonnull

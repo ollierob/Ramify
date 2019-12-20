@@ -27,13 +27,13 @@ public class DefaultFamilyTreeResource implements FamilyTreeResource {
     }
 
     @Override
-    public FamilyTree load(final FamilyTreeId id) {
-        return familyTreeProvider.get(id);
+    public FamilyTree loadTree(final FamilyTreeId id) {
+        return familyTreeProvider.require(id);
     }
 
     @Override
     public FamilyTreeMeta name(final FamilyTreeId id) {
-        return this.load(id).meta();
+        return this.loadTree(id).meta();
     }
 
     @Override

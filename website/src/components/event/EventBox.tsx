@@ -28,14 +28,15 @@ export type EventBoxProps = {
 
 export const EventBox = (props: EventBoxProps) => {
 
-    if (!props.person) return null;
+    const person = props.person;
+    if (!person) return null;
 
     const isSelf = props.relationshipToMain == "self";
     const event = props.event;
 
     return <Card className={"event " + eventClass(event)}>
         <div className="left">
-            {renderDate(event.date)}
+            {renderDate(event, person)}
         </div>
         <div className="right">
             <div className="top">
@@ -83,9 +84,12 @@ const FindRelatedPeopleBox = (props: EventBoxProps & {prefix?: React.ReactNode})
     return <EventRelatedPeopleBox {...props} people={others}/>;
 };
 
-function renderDate(date: DateRange.AsObject) {
+function renderDate(event: Event.AsObject, person: Person.AsObject) {
+    const date = event.date;
+    const exact = isExactRange(date);
     return <>
         <div className="year">{formatYearRange(date, EmptyPrefixWords)}</div>
-        {isExactRange(date) && <div className="date">{formatDateRange(date, MonthDayWordsFormatter, EmptyPrefixWords)}</div>}
+        {exact && <div className="date">{formatDateRange(date, MonthDayWordsFormatter, EmptyPrefixWords)}</div>}
+        {!exact && eventType(event) == "BIRTH" && <div className="date compute">Compute</div>}
     </>;
 }
