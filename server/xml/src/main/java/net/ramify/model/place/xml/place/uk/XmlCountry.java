@@ -22,7 +22,7 @@ import java.util.List;
 @XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "country")
 class XmlCountry extends XmlPlace {
 
-    @XmlAttribute(name = "iso", required = true)
+    @XmlAttribute(name = "iso")
     private String iso;
 
     @XmlElementRefs({

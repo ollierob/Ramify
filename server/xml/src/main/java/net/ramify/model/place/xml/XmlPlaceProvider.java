@@ -28,6 +28,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.File;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
@@ -128,7 +129,9 @@ class XmlPlaceProvider implements PlaceProvider {
     }
 
     private static File[] countryRoots(final File root) {
-        return root.listFiles(File::isDirectory);
+        final var roots = root.listFiles(File::isDirectory);
+        Arrays.sort(roots);
+        return roots;
     }
 
     private static boolean includeFile(final File file) {
