@@ -30,6 +30,7 @@ export const EventBox = (props: EventBoxProps) => {
 
     if (!props.person) return null;
 
+    const isSelf = props.relationshipToMain == "self";
     const event = props.event;
 
     return <Card className={"event " + eventClass(event)}>
@@ -44,7 +45,7 @@ export const EventBox = (props: EventBoxProps) => {
                 {event.place && <div className="place">
                     <PlaceAndParent place={event.place}/>
                 </div>}
-                {event.computedage && <div className="computedAge">
+                {event.computedage && isSelf && <div className="computedAge">
                     Age {renderAge(event.computedage)}
                 </div>}
             </div>

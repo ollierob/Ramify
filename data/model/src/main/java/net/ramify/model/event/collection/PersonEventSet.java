@@ -1,9 +1,11 @@
 package net.ramify.model.event.collection;
 
 import net.meerkat.collections.Iterables;
+import net.ramify.model.event.Event;
 import net.ramify.model.event.type.BirthEvent;
 import net.ramify.model.event.type.DeathEvent;
 import net.ramify.model.event.type.UniqueEvent;
+import net.ramify.model.person.age.Age;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
@@ -29,6 +31,13 @@ public interface PersonEventSet extends EventSet, HasPersonEvents {
     @Nonnull
     default Optional<DeathEvent> findDeath() {
         return this.find(DeathEvent.class);
+    }
+
+    @Nonnull
+    default Optional<Age> inferAge(final Event event) {
+        if (event.isBirth()) return Optional.of(Age.ZERO);
+        if (event.isPostDeath()) return Optional.empty();
+        return this.findBirth().map(birth -> Age.fromDates(birth.date(), event.date()));
     }
 
 }

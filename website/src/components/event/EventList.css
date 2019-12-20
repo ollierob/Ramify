@@ -24,7 +24,7 @@
 .eventList .event .right {
     position: relative;
     left: 55px;
-    display: inline-block;
+    width: calc(100% - 55px);
 }
 
 .eventList .event .title {
@@ -35,8 +35,8 @@
 
 .eventList .event .computedAge {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 0;
+    right: 0;
     font-size: 1.1em;
 }
 

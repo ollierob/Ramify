@@ -15,24 +15,28 @@ public class DateRangeAge implements Age {
         return new DateRangeAge(birthDate, ageDate);
     }
 
-    private final DateRange birthDate;
-    private final DateRange ageDate;
+    private final Period lower, upper;
 
-    DateRangeAge(DateRange birthDate, DateRange ageDate) {
-        this.birthDate = birthDate;
-        this.ageDate = ageDate;
+    DateRangeAge(final DateRange birthDate, final DateRange ageDate) {
+        this.lower = period(birthDate.latestIsoDate(), ageDate.earliestIsoDate());
+        this.upper = period(birthDate.earliestIsoDate(), ageDate.latestIsoDate());
     }
 
     @Nonnull
     @Override
     public Period lowerBound() {
-        throw new UnsupportedOperationException(); //TODO
+        return lower;
     }
 
     @Nonnull
     @Override
     public Period upperBound() {
-        throw new UnsupportedOperationException(); //TODO
+        return upper;
+    }
+
+    private static Period period(final LocalDate from, final LocalDate to) {
+        if (from.isAfter(to)) return Period.ZERO;
+        return Period.between(from, to);
     }
 
 }

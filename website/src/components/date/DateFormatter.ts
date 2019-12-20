@@ -48,5 +48,5 @@ function formatMonthDayYear(d: DateProto.AsObject) {
 }
 
 function formatMonthDayWords(d: DateProto.AsObject) {
-    return new Date(d.year, d.month, d.day).toLocaleDateString("default", {month: "short", day: "numeric"});
+    return new Date(d.year, d.month-1, d.day).toLocaleDateString("default", {month: "short", day: "numeric"});
 }

@@ -26,7 +26,7 @@ public class XmlMentionRecord extends XmlPersonOnDateRecord {
     @XmlAttribute(name = "deceased")
     private Boolean deceased;
 
-    @XmlElementRef(namespace = XmlDateRange.NAMESPACE)
+    @XmlElementRef(namespace = XmlDateRange.NAMESPACE, required = false)
     private XmlDateRange date;
 
     protected boolean deceased() {

@@ -69,7 +69,7 @@ public class MutablePersonEventSet extends HashSet<Event> implements PersonEvent
     public <T extends UniqueEvent> Optional<T> find(final Class<T> type) {
         if (BirthEvent.class.isAssignableFrom(type)) return this.findBirth().flatMap(b -> b.as(type));
         if (DeathEvent.class.isAssignableFrom(type)) return this.findDeath().flatMap(b -> b.as(type));
-        throw new UnsupportedOperationException(); //TODO
+        return PersonEventSet.super.find(type);
     }
 
     @Nonnull
