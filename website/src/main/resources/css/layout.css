@@ -44,6 +44,9 @@ body {
     border-bottom: 1px solid #D7D7D7;
     line-height: 48px;
     font-size: 18px;
+}
+
+.body .submenu.top {
     padding-left: 24px;
 }
 

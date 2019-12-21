@@ -6,7 +6,7 @@ import {Popover} from "antd";
 import {NextIcon, PrevIcon, RecordsIcon} from "../../../components/images/Icons";
 
 export const RecordBreadcrumb = (props: {hierarchy: RecordSetHierarchy.AsObject}) => {
-    return <SubMenu>
+    return <SubMenu className="top">
         {props.hierarchy && <Hierarchy {...props}/>}
     </SubMenu>;
 };
