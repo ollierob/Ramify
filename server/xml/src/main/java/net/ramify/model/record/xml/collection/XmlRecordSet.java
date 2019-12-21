@@ -58,7 +58,7 @@ class XmlRecordSet implements HasRecordSetId {
     @XmlAttribute(name = "type")
     private XmlRecordSetType type;
 
-    @XmlElementRef(namespace = XmlDateRange.NAMESPACE)
+    @XmlElementRef(namespace = XmlDateRange.NAMESPACE, required = false)
     private XmlDateRange date;
 
     @XmlElement(namespace = XmlRecord.NAMESPACE, name = "description")

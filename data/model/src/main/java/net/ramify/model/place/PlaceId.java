@@ -44,7 +44,7 @@ public class PlaceId extends Id implements HasPlaceId {
     }
 
     private static String parseName(final String id) {
-        return id.substring(2, id.indexOf(':', 3));
+        return id.substring(3, id.indexOf(':', 3));
     }
 
     public boolean isParentOf(final PlaceId that, final PlaceProvider placeProvider) {

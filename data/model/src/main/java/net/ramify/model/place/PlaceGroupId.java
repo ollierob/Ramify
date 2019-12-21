@@ -15,6 +15,7 @@ public class PlaceGroupId extends Id {
     public PlaceGroupId(@Nonnull final String value) {
         super(value);
         Preconditions.checkArgument(value.charAt(2) == ':', "Invalid country ISO: %s", value);
+        Preconditions.checkArgument(value.indexOf(':', 3) < 0, "Invalid name: %s", value);
     }
 
     public PlaceGroupId(final CountryIso iso, final String name) {
