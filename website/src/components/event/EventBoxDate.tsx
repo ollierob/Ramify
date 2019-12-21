@@ -119,7 +119,7 @@ const EventCheckbox = (props: {event: Event.AsObject, checked: boolean, disabled
     if (!event || isBirthEvent(event) || isPostDeathEvent(event)) return null;
     return <Checkbox className="date" id={event.id} {...props} onChange={e => props.onCheck(e.target.checked)}>
         <b>{event.title}</b>
-        &nbsp;- {formatDateRange(event.date, "day")}
+        &nbsp;- {formatDateRange(event.date, "day", {between: "between "})}
         {event.givenage && <>&nbsp;- age {renderAge(event.givenage)}</>}
     </Checkbox>;
 };

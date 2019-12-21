@@ -11,6 +11,7 @@ export type PrefixWords = {
     on: string
     unknown: string
     between: string
+    approximate: string
 }
 
 export const DefaultPrefixWords: PrefixWords = {
@@ -19,7 +20,8 @@ export const DefaultPrefixWords: PrefixWords = {
     after: "after ",
     in: "in ",
     on: "on ",
-    between: ""
+    between: "",
+    approximate: "c."
 };
 
 export const EmptyPrefixWords: PrefixWords = {
@@ -28,13 +30,15 @@ export const EmptyPrefixWords: PrefixWords = {
     after: "",
     in: "",
     on: "",
-    between: ""
+    between: "",
+    approximate: "c."
 };
 
 function formatter(type: FormatType | DateFormatter): DateFormatter {
     if (typeof type != "string") return type;
     switch (type) {
         case "year":
+        default:
             return YearFormatter;
         case "month":
             return MonthYearFormatter;
@@ -78,21 +82,22 @@ export function formatDateRange(r: DateRangeProto.AsObject, type: FormatType | D
     words = ensureWords(words);
     if (!r.earliest && !r.latest) return words.unknown;
     const format = formatter(type);
-    if (!r.earliest) return words.after + format.formatDate(r.latest);
-    if (!r.latest) return words.before + format.formatDate(r.earliest);
+    const approx = r.approximate ? words.approximate : "";
+    if (!r.earliest) return words.after + approx + format.formatDate(r.latest);
+    if (!r.latest) return words.before + approx + format.formatDate(r.earliest);
     switch (type) {
         case "day":
-            if (isoDate(r.earliest) == isoDate(r.latest)) return words.on + format.formatDate(r.earliest);
-            if (isWholeYear(r)) return words.in + r.earliest.year;
+            if (isoDate(r.earliest) == isoDate(r.latest)) return words.on + approx + format.formatDate(r.earliest);
+            if (isWholeYear(r)) return words.in + approx + r.earliest.year;
             break;
         case "month":
-            if (isoDate(r.earliest, 1) == isoDate(r.latest, 1)) return words.in + format.formatDate(r.earliest);
+            if (isoDate(r.earliest, 1) == isoDate(r.latest, 1)) return words.in + approx + format.formatDate(r.earliest);
             break;
         case "year":
-            if (earliestYear(r) == latestYear(r)) return words.in + earliestYear(r);
+            if (earliestYear(r) == latestYear(r)) return words.in + approx + earliestYear(r);
             break;
     }
-    return words.between + format.formatRange(r.earliest, r.latest);
+    return words.between + approx + format.formatRange(r.earliest, r.latest);
 }
 
 export function formatYearRanges(r1: DateRangeProto.AsObject, r2: DateRangeProto.AsObject, words?: Partial<PrefixWords>) {

@@ -5,5 +5,5 @@ import {renderLifespan} from "../../../components/people/Lifespan";
 
 export const PersonProfileTitle = (props: {person: Person.AsObject}) => {
     const person = props.person;
-    return <><PersonName name={person.name}/> ({renderLifespan(person, {life: "", born: "b.", died: "d."})})</>;
+    return <><PersonName name={person.name}/> ({renderLifespan(person, {life: "", born: "b.", died: "d.", in: ""})})</>;
 };
