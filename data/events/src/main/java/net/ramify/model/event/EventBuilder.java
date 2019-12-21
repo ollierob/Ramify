@@ -1,5 +1,6 @@
 package net.ramify.model.event;
 
+import com.google.common.collect.Sets;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.historic.HistoricEvent;
 import net.ramify.model.event.type.BirthEvent;
@@ -26,6 +27,8 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.type.SettlementOrRegion;
 import net.ramify.model.util.Link;
 
+import java.util.Set;
+
 public class EventBuilder {
 
     private final EventId eventId;
@@ -34,7 +37,7 @@ public class EventBuilder {
     private Age givenAge;
     private String occupation;
     private boolean inferred;
-    private Link link;
+    private Set<Link> links;
 
     private EventBuilder(final EventId eventId, final DateRange date) {
         this.eventId = eventId;
@@ -65,7 +68,9 @@ public class EventBuilder {
     }
 
     public EventBuilder withLink(final Link link) {
-        this.link = link;
+        if (link == null) return this;
+        if (links == null) links = Sets.newHashSetWithExpectedSize(2);
+        links.add(link);
         return this;
     }
 
@@ -115,7 +120,7 @@ public class EventBuilder {
     }
 
     public HistoricEvent toHistoric(final String title, final String description, final SettlementOrRegion region) {
-        return new GenericHistoricEvent(eventId, date, place, region, title, description);
+        return new GenericHistoricEvent(eventId, date, place, region, title, description, links);
     }
 
 }

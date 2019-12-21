@@ -35,6 +35,10 @@
     font-size: 1.25em;
 }
 
+.eventList .event .title .link {
+    margin-left: 8px;
+}
+
 .eventList .event .computedAge {
     position: absolute;
     top: 0;

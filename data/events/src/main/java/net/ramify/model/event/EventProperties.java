@@ -1,12 +1,16 @@
 package net.ramify.model.event;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.collect.ImmutableSet;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.HasDate;
 import net.ramify.model.person.age.Age;
 import net.ramify.model.person.age.HasAges;
+import net.ramify.model.util.Link;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
+import java.util.Set;
 
 public class EventProperties implements HasDate, HasAges {
 

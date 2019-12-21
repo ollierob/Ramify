@@ -14,8 +14,8 @@ export const LinkTags = (props: {links: ReadonlyArray<LinkProto.AsObject>}) => {
 export const Link = (props: {link: LinkProto.AsObject, iconPath?: string, children?: React.ReactNode, newWindow?: boolean}) => {
     const link = props.link;
     if (!link) return null;
-    const icon = (props.iconPath && <img src={props.iconPath} className="image"/>) || linkIcon(link);
-    return <a href={link.href} target={props.newWindow ? "_blank" : "_self"}>
+    const icon = props.iconPath ? <img src={props.iconPath} className="image"/> : linkIcon(link);
+    return <a href={link.href} target={props.newWindow ? "_blank" : "_self"} className="link">
         {icon}
         {props.children && <> {props.children}</>}
     </a>;

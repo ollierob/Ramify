@@ -6,6 +6,7 @@ option java_outer_classname = "EventProto";
 import "date.proto";
 import "place.proto";
 import "age.proto";
+import "link.proto";
 
 message Event {
 
@@ -21,6 +22,7 @@ message Event {
 
     RecordType type = 20;
     bool isUnique = 21;
+    repeated Link link = 22;
 
     string notes = 30;
     string occupation = 31;

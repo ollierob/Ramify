@@ -23,36 +23,38 @@ export type EventBoxProps = {
     relationshipToMain: RelativeRelationship
 }
 
-export const EventBox = (props: EventBoxProps) => {
+export class EventBox extends React.PureComponent<EventBoxProps> {
 
-    const person = props.person;
-    if (!person) return null;
+    render() {
 
-    const isSelf = props.relationshipToMain == "self";
-    const event = props.event;
+        const person = this.props.person;
+        if (!person) return null;
 
-    return <Card className={"event " + eventClass(event)}>
-        <div className="left">
-            <EventBoxDate {...props}/>
-        </div>
-        <div className="right">
-            <div className="top">
-                <div className="title">
-                    <EventTitle {...props} relationship={props.relationshipToMain}/>
+        const isSelf = this.props.relationshipToMain == "self";
+        const event = this.props.event;
+
+        return <Card className={"event " + eventClass(event)}>
+            <div className="left">
+                <EventBoxDate {...this.props}/>
+            </div>
+            <div className="right">
+                <div className="top">
+                    <EventTitle {...this.props} relationship={this.props.relationshipToMain}/>
+                    {event.place && <div className="place">
+                        <PlaceAndParent place={event.place}/>
+                    </div>}
+                    {event.computedage && isSelf && eventType(event) != "BIRTH" && <div className="computedAge">
+                        Age {renderAge(event.computedage)}
+                    </div>}
                 </div>
-                {event.place && <div className="place">
-                    <PlaceAndParent place={event.place}/>
-                </div>}
-                {event.computedage && isSelf && eventType(event) != "BIRTH" && <div className="computedAge">
-                    Age {renderAge(event.computedage)}
-                </div>}
+                <div className="main">
+                    {renderPeople(this.props)}
+                    <EventNotes event={event}/>
+                </div>
             </div>
-            <div className="main">
-                {renderPeople(props)}
-                <EventNotes event={event}/>
-            </div>
-        </div>
-    </Card>;
+        </Card>;
+
+    }
 
 };
 
