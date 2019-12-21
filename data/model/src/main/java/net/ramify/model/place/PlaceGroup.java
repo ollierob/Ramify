@@ -3,7 +3,6 @@ package net.ramify.model.place;
 import com.google.common.collect.Iterables;
 import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.place.proto.PlaceProto;
-import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.utils.collections.SetUtils;
 
 import javax.annotation.Nonnull;
@@ -18,24 +17,19 @@ public interface PlaceGroup extends BuildsProto<PlaceProto.PlaceGroup> {
     String name();
 
     @Nonnull
-    PlaceId defaultChildId();
+    Place defaultChild();
 
     @Nonnull
-    Set<PlaceId> childIds();
-
-    @Nonnull
-    default Set<Place> children(final PlaceProvider places) {
-        return SetUtils.transformIgnoreNull(this.childIds(), places::require);
-    }
+    Set<Place> children();
 
     @Nonnull
     default PlaceProto.PlaceGroup.Builder toProtoBuilder() {
-        final var otherChildIds = SetUtils.without(this.childIds(), this.defaultChildId());
+        final var otherChildren = SetUtils.without(this.children(), this.defaultChild());
         return PlaceProto.PlaceGroup.newBuilder()
                 .setId(this.id().value())
                 .setName(this.name())
-                .setDefaultChildId(this.defaultChildId().value())
-                .addAllOtherChildId(Iterables.transform(otherChildIds, PlaceId::value));
+                .setDefaultChild(this.defaultChild().toProto())
+                .addAllOtherChildren(Iterables.transform(otherChildren, Place::toProto));
     }
 
     @Nonnull

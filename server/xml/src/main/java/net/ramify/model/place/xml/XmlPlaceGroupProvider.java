@@ -3,9 +3,11 @@ package net.ramify.model.place.xml;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import net.ramify.model.AbstractMappedProvider;
+import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroup;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.group.DefaultPlaceGroup;
 import net.ramify.model.place.provider.PlaceGroupProvider;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.xml.place.group.XmlPlaceGroups;
@@ -19,6 +21,7 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 
 class XmlPlaceGroupProvider extends AbstractMappedProvider<PlaceGroupId, PlaceGroup> implements PlaceGroupProvider {
 
@@ -37,12 +40,17 @@ class XmlPlaceGroupProvider extends AbstractMappedProvider<PlaceGroupId, PlaceGr
 
     void add(final PlaceGroup group) {
         this.put(group.id(), group);
-        group.childIds().forEach(childId -> reverseMappings.put(childId, group));
+        group.children().forEach(child -> reverseMappings.put(child.placeId(), group));
     }
 
     @Override
     public PlaceGroup getGroup(final PlaceId placeId) {
         return reverseMappings.get(placeId);
+    }
+
+    @Override
+    public PlaceGroup synthesize(Place defaultPlace, Set<Place> otherChildren) {
+        return new DefaultPlaceGroup(defaultPlace.placeGroupId(), defaultPlace.name(), defaultPlace, otherChildren);
     }
 
     PlaceGroupProvider immutable() {

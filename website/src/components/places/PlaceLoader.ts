@@ -3,13 +3,11 @@ import {Place, PlaceBundle, PlaceGroup, PlaceList} from "../../protobuf/generate
 import {protoGet} from "../fetch/ProtoFetch";
 import {queryParameters} from "../fetch/Fetch";
 import {Position} from "../../protobuf/generated/location_pb";
-import {PlaceGroupId, ResolvedPlaceGroup, sortPlaceGroupChildren} from "./PlaceGroup";
+import {PlaceGroupId, ResolvedPlaceGroup} from "./PlaceGroup";
 
 export interface PlaceLoader {
 
-    loadGroup(id: PlaceGroupId): Promise<PlaceGroup.AsObject>
-
-    loadResolvedGroup(groupId: PlaceGroupId): Promise<ResolvedPlaceGroup>
+    loadGroup(groupId: PlaceGroupId): Promise<ResolvedPlaceGroup>
 
     loadPlace(id: PlaceId): Promise<Place.AsObject>
 
@@ -34,17 +32,12 @@ class ProtoPlaceLoader implements PlaceLoader {
 
     loadGroup(id: PlaceGroupId) {
         return protoGet("/places/group/at/" + id, PlaceGroup.deserializeBinary)
-            .then(p => p ? p.toObject() : null);
-    }
-
-    loadResolvedGroup(id: PlaceGroupId) {
-        if (!id) return Promise.reject("No group ID provided");
-        //FIXME offer this server-side
-        return this.loadGroup(id).then(group => this.resolveGroup(group));
+            .then(p => p ? p.toObject() : null)
+            .then(g => this.resolveGroup(g));
     }
 
     private resolveGroup(group: PlaceGroup.AsObject): Promise<ResolvedPlaceGroup> {
-        const loadChildren = Promise.all([group.defaultchildid].concat(group.otherchildidList).map(this.loadPlaceBundle));
+        const loadChildren = Promise.all([group.defaultchild.id].concat(group.otherchildrenList.map(c => c.id)).map(this.loadPlaceBundle));
         return loadChildren.then(children => ({group, children: children.filter(c => !!c)}));
     }
 

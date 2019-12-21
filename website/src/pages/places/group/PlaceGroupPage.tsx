@@ -80,7 +80,7 @@ export class PlaceGroupPage extends PlaceBasePage<State> {
     }
 
     private loadPlaceGroup(groupId: PlaceGroupId = this.state.selectedGroupId, placeId: PlaceId = this.state.selectedPlaceId) {
-        if (groupId) asyncLoadData(groupId, id => this.placeLoader.loadResolvedGroup(id), group => this.setState({group}));
+        if (groupId) asyncLoadData(groupId, id => this.placeLoader.loadGroup(id), group => this.setState({group}));
         else if (placeId) asyncLoadData(placeId, id => this.loadPlace(id), group => this.setState({group}));
     }
 

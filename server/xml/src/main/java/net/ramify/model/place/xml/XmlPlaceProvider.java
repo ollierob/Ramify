@@ -43,10 +43,10 @@ class XmlPlaceProvider implements PlaceProvider {
 
     private final Map<PlaceId, Place> places;
     private final SetMultimap<PlaceId, PlaceId> children;
-    private final SetMultimap<PlaceGroupId, PlaceId> groupIds;
+    private final SetMultimap<PlaceGroupId, Place> groupIds;
     private final Set<Country> countries;
 
-    private XmlPlaceProvider(final Map<PlaceId, Place> places, final SetMultimap<PlaceId, PlaceId> children, final SetMultimap<PlaceGroupId, PlaceId> groupIds, final Set<Country> countries) {
+    private XmlPlaceProvider(final Map<PlaceId, Place> places, final SetMultimap<PlaceId, PlaceId> children, final SetMultimap<PlaceGroupId, Place> groupIds, final Set<Country> countries) {
         this.places = places;
         this.children = children;
         this.groupIds = groupIds;
@@ -98,7 +98,7 @@ class XmlPlaceProvider implements PlaceProvider {
 
     @Nonnull
     @Override
-    public Set<PlaceId> findByGroup(final PlaceGroupId groupId) {
+    public Set<Place> findByGroup(final PlaceGroupId groupId) {
         return groupIds.get(groupId);
     }
 
@@ -106,7 +106,7 @@ class XmlPlaceProvider implements PlaceProvider {
         places.put(place.placeId(), place);
         Consumers.ifNonNull(place.parent(), parent -> children.put(parent.placeId(), place.placeId()));
         place.ultimateParent().as(Country.class).ifPresent(countries::add);
-        groupIds.put(place.placeGroupId(), place.placeId());
+        groupIds.put(place.placeGroupId(), place);
     }
 
     void addAll(final Collection<Place> places) {

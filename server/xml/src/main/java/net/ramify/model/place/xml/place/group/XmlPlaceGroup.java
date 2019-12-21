@@ -26,7 +26,7 @@ public class XmlPlaceGroup {
         return new DefaultPlaceGroup(
                 id,
                 name,
-                id.withPlaceType(defaultChildType),
+                placeProvider.require(id.withPlaceType(defaultChildType)),
                 placeProvider.findByGroup(id));
     }
 

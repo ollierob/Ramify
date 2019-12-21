@@ -7,16 +7,6 @@ import "location.proto";
 import "link.proto";
 import "date.proto";
 
-message PlaceGroup {
-
-    string name = 1;
-    string id = 2;
-
-    string defaultChildId = 3;
-    repeated string otherChildId = 4;
-
-}
-
 message Place {
 
     string id = 1;
@@ -80,5 +70,15 @@ message PlaceBundle {
     PlaceDescription description = 3;
     string typeDescription = 4;
     repeated Place child = 5;
+
+}
+
+message PlaceGroup {
+
+    string name = 1;
+    string id = 2;
+
+    Place defaultChild = 3;
+    repeated Place otherChildren = 4;
 
 }

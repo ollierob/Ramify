@@ -1,8 +1,8 @@
 package net.ramify.model.place.group;
 
+import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroup;
 import net.ramify.model.place.PlaceGroupId;
-import net.ramify.model.place.PlaceId;
 import net.ramify.utils.collections.SetUtils;
 
 import javax.annotation.Nonnull;
@@ -12,14 +12,14 @@ public class DefaultPlaceGroup implements PlaceGroup {
 
     private final PlaceGroupId id;
     private final String name;
-    private final PlaceId defaultChildId;
-    private final Set<PlaceId> childIds;
+    private final Place defaultChild;
+    private final Set<Place> children;
 
-    public DefaultPlaceGroup(final PlaceGroupId id, final String name, final PlaceId defaultChildId, final Set<PlaceId> childIds) {
+    public DefaultPlaceGroup(final PlaceGroupId id, final String name, final Place defaultChild, final Set<Place> children) {
         this.id = id;
         this.name = name;
-        this.defaultChildId = defaultChildId;
-        this.childIds = SetUtils.with(childIds, defaultChildId);
+        this.defaultChild = defaultChild;
+        this.children = SetUtils.with(children, defaultChild);
     }
 
     @Nonnull
@@ -36,14 +36,14 @@ public class DefaultPlaceGroup implements PlaceGroup {
 
     @Nonnull
     @Override
-    public PlaceId defaultChildId() {
-        return defaultChildId;
+    public Place defaultChild() {
+        return defaultChild;
     }
 
     @Nonnull
     @Override
-    public Set<PlaceId> childIds() {
-        return childIds;
+    public Set<Place> children() {
+        return children;
     }
 
 }

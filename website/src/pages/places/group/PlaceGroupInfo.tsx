@@ -18,22 +18,22 @@ type Props = {
 
 export const PlaceGroupInfo = (props: Props) => {
 
-    const resolved = props.group.data;
-    if (!resolved) return null;
+    const group = props.group.data;
+    if (!group) return null;
 
     return <Card
         className="placeGroup"
-        title={<><Flag iso={resolved.iso}/><b>{resolved.group.name}</b></>}>
+        title={<><Flag iso={group.iso || group.children[0]?.place.iso}/><b>{group.group.name}</b></>}>
 
         <Tabs
             size="large"
             activeKey={props.selected}
             onChange={active => props.select(active)}>
 
-            {sortPlaceGroupChildren(resolved.group, resolved.children).map(child => <Tabs.TabPane key={child.place.id} tab={<Title place={child.place}/>}>
+            {sortPlaceGroupChildren(group.group, group.children).map(child => <Tabs.TabPane key={child.place.id} tab={<Title place={child.place}/>}>
                 <PlaceGroupTab
                     key={child.place.id}
-                    group={resolved.group}
+                    group={group.group}
                     favourites={props.favourites}
                     place={child}/>
             </Tabs.TabPane>)}

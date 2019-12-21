@@ -44,7 +44,7 @@ public interface PlaceProvider extends Provider<PlaceId, Place> {
     Set<? extends Place> countries();
 
     @Nonnull
-    Set<PlaceId> findByGroup(PlaceGroupId groupId);
+    Set<Place> findByGroup(PlaceGroupId groupId);
 
     @Nonnull
     Set<Place> findByName(String name, int limit, PlaceId within);

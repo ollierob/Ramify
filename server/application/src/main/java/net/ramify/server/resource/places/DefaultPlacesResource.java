@@ -46,14 +46,14 @@ public class DefaultPlacesResource implements PlacesResource {
     }
 
     @Override
-    public PlaceGroup group(final PlaceId id) {
-        return placeGroupProvider.getGroup(id);
+    public PlaceGroup group(final PlaceId placeId) {
+        return placeGroupProvider.getGroupOrSynthesize(placeId, placeProvider);
     }
 
     @CheckForNull
     @Override
-    public PlaceGroup group(final PlaceGroupId id) {
-        return placeGroupProvider.get(id);
+    public PlaceGroup group(final PlaceGroupId groupId) {
+        return placeGroupProvider.getGroupOrSynthesize(groupId, placeProvider);
     }
 
     @Override
