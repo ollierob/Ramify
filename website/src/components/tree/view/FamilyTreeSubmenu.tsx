@@ -10,7 +10,7 @@ import {FamilyTreeId} from "../FamilyTree";
 type ZoomHandler = {zoom: number, setZoom: (zoom: number, reset?: boolean) => void}
 
 export const FamilyTreeSubmenu = (props: {tree: AsyncData<FamilyTree.AsObject>} & ZoomHandler) => {
-    return <SubMenu>
+    return <SubMenu className="top">
         {props.tree.loading && <Loading/>}
         {props.tree.data && <SubmenuContent {...props} tree={props.tree.data}/>}
     </SubMenu>;
