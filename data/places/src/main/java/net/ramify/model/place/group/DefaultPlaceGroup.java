@@ -15,7 +15,7 @@ public class DefaultPlaceGroup implements PlaceGroup {
     private final PlaceId defaultChildId;
     private final Set<PlaceId> childIds;
 
-    public DefaultPlaceGroup(PlaceGroupId id, String name, PlaceId defaultChildId, Set<PlaceId> childIds) {
+    public DefaultPlaceGroup(final PlaceGroupId id, final String name, final PlaceId defaultChildId, final Set<PlaceId> childIds) {
         this.id = id;
         this.name = name;
         this.defaultChildId = defaultChildId;

@@ -1,4 +1,4 @@
-package net.ramify.model.place.region.iso;
+package net.ramify.model.place.iso;
 
 import com.google.common.base.Preconditions;
 

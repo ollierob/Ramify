@@ -4,8 +4,9 @@ import com.google.common.collect.ImmutableSet;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.history.PlaceHistory;
+import net.ramify.model.place.iso.CountrySubdivisionIso;
 import net.ramify.model.place.proto.PlaceProto;
-import net.ramify.model.place.region.iso.CountrySubdivisionIso;
 import net.ramify.model.place.settlement.City;
 
 import javax.annotation.Nonnull;
@@ -20,12 +21,14 @@ public class State extends AbstractRegion {
     private final Country country;
     private final CountrySubdivisionIso iso;
 
-    public State(final PlaceId id, final String name, final Place parent, final CountrySubdivisionIso iso, final PlaceGroupId groupId) throws InvalidPlaceTypeException {
-        this(id, name, parent.requireAs(Country.class), iso, groupId);
-    }
-
-    public State(final PlaceId id, final String name, final Country country, final CountrySubdivisionIso iso, final PlaceGroupId groupId) {
-        super(id, name, groupId);
+    public State(
+            final PlaceId id,
+            final String name,
+            final Country country,
+            final CountrySubdivisionIso iso,
+            final PlaceGroupId groupId,
+            final PlaceHistory history) {
+        super(id, name, groupId, history);
         this.country = country;
         this.iso = iso;
     }

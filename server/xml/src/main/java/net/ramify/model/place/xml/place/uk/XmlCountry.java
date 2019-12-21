@@ -3,10 +3,10 @@ package net.ramify.model.place.xml.place.uk;
 import com.google.common.base.MoreObjects;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
+import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.history.PlaceHistory;
-import net.ramify.model.place.id.Spid;
+import net.ramify.model.place.iso.CountryIso;
 import net.ramify.model.place.region.Country;
-import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
 
@@ -32,13 +32,13 @@ class XmlCountry extends XmlPlace {
     private List<XmlPlace> children;
 
     @Nonnull
-    protected Spid placeId(final String id, final CountryIso iso) {
-        return new Spid(iso, Country.class, id);
+    protected PlaceId placeId(final String id, final CountryIso iso) {
+        return new PlaceId(iso, Country.class, id);
     }
 
     @Override
     protected Place place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
-        return new Country(this.placeId(context), this.name(), this.iso(), parent, history);
+        return new Country(this.placeId(context), this.name(), this.iso(), Country.cast(parent), groupId, history);
     }
 
     protected CountryIso iso() {

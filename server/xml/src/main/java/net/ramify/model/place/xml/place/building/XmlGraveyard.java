@@ -8,6 +8,7 @@ import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Objects;
 
 @XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "graveyard")
 public class XmlGraveyard extends XmlBuilding<Graveyard> {
@@ -18,6 +19,7 @@ public class XmlGraveyard extends XmlBuilding<Graveyard> {
 
     @Override
     protected Graveyard place(final Place parent, final PlaceGroupId groupId, final BuildingHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+        Objects.requireNonNull(parent, "parent");
         return new Graveyard(this.placeId(context), this.name(), parent, groupId, history);
     }
 

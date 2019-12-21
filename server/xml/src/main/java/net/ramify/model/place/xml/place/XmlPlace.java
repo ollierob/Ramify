@@ -9,12 +9,11 @@ import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlInYear;
 import net.ramify.model.place.DefaultPlaceHistory;
 import net.ramify.model.place.Place;
-import net.ramify.model.place.PlaceGroup;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.history.PlaceHistory;
+import net.ramify.model.place.iso.CountryIso;
 import net.ramify.model.place.provider.PlaceProvider;
-import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.settlement.XmlSettlement;
 import net.ramify.model.place.xml.place.uk.XmlUkPlace;
@@ -40,6 +39,9 @@ public abstract class XmlPlace {
     @XmlAttribute(name = "id", required = true)
     private String id;
 
+    @XmlAttribute(name = "groupId")
+    private String groupId;
+
     @XmlAttribute(name = "name")
     private String name;
 
@@ -58,19 +60,21 @@ public abstract class XmlPlace {
     @XmlAttribute(name = "major")
     private Boolean major;
 
+    @Nonnull
     protected PlaceId placeId(final PlaceParserContext context) {
         return this.placeId(context.countryIso());
     }
 
     @Nonnull
-    public PlaceId placeId(final CountryIso iso) {
+    protected PlaceId placeId(final CountryIso iso) {
         return this.placeId(id, iso);
     }
 
     protected abstract PlaceId placeId(String id, CountryIso iso);
 
-    protected String id() {
-        return id;
+    @CheckForNull
+    protected PlaceGroupId placeGroupId(final PlaceId placeId) {
+        return isBlank(groupId) ? placeId.placeGroupId() : new PlaceGroupId(groupId);
     }
 
     public String name() {
@@ -101,10 +105,10 @@ public abstract class XmlPlace {
     }
 
     private Place place(final Place parent, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
-        final var id = this.placeId(context.countryIso());
+        final var placeId = this.placeId(context.countryIso());
         return isBlank(name)
-                ? context.places().require(id)
-                : this.place(parent, context.group(id).map(PlaceGroup::id).orElse(null), this.history(context), context);
+                ? context.places().require(placeId)
+                : this.place(parent, this.placeGroupId(placeId), this.history(context), context);
     }
 
     @Nonnull

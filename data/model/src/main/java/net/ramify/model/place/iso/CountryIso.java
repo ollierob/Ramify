@@ -1,8 +1,6 @@
-package net.ramify.model.place.region.iso;
+package net.ramify.model.place.iso;
 
 import com.google.common.base.Preconditions;
-import net.ramify.model.place.Place;
-import net.ramify.model.place.region.Country;
 import net.ramify.model.Iso;
 
 import static net.ramify.utils.StringUtils.isBlank;
@@ -24,12 +22,6 @@ public class CountryIso extends Iso {
                 final var dash = iso.indexOf('-');
                 return dash <= 0 ? new CountryIso(iso) : new CountrySubdivisionIso(iso.substring(0, dash), iso.substring(dash + 1));
         }
-    }
-
-    public static CountryIso readFrom(final Place place) {
-        return place == null
-                ? null
-                : place.find(Country.class).flatMap(Country::iso).map(CountryIso::withoutSubdivision).get();
     }
 
     CountryIso(final String iso) {

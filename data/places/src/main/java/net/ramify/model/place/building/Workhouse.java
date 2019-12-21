@@ -1,6 +1,5 @@
 package net.ramify.model.place.building;
 
-import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.history.BuildingHistory;
@@ -14,15 +13,6 @@ public class Workhouse extends AbstractBuilding implements Institution {
     private static final PlaceProto.PlaceType PLACE_TYPE = placeType("Workhouse");
 
     private final SettlementOrRegion parent;
-
-    public Workhouse(
-            final PlaceId id,
-            final String name,
-            final Place parent,
-            final PlaceGroupId groupId,
-            final BuildingHistory history) throws InvalidPlaceTypeException {
-        this(id, name, parent.requireAs(SettlementOrRegion.class), groupId, history);
-    }
 
     public Workhouse(
             final PlaceId id,

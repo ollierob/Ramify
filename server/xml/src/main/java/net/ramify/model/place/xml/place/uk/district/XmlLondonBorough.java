@@ -6,11 +6,12 @@ import net.ramify.model.place.DefaultPlaceHistory;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
+import net.ramify.model.place.iso.CountrySubdivisionIso;
 import net.ramify.model.place.region.district.Borough;
-import net.ramify.model.place.region.iso.CountrySubdivisionIso;
+import net.ramify.model.place.type.Region;
 import net.ramify.model.place.xml.PlaceParserContext;
-import net.ramify.model.place.xml.place.region.XmlRegion;
 import net.ramify.model.place.xml.place.XmlPlace;
+import net.ramify.model.place.xml.place.region.XmlRegion;
 import net.ramify.model.place.xml.place.uk.XmlUkPlace;
 
 import javax.annotation.CheckForNull;
@@ -45,7 +46,7 @@ public class XmlLondonBorough extends XmlRegion<Borough> {
             final PlaceGroupId groupId,
             final PlaceHistory history,
             final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
-        return new Borough(this.placeId(context), this.name(), parent, groupId, this.iso(), history);
+        return new Borough(this.placeId(context), this.name(), parent.requireAs(Region.class), groupId, this.iso(), history);
     }
 
     @Override

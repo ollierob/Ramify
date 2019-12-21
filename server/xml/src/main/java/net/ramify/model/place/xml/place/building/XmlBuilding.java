@@ -12,8 +12,7 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.building.DefaultBuildingHistory;
 import net.ramify.model.place.history.BuildingHistory;
 import net.ramify.model.place.history.PlaceHistory;
-import net.ramify.model.place.id.Spid;
-import net.ramify.model.place.region.iso.CountryIso;
+import net.ramify.model.place.iso.CountryIso;
 import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
 
@@ -50,7 +49,7 @@ public abstract class XmlBuilding<P extends Place> extends XmlPlace {
     }
 
     protected PlaceId placeId(final String id, final CountryIso countryIso) {
-        return new Spid(countryIso, type, id);
+        return new PlaceId(countryIso, type, id);
     }
 
     @Override

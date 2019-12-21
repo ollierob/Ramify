@@ -3,8 +3,8 @@ package net.ramify.model.place.building;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
-import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.history.BuildingHistory;
+import net.ramify.model.place.proto.PlaceProto;
 
 import java.util.Objects;
 

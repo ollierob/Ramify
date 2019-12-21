@@ -30,14 +30,14 @@ public abstract class AbstractPlace implements Place {
 
     @Nonnull
     @Override
-    public String name() {
-        return name;
+    public PlaceGroupId placeGroupId() {
+        return groupId == null ? Place.super.placeGroupId() : groupId;
     }
 
-    @CheckForNull
+    @Nonnull
     @Override
-    public PlaceGroupId groupId() {
-        return groupId;
+    public String name() {
+        return name;
     }
 
     @CheckForNull

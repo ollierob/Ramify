@@ -4,11 +4,12 @@ import com.google.common.base.MoreObjects;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
+import net.ramify.model.place.iso.CountrySubdivisionIso;
+import net.ramify.model.place.region.Country;
 import net.ramify.model.place.region.State;
-import net.ramify.model.place.region.iso.CountrySubdivisionIso;
 import net.ramify.model.place.xml.PlaceParserContext;
-import net.ramify.model.place.xml.place.region.XmlRegion;
 import net.ramify.model.place.xml.place.XmlPlace;
+import net.ramify.model.place.xml.place.region.XmlRegion;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -19,6 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @XmlRootElement(namespace = XmlUsaPlace.NAMESPACE, name = "state")
 public class XmlState extends XmlRegion<State> {
@@ -38,8 +40,9 @@ public class XmlState extends XmlRegion<State> {
 
     @Nonnull
     @Override
-    protected State place(Place parent, PlaceGroupId groupId, final PlaceHistory history, PlaceParserContext context) throws Place.InvalidPlaceTypeException {
-        return new State(this.placeId(context), this.name(), parent, this.iso(), groupId);
+    protected State place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+        Objects.requireNonNull(parent, "parent");
+        return new State(this.placeId(context), this.name(), parent.requireAs(Country.class), this.iso(), groupId, history);
     }
 
     protected CountrySubdivisionIso iso() {

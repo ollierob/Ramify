@@ -5,9 +5,8 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.history.PlaceHistory;
-import net.ramify.model.place.id.Spid;
-import net.ramify.model.place.region.iso.CountryIso;
-import net.ramify.model.place.region.iso.CountrySubdivisionIso;
+import net.ramify.model.place.iso.CountryIso;
+import net.ramify.model.place.iso.CountrySubdivisionIso;
 import net.ramify.model.place.settlement.City;
 import net.ramify.model.place.type.Region;
 import net.ramify.model.place.xml.PlaceParserContext;
@@ -36,7 +35,7 @@ public class XmlCity extends XmlSettlement {
 
     @Override
     protected PlaceId placeId(final String id, final CountryIso countryIso) {
-        return new Spid(countryIso, City.class, id);
+        return new PlaceId(countryIso, City.class, id);
     }
 
     @Override

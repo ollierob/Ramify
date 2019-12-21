@@ -2,6 +2,7 @@ package net.ramify.model.place.provider;
 
 import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.Place;
+import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.util.provider.MissingValueException;
 import net.ramify.model.util.provider.Provider;
@@ -41,6 +42,9 @@ public interface PlaceProvider extends Provider<PlaceId, Place> {
 
     @Nonnull
     Set<? extends Place> countries();
+
+    @Nonnull
+    Set<PlaceId> findByGroup(PlaceGroupId groupId);
 
     @Nonnull
     Set<Place> findByName(String name, int limit, PlaceId within);

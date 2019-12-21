@@ -14,4 +14,9 @@ public interface HasPlaceId {
         return lookup.require(this.placeId());
     }
 
+    @Nonnull
+    default PlaceGroupId placeGroupId() {
+        return this.placeId().placeGroupId();
+    }
+
 }

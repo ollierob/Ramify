@@ -5,16 +5,15 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.history.PlaceHistory;
+import net.ramify.model.place.iso.CountrySubdivisionIso;
 import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.region.district.Borough;
 import net.ramify.model.place.region.district.MetropolitanBorough;
-import net.ramify.model.place.region.iso.CountrySubdivisionIso;
 import net.ramify.model.place.region.manor.Manor;
 import net.ramify.model.place.settlement.City;
 import net.ramify.model.place.type.Region;
 
 import javax.annotation.Nonnull;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -29,11 +28,13 @@ public class County extends AbstractRegion implements CountyOrSubdivision {
     private final Region parent;
     private final CountrySubdivisionIso iso;
 
-    public County(final PlaceId id, final String name, final Place parent, final CountrySubdivisionIso iso, final PlaceGroupId groupId, final PlaceHistory history) throws InvalidPlaceTypeException {
-        this(id, name, Objects.requireNonNull(parent).requireAs(Region.class), iso, groupId, history);
-    }
-
-    public County(final PlaceId id, final String name, final Region parent, final CountrySubdivisionIso iso, final PlaceGroupId groupId, final PlaceHistory history) {
+    public County(
+            final PlaceId id,
+            final String name,
+            final Region parent,
+            final CountrySubdivisionIso iso,
+            final PlaceGroupId groupId,
+            final PlaceHistory history) {
         super(id, name, groupId, history);
         this.parent = parent;
         this.iso = iso;

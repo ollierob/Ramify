@@ -5,8 +5,8 @@ import net.ramify.model.date.BeforeDate;
 import net.ramify.model.place.DefaultPlaceHistory;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
-import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.region.AbstractRegion;
 import net.ramify.model.place.type.Region;
@@ -21,15 +21,6 @@ public class Manor extends AbstractRegion {
     private static final PlaceProto.PlaceType PLACE_TYPE = placeType("Manor");
 
     private final Region parent;
-
-    public Manor(
-            final PlaceId id,
-            final String name,
-            final Place parent,
-            final PlaceGroupId groupId,
-            final PlaceHistory history) throws InvalidPlaceTypeException {
-        this(id, name, parent.requireAs(Region.class), groupId, history);
-    }
 
     public Manor(
             final PlaceId id,

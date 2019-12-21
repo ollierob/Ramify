@@ -2,6 +2,7 @@ package net.ramify.model.place.xml.place.group;
 
 import com.google.common.collect.Collections2;
 import net.ramify.model.place.PlaceGroup;
+import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.xml.place.XmlPlace;
 
 import javax.annotation.Nonnull;
@@ -20,9 +21,9 @@ public class XmlPlaceGroups {
     private List<XmlPlaceGroup> groups;
 
     @Nonnull
-    public Collection<PlaceGroup> placeGroups() {
+    public Collection<PlaceGroup> placeGroups(final PlaceProvider placeProvider) {
         if (groups == null || groups.isEmpty()) return Collections.emptySet();
-        return Collections2.transform(groups, XmlPlaceGroup::toPlaceGroup);
+        return Collections2.transform(groups, g -> g.toPlaceGroup(placeProvider));
     }
 
 }

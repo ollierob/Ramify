@@ -825,17 +825,13 @@
     
   <xs:complexType name="xmlPlaceGroup">
         
-    <xs:sequence>
-            
-      <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="childId" type="xs:string"/>
-          
-    </xs:sequence>
+    <xs:sequence/>
         
     <xs:attribute name="id" type="xs:string" use="required"/>
         
     <xs:attribute name="name" type="xs:string" use="required"/>
         
-    <xs:attribute name="defaultChildId" type="xs:string" use="required"/>
+    <xs:attribute name="defaultChildType" type="xs:string" use="required"/>
       
   </xs:complexType>
     

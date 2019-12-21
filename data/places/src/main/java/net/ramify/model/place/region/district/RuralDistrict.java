@@ -1,9 +1,8 @@
 package net.ramify.model.place.region.district;
 
-import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
-import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.region.AbstractRegion;
 import net.ramify.model.place.region.County;
@@ -13,15 +12,6 @@ public class RuralDistrict extends AbstractRegion implements District {
     private static final PlaceProto.PlaceType PLACE_TYPE = placeType("Rural District");
 
     private final County parent;
-
-    public RuralDistrict(
-            final PlaceId id,
-            final String name,
-            final Place parent,
-            final PlaceGroupId groupId,
-            final PlaceHistory history) throws InvalidPlaceTypeException {
-        this(id, name, parent.requireAs(County.class), groupId, history);
-    }
 
     public RuralDistrict(
             final PlaceId id,

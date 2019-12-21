@@ -1,11 +1,10 @@
 package net.ramify.model.place.building;
 
-import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.history.BuildingHistory;
 import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.type.Building;
-import net.ramify.model.place.history.BuildingHistory;
 import net.ramify.model.place.type.SettlementOrRegion;
 
 import java.util.Objects;
@@ -15,15 +14,6 @@ public class Farmstead extends AbstractBuilding implements Building {
     private static final PlaceProto.PlaceType PLACE_TYPE = placeTypeBuilder("Farmstead").setCanPrefix(false).build();
 
     private final SettlementOrRegion parent;
-
-    public Farmstead(
-            final PlaceId id,
-            final String name,
-            final Place parent,
-            final PlaceGroupId groupId,
-            final BuildingHistory history) throws InvalidPlaceTypeException {
-        this(id, name, parent.requireAs(SettlementOrRegion.class), groupId, history);
-    }
 
     public Farmstead(
             final PlaceId id,

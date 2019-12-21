@@ -5,8 +5,8 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.history.PlaceHistory;
+import net.ramify.model.place.iso.CountrySubdivisionIso;
 import net.ramify.model.place.proto.PlaceProto;
-import net.ramify.model.place.region.iso.CountrySubdivisionIso;
 import net.ramify.model.place.type.Region;
 import net.ramify.model.place.type.Settlement;
 
@@ -17,16 +17,6 @@ public class MetropolitanBorough extends Borough {
 
     private static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(Region.class, Settlement.class);
     private static final PlaceProto.PlaceType PLACE_TYPE = placeType("Metropolitan Borough");
-
-    public MetropolitanBorough(
-            final PlaceId id,
-            final String name,
-            final Place parent,
-            final PlaceGroupId groupId,
-            final CountrySubdivisionIso iso,
-            final PlaceHistory history) throws InvalidPlaceTypeException {
-        this(id, name, parent.requireAs(Region.class), groupId, iso, history);
-    }
 
     public MetropolitanBorough(
             final PlaceId id,

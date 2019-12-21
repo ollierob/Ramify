@@ -5,11 +5,12 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.region.Chapelry;
+import net.ramify.model.place.region.Parish;
 import net.ramify.model.place.xml.PlaceParserContext;
-import net.ramify.model.place.xml.place.region.XmlRegion;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.building.XmlChurch;
 import net.ramify.model.place.xml.place.building.XmlSchool;
+import net.ramify.model.place.xml.place.region.XmlRegion;
 import net.ramify.model.place.xml.place.settlement.XmlTown;
 import net.ramify.model.place.xml.place.settlement.XmlVillage;
 
@@ -38,7 +39,7 @@ public class XmlChapelry extends XmlRegion<Chapelry> {
 
     @Override
     protected Chapelry place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
-        return new Chapelry(this.placeId(context), this.name(), parent, groupId, history);
+        return new Chapelry(this.placeId(context), this.name(), parent.requireAs(Parish.class), groupId, history);
     }
 
     @Override

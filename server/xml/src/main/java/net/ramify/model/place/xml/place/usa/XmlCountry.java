@@ -2,15 +2,12 @@ package net.ramify.model.place.xml.place.usa;
 
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
-import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.history.PlaceHistory;
-import net.ramify.model.place.id.Spid;
+import net.ramify.model.place.iso.CountryIso;
 import net.ramify.model.place.region.Country;
-import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.xml.PlaceParserContext;
-import net.ramify.model.place.xml.place.XmlPlace;
+import net.ramify.model.place.xml.place.region.XmlRegion;
 
-import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -19,7 +16,7 @@ import java.util.List;
 import java.util.Objects;
 
 @XmlRootElement(namespace = XmlUsaPlace.NAMESPACE, name = "country")
-class XmlCountry extends XmlPlace {
+class XmlCountry extends XmlRegion<Country> {
 
     @XmlAttribute(name = "iso", required = true)
     private String iso;
@@ -27,14 +24,13 @@ class XmlCountry extends XmlPlace {
     @XmlElementRef
     private List<XmlState> states;
 
-    @Nonnull
-    protected PlaceId placeId(final String id, final CountryIso iso) {
-        return new Spid(iso, Country.class, id);
+    XmlCountry() {
+        super(Country.class);
     }
 
     @Override
-    protected Place place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
-        return new Country(this.placeId(context), this.name(), this.iso(), parent, history);
+    protected Country place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+        return new Country(this.placeId(context), this.name(), this.iso(), Country.cast(parent), groupId, history);
     }
 
     protected CountryIso iso() {

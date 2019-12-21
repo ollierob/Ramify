@@ -5,10 +5,10 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.history.PlaceHistory;
-import net.ramify.model.place.id.Spid;
+import net.ramify.model.place.iso.CountryIso;
+import net.ramify.model.place.iso.CountrySubdivisionIso;
 import net.ramify.model.place.region.County;
-import net.ramify.model.place.region.iso.CountryIso;
-import net.ramify.model.place.region.iso.CountrySubdivisionIso;
+import net.ramify.model.place.type.Region;
 import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.region.XmlForest;
@@ -57,13 +57,13 @@ class XmlCounty extends XmlPlace {
 
     @Override
     protected PlaceId placeId(final String id, final CountryIso iso) {
-        return new Spid(iso, County.class, id);
+        return new PlaceId(iso, County.class, id);
     }
 
     @Override
     protected County place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
-        return new County(this.placeId(context), this.name(), parent, this.iso(), groupId, history);
+        return new County(this.placeId(context), this.name(), parent.requireAs(Region.class), this.iso(), groupId, history);
     }
 
     protected CountrySubdivisionIso iso() {

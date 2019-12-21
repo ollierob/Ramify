@@ -1,7 +1,6 @@
 package net.ramify.model.place;
 
 import com.google.common.collect.ImmutableSet;
-import net.ramify.model.place.id.Spid;
 import net.ramify.model.place.region.Chapelry;
 import net.ramify.model.place.region.Country;
 import net.ramify.model.place.region.Hundred;
@@ -24,7 +23,7 @@ public class DefunctPlaces {
 
     public static boolean isDefunct(@Nonnull final Place place, final Country country) {
         if (country == null) return false;
-        if (Spid.ENGLAND.equals(country.placeId())) return isDefunctInEngland(place);
+        if (PlaceId.ENGLAND.equals(country.placeId())) return isDefunctInEngland(place);
         return false;
     }
 

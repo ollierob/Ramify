@@ -44,8 +44,8 @@ public class XmlPlaceModule extends PrivateModule {
 
     @Provides
     @Singleton
-    PlaceGroupProvider providePlaceGroupProvider(final JAXBContext context, @Named("data") final File data) throws JAXBException {
-        return XmlPlaceGroupProvider.readGroupsInDirectory(context, data);
+    PlaceGroupProvider providePlaceGroupProvider(final JAXBContext context, @Named("data") final File data, final PlaceProvider placeProvider) throws JAXBException {
+        return XmlPlaceGroupProvider.readGroupsInDirectory(context, data, placeProvider);
     }
 
     @Provides
@@ -53,9 +53,8 @@ public class XmlPlaceModule extends PrivateModule {
     PlaceProvider providePlaceProvider(
             final JAXBContext jaxbContext,
             @Named("data") final File data,
-            final PlaceGroupProvider groupProvider,
             final ParserContext context) throws JAXBException {
-        return XmlPlaceProvider.readPlacesInCountryRoot(jaxbContext, data, groupProvider, context);
+        return XmlPlaceProvider.readPlacesInCountryRoot(jaxbContext, data, context);
     }
 
     @Provides

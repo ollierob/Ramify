@@ -23,9 +23,6 @@ public interface Place extends HasPlaceId, Castable<Place>, BuildsProto<PlacePro
     @CheckForNull
     Place parent();
 
-    @CheckForNull
-    PlaceGroupId groupId();
-
     @Nonnull
     default Optional<? extends Iso> iso() {
         return Optional.empty();
@@ -83,12 +80,12 @@ public interface Place extends HasPlaceId, Castable<Place>, BuildsProto<PlacePro
     default PlaceProto.Place.Builder toProtoBuilder(final boolean includeParent) {
         final var builder = PlaceProto.Place.newBuilder()
                 .setId(this.placeId().value())
+                .setGroupId(this.placeGroupId().value())
                 .setName(this.name())
                 .setType(this.protoType())
                 .setDefunct(this.isDefunct());
         if (includeParent) Consumers.ifNonNull(this.parent(), parent -> builder.setParent(parent.toProto()));
         this.iso().map(Iso::value).ifPresent(builder::setIso);
-        Consumers.ifNonNull(this.groupId(), groupId -> builder.setGroupId(groupId.value()));
         Consumers.ifNonNull(this.history(), history -> builder.setHistory(history.toProto()));
         return builder;
     }

@@ -6,10 +6,11 @@ import net.ramify.model.date.InYears;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
+import net.ramify.model.place.region.County;
 import net.ramify.model.place.region.district.UrbanDistrict;
 import net.ramify.model.place.xml.PlaceParserContext;
-import net.ramify.model.place.xml.place.region.XmlRegion;
 import net.ramify.model.place.xml.place.XmlPlace;
+import net.ramify.model.place.xml.place.region.XmlRegion;
 import net.ramify.model.place.xml.place.uk.XmlUkPlace;
 
 import javax.xml.bind.annotation.XmlElementRef;
@@ -35,7 +36,7 @@ public class XmlUrbanDistrict extends XmlRegion<UrbanDistrict> {
 
     @Override
     protected UrbanDistrict place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
-        return new UrbanDistrict(this.placeId(context), this.name(), parent, groupId, history);
+        return new UrbanDistrict(this.placeId(context), this.name(), parent.requireAs(County.class), groupId, history);
     }
 
     @Override

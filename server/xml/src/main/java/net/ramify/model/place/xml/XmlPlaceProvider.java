@@ -11,11 +11,11 @@ import com.google.common.collect.Sets;
 import net.meerkat.functions.consumers.Consumers;
 import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
+import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
-import net.ramify.model.place.provider.PlaceGroupProvider;
+import net.ramify.model.place.iso.CountryIso;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.region.Country;
-import net.ramify.model.place.region.iso.CountryIso;
 import net.ramify.model.place.xml.place.XmlPlaces;
 import net.ramify.utils.file.FileTraverseUtils;
 import org.slf4j.Logger;
@@ -43,11 +43,13 @@ class XmlPlaceProvider implements PlaceProvider {
 
     private final Map<PlaceId, Place> places;
     private final SetMultimap<PlaceId, PlaceId> children;
+    private final SetMultimap<PlaceGroupId, PlaceId> groupIds;
     private final Set<Country> countries;
 
-    private XmlPlaceProvider(final Map<PlaceId, Place> places, final SetMultimap<PlaceId, PlaceId> children, final Set<Country> countries) {
+    private XmlPlaceProvider(final Map<PlaceId, Place> places, final SetMultimap<PlaceId, PlaceId> children, final SetMultimap<PlaceGroupId, PlaceId> groupIds, final Set<Country> countries) {
         this.places = places;
         this.children = children;
+        this.groupIds = groupIds;
         this.countries = countries;
     }
 
@@ -94,10 +96,17 @@ class XmlPlaceProvider implements PlaceProvider {
                 .collect(Collectors.toSet());
     }
 
+    @Nonnull
+    @Override
+    public Set<PlaceId> findByGroup(final PlaceGroupId groupId) {
+        return groupIds.get(groupId);
+    }
+
     void add(final Place place) {
         places.put(place.placeId(), place);
         Consumers.ifNonNull(place.parent(), parent -> children.put(parent.placeId(), place.placeId()));
         place.ultimateParent().as(Country.class).ifPresent(countries::add);
+        groupIds.put(place.placeGroupId(), place.placeId());
     }
 
     void addAll(final Collection<Place> places) {
@@ -109,19 +118,18 @@ class XmlPlaceProvider implements PlaceProvider {
     }
 
     PlaceProvider immutable() {
-        return new XmlPlaceProvider(ImmutableMap.copyOf(places), ImmutableSetMultimap.copyOf(children), ImmutableSet.copyOf(countries));
+        return new XmlPlaceProvider(ImmutableMap.copyOf(places), ImmutableSetMultimap.copyOf(children), ImmutableSetMultimap.copyOf(groupIds), ImmutableSet.copyOf(countries));
     }
 
     static PlaceProvider readPlacesInCountryRoot(
             final JAXBContext jaxbContext,
             final File countryRoot,
-            final PlaceGroupProvider groupProvider,
             final ParserContext context) throws JAXBException {
-        final var provider = new XmlPlaceProvider(Maps.newHashMap(), HashMultimap.create(), Sets.newHashSet());
+        final var provider = new XmlPlaceProvider(Maps.newHashMap(), HashMultimap.create(), HashMultimap.create(), Sets.newHashSet());
         final var unmarshaller = jaxbContext.createUnmarshaller();
         for (final File dir : countryRoots(countryRoot)) {
             final var countryIso = CountryIso.valueOf(dir.getName());
-            final var placeContext = new PlaceParserContext(context.nameParser(), context.dateParser(), countryIso, provider, groupProvider);
+            final var placeContext = new PlaceParserContext(context.nameParser(), context.dateParser(), countryIso, provider);
             FileTraverseUtils.traverseSubdirectories(dir, XmlPlaceProvider::includeFile, file -> readPlacesInFile(unmarshaller, file, provider, placeContext));
             logger.info("Loaded {} places from {}.", provider.size(), dir);
         }

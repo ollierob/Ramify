@@ -1,7 +1,7 @@
 package net.ramify.model.place.xml.place.uk;
 
-import net.ramify.model.place.region.iso.CountryIso;
-import net.ramify.model.place.region.iso.CountrySubdivisionIso;
+import net.ramify.model.place.iso.CountryIso;
+import net.ramify.model.place.iso.CountrySubdivisionIso;
 import net.ramify.model.place.xml.place.XmlPlace;
 
 import javax.xml.bind.annotation.XmlSeeAlso;

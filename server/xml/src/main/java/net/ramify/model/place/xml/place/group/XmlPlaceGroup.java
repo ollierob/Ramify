@@ -2,15 +2,12 @@ package net.ramify.model.place.xml.place.group;
 
 import net.ramify.model.place.PlaceGroup;
 import net.ramify.model.place.PlaceGroupId;
-import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.group.DefaultPlaceGroup;
+import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.xml.place.XmlPlace;
-import net.ramify.utils.collections.SetUtils;
 
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Set;
 
 @XmlRootElement(namespace = XmlPlace.NAMESPACE, name = "placeGroup")
 public class XmlPlaceGroup {
@@ -21,18 +18,20 @@ public class XmlPlaceGroup {
     @XmlAttribute(name = "name", required = true)
     private String name;
 
-    @XmlAttribute(name = "defaultChildId", required = true)
-    private String defaultChildId;
+    @XmlAttribute(name = "defaultChildType", required = true)
+    private String defaultChildType;
 
-    @XmlElement(name = "childId", namespace = XmlPlace.NAMESPACE)
-    private Set<String> childIds;
-
-    PlaceGroup toPlaceGroup() {
+    PlaceGroup toPlaceGroup(final PlaceProvider placeProvider) {
+        final var id = this.placeGroupId();
         return new DefaultPlaceGroup(
-                new PlaceGroupId(id),
+                id,
                 name,
-                new PlaceId(defaultChildId),
-                SetUtils.transform(childIds, PlaceId::new));
+                id.withPlaceType(defaultChildType),
+                placeProvider.findByGroup(id));
+    }
+
+    protected PlaceGroupId placeGroupId() {
+        return new PlaceGroupId(id);
     }
 
 }

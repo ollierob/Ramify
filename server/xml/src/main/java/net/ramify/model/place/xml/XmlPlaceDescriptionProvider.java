@@ -70,6 +70,8 @@ public class XmlPlaceDescriptionProvider implements PlaceDescriptionProvider {
             provider.addAll(places.descriptions(placeProvider));
         } catch (final JAXBException jex) {
             logger.warn("Could not read descriptions in file " + file + ": " + jex.getMessage());
+        } catch (final RuntimeException rex) {
+            throw new RuntimeException("Could not read descriptions in file " + file, rex);
         }
     }
 

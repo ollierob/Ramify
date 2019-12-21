@@ -1,6 +1,5 @@
 package net.ramify.model.place.region.district;
 
-import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.history.PlaceHistory;
@@ -16,11 +15,12 @@ public class CityDistrict extends AbstractRegion implements District {
 
     private final Region parent;
 
-    public CityDistrict(final PlaceId id, final String name, final Place parent, final PlaceGroupId groupId, final PlaceHistory history) throws InvalidPlaceTypeException {
-        this(id, name, parent.requireAs(Region.class), groupId, history);
-    }
-
-    public CityDistrict(final PlaceId id, final String name, final Region parent, final PlaceGroupId groupId, final PlaceHistory history) {
+    public CityDistrict(
+            final PlaceId id,
+            final String name,
+            final Region parent,
+            final PlaceGroupId groupId,
+            final PlaceHistory history) {
         super(id, name, groupId, history);
         this.parent = parent;
     }

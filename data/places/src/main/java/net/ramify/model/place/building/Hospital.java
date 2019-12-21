@@ -1,10 +1,9 @@
 package net.ramify.model.place.building;
 
-import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
-import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.history.BuildingHistory;
+import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.type.SettlementOrRegion;
 
 import java.util.Objects;
@@ -14,15 +13,6 @@ public class Hospital extends AbstractBuilding implements Institution {
     private static final PlaceProto.PlaceType PLACE_TYPE = placeType("Hospital");
 
     private final SettlementOrRegion parent;
-
-    public Hospital(
-            final PlaceId id,
-            final String name,
-            final Place parent,
-            final PlaceGroupId groupId,
-            final BuildingHistory history) throws InvalidPlaceTypeException {
-        this(id, name, parent.requireAs(SettlementOrRegion.class), groupId, history);
-    }
 
     public Hospital(
             final PlaceId id,
