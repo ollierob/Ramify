@@ -4,7 +4,7 @@ import {AsyncData} from "../../fetch/AsyncData";
 import {FamilyTree} from "../../../protobuf/generated/family_pb";
 import {Loading} from "../../style/Loading";
 import {FavouritesIcon, SearchIcon, TreeIcon, ViewIcon} from "../../images/Icons";
-import {Button, Icon, Input, Menu, Popover} from "antd";
+import {Button, Input, Popover} from "antd";
 import {FamilyTreeId} from "../FamilyTree";
 
 type ZoomHandler = {zoom: number, setZoom: (zoom: number, reset?: boolean) => void}

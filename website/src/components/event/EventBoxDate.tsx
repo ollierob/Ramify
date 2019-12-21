@@ -3,7 +3,7 @@ import {EventBoxProps} from "./EventBox";
 import {isExactRange} from "../date/DateRange";
 import {EmptyPrefixWords, formatDateRange, formatYearRange} from "../date/DateFormat";
 import {MonthDayWordsFormatter} from "../date/DateFormatter";
-import {eventType} from "./Event";
+import {eventType, isBirthEvent, isPostDeathEvent} from "./Event";
 import {Button, Checkbox, Icon, Modal} from "antd";
 import {Person} from "../../protobuf/generated/person_pb";
 import {Event} from "../../protobuf/generated/event_pb";
@@ -46,6 +46,8 @@ export class EventBoxDate extends React.PureComponent<Props, State> {
         const person = this.props.person;
         if (!person) return null;
 
+        const anyEvents = this.props.person.eventsList != null && this.props.person.eventsList.length > 0;
+
         return <>
 
             <div className="year">{formatYearRange(date, EmptyPrefixWords)}</div>
@@ -62,10 +64,10 @@ export class EventBoxDate extends React.PureComponent<Props, State> {
                 visible={this.state.modalOpen}
                 onCancel={this.closeModal}
                 footer={<>
-                    <Button onClick={this.inferBirth} type="primary" disabled={this.state.inferredBirthDate.loading}>Compute</Button>
+                    <Button onClick={this.inferBirth} type="primary" disabled={!anyEvents || this.state.inferredBirthDate.loading}>Compute</Button>
                     <Button onClick={this.closeModal}><Icon type="close"/> Close</Button></>}>
 
-                Use the following events:
+                {anyEvents ? <>Use the following events:</> : <>No events to compute from</>}
 
                 {this.props.person.eventsList.map(e => <EventCheckbox
                     key={e.id}
@@ -74,7 +76,7 @@ export class EventBoxDate extends React.PureComponent<Props, State> {
                     disabled={this.state.inferredBirthDate.loading}
                     onCheck={checked => this.toggle(e.id, checked)}/>)}
 
-                {!this.state.inferredBirthDate.loaded && <>Click below to compute.</>}
+                {anyEvents && !this.state.inferredBirthDate.loaded && <>Click below to compute.</>}
                 {this.state.inferredBirthDate.loading && <Loading/>}
                 {this.state.inferredBirthDate.loaded && <>Date: {this.state.inferredBirthDate.data ? formatDateRange(this.state.inferredBirthDate.data, "day") : "Could not compute from given events"}</>}
 
@@ -114,8 +116,10 @@ function allEventIds(person: Person.AsObject): Set<string> {
 
 const EventCheckbox = (props: {event: Event.AsObject, checked: boolean, disabled?: boolean, onCheck: (checked: boolean) => void}) => {
     const event = props.event;
-    if (!event || !event.givenage) return null;
+    if (!event || isBirthEvent(event) || isPostDeathEvent(event)) return null;
     return <Checkbox className="date" id={event.id} {...props} onChange={e => props.onCheck(e.target.checked)}>
-        <b>{event.title}</b> - age {renderAge(event.givenage)} - {formatDateRange(event.date, "day")}
+        <b>{event.title}</b>
+        &nbsp;- {formatDateRange(event.date, "day")}
+        {event.givenage && <>&nbsp;- age {renderAge(event.givenage)}</>}
     </Checkbox>;
 };

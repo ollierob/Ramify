@@ -6,7 +6,7 @@ import {PersonIcon, TreeIcon} from "../../../components/images/Icons";
 import {viewTreeHref} from "../PeopleLinks";
 
 export const PersonProfileSubmenu = (props: {person: Person.AsObject, tree: FamilyTree.AsObject, loading: boolean}) => {
-    return <SubMenu>
+    return <SubMenu className="top">
         {props.person && props.tree && <SubmenuContent {...props}/>}
     </SubMenu>;
 };

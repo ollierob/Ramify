@@ -1,5 +1,6 @@
 package net.ramify.strategy.inference.date;
 
+import net.ramify.model.date.BeforeDate;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.collection.PersonEventSet;
 import net.ramify.model.event.type.BirthEvent;
@@ -26,9 +27,8 @@ public class BirthDateInference implements DateInference<PersonEventSet> {
             if (event.isBirth() || event.isPostDeath()) continue;
 
             final var givenAge = event.givenAge().orElse(null);
-            if (givenAge == null) continue;
-
-            final var eventBirthDate = givenAge.birthDate(event.date());
+            final var eventBirthDate = givenAge == null ? BeforeDate.strictlyBefore(event.date()) : givenAge.birthDate(event.date());
+            
             if (birthDate == null) {
                 birthDate = eventBirthDate;
             } else {
