@@ -18,7 +18,7 @@ import java.util.List;
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "mentionRecords")
 public class XmlMentionRecords extends XmlRecords {
 
-    @XmlElementRef(namespace = XmlDateRange.NAMESPACE)
+    @XmlElementRef(namespace = XmlDateRange.NAMESPACE, required = false)
     private XmlDateRange date;
 
     @XmlElementRef
