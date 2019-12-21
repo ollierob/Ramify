@@ -11,7 +11,7 @@
 .eventList .event .left {
     position: absolute;
     left: 16px;
-    width: 50px;
+    width: 55px;
     text-align: center;
 }
 
@@ -25,8 +25,8 @@
 
 .eventList .event .right {
     position: relative;
-    left: 55px;
-    width: calc(100% - 55px);
+    left: 60px;
+    width: calc(100% - 60px);
 }
 
 .eventList .event .title {
@@ -37,6 +37,10 @@
 
 .eventList .event .title .link {
     margin-left: 8px;
+}
+
+.eventList .event .title .link img {
+    margin-bottom: 4px;
 }
 
 .eventList .event .computedAge {

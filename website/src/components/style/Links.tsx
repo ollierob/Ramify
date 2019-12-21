@@ -24,9 +24,9 @@ export const Link = (props: {link: LinkProto.AsObject, iconPath?: string, childr
 function linkIcon(link: LinkProto.AsObject): React.ReactNode {
     switch (link.type) {
         case TypeMapValues.WIKIPEDIA:
-            return <img src="/images/links/wikipedia.png" className="image" alt="Wikipedia"/>;
+            return <img src="/images/links/wikipedia.png" className="image" alt="Wikipedia" title="Wikipedia link"/>;
         case TypeMapValues.NATIONAL_ARCHIVES:
-            return <img src="/images/links/national_archives.png" className="image" alt="National Archives"/>;
+            return <img src="/images/links/national_archives.png" className="image" alt="National Archives" title="National Archives link"/>;
         default:
             return null;
     }

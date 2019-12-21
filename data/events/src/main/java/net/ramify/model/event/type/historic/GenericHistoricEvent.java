@@ -1,15 +1,19 @@
 package net.ramify.model.event.type.historic;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableSet;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.EventId;
 import net.ramify.model.event.historic.HistoricEvent;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.type.SettlementOrRegion;
+import net.ramify.model.util.Link;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.util.Objects;
+import java.util.Set;
 
 import static net.ramify.utils.StringUtils.isBlank;
 
@@ -21,6 +25,7 @@ public class GenericHistoricEvent implements HistoricEvent {
     private final SettlementOrRegion region;
     private final String title;
     private final String description;
+    private final Set<Link> links;
 
     public GenericHistoricEvent(
             final EventId id,
@@ -28,7 +33,8 @@ public class GenericHistoricEvent implements HistoricEvent {
             final Place place,
             final SettlementOrRegion region,
             final String title,
-            final String description) {
+            final String description,
+            final Set<Link> links) {
         Preconditions.checkArgument(!isBlank(title), "Blank title");
         this.id = Objects.requireNonNull(id);
         this.date = Objects.requireNonNull(date);
@@ -36,6 +42,7 @@ public class GenericHistoricEvent implements HistoricEvent {
         this.region = region;
         this.title = Objects.requireNonNull(title);
         this.description = description;
+        this.links = MoreObjects.firstNonNull(links, ImmutableSet.of());
     }
 
     @Nonnull
@@ -72,6 +79,12 @@ public class GenericHistoricEvent implements HistoricEvent {
     @Override
     public String description() {
         return description;
+    }
+
+    @Nonnull
+    @Override
+    public Set<Link> links() {
+        return links;
     }
 
 }
