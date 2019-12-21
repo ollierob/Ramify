@@ -1,16 +1,12 @@
 package net.ramify.model.event;
 
-import com.google.common.base.MoreObjects;
-import com.google.common.collect.ImmutableSet;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.HasDate;
 import net.ramify.model.person.age.Age;
 import net.ramify.model.person.age.HasAges;
-import net.ramify.model.util.Link;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
-import java.util.Set;
 
 public class EventProperties implements HasDate, HasAges {
 
@@ -18,12 +14,14 @@ public class EventProperties implements HasDate, HasAges {
     private final Age givenAge;
     private final String occupation;
     private final boolean inferred;
+    private final String description;
 
-    EventProperties(final DateRange date, final Age givenAge, final String occupation, boolean inferred) {
+    EventProperties(final DateRange date, final Age givenAge, final String occupation, boolean inferred, String description) {
         this.date = date;
         this.givenAge = givenAge;
         this.occupation = occupation;
         this.inferred = inferred;
+        this.description = description;
     }
 
     @Override
@@ -39,6 +37,11 @@ public class EventProperties implements HasDate, HasAges {
     @Nonnull
     public Optional<String> occupation() {
         return Optional.ofNullable(occupation);
+    }
+
+    @Nonnull
+    public Optional<String> description() {
+        return Optional.ofNullable(description);
     }
 
     public boolean isInferred() {

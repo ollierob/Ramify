@@ -71,6 +71,12 @@ public abstract class ComposedEvent<T extends PersonEvent> implements PersonEven
         return delegate.occupation();
     }
 
+    @Nonnull
+    @Override
+    public Optional<String> description() {
+        return delegate.description();
+    }
+
     @Override
     public boolean isInferred() {
         return delegate.isInferred();

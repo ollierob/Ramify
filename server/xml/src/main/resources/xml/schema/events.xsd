@@ -31,23 +31,29 @@
     
   <xs:complexType abstract="true" name="xmlEvent">
         
-    <xs:choice>
+    <xs:sequence>
             
-      <xs:element ref="ns1:xmlBeforeDate"/>
+      <xs:choice>
+                
+        <xs:element ref="ns1:xmlBeforeDate"/>
+                
+        <xs:element ref="ns1:inYear"/>
+                
+        <xs:element ref="ns1:onDate"/>
+                
+        <xs:element ref="ns1:inQuarter"/>
+                
+        <xs:element ref="ns1:betweenYears"/>
+                
+        <xs:element ref="ns1:inMonth"/>
+                
+        <xs:element ref="ns1:xmlBeforeYear"/>
+              
+      </xs:choice>
             
-      <xs:element ref="ns1:inYear"/>
-            
-      <xs:element ref="ns1:onDate"/>
-            
-      <xs:element ref="ns1:inQuarter"/>
-            
-      <xs:element ref="ns1:betweenYears"/>
-            
-      <xs:element ref="ns1:inMonth"/>
-            
-      <xs:element ref="ns1:xmlBeforeYear"/>
+      <xs:element form="qualified" minOccurs="0" name="description" type="xs:string"/>
           
-    </xs:choice>
+    </xs:sequence>
         
     <xs:attribute name="id" type="xs:string"/>
       
@@ -60,8 +66,6 @@
       <xs:extension base="tns:xmlEvent">
                 
         <xs:sequence>
-                    
-          <xs:element form="qualified" name="description" type="xs:string"/>
                     
           <xs:choice minOccurs="0">
                         

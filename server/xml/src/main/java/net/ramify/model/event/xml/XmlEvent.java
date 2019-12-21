@@ -8,6 +8,7 @@ import net.ramify.model.record.xml.RecordContext;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.UUID;
@@ -23,6 +24,9 @@ public abstract class XmlEvent {
     @XmlElementRef(namespace = XmlDateRange.NAMESPACE)
     private XmlDateRange date;
 
+    @XmlElement(name = "description", namespace = XmlEvent.NAMESPACE)
+    private String description;
+
     @Nonnull
     protected EventId eventId() {
         return new EventId(eventId);
@@ -33,7 +37,8 @@ public abstract class XmlEvent {
     }
 
     protected EventBuilder eventBuilder(final RecordContext context) {
-        return this.eventBuilder(this.eventId(), this.date(context));
+        return this.eventBuilder(this.eventId(), this.date(context))
+                .withDescription(description);
     }
 
     protected EventBuilder eventBuilder(final EventId eventId, final DateRange date) {

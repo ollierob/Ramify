@@ -39,4 +39,9 @@ public interface PersonEventWithProperties extends PersonEvent {
         return this.properties().isInferred();
     }
 
+    @Override
+    default Optional<String> description() {
+        return this.properties().description();
+    }
+
 }

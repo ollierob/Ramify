@@ -36,6 +36,7 @@ public class EventBuilder {
     private Place place;
     private Age givenAge;
     private String occupation;
+    private String description;
     private boolean inferred;
     private Set<Link> links;
 
@@ -74,13 +75,18 @@ public class EventBuilder {
         return this;
     }
 
+    public EventBuilder withDescription(final String description) {
+        this.description = description;
+        return this;
+    }
+
     public EventBuilder setInferred(final boolean inferred) {
         this.inferred = inferred;
         return this;
     }
 
     protected EventProperties eventProperties() {
-        return new EventProperties(date, givenAge, occupation, inferred);
+        return new EventProperties(date, givenAge, occupation, inferred, description);
     }
 
     public BirthEvent toBirth(final HasPersonId person) {
@@ -119,7 +125,7 @@ public class EventBuilder {
         return new GenericProbateEvent(eventId, person.personId(), this.eventProperties());
     }
 
-    public HistoricEvent toHistoric(final String title, final String description, final SettlementOrRegion region) {
+    public HistoricEvent toHistoric(final String title, final SettlementOrRegion region) {
         return new GenericHistoricEvent(eventId, date, place, region, title, description, links);
     }
 

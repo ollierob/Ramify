@@ -9,7 +9,6 @@ import net.ramify.model.place.xml.description.XmlLink;
 import net.ramify.model.record.xml.RecordContext;
 
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -27,9 +26,6 @@ public class XmlHistoricEvent extends XmlEvent {
     @XmlAttribute(name = "region", required = true)
     private String regionId;
 
-    @XmlElement(name = "description", namespace = XmlEvent.NAMESPACE, required = true)
-    private String description;
-
     @XmlElementRef(required = false)
     private XmlLink link;
 
@@ -37,7 +33,7 @@ public class XmlHistoricEvent extends XmlEvent {
         return this.eventBuilder(context)
                 .withPlace(this.place(context))
                 .withLink(link)
-                .toHistoric(title, description, this.region(context));
+                .toHistoric(title, this.region(context));
     }
 
     protected Place place(final RecordContext context) {

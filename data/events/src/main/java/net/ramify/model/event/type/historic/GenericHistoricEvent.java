@@ -10,9 +10,9 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.type.SettlementOrRegion;
 import net.ramify.model.util.Link;
 
-import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import static net.ramify.utils.StringUtils.isBlank;
@@ -75,10 +75,9 @@ public class GenericHistoricEvent implements HistoricEvent {
         return region;
     }
 
-    @CheckForNull
     @Override
-    public String description() {
-        return description;
+    public Optional<String> description() {
+        return Optional.ofNullable(description);
     }
 
     @Nonnull

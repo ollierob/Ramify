@@ -95,7 +95,7 @@ public abstract class XmlPersonEvent extends XmlEvent {
     }
 
     protected EventBuilder eventBuilder(final RecordContext context) {
-        return this.eventBuilder(this.eventId(), this.date(context))
+        return super.eventBuilder(context)
                 .withPlace(this.place(context))
                 .withOccupation(this.occupation());
     }
