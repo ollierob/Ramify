@@ -31,6 +31,7 @@ import static net.ramify.model.place.xml.place.uk.XmlUkPlace.GB_ENG;
 public class XmlMunicipalBorough extends XmlRegion<MunicipalBorough> {
 
     private static final PlaceHistory DEFAULT_ENGLAND_HISTORY = new DefaultPlaceHistory(new InYears(1833), new InYears(1974));
+    private static final PlaceHistory DEFAULT_LONDON_HISTORY = new DefaultPlaceHistory(new InYears(1903), new InYears(1965));
     private static final PlaceHistory DEFAULT_IRELAND_HISTORY = new DefaultPlaceHistory(new InYears(1840), new InYears(1973));
 
     @XmlElementRefs({
