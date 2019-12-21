@@ -9,10 +9,10 @@ export const EventNotes = (props: {event: Event.AsObject}) => {
 
     return <ul className="notes">
         {event.givenage && <li>Given age: {renderAge(event.givenage)}</li>}
-        {event.notes && <li>Notes: {event.notes}</li>}
-        {event.cause && <li>Cause: {event.cause}</li>}
-        {event.occupation && <li>Occupation: {event.occupation}</li>}
-        {event.description && <li><i>{event.description}</i></li>}
+        {event.notes && <li className="notes">Notes: {event.notes}</li>}
+        {event.cause && <li className="cause">Cause: {event.cause}</li>}
+        {event.occupation && <li className="occupation">Occupation: {event.occupation}</li>}
+        {event.description && <li className="description">{event.description}</li>}
     </ul>;
 
 };

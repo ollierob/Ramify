@@ -41,6 +41,10 @@
     background-color: #EEEEEE;
 }
 
+.personProfile .profile .events .eventList .event.historic .description {
+    font-style: italic;
+}
+
 .personProfile .profile .relatives {
     display: inline-block;
     width: 40%;
