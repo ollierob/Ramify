@@ -15,31 +15,63 @@ type Props = HasClass & {
     places: ReadonlyArray<PlaceBundle.AsObject>;
 };
 
-export const PlaceMap = (props: Props) => {
+type State = {
+    places: ReadonlyArray<PlaceBundle.AsObject>;
+    zoom: number;
+    center: Point.AsObject;
+    markers: ReadonlyArray<MarkerPoint>
+    area: ReadonlyArray<Point.AsObject>
+}
 
-    const places: PlaceBundle.AsObject[] = props.places.filter(p => p && p.position);
-    const zoom = determineZoom(places);
-    const center = determineCenter(places);
+export class PlaceMap extends React.PureComponent<Props, State> {
 
-    return <div className={(props.className || "") + " map"} style={props.style}>
+    constructor(props: Props) {
+        super(props);
+        this.state = this.determineState(props);
+    }
 
-        {props.loading && <Loading/>}
+    render() {
 
-        {places.length && <MapComponent
-            {...props}
-            zoom={zoom}
-            center={center}
-            markers={places.filter(isPoint).map(toMarker)}
-            area={places.filter(isArea).map(p => p.position.boundaryList)[0]}
-        />}
+        return <div className={(this.props.className || "") + " map"} style={this.props.style}>
 
-        {!places.length && <span className="unimportant" style={{padding: 4}}>
+            {this.props.loading && <Loading/>}
+
+            {this.state.places.length && <MapComponent {...this.state}/>}
+
+            {!this.state.places.length && <span className="unimportant" style={{padding: 4}}>
                 No position information available.
             </span>}
 
-    </div>;
+        </div>;
 
-};
+    }
+
+    componentDidUpdate(prevProps: Readonly<Props>) {
+        if (this.props.places != prevProps.places)
+            this.setState(this.determineState(this.props));
+    }
+
+    private determineState(props: Props): State {
+        const places = props.places.filter(p => p && p.position);
+        return {
+            places: places,
+            zoom: this.determineZoom(places),
+            center: this.determineCenter(places),
+            markers: places.filter(isPoint).map(toMarker),
+            area: places.filter(isArea).map(p => p.position.boundaryList)[0]
+        };
+    }
+
+    private determineZoom(places: PlaceBundle.AsObject[]) {
+        return Math.min(...places.map(p => p.position.zoom || 0).filter(z => z > 0));
+    }
+
+    private determineCenter(positions: PlaceBundle.AsObject[]) {
+        //FIXME average
+        return positions[0]?.position.center;
+    }
+
+}
 
 function isPoint(place: PlaceBundle.AsObject): boolean {
     return place.position && place.position.boundaryList.length <= 1;
@@ -47,15 +79,6 @@ function isPoint(place: PlaceBundle.AsObject): boolean {
 
 function isArea(place: PlaceBundle.AsObject): boolean {
     return place.position && place.position.boundaryList.length >= 3;
-}
-
-function determineZoom(places: PlaceBundle.AsObject[]) {
-    return Math.min(...places.map(p => p.position.zoom || 0).filter(z => z > 0));
-}
-
-function determineCenter(positions: PlaceBundle.AsObject[]) {
-    //FIXME average
-    return positions[0]?.position.center;
 }
 
 function toMarker(place: PlaceBundle.AsObject): MarkerPoint {
