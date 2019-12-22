@@ -2,7 +2,7 @@ import * as React from "react";
 import {HasClass} from "../style/HasClass";
 import {Point, Position} from "../../protobuf/generated/location_pb";
 import {Map, Marker, Popup, TileLayer} from 'react-leaflet';
-import {LatLngLiteral} from "leaflet";
+import {Icon, LatLngLiteral} from "leaflet";
 import {Loading} from "../style/Loading";
 import {Place} from "../../protobuf/generated/place_pb";
 import "./PlaceMap.css";
@@ -59,7 +59,7 @@ const MapComponent = (props: MapProps) => {
     return <Map center={toLatLong(center)} zoom={props.zoom}>
         <TileLayer
             url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}/>
-        {markers.map(marker => <Marker position={toLatLong(marker.point)}>
+        {markers.map(marker => <Marker position={toLatLong(marker.point)} icon={CustomIcon}>
             <Popup>{marker.label}</Popup>
         </Marker>)}
     </Map>;
@@ -71,3 +71,8 @@ function toLatLong(point: Point.AsObject): LatLngLiteral {
 }
 
 type MarkerPoint = {point: Point.AsObject, label: React.ReactNode}
+
+const CustomIcon: Icon = new Icon({
+    iconUrl: "/images/marker-icon.png",
+    shadowUrl: "/images/marker-shadow.png"
+});
