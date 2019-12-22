@@ -74,5 +74,7 @@ type MarkerPoint = {point: Point.AsObject, label: React.ReactNode}
 
 const CustomIcon: Icon = new Icon({
     iconUrl: "/images/marker-icon.png",
-    shadowUrl: "/images/marker-shadow.png"
+    shadowUrl: "/images/marker-shadow.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 40]
 });
