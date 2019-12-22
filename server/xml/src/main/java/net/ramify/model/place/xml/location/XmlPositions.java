@@ -15,16 +15,16 @@ import java.util.Map;
 
 @XmlType(namespace = XmlPlace.NAMESPACE, name = "placePositions")
 @XmlRootElement(name = "placePositions")
-public class XmlPlacePositions {
+public class XmlPositions {
 
     @XmlElementRef
-    private List<XmlPlacePoint> placePoints;
+    private List<XmlPosition> positions;
 
     @Nonnull
     public Map<PlaceId, Position> positions() {
-        if (placePoints == null) return Collections.emptyMap();
-        final var map = Maps.<PlaceId, Position>newHashMap();
-        placePoints.forEach(p -> map.put(p.placeId(), Position.of(p, p.zoom())));
+        if (positions == null) return Collections.emptyMap();
+        final var map = Maps.<PlaceId, Position>newHashMapWithExpectedSize(positions.size());
+        positions.forEach(p -> map.put(p.placeId(), p.toPosition()));
         return map;
     }
 

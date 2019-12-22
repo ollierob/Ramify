@@ -5,11 +5,12 @@ export function toGeoJson(points: ReadonlyArray<Point.AsObject>): GeoJSON.GeoJso
     if (!points) return null;
     switch (points.length) {
         case 0:
+        case 2:
             return null;
         case 1:
             return toGeoJsonPoint(points[0]);
         default:
-            return null;
+            return toGeoJsonArea(points);
     }
 }
 

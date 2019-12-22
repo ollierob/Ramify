@@ -5,8 +5,7 @@ import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.place.proto.LocationProto;
 
 import javax.annotation.Nonnull;
-import java.util.Collections;
-import java.util.Set;
+import java.util.List;
 
 public interface Position extends BuildsProto<LocationProto.Position> {
 
@@ -14,7 +13,7 @@ public interface Position extends BuildsProto<LocationProto.Position> {
     Point center();
 
     @Nonnull
-    Set<Point> boundaryPoints();
+    List<Point> boundaryPoints();
 
     int zoom();
 
@@ -38,28 +37,6 @@ public interface Position extends BuildsProto<LocationProto.Position> {
                 .addAllBoundary(Iterables.transform(this.boundaryPoints(), Point::toProto))
                 .setZoom(this.zoom())
                 .build();
-    }
-
-    static Position of(final Point point, final int zoom) {
-        return new Position() {
-
-            @Nonnull
-            @Override
-            public Point center() {
-                return point;
-            }
-
-            @Nonnull
-            @Override
-            public Set<Point> boundaryPoints() {
-                return Collections.emptySet();
-            }
-
-            @Override
-            public int zoom() {
-                return zoom;
-            }
-        };
     }
 
 }

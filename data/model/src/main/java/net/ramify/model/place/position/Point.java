@@ -22,18 +22,7 @@ public interface Point extends BuildsProto<LocationProto.Point> {
 
     @Nonnull
     static Point atLatLong(final double latitude, final double longitude) {
-        return new Point() {
-
-            @Override
-            public double latitude() {
-                return latitude;
-            }
-
-            @Override
-            public double longitude() {
-                return longitude;
-            }
-        };
+        return new DefaultPoint(latitude, longitude);
     }
 
 }

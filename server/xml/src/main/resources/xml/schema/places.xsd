@@ -29,6 +29,8 @@
     
   <xs:element name="nationalArchivesLink" type="tns:xmlNationalArchivesLink"/>
     
+  <xs:element name="placeArea" type="tns:xmlPositionArea"/>
+    
   <xs:element name="placeDescription" type="tns:xmlPlaceDescription"/>
     
   <xs:element name="placeDescriptions" type="tns:placeDescriptions"/>
@@ -37,11 +39,15 @@
     
   <xs:element name="placeGroups" type="tns:placeGroups"/>
     
-  <xs:element name="placePoint" type="tns:xmlPlacePoint"/>
+  <xs:element name="placePoint" type="tns:xmlPositionPoint"/>
     
   <xs:element name="placePositions" type="tns:placePositions"/>
     
   <xs:element name="places" type="tns:places"/>
+    
+  <xs:element name="point" type="tns:xmlPoint"/>
+    
+  <xs:element name="position" type="tns:xmlPosition"/>
     
   <xs:element name="school" type="tns:xmlSchool"/>
     
@@ -213,17 +219,61 @@
       
   </xs:complexType>
     
-  <xs:complexType name="xmlPlacePoint">
+  <xs:complexType name="xmlPoint">
+        
+    <xs:sequence/>
+        
+    <xs:attribute name="latitude" type="xs:double" use="required"/>
+        
+    <xs:attribute name="longitude" type="xs:double" use="required"/>
+      
+  </xs:complexType>
+    
+  <xs:complexType abstract="true" name="xmlPosition">
         
     <xs:sequence/>
         
     <xs:attribute name="id" type="xs:string" use="required"/>
         
-    <xs:attribute name="latitude" type="xs:double" use="required"/>
-        
-    <xs:attribute name="longitude" type="xs:double" use="required"/>
-        
     <xs:attribute name="zoom" type="xs:int"/>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlPositionPoint">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPosition">
+                
+        <xs:sequence>
+                    
+          <xs:element ref="tns:point"/>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlPositionArea">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPosition">
+                
+        <xs:sequence>
+                    
+          <xs:element form="qualified" name="center" type="tns:xmlPoint"/>
+                    
+          <xs:element maxOccurs="unbounded" ref="tns:point"/>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
       
   </xs:complexType>
     
@@ -231,7 +281,15 @@
         
     <xs:sequence>
             
-      <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:placePoint"/>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+                
+        <xs:element ref="tns:position"/>
+                
+        <xs:element ref="tns:placePoint"/>
+                
+        <xs:element ref="tns:placeArea"/>
+              
+      </xs:choice>
           
     </xs:sequence>
       

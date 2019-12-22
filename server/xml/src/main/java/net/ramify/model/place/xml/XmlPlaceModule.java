@@ -11,7 +11,7 @@ import net.ramify.model.place.provider.PlaceGroupProvider;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.xml.archives.XmlArchives;
 import net.ramify.model.place.xml.description.XmlPlaceDescriptions;
-import net.ramify.model.place.xml.location.XmlPlacePositions;
+import net.ramify.model.place.xml.location.XmlPositions;
 import net.ramify.model.place.xml.place.XmlPlaces;
 import net.ramify.model.place.xml.place.group.XmlPlaceGroups;
 import net.ramify.model.record.archive.ArchiveProvider;
@@ -39,7 +39,7 @@ public class XmlPlaceModule extends PrivateModule {
     @Provides
     @Singleton
     JAXBContext providePlaceContext() throws JAXBException {
-        return JAXBContext.newInstance(XmlPlaces.class, XmlPlacePositions.class, XmlPlaceDescriptions.class, XmlArchives.class, XmlPlaceGroups.class);
+        return JAXBContext.newInstance(XmlPlaces.class, XmlPositions.class, XmlPlaceDescriptions.class, XmlArchives.class, XmlPlaceGroups.class);
     }
 
     @Provides
