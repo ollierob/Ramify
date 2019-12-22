@@ -57,8 +57,7 @@ export default class RecordSetPage extends RecordBasePage<State> {
 
                 <PlaceMap
                     loading={this.state.recordSetCoversPlace.loading}
-                    place={this.state.recordSetCoversPlace.data && this.state.recordSetCoversPlace.data.place}
-                    position={this.state.recordSetCoversPlace.data && this.state.recordSetCoversPlace.data.position}/>
+                    places={[this.state.recordSetCoversPlace.data, this.state.recordSetSource.data && this.state.recordSetSource.data]}/>
 
                 <RecordPlaceInfo
                     preTitle={<>These records relate to<br/></>}

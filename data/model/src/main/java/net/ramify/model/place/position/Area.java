@@ -10,7 +10,7 @@ public interface Area extends Position {
 
     @Deprecated
     @Override
-    default Set<Point> points() {
+    default Set<Point> boundaryPoints() {
         return this.boundary();
     }
 

@@ -14,20 +14,20 @@ public interface Position extends BuildsProto<LocationProto.Position> {
     Point center();
 
     @Nonnull
-    Set<Point> points();
+    Set<Point> boundaryPoints();
 
     int zoom();
 
-    default boolean isNowhere() {
-        return this.points().isEmpty();
-    }
-
     default boolean isPoint() {
-        return this.points().size() == 1;
+        return this.boundaryPoints().size() <= 1;
     }
 
     default boolean isLine() {
-        return this.points().size() == 2;
+        return this.boundaryPoints().size() == 2;
+    }
+
+    default boolean isArea() {
+        return this.boundaryPoints().size() >= 3;
     }
 
     @Nonnull
@@ -35,7 +35,7 @@ public interface Position extends BuildsProto<LocationProto.Position> {
     default LocationProto.Position toProto() {
         return LocationProto.Position.newBuilder()
                 .setCenter(this.center().toProto())
-                .addAllBoundary(Iterables.transform(this.points(), Point::toProto))
+                .addAllBoundary(Iterables.transform(this.boundaryPoints(), Point::toProto))
                 .setZoom(this.zoom())
                 .build();
     }
@@ -51,7 +51,7 @@ public interface Position extends BuildsProto<LocationProto.Position> {
 
             @Nonnull
             @Override
-            public Set<Point> points() {
+            public Set<Point> boundaryPoints() {
                 return Collections.emptySet();
             }
 
