@@ -16,6 +16,7 @@ import net.ramify.model.event.type.historic.GenericHistoricEvent;
 import net.ramify.model.event.type.marriage.GenericMarriageEvent;
 import net.ramify.model.event.type.marriage.MarriageEvent;
 import net.ramify.model.event.type.misc.Flourished;
+import net.ramify.model.event.type.misc.GenericLifeEvent;
 import net.ramify.model.event.type.residence.GenericResidenceEvent;
 import net.ramify.model.event.type.residence.ResidenceEvent;
 import net.ramify.model.event.type.will.GenericProbateEvent;
@@ -127,6 +128,10 @@ public class EventBuilder {
 
     public HistoricEvent toHistoric(final String title, final SettlementOrRegion region) {
         return new GenericHistoricEvent(eventId, date, place, region, title, description, links);
+    }
+
+    public LifeEvent toAnyLifeEvent(final HasPersonId person, final String title) {
+        return new GenericLifeEvent(title, eventId, person.personId(), this.eventProperties());
     }
 
 }

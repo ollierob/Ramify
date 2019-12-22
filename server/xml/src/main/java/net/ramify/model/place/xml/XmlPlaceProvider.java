@@ -17,6 +17,7 @@ import net.ramify.model.place.iso.CountryIso;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.region.Country;
 import net.ramify.model.place.xml.place.XmlPlaces;
+import net.ramify.utils.collections.SetUtils;
 import net.ramify.utils.file.FileTraverseUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,10 +44,10 @@ class XmlPlaceProvider implements PlaceProvider {
 
     private final Map<PlaceId, Place> places;
     private final SetMultimap<PlaceId, PlaceId> children;
-    private final SetMultimap<PlaceGroupId, Place> groupIds;
+    private final SetMultimap<PlaceGroupId, PlaceId> groupIds;
     private final Set<Country> countries;
 
-    private XmlPlaceProvider(final Map<PlaceId, Place> places, final SetMultimap<PlaceId, PlaceId> children, final SetMultimap<PlaceGroupId, Place> groupIds, final Set<Country> countries) {
+    private XmlPlaceProvider(final Map<PlaceId, Place> places, final SetMultimap<PlaceId, PlaceId> children, final SetMultimap<PlaceGroupId, PlaceId> groupIds, final Set<Country> countries) {
         this.places = places;
         this.children = children;
         this.groupIds = groupIds;
@@ -99,14 +100,14 @@ class XmlPlaceProvider implements PlaceProvider {
     @Nonnull
     @Override
     public Set<Place> findByGroup(final PlaceGroupId groupId) {
-        return groupIds.get(groupId);
+        return SetUtils.transform(groupIds.get(groupId), this::require);
     }
 
     void add(final Place place) {
         places.put(place.placeId(), place);
         Consumers.ifNonNull(place.parent(), parent -> children.put(parent.placeId(), place.placeId()));
         place.ultimateParent().as(Country.class).ifPresent(countries::add);
-        groupIds.put(place.placeGroupId(), place);
+        groupIds.put(place.placeGroupId(), place.placeId());
     }
 
     void addAll(final Collection<Place> places) {

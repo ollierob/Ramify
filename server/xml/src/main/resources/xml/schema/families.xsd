@@ -47,9 +47,11 @@
                 
         <xs:element ref="ns2:personEvent"/>
                 
-        <xs:element ref="ns2:baptism"/>
+        <xs:element ref="ns2:any"/>
                 
         <xs:element ref="ns2:birth"/>
+                
+        <xs:element ref="ns2:baptism"/>
                 
         <xs:element ref="ns2:marriage"/>
                 
