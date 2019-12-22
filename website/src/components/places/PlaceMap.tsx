@@ -2,7 +2,7 @@ import * as React from "react";
 import {HasClass} from "../style/HasClass";
 import {Point} from "../../protobuf/generated/location_pb";
 import {GeoJSON, Map, Marker, Popup, TileLayer} from 'react-leaflet';
-import {Icon, LatLngLiteral} from "leaflet";
+import {Icon, LatLngLiteral, PathOptions} from "leaflet";
 import {Loading} from "../style/Loading";
 import {PlaceBundle} from "../../protobuf/generated/place_pb";
 import "./PlaceMap.css";
@@ -94,8 +94,8 @@ const MapComponent = (props: {center: Point.AsObject, zoom: number, markers: Rea
 
     return <Map center={toLatLong(center)} zoom={props.zoom}>
         <TileLayer url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}/>
-        {props.area && <GeoJSON data={toGeoJson(props.area)}/>}
-        {markers.map(marker => <Marker position={toLatLong(marker.point)} icon={CustomIcon}>
+        {props.area && <GeoJSON data={toGeoJson(props.area)} style={AreaStyle}/>}
+        {markers.map(marker => <Marker position={toLatLong(marker.point)} icon={MarkerIcon}>
             <Popup>{marker.label}</Popup>
         </Marker>)}
     </Map>;
@@ -108,9 +108,14 @@ function toLatLong(point: Point.AsObject): LatLngLiteral {
 
 type MarkerPoint = {point: Point.AsObject, label: React.ReactNode}
 
-const CustomIcon: Icon = new Icon({
+const MarkerIcon: Icon = new Icon({
     iconUrl: "/images/marker-icon.png",
     shadowUrl: "/images/marker-shadow.png",
     iconSize: [25, 41],
     iconAnchor: [12, 40]
 });
+
+const AreaStyle: PathOptions = {
+    color: "#b76337",
+    fillColor: "#d38e6d"
+};
