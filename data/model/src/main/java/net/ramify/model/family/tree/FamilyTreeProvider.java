@@ -38,7 +38,7 @@ public interface FamilyTreeProvider extends Provider<FamilyTreeId, FamilyTree> {
                 .stream()
                 .map(this::get)
                 .filter(Objects::nonNull)
-                .map(FamilyTree::meta);
+                .map(FamilyTree::info);
     }
 
     class UnknownTreeException extends MissingValueException {

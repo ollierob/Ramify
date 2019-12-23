@@ -36,9 +36,9 @@ export class PlaceMap extends React.PureComponent<Props, State> {
 
             {this.props.loading && <Loading/>}
 
-            {this.state.places.length && <MapComponent {...this.state}/>}
+            {this.state.places.length > 0 && <MapComponent {...this.state}/>}
 
-            {!this.state.places.length && <span className="unimportant" style={{padding: 4}}>
+            {!this.props.loading && !this.state.places.length && <span className="unimportant" style={{padding: 4}}>
                 No position information available.
             </span>}
 

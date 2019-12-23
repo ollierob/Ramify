@@ -46,14 +46,14 @@ public class XmlFamilyTree {
         private final FamilyTreeInfo meta;
         private final Set<Family> families;
 
-        private DefaultFamilyTree(FamilyTreeInfo meta, Set<Family> families) {
+        private DefaultFamilyTree(final FamilyTreeInfo meta, final Set<Family> families) {
             this.meta = meta;
             this.families = families;
         }
 
         @Nonnull
         @Override
-        public FamilyTreeInfo meta() {
+        public FamilyTreeInfo info() {
             return meta;
         }
 

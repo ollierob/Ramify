@@ -39,7 +39,7 @@ public class DefaultFamilyTreeResource implements FamilyTreeResource {
 
     @Override
     public FamilyTreeInfo name(final FamilyTreeId id) {
-        return this.loadTree(id).meta();
+        return this.loadTree(id).info();
     }
 
     @Override

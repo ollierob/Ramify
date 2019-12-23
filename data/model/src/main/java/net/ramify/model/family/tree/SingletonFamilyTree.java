@@ -18,7 +18,7 @@ public class SingletonFamilyTree implements FamilyTree {
 
     @Nonnull
     @Override
-    public FamilyTreeInfo meta() {
+    public FamilyTreeInfo info() {
         return meta;
     }
 

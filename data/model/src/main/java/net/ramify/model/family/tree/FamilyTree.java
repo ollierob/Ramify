@@ -12,17 +12,17 @@ import javax.annotation.Nonnull;
 public interface FamilyTree extends HasFamilyTreeId, HasFamilies, BuildsProto<FamilyProto.FamilyTree> {
 
     @Nonnull
-    FamilyTreeInfo meta();
+    FamilyTreeInfo info();
 
     @Nonnull
     default String name() {
-        return this.meta().name();
+        return this.info().name();
     }
 
     @Nonnull
     @Override
     default FamilyTreeId familyTreeId() {
-        return this.meta().familyTreeId();
+        return this.info().familyTreeId();
     }
 
     default FamilyTree relativesOf(final PersonId personId) {
@@ -32,7 +32,7 @@ public interface FamilyTree extends HasFamilyTreeId, HasFamilies, BuildsProto<Fa
 
     @Nonnull
     default FamilyProto.FamilyTree.Builder toProtoBuilder() {
-        return this.meta().toProtoBuilder()
+        return this.info().toProtoBuilder()
                 .addAllFamily(Iterables.transform(this.families(), Family::toProto));
     }
 
