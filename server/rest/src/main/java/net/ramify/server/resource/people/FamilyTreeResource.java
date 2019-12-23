@@ -4,7 +4,7 @@ import net.ramify.model.date.DateRange;
 import net.ramify.model.event.EventId;
 import net.ramify.model.family.tree.FamilyTree;
 import net.ramify.model.family.tree.FamilyTreeId;
-import net.ramify.model.family.tree.FamilyTreeMeta;
+import net.ramify.model.family.tree.FamilyTreeInfo;
 import net.ramify.model.family.tree.FamlyTreeMetas;
 import net.ramify.model.person.PersonId;
 import net.ramify.server.resource.Resource;
@@ -28,7 +28,7 @@ public interface FamilyTreeResource extends Resource {
 
     @GET
     @Path("meta/{id}")
-    FamilyTreeMeta name(@PathParam("id") FamilyTreeId id);
+    FamilyTreeInfo name(@PathParam("id") FamilyTreeId id);
 
     @GET
     @Path("load/{id}")

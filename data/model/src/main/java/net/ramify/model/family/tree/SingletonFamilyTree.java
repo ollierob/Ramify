@@ -8,17 +8,17 @@ import java.util.Set;
 
 public class SingletonFamilyTree implements FamilyTree {
 
-    private final FamilyTreeMeta meta;
+    private final FamilyTreeInfo meta;
     private final Family family;
 
-    public SingletonFamilyTree(final FamilyTreeMeta meta, final Family family) {
+    public SingletonFamilyTree(final FamilyTreeInfo meta, final Family family) {
         this.meta = meta;
         this.family = family;
     }
 
     @Nonnull
     @Override
-    public FamilyTreeMeta meta() {
+    public FamilyTreeInfo meta() {
         return meta;
     }
 

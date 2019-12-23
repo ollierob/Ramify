@@ -5,7 +5,7 @@ import net.ramify.model.family.proto.FamilyProto;
 
 import javax.annotation.Nonnull;
 
-public interface FamilyTreeMeta extends HasFamilyTreeId, BuildsProto<FamilyProto.FamilyTree> {
+public interface FamilyTreeInfo extends HasFamilyTreeId, BuildsProto<FamilyProto.FamilyTree> {
 
     @Nonnull
     String name();

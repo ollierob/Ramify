@@ -5,8 +5,6 @@ import net.ramify.model.Id;
 import net.ramify.model.place.iso.CountryIso;
 import net.ramify.model.place.provider.PlaceProvider;
 
-import java.util.Objects;
-
 public class PlaceId extends Id implements HasPlaceId {
 
     public static final PlaceId ENGLAND = new PlaceId("GB:england:country");
@@ -57,16 +55,6 @@ public class PlaceId extends Id implements HasPlaceId {
 
     public PlaceGroupId placeGroupId() {
         return placeGroupId == null ? placeGroupId = new PlaceGroupId(this.countryIso(), this.name()) : placeGroupId;
-    }
-
-    @Override
-    protected boolean equals(final Id that) {
-        return that instanceof PlaceId
-                && this.equals((PlaceId) that);
-    }
-
-    boolean equals(final PlaceId that) {
-        return Objects.equals(this.value(), that.value());
     }
 
 }

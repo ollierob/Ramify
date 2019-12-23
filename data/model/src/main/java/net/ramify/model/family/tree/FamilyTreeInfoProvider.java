@@ -5,9 +5,9 @@ import net.ramify.model.util.provider.Provider;
 import javax.annotation.Nonnull;
 import java.util.Set;
 
-public interface FamilyTreeMetaProvider extends Provider<FamilyTreeId, FamilyTreeMeta> {
+public interface FamilyTreeInfoProvider extends Provider<FamilyTreeId, FamilyTreeInfo> {
 
     @Nonnull
-    Set<FamilyTreeMeta> all();
+    Set<FamilyTreeInfo> all();
 
 }

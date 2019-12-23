@@ -10,13 +10,13 @@ import java.util.Set;
 public interface FamlyTreeMetas extends BuildsProto<FamilyProto.FamilyTreeList> {
 
     @Nonnull
-    Set<FamilyTreeMeta> meta();
+    Set<FamilyTreeInfo> meta();
 
     @Nonnull
     @Override
     default FamilyProto.FamilyTreeList toProto() {
         return FamilyProto.FamilyTreeList.newBuilder()
-                .addAllFamilyTree(Iterables.transform(this.meta(), FamilyTreeMeta::toProto))
+                .addAllFamilyTree(Iterables.transform(this.meta(), FamilyTreeInfo::toProto))
                 .build();
     }
 

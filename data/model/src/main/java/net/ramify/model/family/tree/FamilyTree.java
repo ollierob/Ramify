@@ -12,7 +12,7 @@ import javax.annotation.Nonnull;
 public interface FamilyTree extends HasFamilyTreeId, HasFamilies, BuildsProto<FamilyProto.FamilyTree> {
 
     @Nonnull
-    FamilyTreeMeta meta();
+    FamilyTreeInfo meta();
 
     @Nonnull
     default String name() {

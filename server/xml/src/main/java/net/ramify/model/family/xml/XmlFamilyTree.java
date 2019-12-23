@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.tree.FamilyTree;
 import net.ramify.model.family.tree.FamilyTreeId;
-import net.ramify.model.family.tree.FamilyTreeMeta;
+import net.ramify.model.family.tree.FamilyTreeInfo;
 import net.ramify.model.record.xml.RecordContext;
 
 import javax.annotation.Nonnull;
@@ -36,24 +36,24 @@ public class XmlFamilyTree {
                 .map(family -> family.toFamily(context))
                 .peek(family -> numPeople.addAndGet(family.numPeople()))
                 .collect(Collectors.toSet());
-        final var meta = new NamedMeta(name, numPeople.get());
+        final var meta = new DefaultInfo(name, numPeople.get());
         return new DefaultFamilyTree(meta, families);
     }
 
     @XmlTransient
     private static class DefaultFamilyTree implements FamilyTree {
 
-        private final FamilyTreeMeta meta;
+        private final FamilyTreeInfo meta;
         private final Set<Family> families;
 
-        private DefaultFamilyTree(FamilyTreeMeta meta, Set<Family> families) {
+        private DefaultFamilyTree(FamilyTreeInfo meta, Set<Family> families) {
             this.meta = meta;
             this.families = families;
         }
 
         @Nonnull
         @Override
-        public FamilyTreeMeta meta() {
+        public FamilyTreeInfo meta() {
             return meta;
         }
 
@@ -66,12 +66,12 @@ public class XmlFamilyTree {
     }
 
     @XmlTransient
-    private static class NamedMeta implements FamilyTreeMeta {
+    private static class DefaultInfo implements FamilyTreeInfo {
 
         private final String name;
         private final int numPeople;
 
-        private NamedMeta(String name, int numPeople) {
+        private DefaultInfo(String name, int numPeople) {
             this.name = name;
             this.numPeople = numPeople;
         }

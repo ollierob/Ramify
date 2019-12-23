@@ -33,7 +33,7 @@ public interface FamilyTreeProvider extends Provider<FamilyTreeId, FamilyTree> {
     }
 
     @Nonnull
-    default Stream<FamilyTreeMeta> allMeta() {
+    default Stream<FamilyTreeInfo> allMeta() {
         return this.allIds()
                 .stream()
                 .map(this::get)

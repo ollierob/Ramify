@@ -4,7 +4,7 @@ import net.ramify.model.date.DateRange;
 import net.ramify.model.event.EventId;
 import net.ramify.model.family.tree.FamilyTree;
 import net.ramify.model.family.tree.FamilyTreeId;
-import net.ramify.model.family.tree.FamilyTreeMeta;
+import net.ramify.model.family.tree.FamilyTreeInfo;
 import net.ramify.model.family.tree.FamilyTreeProvider;
 import net.ramify.model.family.tree.FamlyTreeMetas;
 import net.ramify.model.person.PersonId;
@@ -38,7 +38,7 @@ public class DefaultFamilyTreeResource implements FamilyTreeResource {
     }
 
     @Override
-    public FamilyTreeMeta name(final FamilyTreeId id) {
+    public FamilyTreeInfo name(final FamilyTreeId id) {
         return this.loadTree(id).meta();
     }
 
