@@ -22,8 +22,8 @@ import java.util.UUID;
 
 public class XmlPersonRecord extends XmlRecord {
 
-    @XmlAttribute(name = "id")
-    private String id = UUID.randomUUID().toString();
+    @XmlAttribute(name = "personId")
+    private String personId = UUID.randomUUID().toString();
 
     @XmlAttribute(name = "name")
     private String name;
@@ -40,11 +40,11 @@ public class XmlPersonRecord extends XmlRecord {
     @XmlAttribute(name = "occupation")
     private String occupation;
 
-    @XmlElementRef
+    @XmlElementRef(required = false)
     private List<XmlPersonEvent> events;
 
     public PersonId personId() {
-        return new PersonId(id);
+        return new PersonId(personId);
     }
 
     @Nonnull

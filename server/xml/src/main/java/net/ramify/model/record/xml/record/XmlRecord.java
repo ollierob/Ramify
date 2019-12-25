@@ -14,7 +14,7 @@ public abstract class XmlRecord {
 
     public static final String NAMESPACE = "http://ramify.net/records";
 
-    @XmlAttribute(name = "id")
+    @XmlAttribute(name = "recordId")
     private String recordId;
 
     protected RecordId recordId() {

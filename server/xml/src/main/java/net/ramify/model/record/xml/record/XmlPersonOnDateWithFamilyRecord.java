@@ -15,7 +15,7 @@ import java.util.function.Function;
 
 public abstract class XmlPersonOnDateWithFamilyRecord extends XmlPersonOnDateRecord {
 
-    @XmlElementRef
+    @XmlElementRef(required = false)
     private List<XmlRelationship> relationships;
 
     protected Family family(final RecordContext context, final DateRange recordDate) {
