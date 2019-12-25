@@ -54,7 +54,7 @@ function burialColumns(properties: IndividualRecordProperties) {
     return columns;
 }
 
-const DateColumn: Partial<IndividualRecordColumn> = {
+const YearColumn: Partial<IndividualRecordColumn> = {
     title: "Date",
     width: 85
 };
@@ -103,7 +103,7 @@ const BaptismYear: IndividualRecordColumn = {
 };
 
 const ResidenceYear: IndividualRecordColumn = {
-    ...DateColumn,
+    ...YearColumn,
     key: "residenceDate",
     render: (t, r) => hasResidence(r) && <>{formatDateRange(r.residence[0].date, "month", EmptyPrefixWords)}</>,
     sorter: (r1, r2) => sortDatesByEarliest(hasResidence(r1) && r1.residence[0].date, hasResidence(r2) && r2.residence[0].date),
@@ -140,7 +140,7 @@ const DeathDatePlaceColumn: IndividualRecordColumn = {
 };
 
 const DeathAgeColumn: IndividualRecordColumn = {
-    ...DateColumn,
+    ...YearColumn,
     key: "deathAge",
     title: "Age",
     dataIndex: "death.givenage",

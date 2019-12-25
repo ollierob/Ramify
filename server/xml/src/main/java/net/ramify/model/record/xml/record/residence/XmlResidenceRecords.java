@@ -24,7 +24,7 @@ public class XmlResidenceRecords extends XmlRecords {
     @XmlAttribute(name = "placeId")
     private String placeId;
 
-    @XmlElementRef(namespace = XmlDateRange.NAMESPACE)
+    @XmlElementRef(namespace = XmlDateRange.NAMESPACE, required = false)
     private XmlDateRange date;
 
     @XmlElementRef

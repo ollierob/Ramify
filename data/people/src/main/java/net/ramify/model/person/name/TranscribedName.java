@@ -18,6 +18,10 @@ public class TranscribedName implements Name {
     @Nonnull
     @Override
     public String value() {
+        return assumed.value();
+    }
+
+    public String original() {
         return original;
     }
 
