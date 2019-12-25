@@ -17,10 +17,14 @@ export interface PlaceLoader {
 
     loadPlaceBundle(id: PlaceId): Promise<PlaceBundle.AsObject>
 
-    loadCountries(): Promise<ReadonlyArray<Place.AsObject>>
+    loadCountries(options?: CountryOptions): Promise<ReadonlyArray<Place.AsObject>>
 
     findPlaces(name: string, options: SearchOptions): Promise<ReadonlyArray<Place.AsObject>>
 
+}
+
+type CountryOptions = {
+    onlyTopLevel?: boolean
 }
 
 type SearchOptions = {
@@ -60,11 +64,13 @@ class ProtoPlaceLoader implements PlaceLoader {
             .then(b => b ? b.toObject() : null);
     }
 
-    loadCountries() {
-        return protoGet("/places/countries", PlaceList.deserializeBinary).then(readPlaces);
+    loadCountries(options: CountryOptions = {}) {
+        const url = "/places/countries"
+            + queryParameters({onlyTopLevel: options.onlyTopLevel});
+        return protoGet(url, PlaceList.deserializeBinary).then(readPlaces);
     }
 
-    findPlaces(name: string, options: SearchOptions) {
+    findPlaces(name: string, options: SearchOptions = {}) {
         const url = "/places/search?name=" + name
             + "&limit=" + (options.limit || 1000)
             + (options.within ? "&within=" + options.within : "");

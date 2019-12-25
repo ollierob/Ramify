@@ -46,7 +46,7 @@ public interface PlacesResource extends RootResource {
 
     @GET
     @Path("countries")
-    Places countries();
+    Places countries(@QueryParam("onlyTopLevel") boolean onlyTopLevel);
 
     @GET
     @Path("position/{id}")

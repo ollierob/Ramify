@@ -5,7 +5,6 @@ import {Place} from "../../../../protobuf/generated/place_pb";
 import {DEFAULT_PLACE_LOADER} from "../../../places/PlaceLoader";
 import {Button, Form, Input, List} from "antd";
 import {SearchIcon} from "../../../images/Icons";
-import {PlaceLink} from "../../../places/PlaceLink";
 import {PlaceId} from "../../../places/Place";
 import RegionCascader from "../../../places/RegionCascader";
 import {PlaceAndParent} from "../../../places/PlaceAndParent";
@@ -53,11 +52,12 @@ export class PlaceSearch extends React.PureComponent<Props, State> {
                     <Button
                         htmlType="submit"
                         type="primary"
-                        disabled={this.state.searchResults.loading}>
+                        disabled={!this.state.searchString || this.state.searchResults.loading}>
                         <SearchIcon/> Search
                     </Button>
 
                     <RegionCascader
+                        maxDepth={3}
                         parentOpen={this.props.parentOpen}
                         placeLoader={this.placeLoader}
                         onSelect={this.setSelectedRegion}/>

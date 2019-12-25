@@ -82,7 +82,8 @@ class XmlPlaceProvider implements PlaceProvider {
 
     @Nonnull
     @Override
-    public Set<Country> countries() {
+    public Set<Country> countries(final boolean onlyTopLevel) {
+        if (onlyTopLevel) return Sets.filter(countries, country -> country.parent() == null);
         return countries;
     }
 

@@ -41,7 +41,7 @@ public interface PlaceProvider extends Provider<PlaceId, Place> {
     Set<Place> children(PlaceId id, int depth, Predicate<Place> placePredicate);
 
     @Nonnull
-    Set<? extends Place> countries();
+    Set<? extends Place> countries(boolean onlyTopLevel);
 
     @Nonnull
     Set<Place> findByGroup(PlaceGroupId groupId);

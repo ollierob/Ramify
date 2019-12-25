@@ -7,6 +7,7 @@ import {PlaceLoader} from "./PlaceLoader";
 import {Place} from "../../protobuf/generated/place_pb";
 
 type Props = {
+    maxDepth: number;
     placeHolder?: string;
     placeLoader: PlaceLoader;
     onSelect: (id: PlaceId) => void;
@@ -17,7 +18,6 @@ type Props = {
 type State = {
     selectedRegion: PlaceId[];
     regions: CascaderOptionType[];
-    loadingCountries?: boolean;
     visible?: boolean;
 }
 
@@ -31,7 +31,6 @@ export default class RegionCascader extends React.PureComponent<Props, State> {
         this.state = {
             selectedRegion: [],
             regions: [],
-            loadingCountries: true
         };
         this.loadLeafPlace = this.loadLeafPlace.bind(this);
         this.renderPlace = this.renderPlace.bind(this);
@@ -55,10 +54,10 @@ export default class RegionCascader extends React.PureComponent<Props, State> {
     }
 
     componentDidMount() {
-        this.props.placeLoader.loadCountries().then(countries => this.setState({
-            loadingCountries: false,
-            regions: generateCountryOptions(countries)
-        }));
+        this.props.placeLoader.loadCountries({onlyTopLevel: true})
+            .then(countries => this.setState({
+                regions: generateOptions(countries)
+            }));
     }
 
     componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>) {
@@ -74,16 +73,19 @@ export default class RegionCascader extends React.PureComponent<Props, State> {
     }
 
     private loadLeafPlace(selected: CascaderOptionType[]) {
-        const target = selected[selected.length - 1];
-        if (target.depth == 1) {
+        const depth = selected.length;
+        const target = selected[depth - 1]; //Select the lowest-selected place
+        if (depth < this.props.maxDepth && !target.loadedChildren && !target.loading) {
             target.loading = true;
+            target.loadedChildren = false;
+            //Ugly but how Ant recommends doing it
             this.props.placeLoader.loadChildren(target.value, 1)
                 .then(children => {
                     target.loading = false;
                     target.children = children.map<CascaderOptionType>(child => ({
                         label: <><Flag iso={child.iso}/>{child.name}</>,
                         value: child.id,
-                        depth: 2
+                        isLeaf: depth + 1 >= this.props.maxDepth
                     })).sort((o1, o2) => o1.value.localeCompare(o2.value));
                 }).then(() => this.setState(current => ({regions: [...current.regions]})));
             this.forceUpdate();
@@ -92,13 +94,12 @@ export default class RegionCascader extends React.PureComponent<Props, State> {
 
 }
 
-
-function generateCountryOptions(countries: ReadonlyArray<Place.AsObject>): CascaderOptionType[] {
-    if (!countries) return [];
-    return countries.map<CascaderOptionType>(country => ({
+function generateOptions(places: ReadonlyArray<Place.AsObject>): CascaderOptionType[] {
+    if (!places) return [];
+    return places.map<CascaderOptionType>(country => ({
         label: <><Flag iso={country.iso}/>{country.name}</>,
         value: country.id,
         isLeaf: false,
-        depth: 1
+        loadedChildren: false
     })).sort((o1, o2) => o1.value.localeCompare(o2.value));
 }

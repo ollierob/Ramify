@@ -68,6 +68,7 @@ export default class RecordSearchPage extends RecordBasePage<State> {
                         Filter by record place:
                         <br/>
                         <RegionCascader
+                            maxDepth={3}
                             placeLoader={this.placeLoader}
                             size="large"
                             onSelect={this.setSelectedRegion}/>
