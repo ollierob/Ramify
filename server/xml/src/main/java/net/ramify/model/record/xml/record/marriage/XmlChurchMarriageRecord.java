@@ -6,7 +6,7 @@ import net.ramify.model.event.EventId;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.UnionFamily;
 import net.ramify.model.place.PlaceId;
-import net.ramify.model.record.GenericMarriageRecord;
+import net.ramify.model.record.church.ChurchMarriageRecord;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.type.MarriageRecord;
 import net.ramify.model.record.xml.RecordContext;
@@ -46,12 +46,12 @@ public class XmlChurchMarriageRecord extends XmlMarriageRecord {
         if (spouses == null || spouses.size() != 2) return null;
         final var date = this.date(context);
         final var family = this.family(context.onDate(date));
-        return new GenericMarriageRecord(
+        return new ChurchMarriageRecord(
                 this.recordId(),
                 recordSet,
                 date,
-                marriagePlaceId,
-                family);
+                family,
+                marriagePlaceId);
     }
 
     protected Family family(final RecordContext context) {
