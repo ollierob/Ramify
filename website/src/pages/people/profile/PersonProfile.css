@@ -54,14 +54,14 @@
     vertical-align: top;
 }
 
-.personProfile .profile .right .ant-tabs-nav {
+.personProfile .profile .rightTabs .ant-tabs-nav {
     height: 60px;
 }
 
-.personProfile .profile .right .ant-tabs-tab {
+.personProfile .profile .rightTabs .ant-tabs-tab {
     font-size: 18px;
 }
 
-.personProfile .profile .right .ant-tabs-tab.ant-tabs-tab-active {
+.personProfile .profile .rightTabs .ant-tabs-tab.ant-tabs-tab-active {
     font-weight: bold;
 }

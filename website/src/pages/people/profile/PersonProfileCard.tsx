@@ -125,7 +125,7 @@ function retainFamilyEvent(event: Event.AsObject): boolean {
 }
 
 const ProfileRight = (props: Props & State) => {
-    return <div className="right">
+    return <div className="rightTabs">
         <Tabs size="large">
             <Tabs.TabPane key="relatives" tab="Relatives">
                 <PersonProfileRelativesList {...props}/>
