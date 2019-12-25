@@ -32,7 +32,7 @@ public class ChurchBurialRecord extends AbstractChurchRecord implements BurialRe
 
     @Override
     protected EventProto.RecordType protoType() {
-        return EventProto.RecordType.BAPTISM;
+        return EventProto.RecordType.BURIAL;
     }
 
 }
