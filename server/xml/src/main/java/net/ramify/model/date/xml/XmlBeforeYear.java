@@ -7,7 +7,7 @@ import net.ramify.model.date.parse.DateParser;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(namespace = XmlDateRange.NAMESPACE)
+@XmlRootElement(namespace = XmlDateRange.NAMESPACE, name = "beforeYear")
 public class XmlBeforeYear extends XmlDateRange {
 
     @XmlAttribute(name = "year", required = true)

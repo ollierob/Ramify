@@ -102,6 +102,10 @@
                                     <uri>http://ramify.net/places/us</uri>
                                     <toFile>places_usa.xsd</toFile>
                                 </transformSchema>
+                                <transformSchema>
+                                    <uri>http://ramify.net/places/fr</uri>
+                                    <toFile>places_france.xsd</toFile>
+                                </transformSchema>
                             </transformSchemas>
                             <schemaSourceExcludeFilters>
                                 <myExcludes implementation="org.codehaus.mojo.jaxb2.shared.filters.pattern.PatternFileFilter">

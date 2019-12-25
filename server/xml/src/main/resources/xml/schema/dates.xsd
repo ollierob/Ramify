@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ramify.net/dates" targetNamespace="http://ramify.net/dates" version="1.0">
     
+  <xs:element name="beforeYear" type="tns:xmlBeforeYear"/>
+    
   <xs:element name="betweenYears" type="tns:xmlBetweenYears"/>
     
   <xs:element name="birthDate" type="tns:xmlExactDate"/>
@@ -44,8 +46,6 @@
   <xs:element name="openedInYear" type="tns:xmlInYear"/>
     
   <xs:element name="xmlBeforeDate" type="tns:xmlBeforeDate"/>
-    
-  <xs:element name="xmlBeforeYear" type="tns:xmlBeforeYear"/>
     
   <xs:complexType name="xmlBeforeDate">
         

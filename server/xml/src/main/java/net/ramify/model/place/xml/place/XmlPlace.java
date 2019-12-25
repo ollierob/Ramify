@@ -15,6 +15,7 @@ import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.iso.CountryIso;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.xml.PlaceParserContext;
+import net.ramify.model.place.xml.place.france.XmlFrance;
 import net.ramify.model.place.xml.place.settlement.XmlSettlement;
 import net.ramify.model.place.xml.place.uk.XmlUkPlace;
 import net.ramify.model.place.xml.place.usa.XmlUsaPlace;
@@ -31,7 +32,7 @@ import java.util.function.Consumer;
 
 import static net.ramify.utils.StringUtils.isBlank;
 
-@XmlSeeAlso({XmlSettlement.class, XmlUkPlace.class, XmlUsaPlace.class})
+@XmlSeeAlso({XmlSettlement.class, XmlUkPlace.class, XmlUsaPlace.class, XmlFrance.class})
 public abstract class XmlPlace {
 
     public static final String NAMESPACE = "http://ramify.net/places";

@@ -49,7 +49,7 @@
                 
         <xs:element ref="ns1:inMonth"/>
                 
-        <xs:element ref="ns1:xmlBeforeYear"/>
+        <xs:element ref="ns1:beforeYear"/>
               
       </xs:choice>
             
