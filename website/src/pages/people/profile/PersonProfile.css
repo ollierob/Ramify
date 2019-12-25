@@ -6,10 +6,17 @@
     margin-left: 32px;
 }
 
-.personProfile .profile .events {
+.personProfile .profile .leftHalf {
     display: inline-block;
     width: calc(50% - 8px);
     margin-right: 8px;
+}
+
+.personProfile .profile .rightHalf {
+    display: inline-block;
+    width: calc(50% - 8px);
+    margin-left: 8px;
+    vertical-align: top;
 }
 
 .personProfile .profile .events .controls {
@@ -46,22 +53,18 @@
     font-style: italic;
 }
 
-.personProfile .profile .right {
-    display: inline-block;
-    width: calc(50% - 8px);
+.personProfile .profile .rightHalf .ant-tabs.ant-tabs-top {
     margin-top: -16px;
-    margin-left: 8px;
-    vertical-align: top;
 }
 
-.personProfile .profile .rightTabs .ant-tabs-nav {
+.personProfile .profile .rightHalf .ant-tabs-nav {
     height: 60px;
 }
 
-.personProfile .profile .rightTabs .ant-tabs-tab {
+.personProfile .profile .rightHalf .ant-tabs-tab {
     font-size: 18px;
 }
 
-.personProfile .profile .rightTabs .ant-tabs-tab.ant-tabs-tab-active {
+.personProfile .profile .rightHalf .ant-tabs-tab.ant-tabs-tab-active {
     font-weight: bold;
 }

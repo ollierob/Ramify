@@ -45,18 +45,15 @@ export class PersonProfileCard extends React.PureComponent<Props, State> {
 
         return <Card
             title={<PersonProfileTitle person={person}/>}
-            className="profile large">
+            className="leftHalf profile large">
 
             {person && <>
-
-                <PersonProfileEvents
+                <ProfileLeft
                     {...this.props}
                     {...this.state}/>
-
                 <ProfileRight
                     {...this.props}
                     {...this.state}/>
-
             </>}
 
         </Card>;
@@ -124,8 +121,14 @@ function retainFamilyEvent(event: Event.AsObject): boolean {
     }
 }
 
+const ProfileLeft = (props: Props & State) => {
+    return <div className="leftHalf">
+        <PersonProfileEvents {...props}/>
+    </div>;
+};
+
 const ProfileRight = (props: Props & State) => {
-    return <div className="rightTabs">
+    return <div className="rightHalf">
         <Tabs size="large">
             <Tabs.TabPane key="relatives" tab="Relatives">
                 <PersonProfileRelativesList {...props}/>
