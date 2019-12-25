@@ -1,9 +1,9 @@
 import * as React from "react";
 import {Person} from "../../../protobuf/generated/person_pb";
-import {Card} from "antd";
+import {Card, Tabs} from "antd";
 import {Family} from "../../../protobuf/generated/family_pb";
 import {FamilyTreeId} from "../../../components/tree/FamilyTree";
-import {RelativesList} from "./RelativesList";
+import {PersonProfileRelativesList} from "./PersonProfileRelativesList";
 import {determineRelatives, Relatives} from "../../../components/relationship/Relatives";
 import {ProfileEvent, sortProfileEvents} from "../../../components/event/ProfileEvent";
 import {Event} from "../../../protobuf/generated/event_pb";
@@ -27,7 +27,7 @@ type State = {
     events: ReadonlyArray<ProfileEvent>
 }
 
-export class PersonProfile extends React.PureComponent<Props, State> {
+export class PersonProfileCard extends React.PureComponent<Props, State> {
 
     constructor(props: Props) {
         super(props);
@@ -53,7 +53,7 @@ export class PersonProfile extends React.PureComponent<Props, State> {
                     {...this.props}
                     {...this.state}/>
 
-                <ProfileRelatives
+                <ProfileRight
                     {...this.props}
                     {...this.state}/>
 
@@ -124,8 +124,14 @@ function retainFamilyEvent(event: Event.AsObject): boolean {
     }
 }
 
-const ProfileRelatives = (props: Props & State) => {
-    return <div className="relatives">
-        <RelativesList {...props}/>
+const ProfileRight = (props: Props & State) => {
+    return <div className="right">
+        <Tabs size="large">
+            <Tabs.TabPane key="relatives" tab="Relatives">
+                <PersonProfileRelativesList {...props}/>
+            </Tabs.TabPane>
+            <Tabs.TabPane key="records" tab="Records" disabled/>
+            <Tabs.TabPane key="places" tab="Places" disabled/>
+        </Tabs>
     </div>;
 };

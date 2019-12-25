@@ -8,7 +8,8 @@
 
 .personProfile .profile .events {
     display: inline-block;
-    width: 50%;
+    width: calc(50% - 8px);
+    margin-right: 8px;
 }
 
 .personProfile .profile .events .controls {
@@ -45,8 +46,22 @@
     font-style: italic;
 }
 
-.personProfile .profile .relatives {
+.personProfile .profile .right {
     display: inline-block;
-    width: 40%;
+    width: calc(50% - 8px);
+    margin-top: -16px;
+    margin-left: 8px;
     vertical-align: top;
+}
+
+.personProfile .profile .right .ant-tabs-nav {
+    height: 60px;
+}
+
+.personProfile .profile .right .ant-tabs-tab {
+    font-size: 18px;
+}
+
+.personProfile .profile .right .ant-tabs-tab.ant-tabs-tab-active {
+    font-weight: bold;
 }

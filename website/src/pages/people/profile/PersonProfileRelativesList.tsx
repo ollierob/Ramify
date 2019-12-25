@@ -11,7 +11,7 @@ type Props = {
     relatives: Relatives
 }
 
-export class RelativesList extends React.PureComponent<Props> {
+export class PersonProfileRelativesList extends React.PureComponent<Props> {
 
     constructor(props) {
         super(props);

@@ -48,8 +48,8 @@ export class EventBox extends React.PureComponent<EventBoxProps> {
                     </div>}
                 </div>
                 <div className="main">
-                    {renderPeople(this.props)}
                     <EventNotes event={event}/>
+                    {renderPeople(this.props)}
                 </div>
             </div>
         </Card>;
