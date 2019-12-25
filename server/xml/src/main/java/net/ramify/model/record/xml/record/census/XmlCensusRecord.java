@@ -13,8 +13,6 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 @XmlSeeAlso({XmlEngland1821ByAgeCensusRecord.class, XmlEngland1841CensusRecord.class})
 public abstract class XmlCensusRecord extends XmlPlaceRecord {
 
-    protected abstract int numIndividuals();
-
     protected abstract CensusRecord build(RecordContext context, Place censusPlace, RecordSet recordSet);
 
 }

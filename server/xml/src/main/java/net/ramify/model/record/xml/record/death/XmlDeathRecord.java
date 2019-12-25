@@ -86,6 +86,7 @@ public class XmlDeathRecord extends XmlPersonOnDateRecord {
         return deathDate.resolve();
     }
 
+    @Override
     public int numIndividuals() {
         return 1; //TODO family
     }

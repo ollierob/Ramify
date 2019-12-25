@@ -9,7 +9,7 @@ import net.ramify.model.record.type.MarriageRecord;
 
 public class GenericMarriageRecord extends DateFamilyPlaceRecord implements MarriageRecord {
 
-    protected GenericMarriageRecord(final RecordId id, RecordSet recordSet, DateRange date, PlaceId place, Family family) {
+    public GenericMarriageRecord(final RecordId id, RecordSet recordSet, DateRange date, PlaceId place, Family family) {
         super(id, recordSet, date, family, place);
     }
 

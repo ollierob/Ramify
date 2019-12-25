@@ -28,6 +28,7 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.type.SettlementOrRegion;
 import net.ramify.model.util.Link;
 
+import java.util.Objects;
 import java.util.Set;
 
 public class EventBuilder {
@@ -42,12 +43,12 @@ public class EventBuilder {
     private Set<Link> links;
 
     private EventBuilder(final EventId eventId, final DateRange date) {
-        this.eventId = eventId;
+        this.eventId = Objects.requireNonNull(eventId);
         this.date = date;
     }
 
     public static EventBuilder builder(final EventId id, final DateRange date) {
-        return new EventBuilder(id, date);
+        return new EventBuilder(id == null ? EventId.random() : id, date);
     }
 
     public static EventBuilder builderWithRandomId(final DateRange date) {

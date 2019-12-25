@@ -23,6 +23,8 @@
     
   <xs:element name="burialRecords" type="tns:xmlBurialRecords"/>
     
+  <xs:element name="churchMarriage" type="tns:xmlChurchMarriageRecord"/>
+    
   <xs:element name="death" type="tns:xmlDeathRecord"/>
     
   <xs:element name="englandCensus" type="tns:xmlEnglandCensusRecords"/>
@@ -32,6 +34,8 @@
   <xs:element name="groMarriage" type="tns:xmlGroMarriageRecord"/>
     
   <xs:element name="marriageRecords" type="tns:xmlMarriageRecords"/>
+    
+  <xs:element name="marriageSpouse" type="tns:xmlMarriageSpouse"/>
     
   <xs:element name="memorialInscription" type="tns:xmlMemorialInscription"/>
     
@@ -54,6 +58,8 @@
   <xs:element name="residence" type="tns:xmlResidenceRecord"/>
     
   <xs:element name="residenceRecords" type="tns:xmlResidenceRecords"/>
+    
+  <xs:element name="witness" type="tns:xmlWitnessPerson"/>
     
   <xs:complexType name="xmlPersonRecord">
         
@@ -419,7 +425,7 @@
       
   </xs:complexType>
     
-  <xs:complexType name="xmlPersonOnDateWithFamilyRecord">
+  <xs:complexType abstract="true" name="xmlPersonOnDateWithFamilyRecord">
         
     <xs:complexContent>
             
@@ -493,11 +499,17 @@
                 
         <xs:sequence>
                     
-          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:groMarriage"/>
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        
+            <xs:element ref="tns:churchMarriage"/>
+                        
+            <xs:element ref="tns:groMarriage"/>
+                      
+          </xs:choice>
                   
         </xs:sequence>
                 
-        <xs:attribute name="marriagePlace" type="xs:string" use="required"/>
+        <xs:attribute name="marriagePlace" type="xs:string"/>
               
       </xs:extension>
           
@@ -510,6 +522,76 @@
     <xs:complexContent>
             
       <xs:extension base="tns:xmlRecord">
+                
+        <xs:sequence/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlChurchMarriageRecord">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlMarriageRecord">
+                
+        <xs:sequence>
+                    
+          <xs:choice>
+                        
+            <xs:element ref="ns3:xmlBeforeDate"/>
+                        
+            <xs:element ref="ns3:inYear"/>
+                        
+            <xs:element ref="ns3:onDate"/>
+                        
+            <xs:element ref="ns3:inQuarter"/>
+                        
+            <xs:element ref="ns3:betweenYears"/>
+                        
+            <xs:element ref="ns3:inMonth"/>
+                        
+            <xs:element ref="ns3:xmlBeforeYear"/>
+                      
+          </xs:choice>
+                    
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:marriageSpouse"/>
+                    
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:witness"/>
+                  
+        </xs:sequence>
+                
+        <xs:attribute name="eventId" type="xs:string"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlMarriageSpouse">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPersonOnDateWithFamilyRecord">
+                
+        <xs:sequence/>
+                
+        <xs:attribute name="signature" type="tns:xmlSignature"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlWitnessPerson">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPersonRecord">
                 
         <xs:sequence/>
               
@@ -965,11 +1047,11 @@
         
     <xs:restriction base="xs:string">
             
+      <xs:enumeration value="manor"/>
+            
       <xs:enumeration value="government"/>
             
       <xs:enumeration value="church"/>
-            
-      <xs:enumeration value="manor"/>
           
     </xs:restriction>
       
@@ -979,27 +1061,39 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="mixed"/>
-            
       <xs:enumeration value="residence"/>
-            
-      <xs:enumeration value="birth"/>
-            
-      <xs:enumeration value="burial"/>
-            
-      <xs:enumeration value="census"/>
-            
-      <xs:enumeration value="marriage"/>
-            
-      <xs:enumeration value="payment"/>
-            
-      <xs:enumeration value="membership"/>
-            
-      <xs:enumeration value="mention"/>
             
       <xs:enumeration value="death"/>
             
+      <xs:enumeration value="marriage"/>
+            
+      <xs:enumeration value="burial"/>
+            
+      <xs:enumeration value="birth"/>
+            
       <xs:enumeration value="baptism"/>
+            
+      <xs:enumeration value="mention"/>
+            
+      <xs:enumeration value="census"/>
+            
+      <xs:enumeration value="membership"/>
+            
+      <xs:enumeration value="mixed"/>
+            
+      <xs:enumeration value="payment"/>
+          
+    </xs:restriction>
+      
+  </xs:simpleType>
+    
+  <xs:simpleType name="xmlSignature">
+        
+    <xs:restriction base="xs:string">
+            
+      <xs:enumeration value="signature"/>
+            
+      <xs:enumeration value="mark"/>
           
     </xs:restriction>
       
@@ -1013,9 +1107,9 @@
             
       <xs:enumeration value="head"/>
             
-      <xs:enumeration value="spouse"/>
-            
       <xs:enumeration value="parent"/>
+            
+      <xs:enumeration value="spouse"/>
           
     </xs:restriction>
       

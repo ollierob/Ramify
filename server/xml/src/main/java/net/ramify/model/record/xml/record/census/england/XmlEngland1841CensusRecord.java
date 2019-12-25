@@ -35,7 +35,7 @@ public class XmlEngland1841CensusRecord extends XmlEnglandCensus {
     }
 
     @Override
-    protected int numIndividuals() {
+    public int numIndividuals() {
         return individuals.size();
     }
 

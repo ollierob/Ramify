@@ -3,6 +3,7 @@ package net.ramify.model.record.xml.record;
 import net.meerkat.functions.consumers.Consumers;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.EventBuilder;
+import net.ramify.model.event.EventId;
 import net.ramify.model.event.collection.MutablePersonEventSet;
 import net.ramify.model.event.collection.PersonEventSet;
 import net.ramify.model.event.type.BirthEvent;
@@ -72,8 +73,11 @@ public class XmlPersonOnDateRecord extends XmlPersonRecord {
     }
 
     protected EventBuilder eventBuilder(final DateRange date) {
-        return EventBuilder.builderWithRandomId(date)
-                .withGivenAge(this.age());
+        return this.eventBuilder(null, date);
+    }
+
+    protected EventBuilder eventBuilder(final EventId eventId, final DateRange date) {
+        return EventBuilder.builder(eventId, date).withGivenAge(this.age());
     }
 
 }

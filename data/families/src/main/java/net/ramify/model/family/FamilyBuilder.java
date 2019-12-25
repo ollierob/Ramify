@@ -11,11 +11,9 @@ import net.ramify.model.relationship.RelationshipFactory;
 public class FamilyBuilder {
 
     private final MutableNetwork<Person, Relationship> network = NetworkBuilder.directed().build();
-    private final Person root;
+    private Person root;
 
-    @Deprecated
     public FamilyBuilder() {
-        this.root = null;
     }
 
     public FamilyBuilder(final Person root) {
@@ -25,6 +23,7 @@ public class FamilyBuilder {
 
     public FamilyBuilder addPerson(final Person person) {
         network.addNode(person);
+        if (root == null) root = person;
         return this;
     }
 
@@ -42,6 +41,10 @@ public class FamilyBuilder {
         network.addNode(to);
         network.addEdge(from, to, relationship);
         return this;
+    }
+
+    public FamilyBuilder addFamily(final Family family, final Relationship join) {
+        throw new UnsupportedOperationException();
     }
 
     public Family build() {

@@ -82,4 +82,9 @@ public class XmlPersonRecord extends XmlRecord {
         return events;
     }
 
+    @Override
+    public int numIndividuals() {
+        return 1;
+    }
+
 }

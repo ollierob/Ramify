@@ -29,6 +29,7 @@ public class XmlMemorialInscription extends XmlRecord {
     @XmlElementRef
     private List<XmlFamily> families;
 
+    @Override
     public int numIndividuals() {
         if (families == null || families.isEmpty()) return 0;
         return families.stream().mapToInt(XmlFamily::numPeople).sum();

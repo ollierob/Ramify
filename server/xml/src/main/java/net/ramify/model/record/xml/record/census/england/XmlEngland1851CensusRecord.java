@@ -23,7 +23,7 @@ public class XmlEngland1851CensusRecord extends XmlEnglandCensus {
     private List<XmlEngland1851CensusIndividual> individuals;
 
     @Override
-    protected int numIndividuals() {
+    public int numIndividuals() {
         return individuals.size();
     }
 

@@ -121,7 +121,8 @@ public class XmlBurialRecord extends XmlPersonOnDateRecord {
                 .toBurial(personId);
     }
 
-    int numIndividuals() {
+    @Override
+    public int numIndividuals() {
         return 1 + (relationships == null ? 0 : relationships.size()); //FIXME count unique
     }
 

@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlElementRef;
 import java.util.List;
 import java.util.function.Function;
 
-public class XmlPersonOnDateWithFamilyRecord extends XmlPersonOnDateRecord {
+public abstract class XmlPersonOnDateWithFamilyRecord extends XmlPersonOnDateRecord {
 
     @XmlElementRef
     private List<XmlRelationship> relationships;
@@ -22,8 +22,8 @@ public class XmlPersonOnDateWithFamilyRecord extends XmlPersonOnDateRecord {
         return this.family(context, recordDate, id -> this.events(id, recordDate, context));
     }
 
-    protected Family family(final RecordContext context, final DateRange recordDate, final Function<PersonId, ? extends PersonEventSet> createEvents) {
-        final var root = this.person(context, createEvents);
+    protected Family family(final RecordContext context, final DateRange recordDate, final Function<PersonId, ? extends PersonEventSet> createRootEvents) {
+        final var root = this.person(context, createRootEvents);
         final var builder = new FamilyBuilder(root);
         this.addFamily(root, builder, context, recordDate);
         return builder.build();
@@ -34,8 +34,9 @@ public class XmlPersonOnDateWithFamilyRecord extends XmlPersonOnDateRecord {
         relationships.forEach(relationship -> relationship.addRelationship(root, builder, context, recordDate));
     }
 
+    @Override
     public int numIndividuals() {
-        return 1 + (relationships == null ? 0 : relationships.size()); //FIXME count unique
+        return super.numIndividuals() + (relationships == null ? 0 : relationships.size()); //FIXME count unique
     }
 
 }

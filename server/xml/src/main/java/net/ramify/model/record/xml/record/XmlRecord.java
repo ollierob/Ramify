@@ -20,4 +20,6 @@ public abstract class XmlRecord {
         return EventId.random();
     }
 
+    public abstract int numIndividuals();
+
 }

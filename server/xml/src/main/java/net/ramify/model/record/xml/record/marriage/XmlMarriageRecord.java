@@ -9,10 +9,8 @@ import net.ramify.model.record.xml.record.marriage.england.XmlGroMarriageRecord;
 
 import javax.xml.bind.annotation.XmlSeeAlso;
 
-@XmlSeeAlso({XmlGroMarriageRecord.class})
+@XmlSeeAlso({XmlChurchMarriageRecord.class, XmlGroMarriageRecord.class})
 public abstract class XmlMarriageRecord extends XmlRecord {
-
-    public abstract int numIndividuals();
 
     public abstract MarriageRecord build(RecordContext context, RecordSet recordSet, PlaceId marriagePlace);
 
