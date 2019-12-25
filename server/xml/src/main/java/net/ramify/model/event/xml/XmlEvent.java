@@ -21,11 +21,17 @@ public abstract class XmlEvent {
     @XmlAttribute(name = "id")
     private String eventId = UUID.randomUUID().toString();
 
-    @XmlElementRef(namespace = XmlDateRange.NAMESPACE)
+    @XmlElementRef(namespace = XmlDateRange.NAMESPACE, required = false)
     private XmlDateRange date;
 
     @XmlElement(name = "description", namespace = XmlEvent.NAMESPACE)
     private String description;
+
+    @XmlAttribute(name = "recordSetId")
+    private String recordSetId;
+
+    @XmlAttribute(name = "recordId")
+    private String recordId;
 
     @Nonnull
     protected EventId eventId() {

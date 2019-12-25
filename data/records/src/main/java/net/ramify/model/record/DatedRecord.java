@@ -8,13 +8,13 @@ import net.ramify.model.record.proto.RecordProto;
 
 import javax.annotation.Nonnull;
 
-public abstract class DateRecord implements Record {
+public abstract class DatedRecord implements Record {
 
     private final RecordId id;
     private final DateRange date;
     private final RecordSet recordSet;
 
-    protected DateRecord(
+    protected DatedRecord(
             final RecordId id,
             final RecordSet recordSet,
             final DateRange date) {

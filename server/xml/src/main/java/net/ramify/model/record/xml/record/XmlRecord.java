@@ -1,23 +1,24 @@
 package net.ramify.model.record.xml.record;
 
-import net.ramify.model.event.EventId;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.xml.record.residence.XmlResidenceRecord;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.UUID;
+
+import static net.ramify.utils.StringUtils.isBlank;
 
 @XmlSeeAlso({XmlResidenceRecord.class})
 public abstract class XmlRecord {
 
     public static final String NAMESPACE = "http://ramify.net/records";
 
-    protected RecordId recordId() {
-        return new RecordId(UUID.randomUUID().toString()); //FIXME
-    }
+    @XmlAttribute(name = "id")
+    private String recordId;
 
-    protected EventId randomEventId() {
-        return EventId.random();
+    protected RecordId recordId() {
+        return new RecordId(isBlank(recordId) ? UUID.randomUUID().toString() : recordId);
     }
 
     public abstract int numIndividuals();

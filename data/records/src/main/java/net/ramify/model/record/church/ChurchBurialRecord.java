@@ -1,6 +1,6 @@
 package net.ramify.model.record.church;
 
-import net.ramify.model.date.ExactDate;
+import net.ramify.model.date.DateRange;
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.family.Family;
 import net.ramify.model.place.PlaceId;
@@ -17,7 +17,7 @@ public class ChurchBurialRecord extends AbstractChurchRecord implements BurialRe
     public ChurchBurialRecord(
             final RecordId id,
             final RecordSet recordSet,
-            final ExactDate date,
+            final DateRange date,
             final PlaceId church,
             final Family family) {
         super(id, recordSet, date, family, church);

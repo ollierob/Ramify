@@ -11,6 +11,12 @@
     
   <xs:element name="builtInYear" type="tns:xmlInYear"/>
     
+  <xs:element name="buriedInMonth" type="tns:xmlInMonth"/>
+    
+  <xs:element name="buriedInQuarter" type="tns:xmlInQuarter"/>
+    
+  <xs:element name="buriedOn" type="tns:xmlExactDate"/>
+    
   <xs:element name="closedBeforeYear" type="tns:xmlBeforeYear"/>
     
   <xs:element name="closedBetweenYears" type="tns:xmlBetweenYears"/>
@@ -20,6 +26,12 @@
   <xs:element name="date" type="tns:xmlExactDate"/>
     
   <xs:element name="deathDate" type="tns:xmlExactDate"/>
+    
+  <xs:element name="diedInMonth" type="tns:xmlInMonth"/>
+    
+  <xs:element name="diedInQuarter" type="tns:xmlInQuarter"/>
+    
+  <xs:element name="diedOn" type="tns:xmlExactDate"/>
     
   <xs:element name="inMonth" type="tns:xmlInMonth"/>
     

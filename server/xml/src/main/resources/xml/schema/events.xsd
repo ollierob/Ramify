@@ -35,7 +35,7 @@
         
     <xs:sequence>
             
-      <xs:choice>
+      <xs:choice minOccurs="0">
                 
         <xs:element ref="ns1:xmlBeforeDate"/>
                 
@@ -58,6 +58,10 @@
     </xs:sequence>
         
     <xs:attribute name="id" type="xs:string"/>
+        
+    <xs:attribute name="recordSetId" type="xs:string"/>
+        
+    <xs:attribute name="recordId" type="xs:string"/>
       
   </xs:complexType>
     

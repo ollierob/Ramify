@@ -3,7 +3,7 @@ package net.ramify.model.record;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.record.collection.RecordSet;
 
-public abstract class ExactDateRecord extends DateRecord {
+public abstract class ExactDateRecord extends DatedRecord {
 
     private final ExactDate date;
 

@@ -6,7 +6,7 @@ import net.ramify.model.record.collection.RecordSet;
 
 import javax.annotation.Nonnull;
 
-public abstract class DateFamilyRecord extends DateRecord implements SingleFamilyRecord {
+public abstract class DateFamilyRecord extends DatedRecord implements SingleFamilyRecord {
 
     private final Family family;
 
