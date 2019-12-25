@@ -16,7 +16,7 @@ public class EventProperties implements HasDate, HasAges {
     private final boolean inferred;
     private final String description;
 
-    EventProperties(final DateRange date, final Age givenAge, final String occupation, boolean inferred, String description) {
+    EventProperties(final DateRange date, final Age givenAge, final String occupation, final boolean inferred, final String description) {
         this.date = date;
         this.givenAge = givenAge;
         this.occupation = occupation;

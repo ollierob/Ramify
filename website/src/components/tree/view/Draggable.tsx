@@ -1,6 +1,5 @@
 import * as React from "react";
 import {CSSProperties, MouseEvent, RefObject} from "react";
-import {HasClass} from "../../style/HasClass";
 
 type Props = {
     children: React.ReactNode;
