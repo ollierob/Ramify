@@ -77,7 +77,7 @@ public class DefaultPlacesResource implements PlacesResource {
 
     @Override
     public Places countries() {
-        return Places.of(ListUtils.sortedCopy(placeProvider.countries(), Place.SORT_BY_NAME), false);
+        return Places.of(ListUtils.sortedCopy(placeProvider.countries(), Place.SORT_BY_NAME), true);
     }
 
     @Override

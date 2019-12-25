@@ -106,7 +106,7 @@ class XmlPlaceProvider implements PlaceProvider {
     void add(final Place place) {
         places.put(place.placeId(), place);
         Consumers.ifNonNull(place.parent(), parent -> children.put(parent.placeId(), place.placeId()));
-        place.ultimateParent().as(Country.class).ifPresent(countries::add);
+        place.as(Country.class).ifPresent(countries::add);
         groupIds.put(place.placeGroupId(), place.placeId());
     }
 
