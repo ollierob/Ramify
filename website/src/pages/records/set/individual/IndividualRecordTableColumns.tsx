@@ -36,7 +36,7 @@ function genericColumns(properties: IndividualRecordProperties) {
     const columns: IndividualRecordColumn[] = [];
     if (properties.hasBirth) columns.push(BirthYear);
     if (properties.hasBaptism) columns.push(BaptismYear);
-    if (properties.hasResidence) columns.push(ResidenceYear, ResidencePlace);
+    if (properties.hasResidence) columns.push(ResidencePlace, ResidenceYear);
     if (properties.hasMention) columns.push(MentionYear);
     if (properties.hasDeath) columns.push(DeathDatePlaceColumn);
     if (properties.hasDeath && !properties.hasMention && !properties.hasBirth) columns.push(DeathAgeColumn);
@@ -47,12 +47,17 @@ function genericColumns(properties: IndividualRecordProperties) {
 function burialColumns(properties: IndividualRecordProperties) {
     const columns: IndividualRecordColumn[] = [];
     if (properties.hasBirth) columns.push(BirthYear);
-    if (properties.hasResidence) columns.push(ResidenceYear, ResidencePlace);
+    if (properties.hasResidence) columns.push(ResidencePlace, ResidenceYear);
     if (properties.hasMention) columns.push(MentionYear);
     if (properties.hasDeath) columns.push(DeathDatePlaceColumn, DeathAgeColumn);
     if (properties.hasBurial) columns.push(BurialDateColumn);
     return columns;
 }
+
+const DateColumn: Partial<IndividualRecordColumn> = {
+    title: "Date",
+    width: 85
+};
 
 const ImageColumn: IndividualRecordColumn = {
     key: "image",
@@ -98,11 +103,10 @@ const BaptismYear: IndividualRecordColumn = {
 };
 
 const ResidenceYear: IndividualRecordColumn = {
+    ...DateColumn,
     key: "residenceDate",
-    title: "Residence date",
     render: (t, r) => hasResidence(r) && <>{formatDateRange(r.residence[0].date, "month", EmptyPrefixWords)}</>,
     sorter: (r1, r2) => sortDatesByEarliest(hasResidence(r1) && r1.residence[0].date, hasResidence(r2) && r2.residence[0].date),
-    width: 110
 };
 
 function hasResidence(r: IndividualRecord) {
@@ -136,12 +140,12 @@ const DeathDatePlaceColumn: IndividualRecordColumn = {
 };
 
 const DeathAgeColumn: IndividualRecordColumn = {
+    ...DateColumn,
     key: "deathAge",
-    title: "Death age",
+    title: "Age",
     dataIndex: "death.givenage",
     render: (t, r) => r.death && r.death.givenage > 0 && <>{r.death.givenage}</>,
     sorter: (r1, r2) => sortAges(r1.death && r1.death.givenage, r2.death && r2.death.givenage),
-    width: 80
 };
 
 const BurialDateColumn: IndividualRecordColumn = {

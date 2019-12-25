@@ -85,16 +85,13 @@ export function formatDateRange(r: DateRangeProto.AsObject, type: FormatType | D
     const approx = r.approximate ? words.approximate : "";
     if (!r.earliest) return words.after + approx + format.formatDate(r.latest);
     if (!r.latest) return words.before + approx + format.formatDate(r.earliest);
+    if (isWholeYear(r)) return words.in + approx + r.earliest.year;
     switch (type) {
         case "day":
             if (isoDate(r.earliest) == isoDate(r.latest)) return words.on + approx + format.formatDate(r.earliest);
-            if (isWholeYear(r)) return words.in + approx + r.earliest.year;
             break;
         case "month":
             if (isoDate(r.earliest, 1) == isoDate(r.latest, 1)) return words.in + approx + format.formatDate(r.earliest);
-            break;
-        case "year":
-            if (earliestYear(r) == latestYear(r)) return words.in + approx + earliestYear(r);
             break;
     }
     return words.between + approx + format.formatRange(r.earliest, r.latest);
