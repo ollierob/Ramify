@@ -1,7 +1,7 @@
 import * as React from "react";
 import {ChangeEvent} from "react";
 import {Place} from "../../protobuf/generated/place_pb";
-import {Card, Input} from "antd";
+import {Card, Collapse, Input} from "antd";
 import {RecordSet} from "../../protobuf/generated/record_pb";
 import {placeHref} from "../../pages/places/PlaceLinks";
 import "./RecordCards.css";
@@ -9,6 +9,8 @@ import {HasClass} from "../style/HasClass";
 import {Loading} from "../style/Loading";
 import {sortRecordSetByTitle} from "./RecordSet";
 import {RecordSetChildCard} from "./RecordSetChildCard";
+
+const {Panel} = Collapse;
 
 export type RecordSetTitling = {
     shortTitle?: boolean;
@@ -44,24 +46,28 @@ export class RecordSetChildCards extends React.PureComponent<Props, State> {
 
     render() {
 
-        if (!this.props.records) return null;
-
         const records = this.state.filtered;
 
-        return <div
-            className={"recordCards" + (this.props.fixedWidth ? " fixedWidth" : "")}
-            style={this.props.style}>
+        return <Collapse defaultActiveKey={this.props.records?.length <= 3 ? "records" : []}>
 
-            {this.props.loading && <Loading/>}
+            <Panel
+                key="records"
+                header="Child records"
+                className={"recordCards" + (this.props.fixedWidth ? " fixedWidth" : "")}
+                style={this.props.style}>
 
-            {this.props.records.length >= 10 && this.filterInput()}
-            {records.map(record => <RecordSetChildCard {...this.props} key={record.id} record={record}/>)}
+                {this.props.loading && <Loading/>}
 
-            {!this.props.loading && !records.length && !this.props.ignoreNone && <NoRecordCards/>}
+                {this.props.records?.length >= 10 && this.filterInput()}
+                {records.map(record => <RecordSetChildCard {...this.props} key={record.id} record={record}/>)}
 
-            {this.props.alsoSee && <AlsoSeeCard alsoSee={this.props.alsoSee}/>}
+                {!this.props.loading && !records.length && !this.props.ignoreNone && <NoRecordCards/>}
 
-        </div>;
+                {this.props.alsoSee && <AlsoSeeCard alsoSee={this.props.alsoSee}/>}
+
+            </Panel>
+
+        </Collapse>;
 
     }
 
