@@ -18,11 +18,15 @@ export const RecordSetChildCard = (props: {record: RecordSet.AsObject} & RecordS
     return <Card
         title={enabled ? <a href={recordSetHref(record)}>{title}</a> : <span className="disabled">{title}</span>}
         className="recordCard">
+
         Available {formatYearRange(record.date)}
+
         <br/>
+
         {record.numrecords.toLocaleString()} records, {record.numindividuals.toLocaleString()} individuals
         {record.externalreferenceList.map(ref => <RecordReference key={ref.reference} reference={ref}/>)}
         {record.description && <div className="unimportant">{record.description}</div>}
+        
     </Card>;
 
 };
