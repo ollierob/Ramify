@@ -39,3 +39,13 @@ export function atEndOfYear(year: number): Date.AsObject {
 export function toIsoDate(d: Date.AsObject): string {
     return isoDate(d);
 }
+
+export function parseIsoDate(date: string): Date.AsObject {
+    if (!date || date.length != 10) return null;
+    const year = parseFloat(date.substr(0, 4));
+    if (!year) return null;
+    const month = parseFloat(date.substr(5, 7));
+    if (!month) return null;
+    const day = parseFloat(date.substr(8, 10));
+    return {year, month, day};
+}

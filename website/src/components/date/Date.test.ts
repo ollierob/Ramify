@@ -1,5 +1,5 @@
 import {Date} from "../../protobuf/generated/date_pb";
-import {maxDate, minDate} from "./Date";
+import {maxDate, minDate, parseIsoDate, toIsoDate} from "./Date";
 
 test("minDate", () => {
 
@@ -32,5 +32,13 @@ test("maxDate", () => {
     expect(maxDate(d1, d2)).toBe(d2);
     expect(maxDate(d2, d3)).toBe(d3);
     expect(maxDate(d3, d4)).toBe(d4);
+
+});
+
+test("isoDate", () => {
+
+    const d: Date.AsObject = {year: 1987, month: 6, day: 5};
+    expect(toIsoDate(d)).toEqual("1987-06-05");
+    expect(parseIsoDate("1987-06-05")).toEqual(d);
 
 });

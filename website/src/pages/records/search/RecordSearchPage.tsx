@@ -14,16 +14,19 @@ import {hashToRecordSearch, recordSearchToHash} from "../../../components/search
 import {RecordBasePage, RecordBasePageProps} from "../RecordBasePage";
 import {SearchIcon} from "../../../components/images/Icons";
 import RegionCascader from "../../../components/places/RegionCascader";
-import {toIsoDate} from "../../../components/date/Date";
+import {parseIsoDate, toIsoDate} from "../../../components/date/Date";
 
 type Props = RecordBasePageProps;
 
-type State = {
+type OptionsState = {
     selectedRangeName: string[];
-    selectedRange?: DateRange,
-    recordSets: AsyncData<ReadonlyArray<RecordSet.AsObject>>;
-    recordName?: string;
+    selectedRange?: DateRange;
     selectedRegion?: PlaceId;
+    recordName?: string;
+}
+
+type State = OptionsState & {
+    recordSets: AsyncData<ReadonlyArray<RecordSet.AsObject>>;
 }
 
 export default class RecordSearchPage extends RecordBasePage<State> {
@@ -34,11 +37,9 @@ export default class RecordSearchPage extends RecordBasePage<State> {
 
     constructor(props: Props) {
         super(props);
-        const options = hashToRecordSearch(readPageHash());
         this.state = {
-            selectedRangeName: [],
+            ...optionsToState(hashToRecordSearch(readPageHash())),
             recordSets: {},
-            recordName: options.name
         };
         this.renderRange = this.renderRange.bind(this);
         this.doSearch = this.doSearch.bind(this);
@@ -142,12 +143,12 @@ const YearRanges = generateYearRanges();
 function generateYearRanges(): CascaderOptionType[] {
     const options: CascaderOptionType[] = [];
     for (let century = 1300; century <= 1900; century += 100) {
-        const centuryEnd = century + 99;
+        const centuryEnd = century + 100;
         const centuryOption: CascaderOptionType = {
             label: century + "s",
             value: century + "-" + centuryEnd,
             children: [],
-            range: yearsToDateRange(century, centuryEnd)
+            range: yearsToDateRange(century, centuryEnd - 1)
         };
         options.push(centuryOption);
         for (let decade = 0; decade < 100; decade += 10) {
@@ -156,10 +157,35 @@ function generateYearRanges(): CascaderOptionType[] {
             const decadeOption: CascaderOptionType = {
                 label: decadeStart + " - " + decadeEnd,
                 value: decadeStart + "-" + decadeEnd,
-                range: yearsToDateRange(decadeStart, decadeEnd)
+                range: yearsToDateRange(decadeStart, decadeEnd - 1)
             };
             centuryOption.children.push(decadeOption);
         }
     }
     return options;
+}
+
+function optionsToState(options: RecordSetOptions): OptionsState {
+    const dateRange = parseDateRange(options.fromDate, options.toDate);
+    return {
+        recordName: options.name,
+        selectedRange: dateRange,
+        selectedRangeName: parseRangeName(dateRange),
+    };
+}
+
+function parseDateRange(from: string, to: string): DateRange {
+    if (!from && !to) return null;
+    return {approximate: false, earliest: parseIsoDate(from), latest: parseIsoDate(to)};
+}
+
+function parseRangeName(range: DateRange): string[] {
+    if (!range || !range.earliest || !range.latest) return [];
+    const fromYear = range.earliest.year;
+    if (fromYear % 10 != 0) return [];
+    const toYear = range.latest.year + 1;
+    if (toYear % 10 != 0) return [];
+    if (toYear % 100 == 0 && fromYear + 100 == toYear) return [fromYear + "-" + toYear];
+    const fromCentury = fromYear - (fromYear % 100);
+    return [fromCentury + "-" + (fromCentury + 100), fromYear + "-" + toYear];
 }
