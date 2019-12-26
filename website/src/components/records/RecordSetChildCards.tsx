@@ -48,7 +48,11 @@ export class RecordSetChildCards extends React.PureComponent<Props, State> {
 
         const records = this.state.filtered;
 
-        return <Collapse defaultActiveKey={this.props.records?.length <= 3 ? "records" : []}>
+        const hide = this.props.records.length == 0 && !this.props.loading;
+
+        return <Collapse
+            defaultActiveKey={this.props.records?.length <= 3 ? "records" : []}
+            style={hide ? {display: "none"} : null}>
 
             <Panel
                 key="records"
