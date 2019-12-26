@@ -13,6 +13,7 @@ import {RecordSetReferences} from "../../../components/records/RecordSetReferenc
 import {joinComponents} from "../../../components/Components";
 import {PlaceBundle} from "../../../protobuf/generated/place_pb";
 import {PlaceLink} from "../../../components/places/PlaceLink";
+import {RecordSetChildCollapseCards} from "../../../components/records/RecordSetChildCollapseCards";
 
 type Props = RecordPaginationHandler & RouteComponentProps<any> & {
     loading: boolean;
@@ -45,7 +46,7 @@ export default class RecordSetCard extends React.PureComponent<Props> {
 
             </>}
 
-            <RecordSetChildCards
+            <RecordSetChildCollapseCards
                 {...this.props}
                 fixedWidth={this.useFixedWidthCards()}
                 shortTitle
