@@ -76,6 +76,7 @@ export class RecordSetChildCards extends React.PureComponent<Props, State> {
             value={this.state.filter}
             onChange={this.setFilter}
             placeholder="Filter"
+            maxLength={20}
             width={150}/>;
     }
 

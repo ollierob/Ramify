@@ -2,7 +2,7 @@
     font-size: .8em;
 }
 
-.gray, .unimportant, .background {
+.gray, .unimportant, .background, .disabled {
     color: #AAAAAA !important;
 }
 

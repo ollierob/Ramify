@@ -8,11 +8,15 @@ import {RecordSetTitling} from "./RecordSetChildCards";
 import {recordTypeName} from "./RecordType";
 
 export const RecordSetChildCard = (props: {record: RecordSet.AsObject} & RecordSetTitling) => {
+
     const record = props.record;
     let title = props.shortTitle ? shortTitle(record) : record.longtitle;
     if (props.removePrefix && title.startsWith(props.removePrefix)) title = title.substring(props.removePrefix.length).trimLeft();
+
+    const enabled = record.numindividuals > 0;
+
     return <Card
-        title={<a href={recordSetHref(record)}>{title}</a>}
+        title={enabled ? <a href={recordSetHref(record)}>{title}</a> : <span className="disabled">{title}</span>}
         className="recordCard">
         Available {formatYearRange(record.date)}
         <br/>
@@ -20,6 +24,7 @@ export const RecordSetChildCard = (props: {record: RecordSet.AsObject} & RecordS
         {record.externalreferenceList.map(ref => <RecordReference key={ref.reference} reference={ref}/>)}
         {record.description && <div className="unimportant">{record.description}</div>}
     </Card>;
+
 };
 
 const RecordReference = (props: {reference: ExternalRecordReference.AsObject}) => {
