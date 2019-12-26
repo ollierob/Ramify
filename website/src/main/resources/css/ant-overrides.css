@@ -26,3 +26,11 @@
 .ant-collapse > .ant-collapse-item > .ant-collapse-header .ant-collapse-arrow {
     margin-left: 8px !important;
 }
+
+.ant-table-thead > tr > th {
+    background-color: #fafafa !important;
+}
+
+.ant-table-small > .ant-table-content > .ant-table-body {
+    margin: 0 !important;
+}
