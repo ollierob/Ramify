@@ -39,6 +39,9 @@ public abstract class XmlRelationship {
     @XmlAttribute(name = "deceased")
     private Boolean deceased;
 
+    @XmlAttribute(name = "occupation")
+    private String occupation;
+
     @XmlElementRef
     private List<XmlPersonEvent> events;
 
@@ -54,17 +57,22 @@ public abstract class XmlRelationship {
     protected MutablePersonEventSet events(final PersonId personId, final DateRange date, final RecordContext context) {
         final var events = new MutablePersonEventSet(context.uniqueEventMerger());
         if (this.events != null) this.events.forEach(event -> events.addAll(event.allEvents(personId, context, true)));
-        if (deceased != Boolean.TRUE) events.add(inferMention(personId, date));
-        if (deceased == Boolean.TRUE) events.add(inferDeath(personId, date));
+        if (deceased != Boolean.TRUE) events.add(this.inferMention(personId, date));
+        if (deceased == Boolean.TRUE) events.add(this.inferDeath(personId, date));
         return events;
     }
 
-    private static LifeEvent inferMention(final PersonId personId, final DateRange date) {
-        return EventBuilder.builderWithRandomId(date).toFlourished(personId);
+    protected EventBuilder eventBuilder(final DateRange date) {
+        return EventBuilder.builderWithRandomId(date)
+                .withOccupation(occupation);
     }
 
-    private static DeathEvent inferDeath(final PersonId personId, final DateRange date) {
-        return EventBuilder.builderWithRandomId(BeforeDate.strictlyBefore(date)).toDeath(personId);
+    protected LifeEvent inferMention(final PersonId personId, final DateRange date) {
+        return this.eventBuilder(date).toFlourished(personId);
+    }
+
+    protected DeathEvent inferDeath(final PersonId personId, final DateRange date) {
+        return this.eventBuilder(BeforeDate.strictlyBefore(date)).toDeath(personId);
     }
 
     @CheckForNull
