@@ -9,7 +9,7 @@ import {ColumnSubstringLocalSearch} from "../../../../components/table/ant/Colum
 import {isFemale, isMale} from "../../../../components/people/Gender";
 import {EmptyPrefixWords, formatDateRange, formatYearRange} from "../../../../components/date/DateFormat";
 import {sortDatesByEarliest} from "../../../../components/date/DateRange";
-import {recordSetHref} from "../../RecordLinks";
+import {recordSetHref, RecordSetLink} from "../../RecordLinks";
 import {sortAges} from "../../../../components/people/Age";
 import {DeathDatePlaceCell} from "./IndividualRecordTableCell";
 import {PersonName} from "../../../../components/people/PersonName";
@@ -160,7 +160,7 @@ const BurialDateColumn: IndividualRecordColumn = {
 const RecordSetColumn: IndividualRecordColumn = {
     key: "recordSet",
     title: "Record set",
-    render: (t, r) => r.record.recordSet && <a href={recordSetHref(r.record.recordSet)}>{r.record.recordSet.longtitle}</a>,
+    render: (t, r) => r.record.recordSet && <RecordSetLink recordSet={r.record.recordSet}/>,
     width: 220
 };
 

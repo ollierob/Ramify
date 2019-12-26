@@ -8,6 +8,7 @@ import {RecordSet} from "../../../../protobuf/generated/record_pb";
 import {PlaceLink} from "../../../../components/places/PlaceLink";
 import {formatDateRange} from "../../../../components/date/DateFormat";
 import {sortDatesByEarliest} from "../../../../components/date/DateRange";
+import {RecordSetLink} from "../../RecordLinks";
 
 export type FamilyRecordColumn = ColumnProps<FamilyRecord>;
 
@@ -61,7 +62,7 @@ const FamilyColumn: FamilyRecordColumn = {
 const RecordSetColumn: FamilyRecordColumn = {
     key: "recordSet",
     title: "Record set",
-    render: (t, r) => r.recordSet && r.recordSet.longtitle,
+    render: (t, r) => r.recordSet && <RecordSetLink recordSet={r.recordSet}/>,
     width: 220
 };
 
