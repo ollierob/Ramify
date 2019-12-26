@@ -87,6 +87,10 @@
     font-size: 1.5em;
 }
 
+.records.bordered .table .ant-table {
+    border: 0;
+}
+
 .image-gallery-slides .image-gallery-slide img {
     height: 100% !important;
     width: unset !important;

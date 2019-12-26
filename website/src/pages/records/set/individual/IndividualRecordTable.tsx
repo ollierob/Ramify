@@ -9,6 +9,7 @@ import {IndividualRecord, IndividualRecordProperties} from "./IndividualRecord";
 import {determineColumns, IndividualRecordColumn} from "./IndividualRecordTableColumns";
 import {AsyncData, asyncLoadData, mapAsyncData} from "../../../../components/fetch/AsyncData";
 import {RecordSetId} from "../../../../components/records/RecordSet";
+import "./IndividualRecordTable.css";
 
 type Props = Partial<RecordPaginationHandler> & {
     recordSet: RecordSet.AsObject;
@@ -40,6 +41,7 @@ export default class IndividualRecordTable extends React.PureComponent<Props, St
 
         return <Table
             className="table"
+            size="small"
             loading={loading}
             dataSource={data}
             columns={this.state.columns}/>;

@@ -43,6 +43,7 @@ export default class FamilyRecordTable extends React.PureComponent<Props, State>
 
         return <Table
             className="table"
+            size="small"
             loading={loading}
             dataSource={data}
             columns={this.state.columns}/>;
