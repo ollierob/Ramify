@@ -2,7 +2,7 @@ import * as React from "react";
 import {CSSProperties} from "react";
 import {ExternalRecordReference, RecordSet, RecordSetRelatives} from "../../../protobuf/generated/record_pb";
 import {Card, Icon} from "antd";
-import {RecordSetCards} from "../../../components/records/RecordSetCards";
+import {RecordSetChildCards} from "../../../components/records/RecordSetChildCards";
 import {RecordBrowser} from "./RecordBrowser";
 import {AsyncData} from "../../../components/fetch/AsyncData";
 import {RecordPaginationHandler} from "../../../components/records/RecordPaginationHandler";
@@ -45,7 +45,7 @@ export default class RecordSetCard extends React.PureComponent<Props> {
 
             </>}
 
-            <RecordSetCards
+            <RecordSetChildCards
                 {...this.props}
                 fixedWidth={this.useFixedWidthCards()}
                 shortTitle

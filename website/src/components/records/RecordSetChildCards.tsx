@@ -7,7 +7,7 @@ import "./RecordCards.css";
 import {HasClass} from "../style/HasClass";
 import {Loading} from "../style/Loading";
 import {sortRecordSetByTitle} from "./RecordSet";
-import {RecordSetCard} from "./RecordSetCard";
+import {RecordSetChildCard} from "./RecordSetChildCard";
 
 export type RecordSetTitling = {
     shortTitle?: boolean;
@@ -22,7 +22,7 @@ type Props = HasClass & RecordSetTitling & {
     ignoreNone?: boolean;
 }
 
-export class RecordSetCards extends React.PureComponent<Props> {
+export class RecordSetChildCards extends React.PureComponent<Props> {
 
     render() {
 
@@ -37,7 +37,7 @@ export class RecordSetCards extends React.PureComponent<Props> {
 
             {this.props.loading && <Loading/>}
 
-            {records.map(record => <RecordSetCard {...this.props} key={record.id} record={record}/>)}
+            {records.map(record => <RecordSetChildCard {...this.props} key={record.id} record={record}/>)}
 
             {!this.props.loading && !records.length && !this.props.ignoreNone && <NoRecordCards/>}
 

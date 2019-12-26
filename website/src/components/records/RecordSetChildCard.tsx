@@ -4,10 +4,10 @@ import {recordSetHref} from "../../pages/records/RecordLinks";
 import {formatYearRange} from "../date/DateFormat";
 import * as React from "react";
 import {Link} from "../style/Links";
-import {RecordSetTitling} from "./RecordSetCards";
+import {RecordSetTitling} from "./RecordSetChildCards";
 import {recordTypeName} from "./RecordType";
 
-export const RecordSetCard = (props: {record: RecordSet.AsObject} & RecordSetTitling) => {
+export const RecordSetChildCard = (props: {record: RecordSet.AsObject} & RecordSetTitling) => {
     const record = props.record;
     let title = props.shortTitle ? shortTitle(record) : record.longtitle;
     if (props.removePrefix && title.startsWith(props.removePrefix)) title = title.substring(props.removePrefix.length).trimLeft();

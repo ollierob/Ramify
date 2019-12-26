@@ -4,7 +4,7 @@ import {Place, PlaceDescription} from "../../../protobuf/generated/place_pb";
 import ChildPlaceCards from "../../../components/places/ChildPlaceCards";
 import {PlaceTitle} from "../../../components/places/PlaceTitle";
 import {PlaceFavouritesHandler} from "../../../components/places/PlaceFavourites";
-import {RecordSetCards} from "../../../components/records/RecordSetCards";
+import {RecordSetChildCards} from "../../../components/records/RecordSetChildCards";
 import {RecordSet} from "../../../protobuf/generated/record_pb";
 import {AsyncData} from "../../../components/fetch/AsyncData";
 import {Markdown} from "../../../components/layout/Markdown";
@@ -44,7 +44,7 @@ export class PlaceInfo extends React.PureComponent<Props> {
             </Card>}
 
             <Card className="records" title={<b>Records</b>} bordered={false}>
-                <RecordSetCards
+                <RecordSetChildCards
                     removePrefix={place.name + " "}
                     loading={this.props.records && this.props.records.loading}
                     records={this.props.records && this.props.records.data}/>
