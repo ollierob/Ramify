@@ -26,6 +26,9 @@ message RecordList {
 
     repeated Record record = 1;
 
+    //Supplemental data
+    repeated RecordSet recordSets = 10;
+
 }
 
 message IndividualRecord {

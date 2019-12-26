@@ -2,8 +2,8 @@ import * as React from "react";
 import {RecordPaginationHandler} from "../../../../components/records/RecordPaginationHandler";
 import {RecordSet} from "../../../../protobuf/generated/record_pb";
 import {Table} from "antd";
-import {AsyncData, asyncLoadData, mapAsyncData} from "../../../../components/fetch/AsyncData";
-import {buildFamilyRecords, FamilyRecord} from "./FamilyRecord";
+import {AsyncData, asyncLoadData} from "../../../../components/fetch/AsyncData";
+import {FamilyRecord} from "./FamilyRecord";
 import {NoData} from "../../../../components/style/NoData";
 import {RecordSetId} from "../../../../components/records/RecordSet";
 import {DEFAULT_RECORD_LOADER} from "../../../../components/records/RecordLoader";
@@ -18,7 +18,7 @@ type Props = Partial<RecordPaginationHandler> & {
 
 type State = {
     columns: FamilyRecordColumn[];
-    records: AsyncData<FamilyRecord[]>
+    records: AsyncData<ReadonlyArray<FamilyRecord>>
 }
 
 export default class FamilyRecordTable extends React.PureComponent<Props, State> {
@@ -37,7 +37,7 @@ export default class FamilyRecordTable extends React.PureComponent<Props, State>
 
         if (this.state.records.error) return <ErrorMessage className="table" message={this.state.records.error}/>;
 
-        const data: FamilyRecord[] = this.state.records.data || [];
+        const data: FamilyRecord[] = this.state.records.data ? [...this.state.records.data] : [];
         const loading = this.state.records.loading;
         if (!loading && !data.length) return <NoData/>;
 
@@ -66,7 +66,7 @@ export default class FamilyRecordTable extends React.PureComponent<Props, State>
         asyncLoadData(
             id,
             id => this.recordLoader.loadFamilyRecords(id, {children: true, limit: 100}),
-            records => this.setState({records: mapAsyncData(records, buildFamilyRecords)}));
+            records => this.setState({records}));
     }
 
     private setColumns(records: ReadonlyArray<FamilyRecord>) {

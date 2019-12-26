@@ -1,28 +1,42 @@
 package net.ramify.model.record.collection;
 
+import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import net.ramify.data.proto.BuildsProto;
+import net.ramify.model.place.Place;
+import net.ramify.model.place.collection.HasPlaces;
 import net.ramify.model.record.Record;
 import net.ramify.model.record.proto.RecordProto;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 import java.util.Collection;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public interface Records extends BuildsProto<RecordProto.RecordList> {
+public interface Records extends HasRecordSets, HasPlaces, BuildsProto<RecordProto.RecordList> {
 
     @Nonnull
     Stream<? extends Record> records();
 
     @Nonnull
     @Override
-    default RecordProto.RecordList toProto() {
-        return RecordProto.RecordList.newBuilder()
-                .addAllRecord(this.records().map(Record::toProto).collect(Collectors.toList()))
-                .build();
+    default Set<RecordSet> recordSets() {
+        final var byId = HashBiMap.<RecordSetId, RecordSet>create();
+        this.records().forEach(record -> byId.put(record.recordSetId(), record.recordSet()));
+        return byId.values();
+    }
+
+    @Nonnull
+    @Override
+    default Set<? extends Place> places() {
+        return this.records()
+                .map(Record::places)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toSet());
     }
 
     @CheckReturnValue
@@ -37,6 +51,15 @@ public interface Records extends BuildsProto<RecordProto.RecordList> {
 
     default Records paginate(final int start, final int limit) {
         return () -> this.records().skip(start).limit(limit);
+    }
+
+    @Nonnull
+    @Override
+    default RecordProto.RecordList toProto() {
+        return RecordProto.RecordList.newBuilder()
+                .addAllRecord(this.records().map(Record::toProto).collect(Collectors.toList()))
+                .addAllRecordSets(Iterables.transform(this.recordSets(), RecordSet::toProto))
+                .build();
     }
 
     static Records of(final Collection<Record> records) {

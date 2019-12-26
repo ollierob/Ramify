@@ -48,7 +48,7 @@ const PlaceColumn: FamilyRecordColumn = {
         <PlaceLink place={r.place}/>
         <Minor>{r.place.type.name}</Minor>
     </>,
-    width: 140
+    width: 160
 };
 
 const FamilyColumn: FamilyRecordColumn = {

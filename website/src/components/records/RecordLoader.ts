@@ -14,10 +14,11 @@ import {PlaceId} from "../places/Place";
 import {queryParameters} from "../fetch/Fetch";
 import {protoGet, protoPost} from "../fetch/ProtoFetch";
 import {RecordSetId, sortRecordSetByDateThenTitle} from "./RecordSet";
+import {buildFamilyRecords, FamilyRecord} from "../../pages/records/set/family/FamilyRecord";
 
 export interface RecordLoader {
 
-    loadFamilyRecords(id: RecordSetId, options?: RecordOptions): Promise<ReadonlyArray<Record.AsObject>>
+    loadFamilyRecords(id: RecordSetId, options?: RecordOptions): Promise<ReadonlyArray<FamilyRecord>>
 
     loadIndividualRecords(id: RecordSetId, options?: RecordOptions): Promise<ReadonlyArray<EnrichedIndividualRecord>>
 
@@ -43,7 +44,7 @@ class ProtoRecordLoader implements RecordLoader {
 
     loadFamilyRecords(id: string, options: RecordOptions = {}) {
         const url = "/records/in/" + id + queryParameters(options);
-        return protoGet(url, RecordList.deserializeBinary).then(readRecords);
+        return protoGet(url, RecordList.deserializeBinary).then(buildFamilyRecords);
     }
 
     loadIndividualRecords(id: string, options: RecordOptions = {}) {
