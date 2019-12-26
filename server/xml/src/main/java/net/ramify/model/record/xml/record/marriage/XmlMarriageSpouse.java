@@ -22,7 +22,7 @@ import static net.ramify.utils.StringUtils.isBlank;
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "marriageSpouse")
 public class XmlMarriageSpouse extends XmlPersonOnDateWithFamilyRecord {
 
-    @XmlAttribute(name = "signature")
+    @XmlAttribute(name = "signed")
     private XmlSignature signature;
 
     protected Family family(final RecordContext context, final EventId marriageEventId) {
