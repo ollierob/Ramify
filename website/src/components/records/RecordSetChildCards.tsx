@@ -61,7 +61,7 @@ export class RecordSetChildCards extends React.PureComponent<Props, State> {
                 {this.props.records?.length >= 10 && this.filterInput()}
                 {records.map(record => <RecordSetChildCard {...this.props} key={record.id} record={record}/>)}
 
-                {!this.props.loading && !records.length && !this.props.ignoreNone && <NoRecordCards/>}
+                {!this.props.loading && !records.length && (!this.props.ignoreNone || this.state.filter) && <NoRecordCards/>}
 
                 {this.props.alsoSee && <AlsoSeeCard alsoSee={this.props.alsoSee}/>}
 
@@ -113,6 +113,6 @@ const AlsoSeeCard = (props: {alsoSee: ReadonlyArray<Place.AsObject>}) => {
     </Card>;
 };
 
-export const NoRecordCards = () => {
+const NoRecordCards = () => {
     return <>No records known.</>;
 };
