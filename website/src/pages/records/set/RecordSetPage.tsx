@@ -46,7 +46,7 @@ export default class RecordSetPage extends RecordBasePage<State> {
     body() {
 
         const recordSet = this.state.recordSet.data;
-        if (!recordSet && !this.state.recordSet.loading) return <ErrorMessage message="Unknown record set"/>;
+        if (!recordSet && !this.state.recordSet.loading) return <ErrorMessage message="Unknown record set" className="content"/>;
 
         return <>
 
