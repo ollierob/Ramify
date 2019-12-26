@@ -23,6 +23,8 @@
     
   <xs:element name="unknown" type="tns:xmlUnknownRelation"/>
     
+  <xs:element name="wife" type="tns:xmlWife"/>
+    
   <xs:complexType name="xmlDaughter">
         
     <xs:complexContent>
@@ -102,6 +104,20 @@
   </xs:complexType>
     
   <xs:complexType name="xmlSon">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlRelationship">
+                
+        <xs:sequence/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlWife">
         
     <xs:complexContent>
             

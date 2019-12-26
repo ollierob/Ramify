@@ -4,6 +4,9 @@
 }
 
 .records .ant-table .family .relationship {
-    margin-left: .5em;
+    font-style: italic;
+}
+
+.records .ant-table .family .unknown.name {
     font-style: italic;
 }

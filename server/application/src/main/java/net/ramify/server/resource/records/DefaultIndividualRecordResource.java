@@ -34,7 +34,7 @@ public class DefaultIndividualRecordResource implements IndividualRecordResource
     @Override
     public IndividualRecords in(final RecordSetId id, final boolean includeChildren, final int start, final int limit) {
         final var records = includeChildren ? this.parentAndChildRecords(id) : this.records.require(id);
-        return records.individualRecords().paginate(start, limit);
+        return records.individualRecords(true).paginate(start, limit);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class DefaultIndividualRecordResource implements IndividualRecordResource
         final var records = recordSetId.isEmpty()
                 ? this.allRecords()
                 : this.parentAndChildRecords(new RecordSetId(recordSetId));
-        return search.searchIndividuals(records, searchParameters);
+        return search.searchIndividuals(records, searchParameters).paginate(0, 100); //FIXME paginate
     }
 
     private Records parentAndChildRecords(final RecordSetId id) {

@@ -34,7 +34,7 @@ class RecordSearch {
     }
 
     IndividualRecords searchIndividuals(final Records source, final RecordProto.RecordSearch search) {
-        return source.individualRecords().filter(this.searchIndividualTest(search));
+        return source.individualRecords(true).filter(this.searchIndividualTest(search));
     }
 
     private Predicate<IndividualRecord> searchIndividualTest(final RecordProto.RecordSearch search) {

@@ -27,10 +27,10 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.List;
 
-@XmlSeeAlso({XmlFather.class, XmlMother.class, XmlSon.class, XmlDaughter.class, XmlUnknownRelation.class})
+@XmlSeeAlso({XmlFather.class, XmlMother.class, XmlSon.class, XmlDaughter.class, XmlWife.class, XmlUnknownRelation.class})
 public abstract class XmlRelationship {
 
-    @XmlAttribute(name = "name", required = false)
+    @XmlAttribute(name = "name")
     private String name;
 
     @XmlElementRef(required = false)
@@ -70,7 +70,7 @@ public abstract class XmlRelationship {
     @CheckForNull
     protected Name name(final NameParser parser) {
         if (complexName != null) return complexName.build(parser);
-        return Functions.ifNonNull(name, parser::parse);
+        return Functions.ifNonNull(name, parser::parse, Name.UNKNOWN);
     }
 
     protected PersonId personId() {

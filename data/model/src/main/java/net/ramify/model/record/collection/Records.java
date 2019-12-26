@@ -31,8 +31,8 @@ public interface Records extends BuildsProto<RecordProto.RecordList> {
     }
 
     @Nonnull
-    default IndividualRecords individualRecords() {
-        return () -> this.records().flatMap(Record::individualRecords);
+    default IndividualRecords individualRecords(final boolean ignoreUnnamed) {
+        return () -> this.records().flatMap(Record::individualRecords).filter(r -> !ignoreUnnamed || !r.person().name().isUnknown());
     }
 
     default Records paginate(final int start, final int limit) {

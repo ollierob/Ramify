@@ -26,7 +26,7 @@ public interface Name extends BuildsProto<NameProto.Name> {
     default boolean isUnknown() {
         if (this == UNKNOWN) return true;
         final var value = this.value();
-        return value.isBlank() || value.equals(UNKNOWN.value()) || value.equalsIgnoreCase("unknown");
+        return value.isBlank() || value.equals(UNKNOWN.value());
     }
 
     @Nonnull
@@ -43,6 +43,6 @@ public interface Name extends BuildsProto<NameProto.Name> {
         return this.toProtoBuilder().build();
     }
 
-    Name UNKNOWN = () -> "?";
+    Name UNKNOWN = () -> "unknown";
 
 }

@@ -12,6 +12,7 @@ import {sortDatesByEarliest} from "../../../../components/date/DateRange";
 import {recordSetHref} from "../../RecordLinks";
 import {sortAges} from "../../../../components/people/Age";
 import {DeathDatePlaceCell} from "./IndividualRecordTableCell";
+import {PersonName} from "../../../../components/people/PersonName";
 
 export type IndividualRecordColumn = ColumnProps<IndividualRecord>;
 
@@ -72,13 +73,13 @@ const NameColumn: IndividualRecordColumn = {
     title: "Name",
     dataIndex: "person.name.surname",
     render: (t, r) => {
-        if (r.person.name.unknown) {
+        if (r.person.name && r.person.name.unknown) {
             const gender = isMale(r.person) ? "male" : isFemale(r.person) ? "female" : "";
             return <span className="unimportant">Unknown{gender && <> {gender}</>}</span>;
         }
         return <>
-            {r.person.name.value}
-            {r.person.name.variationList.map(v => <Minor children={v}/>)}
+            <PersonName name={r.person.name}/>
+            {r.person.name && r.person.name.variationList.map(v => <Minor children={v}/>)}
         </>;
     },
     sorter: (r1, r2) => r1.person.name.value.localeCompare(r2.person.name.value),

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/people" xmlns:ns2="http://ramify.net/events" xmlns:ns3="http://ramify.net/dates" xmlns:ns4="http://ramify.net/places" xmlns:ns5="http://ramify.net/families" xmlns:tns="http://ramify.net/records" targetNamespace="http://ramify.net/records" version="1.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/people" xmlns:ns2="http://ramify.net/events" xmlns:ns3="http://ramify.net/families" xmlns:ns4="http://ramify.net/dates" xmlns:ns5="http://ramify.net/places" xmlns:tns="http://ramify.net/records" targetNamespace="http://ramify.net/records" version="1.0">
     
   <xs:import namespace="http://ramify.net/people" schemaLocation="people.xsd"/>
     
   <xs:import namespace="http://ramify.net/events" schemaLocation="events.xsd"/>
     
+  <xs:import namespace="http://ramify.net/families" schemaLocation="families.xsd"/>
+    
   <xs:import namespace="http://ramify.net/dates" schemaLocation="dates.xsd"/>
     
   <xs:import namespace="http://ramify.net/places" schemaLocation="places.xsd"/>
-    
-  <xs:import namespace="http://ramify.net/families" schemaLocation="families.xsd"/>
     
   <xs:element name="baptism" type="tns:xmlBaptismRecord"/>
     
@@ -28,8 +28,6 @@
   <xs:element name="death" type="tns:xmlDeathRecord"/>
     
   <xs:element name="englandCensus" type="tns:xmlEnglandCensusRecords"/>
-    
-  <xs:element name="familyResidence" type="tns:xmlFamilyResidenceRecord"/>
     
   <xs:element name="groMarriage" type="tns:xmlGroMarriageRecord"/>
     
@@ -123,11 +121,43 @@
         
     <xs:complexContent>
             
-      <xs:extension base="tns:xmlPersonOnDateRecord">
+      <xs:extension base="tns:xmlPersonOnDateWithFamilyRecord">
                 
         <xs:sequence/>
                 
         <xs:attribute name="placeId" type="xs:string"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType abstract="true" name="xmlPersonOnDateWithFamilyRecord">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPersonOnDateRecord">
+                
+        <xs:sequence>
+                    
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        
+            <xs:element ref="ns3:daughter"/>
+                        
+            <xs:element ref="ns3:father"/>
+                        
+            <xs:element ref="ns3:mother"/>
+                        
+            <xs:element ref="ns3:son"/>
+                        
+            <xs:element ref="ns3:wife"/>
+                        
+            <xs:element ref="ns3:unknown"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
               
       </xs:extension>
           
@@ -169,19 +199,19 @@
             
       <xs:choice minOccurs="0">
                 
-        <xs:element ref="ns3:xmlBeforeDate"/>
+        <xs:element ref="ns4:xmlBeforeDate"/>
                 
-        <xs:element ref="ns3:inYear"/>
+        <xs:element ref="ns4:inYear"/>
                 
-        <xs:element ref="ns3:onDate"/>
+        <xs:element ref="ns4:onDate"/>
                 
-        <xs:element ref="ns3:inQuarter"/>
+        <xs:element ref="ns4:inQuarter"/>
                 
-        <xs:element ref="ns3:betweenYears"/>
+        <xs:element ref="ns4:betweenYears"/>
                 
-        <xs:element ref="ns3:inMonth"/>
+        <xs:element ref="ns4:inMonth"/>
                 
-        <xs:element ref="ns3:beforeYear"/>
+        <xs:element ref="ns4:beforeYear"/>
               
       </xs:choice>
             
@@ -249,13 +279,13 @@
             
       <xs:choice minOccurs="0">
                 
-        <xs:element ref="ns4:textLink"/>
+        <xs:element ref="ns5:textLink"/>
                 
-        <xs:element ref="ns4:wikipediaLink"/>
+        <xs:element ref="ns5:wikipediaLink"/>
                 
-        <xs:element ref="ns4:nationalArchivesLink"/>
+        <xs:element ref="ns5:nationalArchivesLink"/>
                 
-        <xs:element ref="ns4:websiteLink"/>
+        <xs:element ref="ns5:websiteLink"/>
               
       </xs:choice>
           
@@ -283,19 +313,19 @@
                     
           <xs:choice minOccurs="0">
                         
-            <xs:element ref="ns3:xmlBeforeDate"/>
+            <xs:element ref="ns4:xmlBeforeDate"/>
                         
-            <xs:element ref="ns3:inYear"/>
+            <xs:element ref="ns4:inYear"/>
                         
-            <xs:element ref="ns3:onDate"/>
+            <xs:element ref="ns4:onDate"/>
                         
-            <xs:element ref="ns3:inQuarter"/>
+            <xs:element ref="ns4:inQuarter"/>
                         
-            <xs:element ref="ns3:betweenYears"/>
+            <xs:element ref="ns4:betweenYears"/>
                         
-            <xs:element ref="ns3:inMonth"/>
+            <xs:element ref="ns4:inMonth"/>
                         
-            <xs:element ref="ns3:beforeYear"/>
+            <xs:element ref="ns4:beforeYear"/>
                       
           </xs:choice>
                     
@@ -319,19 +349,19 @@
                     
           <xs:choice minOccurs="0">
                         
-            <xs:element ref="ns3:xmlBeforeDate"/>
+            <xs:element ref="ns4:xmlBeforeDate"/>
                         
-            <xs:element ref="ns3:inYear"/>
+            <xs:element ref="ns4:inYear"/>
                         
-            <xs:element ref="ns3:onDate"/>
+            <xs:element ref="ns4:onDate"/>
                         
-            <xs:element ref="ns3:inQuarter"/>
+            <xs:element ref="ns4:inQuarter"/>
                         
-            <xs:element ref="ns3:betweenYears"/>
+            <xs:element ref="ns4:betweenYears"/>
                         
-            <xs:element ref="ns3:inMonth"/>
+            <xs:element ref="ns4:inMonth"/>
                         
-            <xs:element ref="ns3:beforeYear"/>
+            <xs:element ref="ns4:beforeYear"/>
                       
           </xs:choice>
                   
@@ -355,29 +385,23 @@
                     
           <xs:choice minOccurs="0">
                         
-            <xs:element ref="ns3:xmlBeforeDate"/>
+            <xs:element ref="ns4:xmlBeforeDate"/>
                         
-            <xs:element ref="ns3:inYear"/>
+            <xs:element ref="ns4:inYear"/>
                         
-            <xs:element ref="ns3:onDate"/>
+            <xs:element ref="ns4:onDate"/>
                         
-            <xs:element ref="ns3:inQuarter"/>
+            <xs:element ref="ns4:inQuarter"/>
                         
-            <xs:element ref="ns3:betweenYears"/>
+            <xs:element ref="ns4:betweenYears"/>
                         
-            <xs:element ref="ns3:inMonth"/>
+            <xs:element ref="ns4:inMonth"/>
                         
-            <xs:element ref="ns3:beforeYear"/>
+            <xs:element ref="ns4:beforeYear"/>
                       
           </xs:choice>
                     
-          <xs:choice maxOccurs="unbounded" minOccurs="0">
-                        
-            <xs:element ref="tns:residence"/>
-                        
-            <xs:element ref="tns:familyResidence"/>
-                      
-          </xs:choice>
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:residence"/>
                   
         </xs:sequence>
                 
@@ -415,41 +439,11 @@
                 
         <xs:sequence>
                     
-          <xs:element ref="ns3:birthDate"/>
+          <xs:element ref="ns4:birthDate"/>
                   
         </xs:sequence>
                 
         <xs:attribute name="birthPlace" type="xs:string"/>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType abstract="true" name="xmlPersonOnDateWithFamilyRecord">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPersonOnDateRecord">
-                
-        <xs:sequence>
-                    
-          <xs:choice maxOccurs="unbounded" minOccurs="0">
-                        
-            <xs:element ref="ns5:daughter"/>
-                        
-            <xs:element ref="ns5:father"/>
-                        
-            <xs:element ref="ns5:mother"/>
-                        
-            <xs:element ref="ns5:son"/>
-                        
-            <xs:element ref="ns5:unknown"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
               
       </xs:extension>
           
@@ -483,7 +477,7 @@
                 
         <xs:sequence>
                     
-          <xs:element ref="ns3:date"/>
+          <xs:element ref="ns4:date"/>
                   
         </xs:sequence>
               
@@ -543,19 +537,19 @@
                     
           <xs:choice>
                         
-            <xs:element ref="ns3:xmlBeforeDate"/>
+            <xs:element ref="ns4:xmlBeforeDate"/>
                         
-            <xs:element ref="ns3:inYear"/>
+            <xs:element ref="ns4:inYear"/>
                         
-            <xs:element ref="ns3:onDate"/>
+            <xs:element ref="ns4:onDate"/>
                         
-            <xs:element ref="ns3:inQuarter"/>
+            <xs:element ref="ns4:inQuarter"/>
                         
-            <xs:element ref="ns3:betweenYears"/>
+            <xs:element ref="ns4:betweenYears"/>
                         
-            <xs:element ref="ns3:inMonth"/>
+            <xs:element ref="ns4:inMonth"/>
                         
-            <xs:element ref="ns3:beforeYear"/>
+            <xs:element ref="ns4:beforeYear"/>
                       
           </xs:choice>
                     
@@ -839,35 +833,37 @@
                     
           <xs:choice minOccurs="0">
                         
-            <xs:element ref="ns3:buriedOn"/>
+            <xs:element ref="ns4:buriedOn"/>
                         
-            <xs:element ref="ns3:buriedInMonth"/>
+            <xs:element ref="ns4:buriedInMonth"/>
                         
-            <xs:element ref="ns3:buriedInQuarter"/>
+            <xs:element ref="ns4:buriedInQuarter"/>
                       
           </xs:choice>
                     
           <xs:choice minOccurs="0">
                         
-            <xs:element ref="ns3:diedOn"/>
+            <xs:element ref="ns4:diedOn"/>
                         
-            <xs:element ref="ns3:diedInMonth"/>
+            <xs:element ref="ns4:diedInMonth"/>
                         
-            <xs:element ref="ns3:diedInQuarter"/>
+            <xs:element ref="ns4:diedInQuarter"/>
                       
           </xs:choice>
                     
           <xs:choice maxOccurs="unbounded" minOccurs="0">
                         
-            <xs:element ref="ns5:daughter"/>
+            <xs:element ref="ns3:daughter"/>
                         
-            <xs:element ref="ns5:father"/>
+            <xs:element ref="ns3:father"/>
                         
-            <xs:element ref="ns5:mother"/>
+            <xs:element ref="ns3:mother"/>
                         
-            <xs:element ref="ns5:son"/>
+            <xs:element ref="ns3:son"/>
                         
-            <xs:element ref="ns5:unknown"/>
+            <xs:element ref="ns3:wife"/>
+                        
+            <xs:element ref="ns3:unknown"/>
                       
           </xs:choice>
                   
@@ -911,7 +907,7 @@
                     
           <xs:element form="qualified" name="text" type="xs:string"/>
                     
-          <xs:element maxOccurs="unbounded" minOccurs="0" ref="ns5:family"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="ns3:family"/>
                   
         </xs:sequence>
               
@@ -947,19 +943,19 @@
                 
         <xs:choice>
                     
-          <xs:element ref="ns3:xmlBeforeDate"/>
+          <xs:element ref="ns4:xmlBeforeDate"/>
                     
-          <xs:element ref="ns3:inYear"/>
+          <xs:element ref="ns4:inYear"/>
                     
-          <xs:element ref="ns3:onDate"/>
+          <xs:element ref="ns4:onDate"/>
                     
-          <xs:element ref="ns3:inQuarter"/>
+          <xs:element ref="ns4:inQuarter"/>
                     
-          <xs:element ref="ns3:betweenYears"/>
+          <xs:element ref="ns4:betweenYears"/>
                     
-          <xs:element ref="ns3:inMonth"/>
+          <xs:element ref="ns4:inMonth"/>
                     
-          <xs:element ref="ns3:beforeYear"/>
+          <xs:element ref="ns4:beforeYear"/>
                   
         </xs:choice>
               
@@ -987,19 +983,21 @@
                 
         <xs:sequence>
                     
-          <xs:element minOccurs="0" ref="ns3:deathDate"/>
+          <xs:element minOccurs="0" ref="ns4:deathDate"/>
                     
           <xs:choice maxOccurs="unbounded" minOccurs="0">
                         
-            <xs:element ref="ns5:daughter"/>
+            <xs:element ref="ns3:daughter"/>
                         
-            <xs:element ref="ns5:father"/>
+            <xs:element ref="ns3:father"/>
                         
-            <xs:element ref="ns5:mother"/>
+            <xs:element ref="ns3:mother"/>
                         
-            <xs:element ref="ns5:son"/>
+            <xs:element ref="ns3:son"/>
                         
-            <xs:element ref="ns5:unknown"/>
+            <xs:element ref="ns3:wife"/>
+                        
+            <xs:element ref="ns3:unknown"/>
                       
           </xs:choice>
                   
@@ -1027,36 +1025,6 @@
       
   </xs:complexType>
     
-  <xs:complexType name="xmlFamilyResidenceRecord">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlResidenceRecord">
-                
-        <xs:sequence>
-                    
-          <xs:choice maxOccurs="unbounded" minOccurs="0">
-                        
-            <xs:element ref="ns5:daughter"/>
-                        
-            <xs:element ref="ns5:father"/>
-                        
-            <xs:element ref="ns5:mother"/>
-                        
-            <xs:element ref="ns5:son"/>
-                        
-            <xs:element ref="ns5:unknown"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
   <xs:simpleType name="xmlRecordSetSource">
         
     <xs:restriction base="xs:string">
@@ -1075,27 +1043,27 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="residence"/>
-            
       <xs:enumeration value="mention"/>
-            
-      <xs:enumeration value="census"/>
-            
-      <xs:enumeration value="death"/>
-            
-      <xs:enumeration value="mixed"/>
-            
-      <xs:enumeration value="baptism"/>
-            
-      <xs:enumeration value="payment"/>
             
       <xs:enumeration value="birth"/>
             
-      <xs:enumeration value="burial"/>
+      <xs:enumeration value="marriage"/>
+            
+      <xs:enumeration value="mixed"/>
             
       <xs:enumeration value="membership"/>
             
-      <xs:enumeration value="marriage"/>
+      <xs:enumeration value="payment"/>
+            
+      <xs:enumeration value="census"/>
+            
+      <xs:enumeration value="baptism"/>
+            
+      <xs:enumeration value="residence"/>
+            
+      <xs:enumeration value="death"/>
+            
+      <xs:enumeration value="burial"/>
           
     </xs:restriction>
       
@@ -1105,9 +1073,9 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="signature"/>
-            
       <xs:enumeration value="mark"/>
+            
+      <xs:enumeration value="signature"/>
           
     </xs:restriction>
       
@@ -1119,11 +1087,11 @@
             
       <xs:enumeration value="head"/>
             
+      <xs:enumeration value="parent"/>
+            
       <xs:enumeration value="spouse"/>
             
       <xs:enumeration value="child"/>
-            
-      <xs:enumeration value="parent"/>
           
     </xs:restriction>
       
@@ -1133,11 +1101,11 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="married"/>
+      <xs:enumeration value="widowed"/>
             
       <xs:enumeration value="unmarried"/>
             
-      <xs:enumeration value="widowed"/>
+      <xs:enumeration value="married"/>
           
     </xs:restriction>
       

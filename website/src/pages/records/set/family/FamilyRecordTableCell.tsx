@@ -21,7 +21,7 @@ export function renderFamilyRecord(record: FamilyRecord) {
 
 function renderFamily(family: Family.AsObject) {
     if (!family || !family.personList || !family.personList.length) return null;
-    const list = [...family.personList].filter(p => p.name && !p.name.unknown).sort(sortPeopleByBirthDate);
+    const list = [...family.personList].sort(sortPeopleByBirthDate);
     if (family.root) moveToFront(list, p => p.id == family.root.id);
     const root = list[0];
     return <List
@@ -45,7 +45,7 @@ function renderName(name: Name.AsObject) {
 function renderRelationship(person: Person.AsObject, root: Person.AsObject, relationships: ReadonlyArray<Relationship.AsObject>) {
     const relationship = findRelationship(person, root, relationships);
     if (!relationship || !relationship.type) return null;
-    return <span className="relationship">{relationshipName(relationship, person)}</span>;
+    return <>&nbsp;<span className="relationship">{relationshipName(relationship, person)}</span></>;
 }
 
 function renderNotes(person: Person.AsObject) {

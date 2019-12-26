@@ -23,16 +23,16 @@ public interface Person extends HasPerson, HasName, HasGender, HasPersonEvents, 
     default PersonProto.Person.Builder toProtoBuilder() {
         final var builder = PersonProto.Person.newBuilder()
                 .setId(this.personId().value())
-                .setGender(this.gender().value());
+                .setGender(this.gender().value())
+                .setName(this.name().toProto());
         //.addAllEvents(Iterables.transform(this.sortedEvents(), Event::toProto));
+        //FIXME push this into a different proto
         final var events = this.events();
         for (final var event : events.sortedEvents()) {
             final var eventBuilder = event.toProtoBuilder();
             events.inferAge(event).ifPresent(age -> eventBuilder.setComputedAge(age.toProto()));
             builder.addEvents(eventBuilder);
         }
-        final var name = this.name();
-        if (!name.isUnknown()) builder.setName(name.toProto());
         return builder;
     }
 

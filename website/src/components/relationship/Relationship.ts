@@ -31,6 +31,10 @@ export function relationshipType(relationship: Relationship.AsObject): Relations
 export function relationshipName(relationship: Relationship.AsObject, person?: Person.AsObject): string {
     if (person) {
         switch (relationshipType(relationship)) {
+            case "SPOUSE":
+                if (isMale(person)) return "Husband";
+                if (isFemale(person)) return "Wife";
+                break;
             case "PARENT_CHILD":
                 if (isMale(person)) return "Father";
                 if (isFemale(person)) return "Mother";
