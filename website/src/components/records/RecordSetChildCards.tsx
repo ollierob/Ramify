@@ -37,6 +37,11 @@ export class RecordSetChildCards extends React.PureComponent<Props, State> {
         filtered: filterAndSort(this.props.records, e.target.value?.toLowerCase())
     });
 
+    private readonly clearFilter = () => this.setState({
+        filter: null,
+        filtered: filterAndSort(this.props.records, null)
+    });
+
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -65,7 +70,7 @@ export class RecordSetChildCards extends React.PureComponent<Props, State> {
                 {this.props.records?.length >= 10 && this.filterInput()}
                 {records.map(record => <RecordSetChildCard {...this.props} key={record.id} record={record}/>)}
 
-                {!this.props.loading && !records.length && (!this.props.ignoreNone || this.state.filter) && <NoRecordCards/>}
+                {!this.props.loading && !records.length && (!this.props.ignoreNone || this.state.filter) && <NoRecordCards clearFilter={this.state.filter && this.clearFilter}/>}
 
                 {this.props.alsoSee && <AlsoSeeCard alsoSee={this.props.alsoSee}/>}
 
@@ -77,7 +82,7 @@ export class RecordSetChildCards extends React.PureComponent<Props, State> {
 
     componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>) {
         if (this.props.records != prevProps.records)
-            this.setState({filter: null, filtered: filterAndSort(this.props.records, null)});
+            this.clearFilter();
     }
 
     private filterInput() {
@@ -117,6 +122,9 @@ const AlsoSeeCard = (props: {alsoSee: ReadonlyArray<Place.AsObject>}) => {
     </Card>;
 };
 
-const NoRecordCards = () => {
-    return <>No records known.</>;
+const NoRecordCards = (props: {clearFilter?: () => void}) => {
+    return <>
+        No records.
+        {props.clearFilter && <> <a onClick={props.clearFilter}>Clear filter</a></>}
+    </>;
 };
