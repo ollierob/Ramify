@@ -43,3 +43,9 @@
     padding-left: 24px;
     margin-bottom: 0;
 }
+
+.recordCards input {
+    width: 150px;
+    display: block;
+    margin-bottom: 8px;
+}

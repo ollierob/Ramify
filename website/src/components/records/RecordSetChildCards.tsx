@@ -1,6 +1,7 @@
 import * as React from "react";
+import {ChangeEvent} from "react";
 import {Place} from "../../protobuf/generated/place_pb";
-import {Card} from "antd";
+import {Card, Input} from "antd";
 import {RecordSet} from "../../protobuf/generated/record_pb";
 import {placeHref} from "../../pages/places/PlaceLinks";
 import "./RecordCards.css";
@@ -22,14 +23,30 @@ type Props = HasClass & RecordSetTitling & {
     ignoreNone?: boolean;
 }
 
-export class RecordSetChildCards extends React.PureComponent<Props> {
+type State = {
+    filter?: string
+    filtered: RecordSet.AsObject[]
+}
+
+export class RecordSetChildCards extends React.PureComponent<Props, State> {
+
+    private readonly setFilter = (e: ChangeEvent<HTMLInputElement>) => this.setState({
+        filter: e.target.value,
+        filtered: filterAndSort(this.props.records, e.target.value?.toLowerCase())
+    });
+
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            filtered: filterAndSort(props.records, null)
+        };
+    }
 
     render() {
 
         if (!this.props.records) return null;
 
-        const records = [...this.props.records].sort(sortRecordSetByTitle);
-        //if (props.groupByParent && props.relatives && props.relatives.length) return <GroupedRecordCards {...props}/>;
+        const records = this.state.filtered;
 
         return <div
             className={"recordCards" + (this.props.fixedWidth ? " fixedWidth" : "")}
@@ -37,6 +54,7 @@ export class RecordSetChildCards extends React.PureComponent<Props> {
 
             {this.props.loading && <Loading/>}
 
+            {this.props.records.length >= 10 && this.filterInput()}
             {records.map(record => <RecordSetChildCard {...this.props} key={record.id} record={record}/>)}
 
             {!this.props.loading && !records.length && !this.props.ignoreNone && <NoRecordCards/>}
@@ -47,6 +65,31 @@ export class RecordSetChildCards extends React.PureComponent<Props> {
 
     }
 
+    componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>) {
+        if (this.props.records != prevProps.records)
+            this.setState({filter: null, filtered: filterAndSort(this.props.records, null)});
+    }
+
+    private filterInput() {
+        return <Input
+            className="filter"
+            value={this.state.filter}
+            onChange={this.setFilter}
+            placeholder="Filter"
+            width={150}/>;
+    }
+
+}
+
+function filterAndSort(records: ReadonlyArray<RecordSet.AsObject>, filter: string): RecordSet.AsObject[] {
+    if (!records || !records.length) return [];
+    return records.filter(record => filterRecord(record, filter)).sort(sortRecordSetByTitle);
+}
+
+function filterRecord(record: RecordSet.AsObject, filter: string) {
+    if (!filter) return true;
+    return (record.longtitle?.toLowerCase() || "").includes(filter)
+        || (record.description?.toLowerCase() || "").includes(filter);
 }
 
 const AlsoSeeCard = (props: {alsoSee: ReadonlyArray<Place.AsObject>}) => {
