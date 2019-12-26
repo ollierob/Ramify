@@ -9,20 +9,6 @@
     
   <xs:element name="region" type="tns:xmlRegion"/>
     
-  <xs:complexType name="xmlDepartment">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="ns1:xmlPlace">
-                
-        <xs:sequence/>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
   <xs:complexType name="xmlFrance">
         
     <xs:complexContent>
@@ -52,6 +38,20 @@
           <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:department"/>
                   
         </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlDepartment">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="ns1:xmlPlace">
+                
+        <xs:sequence/>
               
       </xs:extension>
           

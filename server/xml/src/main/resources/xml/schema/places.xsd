@@ -879,11 +879,11 @@
                 
         <xs:element ref="ns3:parish"/>
                 
-        <xs:element ref="ns4:department"/>
-                
         <xs:element ref="ns4:country"/>
                 
         <xs:element ref="ns4:region"/>
+                
+        <xs:element ref="ns4:department"/>
               
       </xs:choice>
           
