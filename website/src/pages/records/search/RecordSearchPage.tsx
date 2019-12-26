@@ -2,12 +2,10 @@ import * as React from "react";
 import {FormEvent} from "react";
 import {Button, Card, Cascader, Form, Input} from "antd";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
-import {Place} from "../../../protobuf/generated/place_pb";
-import {Flag} from "../../../components/images/Flag";
 import {PlaceId} from "../../../components/places/Place";
 import {DEFAULT_PLACE_LOADER} from "../../../components/places/PlaceLoader";
 import {CascaderOptionType} from "antd/es/cascader";
-import {YearRange} from "../../../components/date/DateRange";
+import {DateRange, yearsToDateRange} from "../../../components/date/DateRange";
 import {RecordSet} from "../../../protobuf/generated/record_pb";
 import RecordSetTable from "./RecordSetTable";
 import {DEFAULT_RECORD_LOADER, RecordSetOptions} from "../../../components/records/RecordLoader";
@@ -16,11 +14,13 @@ import {hashToRecordSearch, recordSearchToHash} from "../../../components/search
 import {RecordBasePage, RecordBasePageProps} from "../RecordBasePage";
 import {SearchIcon} from "../../../components/images/Icons";
 import RegionCascader from "../../../components/places/RegionCascader";
+import {toIsoDate} from "../../../components/date/Date";
 
 type Props = RecordBasePageProps;
 
 type State = {
-    selectedRange: string[];
+    selectedRangeName: string[];
+    selectedRange?: DateRange,
     recordSets: AsyncData<ReadonlyArray<RecordSet.AsObject>>;
     recordName?: string;
     selectedRegion?: PlaceId;
@@ -36,7 +36,7 @@ export default class RecordSearchPage extends RecordBasePage<State> {
         super(props);
         const options = hashToRecordSearch(readPageHash());
         this.state = {
-            selectedRange: [],
+            selectedRangeName: [],
             recordSets: {},
             recordName: options.name
         };
@@ -81,8 +81,8 @@ export default class RecordSearchPage extends RecordBasePage<State> {
                             placeholder="Matching all dates"
                             size="large"
                             changeOnSelect
-                            value={this.state.selectedRange}
-                            onChange={selectedRange => this.setState({selectedRange})}
+                            value={this.state.selectedRangeName}
+                            onChange={(selectedRange, selectedOptions) => this.setState({selectedRangeName: selectedRange, selectedRange: selectedOptions[selectedRange.length - 1]?.range})}
                             options={YearRanges}
                             displayRender={this.renderRange}/>
                     </Form.Item>
@@ -127,6 +127,8 @@ export default class RecordSearchPage extends RecordBasePage<State> {
         const options: RecordSetOptions = {
             place: this.state.selectedRegion,
             name: this.state.recordName,
+            fromDate: toIsoDate(this.state.selectedRange?.earliest),
+            toDate: toIsoDate(this.state.selectedRange?.latest)
         };
         asyncLoadData(options, this.recordLoader.loadRecordSets, recordSets => this.setState({recordSets}));
         updatePageHash(recordSearchToHash(options));
@@ -140,12 +142,12 @@ const YearRanges = generateYearRanges();
 function generateYearRanges(): CascaderOptionType[] {
     const options: CascaderOptionType[] = [];
     for (let century = 1300; century <= 1900; century += 100) {
-        const centuryEnd = century + 100;
+        const centuryEnd = century + 99;
         const centuryOption: CascaderOptionType = {
             label: century + "s",
             value: century + "-" + centuryEnd,
             children: [],
-            range: yearRange(century, centuryEnd)
+            range: yearsToDateRange(century, centuryEnd)
         };
         options.push(centuryOption);
         for (let decade = 0; decade < 100; decade += 10) {
@@ -154,14 +156,10 @@ function generateYearRanges(): CascaderOptionType[] {
             const decadeOption: CascaderOptionType = {
                 label: decadeStart + " - " + decadeEnd,
                 value: decadeStart + "-" + decadeEnd,
-                range: yearRange(decadeStart, decadeEnd)
+                range: yearsToDateRange(decadeStart, decadeEnd)
             };
             centuryOption.children.push(decadeOption);
         }
     }
     return options;
-}
-
-function yearRange(from: number, to: number): YearRange {
-    return {from, to};
 }

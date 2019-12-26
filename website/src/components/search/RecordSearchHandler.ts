@@ -14,11 +14,15 @@ export function recordSearchToHash(options: RecordSetOptions): QueryMap {
         base: "search",
         searchName: options.name,
         searchPlace: options.place,
+        searchFromDate: options.fromDate,
+        searchToDate: options.toDate,
     };
 }
 
 export function hashToRecordSearch(map: StringMap): RecordSetOptions {
     return {
         name: map.searchName,
+        fromDate: map.searchFromDate,
+        toDate: map.searchToDate
     };
 }

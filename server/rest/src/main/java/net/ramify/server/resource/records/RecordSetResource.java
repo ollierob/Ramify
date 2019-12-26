@@ -1,6 +1,5 @@
 package net.ramify.server.resource.records;
 
-import net.ramify.model.date.DateRange;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetHierarchy;
@@ -18,6 +17,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import java.time.LocalDate;
 
 import static net.ramify.server.resource.Resource.APPLICATION_PROTOBUF;
 
@@ -29,7 +29,8 @@ public interface RecordSetResource extends Resource {
     RecordSets recordSets(
             @QueryParam("name") String name,
             @QueryParam("place") PlaceId withinPlace,
-            @QueryParam("date") DateRange withinDate,
+            @QueryParam("fromDate") LocalDate fromDate,
+            @QueryParam("toDate") LocalDate toDate,
             @QueryParam("onlyParents") @DefaultValue("false") boolean onlyParents,
             @QueryParam("limit") @DefaultValue("20") int limit);
 

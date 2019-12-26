@@ -1,6 +1,6 @@
 package net.ramify.server.resource.records;
 
-import net.ramify.model.date.DateRange;
+import net.ramify.model.date.ClosedDateRange;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.provider.PlaceProvider;
@@ -17,6 +17,7 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.time.LocalDate;
 import java.util.function.Predicate;
 
 @Singleton
@@ -41,7 +42,8 @@ public class DefaultRecordSetResource implements RecordSetResource {
     public RecordSets recordSets(
             @CheckForNull final String name,
             @CheckForNull final PlaceId withinPlace,
-            @CheckForNull final DateRange withinDate,
+            final LocalDate fromDate,
+            final LocalDate toDate,
             final boolean onlyParents,
             final int limit) {
         Predicate<RecordSet> predicate = r -> true;
@@ -53,8 +55,9 @@ public class DefaultRecordSetResource implements RecordSetResource {
             final var place = places.require(withinPlace);
             predicate = predicate.and(record -> this.isCovered(record, place));
         }
-        if (withinDate != null) {
-            predicate = predicate.and(r -> r.date().intersects(withinDate));
+        final var dateRange = fromDate == null && toDate == null ? null : ClosedDateRange.of(fromDate, toDate);
+        if (dateRange != null) {
+            predicate = predicate.and(r -> dateRange.intersects(r.date()));
         }
         return RecordSets.of(recordSets.matching(predicate, limit, onlyParents));
     }

@@ -114,10 +114,11 @@ export function formatDateRanges(r1: DateRangeProto.AsObject, r2: DateRangeProto
 }
 
 export function isoDate(date: DateProto.AsObject, d?: number): string {
+    if (!date) return null;
     return date.year + "-" + zeroPad(date.month, 2) + "-" + zeroPad(d || date.day, 2);
 }
 
-function zeroPad(n: number, length: number = 2): string {
+export function zeroPad(n: number, length: number = 2): string {
     let s = String(n);
     while (s.length < length) s = '0' + s;
     return s;

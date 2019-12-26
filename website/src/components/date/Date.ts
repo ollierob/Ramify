@@ -1,5 +1,6 @@
 import {Date, Date as DateProto} from "../../protobuf/generated/date_pb";
 import {datesEqual} from "./DateRange";
+import {isoDate} from "./DateFormat";
 
 export function areDatesEqual(d1: DateProto.AsObject, d2: DateProto.AsObject) {
     if (d1 == null) return d2 == null;
@@ -25,4 +26,16 @@ export function maxDate(d1: Date.AsObject, d2: Date.AsObject): Date.AsObject {
 
 export function lessThanOrEqual(d1: Date.AsObject, d2: Date.AsObject): boolean {
     return minDate(d1, d2) == d1 || datesEqual(d1, d2);
+}
+
+export function atStartOfYear(year: number): Date.AsObject {
+    return {year, month: 1, day: 1};
+}
+
+export function atEndOfYear(year: number): Date.AsObject {
+    return {year, month: 12, day: 31};
+}
+
+export function toIsoDate(d: Date.AsObject): string {
+    return isoDate(d);
 }

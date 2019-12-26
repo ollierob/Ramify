@@ -127,6 +127,11 @@ public interface DateRange extends BuildsProto<DateProto.DateRange> {
         }
 
         @Override
+        public boolean intersects(final DateRange that) {
+            return true;
+        }
+
+        @Override
         public String toString() {
             return "ALWAYS";
         }
@@ -159,7 +164,7 @@ public interface DateRange extends BuildsProto<DateProto.DateRange> {
         }
 
         @Override
-        public boolean intersects(DateRange that) {
+        public boolean intersects(final DateRange that) {
             return false;
         }
 
