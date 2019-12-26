@@ -27,20 +27,21 @@ function renderFamily(family: Family.AsObject) {
 }
 
 function renderPerson(person: Person.AsObject, root: Person.AsObject, relationships: ReadonlyArray<Relationship.AsObject>) {
+    const relationship = findRelationship(person, root, relationships);
     return <>
-        {renderName(person.name)}
+        {renderName(person.name, person.gender?.toLowerCase(), relationship)}
         {renderLifespan(person)}
-        {renderRelationship(person, root, relationships)}
+        {renderRelationship(person, root, relationship)}
         {renderNotes(person)}
     </>;
 }
 
-function renderName(name: Name.AsObject) {
-    return <PersonName name={name}/>;
+function renderName(name: Name.AsObject, gender: string, relationship: Relationship.AsObject) {
+    const unknownRelationship = relationship == null || relationship.unknown;
+    return <PersonName name={name} showGender={unknownRelationship && gender}/>;
 }
 
-function renderRelationship(person: Person.AsObject, root: Person.AsObject, relationships: ReadonlyArray<Relationship.AsObject>) {
-    const relationship = findRelationship(person, root, relationships);
+function renderRelationship(person: Person.AsObject, root: Person.AsObject, relationship: Relationship.AsObject) {
     if (!relationship || !relationship.type) return null;
     return <>&nbsp;<span className="relationship">{relationshipName(relationship, person)}</span></>;
 }
