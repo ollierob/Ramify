@@ -42,7 +42,7 @@ const Breadcrumb = (props: {place: Place.AsObject, separator: boolean, showType:
 
     const type = place.type;
     const prefix = props.showType && place.type.canprefix && !place.name.endsWith(type.name);
-    const suffix = !prefix && props.showType && place.type.cansuffix;
+    const suffix = !prefix && props.showType && place.type.cansuffix && !place.name.endsWith(type.name);
 
     return <>
         <span className="place">
