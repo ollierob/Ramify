@@ -13,10 +13,7 @@ import {moveToFront} from "../../../../components/Arrays";
 
 export function renderFamilyRecord(record: FamilyRecord) {
     if (!record) return null;
-    switch (record.type) {
-        default:
-            return renderFamily(record.family);
-    }
+    return renderFamily(record.family);
 }
 
 function renderFamily(family: Family.AsObject) {
@@ -49,5 +46,8 @@ function renderRelationship(person: Person.AsObject, root: Person.AsObject, rela
 }
 
 function renderNotes(person: Person.AsObject) {
-    return person.notes && <span className="notes">{person.notes}</span>;
+    if (person.notes) return <span className="notes">{person.notes}</span>;
+    const occupations = new Set(person.eventsList.map(e => e.occupation).filter(o => !!o));
+    if (occupations.size == 1) return <span className="occupation">{Array.from(occupations)[0]}</span>;
+    return null;
 }
