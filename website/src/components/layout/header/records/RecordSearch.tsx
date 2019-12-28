@@ -42,7 +42,7 @@ export class RecordSearch extends React.PureComponent<Props, State> {
                 <Form.Item className="search">
                     <Input
                         size="large"
-                        placeholder="Place name"
+                        placeholder="Record name"
                         value={this.state.searchString}
                         onChange={this.setSearchString}/>
                 </Form.Item>
