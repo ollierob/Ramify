@@ -9,13 +9,11 @@ import net.ramify.model.person.PersonId;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlPersonOnDateWithFamilyRecord;
 import net.ramify.model.record.xml.record.XmlRecord;
+import net.ramify.model.record.xml.record.mention.XmlSignature;
 
 import javax.annotation.CheckForNull;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 import static net.ramify.utils.StringUtils.isBlank;
 
@@ -47,19 +45,6 @@ public class XmlMarriageSpouse extends XmlPersonOnDateWithFamilyRecord {
         if (signature == XmlSignature.SIGNATURE) return "Signed name";
         if (signature == XmlSignature.MARK) return "Marked name";
         return null;
-    }
-
-    @SuppressWarnings("ValidExternallyBoundObject")
-    @XmlEnum
-    @XmlType(namespace = XmlRecord.NAMESPACE)
-    enum XmlSignature {
-
-        @XmlEnumValue("signature")
-        SIGNATURE,
-
-        @XmlEnumValue("mark")
-        MARK;
-
     }
 
 }

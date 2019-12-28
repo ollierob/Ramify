@@ -11,6 +11,7 @@ import net.ramify.model.family.FamilyOfUnknownRelationships;
 import net.ramify.model.person.AbstractPerson;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
+import net.ramify.model.person.features.PersonFeature;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.name.Name;
 import net.ramify.model.place.HasPlace;
@@ -23,6 +24,7 @@ import net.ramify.utils.collections.SetUtils;
 import javax.annotation.Nonnull;
 import java.time.Month;
 import java.time.Period;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -134,6 +136,12 @@ public class Census1841Record extends CensusRecord implements HasPlace {
                     eventMerger,
                     EventBuilder.builderWithRandomId(birthDate).withPlace(birthPlace).toBirth(this.personId()),
                     EventBuilder.builderWithRandomId(CENSUS_DATE).withGivenAge(age).withPlace(residencePlace).withOccupation(occupation).toResidence(this.personId()));
+        }
+
+        @Nonnull
+        @Override
+        public Set<? extends PersonFeature> features() {
+            return Collections.emptySet();
         }
 
     }

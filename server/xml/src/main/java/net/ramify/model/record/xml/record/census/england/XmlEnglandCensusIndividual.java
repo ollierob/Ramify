@@ -8,6 +8,7 @@ import net.ramify.model.record.xml.record.XmlPersonOnDateRecord;
 import net.ramify.model.record.xml.record.XmlRecord;
 import net.ramify.model.relationship.RelationshipFactory;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
@@ -24,6 +25,9 @@ public abstract class XmlEnglandCensusIndividual extends XmlPersonOnDateRecord {
     @XmlAttribute(name = "placeOfBirth")
     private String placeOfBirth;
 
+    @XmlAttribute(name = "disability")
+    private String disability;
+
     public boolean isHead() {
         return relationshipToHead.isHead();
     }
@@ -38,6 +42,11 @@ public abstract class XmlEnglandCensusIndividual extends XmlPersonOnDateRecord {
 
     protected RelationshipFactory relationshipToHead() {
         return relationshipToHead;
+    }
+
+    @CheckForNull
+    protected String disability() {
+        return disability;
     }
 
     @Nonnull

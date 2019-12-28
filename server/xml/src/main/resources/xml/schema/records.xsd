@@ -590,6 +590,8 @@
       <xs:extension base="tns:xmlPersonRecord">
                 
         <xs:sequence/>
+                
+        <xs:attribute name="signed" type="tns:xmlSignature"/>
               
       </xs:extension>
           
@@ -1015,11 +1017,11 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="manor"/>
-            
       <xs:enumeration value="church"/>
             
       <xs:enumeration value="government"/>
+            
+      <xs:enumeration value="manor"/>
           
     </xs:restriction>
       
@@ -1029,27 +1031,27 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="baptism"/>
-            
-      <xs:enumeration value="death"/>
+      <xs:enumeration value="marriage"/>
             
       <xs:enumeration value="mixed"/>
             
-      <xs:enumeration value="membership"/>
-            
-      <xs:enumeration value="burial"/>
-            
-      <xs:enumeration value="marriage"/>
-            
-      <xs:enumeration value="mention"/>
-            
       <xs:enumeration value="residence"/>
-            
-      <xs:enumeration value="birth"/>
             
       <xs:enumeration value="payment"/>
             
+      <xs:enumeration value="birth"/>
+            
+      <xs:enumeration value="death"/>
+            
+      <xs:enumeration value="burial"/>
+            
+      <xs:enumeration value="baptism"/>
+            
+      <xs:enumeration value="mention"/>
+            
       <xs:enumeration value="census"/>
+            
+      <xs:enumeration value="membership"/>
           
     </xs:restriction>
       
@@ -1071,13 +1073,13 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="parent"/>
-            
-      <xs:enumeration value="child"/>
-            
       <xs:enumeration value="head"/>
             
       <xs:enumeration value="spouse"/>
+            
+      <xs:enumeration value="child"/>
+            
+      <xs:enumeration value="parent"/>
           
     </xs:restriction>
       
@@ -1089,9 +1091,9 @@
             
       <xs:enumeration value="unmarried"/>
             
-      <xs:enumeration value="widowed"/>
-            
       <xs:enumeration value="married"/>
+            
+      <xs:enumeration value="widowed"/>
           
     </xs:restriction>
       

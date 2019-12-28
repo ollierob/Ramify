@@ -4,11 +4,14 @@ import com.google.common.base.MoreObjects;
 import net.ramify.model.event.collection.PersonEventSet;
 import net.ramify.model.person.AbstractPerson;
 import net.ramify.model.person.PersonId;
+import net.ramify.model.person.features.PersonFeature;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.name.Name;
 import net.ramify.model.person.proto.PersonProto;
 
 import javax.annotation.Nonnull;
+import java.util.Collections;
+import java.util.Set;
 
 public class GenericRecordPerson extends AbstractPerson {
 
@@ -32,6 +35,12 @@ public class GenericRecordPerson extends AbstractPerson {
     public PersonProto.Person.Builder toProtoBuilder() {
         return super.toProtoBuilder()
                 .setNotes(MoreObjects.firstNonNull(notes, ""));
+    }
+
+    @Nonnull
+    @Override
+    public Set<? extends PersonFeature> features() {
+        return Collections.emptySet();
     }
 
 }

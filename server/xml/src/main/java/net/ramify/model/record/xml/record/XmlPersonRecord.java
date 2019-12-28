@@ -72,14 +72,14 @@ public class XmlPersonRecord extends XmlRecord {
         return occupation;
     }
 
-    protected List<XmlPersonEvent> events() {
-        return MoreObjects.firstNonNull(events, Collections.emptyList());
-    }
-
     protected MutablePersonEventSet events(final PersonId personId, final RecordContext context) {
         final var events = new MutablePersonEventSet(context.uniqueEventMerger());
         this.events().forEach(event -> events.addAll(event.allEvents(personId, context, false)));
         return events;
+    }
+
+    protected List<XmlPersonEvent> events() {
+        return MoreObjects.firstNonNull(events, Collections.emptyList());
     }
 
     @Override

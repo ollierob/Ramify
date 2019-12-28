@@ -14,6 +14,14 @@ message Person {
     string notes = 4;
 
     repeated Event events = 10;
+    repeated PersonFeature feature = 11;
+
+}
+
+message PersonFeature {
+
+    string name = 1;
+    string value = 2;
 
 }
 

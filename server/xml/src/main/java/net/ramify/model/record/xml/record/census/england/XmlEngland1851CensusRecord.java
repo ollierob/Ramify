@@ -10,6 +10,7 @@ import net.ramify.model.record.residence.uk.Census1851Record;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlRecord;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import java.util.Collections;
@@ -39,12 +40,13 @@ public class XmlEngland1851CensusRecord extends XmlEnglandCensus {
         return MoreObjects.firstNonNull(super.place(places), censusPlace);
     }
 
+    @Nonnull
     Census1851Record.Census1851Head head(final RecordContext context) {
         return Iterables.find(individuals, XmlEnglandCensusIndividual::isHead).toHead(context);
     }
 
     List<Census1851Record.Census1851Resident> others(final RecordContext context) {
-        if (individuals.size() <= 1) return Collections.emptyList();
+        if (individuals == null || individuals.size() <= 1) return Collections.emptyList();
         return individuals.stream().filter(XmlEnglandCensusIndividual::isNotHead).map(i -> i.toOther(context)).collect(Collectors.toList());
     }
 
@@ -60,7 +62,8 @@ public class XmlEngland1851CensusRecord extends XmlEnglandCensus {
                     this.marriageCondition(),
                     this.age(),
                     this.placeOfBirth(context.places()),
-                    this.occupation());
+                    this.occupation(),
+                    this.disability());
         }
 
         Census1851Record.Census1851Resident toOther(final RecordContext context) {
@@ -73,7 +76,8 @@ public class XmlEngland1851CensusRecord extends XmlEnglandCensus {
                     this.marriageCondition(),
                     this.age(),
                     this.placeOfBirth(context.places()),
-                    this.occupation());
+                    this.occupation(),
+                    this.disability());
         }
 
     }

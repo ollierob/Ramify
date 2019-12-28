@@ -72,6 +72,8 @@
     <xs:attribute name="name" type="xs:string"/>
         
     <xs:attribute name="deceased" type="xs:boolean"/>
+        
+    <xs:attribute name="occupation" type="xs:string"/>
       
   </xs:complexType>
     

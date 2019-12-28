@@ -13,6 +13,8 @@ import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
+import net.ramify.model.person.feature.Disability;
+import net.ramify.model.person.features.PersonFeature;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.gender.Sex;
 import net.ramify.model.person.name.Name;
@@ -28,10 +30,13 @@ import net.ramify.model.relationship.type.Married;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.time.Month;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+
+import static net.ramify.utils.StringUtils.isBlank;
 
 public class Census1851Record extends CensusRecord {
 
@@ -94,6 +99,7 @@ public class Census1851Record extends CensusRecord {
         private final Age age;
         private final Place birthPlace;
         private final String occupation;
+        private final String disability;
 
         protected Census1851Entry(
                 final PersonId id,
@@ -103,7 +109,8 @@ public class Census1851Record extends CensusRecord {
                 final MarriageConditionEventInference condition,
                 final Age age,
                 final Place birthPlace,
-                final String occupation) {
+                final String occupation,
+                final String disability) {
             this.id = id;
             this.name = name;
             this.sex = sex;
@@ -112,6 +119,7 @@ public class Census1851Record extends CensusRecord {
             this.age = age;
             this.birthPlace = birthPlace;
             this.occupation = occupation;
+            this.disability = disability;
         }
 
         public PersonId id() {
@@ -135,6 +143,7 @@ public class Census1851Record extends CensusRecord {
                     condition.inferEvents(id, record),
                     condition,
                     occupation,
+                    disability,
                     record.eventMerger);
         }
 
@@ -149,8 +158,9 @@ public class Census1851Record extends CensusRecord {
                 final MarriageConditionEventInference condition,
                 final Age age,
                 final Place birthPlace,
-                final String occupation) {
-            super(id, name, sex, (a, b) -> null, condition, age, birthPlace, occupation);
+                final String occupation,
+                final String disability) {
+            super(id, name, sex, (a, b) -> null, condition, age, birthPlace, occupation, disability);
         }
 
     }
@@ -165,8 +175,9 @@ public class Census1851Record extends CensusRecord {
                 final MarriageConditionEventInference condition,
                 final Age age,
                 final Place birthPlace,
-                final String occupation) {
-            super(id, name, sex, Objects.requireNonNull(relationshipToHead), condition, age, birthPlace, occupation);
+                final String occupation,
+                final String disability) {
+            super(id, name, sex, Objects.requireNonNull(relationshipToHead), condition, age, birthPlace, occupation, disability);
         }
 
     }
@@ -179,6 +190,7 @@ public class Census1851Record extends CensusRecord {
         private final Relationship relationshipToHead;
         private final Set<? extends PersonEvent> extraEvents;
         private final MarriageConditionEventInference condition;
+        private final String disability;
         private final UniqueEventMerger eventMerger;
 
         Census1851Person(
@@ -192,6 +204,7 @@ public class Census1851Record extends CensusRecord {
                 final Set<? extends PersonEvent> extraEvents,
                 final MarriageConditionEventInference condition,
                 final String occupation,
+                final String disability,
                 final UniqueEventMerger eventMerger) {
             super(id, name, gender, CENSUS_DATE, occupation);
             this.residencePlace = Objects.requireNonNull(residencePlace, "residence place");
@@ -200,6 +213,7 @@ public class Census1851Record extends CensusRecord {
             this.relationshipToHead = relationshipToHead;
             this.extraEvents = extraEvents;
             this.condition = condition;
+            this.disability = disability;
             this.eventMerger = eventMerger;
         }
 
@@ -217,6 +231,14 @@ public class Census1851Record extends CensusRecord {
             final var events = new MutablePersonEventSet(eventMerger, this.birth(age, birthPlace), this.residence(age, residencePlace));
             events.addAll(extraEvents);
             return events;
+        }
+
+        @Nonnull
+        @Override
+        public Set<? extends PersonFeature> features() {
+            return isBlank(disability)
+                    ? Collections.emptySet()
+                    : Collections.singleton(new Disability(disability));
         }
 
     }

@@ -6,6 +6,7 @@ import net.meerkat.objects.Castable;
 import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -20,6 +21,14 @@ public class IterableUtils {
 
     public static <T extends Castable<? super T>> boolean has(final Iterable<? extends T> iterable, @Nonnull final Class<? extends T> type) {
         return any(iterable, event -> event.is(type));
+    }
+
+    public static <T extends Castable<? super T>, R extends T> Optional<R> findFirst(@Nonnull final Iterable<? extends T> iterable, @Nonnull final Class<R> type) {
+        return stream(iterable)
+                .map(e -> e.as(type))
+                .filter(Optional::isPresent)
+                .findAny()
+                .orElseGet(Optional::empty);
     }
 
     public static <T extends Castable<? super T>, R extends T> Set<R> findAll(@Nonnull final Iterable<? extends T> iterable, @Nonnull final Class<R> type) {

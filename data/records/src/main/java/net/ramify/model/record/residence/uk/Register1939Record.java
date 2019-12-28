@@ -9,6 +9,7 @@ import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyOfUnknownRelationships;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
+import net.ramify.model.person.features.PersonFeature;
 import net.ramify.model.person.gender.Sex;
 import net.ramify.model.person.name.Name;
 import net.ramify.model.place.Place;
@@ -20,6 +21,7 @@ import net.ramify.utils.collections.SetUtils;
 import javax.annotation.Nonnull;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -126,6 +128,12 @@ public class Register1939Record extends CensusRecord {
                     eventMerger,
                     this.birth(birthDate, null),
                     this.residence(Age.fromDates(birthDate, CENSUS_DATE), residence));
+        }
+
+        @Nonnull
+        @Override
+        public Set<? extends PersonFeature> features() {
+            return Collections.emptySet();
         }
 
     }
