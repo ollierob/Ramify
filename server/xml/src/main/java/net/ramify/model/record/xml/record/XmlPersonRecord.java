@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import static net.ramify.utils.StringUtils.isBlank;
+
 public class XmlPersonRecord extends XmlRecord {
 
     @XmlAttribute(name = "personId")
@@ -58,8 +60,8 @@ public class XmlPersonRecord extends XmlRecord {
     @Nonnull
     protected Name name(final NameParser parser) {
         if (complexName != null) return complexName.build(parser);
-        if (name != null) return parser.parse(name);
-        throw new UnsupportedOperationException(); //TODO add extra naming elements
+        if (!isBlank(name)) return parser.parse(name);
+        return Name.UNKNOWN;
     }
 
     protected Gender gender() {

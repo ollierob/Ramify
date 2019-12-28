@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.List;
 
-@XmlSeeAlso({XmlFather.class, XmlMother.class, XmlSon.class, XmlDaughter.class, XmlWife.class, XmlUnknownRelation.class})
+@XmlSeeAlso({XmlFather.class, XmlMother.class, XmlSon.class, XmlDaughter.class, XmlHusband.class, XmlWife.class, XmlUnknownRelation.class})
 public abstract class XmlRelationship {
 
     @XmlAttribute(name = "name")

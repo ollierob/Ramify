@@ -83,8 +83,8 @@ export function formatDateRange(r: DateRangeProto.AsObject, type: FormatType | D
     if (!r.earliest && !r.latest) return words.unknown;
     const format = formatter(type);
     const approx = r.approximate ? words.approximate : "";
-    if (!r.earliest) return words.after + approx + format.formatDate(r.latest);
-    if (!r.latest) return words.before + approx + format.formatDate(r.earliest);
+    if (!r.earliest) return words.before + approx + format.formatDate(r.latest);
+    if (!r.latest) return words.after + approx + format.formatDate(r.earliest);
     if (isWholeYear(r)) return words.in + approx + r.earliest.year;
     switch (type) {
         case "day":
