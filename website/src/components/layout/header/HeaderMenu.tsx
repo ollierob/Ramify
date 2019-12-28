@@ -3,8 +3,8 @@ import {Menu} from "antd";
 import {PlacesIcon, RecordsIcon, TreeIcon} from "../../images/Icons";
 import {PlaceFavouritesHandler} from "../../places/PlaceFavourites";
 import "./HeaderMenu.css";
-import {PlaceMenu} from "./place/PlaceMenu";
-import {RecordMenu} from "./RecordMenu";
+import {PlaceMenu} from "./places/PlaceMenu";
+import {RecordMenu} from "./records/RecordMenu";
 import {PeopleMenu} from "./PeopleMenu";
 import {PlaceHistoryHandler} from "../../places/PlaceHistory";
 

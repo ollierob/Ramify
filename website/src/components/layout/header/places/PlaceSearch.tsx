@@ -8,6 +8,7 @@ import {SearchIcon} from "../../../images/Icons";
 import {PlaceId} from "../../../places/Place";
 import RegionCascader from "../../../places/RegionCascader";
 import {PlaceAndParent} from "../../../places/PlaceAndParent";
+import {NoData} from "../../../style/NoData";
 
 type Props = {
     parentOpen: boolean;
@@ -35,7 +36,7 @@ export class PlaceSearch extends React.PureComponent<Props, State> {
 
     render() {
 
-        return <div className="placeSearch">
+        return <div className="place menuSearch">
 
             <Form onSubmit={this.doSearch}>
 
@@ -81,29 +82,26 @@ export class PlaceSearch extends React.PureComponent<Props, State> {
         asyncLoadData(name, n => this.placeLoader.findPlaces(n, {limit: 10, within: this.state.selectedRegion}), searchResults => this.setState({searchResults}));
     }
 
-    componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>) {
-        if (this.state.searchResults.data != prevState.searchResults.data)
-            console.log("Search results: " + this.state.searchString + " => " + (this.state.searchResults.data ? this.state.searchResults.data.length : 0));
-    }
-
 }
 
 const SearchResults = (props: {searchResults: AsyncData<ReadonlyArray<Place.AsObject>>}) => {
 
     const results = props.searchResults;
 
-    if (results.data) {
-        const data: Place.AsObject[] = [...results.data];
+    if (results.loading || results.data) {
+        const data: Place.AsObject[] = results.data ? [...results.data] : [];
         return <List
             loading={results.loading}
             dataSource={data}
-            renderItem={place => <List.Item key={place.id}><SearchResult place={place}/></List.Item>}/>;
+            renderItem={renderSearchResult}/>;
     }
 
-    return null;
+    return <NoData/>;
 
 };
 
-const SearchResult = (props: {place: Place.AsObject}) => {
-    return <PlaceAndParent {...props}/>;
-};
+function renderSearchResult(place: Place.AsObject) {
+    return <List.Item key={place.id}>
+        <PlaceAndParent place={place}/>;
+    </List.Item>;
+}

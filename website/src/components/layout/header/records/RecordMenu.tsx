@@ -1,6 +1,7 @@
 import * as React from "react";
 import {Tabs} from "antd";
-import {NoData} from "../../style/NoData";
+import {NoData} from "../../../style/NoData";
+import {RecordSearch} from "./RecordSearch";
 
 type Props = {
     open: boolean;
@@ -28,7 +29,7 @@ export class RecordMenu extends React.PureComponent<Props, State> {
             <Tabs tabPosition="left" activeKey={this.state.activeTab} size="large">
 
                 <Tabs.TabPane key="search" tab={<TabTitle title="Search" onMouseover={this.setSearch}/>}>
-
+                    <RecordSearch parentOpen={this.props.open}/>
                 </Tabs.TabPane>
 
                 <Tabs.TabPane key="favourites" tab={<TabTitle title="Favourites" onMouseover={this.setFavourites}/>}>

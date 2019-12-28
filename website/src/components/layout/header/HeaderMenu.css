@@ -22,15 +22,15 @@
     overflow-y: auto;
 }
 
-.ant-menu-submenu .placeSearch .ant-form-item {
+.ant-menu-submenu .menuSearch .ant-form-item {
     margin-bottom: 8px;
 }
 
-.ant-menu-submenu .placeSearch .results .ant-list-item {
+.ant-menu-submenu .menuSearch .results .ant-list-item {
     display: block;
 }
 
-.ant-menu-submenu .placeSearch .regionCascader {
+.ant-menu-submenu .menuSearch.place .regionCascader {
     width: 210px;
     float: right;
 }

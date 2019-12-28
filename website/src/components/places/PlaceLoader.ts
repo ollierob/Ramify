@@ -64,7 +64,8 @@ class ProtoPlaceLoader implements PlaceLoader {
             .then(b => b ? b.toObject() : null);
     }
 
-    loadCountries(options: CountryOptions = {}) {
+    loadCountries(options: CountryOptions) {
+        if (!options) options = {};
         const url = "/places/countries"
             + queryParameters({onlyTopLevel: options.onlyTopLevel});
         return protoGet(url, PlaceList.deserializeBinary).then(readPlaces);
