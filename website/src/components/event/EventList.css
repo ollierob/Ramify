@@ -78,6 +78,10 @@
     display: none;
 }
 
+.eventList .event .related .person {
+    text-transform: capitalize;
+}
+
 .inferBirth.ant-modal .ant-modal-title {
     font-weight: bold;
     font-size: 18px;
