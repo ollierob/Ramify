@@ -96,7 +96,7 @@ const SearchResults = (props: {searchResults: AsyncData<ReadonlyArray<Place.AsOb
             renderItem={renderSearchResult}/>;
     }
 
-    return <NoData/>;
+    return results.loaded ? <NoData/> : null;
 
 };
 
