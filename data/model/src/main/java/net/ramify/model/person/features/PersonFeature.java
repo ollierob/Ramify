@@ -6,6 +6,9 @@ import net.ramify.model.person.proto.PersonProto;
 
 import javax.annotation.Nonnull;
 
+/**
+ * Some irreversible feature of a person (usually by the time they are an adult).
+ */
 public interface PersonFeature extends Castable<PersonFeature>, BuildsProto<PersonProto.PersonFeature> {
 
     @Nonnull
