@@ -1,16 +1,20 @@
 package net.ramify.model.record.xml.record;
 
 import com.google.common.base.MoreObjects;
+import com.google.common.collect.ImmutableSet;
 import net.ramify.model.event.collection.MutablePersonEventSet;
 import net.ramify.model.event.xml.person.XmlPersonEvent;
 import net.ramify.model.person.PersonId;
+import net.ramify.model.person.features.PersonFeature;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.gender.Sex;
 import net.ramify.model.person.name.Name;
 import net.ramify.model.person.name.NameParser;
 import net.ramify.model.person.xml.XmlGender;
-import net.ramify.model.person.xml.XmlName;
+import net.ramify.model.person.xml.feature.XmlPersonFeature;
+import net.ramify.model.person.xml.name.XmlName;
 import net.ramify.model.record.xml.RecordContext;
+import net.ramify.utils.collections.SetUtils;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -18,6 +22,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public class XmlPersonRecord extends XmlRecord {
@@ -39,6 +44,9 @@ public class XmlPersonRecord extends XmlRecord {
 
     @XmlAttribute(name = "occupation")
     private String occupation;
+
+    @XmlElementRef(required = false)
+    private List<XmlPersonFeature> features;
 
     @XmlElementRef(required = false)
     private List<XmlPersonEvent> events;
@@ -70,6 +78,13 @@ public class XmlPersonRecord extends XmlRecord {
     @CheckForNull
     protected String occupation() {
         return occupation;
+    }
+
+    @Nonnull
+    protected Set<PersonFeature> features() {
+        return features == null
+                ? ImmutableSet.of()
+                : SetUtils.transform(features, XmlPersonFeature::toFeature);
     }
 
     protected MutablePersonEventSet events(final PersonId personId, final RecordContext context) {

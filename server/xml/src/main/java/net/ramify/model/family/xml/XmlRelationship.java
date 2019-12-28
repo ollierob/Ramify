@@ -15,7 +15,7 @@ import net.ramify.model.person.PersonId;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.name.Name;
 import net.ramify.model.person.name.NameParser;
-import net.ramify.model.person.xml.XmlName;
+import net.ramify.model.person.xml.name.XmlName;
 import net.ramify.model.record.GenericRecordPerson;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.relationship.Relationship;

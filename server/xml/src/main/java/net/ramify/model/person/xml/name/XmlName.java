@@ -1,7 +1,8 @@
-package net.ramify.model.person.xml;
+package net.ramify.model.person.xml.name;
 
 import net.ramify.model.person.name.Name;
 import net.ramify.model.person.name.NameParser;
+import net.ramify.model.person.xml.XmlPerson;
 
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;

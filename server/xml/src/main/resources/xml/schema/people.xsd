@@ -7,6 +7,10 @@
     
   <xs:element name="exactAge" type="tns:xmlExactAge"/>
     
+  <xs:element name="height" type="tns:xmlHairColourFeature"/>
+    
+  <xs:element name="literacy" type="tns:xmlLiteracyFeature"/>
+    
   <xs:element name="nameTranscription" type="tns:xmlNameTranscription"/>
     
   <xs:complexType abstract="true" name="xmlAge">
@@ -97,6 +101,44 @@
       
   </xs:complexType>
     
+  <xs:complexType abstract="true" name="xmlPersonFeature">
+        
+    <xs:sequence/>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlLiteracyFeature">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPersonFeature">
+                
+        <xs:sequence/>
+                
+        <xs:attribute name="literate" type="xs:boolean" use="required"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlHairColourFeature">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPersonFeature">
+                
+        <xs:sequence/>
+                
+        <xs:attribute name="cm" type="xs:int" use="required"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
   <xs:complexType name="xmlPerson">
         
     <xs:sequence/>
@@ -109,9 +151,9 @@
             
       <xs:enumeration value="male"/>
             
-      <xs:enumeration value="unknown"/>
-            
       <xs:enumeration value="female"/>
+            
+      <xs:enumeration value="unknown"/>
           
     </xs:restriction>
       

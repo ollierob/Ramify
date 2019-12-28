@@ -17,11 +17,18 @@ public class GenericRecordPerson extends AbstractPerson {
 
     private final PersonEventSet events;
     private final String notes;
+    private final Set<PersonFeature> features;
 
+    @Deprecated
     public GenericRecordPerson(final PersonId id, final Name name, final Gender gender, final PersonEventSet events, final String notes) {
+        this(id, name, gender, events, notes, Collections.emptySet());
+    }
+
+    public GenericRecordPerson(final PersonId id, final Name name, final Gender gender, final PersonEventSet events, final String notes, final Set<PersonFeature> features) {
         super(id, name, gender);
         this.events = events;
         this.notes = notes;
+        this.features = features;
     }
 
     @Nonnull
@@ -40,7 +47,7 @@ public class GenericRecordPerson extends AbstractPerson {
     @Nonnull
     @Override
     public Set<? extends PersonFeature> features() {
-        return Collections.emptySet();
+        return features;
     }
 
 }

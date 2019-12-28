@@ -71,6 +71,14 @@
                     
           <xs:choice maxOccurs="unbounded" minOccurs="0">
                         
+            <xs:element ref="ns1:literacy"/>
+                        
+            <xs:element ref="ns1:height"/>
+                      
+          </xs:choice>
+                    
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        
             <xs:element ref="ns2:personEvent"/>
                         
             <xs:element ref="ns2:any"/>
@@ -800,6 +808,8 @@
         <xs:attribute name="marriageCondition" type="tns:censusMarriageCondition"/>
                 
         <xs:attribute name="placeOfBirth" type="xs:string"/>
+                
+        <xs:attribute name="disability" type="xs:string"/>
               
       </xs:extension>
           
@@ -1017,11 +1027,11 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="church"/>
+      <xs:enumeration value="manor"/>
             
       <xs:enumeration value="government"/>
             
-      <xs:enumeration value="manor"/>
+      <xs:enumeration value="church"/>
           
     </xs:restriction>
       
@@ -1033,25 +1043,25 @@
             
       <xs:enumeration value="marriage"/>
             
-      <xs:enumeration value="mixed"/>
-            
       <xs:enumeration value="residence"/>
-            
-      <xs:enumeration value="payment"/>
-            
-      <xs:enumeration value="birth"/>
-            
-      <xs:enumeration value="death"/>
             
       <xs:enumeration value="burial"/>
             
-      <xs:enumeration value="baptism"/>
+      <xs:enumeration value="mixed"/>
             
-      <xs:enumeration value="mention"/>
+      <xs:enumeration value="birth"/>
             
       <xs:enumeration value="census"/>
             
+      <xs:enumeration value="death"/>
+            
+      <xs:enumeration value="mention"/>
+            
       <xs:enumeration value="membership"/>
+            
+      <xs:enumeration value="baptism"/>
+            
+      <xs:enumeration value="payment"/>
           
     </xs:restriction>
       
@@ -1061,9 +1071,9 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="mark"/>
-            
       <xs:enumeration value="signature"/>
+            
+      <xs:enumeration value="mark"/>
           
     </xs:restriction>
       
@@ -1075,11 +1085,11 @@
             
       <xs:enumeration value="head"/>
             
+      <xs:enumeration value="parent"/>
+            
       <xs:enumeration value="spouse"/>
             
       <xs:enumeration value="child"/>
-            
-      <xs:enumeration value="parent"/>
           
     </xs:restriction>
       
@@ -1089,11 +1099,11 @@
         
     <xs:restriction base="xs:string">
             
+      <xs:enumeration value="widowed"/>
+            
       <xs:enumeration value="unmarried"/>
             
       <xs:enumeration value="married"/>
-            
-      <xs:enumeration value="widowed"/>
           
     </xs:restriction>
       

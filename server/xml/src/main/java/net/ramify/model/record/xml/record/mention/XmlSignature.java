@@ -16,4 +16,8 @@ public enum XmlSignature {
     @XmlEnumValue("mark")
     MARK;
 
+    public boolean isLiterate() {
+        return this == SIGNATURE;
+    }
+
 }

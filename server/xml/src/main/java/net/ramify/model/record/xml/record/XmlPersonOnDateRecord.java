@@ -43,7 +43,8 @@ public class XmlPersonOnDateRecord extends XmlPersonRecord {
         final var gender = this.gender();
         final var events = createEvents.apply(personId);
         final var notes = this.notes();
-        return new GenericRecordPerson(personId, name, gender, events, notes);
+        final var features = this.features();
+        return new GenericRecordPerson(personId, name, gender, events, notes, features);
     }
 
     @OverridingMethodsMustInvokeSuper
