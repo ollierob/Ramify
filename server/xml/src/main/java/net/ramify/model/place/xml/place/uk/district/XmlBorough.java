@@ -36,7 +36,7 @@ public class XmlBorough extends XmlRegion<Borough> {
     }
 
     @Override
-    protected Borough place(Place parent, PlaceGroupId groupId, PlaceHistory history, PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+    protected Borough toPlace(Place parent, PlaceGroupId groupId, PlaceHistory history, PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         return new Borough(this.placeId(context), this.name(), parent.requireAs(Region.class), groupId, null, this.history(context));
     }
 

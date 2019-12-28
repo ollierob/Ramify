@@ -34,7 +34,7 @@ class XmlGraveship extends XmlPlace {
     }
 
     @Override
-    protected Graveship place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+    protected Graveship toPlace(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
         return new Graveship(this.placeId(context), this.name(), parent.requireAs(Manor.class), groupId, history);
     }

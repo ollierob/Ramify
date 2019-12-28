@@ -34,7 +34,7 @@ class XmlTownship extends XmlRegion<Township> {
     }
 
     @Override
-    protected Township place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+    protected Township toPlace(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
         return new Township(this.placeId(context), this.name(), parent.requireAs(Region.class), groupId, history);
     }

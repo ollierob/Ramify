@@ -31,7 +31,7 @@ public class XmlFrance extends XmlPlace {
 
     @Nonnull
     @Override
-    protected Country place(Place parent, PlaceGroupId groupId, PlaceHistory history, PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+    protected Country toPlace(Place parent, PlaceGroupId groupId, PlaceHistory history, PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         return new Country(this.placeId(context), this.name(), context.countryIso(), null, groupId, history);
     }
 

@@ -40,7 +40,7 @@ public class XmlState extends XmlRegion<State> {
 
     @Nonnull
     @Override
-    protected State place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+    protected State toPlace(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
         return new State(this.placeId(context), this.name(), parent.requireAs(Country.class), this.iso(), groupId, history);
     }

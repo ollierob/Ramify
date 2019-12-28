@@ -19,7 +19,7 @@ public class XmlStreet extends XmlBuilding<Street> {
     }
 
     @Override
-    protected Street place(final Place parent, final PlaceGroupId groupId, final BuildingHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+    protected Street toPlace(final Place parent, final PlaceGroupId groupId, final BuildingHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
         return new Street(this.placeId(context), this.name(), parent.requireAs(SettlementOrRegion.class), groupId, history);
     }

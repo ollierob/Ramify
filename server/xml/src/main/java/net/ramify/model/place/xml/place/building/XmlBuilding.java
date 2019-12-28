@@ -53,16 +53,16 @@ public abstract class XmlBuilding<P extends Place> extends XmlPlace {
     }
 
     @Override
-    protected P place(
+    protected P toPlace(
             final Place parent,
             final PlaceGroupId groupId,
             final PlaceHistory history,
             final PlaceParserContext context)
             throws Place.InvalidPlaceTypeException {
-        return this.place(parent, groupId, history instanceof BuildingHistory ? (BuildingHistory) history : this.history(context), context);
+        return this.toPlace(parent, groupId, history instanceof BuildingHistory ? (BuildingHistory) history : this.history(context), context);
     }
 
-    protected abstract P place(
+    protected abstract P toPlace(
             Place parent,
             PlaceGroupId groupId,
             BuildingHistory history,

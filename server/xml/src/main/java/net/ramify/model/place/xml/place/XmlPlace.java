@@ -1,5 +1,8 @@
 package net.ramify.model.place.xml.place;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.parse.DateParser;
@@ -58,11 +61,14 @@ public abstract class XmlPlace {
     })
     private XmlDateRange closed;
 
+    @XmlElement(name = "physicalParent", namespace = NAMESPACE)
+    private XmlPlaces within;
+
     @XmlAttribute(name = "major")
     private Boolean major;
 
     @Nonnull
-    protected PlaceId placeId(final PlaceParserContext context) {
+    public PlaceId placeId(final PlaceParserContext context) {
         return this.placeId(context.countryIso());
     }
 
@@ -96,7 +102,7 @@ public abstract class XmlPlace {
 
     void addPlaces(final Place parent, final Consumer<Place> addPlace, final PlaceParserContext context) {
         try {
-            final var self = this.place(parent, context);
+            final var self = this.toPlace(parent, context);
             addPlace.accept(self);
             final var children = this.children();
             if (children != null) children.forEach(child -> child.addPlaces(self, addPlace, context));
@@ -105,15 +111,19 @@ public abstract class XmlPlace {
         }
     }
 
-    private Place place(final Place parent, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+    private Place toPlace(final Place parent, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         final var placeId = this.placeId(context.countryIso());
         return isBlank(name)
                 ? context.places().require(placeId)
-                : this.place(parent, this.placeGroupId(placeId), this.history(context), context);
+                : this.toPlace(parent, this.placeGroupId(placeId), this.history(context), context);
     }
 
     @Nonnull
-    protected abstract Place place(Place parent, PlaceGroupId groupId, PlaceHistory history, PlaceParserContext context) throws Place.InvalidPlaceTypeException;
+    protected abstract Place toPlace(
+            Place parent,
+            PlaceGroupId groupId,
+            PlaceHistory history,
+            PlaceParserContext context) throws Place.InvalidPlaceTypeException;
 
     @CheckForNull
     protected abstract Collection<? extends XmlPlace> children();
@@ -130,6 +140,19 @@ public abstract class XmlPlace {
         return opened == null && closed == null
                 ? null
                 : new DefaultPlaceHistory(this.opened(context.dateParser()), this.closed(context.dateParser()));
+    }
+
+    @Nonnull
+    public Multimap<PlaceId, PlaceId> physicalParents(final PlaceParserContext context) {
+
+        final var children = this.children();
+        if (children == null && within == null) return ImmutableMultimap.of();
+
+        final var map = HashMultimap.<PlaceId, PlaceId>create();
+        children.forEach(child -> map.putAll(child.physicalParents(context)));
+        if (within != null) within.places().forEach(parent -> map.put(parent.placeId(context), this.placeId(context)));
+        return map;
+
     }
 
     @Override

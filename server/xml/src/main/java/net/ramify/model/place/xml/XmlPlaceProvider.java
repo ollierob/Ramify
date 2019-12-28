@@ -16,6 +16,7 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.iso.CountryIso;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.region.Country;
+import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.XmlPlaces;
 import net.ramify.utils.collections.SetUtils;
 import net.ramify.utils.file.FileTraverseUtils;
@@ -104,6 +105,13 @@ class XmlPlaceProvider implements PlaceProvider {
         return SetUtils.transform(groupIds.get(groupId), this::require);
     }
 
+    void addAll(final PlaceParserContext context, final Collection<XmlPlace> places) {
+        for (final var place : places) {
+            place.places(context).forEach(this::add);
+            children.putAll(place.physicalParents(context));
+        }
+    }
+
     void add(final Place place) {
         places.put(place.placeId(), place);
         Consumers.ifNonNull(place.parent(), parent -> children.put(parent.placeId(), place.placeId()));
@@ -111,16 +119,16 @@ class XmlPlaceProvider implements PlaceProvider {
         groupIds.put(place.placeGroupId(), place.placeId());
     }
 
-    void addAll(final Collection<Place> places) {
-        places.forEach(this::add);
-    }
-
     int size() {
         return places.size();
     }
 
     PlaceProvider immutable() {
-        return new XmlPlaceProvider(ImmutableMap.copyOf(places), ImmutableSetMultimap.copyOf(children), ImmutableSetMultimap.copyOf(groupIds), ImmutableSet.copyOf(countries));
+        return new XmlPlaceProvider(
+                ImmutableMap.copyOf(places),
+                ImmutableSetMultimap.copyOf(children),
+                ImmutableSetMultimap.copyOf(groupIds),
+                ImmutableSet.copyOf(countries));
     }
 
     static PlaceProvider readPlacesInCountryRoot(
@@ -160,7 +168,7 @@ class XmlPlaceProvider implements PlaceProvider {
             final var unmarshalled = unmarshaller.unmarshal(file);
             if (!(unmarshalled instanceof XmlPlaces)) return;
             final var places = (XmlPlaces) unmarshalled;
-            placeProvider.addAll(places.places(context));
+            placeProvider.addAll(context, places.places());
         } catch (final JAXBException jex) {
             logger.warn("Could not read places in file " + file + ": " + jex.getMessage());
         } catch (final RuntimeException rex) {

@@ -41,7 +41,7 @@ public class XmlLondonBorough extends XmlRegion<Borough> {
     }
 
     @Override
-    protected Borough place(
+    protected Borough toPlace(
             final Place parent,
             final PlaceGroupId groupId,
             final PlaceHistory history,

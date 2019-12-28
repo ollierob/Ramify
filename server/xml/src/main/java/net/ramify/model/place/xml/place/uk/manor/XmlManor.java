@@ -35,7 +35,7 @@ public class XmlManor extends XmlRegion<Manor> {
     }
 
     @Override
-    protected Manor place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+    protected Manor toPlace(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
         return new Manor(this.placeId(context), this.name(), parent.requireAs(Region.class), groupId, history);
     }

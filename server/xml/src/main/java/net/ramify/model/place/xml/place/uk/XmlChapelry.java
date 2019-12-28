@@ -38,7 +38,7 @@ public class XmlChapelry extends XmlRegion<Chapelry> {
     }
 
     @Override
-    protected Chapelry place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+    protected Chapelry toPlace(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         return new Chapelry(this.placeId(context), this.name(), parent.requireAs(Parish.class), groupId, history);
     }
 

@@ -28,7 +28,7 @@ public class XmlRegion extends net.ramify.model.place.xml.place.region.XmlRegion
     }
 
     @Override
-    protected Region place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+    protected Region toPlace(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         return new CountryRegion(this.placeId(context), this.name(), groupId, history, parent.requireAs(Country.class));
     }
 

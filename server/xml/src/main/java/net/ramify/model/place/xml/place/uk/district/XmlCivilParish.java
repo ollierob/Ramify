@@ -36,7 +36,7 @@ public class XmlCivilParish extends XmlRegion<CivilParish> {
     }
 
     @Override
-    protected CivilParish place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+    protected CivilParish toPlace(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
         return new CivilParish(this.placeId(context), this.name(), parent.requireAs(District.class), groupId, history);
     }

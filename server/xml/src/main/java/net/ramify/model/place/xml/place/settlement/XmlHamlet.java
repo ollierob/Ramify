@@ -31,7 +31,7 @@ public class XmlHamlet extends XmlSettlement {
     }
 
     @Override
-    protected Hamlet place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+    protected Hamlet toPlace(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
         return new Hamlet(this.placeId(context), this.name(), parent.requireAs(Region.class), groupId, history);
     }

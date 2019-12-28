@@ -35,7 +35,7 @@ public class XmlUrbanDistrict extends XmlRegion<UrbanDistrict> {
     }
 
     @Override
-    protected UrbanDistrict place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+    protected UrbanDistrict toPlace(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         return new UrbanDistrict(this.placeId(context), this.name(), parent.requireAs(County.class), groupId, history);
     }
 

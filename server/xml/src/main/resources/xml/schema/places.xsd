@@ -312,6 +312,8 @@
         <xs:element ref="ns1:closedBeforeYear"/>
               
       </xs:choice>
+            
+      <xs:element form="qualified" minOccurs="0" name="physicalParent" type="tns:places"/>
           
     </xs:sequence>
         
@@ -322,6 +324,104 @@
     <xs:attribute name="name" type="xs:string"/>
         
     <xs:attribute name="major" type="xs:boolean"/>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="places">
+        
+    <xs:sequence>
+            
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+                
+        <xs:element ref="tns:city"/>
+                
+        <xs:element ref="tns:church"/>
+                
+        <xs:element ref="tns:graveyard"/>
+                
+        <xs:element ref="tns:farmstead"/>
+                
+        <xs:element ref="tns:inn"/>
+                
+        <xs:element ref="tns:mill"/>
+                
+        <xs:element ref="tns:monastery"/>
+                
+        <xs:element ref="tns:school"/>
+                
+        <xs:element ref="tns:street"/>
+                
+        <xs:element ref="tns:workhouse"/>
+                
+        <xs:element ref="tns:town"/>
+                
+        <xs:element ref="tns:village"/>
+                
+        <xs:element ref="tns:hamlet"/>
+                
+        <xs:element ref="tns:suburb"/>
+                
+        <xs:element ref="ns2:country"/>
+                
+        <xs:element ref="ns2:county"/>
+                
+        <xs:element ref="ns2:parish"/>
+                
+        <xs:element ref="ns2:chapelry"/>
+                
+        <xs:element ref="ns2:township"/>
+                
+        <xs:element ref="ns2:manor"/>
+                
+        <xs:element ref="ns2:graveship"/>
+                
+        <xs:element ref="ns2:forest"/>
+                
+        <xs:element ref="ns2:hundred"/>
+                
+        <xs:element ref="ns2:rape"/>
+                
+        <xs:element ref="ns2:wapentake"/>
+                
+        <xs:element ref="ns2:lathe"/>
+                
+        <xs:element ref="ns2:ward"/>
+                
+        <xs:element ref="ns2:borough"/>
+                
+        <xs:element ref="ns2:civilParish"/>
+                
+        <xs:element ref="ns2:metropolitanBorough"/>
+                
+        <xs:element ref="ns2:municipalBorough"/>
+                
+        <xs:element ref="ns2:urbanDistrict"/>
+                
+        <xs:element ref="ns2:ruralDistrict"/>
+                
+        <xs:element ref="ns2:londonBorough"/>
+                
+        <xs:element ref="ns2:cityDistrict"/>
+                
+        <xs:element ref="ns3:country"/>
+                
+        <xs:element ref="ns3:state"/>
+                
+        <xs:element ref="ns3:county"/>
+                
+        <xs:element ref="ns3:township"/>
+                
+        <xs:element ref="ns3:parish"/>
+                
+        <xs:element ref="ns4:country"/>
+                
+        <xs:element ref="ns4:region"/>
+                
+        <xs:element ref="ns4:department"/>
+              
+      </xs:choice>
+          
+    </xs:sequence>
       
   </xs:complexType>
     
@@ -790,104 +890,6 @@
       </xs:extension>
           
     </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="places">
-        
-    <xs:sequence>
-            
-      <xs:choice maxOccurs="unbounded" minOccurs="0">
-                
-        <xs:element ref="tns:city"/>
-                
-        <xs:element ref="tns:church"/>
-                
-        <xs:element ref="tns:graveyard"/>
-                
-        <xs:element ref="tns:farmstead"/>
-                
-        <xs:element ref="tns:inn"/>
-                
-        <xs:element ref="tns:mill"/>
-                
-        <xs:element ref="tns:monastery"/>
-                
-        <xs:element ref="tns:school"/>
-                
-        <xs:element ref="tns:street"/>
-                
-        <xs:element ref="tns:workhouse"/>
-                
-        <xs:element ref="tns:town"/>
-                
-        <xs:element ref="tns:village"/>
-                
-        <xs:element ref="tns:hamlet"/>
-                
-        <xs:element ref="tns:suburb"/>
-                
-        <xs:element ref="ns2:country"/>
-                
-        <xs:element ref="ns2:county"/>
-                
-        <xs:element ref="ns2:parish"/>
-                
-        <xs:element ref="ns2:chapelry"/>
-                
-        <xs:element ref="ns2:township"/>
-                
-        <xs:element ref="ns2:manor"/>
-                
-        <xs:element ref="ns2:graveship"/>
-                
-        <xs:element ref="ns2:forest"/>
-                
-        <xs:element ref="ns2:hundred"/>
-                
-        <xs:element ref="ns2:rape"/>
-                
-        <xs:element ref="ns2:wapentake"/>
-                
-        <xs:element ref="ns2:lathe"/>
-                
-        <xs:element ref="ns2:ward"/>
-                
-        <xs:element ref="ns2:borough"/>
-                
-        <xs:element ref="ns2:civilParish"/>
-                
-        <xs:element ref="ns2:metropolitanBorough"/>
-                
-        <xs:element ref="ns2:municipalBorough"/>
-                
-        <xs:element ref="ns2:urbanDistrict"/>
-                
-        <xs:element ref="ns2:ruralDistrict"/>
-                
-        <xs:element ref="ns2:londonBorough"/>
-                
-        <xs:element ref="ns2:cityDistrict"/>
-                
-        <xs:element ref="ns3:country"/>
-                
-        <xs:element ref="ns3:state"/>
-                
-        <xs:element ref="ns3:county"/>
-                
-        <xs:element ref="ns3:township"/>
-                
-        <xs:element ref="ns3:parish"/>
-                
-        <xs:element ref="ns4:country"/>
-                
-        <xs:element ref="ns4:region"/>
-                
-        <xs:element ref="ns4:department"/>
-              
-      </xs:choice>
-          
-    </xs:sequence>
       
   </xs:complexType>
     

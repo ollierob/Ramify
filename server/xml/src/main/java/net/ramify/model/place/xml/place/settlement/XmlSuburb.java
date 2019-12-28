@@ -27,7 +27,7 @@ public class XmlSuburb extends XmlSettlement {
 
     @Nonnull
     @Override
-    protected Suburb place(Place parent, final PlaceGroupId groupId, PlaceHistory history, PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+    protected Suburb toPlace(Place parent, final PlaceGroupId groupId, PlaceHistory history, PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
         return new Suburb(this.placeId(context), this.name(), parent.requireAs(SettlementOrRegion.class), groupId, history);
     }

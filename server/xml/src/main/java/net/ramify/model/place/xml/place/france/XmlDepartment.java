@@ -24,7 +24,7 @@ public class XmlDepartment extends XmlRegion<Department> {
 
     @Nonnull
     @Override
-    protected Department place(Place parent, PlaceGroupId groupId, PlaceHistory history, PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+    protected Department toPlace(Place parent, PlaceGroupId groupId, PlaceHistory history, PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         return new Department(this.placeId(context), this.name(), groupId, history, parent.requireAs(Region.class));
     }
 

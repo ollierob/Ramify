@@ -31,7 +31,7 @@ public class XmlVillage extends XmlSettlement {
     }
 
     @Override
-    protected Village place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+    protected Village toPlace(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
         return new Village(this.placeId(context), this.name(), parent.requireAs(Region.class), groupId, history);
     }

@@ -22,7 +22,7 @@ public class XmlForest extends XmlRegion<Forest> {
     }
 
     @Override
-    protected Forest place(
+    protected Forest toPlace(
             final Place parent,
             final PlaceGroupId groupId,
             final PlaceHistory history,

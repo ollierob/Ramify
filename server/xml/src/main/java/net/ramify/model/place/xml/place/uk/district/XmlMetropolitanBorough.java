@@ -49,7 +49,7 @@ public class XmlMetropolitanBorough extends XmlRegion<MetropolitanBorough> {
     }
 
     @Override
-    protected MetropolitanBorough place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+    protected MetropolitanBorough toPlace(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
         return new MetropolitanBorough(this.placeId(context), this.name(), parent.requireAs(Region.class), groupId, this.iso(), history);
     }

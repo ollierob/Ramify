@@ -26,7 +26,7 @@ public abstract class XmlRegion<P extends Region> extends XmlPlace {
     }
 
     @Override
-    protected abstract P place(
+    protected abstract P toPlace(
             Place parent,
             PlaceGroupId groupId,
             PlaceHistory history,

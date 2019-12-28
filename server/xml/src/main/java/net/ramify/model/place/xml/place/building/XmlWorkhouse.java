@@ -19,7 +19,7 @@ public class XmlWorkhouse extends XmlBuilding<Workhouse> {
     }
 
     @Override
-    protected Workhouse place(final Place parent, final PlaceGroupId groupId, final BuildingHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+    protected Workhouse toPlace(final Place parent, final PlaceGroupId groupId, final BuildingHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
         return new Workhouse(this.placeId(context), this.name(), parent.requireAs(SettlementOrRegion.class), groupId, history);
     }

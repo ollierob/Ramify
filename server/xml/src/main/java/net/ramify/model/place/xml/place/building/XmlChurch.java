@@ -26,7 +26,7 @@ public class XmlChurch extends XmlBuilding<Church> {
     }
 
     @Override
-    protected Church place(final Place parent, final PlaceGroupId groupId, final BuildingHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+    protected Church toPlace(final Place parent, final PlaceGroupId groupId, final BuildingHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
         return new Church(this.placeId(context), this.name(), parent.requireAs(SettlementOrRegion.class), groupId, history);
     }

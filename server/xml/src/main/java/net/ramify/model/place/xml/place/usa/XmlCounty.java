@@ -38,7 +38,7 @@ class XmlCounty extends XmlPlace {
     }
 
     @Override
-    protected Region place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+    protected Region toPlace(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
         return new County(this.placeId(context), this.name(), parent.requireAs(State.class), null, groupId, history);
     }

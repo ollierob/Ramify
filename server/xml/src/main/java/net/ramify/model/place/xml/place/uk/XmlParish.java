@@ -37,7 +37,7 @@ public class XmlParish extends XmlPlace {
     }
 
     @Override
-    protected Place place(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+    protected Place toPlace(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         Objects.requireNonNull(parent, "parent");
         return new Parish(this.placeId(context), this.name(), Region.cast(parent), groupId, history);
     }

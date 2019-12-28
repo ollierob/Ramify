@@ -23,7 +23,7 @@ public class XmlCityDistrict extends XmlRegion<CityDistrict> {
     }
 
     @Override
-    protected CityDistrict place(
+    protected CityDistrict toPlace(
             final Place parent,
             final PlaceGroupId groupId,
             final PlaceHistory history,
