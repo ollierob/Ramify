@@ -48,14 +48,15 @@ export function determineRelatives(id: PersonId, family: Family.AsObject): Relat
     if (remainingChildren.length) relatives.spouses.push({children: remainingChildren});
 
     relatives.siblings = [...findSiblings(id, [relatives.father?.id, relatives.mother?.id], family)];
-    
+
     return relatives;
 
 }
 
 export function findEventSpouse(relatives: Relatives, marriage: Event.AsObject): Person.AsObject {
+    if (!relatives || !marriage) return null;
     for (const s of relatives.spouses) {
-        if (s.spouse.eventsList.some(e => e.id == marriage.id)) return s.spouse;
+        if (s.spouse && s.spouse.eventsList.some(e => e.id == marriage.id)) return s.spouse;
     }
     return null;
 }
