@@ -4,9 +4,9 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.google.inject.PrivateModule;
 import com.google.inject.Provides;
-import net.ramify.model.person.name.NameParser;
 import net.ramify.model.place.xml.XmlPlaceModule;
 import net.ramify.model.record.collection.RecordSetId;
+import net.ramify.model.record.provider.RecordProvider;
 import net.ramify.model.record.provider.RecordSetProvider;
 import net.ramify.model.record.provider.RecordSetRelativesProvider;
 import net.ramify.model.record.provider.RecordsProvider;
@@ -28,9 +28,11 @@ public class XmlRecordModule extends PrivateModule {
     @Override
     protected void configure() {
         this.expose(RecordSetProvider.class);
-        this.bind(RecordsProvider.class).to(XmlRecordProvider.class);
+        this.bind(RecordsProvider.class).to(XmlRecordsProvider.class);
         this.expose(RecordsProvider.class);
         this.expose(RecordSetRelativesProvider.class);
+        this.bind(RecordProvider.class).to(XmlRecordProvider.class);
+        this.expose(RecordProvider.class);
     }
 
     @Provides
@@ -73,12 +75,12 @@ public class XmlRecordModule extends PrivateModule {
 
     @Provides
     @Singleton
-    XmlRecordProvider provideRecordProvider(
+    XmlRecordsProvider provideRecordProvider(
             final JAXBContext context,
             final RecordContext recordContext,
             final Map<RecordSetId, File> recordSetFiles,
             final RecordSetProvider recordSets) {
-        return new XmlRecordProvider(recordSetFiles, context, recordContext, recordSets);
+        return new XmlRecordsProvider(recordSetFiles, context, recordContext, recordSets);
     }
 
     @Provides

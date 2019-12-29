@@ -10,6 +10,7 @@ import net.ramify.model.record.collection.RecordSetHierarchy;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.RecordSetRelatives;
 import net.ramify.model.record.collection.RecordSets;
+import net.ramify.model.record.provider.RecordProvider;
 import net.ramify.model.record.provider.RecordSetProvider;
 import net.ramify.model.record.provider.RecordSetRelativesProvider;
 import net.ramify.utils.objects.Functions;
@@ -24,15 +25,18 @@ import java.util.function.Predicate;
 @Singleton
 public class DefaultRecordSetResource implements RecordSetResource {
 
+    private final RecordProvider records;
     private final RecordSetProvider recordSets;
     private final RecordSetRelativesProvider relatives;
     private final PlaceProvider places;
 
     @Inject
     DefaultRecordSetResource(
+            final RecordProvider records,
             final RecordSetProvider recordSets,
             final RecordSetRelativesProvider relatives,
             final PlaceProvider places) {
+        this.records = records;
         this.recordSets = recordSets;
         this.relatives = relatives;
         this.places = places;
