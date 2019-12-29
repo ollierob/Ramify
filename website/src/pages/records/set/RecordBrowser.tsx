@@ -10,7 +10,7 @@ import {ImageIcon, PeopleIcon, PersonIcon} from "../../../components/images/Icon
 
 type Props = RecordPaginationHandler & {
     recordSet: RecordSet.AsObject;
-    showRecordSet?: boolean;
+    hasChildren?: boolean;
 }
 
 type State = {
@@ -50,13 +50,13 @@ export class RecordBrowser extends React.PureComponent<Props, State> {
             <Tabs.TabPane
                 key="families"
                 tab={<><PeopleIcon/> Families</>}>
-                <FamilyRecordTable {...this.props}/>
+                <FamilyRecordTable {...this.props} showRecordSet={this.props.hasChildren}/>
             </Tabs.TabPane>
 
             <Tabs.TabPane
                 key="individuals"
                 tab={<><PersonIcon/> Individuals</>}>
-                <IndividualRecordTable {...this.props}/>
+                <IndividualRecordTable {...this.props} showRecordSet={this.props.hasChildren}/>
             </Tabs.TabPane>
 
             <Tabs.TabPane

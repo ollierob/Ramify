@@ -2,7 +2,6 @@ import * as React from "react";
 import "./ImageGallery.css";
 import {Card, Modal} from "antd";
 import {Magnifier} from "./ImageMagnifier";
-import {stringMultimap} from "../Maps";
 
 export type Image = {
     src: string;
@@ -13,6 +12,7 @@ export type Image = {
 
 type Props = {
     images: ReadonlyArray<Image>
+    showGroups?: boolean;
 }
 
 type State = {
@@ -26,11 +26,11 @@ export default class ImageGallery extends React.PureComponent<Props, State> {
     private doSelect = (image: Image) => this.setState({selected: image, modal: true});
     private doClose = () => this.setState({modal: false});
 
-    constructor(props) {
+    constructor(props: Props) {
         super(props);
         this.state = {
             selected: props.images.length ? props.images[0] : null,
-            imageGroups: buildImageGroups(props.images)
+            imageGroups: buildImageGroups(props.images, props.showGroups)
         };
     }
 
@@ -55,6 +55,11 @@ export default class ImageGallery extends React.PureComponent<Props, State> {
 
     }
 
+    componentDidUpdate(prevProps: Readonly<Props>) {
+        if (this.props.images != prevProps.images)
+            this.setState({imageGroups: buildImageGroups(this.props.images, this.props.showGroups)});
+    }
+
 }
 
 type SelectorProps = {
@@ -63,21 +68,27 @@ type SelectorProps = {
 }
 
 const Thumbnails = (props: {images: ImageGroups, mode: "blocks" | "inline"} & SelectorProps) => {
+
     const groups = Object.keys(props.images).sort();
     if (!groups.length) return null;
     const firstGroup = groups[0];
     const useCards = props.mode == "blocks" && (groups.length > 1 || !!firstGroup);
+
     return <div className={"thumbnails " + props.mode}>
-        {useCards && Object.keys(props.images).map(group => {
-            const images = props.images[group];
-            return <Card className="card" title={group || "Thumbnails"} size="small">
-                {images.map(image => <Thumbnail {...props} image={image}/>)}
+
+        {useCards && groups.map(groupId => {
+            const group = props.images[groupId];
+            return <Card className="card" title={group.title} size="small">
+                {group.images.map(image => <Thumbnail {...props} image={image}/>)}
             </Card>;
         })}
+
         {!useCards && <>
-            {props.images[firstGroup].map(image => <Thumbnail {...props} image={image}/>)}
+            {props.images[firstGroup].images.map(image => <Thumbnail {...props} image={image}/>)}
         </>}
+
     </div>;
+
 };
 
 const Thumbnail = (props: {image: Image} & SelectorProps) => {
@@ -110,8 +121,18 @@ const ImageModal = (props: {visible: boolean, images: ImageGroups, close: () => 
 
 };
 
-type ImageGroups = {[group: string]: ReadonlyArray<Image>}
+type ImageGroups = {[group: string]: {title: string, images: Image[]}}
 
-function buildImageGroups(images: ReadonlyArray<Image>): ImageGroups {
-    return stringMultimap(images, image => image.group);
+function buildImageGroups(images: ReadonlyArray<Image>, showGroups: boolean): ImageGroups {
+    const i: ImageGroups = {};
+    images.forEach(image => {
+        const groupId = showGroups ? image.group : "";
+        let g = i[groupId];
+        if (!g) {
+            g = {title: showGroups ? image.group : "Thumbnails", images: []};
+            i[groupId] = g;
+        }
+        g.images.push(image);
+    });
+    return i;
 }

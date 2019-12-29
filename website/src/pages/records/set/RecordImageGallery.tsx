@@ -10,6 +10,7 @@ import {recordImageHref} from "../../../components/records/RecordImage";
 
 type Props = {
     recordSet: RecordSet.AsObject;
+    hasChildren?: boolean;
 }
 
 type State = {
@@ -34,7 +35,9 @@ export default class RecordImageGallery extends React.PureComponent<Props, State
         const data = this.state.images.data;
         if (!data) return <NoData/>;
 
-        return <ImageGallery images={data.imageList.map(toImage)}/>;
+        return <ImageGallery
+            showGroups={this.props.hasChildren}
+            images={data.imageList.map(toImage)}/>;
 
     }
 

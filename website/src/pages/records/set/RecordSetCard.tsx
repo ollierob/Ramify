@@ -2,7 +2,6 @@ import * as React from "react";
 import {CSSProperties} from "react";
 import {ExternalRecordReference, RecordSet, RecordSetRelatives} from "../../../protobuf/generated/record_pb";
 import {Card, Icon} from "antd";
-import {RecordSetChildCards} from "../../../components/records/RecordSetChildCards";
 import {RecordBrowser} from "./RecordBrowser";
 import {AsyncData} from "../../../components/fetch/AsyncData";
 import {RecordPaginationHandler} from "../../../components/records/RecordPaginationHandler";
@@ -28,6 +27,7 @@ export default class RecordSetCard extends React.PureComponent<Props> {
 
         const recordSet = this.props.recordSet;
         const relatives: RecordSetRelatives.AsObject = this.props.relatives.data || {childList: [], nextList: []};
+        const hasChildren = relatives.childList.length > 0;
 
         return <Card
             className="large info"
@@ -56,7 +56,7 @@ export default class RecordSetCard extends React.PureComponent<Props> {
 
             <RecordBrowser
                 {...this.props}
-                showRecordSet={relatives.childList.length > 0}/>
+                hasChildren={hasChildren}/>
 
         </Card>;
 
