@@ -6,13 +6,12 @@ import net.ramify.model.date.DateRange;
 import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.event.collection.MutablePersonEventSet;
-import net.ramify.model.family.SinglePersonFamily;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.residence.GenericMentionRecord;
 import net.ramify.model.record.type.LifeEventRecord;
 import net.ramify.model.record.xml.RecordContext;
-import net.ramify.model.record.xml.record.XmlPersonOnDateRecord;
+import net.ramify.model.record.xml.record.XmlPersonOnDateWithFamilyRecord;
 import net.ramify.model.record.xml.record.XmlRecord;
 
 import javax.annotation.CheckForNull;
@@ -21,7 +20,7 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "mention")
-public class XmlMentionRecord extends XmlPersonOnDateRecord {
+public class XmlMentionRecord extends XmlPersonOnDateWithFamilyRecord {
 
     @XmlAttribute(name = "deceased")
     private Boolean deceased;
@@ -36,7 +35,7 @@ public class XmlMentionRecord extends XmlPersonOnDateRecord {
     public LifeEventRecord buildRecord(final DateRange parentDate, final RecordContext context, final RecordSet recordSet) {
         final var recordId = this.recordId();
         final var date = MoreObjects.firstNonNull(this.date(context.dateParser()), parentDate);
-        final var family = new SinglePersonFamily(this.person(context));
+        final var family = this.family(context);
         return new GenericMentionRecord(
                 recordId,
                 recordSet,
