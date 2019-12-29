@@ -7,6 +7,8 @@ import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.Records;
 import net.ramify.model.record.provider.RecordProvider;
 import net.ramify.model.record.provider.RecordsProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.CheckForNull;
 import javax.inject.Inject;
@@ -15,6 +17,8 @@ import java.util.Map;
 
 @XmlTransient
 class XmlRecordProvider implements RecordProvider {
+
+    private static final Logger logger = LoggerFactory.getLogger(XmlRecordProvider.class);
 
     private final RecordsProvider recordsProvider;
     private final Map<RecordId, RecordSet> recordSets = Maps.newConcurrentMap();
@@ -34,6 +38,7 @@ class XmlRecordProvider implements RecordProvider {
     }
 
     private void indexRecordSets() {
+        logger.info("Indexing record sets ...");
         recordsProvider.all()
                 .stream()
                 .flatMap(Records::records)

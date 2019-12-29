@@ -1,8 +1,10 @@
 package net.ramify.model.record.xml.record;
 
 import net.ramify.model.record.RecordId;
+import net.ramify.model.record.image.ImageId;
 import net.ramify.model.record.xml.record.residence.XmlResidenceRecord;
 
+import javax.annotation.CheckForNull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.UUID;
@@ -17,10 +19,18 @@ public abstract class XmlRecord {
     @XmlAttribute(name = "recordId")
     private String recordId;
 
+    @XmlAttribute(name = "imageId")
+    private String imageId;
+
+    public abstract int numIndividuals();
+
     protected RecordId recordId() {
         return new RecordId(isBlank(recordId) ? UUID.randomUUID().toString() : recordId);
     }
 
-    public abstract int numIndividuals();
+    @CheckForNull
+    protected ImageId imageId() {
+        return isBlank(imageId) ? null : new ImageId(imageId);
+    }
 
 }

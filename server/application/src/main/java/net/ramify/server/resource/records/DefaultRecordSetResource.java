@@ -81,7 +81,7 @@ public class DefaultRecordSetResource implements RecordSetResource {
 
     @Override
     public RecordSetId recordSetId(final RecordId id) {
-        throw new UnsupportedOperationException();
+        return records.getRecordSetId(id);
     }
 
     @Override
