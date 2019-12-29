@@ -30,6 +30,7 @@ public interface RecordSetRelativesProvider extends Provider<RecordSetId, Record
         return this.containsAnyParent(ids, this.parentOf(child));
     }
 
+    @Nonnull
     default Set<RecordSet> descendants(final HasRecordSetId parentId) {
         final var relatives = this.get(parentId.recordSetId());
         if (relatives == null) return Collections.emptySet();

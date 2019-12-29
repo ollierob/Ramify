@@ -60,6 +60,11 @@ class DirectoryRecordImagesProvider implements RecordImagesProvider {
             return Collections2.transform(Arrays.asList(files), DirectoryRecordImage::new);
         }
 
+        @Override
+        public boolean isEmpty() {
+            return directory.listFiles(this::isImage).length == 0;
+        }
+
         private boolean isImage(final File file) {
             final var name = file.getName().toLowerCase();
             return name.endsWith(".jpg") || name.endsWith(".png") || name.endsWith(".tif");
@@ -109,6 +114,24 @@ class DirectoryRecordImagesProvider implements RecordImagesProvider {
         @Override
         public String thumbnailPath() {
             return null;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            final var that = (DirectoryRecordImage) o;
+            if (!id.equals(that.id)) return false;
+            if (!file.equals(that.file)) return false;
+            return recordSetId.equals(that.recordSetId);
+        }
+
+        @Override
+        public int hashCode() {
+            int result = id.hashCode();
+            result = 31 * result + file.hashCode();
+            result = 31 * result + recordSetId.hashCode();
+            return result;
         }
 
     }

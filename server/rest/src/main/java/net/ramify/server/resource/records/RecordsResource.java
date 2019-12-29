@@ -39,7 +39,9 @@ public interface RecordsResource extends RootResource {
 
     @GET
     @Path("images/set/{id}")
-    RecordImages images(@PathParam("id") RecordSetId id);
+    RecordImages images(
+            @PathParam("id") RecordSetId id,
+            @QueryParam("includeChildren") boolean includeChildren);
 
     @GET
     @Path("images/set/{id}/{imageId}")

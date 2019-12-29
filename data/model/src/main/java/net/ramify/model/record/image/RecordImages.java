@@ -1,6 +1,7 @@
 package net.ramify.model.record.image;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.record.proto.RecordProto;
@@ -13,6 +14,10 @@ public interface RecordImages extends BuildsProto<RecordProto.RecordImageList> {
 
     @Nonnull
     Collection<RecordImage> images();
+
+    default boolean isEmpty() {
+        return this.images().isEmpty();
+    }
 
     @CheckForNull
     default RecordImage image(final ImageId imageId) {
@@ -27,9 +32,20 @@ public interface RecordImages extends BuildsProto<RecordProto.RecordImageList> {
                 .build();
     }
 
+    default RecordImages union(final RecordImages that) {
+        if (that == null || that.isEmpty()) return this;
+        final var copy = ImmutableSet.<RecordImage>builder()
+                .addAll(this.images())
+                .addAll(that.images())
+                .build();
+        return () -> copy;
+    }
+
     static RecordImages of(final Collection<? extends RecordImage> images) {
         final var immutable = ImmutableList.<RecordImage>copyOf(images);
         return () -> immutable;
     }
+
+    RecordImages NONE = ImmutableSet::of;
 
 }

@@ -75,8 +75,14 @@ public class DefaultRecordsResource extends AbstractResource implements RecordsR
     }
 
     @Override
-    public RecordImages images(final RecordSetId id) {
-        return imageProvider.get(id);
+    public RecordImages images(final RecordSetId id, final boolean includeChildren) {
+        final var self = imageProvider.getOrDefault(id, RecordImages.NONE);
+        if (!includeChildren) return self;
+        RecordImages images = self;
+        for (final var descendant : relatives.descendants(id)) {
+            images = images.union(imageProvider.get(descendant.recordSetId()));
+        }
+        return images;
     }
 
     @Override

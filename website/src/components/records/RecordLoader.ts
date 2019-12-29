@@ -80,7 +80,7 @@ class ProtoRecordLoader implements RecordLoader {
     }
 
     loadRecordImages(id: RecordSetId) {
-        return protoGet("/records/images/set/" + id, RecordImageList.deserializeBinary)
+        return protoGet("/records/images/set/" + id + "?includeChildren=true", RecordImageList.deserializeBinary)
             .then(l => l ? l.toObject() : null);
     }
 
