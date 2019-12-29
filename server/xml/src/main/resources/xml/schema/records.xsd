@@ -39,7 +39,7 @@
     
   <xs:element name="memorialInscriptions" type="tns:xmlMemorialInscriptions"/>
     
-  <xs:element name="mention" type="tns:xmlMentionRecord"/>
+  <xs:element name="mention" type="tns:xmlMentionPersonRecord"/>
     
   <xs:element name="mentionRecords" type="tns:xmlMentionRecords"/>
     
@@ -555,7 +555,7 @@
       
   </xs:complexType>
     
-  <xs:complexType name="xmlMentionRecord">
+  <xs:complexType name="xmlMentionPersonRecord">
         
     <xs:complexContent>
             
@@ -1109,11 +1109,11 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="government"/>
-            
       <xs:enumeration value="church"/>
             
       <xs:enumeration value="manor"/>
+            
+      <xs:enumeration value="government"/>
           
     </xs:restriction>
       
@@ -1123,27 +1123,27 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="marriage"/>
-            
       <xs:enumeration value="mention"/>
+            
+      <xs:enumeration value="death"/>
             
       <xs:enumeration value="birth"/>
             
-      <xs:enumeration value="census"/>
+      <xs:enumeration value="burial"/>
             
-      <xs:enumeration value="mixed"/>
+      <xs:enumeration value="census"/>
             
       <xs:enumeration value="payment"/>
             
       <xs:enumeration value="baptism"/>
             
-      <xs:enumeration value="death"/>
-            
-      <xs:enumeration value="residence"/>
-            
-      <xs:enumeration value="burial"/>
+      <xs:enumeration value="marriage"/>
             
       <xs:enumeration value="membership"/>
+            
+      <xs:enumeration value="mixed"/>
+            
+      <xs:enumeration value="residence"/>
           
     </xs:restriction>
       
@@ -1165,11 +1165,11 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="parent"/>
-            
       <xs:enumeration value="head"/>
             
       <xs:enumeration value="child"/>
+            
+      <xs:enumeration value="parent"/>
             
       <xs:enumeration value="spouse"/>
           

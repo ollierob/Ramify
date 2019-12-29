@@ -11,6 +11,7 @@ import net.ramify.utils.objects.Functions;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.List;
@@ -21,7 +22,9 @@ public class XmlMentionRecords extends XmlRecords {
     @XmlElementRef(namespace = XmlDateRange.NAMESPACE, required = false)
     private XmlDateRange date;
 
-    @XmlElementRef
+    @XmlElementRefs({
+            @XmlElementRef(type = XmlMentionPersonRecord.class)
+    })
     private List<XmlMentionRecord> records;
 
     @Override
@@ -31,7 +34,7 @@ public class XmlMentionRecords extends XmlRecords {
 
     @Override
     public int numIndividuals() {
-        return records.size();
+        return records.stream().mapToInt(XmlMentionRecord::numIndividuals).sum();
     }
 
     @Nonnull
@@ -40,7 +43,7 @@ public class XmlMentionRecords extends XmlRecords {
             final RecordSet recordSet,
             final RecordContext context) {
         final var date = Functions.ifNonNull(this.date, d -> d.resolve(context.dateParser()), recordSet.date());
-        return ListUtils.eagerlyTransform(records, record -> record.buildRecord(date, context, recordSet));
+        return ListUtils.eagerlyTransform(records, record -> record.buildRecord(context.onDate(date), recordSet));
     }
 
 }
