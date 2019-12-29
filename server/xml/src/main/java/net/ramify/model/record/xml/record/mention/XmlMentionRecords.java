@@ -23,7 +23,8 @@ public class XmlMentionRecords extends XmlRecords {
     private XmlDateRange date;
 
     @XmlElementRefs({
-            @XmlElementRef(type = XmlMentionPersonRecord.class)
+            @XmlElementRef(type = XmlMentionPersonRecord.class),
+            @XmlElementRef(type = XmlMentionPeopleRecord.class),
     })
     private List<XmlMentionRecord> records;
 

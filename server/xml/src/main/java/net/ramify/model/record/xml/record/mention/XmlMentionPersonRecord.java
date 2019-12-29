@@ -6,7 +6,7 @@ import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.event.collection.MutablePersonEventSet;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.record.collection.RecordSet;
-import net.ramify.model.record.residence.GenericMentionRecord;
+import net.ramify.model.record.residence.GenericMentionFamilyRecord;
 import net.ramify.model.record.type.LifeEventRecord;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlPersonOnDateWithFamilyRecord;
@@ -35,7 +35,7 @@ public class XmlMentionPersonRecord extends XmlPersonOnDateWithFamilyRecord impl
         final var recordId = this.recordId();
         final var date = this.date(context);
         final var family = this.family(context.onDate(date));
-        return new GenericMentionRecord(
+        return new GenericMentionFamilyRecord(
                 recordId,
                 recordSet,
                 family,

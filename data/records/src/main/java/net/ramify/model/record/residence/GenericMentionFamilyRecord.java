@@ -6,9 +6,9 @@ import net.ramify.model.record.RecordId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.type.MentionRecord;
 
-public class GenericMentionRecord extends GenericLifeEventRecord implements MentionRecord {
+public class GenericMentionFamilyRecord extends GenericLifeEventRecord implements MentionRecord {
 
-    public GenericMentionRecord(RecordId recordId, RecordSet recordSet, Family family, DateRange date) {
+    public GenericMentionFamilyRecord(RecordId recordId, RecordSet recordSet, Family family, DateRange date) {
         super(recordId, recordSet, family, date);
     }
 
