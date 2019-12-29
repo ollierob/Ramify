@@ -60,9 +60,15 @@ class XmlPlaceGroupProvider extends AbstractMappedProvider<PlaceGroupId, PlaceGr
     static PlaceGroupProvider readGroupsInDirectory(final JAXBContext context, final File root, final PlaceProvider placeProvider) throws JAXBException {
         final var groupProvider = new XmlPlaceGroupProvider(Maps.newHashMap(), Maps.newHashMap());
         final var unmarshaller = context.createUnmarshaller();
-        FileTraverseUtils.traverseSubdirectories(root, file -> file.getName().endsWith(".xml"), file -> readGroupsInFile(unmarshaller, file, groupProvider, placeProvider));
+        FileTraverseUtils.traverseSubdirectories(root, XmlPlaceGroupProvider::isGroupFile, file -> readGroupsInFile(unmarshaller, file, groupProvider, placeProvider));
         logger.info("Loaded {} place groups from {}.", groupProvider.size(), root);
         return groupProvider.immutable();
+    }
+
+    static boolean isGroupFile(final File file) {
+        return file.getName().endsWith(".xml")
+                && !file.getPath().contains("_records")
+                && !file.getPath().contains("_events");
     }
 
     private static void readGroupsInFile(final Unmarshaller unmarshaller, final File file, final XmlPlaceGroupProvider groupProvider, final PlaceProvider placeProvider) {

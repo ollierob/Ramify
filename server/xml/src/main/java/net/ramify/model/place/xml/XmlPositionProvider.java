@@ -51,9 +51,14 @@ public class XmlPositionProvider implements PositionProvider {
     static PositionProvider readPositionsInDirectory(final JAXBContext context, final File root) throws JAXBException {
         final var provider = new XmlPositionProvider(Maps.newConcurrentMap());
         final var unmarshaller = context.createUnmarshaller();
-        FileTraverseUtils.traverseSubdirectories(root, file -> file.getName().endsWith(".xml"), file -> readPositionsInFile(unmarshaller, file, provider));
+        FileTraverseUtils.traverseSubdirectories(root, XmlPositionProvider::isPositionFile, file -> readPositionsInFile(unmarshaller, file, provider));
         logger.info("Loaded {} places from {}.", provider.size(), root);
         return provider.immutable();
+    }
+
+    static boolean isPositionFile(final File file) {
+        return file.getName().endsWith(".xml")
+                && !file.getPath().contains("_records");
     }
 
     private static void readPositionsInFile(final Unmarshaller unmarshaller, final File file, final XmlPositionProvider locationProvider) {

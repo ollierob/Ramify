@@ -1,5 +1,7 @@
 package net.ramify.model;
 
+import com.google.common.base.Preconditions;
+
 import javax.annotation.Nonnull;
 import java.util.Objects;
 
@@ -8,7 +10,8 @@ public abstract class Id {
     private final String value;
 
     protected Id(@Nonnull final String value) {
-        this.value = Objects.requireNonNull(value);
+        this.value = Objects.requireNonNull(value, "Null value");
+        Preconditions.checkArgument(!value.isBlank(), "Blank value");
     }
 
     @Nonnull

@@ -38,22 +38,27 @@ public class XmlArchiveProvider extends AbstractMappedProvider<ArchiveId, Archiv
     static ArchiveProvider readArchivesInDirectory(final JAXBContext context, final File root) throws JAXBException {
         final var provider = new XmlArchiveProvider(Maps.newHashMap());
         final var unmarshaller = context.createUnmarshaller();
-        FileTraverseUtils.traverseSubdirectories(root, file -> file.getName().endsWith(".xml"), file -> readArchivesInFile(unmarshaller, file, provider));
+        FileTraverseUtils.traverseSubdirectories(root, XmlArchiveProvider::isArchivesFile, file -> readArchivesInFile(unmarshaller, file, provider));
         logger.info("Loaded {} places from {}.", provider.size(), root);
         return provider.immutable();
+    }
+
+    static boolean isArchivesFile(final File file) {
+        return file.getName().endsWith(".xml")
+                && !file.getPath().contains("_records");
     }
 
     private static void readArchivesInFile(final Unmarshaller unmarshaller, final File file, final XmlArchiveProvider provider) {
         FileUtils.checkReadableFile(file);
         Preconditions.checkArgument(file.getName().endsWith(".xml"), "Not an XML file: %s", file);
         try {
-            logger.info("Reading places from file {}", file);
+            logger.info("Reading archives from file {}", file);
             final var unmarshalled = unmarshaller.unmarshal(file);
             if (!(unmarshalled instanceof XmlArchives)) return;
             final var archives = (XmlArchives) unmarshalled;
             provider.addAll(archives.buildArchives());
         } catch (final JAXBException jex) {
-            logger.warn("Could not read places in file " + file + ": " + jex.getMessage());
+            logger.warn("Could not read archives in file " + file + ": " + jex.getMessage());
         }
     }
 

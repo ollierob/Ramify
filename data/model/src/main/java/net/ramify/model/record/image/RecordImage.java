@@ -10,7 +10,7 @@ import javax.annotation.Nonnull;
 public interface RecordImage extends BuildsProto<RecordProto.RecordImage> {
 
     @Nonnull
-    String id();
+    ImageId id();
 
     @CheckForNull
     String group();
@@ -25,10 +25,8 @@ public interface RecordImage extends BuildsProto<RecordProto.RecordImage> {
     @Override
     default RecordProto.RecordImage toProto() {
         return RecordProto.RecordImage.newBuilder()
-                .setId(this.id())
+                .setId(this.id().value())
                 .setGroup(MoreObjects.firstNonNull(this.group(), ""))
-                .setFilename(this.filename())
-                .setThumbnail(MoreObjects.firstNonNull(this.thumbnailPath(), ""))
                 .build();
     }
 

@@ -153,10 +153,10 @@ class XmlPlaceProvider implements PlaceProvider {
     }
 
     private static boolean includeFile(final File file) {
-        final var name = file.getName();
-        return name.endsWith(".xml")
-                && !name.contains("_records")
-                && !name.contains("_events");
+        if (!file.getName().endsWith(".xml")) return false;
+        final var path = file.getPath();
+        return !path.contains("_records")
+                && !path.contains("_events");
     }
 
     private static void readPlacesInFile(final Unmarshaller unmarshaller, final File file, final XmlPlaceProvider placeProvider, final PlaceParserContext context) {

@@ -1,17 +1,20 @@
 package net.ramify.server.resource.records;
 
+import net.ramify.model.record.RecordId;
 import net.ramify.model.record.collection.AggregateRecords;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.Records;
+import net.ramify.model.record.image.ImageId;
 import net.ramify.model.record.image.RecordImages;
-import net.ramify.model.record.provider.RecordImageProvider;
+import net.ramify.model.record.image.RecordImagesProvider;
 import net.ramify.model.record.provider.RecordSetRelativesProvider;
 import net.ramify.model.record.provider.RecordsProvider;
 import net.ramify.utils.collections.ListUtils;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import javax.ws.rs.core.Response;
 import java.util.stream.Collectors;
 
 @Singleton
@@ -21,7 +24,7 @@ public class DefaultRecordsResource implements RecordsResource {
     private final RecordSetRelativesProvider relatives;
     private final RecordSetResource recordSets;
     private final IndividualRecordResource individuals;
-    private final RecordImageProvider imageProvider;
+    private final RecordImagesProvider imageProvider;
     private final PlaceRecordResource placeRecords;
 
     @Inject
@@ -30,7 +33,7 @@ public class DefaultRecordsResource implements RecordsResource {
             final RecordSetRelativesProvider relatives,
             final RecordSetResource recordSets,
             final IndividualRecordResource individuals,
-            final RecordImageProvider imageProvider,
+            final RecordImagesProvider imageProvider,
             final PlaceRecordResource placeRecords) {
         this.records = records;
         this.relatives = relatives;
@@ -69,6 +72,11 @@ public class DefaultRecordsResource implements RecordsResource {
     @Override
     public RecordImages images(final RecordSetId id) {
         return imageProvider.get(id);
+    }
+
+    @Override
+    public Response image(final RecordId recordId, final ImageId imageId) {
+        throw new UnsupportedOperationException(); //TODO
     }
 
     @Override

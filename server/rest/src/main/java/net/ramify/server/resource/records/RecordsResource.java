@@ -1,7 +1,9 @@
 package net.ramify.server.resource.records;
 
+import net.ramify.model.record.RecordId;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.Records;
+import net.ramify.model.record.image.ImageId;
 import net.ramify.model.record.image.RecordImages;
 import net.ramify.server.resource.RootResource;
 
@@ -12,6 +14,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import static net.ramify.server.resource.Resource.APPLICATION_PROTOBUF;
 
@@ -34,8 +37,15 @@ public interface RecordsResource extends RootResource {
     IndividualRecordResource individuals();
 
     @GET
-    @Path("images/{id}")
+    @Path("images/set/{id}")
     RecordImages images(@PathParam("id") RecordSetId id);
+
+    @GET
+    @Path("images/record/{recordId}/{imageId}")
+    @Produces("image/*")
+    Response image(
+            @PathParam("recordId") RecordId recordId,
+            @PathParam("imageId") ImageId imageId);
 
     @Path("places")
     PlaceRecordResource places();
