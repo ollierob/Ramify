@@ -6,6 +6,7 @@ import com.google.common.base.Preconditions;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 public class FileTraverseUtils {
@@ -46,6 +47,15 @@ public class FileTraverseUtils {
         for (final File file : directory.listFiles(File::isFile)) {
             reader.accept(file);
         }
+    }
+
+    public static Optional<File> findSubdirectory(final File directory, final String name) {
+        if (directory.getName().equalsIgnoreCase(name)) return Optional.of(directory);
+        for (final var subdirectory : directory.listFiles(File::isDirectory)) {
+            final var file = findSubdirectory(subdirectory, name);
+            if (file.isPresent()) return file;
+        }
+        return Optional.empty();
     }
 
 }

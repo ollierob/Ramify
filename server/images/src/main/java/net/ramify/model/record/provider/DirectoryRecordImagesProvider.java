@@ -1,6 +1,7 @@
 package net.ramify.model.record.provider;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Maps;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.image.ImageId;
 import net.ramify.model.record.image.RecordImage;
@@ -10,33 +11,63 @@ import net.ramify.utils.file.FileTraverseUtils;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import javax.inject.Singleton;
 import java.io.File;
 import java.net.URISyntaxException;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Optional;
 
+@Singleton
 class DirectoryRecordImagesProvider implements RecordImagesProvider {
 
-    @CheckForNull
-    @Override
-    public RecordImages get(final RecordSetId id) {
-        final var basePath = "/images/records/" + id.value();
-        final var dir = this.getClass().getResource(basePath);
-        if (dir == null) return null;
+    private static final String ROOT_PATH = "/images/records/";
+    private final Map<RecordSetId, Optional<RecordImages>> images = Maps.newConcurrentMap();
+    private final File baseDirectory;
+
+    DirectoryRecordImagesProvider() {
         try {
-            final var files = Lists.<RecordImage>newArrayList();
-            final var baseDir = new File(dir.toURI());
-            FileTraverseUtils.traverseSubdirectories(baseDir, this::isImage, file -> files.add(new DirectoryRecordImage(file)));
-            return RecordImages.of( files);
-        } catch (URISyntaxException ex) {
-            throw new RuntimeException(ex);
+            final var dir = this.getClass().getResource(ROOT_PATH);
+            this.baseDirectory = new File(dir.toURI());
+        } catch (URISyntaxException e) {
+            throw new Error(e);
         }
     }
 
-    private boolean isImage(final File file) {
-        final var name = file.getName().toLowerCase();
-        return name.endsWith(".jpg") || name.endsWith(".png") || name.endsWith(".tif");
+    @Override
+    public RecordImages get(final RecordSetId id) {
+        return images.computeIfAbsent(id, i -> this.find(i.value())).orElse(null);
     }
 
-    private static class DirectoryRecordImage implements RecordImage {
+    private Optional<RecordImages> find(final String name) {
+        return FileTraverseUtils.findSubdirectory(baseDirectory, name)
+                .map(LazyDirectoryRecordImages::new);
+    }
+
+    private static final class LazyDirectoryRecordImages implements RecordImages {
+
+        private final File directory;
+
+        private LazyDirectoryRecordImages(final File directory) {
+            this.directory = directory;
+        }
+
+        @Nonnull
+        @Override
+        public Collection<RecordImage> images() {
+            final var files = directory.listFiles(this::isImage);
+            return Collections2.transform(Arrays.asList(files), DirectoryRecordImage::new);
+        }
+
+        private boolean isImage(final File file) {
+            final var name = file.getName().toLowerCase();
+            return name.endsWith(".jpg") || name.endsWith(".png") || name.endsWith(".tif");
+        }
+
+    }
+
+    private static final class DirectoryRecordImage implements RecordImage {
 
         private final ImageId id;
         private final File file;
@@ -44,7 +75,7 @@ class DirectoryRecordImagesProvider implements RecordImagesProvider {
 
         private DirectoryRecordImage(final File file) {
             this.file = file;
-            this.recordSetId = new RecordSetId(file.getParent());
+            this.recordSetId = new RecordSetId(file.getParentFile().getName());
             final var name = file.getName();
             this.id = new ImageId(name.substring(0, name.indexOf('.')));
         }
@@ -59,6 +90,13 @@ class DirectoryRecordImagesProvider implements RecordImagesProvider {
         @Override
         public File file() {
             return file;
+        }
+
+        @Nonnull
+        @Override
+        public String path() {
+            final var path = file.getAbsolutePath();
+            return path.substring(path.indexOf(ROOT_PATH));
         }
 
         @Nonnull

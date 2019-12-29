@@ -1,7 +1,6 @@
 package net.ramify.server.resource.records;
 
 import net.ramify.authentication.UserSession;
-import net.ramify.model.record.RecordId;
 import net.ramify.model.record.collection.AggregateRecords;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
@@ -81,9 +80,8 @@ public class DefaultRecordsResource extends AbstractResource implements RecordsR
     }
 
     @Override
-    public Response image(final RecordId recordId, final ImageId imageId) {
-        return Optional.ofNullable(recordSets.recordSetId(recordId))
-                .map(imageProvider::get)
+    public Response image(final RecordSetId recordId, final ImageId imageId) {
+        return Optional.ofNullable(imageProvider.get(recordId))
                 .map(images -> images.image(imageId))
                 .map(this::readImage)
                 .orElseGet(AbstractResource::notFound);
