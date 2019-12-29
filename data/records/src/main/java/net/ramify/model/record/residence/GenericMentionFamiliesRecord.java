@@ -15,7 +15,11 @@ public class GenericMentionFamiliesRecord extends DatedRecord implements Mention
 
     private final Set<Family> families;
 
-    public GenericMentionFamiliesRecord(RecordId recordId, RecordSet recordSet, Set<Family> families, DateRange date) {
+    public GenericMentionFamiliesRecord(
+            final RecordId recordId,
+            final RecordSet recordSet,
+            final Set<Family> families,
+            final DateRange date) {
         super(recordId, recordSet, date);
         this.families = families;
     }

@@ -20,6 +20,8 @@ message Record {
     string recordSetId = 5;
     Place place = 6;
 
+    string imageId = 10;
+
 }
 
 message RecordList {

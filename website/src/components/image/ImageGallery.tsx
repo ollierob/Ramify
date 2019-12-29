@@ -34,7 +34,6 @@ export default class ImageGallery extends React.PureComponent<Props, State> {
         };
     }
 
-
     render() {
 
         return <div className="imageGallery">

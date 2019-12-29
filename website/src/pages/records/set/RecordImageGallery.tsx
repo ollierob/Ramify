@@ -5,7 +5,8 @@ import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {Loading} from "../../../components/style/Loading";
 import {NoData} from "../../../components/style/NoData";
 import {RecordSetId} from "../../../components/records/RecordSet";
-import {Image} from "../../../components/image/ImageGallery";
+import ImageGallery, {Image} from "../../../components/image/ImageGallery";
+import {recordImageHref} from "../../../components/records/RecordImage";
 
 type Props = {
     recordSet: RecordSet.AsObject;
@@ -33,14 +34,7 @@ export default class RecordImageGallery extends React.PureComponent<Props, State
         const data = this.state.images.data;
         if (!data) return <NoData/>;
 
-        return null; //TODO
-
-        // return <>
-        //
-        //     <ImageGallery
-        //         images={data.imageList.map(i => toImage(data.basepath, i))}/>
-        //
-        // </>;
+        return <ImageGallery images={data.imageList.map(toImage)}/>;
 
     }
 
@@ -61,10 +55,10 @@ export default class RecordImageGallery extends React.PureComponent<Props, State
 
 }
 
-// function toImage(basePath: string, image: RecordImage.AsObject): Image {
-//     return {
-//         src: basePath + "/" + image.filename,
-//         thumbnailSrc: basePath + "/" + (image.thumbnail || image.filename),
-//         group: image.group
-//     };
-// };
+function toImage(image: RecordImage.AsObject): Image {
+    return {
+        src: recordImageHref({imageid: image.id, recordsetid: image.group}),
+        thumbnailSrc: null,
+        group: image.group
+    };
+};

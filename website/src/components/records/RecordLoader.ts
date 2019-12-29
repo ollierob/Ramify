@@ -79,8 +79,8 @@ class ProtoRecordLoader implements RecordLoader {
             .then(r => r ? r.toObject() : null);
     }
 
-    loadRecordImages(id: string): Promise<RecordImageList.AsObject> {
-        return protoGet("/records/images/" + id, RecordImageList.deserializeBinary)
+    loadRecordImages(id: RecordSetId) {
+        return protoGet("/records/images/set/" + id, RecordImageList.deserializeBinary)
             .then(l => l ? l.toObject() : null);
     }
 
