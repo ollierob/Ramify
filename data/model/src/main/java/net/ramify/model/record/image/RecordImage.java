@@ -1,22 +1,25 @@
 package net.ramify.model.record.image;
 
-import com.google.common.base.MoreObjects;
 import net.ramify.data.proto.BuildsProto;
+import net.ramify.model.record.collection.HasRecordSetId;
 import net.ramify.model.record.proto.RecordProto;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import java.io.File;
 
-public interface RecordImage extends BuildsProto<RecordProto.RecordImage> {
+public interface RecordImage extends HasRecordSetId, BuildsProto<RecordProto.RecordImage> {
 
     @Nonnull
     ImageId id();
 
-    @CheckForNull
-    String group();
+    @Nonnull
+    File file();
 
     @Nonnull
-    String filename();
+    default String path() {
+        return this.file().getAbsolutePath();
+    }
 
     @CheckForNull
     String thumbnailPath();
@@ -26,7 +29,7 @@ public interface RecordImage extends BuildsProto<RecordProto.RecordImage> {
     default RecordProto.RecordImage toProto() {
         return RecordProto.RecordImage.newBuilder()
                 .setId(this.id().value())
-                .setGroup(MoreObjects.firstNonNull(this.group(), ""))
+                .setGroup(this.recordSetId().value())
                 .build();
     }
 

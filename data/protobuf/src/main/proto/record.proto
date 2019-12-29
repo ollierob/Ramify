@@ -125,14 +125,11 @@ message RecordImage {
 
     string id = 1;
     string group = 2;
-    string filename = 3;
-    string thumbnail = 4;
 
 }
 
 message RecordImageList {
 
     repeated RecordImage image = 1;
-    string basePath = 2;
 
 }

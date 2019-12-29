@@ -3,6 +3,7 @@ package net.ramify.utils.file;
 import com.google.common.base.Preconditions;
 
 import java.io.File;
+import java.util.Optional;
 
 public class FileUtils {
 
@@ -26,6 +27,12 @@ public class FileUtils {
         final var name = file.getName();
         final var dot = name.lastIndexOf('.');
         return dot < 0 ? name : name.substring(0, dot);
+    }
+
+    public static Optional<String> extension(final File file) {
+        final var name = file.getName();
+        final var dot = name.lastIndexOf('.');
+        return dot >= 0 ? Optional.of(name.substring(dot + 1)) : Optional.empty();
     }
 
 }

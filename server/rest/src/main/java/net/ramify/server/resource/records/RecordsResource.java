@@ -22,6 +22,8 @@ import static net.ramify.server.resource.Resource.APPLICATION_PROTOBUF;
 @Produces({MediaType.TEXT_PLAIN, APPLICATION_PROTOBUF})
 public interface RecordsResource extends RootResource {
 
+    MediaType IMAGE_MEDIA_TYPE = new MediaType("image", null);
+
     @GET
     @Path("in/{id}")
     Records records(

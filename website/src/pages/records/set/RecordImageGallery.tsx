@@ -5,7 +5,7 @@ import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {Loading} from "../../../components/style/Loading";
 import {NoData} from "../../../components/style/NoData";
 import {RecordSetId} from "../../../components/records/RecordSet";
-import ImageGallery, {Image} from "../../../components/image/ImageGallery";
+import {Image} from "../../../components/image/ImageGallery";
 
 type Props = {
     recordSet: RecordSet.AsObject;
@@ -33,12 +33,14 @@ export default class RecordImageGallery extends React.PureComponent<Props, State
         const data = this.state.images.data;
         if (!data) return <NoData/>;
 
-        return <>
+        return null; //TODO
 
-            <ImageGallery
-                images={data.imageList.map(i => toImage(data.basepath, i))}/>
-
-        </>;
+        // return <>
+        //
+        //     <ImageGallery
+        //         images={data.imageList.map(i => toImage(data.basepath, i))}/>
+        //
+        // </>;
 
     }
 
@@ -59,10 +61,10 @@ export default class RecordImageGallery extends React.PureComponent<Props, State
 
 }
 
-function toImage(basePath: string, image: RecordImage.AsObject): Image {
-    return {
-        src: basePath + "/" + image.filename,
-        thumbnailSrc: basePath + "/" + (image.thumbnail || image.filename),
-        group: image.group
-    };
-};
+// function toImage(basePath: string, image: RecordImage.AsObject): Image {
+//     return {
+//         src: basePath + "/" + image.filename,
+//         thumbnailSrc: basePath + "/" + (image.thumbnail || image.filename),
+//         group: image.group
+//     };
+// };

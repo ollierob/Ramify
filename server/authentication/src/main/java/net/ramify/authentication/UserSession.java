@@ -6,4 +6,7 @@ public interface UserSession {
 
     boolean permits(Resource resource);
 
+    @Deprecated
+    UserSession INTERNAL = r -> true;
+
 }

@@ -1,6 +1,7 @@
 package net.ramify.server.resource.records;
 
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.record.RecordId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetHierarchy;
 import net.ramify.model.record.collection.RecordSetId;
@@ -36,8 +37,12 @@ public interface RecordSetResource extends Resource {
 
     @CheckForNull
     @GET
-    @Path("{id}")
+    @Path("at/{id}")
     RecordSet recordSet(@PathParam("id") RecordSetId id);
+
+    @GET
+    @Path("for/record/{id}")
+    RecordSetId recordSetId(@PathParam("id") RecordId id);
 
     @CheckForNull
     @GET

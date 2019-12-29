@@ -60,7 +60,7 @@ class ProtoRecordLoader implements RecordLoader {
     }
 
     loadRecordSet(id: string) {
-        return protoGet("/records/sets/" + id, RecordSet.deserializeBinary)
+        return protoGet("/records/sets/at/" + id, RecordSet.deserializeBinary)
             .then(s => s ? s.toObject() : null);
     }
 

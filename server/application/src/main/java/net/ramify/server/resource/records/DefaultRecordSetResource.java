@@ -4,6 +4,7 @@ import net.ramify.model.date.ClosedDateRange;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.provider.PlaceProvider;
+import net.ramify.model.record.RecordId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetHierarchy;
 import net.ramify.model.record.collection.RecordSetId;
@@ -72,6 +73,11 @@ public class DefaultRecordSetResource implements RecordSetResource {
     @Override
     public RecordSet recordSet(final RecordSetId id) {
         return recordSets.get(id);
+    }
+
+    @Override
+    public RecordSetId recordSetId(final RecordId id) {
+        throw new UnsupportedOperationException();
     }
 
     @Override

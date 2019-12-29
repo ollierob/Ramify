@@ -7,7 +7,6 @@ import net.ramify.model.record.image.RecordImage;
 import net.ramify.model.record.image.RecordImages;
 import net.ramify.model.record.image.RecordImagesProvider;
 import net.ramify.utils.file.FileTraverseUtils;
-import net.ramify.utils.objects.Functions;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -25,8 +24,8 @@ class DirectoryRecordImagesProvider implements RecordImagesProvider {
         try {
             final var files = Lists.<RecordImage>newArrayList();
             final var baseDir = new File(dir.toURI());
-            FileTraverseUtils.traverseSubdirectories(baseDir, this::isImage, file -> files.add(new DirectoryRecordImage(file.getParentFile().getName(), file)));
-            return RecordImages.of(basePath, files);
+            FileTraverseUtils.traverseSubdirectories(baseDir, this::isImage, file -> files.add(new DirectoryRecordImage(file)));
+            return RecordImages.of( files);
         } catch (URISyntaxException ex) {
             throw new RuntimeException(ex);
         }
@@ -40,14 +39,14 @@ class DirectoryRecordImagesProvider implements RecordImagesProvider {
     private static class DirectoryRecordImage implements RecordImage {
 
         private final ImageId id;
-        private final String filename;
-        private final String group;
+        private final File file;
+        private final RecordSetId recordSetId;
 
-        private DirectoryRecordImage(final String group, final File file) {
-            this.group = group;
+        private DirectoryRecordImage(final File file) {
+            this.file = file;
+            this.recordSetId = new RecordSetId(file.getParent());
             final var name = file.getName();
             this.id = new ImageId(name.substring(0, name.indexOf('.')));
-            this.filename = Functions.ifNonNull(group, g -> g + "/", "") + name;
         }
 
         @Nonnull
@@ -56,16 +55,16 @@ class DirectoryRecordImagesProvider implements RecordImagesProvider {
             return id;
         }
 
-        @CheckForNull
+        @Nonnull
         @Override
-        public String group() {
-            return group;
+        public File file() {
+            return file;
         }
 
         @Nonnull
         @Override
-        public String filename() {
-            return filename;
+        public RecordSetId recordSetId() {
+            return recordSetId;
         }
 
         @CheckForNull

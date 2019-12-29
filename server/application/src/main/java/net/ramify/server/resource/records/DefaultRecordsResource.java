@@ -1,24 +1,30 @@
 package net.ramify.server.resource.records;
 
+import net.ramify.authentication.UserSession;
 import net.ramify.model.record.RecordId;
 import net.ramify.model.record.collection.AggregateRecords;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.Records;
 import net.ramify.model.record.image.ImageId;
+import net.ramify.model.record.image.RecordImage;
 import net.ramify.model.record.image.RecordImages;
 import net.ramify.model.record.image.RecordImagesProvider;
 import net.ramify.model.record.provider.RecordSetRelativesProvider;
 import net.ramify.model.record.provider.RecordsProvider;
+import net.ramify.server.resource.AbstractResource;
 import net.ramify.utils.collections.ListUtils;
+import net.ramify.utils.file.FileUtils;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Singleton
-public class DefaultRecordsResource implements RecordsResource {
+public class DefaultRecordsResource extends AbstractResource implements RecordsResource {
 
     private final RecordsProvider records;
     private final RecordSetRelativesProvider relatives;
@@ -76,7 +82,21 @@ public class DefaultRecordsResource implements RecordsResource {
 
     @Override
     public Response image(final RecordId recordId, final ImageId imageId) {
-        throw new UnsupportedOperationException(); //TODO
+        return Optional.ofNullable(recordSets.recordSetId(recordId))
+                .map(imageProvider::get)
+                .map(images -> images.image(imageId))
+                .map(this::readImage)
+                .orElseGet(AbstractResource::notFound);
+    }
+
+    private Response readImage(final RecordImage image) {
+        return this.readSessionResource(UserSession.INTERNAL, image.path(), mediaType(image));
+    }
+
+    private static MediaType mediaType(final RecordImage image) {
+        return FileUtils.extension(image.file())
+                .map(ext -> new MediaType(IMAGE_MEDIA_TYPE.getType(), ext))
+                .orElse(IMAGE_MEDIA_TYPE);
     }
 
     @Override
