@@ -6,6 +6,7 @@ import RecordImageGallery from "./RecordImageGallery";
 import FamilyRecordTable from "./family/FamilyRecordTable";
 import IndividualRecordTable from "./individual/IndividualRecordTable";
 import {readPageHash, updatePageHash} from "../../../components/Page";
+import {ImageIcon, PeopleIcon, PersonIcon} from "../../../components/images/Icons";
 
 type Props = RecordPaginationHandler & {
     recordSet: RecordSet.AsObject;
@@ -48,19 +49,19 @@ export class RecordBrowser extends React.PureComponent<Props, State> {
 
             <Tabs.TabPane
                 key="families"
-                tab="Families">
+                tab={<><PeopleIcon/> Families</>}>
                 <FamilyRecordTable {...this.props}/>
             </Tabs.TabPane>
 
             <Tabs.TabPane
                 key="individuals"
-                tab="Individuals">
+                tab={<><PersonIcon/> Individuals</>}>
                 <IndividualRecordTable {...this.props}/>
             </Tabs.TabPane>
 
             <Tabs.TabPane
                 key="images"
-                tab="Image browser">
+                tab={<><ImageIcon/> Image browser</>}>
                 <RecordImageGallery {...this.props}/>
             </Tabs.TabPane>
 
