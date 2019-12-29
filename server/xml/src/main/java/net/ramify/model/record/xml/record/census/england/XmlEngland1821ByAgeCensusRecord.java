@@ -70,7 +70,7 @@ public class XmlEngland1821ByAgeCensusRecord extends XmlEnglandCensus {
     @Override
     protected Census1821Record build(final RecordContext context, final Place censusPlace, final RecordSet recordSet) {
         final var id = this.recordId();
-        final var head = this.head.person(censusPlace, Census1821Record.CENSUS_DATE, context);
+        final var head = this.head.person(censusPlace, context.onDate(Census1821Record.CENSUS_DATE));
         final var place = MoreObjects.firstNonNull(this.place(context.places()), censusPlace);
         final var ageCounts = this.ageCounts();
         return new Census1821Record(

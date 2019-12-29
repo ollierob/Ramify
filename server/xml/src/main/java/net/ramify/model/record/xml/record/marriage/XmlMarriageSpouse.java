@@ -30,7 +30,7 @@ public class XmlMarriageSpouse extends XmlPersonOnDateWithFamilyRecord {
     private XmlSignature signature;
 
     protected Family family(final RecordContext context, final EventId marriageEventId) {
-        return super.family(context, context.recordDate(), id -> this.events(id, context, marriageEventId));
+        return super.family(context, id -> this.events(id, context, marriageEventId));
     }
 
     protected MarriageEvent marriage(final EventId eventId, final PersonId personId, final DateRange date) {
@@ -38,7 +38,7 @@ public class XmlMarriageSpouse extends XmlPersonOnDateWithFamilyRecord {
     }
 
     protected MutablePersonEventSet events(final PersonId personId, final RecordContext context, final EventId marriageEventId) {
-        final var events = super.events(personId, context.recordDate(), context);
+        final var events = super.events(personId, context);
         events.add(this.marriage(marriageEventId, personId, context.recordDate()));
         return events;
     }

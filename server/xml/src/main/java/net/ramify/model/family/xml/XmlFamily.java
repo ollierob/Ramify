@@ -26,7 +26,7 @@ public class XmlFamily {
 
     public Family toFamily(final RecordContext context) {
         final var people = this.buildPeople(context);
-        return this.buildFamily(people);
+        return this.buildFamily(people, context);
     }
 
     FamilyPersonProvider buildPeople(final RecordContext context) {
@@ -36,12 +36,12 @@ public class XmlFamily {
         return provider;
     }
 
-    Family buildFamily(final FamilyPersonProvider provider) {
+    Family buildFamily(final FamilyPersonProvider provider, final RecordContext context) {
         Preconditions.checkArgument(people != null && !people.isEmpty());
         final var builder = new FamilyBuilder();
         people.forEach(xmlPerson -> {
             final var self = provider.require(xmlPerson.personId());
-            final var relationships = xmlPerson.relationships(self, provider);
+            final var relationships = xmlPerson.relationships(self, provider, context);
             if (relationships.isEmpty()) builder.addPerson(self);
             else relationships.forEach(relationship -> builder.addRelationship(relationship, provider));
         });

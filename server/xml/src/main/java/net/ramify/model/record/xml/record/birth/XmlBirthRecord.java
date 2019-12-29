@@ -1,6 +1,5 @@
 package net.ramify.model.record.xml.record.birth;
 
-import net.ramify.model.date.DateRange;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlExactDate;
 import net.ramify.model.event.type.BirthEvent;
@@ -36,13 +35,13 @@ public class XmlBirthRecord extends XmlPersonOnDateWithFamilyRecord {
                 this.recordId(),
                 recordSet,
                 birthDate,
-                this.family(context.onDate(birthDate), birthDate),
+                this.family(context.onDate(birthDate)),
                 birthPlace);
     }
 
     @Override
-    protected BirthEvent inferBirth(final PersonId personId, final DateRange date, final RecordContext context) {
-        return this.eventBuilder(date)
+    protected BirthEvent inferBirth(final PersonId personId, final RecordContext context) {
+        return this.eventBuilder(context.recordDate())
                 .withPlace(this.birthPlace(context))
                 .toBirth(personId);
     }

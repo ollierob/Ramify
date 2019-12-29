@@ -47,6 +47,10 @@
     
   <xs:element name="probateRecords" type="tns:xmlProbateRecords"/>
     
+  <xs:element name="propertyRecord" type="tns:xmlPropertyTransactionRecord"/>
+    
+  <xs:element name="propertyRecords" type="tns:xmlPropertyTransactionRecords"/>
+    
   <xs:element name="recordSet" type="tns:xmlRecordSet"/>
     
   <xs:element name="recordSetReference" type="tns:xmlRecordSetReference"/>
@@ -235,15 +239,17 @@
             
       <xs:choice maxOccurs="unbounded" minOccurs="0">
                 
-        <xs:element ref="tns:mentionRecords"/>
-                
-        <xs:element ref="tns:residenceRecords"/>
-                
         <xs:element ref="tns:birthRecords"/>
                 
         <xs:element ref="tns:baptismRecords"/>
                 
         <xs:element ref="tns:marriageRecords"/>
+                
+        <xs:element ref="tns:mentionRecords"/>
+                
+        <xs:element ref="tns:residenceRecords"/>
+                
+        <xs:element ref="tns:propertyRecords"/>
                 
         <xs:element ref="tns:englandCensus"/>
                 
@@ -310,116 +316,6 @@
   <xs:complexType abstract="true" name="xmlRecords">
         
     <xs:sequence/>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlMentionRecords">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlRecords">
-                
-        <xs:sequence>
-                    
-          <xs:choice minOccurs="0">
-                        
-            <xs:element ref="ns4:xmlBeforeDate"/>
-                        
-            <xs:element ref="ns4:inYear"/>
-                        
-            <xs:element ref="ns4:onDate"/>
-                        
-            <xs:element ref="ns4:inQuarter"/>
-                        
-            <xs:element ref="ns4:betweenYears"/>
-                        
-            <xs:element ref="ns4:inMonth"/>
-                        
-            <xs:element ref="ns4:beforeYear"/>
-                      
-          </xs:choice>
-                    
-          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:mention"/>
-                  
-        </xs:sequence>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlMentionRecord">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlPersonOnDateRecord">
-                
-        <xs:sequence>
-                    
-          <xs:choice minOccurs="0">
-                        
-            <xs:element ref="ns4:xmlBeforeDate"/>
-                        
-            <xs:element ref="ns4:inYear"/>
-                        
-            <xs:element ref="ns4:onDate"/>
-                        
-            <xs:element ref="ns4:inQuarter"/>
-                        
-            <xs:element ref="ns4:betweenYears"/>
-                        
-            <xs:element ref="ns4:inMonth"/>
-                        
-            <xs:element ref="ns4:beforeYear"/>
-                      
-          </xs:choice>
-                  
-        </xs:sequence>
-                
-        <xs:attribute name="deceased" type="xs:boolean"/>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
-      
-  </xs:complexType>
-    
-  <xs:complexType name="xmlResidenceRecords">
-        
-    <xs:complexContent>
-            
-      <xs:extension base="tns:xmlRecords">
-                
-        <xs:sequence>
-                    
-          <xs:choice minOccurs="0">
-                        
-            <xs:element ref="ns4:xmlBeforeDate"/>
-                        
-            <xs:element ref="ns4:inYear"/>
-                        
-            <xs:element ref="ns4:onDate"/>
-                        
-            <xs:element ref="ns4:inQuarter"/>
-                        
-            <xs:element ref="ns4:betweenYears"/>
-                        
-            <xs:element ref="ns4:inMonth"/>
-                        
-            <xs:element ref="ns4:beforeYear"/>
-                      
-          </xs:choice>
-                    
-          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:residence"/>
-                  
-        </xs:sequence>
-                
-        <xs:attribute name="placeId" type="xs:string"/>
-              
-      </xs:extension>
-          
-    </xs:complexContent>
       
   </xs:complexType>
     
@@ -616,6 +512,186 @@
       <xs:extension base="tns:xmlMarriageRecord">
                 
         <xs:sequence/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlMentionRecords">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlRecords">
+                
+        <xs:sequence>
+                    
+          <xs:choice minOccurs="0">
+                        
+            <xs:element ref="ns4:xmlBeforeDate"/>
+                        
+            <xs:element ref="ns4:inYear"/>
+                        
+            <xs:element ref="ns4:onDate"/>
+                        
+            <xs:element ref="ns4:inQuarter"/>
+                        
+            <xs:element ref="ns4:betweenYears"/>
+                        
+            <xs:element ref="ns4:inMonth"/>
+                        
+            <xs:element ref="ns4:beforeYear"/>
+                      
+          </xs:choice>
+                    
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:mention"/>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlMentionRecord">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPersonOnDateRecord">
+                
+        <xs:sequence>
+                    
+          <xs:choice minOccurs="0">
+                        
+            <xs:element ref="ns4:xmlBeforeDate"/>
+                        
+            <xs:element ref="ns4:inYear"/>
+                        
+            <xs:element ref="ns4:onDate"/>
+                        
+            <xs:element ref="ns4:inQuarter"/>
+                        
+            <xs:element ref="ns4:betweenYears"/>
+                        
+            <xs:element ref="ns4:inMonth"/>
+                        
+            <xs:element ref="ns4:beforeYear"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+                
+        <xs:attribute name="deceased" type="xs:boolean"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlResidenceRecords">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlRecords">
+                
+        <xs:sequence>
+                    
+          <xs:choice minOccurs="0">
+                        
+            <xs:element ref="ns4:xmlBeforeDate"/>
+                        
+            <xs:element ref="ns4:inYear"/>
+                        
+            <xs:element ref="ns4:onDate"/>
+                        
+            <xs:element ref="ns4:inQuarter"/>
+                        
+            <xs:element ref="ns4:betweenYears"/>
+                        
+            <xs:element ref="ns4:inMonth"/>
+                        
+            <xs:element ref="ns4:beforeYear"/>
+                      
+          </xs:choice>
+                    
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:residence"/>
+                  
+        </xs:sequence>
+                
+        <xs:attribute name="placeId" type="xs:string"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlPropertyTransactionRecords">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlRecords">
+                
+        <xs:sequence>
+                    
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:propertyRecord"/>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlPropertyTransactionRecord">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlDatedRecord">
+                
+        <xs:sequence>
+                    
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="ns3:family"/>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType abstract="true" name="xmlDatedRecord">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlRecord">
+                
+        <xs:sequence>
+                    
+          <xs:choice minOccurs="0">
+                        
+            <xs:element ref="ns4:xmlBeforeDate"/>
+                        
+            <xs:element ref="ns4:inYear"/>
+                        
+            <xs:element ref="ns4:onDate"/>
+                        
+            <xs:element ref="ns4:inQuarter"/>
+                        
+            <xs:element ref="ns4:betweenYears"/>
+                        
+            <xs:element ref="ns4:inMonth"/>
+                        
+            <xs:element ref="ns4:beforeYear"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
               
       </xs:extension>
           
@@ -1033,11 +1109,11 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="church"/>
-            
       <xs:enumeration value="government"/>
             
       <xs:enumeration value="manor"/>
+            
+      <xs:enumeration value="church"/>
           
     </xs:restriction>
       
@@ -1047,27 +1123,27 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="baptism"/>
-            
-      <xs:enumeration value="burial"/>
-            
-      <xs:enumeration value="death"/>
+      <xs:enumeration value="marriage"/>
             
       <xs:enumeration value="birth"/>
             
-      <xs:enumeration value="census"/>
-            
-      <xs:enumeration value="marriage"/>
-            
-      <xs:enumeration value="residence"/>
-            
-      <xs:enumeration value="membership"/>
+      <xs:enumeration value="payment"/>
             
       <xs:enumeration value="mixed"/>
             
-      <xs:enumeration value="mention"/>
+      <xs:enumeration value="burial"/>
             
-      <xs:enumeration value="payment"/>
+      <xs:enumeration value="residence"/>
+            
+      <xs:enumeration value="baptism"/>
+            
+      <xs:enumeration value="census"/>
+            
+      <xs:enumeration value="membership"/>
+            
+      <xs:enumeration value="death"/>
+            
+      <xs:enumeration value="mention"/>
           
     </xs:restriction>
       
@@ -1089,13 +1165,13 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="head"/>
-            
-      <xs:enumeration value="spouse"/>
+      <xs:enumeration value="child"/>
             
       <xs:enumeration value="parent"/>
             
-      <xs:enumeration value="child"/>
+      <xs:enumeration value="spouse"/>
+            
+      <xs:enumeration value="head"/>
           
     </xs:restriction>
       
@@ -1105,11 +1181,11 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="married"/>
-            
       <xs:enumeration value="unmarried"/>
             
       <xs:enumeration value="widowed"/>
+            
+      <xs:enumeration value="married"/>
           
     </xs:restriction>
       

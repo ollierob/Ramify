@@ -182,8 +182,9 @@ class XmlRecordSet implements HasRecordSetId {
     Collection<Record> records(final RecordContext context, final RecordSet parent) {
         final var out = Lists.<Record>newArrayList();
         final var self = this.buildSelf(parent, context);
-        if (records != null) records.forEach(record -> out.addAll(record.build(self, context)));
-        if (children != null) children.forEach(child -> out.addAll(child.records(context, self)));
+        final var newContext = context.onDate(self.date());
+        if (records != null) records.forEach(record -> out.addAll(record.build(self, newContext)));
+        if (children != null) children.forEach(child -> out.addAll(child.records(newContext, self)));
         return out;
     }
 

@@ -25,18 +25,18 @@ public class XmlBaptismRecord extends XmlPersonOnDateWithFamilyRecord {
     @XmlElement(name = "date", required = true, namespace = XmlDateRange.NAMESPACE)
     private XmlExactDate date;
 
-    protected ExactDate date() {
+    protected ExactDate date(final RecordContext context) {
         return date.resolve();
     }
 
     public BaptismRecord build(final Place church, final RecordContext context, final RecordSet recordSet) {
-        final var date = this.date();
+        final var date = this.date(context);
         return new ChurchBaptismRecord(
                 this.recordId(),
                 recordSet,
                 date,
                 church.placeId(),
-                this.family(context, date, id -> this.events(id, date, church)));
+                this.family(context.onDate(date), id -> this.events(id, date, church)));
     }
 
     protected PersonEventSet events(final PersonId id, final DateRange date, final Place church) {

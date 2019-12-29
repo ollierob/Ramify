@@ -3,12 +3,13 @@ package net.ramify.model.record.residence;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.family.Family;
 import net.ramify.model.record.RecordId;
+import net.ramify.model.record.SingleFamilyRecord;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.type.LifeEventRecord;
 
 import javax.annotation.Nonnull;
 
-public abstract class GenericLifeEventRecord implements LifeEventRecord {
+public abstract class GenericLifeEventRecord implements LifeEventRecord, SingleFamilyRecord {
 
     private final RecordId recordId;
     private final RecordSet recordSet;

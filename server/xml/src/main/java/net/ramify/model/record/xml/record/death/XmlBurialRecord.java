@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -65,7 +66,7 @@ public class XmlBurialRecord extends XmlPersonOnDateRecord {
     public BurialRecord build(final PlaceId burialPlaceId, final RecordContext context, final RecordSet recordSet) {
         Objects.requireNonNull(burialPlaceId, "burial place ID");
         final var burialDate = this.burialDate(context);
-        final var family = this.family(burialDate, context.onDate(burialDate), burialPlaceId);
+        final var family = this.family(context.onDate(burialDate), burialPlaceId);
         return new ChurchBurialRecord(
                 this.recordId(),
                 recordSet,
@@ -79,25 +80,27 @@ public class XmlBurialRecord extends XmlPersonOnDateRecord {
         return context.recordDate();
     }
 
-    Family family(final DateRange burialDate, final RecordContext context, final PlaceId burialPlaceId) {
-        final var person = this.person(context.nameParser(), burialDate, context, burialPlaceId);
+    Family family(final RecordContext context, final PlaceId burialPlaceId) {
+        final var person = this.person(context.nameParser(), context, burialPlaceId);
         final var builder = new FamilyBuilder(person);
-        if (relationships != null) relationships.forEach(relationship -> relationship.addRelationship(person, builder, context, burialDate));
+        if (relationships != null) relationships.forEach(relationship -> relationship.addRelationship(person, builder, context));
         return builder.build();
     }
 
-    Person person(final NameParser nameParser, final DateRange burialDate, final RecordContext context, final PlaceId burialPlaceId) {
+    Person person(final NameParser nameParser, final RecordContext context, final PlaceId burialPlaceId) {
         final var personId = this.personId();
         return new GenericRecordPerson(
                 personId,
                 this.name(nameParser),
                 this.gender(),
-                this.events(personId, burialDate, context, burialPlaceId),
-                this.notes());
+                this.events(personId, context, burialPlaceId),
+                this.notes(),
+                Collections.emptySet());
     }
 
-    MutablePersonEventSet events(final PersonId personId, final DateRange burialDate, final RecordContext context, final PlaceId burialPlaceId) {
-        final var events = super.events(personId, burialDate, context);
+    MutablePersonEventSet events(final PersonId personId, final RecordContext context, final PlaceId burialPlaceId) {
+        final var events = super.events(personId, context);
+        final var burialDate = context.recordDate();
         events.add(this.burialEvent(personId, burialDate, context.places().require(burialPlaceId)));
         final var deathDate = this.deathDate(context);
         if (deathDate != null) events.add(this.deathEvent(personId, deathDate, context));

@@ -33,8 +33,8 @@ public class XmlPersonOnDateRecord extends XmlPersonRecord {
     @XmlElementRef(required = false)
     private XmlAge complexAge;
 
-    protected Person person(final DateRange date, final RecordContext context) {
-        return this.person(context, id -> this.events(id, date, context));
+    protected Person person(final RecordContext context) {
+        return this.person(context, id -> this.events(id, context));
     }
 
     protected Person person(final RecordContext context, final Function<PersonId, ? extends PersonEventSet> createEvents) {
@@ -48,11 +48,10 @@ public class XmlPersonOnDateRecord extends XmlPersonRecord {
     }
 
     @OverridingMethodsMustInvokeSuper
-    protected MutablePersonEventSet events(final PersonId personId, final DateRange date, final RecordContext context) {
-        final var events = new MutablePersonEventSet(context.uniqueEventMerger());
-        events.addAll(this.events(personId, context));
-        //FIXME only infer birth if not already added
-        Consumers.ifNonNull(this.inferBirth(personId, date, context), events::add);
+    @Override
+    protected MutablePersonEventSet events(final PersonId personId, final RecordContext context) {
+        final var events = super.events(personId, context);
+        Consumers.ifNonNull(this.inferBirth(personId, context), events::add);
         return events;
     }
 
@@ -67,10 +66,10 @@ public class XmlPersonOnDateRecord extends XmlPersonRecord {
     }
 
     @CheckForNull
-    protected BirthEvent inferBirth(final PersonId personId, final DateRange date, final RecordContext context) {
+    protected BirthEvent inferBirth(final PersonId personId, final RecordContext context) {
         final var age = this.age();
         if (age == null) return null;
-        return this.eventBuilder(age.birthDate(date)).setInferred(true).toBirth(personId);
+        return this.eventBuilder(age.birthDate(context.recordDate())).setInferred(true).toBirth(personId);
     }
 
     protected EventBuilder eventBuilder(final DateRange date) {

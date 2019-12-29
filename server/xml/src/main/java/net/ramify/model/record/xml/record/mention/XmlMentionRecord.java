@@ -36,7 +36,7 @@ public class XmlMentionRecord extends XmlPersonOnDateRecord {
     public LifeEventRecord buildRecord(final DateRange parentDate, final RecordContext context, final RecordSet recordSet) {
         final var recordId = this.recordId();
         final var date = MoreObjects.firstNonNull(this.date(context.dateParser()), parentDate);
-        final var family = new SinglePersonFamily(this.person(date, context));
+        final var family = new SinglePersonFamily(this.person(context));
         return new GenericMentionRecord(
                 recordId,
                 recordSet,
@@ -50,8 +50,9 @@ public class XmlMentionRecord extends XmlPersonOnDateRecord {
     }
 
     @Override
-    protected MutablePersonEventSet events(final PersonId personId, final DateRange date, final RecordContext context) {
-        final var events = super.events(personId, date, context);
+    protected MutablePersonEventSet events(final PersonId personId, final RecordContext context) {
+        final var events = super.events(personId, context);
+        final var date = context.recordDate();
         if (this.deceased()) {
             events.add(this.eventBuilder(BeforeDate.strictlyBefore(date)).toDeath(personId));
         } else {

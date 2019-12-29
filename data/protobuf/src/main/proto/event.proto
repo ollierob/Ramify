@@ -55,6 +55,7 @@ enum RecordType {
     RESIDENCE = 22;
     PAYMENT = 23;
     MEMBERSHIP = 24;
+    TRANSACTION = 25;
 
     HISTORIC = 98;
     MIXED = 99;

@@ -71,6 +71,8 @@
           
     </xs:sequence>
         
+    <xs:attribute name="personId" type="xs:string"/>
+        
     <xs:attribute name="name" type="xs:string"/>
         
     <xs:attribute name="deceased" type="xs:boolean"/>
@@ -186,6 +188,24 @@
           <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="parent" type="xs:string"/>
                     
           <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="spouse" type="xs:string"/>
+                    
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        
+            <xs:element ref="tns:daughter"/>
+                        
+            <xs:element ref="tns:father"/>
+                        
+            <xs:element ref="tns:mother"/>
+                        
+            <xs:element ref="tns:son"/>
+                        
+            <xs:element ref="tns:husband"/>
+                        
+            <xs:element ref="tns:wife"/>
+                        
+            <xs:element ref="tns:unknown"/>
+                      
+          </xs:choice>
                   
         </xs:sequence>
               

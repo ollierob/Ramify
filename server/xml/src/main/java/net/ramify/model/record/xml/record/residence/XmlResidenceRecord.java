@@ -1,6 +1,5 @@
 package net.ramify.model.record.xml.record.residence;
 
-import net.ramify.model.date.DateRange;
 import net.ramify.model.event.collection.MutablePersonEventSet;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
@@ -26,29 +25,29 @@ public class XmlResidenceRecord extends XmlPersonOnDateWithFamilyRecord {
     private String placeId;
 
     @Nonnull
-    public LifeEventRecord build(final Place parentPlace, final DateRange date, final RecordContext context, final RecordSet recordSet) {
+    public LifeEventRecord build(final Place parentPlace, final RecordContext context, final RecordSet recordSet) {
         final var recordId = this.recordId();
         try {
             final var place = Functions.ifNonNull(placeId, id -> context.places().require(new PlaceId(id)), parentPlace);
-            final var family = this.family(context, date, id -> this.events(id, place, date, context));
-            return new GenericResidenceRecord(recordId, recordSet, family, date, place);
+            final var family = this.family(context, id -> this.events(id, place, context));
+            return new GenericResidenceRecord(recordId, recordSet, family, context.recordDate(), place);
         } catch (final Exception ex) {
             throw new RuntimeException("Error building residence record for " + recordId, ex);
         }
     }
 
-    public Person person(final Place place, final DateRange date, final RecordContext context) {
+    public Person person(final Place place, final RecordContext context) {
         final var id = this.personId();
         final var name = this.name(context.nameParser());
         final var gender = this.gender();
-        final var events = this.events(id, place, date, context);
+        final var events = this.events(id, place, context);
         final var notes = this.notes();
         return new GenericRecordPerson(id, name, gender, events, notes);
     }
 
-    protected MutablePersonEventSet events(final PersonId personId, final Place place, final DateRange date, final RecordContext context) {
-        final var events = super.events(personId, date, context);
-        events.add(this.eventBuilder(date).withPlace(place).toResidence(personId));
+    protected MutablePersonEventSet events(final PersonId personId, final Place place, final RecordContext context) {
+        final var events = super.events(personId, context);
+        events.add(this.eventBuilder(context.recordDate()).withPlace(place).toResidence(personId));
         return events;
     }
 

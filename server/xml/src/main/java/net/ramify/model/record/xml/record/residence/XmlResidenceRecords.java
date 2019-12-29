@@ -1,5 +1,6 @@
 package net.ramify.model.record.xml.record.residence;
 
+import net.ramify.model.date.DateRange;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.collection.RecordSet;
@@ -47,8 +48,14 @@ public class XmlResidenceRecords extends XmlRecords {
             final RecordContext context) {
         if (records == null) return Collections.emptyList();
         final var place = context.places().require(Functions.ifNonNull(this.placeId, PlaceId::new, recordSet.placeId()));
-        final var date = Functions.ifNonNull(this.date, d -> d.resolve(context.dateParser()), recordSet.date());
-        return ListUtils.eagerlyTransform(records, record -> record.build(place, date, context, recordSet));
+        final var date = this.date(recordSet, context);
+        return ListUtils.eagerlyTransform(records, record -> record.build(place, context.onDate(date), recordSet));
+    }
+
+    private DateRange date(final RecordSet recordSet, final RecordContext context) {
+        if (date != null) return date.resolve(context.dateParser());
+
+        return Functions.ifNonNull(this.date, d -> d.resolve(context.dateParser()), context.recordDate());
     }
 
 }

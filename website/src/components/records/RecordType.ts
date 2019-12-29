@@ -40,5 +40,6 @@ const ShortRecordTitles: { [key in RecordType]: string } = {
     PAYMENT: "Payments",
     PROBATE: "Probate",
     RESIDENCE: "Residence",
+    TRANSACTION: "Transaction",
     WILL: "Wills"
 };

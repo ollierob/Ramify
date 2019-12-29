@@ -28,13 +28,13 @@ public class XmlProbateRecord extends XmlPersonOnDateWithFamilyRecord {
                 this.recordId(),
                 recordSet,
                 date,
-                this.family(context, date));
+                this.family(context.onDate(date)));
     }
 
     @Override
-    protected MutablePersonEventSet events(final PersonId personId, final DateRange date, final RecordContext context) {
-        final var events = super.events(personId, date, context);
-        events.add(this.probate(personId, date));
+    protected MutablePersonEventSet events(final PersonId personId, final RecordContext context) {
+        final var events = super.events(personId, context);
+        events.add(this.probate(personId, context.recordDate()));
         return events;
     }
 

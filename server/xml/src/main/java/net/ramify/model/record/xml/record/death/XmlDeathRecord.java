@@ -1,6 +1,5 @@
 package net.ramify.model.record.xml.record.death;
 
-import net.ramify.model.date.DateRange;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.date.xml.XmlDateRange;
 import net.ramify.model.date.xml.XmlExactDate;
@@ -44,32 +43,32 @@ public class XmlDeathRecord extends XmlPersonOnDateRecord {
     @Nonnull
     public DeathRecord build(final PlaceId recordSetCovers, final RecordContext context, final RecordSet recordSet) {
         final var date = this.deathDate();
-        final var person = this.person(date, context);
+        final var person = this.person(context);
         final var deathPlace = this.deathPlace().orElse(recordSetCovers);
         return new GenericDeathRecord(
                 this.recordId(),
                 recordSet,
                 date,
                 deathPlace,
-                this.family(person, context, date));
+                this.family(person, context.onDate(date)));
     }
 
-    Family family(final Person person, final RecordContext context, final ExactDate date) {
+    Family family(final Person person, final RecordContext context) {
         if (relationships == null || relationships.isEmpty()) return new SinglePersonFamily(person);
         final var builder = new FamilyBuilder(person);
-        relationships.forEach(relationship -> relationship.addRelationship(person, builder, context, date));
+        relationships.forEach(relationship -> relationship.addRelationship(person, builder, context));
         return builder.build();
     }
 
     @Override
-    protected MutablePersonEventSet events(final PersonId personId, final DateRange date, final RecordContext context) {
-        final var events = super.events(personId, date, context);
-        events.add(this.death(personId, date, context));
+    protected MutablePersonEventSet events(final PersonId personId, final RecordContext context) {
+        final var events = super.events(personId, context);
+        events.add(this.death(personId, context));
         return events;
     }
 
-    protected DeathEvent death(final PersonId personId, final DateRange date, final RecordContext context) {
-        return this.eventBuilder(date)
+    protected DeathEvent death(final PersonId personId, final RecordContext context) {
+        return this.eventBuilder(context.recordDate())
                 .withPlace(this.deathPlace(context))
                 .toDeath(personId);
     }
