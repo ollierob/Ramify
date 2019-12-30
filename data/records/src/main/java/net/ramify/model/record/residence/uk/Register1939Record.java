@@ -1,5 +1,6 @@
 package net.ramify.model.record.residence.uk;
 
+import net.ramify.model.date.DateRange;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.EventId;
 import net.ramify.model.event.collection.MutablePersonEventSet;
@@ -19,7 +20,6 @@ import net.ramify.model.record.residence.CensusRecord;
 import net.ramify.utils.collections.SetUtils;
 
 import javax.annotation.Nonnull;
-import java.time.LocalDate;
 import java.time.Month;
 import java.util.Collections;
 import java.util.List;
@@ -60,7 +60,7 @@ public class Register1939Record extends CensusRecord {
         private final PersonId id;
         private final Name name;
         private final Sex gender;
-        private final LocalDate birthDate;
+        private final DateRange birthDate;
         private final String occupation;
         private final EventId birthEventId, residenceEventId;
 
@@ -68,7 +68,7 @@ public class Register1939Record extends CensusRecord {
                 final PersonId id,
                 final Name name,
                 final Sex sex,
-                final LocalDate birthDate,
+                final DateRange birthDate,
                 final String occupation,
                 final EventId birthEventId,
                 final EventId residenceEventId) {
@@ -89,7 +89,7 @@ public class Register1939Record extends CensusRecord {
                     birthEventId,
                     residenceEventId,
                     record.place(),
-                    ExactDate.on(birthDate),
+                    birthDate,
                     occupation,
                     record.eventMerger);
         }
@@ -99,7 +99,7 @@ public class Register1939Record extends CensusRecord {
     public static class Register1939Person extends AbstractCensusPerson {
 
         private final Place residence;
-        private final ExactDate birthDate;
+        private final DateRange birthDate;
         private final EventId birthEventId, residenceEventId;
         private final UniqueEventMerger eventMerger;
 
@@ -110,7 +110,7 @@ public class Register1939Record extends CensusRecord {
                 final EventId birthEventId,
                 final EventId residenceEventId,
                 final Place residence,
-                final ExactDate birthDate,
+                final DateRange birthDate,
                 final String occupation,
                 final UniqueEventMerger eventMerger) {
             super(id, name, gender, CENSUS_DATE, occupation);

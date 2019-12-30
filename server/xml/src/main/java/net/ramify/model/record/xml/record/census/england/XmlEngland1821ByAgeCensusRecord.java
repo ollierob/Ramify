@@ -11,16 +11,17 @@ import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.residence.uk.Census1821Record;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlRecord;
+import net.ramify.model.record.xml.record.country.uk.XmlUkRecord;
 import net.ramify.model.record.xml.record.residence.XmlResidenceRecord;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.time.Period;
 
-@XmlType(namespace = XmlRecord.NAMESPACE, name = "censusEngland1821ByAge")
-public class XmlEngland1821ByAgeCensusRecord extends XmlEnglandCensus {
+@XmlRootElement(namespace = XmlUkRecord.NAMESPACE, name = "census1821ByAge")
+public class XmlEngland1821ByAgeCensusRecord extends XmlEnglandCensusRecord {
 
     static final Age UNDER_FIVE = Age.betweenInclusive(Period.ZERO, Period.of(5, 0, -1));
     static final Age FIVE_TO_TEN = Age.betweenInclusive(Period.ofYears(5), Period.of(10, 0, -1));

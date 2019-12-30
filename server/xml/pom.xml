@@ -87,6 +87,10 @@
                                     <toFile>records.xsd</toFile>
                                 </transformSchema>
                                 <transformSchema>
+                                    <uri>http://ramify.net/records/gb</uri>
+                                    <toFile>records_uk.xsd</toFile>
+                                </transformSchema>
+                                <transformSchema>
                                     <uri>http://ramify.net/events</uri>
                                     <toFile>events.xsd</toFile>
                                 </transformSchema>

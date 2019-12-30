@@ -5,7 +5,7 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.record.xml.record.XmlPersonOnDateRecord;
-import net.ramify.model.record.xml.record.XmlRecord;
+import net.ramify.model.record.xml.record.country.uk.XmlUkRecord;
 import net.ramify.model.relationship.RelationshipFactory;
 
 import javax.annotation.CheckForNull;
@@ -13,7 +13,7 @@ import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(namespace = XmlRecord.NAMESPACE)
+@XmlType(namespace = XmlUkRecord.NAMESPACE)
 public abstract class XmlEnglandCensusIndividual extends XmlPersonOnDateRecord {
 
     @XmlAttribute(name = "relationshipToHead", required = true)

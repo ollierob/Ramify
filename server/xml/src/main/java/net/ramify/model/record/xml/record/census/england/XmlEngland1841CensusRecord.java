@@ -7,25 +7,26 @@ import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.residence.uk.Census1841Record;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlPersonOnDateRecord;
-import net.ramify.model.record.xml.record.XmlRecord;
+import net.ramify.model.record.xml.record.country.uk.XmlUkRecord;
 import net.ramify.utils.collections.ListUtils;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
-@XmlType(namespace = XmlRecord.NAMESPACE, name = "censusEngland1841")
-public class XmlEngland1841CensusRecord extends XmlEnglandCensus {
+@XmlRootElement(namespace = XmlUkRecord.NAMESPACE, name = "census1841")
+public class XmlEngland1841CensusRecord extends XmlEnglandCensusRecord {
 
-    @XmlElement(type = Individual.class, name = "entry", namespace = XmlRecord.NAMESPACE)
-    private List<Individual> individuals;
+    @XmlElement(name = "entry", namespace = XmlUkRecord.NAMESPACE)
+    private List<XmlCensusIndividual> individuals;
 
     @Override
     protected Census1841Record build(final RecordContext context, final Place censusPlace, final RecordSet recordSet) {
         final var id = this.recordId();
-        final var place = MoreObjects.firstNonNull(this.place(context.places()), censusPlace);
+        final var place = this.place(context, censusPlace);
         final var entries = this.entries(context, censusPlace);
         return new Census1841Record(id, recordSet, place, entries, context.uniqueEventMerger());
     }
@@ -39,8 +40,8 @@ public class XmlEngland1841CensusRecord extends XmlEnglandCensus {
         return individuals.size();
     }
 
-    @XmlType(namespace = XmlRecord.NAMESPACE, name = "census1841EnglandEntry")
-    public static class Individual extends XmlPersonOnDateRecord {
+    @XmlType(namespace = XmlUkRecord.NAMESPACE)
+    public static class XmlCensusIndividual extends XmlPersonOnDateRecord {
 
         @XmlAttribute(name = "bornInCounty")
         private Boolean bornInCounty;

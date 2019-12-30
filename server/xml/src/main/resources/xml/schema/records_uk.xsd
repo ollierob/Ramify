@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ramify.net/records" xmlns:ns2="http://ramify.net/dates" xmlns:tns="http://ramify.net/records/gb" targetNamespace="http://ramify.net/records/gb" version="1.0">
+    
+  <xs:import namespace="http://ramify.net/records" schemaLocation="records.xsd"/>
+    
+  <xs:import namespace="http://ramify.net/dates" schemaLocation="dates.xsd"/>
+    
+  <xs:element name="census1821ByAge" type="tns:xmlEngland1821ByAgeCensusRecord"/>
+    
+  <xs:element name="census1841" type="tns:xmlEngland1841CensusRecord"/>
+    
+  <xs:element name="census1851" type="tns:xmlEngland1851CensusRecord"/>
+    
+  <xs:element name="englandCensus" type="tns:xmlEnglandCensusRecords"/>
+    
+  <xs:element name="register1939" type="tns:xmlEngland1939RegisterRecord"/>
+    
+  <xs:complexType name="xmlEnglandCensusRecords">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="ns1:xmlCensusRecords">
+                
+        <xs:sequence>
+                    
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        
+            <xs:element ref="tns:census1821ByAge"/>
+                        
+            <xs:element ref="tns:census1841"/>
+                        
+            <xs:element ref="tns:census1851"/>
+                        
+            <xs:element ref="tns:register1939"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType abstract="true" name="xmlEnglandCensusRecord">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="ns1:xmlCensusRecord">
+                
+        <xs:sequence/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlEngland1821ByAgeCensusRecord">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlEnglandCensusRecord">
+                
+        <xs:sequence>
+                    
+          <xs:element ref="ns1:head"/>
+                  
+        </xs:sequence>
+                
+        <xs:attribute name="malesUnderFive" type="xs:int"/>
+                
+        <xs:attribute name="malesFiveToTen" type="xs:int"/>
+                
+        <xs:attribute name="malesTenToFifteen" type="xs:int"/>
+                
+        <xs:attribute name="malesThirtyToForty" type="xs:int"/>
+                
+        <xs:attribute name="malesFortyToFifty" type="xs:int"/>
+                
+        <xs:attribute name="malesFiftyToSixty" type="xs:int"/>
+                
+        <xs:attribute name="malesSixtyToSeventy" type="xs:int"/>
+                
+        <xs:attribute name="femalesUnderFive" type="xs:int"/>
+                
+        <xs:attribute name="femalesFiveToTen" type="xs:int"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlEngland1841CensusRecord">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlEnglandCensusRecord">
+                
+        <xs:sequence>
+                    
+          <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="entry" type="tns:xmlCensusIndividual"/>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlCensusIndividual">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="ns1:xmlPersonOnDateRecord">
+                
+        <xs:sequence/>
+                
+        <xs:attribute name="bornInCounty" type="xs:boolean"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlEngland1851CensusRecord">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlEnglandCensusRecord">
+                
+        <xs:sequence>
+                    
+          <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="entry" type="tns:xmlEngland1851CensusIndividual"/>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlEngland1851CensusIndividual">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlEnglandCensusIndividual">
+                
+        <xs:sequence/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType abstract="true" name="xmlEnglandCensusIndividual">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="ns1:xmlPersonOnDateRecord">
+                
+        <xs:sequence/>
+                
+        <xs:attribute name="relationshipToHead" type="ns1:censusRelationshipToHead" use="required"/>
+                
+        <xs:attribute name="marriageCondition" type="ns1:censusMarriageCondition"/>
+                
+        <xs:attribute name="placeOfBirth" type="xs:string"/>
+                
+        <xs:attribute name="disability" type="xs:string"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlEngland1939RegisterRecord">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlEnglandCensusRecord">
+                
+        <xs:sequence>
+                    
+          <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="individual" type="tns:xmlEngland1939RegisterIndividual"/>
+                  
+        </xs:sequence>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlEngland1939RegisterIndividual">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="ns1:xmlPersonRecord">
+                
+        <xs:sequence>
+                    
+          <xs:choice minOccurs="0">
+                        
+            <xs:element ref="ns2:bornOn"/>
+                        
+            <xs:element ref="ns2:bornIn"/>
+                      
+          </xs:choice>
+                  
+        </xs:sequence>
+                
+        <xs:attribute name="birthEventId" type="xs:string"/>
+                
+        <xs:attribute name="residenceEventId" type="xs:string"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+  
+</xs:schema>

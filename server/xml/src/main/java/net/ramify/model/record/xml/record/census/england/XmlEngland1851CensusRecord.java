@@ -1,26 +1,25 @@
 package net.ramify.model.record.xml.record.census.england;
 
-import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 import net.ramify.model.place.Place;
-import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.residence.uk.Census1851Record;
 import net.ramify.model.record.xml.RecordContext;
-import net.ramify.model.record.xml.record.XmlRecord;
+import net.ramify.model.record.xml.record.country.uk.XmlUkRecord;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@XmlType(namespace = XmlRecord.NAMESPACE, name = "censusEngland1851")
-public class XmlEngland1851CensusRecord extends XmlEnglandCensus {
+@XmlRootElement(namespace = XmlUkRecord.NAMESPACE, name = "census1851")
+public class XmlEngland1851CensusRecord extends XmlEnglandCensusRecord {
 
-    @XmlElement(namespace = XmlRecord.NAMESPACE, name = "entry")
+    @XmlElement(namespace = XmlUkRecord.NAMESPACE, name = "entry")
     private List<XmlEngland1851CensusIndividual> individuals;
 
     @Override
@@ -30,14 +29,10 @@ public class XmlEngland1851CensusRecord extends XmlEnglandCensus {
 
     @Override
     protected Census1851Record build(final RecordContext context, final Place censusPlace, final RecordSet recordSet) {
-        final var place = this.place(context.places(), censusPlace);
+        final var place = this.place(context, censusPlace);
         final var head = this.head(context);
         final var others = this.others(context);
         return new Census1851Record(this.recordId(), recordSet, place, head, others, context.uniqueEventMerger());
-    }
-
-    Place place(final PlaceProvider places, final Place censusPlace) {
-        return MoreObjects.firstNonNull(super.place(places), censusPlace);
     }
 
     @Nonnull
@@ -50,7 +45,7 @@ public class XmlEngland1851CensusRecord extends XmlEnglandCensus {
         return individuals.stream().filter(XmlEnglandCensusIndividual::isNotHead).map(i -> i.toOther(context)).collect(Collectors.toList());
     }
 
-    @XmlType(namespace = XmlRecord.NAMESPACE)
+    @XmlType(namespace = XmlUkRecord.NAMESPACE)
     public static class XmlEngland1851CensusIndividual extends XmlEnglandCensusIndividual {
 
         Census1851Record.Census1851Head toHead(final RecordContext context) {
