@@ -27,7 +27,7 @@ public class FamilyOfUnknownRelationships implements Family {
     @Nonnull
     @Override
     public Person root() {
-        return null; //FIXME
+        return people.isEmpty() ? null : people.iterator().next();
     }
 
     @Nonnull

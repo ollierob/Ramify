@@ -10,6 +10,7 @@ import {sortPeopleByBirthDate} from "../../../../components/people/Person";
 import {PersonName} from "../../../../components/people/PersonName";
 import {renderLifespan} from "../../../../components/people/Lifespan";
 import {moveToFront} from "../../../../components/Arrays";
+import {joinComponents} from "../../../../components/Components";
 
 export function renderFamilyRecord(record: FamilyRecord) {
     if (!record) return null;
@@ -30,9 +31,14 @@ function renderPerson(person: Person.AsObject, root: Person.AsObject, relationsh
     const relationship = findRelationship(person, root, relationships);
     return <>
         {renderName(person.name, person.gender?.toLowerCase(), relationship)}
-        {renderLifespan(person)}
-        {renderRelationship(person, root, relationship)}
-        {renderNotes(person)}
+        &nbsp;
+        <span className="more">
+            {joinComponents([
+                renderLifespan(person),
+                renderRelationship(person, root, relationship),
+                renderNotes(person)
+            ], " | ")}
+        </span>
     </>;
 }
 

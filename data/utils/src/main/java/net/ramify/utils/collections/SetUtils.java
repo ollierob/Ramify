@@ -11,7 +11,7 @@ import java.util.function.IntFunction;
 public class SetUtils {
 
     public static <F, T> Set<T> transform(final Collection<F> collection, final Function<? super F, ? extends T> transform) {
-        return transform(collection, transform, Sets::newHashSetWithExpectedSize);
+        return transform(collection, transform, Sets::newLinkedHashSetWithExpectedSize);
     }
 
     public static <F, T> Set<T> transform(final Collection<F> collection, final Function<? super F, ? extends T> transform, final IntFunction<Set<T>> createSet) {
@@ -23,7 +23,7 @@ public class SetUtils {
     }
 
     public static <F, T> Set<T> transformIgnoreNull(final Collection<F> collection, final Function<? super F, ? extends T> transform) {
-        return transform(collection, transform, true, Sets::newHashSetWithExpectedSize);
+        return transform(collection, transform, true, Sets::newLinkedHashSetWithExpectedSize);
     }
 
     private static <F, T> Set<T> transform(final Collection<F> collection, final Function<? super F, ? extends T> transform, final boolean ignoreNull, final IntFunction<Set<T>> createSet) {
