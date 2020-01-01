@@ -14,6 +14,7 @@ import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.building.XmlBuilding;
 import net.ramify.model.place.xml.place.settlement.XmlHamlet;
+import net.ramify.model.place.xml.place.settlement.XmlTown;
 import net.ramify.model.place.xml.place.settlement.XmlVillage;
 
 import javax.xml.bind.annotation.XmlElementRef;
@@ -30,8 +31,9 @@ class XmlTownship extends XmlPlace {
     static final PlaceHistory DEFAULT_HISTORY = new DefaultPlaceHistory(null, new InYears(1866));
 
     @XmlElementRefs({
-            @XmlElementRef(type = XmlHamlet.class),
+            @XmlElementRef(type = XmlTown.class),
             @XmlElementRef(type = XmlVillage.class),
+            @XmlElementRef(type = XmlHamlet.class),
             @XmlElementRef(type = XmlBuilding.class)
     })
     private List<XmlPlace> children;
