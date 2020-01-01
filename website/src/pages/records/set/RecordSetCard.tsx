@@ -98,7 +98,7 @@ const Description = (props: {record: RecordSet.AsObject}) => {
 const Creator = (props: {place: AsyncData<Readonly<PlaceBundle.AsObject>>}) => {
     const place = props.place;
     if (!place.data && !place.loading) return null;
-    return <div className="relationship place">
+    return <div className="creator">
         <Icon type="edit"/> These records were created by <PlaceLink place={place.data && place.data.place} loading={place.loading} showType/>
     </div>;
 };
