@@ -217,9 +217,11 @@
                     
           <xs:choice maxOccurs="unbounded" minOccurs="0">
                         
-            <xs:element ref="ns1:hamlet"/>
+            <xs:element ref="ns1:town"/>
                         
             <xs:element ref="ns1:village"/>
+                        
+            <xs:element ref="ns1:hamlet"/>
                         
             <xs:element ref="ns1:church"/>
                         

@@ -28,9 +28,12 @@ export function recordTypeName(record: RecordSet.AsObject | RecordType): string 
 const ShortRecordTitles: { [key in RecordType]: string } = {
     UNSPECIFIED: "Miscellaneous",
     BAPTISM: "Baptisms",
+    BANNS: "Banns",
     BIRTH: "Births",
     BURIAL: "Burials",
+    CENSUS: "Census",
     DEATH: "Deaths",
+    DIVORCE: "Divorce",
     HISTORIC: "Historic",
     MARRIAGE: "Marriages",
     MEMBERSHIP: "Membership",
@@ -40,6 +43,20 @@ const ShortRecordTitles: { [key in RecordType]: string } = {
     PAYMENT: "Payments",
     PROBATE: "Probate",
     RESIDENCE: "Residence",
-    TRANSACTION: "Transaction",
+    TRANSACTION: "Transactions",
     WILL: "Wills"
 };
+
+export function recordTypes(includeMixed: boolean = true): RecordType[] {
+    return Object.keys(RecordTypes)
+        .map(k => k as RecordType)
+        .filter(t => includeMixed || (t != "MIXED" && t != "HISTORIC"));
+}
+
+const RecordTypesSet: Set<string> = new Set(Object.keys(RecordTypes));
+
+export function sanitizeRecordType(type: string): RecordType {
+    if (!type) return null;
+    type = type.trim().toUpperCase();
+    return RecordTypesSet.has(type.toUpperCase()) ? type as RecordType : null;
+}

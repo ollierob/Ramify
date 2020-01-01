@@ -1,14 +1,15 @@
 package net.ramify.model.record.civil.uk;
 
 import net.ramify.model.date.DateRange;
-import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.GenericRecordEntry;
 import net.ramify.model.record.RecordId;
+import net.ramify.model.record.RecordSetTypes;
 import net.ramify.model.record.civil.AbstractCivilRecord;
 import net.ramify.model.record.collection.RecordSet;
+import net.ramify.model.record.collection.RecordSetType;
 import net.ramify.model.record.type.MarriageRecord;
 import net.ramify.model.relationship.type.ChildParent;
 import net.ramify.model.relationship.type.Married;
@@ -80,8 +81,8 @@ public class GeneralRegisterMarriage extends AbstractCivilRecord implements Gene
     }
 
     @Override
-    protected EventProto.RecordType protoType() {
-        return EventProto.RecordType.MARRIAGE;
+    public RecordSetType type() {
+        return RecordSetTypes.MARRIAGE;
     }
 
 }

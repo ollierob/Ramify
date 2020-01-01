@@ -3,7 +3,6 @@ package net.ramify.model.record.residence;
 import net.ramify.model.date.BeforeDate;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.EventBuilder;
-import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.event.type.BirthEvent;
 import net.ramify.model.event.type.DeathEvent;
 import net.ramify.model.person.HasPersonId;
@@ -12,8 +11,10 @@ import net.ramify.model.place.HasPlace;
 import net.ramify.model.place.Place;
 import net.ramify.model.record.ExactDateRecord;
 import net.ramify.model.record.RecordId;
+import net.ramify.model.record.RecordSetTypes;
 import net.ramify.model.record.SingleFamilyRecord;
 import net.ramify.model.record.collection.RecordSet;
+import net.ramify.model.record.collection.RecordSetType;
 import net.ramify.model.record.type.LifeEventRecord;
 
 import javax.annotation.Nonnull;
@@ -52,8 +53,8 @@ public abstract class CensusRecord extends ExactDateRecord implements LifeEventR
     }
 
     @Override
-    protected EventProto.RecordType protoType() {
-        return EventProto.RecordType.RESIDENCE;
+    public RecordSetType type() {
+        return RecordSetTypes.CENSUS;
     }
 
 }

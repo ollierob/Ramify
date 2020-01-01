@@ -1,11 +1,12 @@
 package net.ramify.model.record.church;
 
 import net.ramify.model.date.DateRange;
-import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.family.Family;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.RecordId;
+import net.ramify.model.record.RecordSetTypes;
 import net.ramify.model.record.collection.RecordSet;
+import net.ramify.model.record.collection.RecordSetType;
 import net.ramify.model.record.type.MarriageRecord;
 
 public class ChurchMarriageRecord extends AbstractChurchRecord implements MarriageRecord {
@@ -15,8 +16,8 @@ public class ChurchMarriageRecord extends AbstractChurchRecord implements Marria
     }
 
     @Override
-    protected EventProto.RecordType protoType() {
-        return EventProto.RecordType.MARRIAGE;
+    public RecordSetType type() {
+        return RecordSetTypes.MARRIAGE;
     }
 
 }

@@ -9,6 +9,7 @@ import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetHierarchy;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.RecordSetRelatives;
+import net.ramify.model.record.collection.RecordSetType;
 import net.ramify.model.record.collection.RecordSets;
 import net.ramify.model.record.provider.RecordProvider;
 import net.ramify.model.record.provider.RecordSetProvider;
@@ -20,6 +21,7 @@ import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.time.LocalDate;
+import java.util.Set;
 import java.util.function.Predicate;
 
 @Singleton
@@ -50,20 +52,28 @@ public class DefaultRecordSetResource implements RecordSetResource {
             final LocalDate fromDate,
             final LocalDate toDate,
             final boolean onlyParents,
+            final Set<RecordSetType> types,
             final int limit) {
 
         Predicate<RecordSet> predicate = r -> true;
+
         if (name != null) {
             final var l = name.toLowerCase();
             predicate = r -> r.title().toLowerCase().contains(l);
         }
+
         if (withinPlace != null) {
             final var place = places.require(withinPlace);
             predicate = predicate.and(record -> this.isCovered(record, place));
         }
+
         final var dateRange = fromDate == null && toDate == null ? null : ClosedDateRange.of(fromDate, toDate);
         if (dateRange != null) {
             predicate = predicate.and(r -> dateRange.intersects(r.date()));
+        }
+
+        if (!types.isEmpty()) {
+            predicate = predicate.and(r -> types.contains(r.type()));
         }
 
         return RecordSets.of(recordSets.matching(predicate, limit, onlyParents));

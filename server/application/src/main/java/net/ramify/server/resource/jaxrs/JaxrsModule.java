@@ -14,6 +14,7 @@ public class JaxrsModule extends AbstractModule {
         this.bind(CacheControlFilter.class);
         this.bind(DateParamConverterProvider.class);
         this.bind(DateRangeParamConverterProvider.class);
+        this.bind(AdhocParamConverterProvider.class);
     }
 
 }

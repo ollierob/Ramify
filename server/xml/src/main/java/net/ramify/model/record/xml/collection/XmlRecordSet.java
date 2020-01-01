@@ -5,13 +5,14 @@ import com.google.common.collect.Lists;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.parse.DateParser;
 import net.ramify.model.date.xml.XmlDateRange;
-import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.Record;
+import net.ramify.model.record.RecordSetTypes;
 import net.ramify.model.record.collection.HasRecordSetId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.RecordSetReference;
+import net.ramify.model.record.collection.RecordSetType;
 import net.ramify.model.record.provider.RecordSetProvider;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlRecord;
@@ -112,10 +113,10 @@ class XmlRecordSet implements HasRecordSetId {
                 this.nextIds());
     }
 
-    EventProto.RecordType type(final RecordSet parent) {
+    RecordSetType type(final RecordSet parent) {
         if (this.type != null) return this.type.type();
-        if (parent != null) return parent.toProtoBuilder().getType();
-        return EventProto.RecordType.UNSPECIFIED;
+        if (parent != null) return parent.type();
+        return RecordSetTypes.UNSPECIFIED;
     }
 
     DateRange date(final RecordSet parent, final DateParser dateParser) {

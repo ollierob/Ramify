@@ -1,6 +1,6 @@
 import * as React from "react";
 import {FormEvent} from "react";
-import {Button, Card, Cascader, Form, Input} from "antd";
+import {Button, Card, Cascader, Form, Input, Select} from "antd";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {PlaceId} from "../../../components/places/Place";
 import {DEFAULT_PLACE_LOADER} from "../../../components/places/PlaceLoader";
@@ -15,6 +15,9 @@ import {RecordBasePage, RecordBasePageProps} from "../RecordBasePage";
 import {SearchIcon} from "../../../components/images/Icons";
 import RegionCascader from "../../../components/places/RegionCascader";
 import {parseIsoDate, toIsoDate} from "../../../components/date/Date";
+import {RecordType, recordTypeName, recordTypes} from "../../../components/records/RecordType";
+
+const {Option} = Select;
 
 type Props = RecordBasePageProps;
 
@@ -22,6 +25,7 @@ type OptionsState = {
     selectedRangeName: string[];
     selectedRange?: DateRange;
     selectedRegion?: PlaceId;
+    selectedTypes: RecordType[]
     recordName?: string;
 }
 
@@ -59,7 +63,7 @@ export default class RecordSearchPage extends RecordBasePage<State> {
                         Search by record name:
                         <br/>
                         <Input
-                            placeholder="Matching all record names"
+                            placeholder="Matching all names"
                             size="large"
                             value={this.state.recordName}
                             onChange={e => this.setState({recordName: e.target.value})}/>
@@ -71,6 +75,7 @@ export default class RecordSearchPage extends RecordBasePage<State> {
                         <RegionCascader
                             maxDepth={3}
                             placeLoader={this.placeLoader}
+                            placeHolder="Matching all places"
                             size="large"
                             onSelect={this.setSelectedRegion}/>
                     </Form.Item>
@@ -86,6 +91,20 @@ export default class RecordSearchPage extends RecordBasePage<State> {
                             onChange={(selectedRange, selectedOptions) => this.setState({selectedRangeName: selectedRange, selectedRange: selectedOptions[selectedRange.length - 1]?.range})}
                             options={YearRanges}
                             displayRender={this.renderRange}/>
+                    </Form.Item>
+
+                    <Form.Item className="filter">
+                        Filter by record type:
+                        <br/>
+                        <Select
+                            mode="multiple"
+                            size="large"
+                            value={this.state.selectedTypes}
+                            onChange={values => this.setState({selectedTypes: values})}
+                            maxTagCount={1}
+                            placeholder="Matching all types">
+                            {RecordTypeOptions}
+                        </Select>
                     </Form.Item>
 
                     <Form.Item className="filter">
@@ -114,6 +133,7 @@ export default class RecordSearchPage extends RecordBasePage<State> {
 
     componentDidMount() {
         super.componentDidMount();
+        this.setPageTitle("Record search");
         if (this.state.recordName || this.state.selectedRegion)
             this.doSearch();
     }
@@ -129,7 +149,9 @@ export default class RecordSearchPage extends RecordBasePage<State> {
             place: this.state.selectedRegion,
             name: this.state.recordName,
             fromDate: toIsoDate(this.state.selectedRange?.earliest),
-            toDate: toIsoDate(this.state.selectedRange?.latest)
+            toDate: toIsoDate(this.state.selectedRange?.latest),
+            type: this.state.selectedTypes,
+            onlyParents: true
         };
         asyncLoadData(options, this.recordLoader.loadRecordSets, recordSets => this.setState({recordSets}));
         updatePageHash(recordSearchToHash(options));
@@ -171,6 +193,7 @@ function optionsToState(options: RecordSetOptions): OptionsState {
         recordName: options.name,
         selectedRange: dateRange,
         selectedRangeName: parseRangeName(dateRange),
+        selectedTypes: options.type || []
     };
 }
 
@@ -189,3 +212,7 @@ function parseRangeName(range: DateRange): string[] {
     const fromCentury = fromYear - (fromYear % 100);
     return [fromCentury + "-" + (fromCentury + 100), fromYear + "-" + toYear];
 }
+
+const RecordTypeOptions: ReadonlyArray<React.ReactNode> = recordTypes(false)
+    .sort()
+    .map(type => <Option key={type} value={type}>{recordTypeName(type)}</Option>);

@@ -2,11 +2,11 @@ package net.ramify.model.record.xml.collection;
 
 import com.google.common.base.MoreObjects;
 import net.ramify.model.date.DateRange;
-import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.RecordSetReference;
+import net.ramify.model.record.collection.RecordSetType;
 import net.ramify.model.record.proto.RecordProto;
 
 import javax.annotation.CheckForNull;
@@ -20,7 +20,7 @@ public class DefaultRecordSet implements RecordSet {
 
     private final RecordSetId id;
     private final RecordProto.SourceType source;
-    private final EventProto.RecordType type;
+    private final RecordSetType type;
     private final DateRange date;
     private final PlaceId creatorPlaceId;
     private final PlaceId coversPlaceId;
@@ -35,7 +35,7 @@ public class DefaultRecordSet implements RecordSet {
     DefaultRecordSet(
             final RecordSetId id,
             final RecordProto.SourceType source,
-            final EventProto.RecordType type,
+            final RecordSetType type,
             final DateRange date,
             final String longTitle,
             final PlaceId creatorPlaceId,
@@ -127,10 +127,15 @@ public class DefaultRecordSet implements RecordSet {
 
     @Nonnull
     @Override
+    public RecordSetType type() {
+        return type;
+    }
+
+    @Nonnull
+    @Override
     public RecordProto.RecordSet.Builder toProtoBuilder() {
         return RecordSet.super.toProtoBuilder()
                 .setShortTitle(MoreObjects.firstNonNull(shortTitle, ""))
-                .setType(type)
                 .setSource(source);
     }
 

@@ -74,6 +74,12 @@ public abstract class DelegatedRecordSet implements RecordSet {
         return delegate.numIndividuals();
     }
 
+    @Override
+    @Nonnull
+    public RecordSetType type() {
+        return delegate.type();
+    }
+
     @Nonnull
     @Override
     public RecordProto.RecordSet.Builder toProtoBuilder() {

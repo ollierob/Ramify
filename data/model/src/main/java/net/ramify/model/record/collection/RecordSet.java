@@ -48,6 +48,9 @@ public interface RecordSet extends HasTitleDescription, HasRecordSet, HasDate, H
     int numIndividuals();
 
     @Nonnull
+    RecordSetType type();
+
+    @Nonnull
     default RecordProto.RecordSet.Builder toProtoBuilder() {
         final var builder = RecordProto.RecordSet.newBuilder()
                 .setId(this.recordSetId().value())
@@ -55,6 +58,7 @@ public interface RecordSet extends HasTitleDescription, HasRecordSet, HasDate, H
                 .setDescription(MoreObjects.firstNonNull(this.description(), ""))
                 .setNumRecords(this.numRecords())
                 .setNumIndividuals(this.numIndividuals())
+                .setType(this.type().toProto())
                 .addAllExternalReference(Iterables.transform(this.references(), RecordSetReference::toProto));
         Consumers.ifNonNull(this.createdBy(), place -> builder.setCreatorPlaceId(place.value()));
         Consumers.ifNonNull(this.date(), date -> builder.setDate(date.toProto()));

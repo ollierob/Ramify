@@ -15,10 +15,10 @@ import java.util.Collections;
 import java.util.List;
 
 @XmlRootElement(namespace = XmlRecord.NAMESPACE, name = "memorialInscriptions")
-public class XmlMemorialInscriptions extends XmlRecords {
+public class XmlMemorialInscriptionRecords extends XmlRecords {
 
     @XmlElementRef
-    private List<XmlMemorialInscription> inscriptions;
+    private List<XmlMemorialInscriptionRecord> inscriptions;
 
     @Override
     public int numRecords() {
@@ -27,7 +27,7 @@ public class XmlMemorialInscriptions extends XmlRecords {
 
     @Override
     public int numIndividuals() {
-        return inscriptions == null ? 0 : inscriptions.stream().mapToInt(XmlMemorialInscription::numIndividuals).sum();
+        return inscriptions == null ? 0 : inscriptions.stream().mapToInt(XmlMemorialInscriptionRecord::numIndividuals).sum();
     }
 
     @Nonnull

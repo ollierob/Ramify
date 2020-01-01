@@ -2,14 +2,15 @@ package net.ramify.model.record.civil.uk;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.ExactDate;
-import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.FamilyBuilder;
 import net.ramify.model.family.SinglePersonFamily;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.record.RecordId;
+import net.ramify.model.record.RecordSetTypes;
 import net.ramify.model.record.civil.AbstractCivilRecord;
 import net.ramify.model.record.collection.RecordSet;
+import net.ramify.model.record.collection.RecordSetType;
 import net.ramify.model.record.type.DeathRecord;
 
 import javax.annotation.CheckForNull;
@@ -57,8 +58,8 @@ public class GeneralRegisterDeath extends AbstractCivilRecord implements General
     }
 
     @Override
-    protected EventProto.RecordType protoType() {
-        return EventProto.RecordType.DEATH;
+    public RecordSetType type() {
+        return RecordSetTypes.DEATH;
     }
 
 }

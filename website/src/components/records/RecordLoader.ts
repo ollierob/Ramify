@@ -16,6 +16,7 @@ import {protoGet, protoPost} from "../fetch/ProtoFetch";
 import {RecordSetId, sortRecordSetByDateThenTitle} from "./RecordSet";
 import {buildFamilyRecords, FamilyRecord} from "../../pages/records/set/family/FamilyRecord";
 import {DateRange} from "../date/DateRange";
+import {RecordType} from "./RecordType";
 
 export interface RecordLoader {
 
@@ -38,7 +39,7 @@ export interface RecordLoader {
 }
 
 type RecordOptions = {start?: number, limit?: number, children?: boolean}
-export type RecordSetOptions = {name?: string, place?: PlaceId, limit?: number, fromDate?: string, toDate?: string, onlyParents?: boolean}
+export type RecordSetOptions = {name?: string, place?: PlaceId, limit?: number, fromDate?: string, toDate?: string, onlyParents?: boolean, type?: RecordType[]}
 export type EnrichedIndividualRecord = IndividualRecord.AsObject & {recordSet: RecordSet.AsObject};
 
 class ProtoRecordLoader implements RecordLoader {

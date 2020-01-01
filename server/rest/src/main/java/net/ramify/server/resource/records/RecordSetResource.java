@@ -6,6 +6,7 @@ import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.collection.RecordSetHierarchy;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.collection.RecordSetRelatives;
+import net.ramify.model.record.collection.RecordSetType;
 import net.ramify.model.record.collection.RecordSets;
 import net.ramify.server.resource.Resource;
 
@@ -19,6 +20,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import java.time.LocalDate;
+import java.util.Set;
 
 import static net.ramify.server.resource.Resource.APPLICATION_PROTOBUF;
 
@@ -33,6 +35,7 @@ public interface RecordSetResource extends Resource {
             @QueryParam("fromDate") LocalDate fromDate,
             @QueryParam("toDate") LocalDate toDate,
             @QueryParam("onlyParents") @DefaultValue("false") boolean onlyParents,
+            @QueryParam("type") Set<RecordSetType> types,
             @QueryParam("limit") @DefaultValue("20") int limit);
 
     @CheckForNull

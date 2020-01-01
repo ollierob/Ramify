@@ -38,3 +38,8 @@
 .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-thead > tr > th {
     padding: 16px 8px !important;
 }
+
+.ant-select-selection__choice__remove {
+    font-size: 14px;
+    top: calc(50% - 5px);
+}

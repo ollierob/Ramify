@@ -7,7 +7,7 @@ import net.ramify.model.record.xml.record.birth.XmlBaptismRecords;
 import net.ramify.model.record.xml.record.birth.XmlBirthRecords;
 import net.ramify.model.record.xml.record.census.XmlCensusRecords;
 import net.ramify.model.record.xml.record.death.XmlBurialRecords;
-import net.ramify.model.record.xml.record.death.XmlMemorialInscriptions;
+import net.ramify.model.record.xml.record.death.XmlMemorialInscriptionRecords;
 import net.ramify.model.record.xml.record.marriage.XmlMarriageRecords;
 import net.ramify.model.record.xml.record.mention.XmlMentionRecords;
 import net.ramify.model.record.xml.record.property.XmlPropertyTransactionRecords;
@@ -23,7 +23,7 @@ import java.util.Collection;
         XmlMarriageRecords.class,
         XmlMentionRecords.class, XmlResidenceRecords.class, XmlPropertyTransactionRecords.class,
         XmlCensusRecords.class,
-        XmlBurialRecords.class, XmlMemorialInscriptions.class,
+        XmlBurialRecords.class, XmlMemorialInscriptionRecords.class,
         XmlProbateRecords.class
 })
 public abstract class XmlRecords {

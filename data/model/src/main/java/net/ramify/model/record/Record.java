@@ -8,6 +8,7 @@ import net.ramify.model.family.Family;
 import net.ramify.model.family.collection.HasFamilies;
 import net.ramify.model.place.HasPlace;
 import net.ramify.model.record.collection.HasRecordSet;
+import net.ramify.model.record.collection.RecordSetType;
 import net.ramify.model.record.proto.RecordProto;
 import net.ramify.model.record.type.RecordHandler;
 
@@ -15,6 +16,11 @@ import javax.annotation.Nonnull;
 import java.util.stream.Stream;
 
 public interface Record extends HasRecordId, HasRecordSet, HasDate, HasFamilies, Castable<Record>, BuildsProto<RecordProto.Record> {
+
+    @Nonnull
+    default RecordSetType type() {
+        return this.recordSet().type();
+    }
 
     @Nonnull
     default Stream<? extends IndividualRecord> individualRecords() {
@@ -29,6 +35,7 @@ public interface Record extends HasRecordId, HasRecordSet, HasDate, HasFamilies,
                 .setId(this.recordId().value())
                 .setDate(this.date().toProto())
                 .setRecordSetId(this.recordSetId().value())
+                .setType(this.type().toProto())
                 .addAllFamily(Iterables.transform(this.families(), Family::toProto));
         if (this instanceof HasPlace) builder.setPlace(((HasPlace) this).place().toProto(false));
         return builder;

@@ -2,9 +2,7 @@ package net.ramify.model.record;
 
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.EventBuilder;
-import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.record.collection.RecordSet;
-import net.ramify.model.record.proto.RecordProto;
 
 import javax.annotation.Nonnull;
 
@@ -41,16 +39,8 @@ public abstract class DatedRecord implements Record {
         return date;
     }
 
-    protected abstract EventProto.RecordType protoType();
-
     protected EventBuilder eventBuilder() {
         return EventBuilder.builderWithRandomId(this.date());
-    }
-
-    @Nonnull
-    @Override
-    public RecordProto.Record.Builder toProtoBuilder() {
-        return Record.super.toProtoBuilder().setType(this.protoType());
     }
 
 }

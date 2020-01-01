@@ -1,6 +1,7 @@
 package net.ramify.model.record.xml.collection;
 
-import net.ramify.model.event.proto.EventProto;
+import net.ramify.model.record.RecordSetTypes;
+import net.ramify.model.record.collection.RecordSetType;
 import net.ramify.model.record.xml.record.XmlRecord;
 
 import javax.annotation.Nonnull;
@@ -12,50 +13,52 @@ import javax.xml.bind.annotation.XmlType;
 enum XmlRecordSetType {
 
     @XmlEnumValue("birth")
-    BIRTH,
+    BIRTH(RecordSetTypes.BIRTH),
 
     @XmlEnumValue("baptism")
-    BAPTISM,
+    BAPTISM(RecordSetTypes.BAPTISM),
 
     @XmlEnumValue("marriage")
-    MARRIAGE,
+    MARRIAGE(RecordSetTypes.MARRIAGE),
 
     @XmlEnumValue("mention")
-    MENTION,
+    MENTION(RecordSetTypes.MENTION),
 
     @XmlEnumValue("census")
-    CENSUS(EventProto.RecordType.RESIDENCE),
+    CENSUS(RecordSetTypes.CENSUS),
 
     @XmlEnumValue("membership")
-    MEMBERSHIP,
+    MEMBERSHIP(RecordSetTypes.MEMBERSHIP),
 
     @XmlEnumValue("residence")
-    RESIDENCE,
+    RESIDENCE(RecordSetTypes.RESIDENCE),
 
     @XmlEnumValue("payment")
-    PAYMENT,
+    PAYMENT(RecordSetTypes.PAYMENT),
 
     @XmlEnumValue("death")
-    DEATH,
+    DEATH(RecordSetTypes.MARRIAGE),
 
     @XmlEnumValue("burial")
-    BURIAL,
+    BURIAL(RecordSetTypes.BURIAL),
+
+    @XmlEnumValue("probate")
+    PROBATE(RecordSetTypes.PROBATE),
+
+    @XmlEnumValue("will")
+    WILL(RecordSetTypes.WILL),
 
     @XmlEnumValue("mixed")
-    MIXED;
+    MIXED(RecordSetTypes.MIXED);
 
-    private final EventProto.RecordType type;
+    private final RecordSetType type;
 
-    XmlRecordSetType() {
-        this(null);
-    }
-
-    XmlRecordSetType(final EventProto.RecordType type) {
-        this.type = type == null ? EventProto.RecordType.valueOf(this.name()) : type;
+    XmlRecordSetType(final RecordSetType type) {
+        this.type = type;
     }
 
     @Nonnull
-    EventProto.RecordType type() {
+    RecordSetType type() {
         return type;
     }
 

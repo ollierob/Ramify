@@ -1,11 +1,12 @@
 package net.ramify.model.record.civil;
 
 import net.ramify.model.date.DateRange;
-import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.family.Family;
 import net.ramify.model.record.DatedRecord;
 import net.ramify.model.record.RecordId;
+import net.ramify.model.record.RecordSetTypes;
 import net.ramify.model.record.collection.RecordSet;
+import net.ramify.model.record.collection.RecordSetType;
 import net.ramify.model.record.type.LifeEventRecord;
 
 import javax.annotation.Nonnull;
@@ -25,8 +26,8 @@ public class GenericPropertyTransactionRecord extends DatedRecord implements Lif
     }
 
     @Override
-    protected EventProto.RecordType protoType() {
-        return EventProto.RecordType.TRANSACTION;
+    public RecordSetType type() {
+        return RecordSetTypes.TRANSACTION;
     }
 
     @Nonnull

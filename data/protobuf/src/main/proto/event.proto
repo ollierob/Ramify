@@ -50,14 +50,18 @@ enum RecordType {
     PROBATE = 13;
     MEMORIAL = 14;
 
-    MENTION = 20;
-    MARRIAGE = 21;
-    RESIDENCE = 22;
-    PAYMENT = 23;
-    MEMBERSHIP = 24;
-    TRANSACTION = 25;
+    MARRIAGE = 20;
+    BANNS = 21;
+    DIVORCE = 22;
 
-    HISTORIC = 98;
-    MIXED = 99;
+    RESIDENCE = 30;
+    CENSUS = 31;
+    MENTION = 32;
+    PAYMENT = 33;
+    MEMBERSHIP = 34;
+    TRANSACTION = 35;
+
+    HISTORIC = 98; //Used for historic non-personal events
+    MIXED = 99; //Registers
 
 }

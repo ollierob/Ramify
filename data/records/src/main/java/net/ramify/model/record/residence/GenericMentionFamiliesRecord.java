@@ -1,11 +1,12 @@
 package net.ramify.model.record.residence;
 
 import net.ramify.model.date.DateRange;
-import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.family.Family;
 import net.ramify.model.record.DatedRecord;
 import net.ramify.model.record.RecordId;
+import net.ramify.model.record.RecordSetTypes;
 import net.ramify.model.record.collection.RecordSet;
+import net.ramify.model.record.collection.RecordSetType;
 import net.ramify.model.record.type.MentionRecord;
 
 import javax.annotation.Nonnull;
@@ -25,8 +26,8 @@ public class GenericMentionFamiliesRecord extends DatedRecord implements Mention
     }
 
     @Override
-    protected EventProto.RecordType protoType() {
-        return EventProto.RecordType.MENTION;
+    public RecordSetType type() {
+        return RecordSetTypes.MENTION;
     }
 
     @Nonnull

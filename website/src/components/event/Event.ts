@@ -49,7 +49,6 @@ export function isDeathOrBurialEvent(event: Event.AsObject): boolean {
 export function isPostDeathEvent(event: Event.AsObject): boolean {
     switch (eventType(event)) {
         case "BURIAL":
-        case "PROBATE":
         case "WILL":
             return true;
         default:
