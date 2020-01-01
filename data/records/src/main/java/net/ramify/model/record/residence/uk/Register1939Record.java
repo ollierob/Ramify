@@ -1,5 +1,6 @@
 package net.ramify.model.record.residence.uk;
 
+import net.ramify.model.date.BeforeDate;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.event.EventId;
@@ -11,7 +12,7 @@ import net.ramify.model.family.FamilyOfUnknownRelationships;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.age.Age;
 import net.ramify.model.person.features.PersonFeature;
-import net.ramify.model.person.gender.Sex;
+import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.name.Name;
 import net.ramify.model.place.Place;
 import net.ramify.model.record.RecordId;
@@ -59,22 +60,26 @@ public class Register1939Record extends CensusRecord {
 
         private final PersonId id;
         private final Name name;
-        private final Sex gender;
+        private final Gender gender;
         private final DateRange birthDate;
         private final String occupation;
         private final EventId birthEventId, residenceEventId;
 
+        public Register1939Entry(final PersonId id) {
+            this(id, Name.UNKNOWN, Gender.UNKNOWN, BeforeDate.strictlyBefore(CENSUS_DATE), null, null, null);
+        }
+
         public Register1939Entry(
                 final PersonId id,
                 final Name name,
-                final Sex sex,
+                final Gender gender,
                 final DateRange birthDate,
                 final String occupation,
                 final EventId birthEventId,
                 final EventId residenceEventId) {
             this.id = id;
             this.name = name;
-            this.gender = sex;
+            this.gender = gender;
             this.birthDate = birthDate;
             this.occupation = occupation;
             this.birthEventId = birthEventId;
@@ -100,13 +105,13 @@ public class Register1939Record extends CensusRecord {
 
         private final Place residence;
         private final DateRange birthDate;
-        private final EventId birthEventId, residenceEventId;
+        private final EventId birthEventId, residenceEventId; //TODO use these
         private final UniqueEventMerger eventMerger;
 
         Register1939Person(
                 final PersonId id,
                 final Name name,
-                final Sex gender,
+                final Gender gender,
                 final EventId birthEventId,
                 final EventId residenceEventId,
                 final Place residence,

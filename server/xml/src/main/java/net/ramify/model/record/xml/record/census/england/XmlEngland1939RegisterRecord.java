@@ -16,12 +16,14 @@ import net.ramify.model.record.residence.CensusRecord;
 import net.ramify.model.record.residence.uk.Register1939Record;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.model.record.xml.record.XmlPersonRecord;
+import net.ramify.model.record.xml.record.XmlRecord;
 import net.ramify.model.record.xml.record.country.uk.XmlUkRecord;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 import java.util.UUID;
@@ -29,18 +31,24 @@ import java.util.UUID;
 @XmlRootElement(namespace = XmlUkRecord.NAMESPACE, name = "register1939")
 public class XmlEngland1939RegisterRecord extends XmlEnglandCensusRecord {
 
-    @XmlElement(namespace = XmlUkRecord.NAMESPACE, name = "individual")
-    private List<XmlEngland1939RegisterIndividual> individuals;
+    @XmlElements({
+            @XmlElement(namespace = XmlUkRecord.NAMESPACE, name = "individual", type = XmlEngland1939RegisterIndividual.class),
+            @XmlElement(namespace = XmlUkRecord.NAMESPACE, name = "closed", type = XmlEngland1939RegisterClosedEntry.class),
+    })
+    private List<RegisterIndividual> individuals;
 
     @Override
     protected CensusRecord build(final RecordContext context, final Place censusPlace, final RecordSet recordSet) {
-        final var place = this.place(context, censusPlace);
         return new Register1939Record(
                 this.recordId(),
                 recordSet,
-                place,
-                Lists.eagerlyTransform(individuals, i -> i.toEntry(context)),
+                this.place(context, censusPlace),
+                this.entries(context),
                 context.uniqueEventMerger());
+    }
+
+    private List<Register1939Record.Register1939Entry> entries(final RecordContext context) {
+        return Lists.eagerlyTransform(individuals, i -> i.toEntry(context));
     }
 
     @Override
@@ -48,8 +56,15 @@ public class XmlEngland1939RegisterRecord extends XmlEnglandCensusRecord {
         return individuals == null ? 0 : individuals.size();
     }
 
+    @XmlTransient
+    private interface RegisterIndividual {
+
+        Register1939Record.Register1939Entry toEntry(RecordContext context);
+
+    }
+
     @XmlType(namespace = XmlUkRecord.NAMESPACE)
-    public static class XmlEngland1939RegisterIndividual extends XmlPersonRecord {
+    public static class XmlEngland1939RegisterIndividual extends XmlPersonRecord implements RegisterIndividual {
 
         @XmlAttribute(name = "birthEventId")
         private String birthEventId = UUID.randomUUID().toString();
@@ -78,15 +93,34 @@ public class XmlEngland1939RegisterRecord extends XmlEnglandCensusRecord {
             return EventBuilder.builderWithRandomId(birthDate).toBirth(personId);
         }
 
-        Register1939Record.Register1939Entry toEntry(final RecordContext context) {
+        @Override
+        public Register1939Record.Register1939Entry toEntry(final RecordContext context) {
             return new Register1939Record.Register1939Entry(
                     this.personId(),
                     this.name(context.nameParser()),
-                    this.sex(),
+                    this.gender(),
                     this.birthDate(context),
                     this.occupation(),
                     new EventId(birthEventId),
                     new EventId(residenceEventId));
+        }
+
+    }
+
+    @XmlType(namespace = XmlUkRecord.NAMESPACE)
+    public static class XmlEngland1939RegisterClosedEntry extends XmlRecord implements RegisterIndividual {
+
+        @XmlAttribute(name = "personId")
+        private String personId = UUID.randomUUID().toString();
+
+        @Override
+        public Register1939Record.Register1939Entry toEntry(RecordContext context) {
+            return new Register1939Record.Register1939Entry(new PersonId(personId));
+        }
+
+        @Override
+        public int numIndividuals() {
+            return 1;
         }
 
     }

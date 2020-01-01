@@ -15,6 +15,7 @@ import net.ramify.model.person.xml.feature.XmlPersonFeature;
 import net.ramify.model.person.xml.name.XmlName;
 import net.ramify.model.record.xml.RecordContext;
 import net.ramify.utils.collections.SetUtils;
+import net.ramify.utils.objects.Functions;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -64,8 +65,9 @@ public class XmlPersonRecord extends XmlRecord {
         return Name.UNKNOWN;
     }
 
+    @Nonnull
     protected Gender gender() {
-        return gender.gender();
+        return Functions.ifNonNull(gender, XmlGender::gender, Gender.UNKNOWN);
     }
 
     protected Sex sex() {
