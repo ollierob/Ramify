@@ -1,0 +1,7 @@
+.recordSet .references, .recordSet .description, .recordSet .recordCardsCollapse {
+    margin-bottom: 16px;
+}
+
+.recordSet .recordCardsCollapse .ant-collapse-content > .ant-collapse-content-box {
+    padding: 12px;
+}

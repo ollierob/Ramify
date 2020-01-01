@@ -47,19 +47,14 @@ export class RecordSetChildCollapseCards extends React.PureComponent<Props, Stat
 
     render() {
 
-        const records = this.state.filtered;
-
         const hide = (!this.props.records || !this.props.records.length) && !this.props.loading;
 
         return <Collapse
+            className="recordCardsCollapse"
             defaultActiveKey={this.props.records?.length <= 3 ? "records" : []}
             style={hide ? {display: "none"} : null}>
 
-            <Panel
-                key="records"
-                header="Child records"
-                className={"recordCards" + (this.props.fixedWidth ? " fixedWidth" : "")}
-                style={this.props.style}>
+            <Panel key="records" header="Child records">
 
                 {this.props.records?.length >= 10 && this.filterInput()}
 

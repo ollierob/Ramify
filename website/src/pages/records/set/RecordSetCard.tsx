@@ -1,5 +1,4 @@
 import * as React from "react";
-import {CSSProperties} from "react";
 import {ExternalRecordReference, RecordSet, RecordSetRelatives} from "../../../protobuf/generated/record_pb";
 import {Card, Icon} from "antd";
 import {RecordBrowser} from "./RecordBrowser";
@@ -13,6 +12,7 @@ import {joinComponents} from "../../../components/Components";
 import {PlaceBundle} from "../../../protobuf/generated/place_pb";
 import {PlaceLink} from "../../../components/places/PlaceLink";
 import {RecordSetChildCollapseCards} from "../../../components/records/RecordSetChildCollapseCards";
+import "./RecordSetCard.css";
 
 type Props = RecordPaginationHandler & RouteComponentProps<any> & {
     loading: boolean;
@@ -51,7 +51,6 @@ export default class RecordSetCard extends React.PureComponent<Props> {
                 fixedWidth={this.useFixedWidthCards()}
                 shortTitle
                 records={relatives.childList}
-                style={MarginBottom}
                 ignoreNone/>
 
             <RecordBrowser
@@ -91,7 +90,7 @@ function prefixWithRecords(title: string) {
 const Description = (props: {record: RecordSet.AsObject}) => {
     const description = props.record.description;
     if (!description) return null;
-    return <div className="description" style={MarginBottom}>
+    return <div className="description">
         {description}
     </div>;
 };
@@ -99,7 +98,7 @@ const Description = (props: {record: RecordSet.AsObject}) => {
 const Creator = (props: {place: AsyncData<Readonly<PlaceBundle.AsObject>>}) => {
     const place = props.place;
     if (!place.data && !place.loading) return null;
-    return <div className="relationship place" style={MarginBottom}>
+    return <div className="relationship place">
         <Icon type="edit"/> These records were created by <PlaceLink place={place.data && place.data.place} loading={place.loading} showType/>
     </div>;
 };
@@ -108,7 +107,7 @@ const References = (props: {references: ReadonlyArray<ExternalRecordReference.As
     const references = props.references;
     if (!references || !references.length) return null;
     const archiveGroupings = stringMultimap(references, ref => ref.archive.id);
-    return <div className="references" style={MarginBottom}>
+    return <div className="references">
         <Icon type="book"/> These records are held
         {" "}
         {joinComponents(Object.values(archiveGroupings).map(refs => <>
@@ -116,5 +115,3 @@ const References = (props: {references: ReadonlyArray<ExternalRecordReference.As
         </>), " and ")}
     </div>;
 };
-
-const MarginBottom: CSSProperties = {marginBottom: 16};
