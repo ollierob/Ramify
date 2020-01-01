@@ -6,7 +6,7 @@ import RecordImageGallery from "./RecordImageGallery";
 import FamilyRecordTable from "./family/FamilyRecordTable";
 import IndividualRecordTable from "./individual/IndividualRecordTable";
 import {readPageHash, updatePageHash} from "../../../components/Page";
-import {ImageIcon, PeopleIcon, PersonIcon} from "../../../components/images/Icons";
+import {ImageIcon, PeopleIcon, PersonIcon, StatisticsIcon} from "../../../components/images/Icons";
 
 type Props = RecordPaginationHandler & {
     recordSet: RecordSet.AsObject;
@@ -17,7 +17,7 @@ type State = {
     activeTab?: ActiveTab;
 }
 
-type ActiveTab = "families" | "individuals" | "images"
+type ActiveTab = "families" | "individuals" | "images" | "statistics"
 
 export class RecordBrowser extends React.PureComponent<Props, State> {
 
@@ -33,6 +33,7 @@ export class RecordBrowser extends React.PureComponent<Props, State> {
             case "families":
             case "individuals":
             case "images":
+            case "statistics":
                 return active;
             default:
                 return null;
@@ -64,6 +65,11 @@ export class RecordBrowser extends React.PureComponent<Props, State> {
                 tab={<><ImageIcon/> Image browser</>}>
                 <RecordImageGallery {...this.props}/>
             </Tabs.TabPane>
+
+            <Tabs.TabPane
+                key="statistics"
+                tab={<><StatisticsIcon/> Statistics</>}
+                disabled/>
 
         </Tabs>;
 

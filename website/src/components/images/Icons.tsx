@@ -19,6 +19,7 @@ export const LoadingIcon = (props: IconProps) => <Icon type="loading" {...props}
 export const ViewIcon = (props: IconProps) => <Icon type="eye" {...props}/>;
 export const FilterIcon = (props: IconProps) => <Icon type="filter" {...props}/>;
 export const ImageIcon = (props: IconProps) => <Icon type="file-image" {...props}/>;
+export const StatisticsIcon = (props: IconProps) => <Icon type="experiment" {...props}/>;
 
 export const PrevIcon = (props: IconProps) => <Icon type="left-square" {...props}/>;
 export const NextIcon = (props: IconProps) => <Icon type="right-square" {...props}/>;
