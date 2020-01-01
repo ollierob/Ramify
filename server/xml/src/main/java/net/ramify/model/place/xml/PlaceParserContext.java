@@ -20,12 +20,12 @@ public class PlaceParserContext extends ParserContext {
             final CountryIso iso,
             final PlaceProvider places) {
         super(nameParser, dateParser);
-        this.iso = iso.withoutSubdivision();
+        this.iso = iso;
         this.places = places;
     }
 
-    public CountryIso countryIso() {
-        return iso;
+    public CountryIso countryIso(final boolean includeSubdivision) {
+        return includeSubdivision ? iso : iso.withoutSubdivision();
     }
 
     public PlaceProvider places() {

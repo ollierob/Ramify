@@ -20,7 +20,7 @@ public class PlaceId extends Id implements HasPlaceId {
     }
 
     public PlaceId(final CountryIso iso, final Class<? extends Place> type, final String name) {
-        super(iso + ":" + name + ":" + type.getSimpleName().toLowerCase());
+        super(iso.withoutSubdivision() + ":" + name + ":" + type.getSimpleName().toLowerCase());
         this.iso = iso;
     }
 

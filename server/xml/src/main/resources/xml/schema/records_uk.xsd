@@ -189,7 +189,13 @@
                 
         <xs:sequence>
                     
-          <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="individual" type="tns:xmlEngland1939RegisterIndividual"/>
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        
+            <xs:element form="qualified" name="individual" type="tns:xmlEngland1939RegisterIndividual"/>
+                        
+            <xs:element form="qualified" name="closed" type="tns:xmlEngland1939RegisterClosedEntry"/>
+                      
+          </xs:choice>
                   
         </xs:sequence>
               
@@ -220,6 +226,22 @@
         <xs:attribute name="birthEventId" type="xs:string"/>
                 
         <xs:attribute name="residenceEventId" type="xs:string"/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlEngland1939RegisterClosedEntry">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="ns1:xmlRecord">
+                
+        <xs:sequence/>
+                
+        <xs:attribute name="personId" type="xs:string"/>
               
       </xs:extension>
           

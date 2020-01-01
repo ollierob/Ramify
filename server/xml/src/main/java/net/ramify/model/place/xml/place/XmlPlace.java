@@ -69,7 +69,7 @@ public abstract class XmlPlace {
 
     @Nonnull
     public PlaceId placeId(final PlaceParserContext context) {
-        return this.placeId(context.countryIso());
+        return this.placeId(context.countryIso(false));
     }
 
     @Nonnull
@@ -90,7 +90,7 @@ public abstract class XmlPlace {
 
     public Set<Place> places(final PlaceParserContext context) {
         final var places = Sets.<Place>newHashSet();
-        final var id = this.placeId(context.countryIso());
+        final var id = this.placeId(context.countryIso(false));
         final var parent = this.parent(id, context.places());
         this.addPlaces(parent, places::add, context);
         return places;
@@ -112,7 +112,7 @@ public abstract class XmlPlace {
     }
 
     private Place toPlace(final Place parent, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
-        final var placeId = this.placeId(context.countryIso());
+        final var placeId = this.placeId(context.countryIso(false));
         return isBlank(name)
                 ? context.places().require(placeId)
                 : this.toPlace(parent, this.placeGroupId(placeId), this.history(context), context);

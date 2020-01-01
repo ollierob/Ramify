@@ -391,6 +391,8 @@
                 
         <xs:element ref="ns2:civilParish"/>
                 
+        <xs:element ref="ns2:countyBorough"/>
+                
         <xs:element ref="ns2:metropolitanBorough"/>
                 
         <xs:element ref="ns2:municipalBorough"/>
