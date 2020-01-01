@@ -98,6 +98,8 @@ enum SourceType {
     GOVERNMENT_SOURCE = 0;
     CHURCH_SOURCE = 1;
     MANOR_SOURCE = 2;
+    CORPORATE_SOURCE = 3;
+    INDIVIDUAL_SOURCE = 4;
 
 }
 
