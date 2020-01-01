@@ -1,6 +1,6 @@
 import {Date as DateProto, DateRange as DateRangeProto} from "../../protobuf/generated/date_pb";
 import {DateFormatter, DayMonthYearFormatter, MonthYearFormatter, YearFormatter} from "./DateFormatter";
-import {datesToRange, earliestYear, isStartOfYear, isWholeYear, latestYear} from "./DateRange";
+import {addYear, datesToRange, earliestYear, isStartOfYear, isWholeYear, isWholeYearRange, latestYear} from "./DateRange";
 
 type FormatType = "year" | "month" | "day";
 
@@ -85,7 +85,10 @@ export function formatDateRange(r: DateRangeProto.AsObject, type: FormatType | D
     const approx = r.approximate ? words.approximate : "";
     if (!r.earliest) return words.before + approx + format.formatDate(r.latest);
     if (!r.latest) return words.after + approx + format.formatDate(r.earliest);
-    if (isWholeYear(r)) return words.in + approx + r.earliest.year;
+
+    if (isWholeYear(r)) return words.in + approx + YearFormatter.formatDate(r.earliest);
+    if (isWholeYearRange(r)) return words.between + approx + YearFormatter.formatRange(r.earliest, addYear(r.latest));
+
     switch (type) {
         case "day":
             if (isoDate(r.earliest) == isoDate(r.latest)) return words.on + approx + format.formatDate(r.earliest);

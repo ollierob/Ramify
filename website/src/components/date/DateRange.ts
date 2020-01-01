@@ -73,10 +73,12 @@ export function isEndOfYear(d: DateProto.AsObject) {
 }
 
 export function isWholeYear(r: DateRangeProto.AsObject) {
+    return isWholeYearRange(r) && r.earliest.year == r.latest.year;
+}
+
+export function isWholeYearRange(r: DateRangeProto.AsObject) {
     return !!r
-        && r.earliest
-        && r.latest
-        && r.earliest.year == r.latest.year
+        && r.earliest && r.latest
         && isStartOfYear(r.earliest)
         && isEndOfYear(r.latest);
 }
@@ -95,4 +97,9 @@ export function isExactRange(d: DateRangeProto.AsObject) {
 
 export function yearsToDateRange(fromYear: number, toYear: number): DateRangeProto.AsObject {
     return {approximate: false, earliest: atStartOfYear(fromYear), latest: atEndOfYear(toYear)};
+}
+
+export function addYear(d: DateProto.AsObject, years: number = 1): DateProto.AsObject {
+    if (!d || !years) return d;
+    return {...d, year: d.year + years};
 }
