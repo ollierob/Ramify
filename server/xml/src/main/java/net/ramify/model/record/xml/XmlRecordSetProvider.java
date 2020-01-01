@@ -52,7 +52,10 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
 
     @Nonnull
     @Override
-    public Set<RecordSet> matching(final Predicate<? super RecordSet> predicate, final int limit, final boolean onlyParents) {
+    public Set<RecordSet> matching(
+            final Predicate<? super RecordSet> predicate,
+            final int limit,
+            final boolean onlyParents) {
 
         final var keys = this.keys();
 
@@ -66,13 +69,12 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
 
         for (final var key : keys) {
 
+            if (matching.containsKey(key)) continue;
             final var record = this.get(key);
-            if (record == null) continue;
-            if (!predicate.test(record)) continue;
-            if (relatives.containsAnyParent(matching.keySet(), record.recordSetId())) continue;
+            if (record == null || !predicate.test(record)) continue;
 
-            matching.put(record.recordSetId(), record);
-            relatives.descendants(record).forEach(descendant -> matching.remove(descendant.recordSetId()));
+            final var match = this.highestMatchingParent(record, predicate);
+            matching.put(match.recordSetId(), match);
 
             if (matching.size() >= limit) break;
 
@@ -80,6 +82,19 @@ class XmlRecordSetProvider extends AbstractMappedProvider<RecordSetId, RecordSet
 
         return Sets.newHashSet(matching.values());
 
+    }
+
+    @Nonnull
+    RecordSet highestMatchingParent(RecordSet recordSet, final Predicate<? super RecordSet> predicate) {
+        var childId = recordSet.recordSetId();
+        RecordSetId parentId;
+        while ((parentId = relatives.parentId(childId)) != null) {
+            final var candidate = this.get(parentId);
+            if (!predicate.test(candidate)) break;
+            recordSet = candidate;
+            childId = parentId;
+        }
+        return recordSet;
     }
 
     Map<RecordSetId, File> recordSetFiles() {

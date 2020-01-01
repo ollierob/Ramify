@@ -51,6 +51,7 @@ public class DefaultRecordSetResource implements RecordSetResource {
             final LocalDate toDate,
             final boolean onlyParents,
             final int limit) {
+
         Predicate<RecordSet> predicate = r -> true;
         if (name != null) {
             final var l = name.toLowerCase();
@@ -64,7 +65,9 @@ public class DefaultRecordSetResource implements RecordSetResource {
         if (dateRange != null) {
             predicate = predicate.and(r -> dateRange.intersects(r.date()));
         }
+
         return RecordSets.of(recordSets.matching(predicate, limit, onlyParents));
+
     }
 
     private boolean isCovered(final RecordSet recordSet, final Place place) {
