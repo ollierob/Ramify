@@ -6,14 +6,11 @@ import javax.annotation.Nonnull;
 import java.util.Objects;
 import java.util.Set;
 
-public class ChangedName implements Name {
+public record ChangedName(Name before, Name after) implements Name {
 
-    private final Name before;
-    private final Name after;
-
-    public ChangedName(@Nonnull final Name before, @Nonnull final Name after) {
-        this.before = Objects.requireNonNull(before);
-        this.after = Objects.requireNonNull(after);
+    public ChangedName {
+        Objects.requireNonNull(before, "before");
+        Objects.requireNonNull(after, "after");
     }
 
     public Name before() {

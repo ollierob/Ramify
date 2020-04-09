@@ -16,7 +16,7 @@ public interface Gender {
     }
 
     default Gender inverse() {
-        return this instanceof Sex ? ((Sex) this).inverse() : this;
+        return this;
     }
 
     default boolean isUnknown() {

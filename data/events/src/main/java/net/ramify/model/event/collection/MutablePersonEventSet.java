@@ -135,8 +135,8 @@ public class MutablePersonEventSet extends HashSet<PersonEvent> implements Perso
         }
 
         private boolean add(final PersonEvent event) {
-            return event instanceof UniqueEvent
-                    ? this.addUnique((UniqueEvent) event)
+            return event instanceof UniqueEvent unique
+                    ? this.addUnique(unique)
                     : addToSet(event);
         }
 

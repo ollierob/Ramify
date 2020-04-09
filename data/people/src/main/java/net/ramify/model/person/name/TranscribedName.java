@@ -5,29 +5,12 @@ import com.google.common.collect.ImmutableSet;
 import javax.annotation.Nonnull;
 import java.util.Set;
 
-public class TranscribedName implements Name {
-
-    private final String original;
-    private final Name assumed;
-
-    public TranscribedName(final String original, final Name assumed) {
-        this.original = original;
-        this.assumed = assumed;
-    }
+public record TranscribedName(String original, Name assumed) implements Name {
 
     @Nonnull
     @Override
     public String value() {
         return assumed.value();
-    }
-
-    public String original() {
-        return original;
-    }
-
-    @Nonnull
-    public Name assumed() {
-        return assumed;
     }
 
     @Override
