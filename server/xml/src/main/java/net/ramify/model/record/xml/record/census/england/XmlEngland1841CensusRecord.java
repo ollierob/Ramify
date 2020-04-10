@@ -31,7 +31,7 @@ public class XmlEngland1841CensusRecord extends XmlEnglandCensusRecord {
         return new Census1841Record(id, recordSet, place, entries, context.uniqueEventMerger());
     }
 
-    List<Census1841Record.Census1841Entry> entries(final RecordContext context, final Place censusPlace) {
+    List<Census1841Record.Record> entries(final RecordContext context, final Place censusPlace) {
         return ListUtils.eagerlyTransform(individuals, entry -> entry.build(context, censusPlace));
     }
 
@@ -47,8 +47,8 @@ public class XmlEngland1841CensusRecord extends XmlEnglandCensusRecord {
         private Boolean bornInCounty;
 
         @Nonnull
-        Census1841Record.Census1841Entry build(final RecordContext context, final Place censusPlace) {
-            return new Census1841Record.Census1841Entry(
+        Census1841Record.Record build(final RecordContext context, final Place censusPlace) {
+            return new Census1841Record.Record(
                     this.personId(),
                     this.name(context.nameParser()),
                     this.age(),

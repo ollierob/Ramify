@@ -32,14 +32,14 @@ public class Census1841Record extends CensusRecord implements HasPlace {
 
     public static final ExactDate CENSUS_DATE = ExactDate.on(1841, Month.JUNE, 6);
 
-    private final List<Census1841Entry> entries;
+    private final List<Record> entries;
     private final UniqueEventMerger eventMerger;
 
     public Census1841Record(
             final RecordId id,
             final RecordSet recordSet,
             final Place place,
-            final List<Census1841Entry> entries,
+            final List<Record> entries,
             final UniqueEventMerger eventMerger) {
         super(id, recordSet, CENSUS_DATE, place);
         this.entries = entries;
@@ -77,23 +77,7 @@ public class Census1841Record extends CensusRecord implements HasPlace {
         return Age.betweenExclusive(years, years + 5);
     }
 
-    public static class Census1841Entry {
-
-        private final PersonId id;
-        private final Name name;
-        private final Age age;
-        private final Gender gender;
-        private final String occupation;
-        private final Place birthPlace;
-
-        public Census1841Entry(final PersonId id, final Name name, final Age age, final Gender gender, final String occupation, final Place birthPlace) {
-            this.id = id;
-            this.name = name;
-            this.age = age;
-            this.gender = gender;
-            this.occupation = occupation;
-            this.birthPlace = birthPlace;
-        }
+    public record Record(PersonId id, Name name, Age age, Gender gender, String occupation, Place birthPlace) {
 
         Census1841Person build(final Census1841Record record) {
             return new Census1841Person(id, name, gender, record.place(), record.inferBirthDate(age), birthPlace, age, occupation, record.eventMerger);

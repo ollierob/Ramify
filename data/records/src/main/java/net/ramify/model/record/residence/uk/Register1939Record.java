@@ -56,34 +56,17 @@ public class Register1939Record extends CensusRecord {
         return new FamilyOfUnknownRelationships(this.people());
     }
 
-    public static class Register1939Entry {
-
-        private final PersonId id;
-        private final Name name;
-        private final Gender gender;
-        private final DateRange birthDate;
-        private final String occupation;
-        private final EventId birthEventId, residenceEventId;
+    public record Register1939Entry(
+            PersonId id,
+            Name name,
+            Gender gender,
+            DateRange birthDate,
+            String occupation,
+            EventId birthEventId,
+            EventId residenceEventId) {
 
         public Register1939Entry(final PersonId id) {
             this(id, Name.UNKNOWN, Gender.UNKNOWN, BeforeDate.strictlyBefore(CENSUS_DATE), null, null, null);
-        }
-
-        public Register1939Entry(
-                final PersonId id,
-                final Name name,
-                final Gender gender,
-                final DateRange birthDate,
-                final String occupation,
-                final EventId birthEventId,
-                final EventId residenceEventId) {
-            this.id = id;
-            this.name = name;
-            this.gender = gender;
-            this.birthDate = birthDate;
-            this.occupation = occupation;
-            this.birthEventId = birthEventId;
-            this.residenceEventId = residenceEventId;
         }
 
         Register1939Person build(final Register1939Record record) {
