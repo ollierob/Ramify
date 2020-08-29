@@ -1,4 +1,5 @@
 .idea/*
+*.iml
 **/*.pbf
 
 **/node_modules/*
