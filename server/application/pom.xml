@@ -12,10 +12,6 @@
 
     <artifactId>application</artifactId>
 
-    <properties>
-        <jetty.version>9.4.24.v20191120</jetty.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -64,7 +60,7 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-servlet</artifactId>
-            <version>${jetty.version}</version>
+            <version>9.4.32.v20200930</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
