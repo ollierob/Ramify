@@ -4,7 +4,7 @@ type QueryableType = string | number | boolean;
 
 export type QueryMap = StringMap<QueryableType> & {base: string}
 
-export function updatePageHash(delta: StringMap, current: StringMap = readPageHash(), update: (hash: string) => void = setPageHashString): void {
+export function updatePageHash(delta: StringMap<any>, current: StringMap = readPageHash(), update: (hash: string) => void = setPageHashString): void {
     const total: QueryMap = {...current, ...delta, base: delta.base || readPageBase()};
     Object.keys(delta).filter(k => k != "base").forEach(key => {
         const n = delta[key];
