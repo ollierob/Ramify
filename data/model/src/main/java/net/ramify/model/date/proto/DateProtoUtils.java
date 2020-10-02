@@ -8,7 +8,7 @@ public class DateProtoUtils {
 
     @Nonnull
     public static DateProto.Date toProto(final ChronoLocalDate date) {
-        if (date instanceof LocalDate localDate) return toProto(localDate);
+        if (date instanceof LocalDate) return toProto((LocalDate) date);
         throw new UnsupportedOperationException();
     }
 

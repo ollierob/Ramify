@@ -27,8 +27,8 @@ public abstract class Id {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null) return false;
-        return o instanceof Id id
-                && this.equals(id);
+        return o instanceof Id
+                && this.equals((Id) o);
     }
 
     protected boolean equals(@Nonnull final Id that) {

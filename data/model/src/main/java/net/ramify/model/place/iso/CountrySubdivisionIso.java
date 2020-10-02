@@ -6,7 +6,7 @@ public class CountrySubdivisionIso extends CountryIso {
 
     public static CountrySubdivisionIso valueOf(final String iso) {
         final var country = CountryIso.valueOf(iso);
-        return country instanceof CountrySubdivisionIso subdiv ? subdiv : null;
+        return country instanceof CountrySubdivisionIso ? (CountrySubdivisionIso) country : null;
     }
 
     private final String country;

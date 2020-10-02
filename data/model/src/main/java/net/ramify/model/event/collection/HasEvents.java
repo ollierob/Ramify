@@ -55,7 +55,9 @@ public interface HasEvents extends HasPlaces {
     default Set<? extends Place> places() {
         final var places = Sets.<Place>newHashSet();
         this.events().forEach(event -> {
-            if (event instanceof HasPlace place) places.add(place.place());
+            if (event instanceof HasPlace) {
+                places.add(((HasPlace) event).place());
+            }
         });
         return places;
     }
