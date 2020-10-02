@@ -12,6 +12,10 @@ class EmptyPersonEventSet extends AbstractSet<PersonEvent> implements PersonEven
 
     static final EmptyPersonEventSet INSTANCE = new EmptyPersonEventSet();
 
+    private EmptyPersonEventSet() {
+
+    }
+
     @Override
     public Iterator<PersonEvent> iterator() {
         return Collections.emptyIterator();
@@ -22,15 +26,10 @@ class EmptyPersonEventSet extends AbstractSet<PersonEvent> implements PersonEven
         return 0;
     }
 
-    @Override
-    public boolean contains(final Object o) {
-        return false;
-    }
-
     @Nonnull
     @Override
     @Deprecated
-    public EmptyPersonEventSet filteredCopy(final Predicate<? super PersonEvent> predicate) {
+    public PersonEventSet filteredCopy(final Predicate<? super PersonEvent> predicate) {
         return this;
     }
 

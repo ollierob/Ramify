@@ -12,8 +12,8 @@ import java.util.List;
 
 public class GrandParentChild extends AbstractRelationship implements CosanguinealRelationship {
 
-    public GrandParentChild(final HasPersonId grandparent, final HasPersonId grandchild) {
-        super(grandparent, grandchild);
+    public GrandParentChild(final HasPersonId from, final HasPersonId to) {
+        super(from, to);
     }
 
     @Nonnull

@@ -7,8 +7,8 @@ import javax.annotation.Nonnull;
 
 public class GodParentChild extends AbstractRelationship implements FictiveRelationship {
 
-    public GodParentChild(final HasPersonId godParent, final HasPersonId godChild) {
-        super(godParent, godChild);
+    public GodParentChild(final HasPersonId godParent, final HasPersonId child) {
+        super(godParent, child);
     }
 
     @Override

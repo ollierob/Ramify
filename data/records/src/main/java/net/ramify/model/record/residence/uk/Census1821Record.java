@@ -95,17 +95,17 @@ public class Census1821Record extends CensusRecord implements HasPlace {
     private Optional<Age> onlyAdultAge(final Person person) {
         final var ages = ageCounts.row(person.gender());
         switch (ages.size()) {
-            case 0 -> throw new IllegalStateException();
-            case 1 -> {
+            case 0:
+                throw new IllegalStateException();
+            case 1: {
                 final var only = ages.entrySet().iterator().next();
                 return only.getValue() == 1 ? Optional.of(only.getKey()) : Optional.empty();
             }
-            default -> {
+            default:
                 final var adultAges = Maps.filterKeys(ages, age -> age.isSameOrOlderThan(MIN_HEAD_AGE));
                 if (adultAges.size() != 1) return Optional.empty();
                 final var only = adultAges.entrySet().iterator().next();
                 return only.getValue() == 1 ? Optional.of(only.getKey()) : Optional.empty();
-            }
         }
     }
 
