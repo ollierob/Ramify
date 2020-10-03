@@ -85,6 +85,11 @@ export class PersonProfileEvents extends React.PureComponent<Props, State> {
         return this.state.historic.data.map<ProfileEvent>(event => ({event, type: "historic"}));
     }
 
+    componentDidMount() {
+        if (this.state.showHistoric)
+            this.loadHistoric(this.props.person);
+    }
+
     componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>) {
         if (this.props.events != prevProps.events)
             this.setState({historic: {}});
