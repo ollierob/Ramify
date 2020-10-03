@@ -5,8 +5,9 @@ import {PlaceFavouritesHandler} from "../../places/PlaceFavourites";
 import "./HeaderMenu.css";
 import {PlaceMenu} from "./places/PlaceMenu";
 import {RecordMenu} from "./records/RecordMenu";
-import {PeopleMenu} from "./PeopleMenu";
+import {PeopleMenu} from "./people/PeopleMenu";
 import {PlaceHistoryHandler} from "../../places/PlaceHistory";
+import CommunityMenu from "./community/CommunityMenu";
 
 type Props = PlaceFavouritesHandler & PlaceHistoryHandler & {
     active: HeaderMenuType;
@@ -60,7 +61,7 @@ export default class HeaderMenu extends React.PureComponent<Props, State> {
                 key="community"
                 title={<a href="/community"><CommunityIcon/> Community</a>}
                 className={this.props.active == "community" && ActiveClass}>
-
+                <CommunityMenu {...this.props}/>
             </Menu.SubMenu>
 
         </Menu>;

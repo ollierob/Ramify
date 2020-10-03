@@ -1,11 +1,11 @@
 import * as React from "react";
 import {Icon, List, Tabs} from "antd";
-import {NoData} from "../../style/NoData";
-import {FamilyTree} from "../../../protobuf/generated/family_pb";
-import {AsyncData, asyncLoadData} from "../../fetch/AsyncData";
-import {DEFAULT_FAMILY_TREE_LOADER} from "../../tree/FamilyTreeLoader";
-import {Loading} from "../../style/Loading";
-import {createTreeHref, viewTreeHref} from "../../../pages/people/PeopleLinks";
+import {NoData} from "../../../style/NoData";
+import {FamilyTree} from "../../../../protobuf/generated/family_pb";
+import {AsyncData, asyncLoadData} from "../../../fetch/AsyncData";
+import {DEFAULT_FAMILY_TREE_LOADER} from "../../../tree/FamilyTreeLoader";
+import {Loading} from "../../../style/Loading";
+import {createTreeHref, viewTreeHref} from "../../../../pages/people/PeopleLinks";
 
 type Props = {
     open: boolean;
