@@ -1,10 +1,8 @@
 package net.ramify.model.place.xml;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.HashMultimap;
 import com.google.inject.PrivateModule;
 import com.google.inject.Provides;
-import com.google.inject.Singleton;
 import net.ramify.model.ParserContext;
 import net.ramify.model.place.position.PositionProvider;
 import net.ramify.model.place.provider.PlaceDescriptionProvider;
@@ -20,6 +18,7 @@ import net.ramify.model.record.archive.ArchiveProvider;
 
 import javax.annotation.Nonnull;
 import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlTransient;
@@ -53,11 +52,23 @@ public class XmlPlaceModule extends PrivateModule {
 
     @Provides
     @Singleton
-    PlaceProvider providePlaceProvider(
+    XmlPlaceLoader places(
             final JAXBContext jaxbContext,
             @Named("data") final File data,
             final ParserContext context) throws JAXBException {
-        return XmlPlaceProvider.readPlacesInCountryRoot(jaxbContext, data, context);
+        return XmlPlaceLoader.readPlacesInCountryRoot(jaxbContext, data, context);
+    }
+
+    @Provides
+    @Singleton
+    PlaceProvider places(final XmlPlaceLoader loader) {
+        return loader.places();
+    }
+
+    @Provides
+    @Singleton
+    PlaceHierarchyProvider hierarchies(final XmlPlaceLoader loader) {
+        return loader.hierarchies();
     }
 
     @Provides
@@ -86,12 +97,6 @@ public class XmlPlaceModule extends PrivateModule {
         final var places = XmlPlaceModule.class.getResource("/xml/data/places");
         Preconditions.checkState(places != null, "Could not load XML data");
         return new File(places.toURI());
-    }
-
-    @Provides
-    @Singleton
-    PlaceHierarchyProvider hierarchyProvider() {
-        return new XmlPlaceHierarchyProvider(HashMultimap.create()); //TODO
     }
 
 }

@@ -1,5 +1,6 @@
 package net.ramify.model.place.xml;
 
+import com.google.common.collect.ImmutableSetMultimap;
 import com.google.common.collect.SetMultimap;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.hierarchy.PlaceHierarchy;
@@ -34,6 +35,10 @@ public class XmlPlaceHierarchyProvider implements PlaceHierarchyProvider {
     @Override
     public PlaceHierarchy get(@Nonnull PlaceHierarchyId key) {
         throw new UnsupportedOperationException(); //TODO
+    }
+
+    PlaceHierarchyProvider immutable() {
+        return new XmlPlaceHierarchyProvider(ImmutableSetMultimap.copyOf(children));
     }
 
 }
