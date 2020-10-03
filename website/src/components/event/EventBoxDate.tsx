@@ -101,9 +101,11 @@ export class EventBoxDate extends React.PureComponent<Props, State> {
     }
 
     private inferBirth() {
+        const checked = Array.from(this.state.checked);
+        const all = checked.length == allEventIds(this.props.person).size;
         asyncLoadData(
             null,
-            () => this.treeLoader.loadInferredBirthDate(this.props.tree, this.props.person.id, Array.from(this.state.checked)),
+            () => this.treeLoader.loadInferredBirthDate(this.props.tree, this.props.person.id, all ? [] : checked),
             inferredBirthDate => this.setState({inferredBirthDate}));
     }
 
