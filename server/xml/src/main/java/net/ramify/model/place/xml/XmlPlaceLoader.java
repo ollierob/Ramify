@@ -8,6 +8,7 @@ import net.ramify.model.ParserContext;
 import net.ramify.model.place.iso.CountryIso;
 import net.ramify.model.place.provider.PlaceHierarchyProvider;
 import net.ramify.model.place.provider.PlaceProvider;
+import net.ramify.model.place.xml.place.XmlPlaces;
 import net.ramify.utils.file.FileTraverseUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +33,7 @@ class XmlPlaceLoader {
         for (final File dir : countryRoots(countryRoot)) {
             final var countryIso = CountryIso.valueOf(dir.getName());
             final var placeContext = new PlaceParserContext(context.nameParser(), context.dateParser(), countryIso, places);
-            FileTraverseUtils.traverseSubdirectories(dir, XmlPlaceLoader::includeFile, file -> readPlacesInFile(unmarshaller, file, places, placeContext));
+            FileTraverseUtils.traverseSubdirectories(dir, XmlPlaceLoader::includeFile, file -> readPlacesInFile(unmarshaller, file, places, hierarchies, placeContext));
             logger.info("Loaded {} places from {}.", places.size(), dir);
         }
         return new XmlPlaceLoader(places.immutable(), hierarchies.immutable());
@@ -44,21 +45,30 @@ class XmlPlaceLoader {
         return roots;
     }
 
-    private static void readPlacesInFile(final Unmarshaller unmarshaller, final File file, final XmlPlaceProvider placeProvider, final PlaceParserContext context) {
+    private static void readPlacesInFile(
+            final Unmarshaller unmarshaller,
+            final File file,
+            final XmlPlaceProvider placeProvider,
+            final XmlPlaceHierarchyProvider hierarchyProvider,
+            final PlaceParserContext context) {
+
         Preconditions.checkArgument(file.isFile(), "Not a file: %s", file);
         Preconditions.checkArgument(file.canRead(), "Not a readable file: %s", file);
         Preconditions.checkArgument(file.getName().endsWith(".xml"), "Not an XML file: %s", file);
+
         try {
             logger.info("Reading places from file {}", file);
             final var unmarshalled = unmarshaller.unmarshal(file);
-            if (!(unmarshalled instanceof net.ramify.model.place.xml.place.XmlPlaces)) return;
-            final var places = (net.ramify.model.place.xml.place.XmlPlaces) unmarshalled;
-            placeProvider.addAll(context, places.places());
+            if (!(unmarshalled instanceof XmlPlaces)) return;
+            final var places = ((XmlPlaces) unmarshalled).places();
+            placeProvider.addAll(context, places);
+            hierarchyProvider.addAll(context, places);
         } catch (final JAXBException jex) {
             logger.warn("Could not read places in file " + file + ": " + jex.getMessage());
         } catch (final RuntimeException rex) {
             throw new RuntimeException("Error reading places in file: " + file, rex);
         }
+
     }
 
     private static boolean includeFile(final File file) {
