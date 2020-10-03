@@ -10,6 +10,7 @@ import {Family} from "../../../protobuf/generated/family_pb";
 import {FamilyTreeId} from "../../../components/tree/FamilyTree";
 import {LoadingIcon} from "../../../components/images/Icons";
 import {lifeDateRange} from "../../../components/people/Person";
+import * as Cookies from 'es-cookie';
 import {DEFAULT_EVENT_LOADER} from "../../../components/event/EventLoader";
 
 type Props = {
@@ -27,6 +28,9 @@ type State = {
     historic: AsyncData<ReadonlyArray<Event.AsObject>>
 }
 
+const FAMILY_COOKIE = "showProfileFamilyEvents";
+const HISTORIC_COOKIE = "showProfileHistoricEvents";
+
 export class PersonProfileEvents extends React.PureComponent<Props, State> {
 
     private readonly eventLoader = DEFAULT_EVENT_LOADER;
@@ -35,6 +39,8 @@ export class PersonProfileEvents extends React.PureComponent<Props, State> {
         super(props);
         this.state = {
             showOwn: true,
+            showFamily: Cookies.get(FAMILY_COOKIE) == "true",
+            showHistoric: Cookies.get(HISTORIC_COOKIE) == "true",
             historic: {}
         };
     }
@@ -84,6 +90,10 @@ export class PersonProfileEvents extends React.PureComponent<Props, State> {
             this.setState({historic: {}});
         if (this.state.showHistoric && ((!prevState.showHistoric && !this.state.historic.data) || this.props.person != prevProps.person))
             this.loadHistoric(this.props.person);
+        if (this.state.showFamily != prevState.showFamily)
+            Cookies.set(FAMILY_COOKIE, String(this.state.showFamily));
+        if (this.state.showHistoric != prevState.showHistoric)
+            Cookies.set(HISTORIC_COOKIE, String(this.state.showHistoric));
     }
 
     private loadHistoric(person: Person.AsObject) {
