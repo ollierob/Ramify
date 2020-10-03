@@ -1,6 +1,6 @@
 import * as React from "react";
 import {EventBoxProps} from "./EventBox";
-import {isExactRange} from "../date/DateRange";
+import {isExactRange, isInMonth} from "../date/DateRange";
 import {EmptyPrefixWords, formatDateRange, formatYearRange} from "../date/DateFormat";
 import {MonthDayWordsFormatter} from "../date/DateFormatter";
 import {eventType, isBirthEvent, isPostDeathEvent} from "./Event";
@@ -41,7 +41,7 @@ export class EventBoxDate extends React.PureComponent<Props, State> {
         const event = this.props.event;
         if (!event) return null;
         const date = event.date;
-        const exact = isExactRange(date);
+        const exactDateOrMonth = isExactRange(date) || isInMonth(date);
 
         const person = this.props.person;
         if (!person) return null;
@@ -52,9 +52,9 @@ export class EventBoxDate extends React.PureComponent<Props, State> {
 
             <div className="year">{formatYearRange(date, EmptyPrefixWords)}</div>
 
-            {exact && <div className="date">{formatDateRange(date, MonthDayWordsFormatter, EmptyPrefixWords)}</div>}
+            {exactDateOrMonth && <div className="date">{formatDateRange(date, MonthDayWordsFormatter, EmptyPrefixWords)}</div>}
 
-            {!exact && eventType(event) == "BIRTH" && <div className="date compute">
+            {!exactDateOrMonth && eventType(event) == "BIRTH" && <div className="date compute">
                 <a onClick={() => this.setState({modalOpen: true})}>Compute</a>
             </div>}
 
