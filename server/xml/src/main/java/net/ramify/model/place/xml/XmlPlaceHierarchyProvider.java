@@ -1,7 +1,5 @@
 package net.ramify.model.place.xml;
 
-import com.google.common.collect.ImmutableSetMultimap;
-import com.google.common.collect.SetMultimap;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.hierarchy.PlaceHierarchy;
 import net.ramify.model.place.hierarchy.PlaceHierarchyId;
@@ -15,14 +13,8 @@ import java.util.Set;
 
 public class XmlPlaceHierarchyProvider implements PlaceHierarchyProvider {
 
-    private final SetMultimap<PlaceId, PlaceId> children;
-
-    public XmlPlaceHierarchyProvider(final SetMultimap<PlaceId, PlaceId> children) {
-        this.children = children;
-    }
-
     PlaceHierarchyProvider immutable() {
-        return new XmlPlaceHierarchyProvider(ImmutableSetMultimap.copyOf(children));
+        return new XmlPlaceHierarchyProvider();
     }
 
     void addAll(final PlaceParserContext context, final Collection<XmlPlace> places) {

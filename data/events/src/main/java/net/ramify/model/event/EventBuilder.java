@@ -100,7 +100,7 @@ public class EventBuilder {
     }
 
     public ResidenceEvent toResidence(final HasPersonId person) {
-        return new GenericResidenceEvent(eventId, person.personId(), this.eventProperties(), place);
+        return place == null ? null : new GenericResidenceEvent(eventId, person.personId(), this.eventProperties(), place);
     }
 
     public LifeEvent toFlourished(final PersonId personId) {

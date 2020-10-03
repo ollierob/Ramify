@@ -49,7 +49,7 @@ public abstract class XmlPersonEvent extends XmlEvent {
     @CheckForNull
     protected Place place(final RecordContext context) {
         final var placeId = this.placeId();
-        return Functions.ifNonNull(placeId, context.places()::require);
+        return Functions.ifNonNull(placeId, context.places()::get);
     }
 
     public abstract PersonEvent build(PersonId personId, RecordContext context);
