@@ -33,7 +33,7 @@ public interface Person extends HasPerson, HasName, HasGender, HasPersonEvents, 
         final var events = this.events();
         for (final var event : events.sortedEvents()) {
             final var eventBuilder = event.toProtoBuilder();
-            events.inferAge(event).ifPresent(age -> eventBuilder.setComputedAge(age.toProto()));
+            if (!event.isBirth()) events.inferAge(event).ifPresent(age -> eventBuilder.setComputedAge(age.toProto()));
             builder.addEvents(eventBuilder);
         }
         return builder;

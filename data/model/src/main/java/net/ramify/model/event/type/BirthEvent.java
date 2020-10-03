@@ -48,6 +48,7 @@ public interface BirthEvent extends UniqueEvent {
     default EventProto.Event.Builder toProtoBuilder() {
         return UniqueEvent.super.toProtoBuilder()
                 .clearGivenAge()
+                .clearComputedAge()
                 .clearOccupation()
                 .setType(EventProto.RecordType.BIRTH);
     }
