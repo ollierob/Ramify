@@ -9,9 +9,6 @@ import java.util.Set;
 public interface Settlement extends SettlementOrRegion {
 
     @Nonnull
-    SettlementOrRegion parent();
-
-    @Nonnull
     @Override
     default Set<Class<? extends Place>> childTypes() {
         return ImmutableSet.of();

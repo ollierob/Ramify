@@ -3,7 +3,6 @@ package net.ramify.model.place;
 import com.google.common.base.Preconditions;
 import net.ramify.model.Id;
 import net.ramify.model.place.iso.CountryIso;
-import net.ramify.model.place.provider.PlaceProvider;
 
 public class PlaceId extends Id implements HasPlaceId {
 
@@ -43,14 +42,6 @@ public class PlaceId extends Id implements HasPlaceId {
     private static String parseName(final String id) {
         final int a = id.indexOf(':') + 1, b = id.indexOf(':', a);
         return id.substring(a, b);
-    }
-
-    public boolean isParentOf(final PlaceId that, final PlaceProvider placeProvider) {
-        final var thisPlace = placeProvider.get(this);
-        if (thisPlace == null) return false;
-        final var thatPlace = placeProvider.get(that);
-        if (thatPlace == null) return false;
-        return thisPlace.isParentOf(thatPlace);
     }
 
     public PlaceGroupId placeGroupId() {

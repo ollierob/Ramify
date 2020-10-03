@@ -30,8 +30,7 @@ public class Borough extends AbstractRegion implements District {
         this.iso = iso;
     }
 
-    @Override
-    public Region parent() {
+    private Region parent() {
         return parent;
     }
 

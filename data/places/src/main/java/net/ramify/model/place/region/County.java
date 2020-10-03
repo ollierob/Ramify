@@ -40,8 +40,7 @@ public class County extends AbstractRegion implements CountyOrSubdivision {
         this.iso = iso;
     }
 
-    @Override
-    public Region parent() {
+    private Region parent() {
         return parent;
     }
 

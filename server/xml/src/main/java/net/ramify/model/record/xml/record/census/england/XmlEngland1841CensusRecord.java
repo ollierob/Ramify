@@ -2,7 +2,6 @@ package net.ramify.model.record.xml.record.census.england;
 
 import com.google.common.base.MoreObjects;
 import net.ramify.model.place.Place;
-import net.ramify.model.place.region.County;
 import net.ramify.model.record.collection.RecordSet;
 import net.ramify.model.record.residence.uk.Census1841Record;
 import net.ramify.model.record.xml.RecordContext;
@@ -59,7 +58,8 @@ public class XmlEngland1841CensusRecord extends XmlEnglandCensusRecord {
 
         Place birthPlace(final Place place) {
             final var bornInCounty = MoreObjects.firstNonNull(this.bornInCounty, true);
-            if (bornInCounty) return place.find(County.class).get();
+            //FIXME
+            //if (bornInCounty) return place.find(County.class).get();
             return null;
         }
 

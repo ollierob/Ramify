@@ -26,8 +26,7 @@ public class Graveship extends AbstractRegion {
         this.parent = parent;
     }
 
-    @Override
-    public Manor parent() {
+    private Manor parent() {
         return parent;
     }
 

@@ -25,8 +25,7 @@ public class Inn extends AbstractBuilding implements Building {
         this.parent = Objects.requireNonNull(parent, "parent");
     }
 
-    @Override
-    public SettlementOrRegion parent() {
+    private SettlementOrRegion parent() {
         return parent;
     }
 

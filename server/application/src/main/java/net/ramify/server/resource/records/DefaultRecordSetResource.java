@@ -14,7 +14,6 @@ import net.ramify.model.record.collection.RecordSets;
 import net.ramify.model.record.provider.RecordProvider;
 import net.ramify.model.record.provider.RecordSetProvider;
 import net.ramify.model.record.provider.RecordSetRelativesProvider;
-import net.ramify.utils.objects.Functions;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -81,9 +80,10 @@ public class DefaultRecordSetResource implements RecordSetResource {
     }
 
     private boolean isCovered(final RecordSet recordSet, final Place place) {
-        if (place.isParentOf(recordSet.covers().resolvePlace(places))) return true;
-        final var createdPlace = Functions.ifNonNull(recordSet.createdBy(), id -> id.resolvePlace(places));
-        return createdPlace != null && place.isParentOf(createdPlace);
+//        if (place.isParentOf(recordSet.covers().resolvePlace(places))) return true;
+//        final var createdPlace = Functions.ifNonNull(recordSet.createdBy(), id -> id.resolvePlace(places));
+//        return createdPlace != null && place.isParentOf(createdPlace);
+        return false; //FIXME use hierarchy
     }
 
     @CheckForNull

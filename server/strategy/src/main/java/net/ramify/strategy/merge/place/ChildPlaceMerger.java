@@ -16,9 +16,10 @@ public class ChildPlaceMerger implements PlaceMerger {
     @Nonnull
     @Override
     public Result<Place> merge(final Place p1, final Place p2) {
-        if (p1.isChildOf(p2)) return Result.of(p1);
-        if (p2.isChildOf(p1)) return Result.of(p2);
-        return fallback.merge(p1, p2);
+//        if (p1.isChildOf(p2)) return Result.of(p1);
+//        if (p2.isChildOf(p1)) return Result.of(p2);
+//        return fallback.merge(p1, p2);
+        throw new UnsupportedOperationException();
     }
 
 }

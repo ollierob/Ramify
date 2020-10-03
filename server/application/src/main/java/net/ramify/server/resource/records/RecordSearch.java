@@ -1,6 +1,5 @@
 package net.ramify.server.resource.records;
 
-import com.google.common.collect.Iterables;
 import net.ramify.model.person.name.ForenameSurname;
 import net.ramify.model.person.name.Name;
 import net.ramify.model.person.name.NameParser;
@@ -41,8 +40,7 @@ class RecordSearch {
         final var place = this.searchPlace(search);
         final var name = this.searchName(search);
         //TODO also age/DOB search
-        return record -> this.testPlace(record, place)
-                && this.testName(record, name);
+        return record -> this.testPlace(record, place) && this.testName(record, name);
     }
 
     private Name searchName(final RecordProto.RecordSearch search) {
@@ -63,10 +61,12 @@ class RecordSearch {
         if (searchPlace == null) return true;
         if (record instanceof HasPlaceId) {
             final var recordPlace = ((HasPlaceId) record).resolvePlace(places);
-            return searchPlace.isParentOf(recordPlace);
+            //return searchPlace.isParentOf(recordPlace);
+            return false; //FIXME use hierarchy
         }
         final var places = record.places();
-        return Iterables.any(places, searchPlace::isParentOf);
+        //return Iterables.any(places, searchPlace::isParentOf);
+        return false; //FIXME use hierarchy
     }
 
     private boolean testName(final IndividualRecord record, final Name searchName) {

@@ -19,8 +19,7 @@ public abstract class AbstractSettlement extends AbstractPlace implements Settle
     }
 
     @Nonnull
-    @Override
-    public SettlementOrRegion parent() {
+    private SettlementOrRegion parent() {
         return region;
     }
 

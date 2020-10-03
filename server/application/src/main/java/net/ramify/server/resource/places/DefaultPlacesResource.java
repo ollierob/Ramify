@@ -12,6 +12,7 @@ import net.ramify.model.place.position.PositionProvider;
 import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.provider.PlaceDescriptionProvider;
 import net.ramify.model.place.provider.PlaceGroupProvider;
+import net.ramify.model.place.provider.PlaceHierarchyProvider;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.region.Country;
 import net.ramify.utils.collections.ListUtils;
@@ -20,8 +21,6 @@ import javax.annotation.CheckForNull;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import static net.ramify.utils.StringUtils.isBlank;
-
 @Singleton
 public class DefaultPlacesResource implements PlacesResource {
 
@@ -29,6 +28,7 @@ public class DefaultPlacesResource implements PlacesResource {
     private final PlaceGroupProvider placeGroupProvider;
     private final PositionProvider positionProvider;
     private final PlaceDescriptionProvider descriptionProvider;
+    private final PlaceHierarchyProvider hierarchyProvider;
     private final PlaceFavouritesResource favouritesResource;
 
     @Inject
@@ -37,11 +37,13 @@ public class DefaultPlacesResource implements PlacesResource {
             final PlaceGroupProvider placeGroupProvider,
             final PositionProvider positionProvider,
             final PlaceDescriptionProvider descriptionProvider,
+            final PlaceHierarchyProvider hierarchyProvider,
             final PlaceFavouritesResource favouritesResource) {
         this.placeProvider = placeProvider;
         this.placeGroupProvider = placeGroupProvider;
         this.positionProvider = positionProvider;
         this.descriptionProvider = descriptionProvider;
+        this.hierarchyProvider = hierarchyProvider;
         this.favouritesResource = favouritesResource;
     }
 
@@ -63,11 +65,12 @@ public class DefaultPlacesResource implements PlacesResource {
 
     @Override
     public Places within(final PlaceId id, final Integer depth) {
-        final var place = placeProvider.get(id);
-        if (place == null) return null;
-        final var childTypes = place.childTypes();
-        final var children = placeProvider.children(id, this.maxDepth(place), childTypes.isEmpty() ? p -> true : p -> p.isAny(childTypes));
-        return Places.of(children, false);
+        return Places.NONE;
+//        final var place = placeProvider.get(id);
+//        if (place == null) return null;
+//        final var childTypes = place.childTypes();
+//        final var children = placeProvider.children(id, this.maxDepth(place), childTypes.isEmpty() ? p -> true : p -> p.isAny(childTypes));
+//        return Places.of(children, false);
     }
 
     private int maxDepth(final Place place) {
@@ -96,9 +99,7 @@ public class DefaultPlacesResource implements PlacesResource {
     public String describeType(final PlaceId id) {
         final var place = this.at(id);
         if (place == null) return null;
-        final var country = place.find(Country.class).orElse(null);
-        if (country == null) return null;
-        return PlaceTypeDescriptions.describe(place.protoType(), country);
+        return PlaceTypeDescriptions.describe(place.protoType(), place.countryIso());
     }
 
     @Override
@@ -115,8 +116,9 @@ public class DefaultPlacesResource implements PlacesResource {
 
     @Override
     public Places find(final String name, final PlaceId within, final int limit) {
-        if (isBlank(name)) return Places.of();
-        return Places.of(placeProvider.findByName(name, limit, within), true);
+//        if (isBlank(name)) return Places.of();
+//        return Places.of(hierarchyProvider.findByName(name, limit, within), true);
+        return null;
     }
 
     @Override

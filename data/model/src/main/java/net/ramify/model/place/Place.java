@@ -20,9 +20,6 @@ public interface Place extends HasPlaceId, Castable<Place>, BuildsProto<PlacePro
     @Nonnull
     String name();
 
-    @CheckForNull
-    Place parent();
-
     @Nonnull
     default Optional<? extends Iso> iso() {
         return Optional.empty();
@@ -30,37 +27,6 @@ public interface Place extends HasPlaceId, Castable<Place>, BuildsProto<PlacePro
 
     @CheckForNull
     PlaceHistory history();
-
-    @Nonnull
-    default Place ultimateParent() {
-        final var parent = this.parent();
-        return parent == null ? this : parent.ultimateParent();
-    }
-
-    default boolean isParentOf(final Place that) {
-        if (that == null) return false;
-        if (this.equals(that)) return true;
-        return this.isParentOf(that.parent());
-    }
-
-    default boolean isChildOf(final Place that) {
-        return that != null && that.isParentOf(this);
-    }
-
-    @Nonnull
-    default <P extends Place> Optional<P> find(final Class<P> type) {
-        if (this.is(type)) return this.as(type);
-        final var parent = this.parent();
-        if (parent == null) return Optional.empty();
-        return parent.find(type);
-    }
-
-    @Nonnull
-    default String address() {
-        var address = this.name();
-        final var parent = this.parent();
-        return parent == null ? address : address + ", " + parent.address();
-    }
 
     @Nonnull
     default Set<Class<? extends Place>> childTypes() {
@@ -84,7 +50,6 @@ public interface Place extends HasPlaceId, Castable<Place>, BuildsProto<PlacePro
                 .setName(this.name())
                 .setType(this.protoType())
                 .setDefunct(this.isDefunct());
-        if (includeParent) Consumers.ifNonNull(this.parent(), parent -> builder.setParent(parent.toProto()));
         this.iso().map(Iso::value).ifPresent(builder::setIso);
         Consumers.ifNonNull(this.history(), history -> builder.setHistory(history.toProto()));
         return builder;

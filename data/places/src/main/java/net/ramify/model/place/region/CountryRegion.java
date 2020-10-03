@@ -16,8 +16,7 @@ public class CountryRegion extends AbstractRegion {
         this.parent = parent;
     }
 
-    @Override
-    public Country parent() {
+    private Country parent() {
         return parent;
     }
 

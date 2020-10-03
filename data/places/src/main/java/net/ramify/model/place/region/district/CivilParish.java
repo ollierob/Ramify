@@ -24,8 +24,7 @@ public class CivilParish extends AbstractRegion {
         this.parent = parent;
     }
 
-    @Override
-    public District parent() {
+    private District parent() {
         return parent;
     }
 

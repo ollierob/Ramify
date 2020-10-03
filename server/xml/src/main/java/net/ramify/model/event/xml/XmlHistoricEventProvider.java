@@ -44,7 +44,7 @@ class XmlHistoricEventProvider extends AbstractMappedProvider<EventId, HistoricE
     public Set<HistoricEvent> within(final Place place, final DateRange date) {
         return this.values()
                 .stream()
-                .filter(event -> event.region().isParentOf(place))
+                //.filter(event -> event.region().isParentOf(place)) //FIXME
                 .filter(event -> event.date().intersects(date))
                 .collect(Collectors.toSet());
     }

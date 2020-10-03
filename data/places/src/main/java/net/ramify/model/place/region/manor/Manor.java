@@ -32,8 +32,7 @@ public class Manor extends AbstractRegion {
         this.parent = parent;
     }
 
-    @Override
-    public Region parent() {
+    private Region parent() {
         return parent;
     }
 

@@ -8,7 +8,6 @@ import com.google.common.collect.ImmutableSetMultimap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
-import net.meerkat.functions.consumers.Consumers;
 import net.ramify.model.ParserContext;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
@@ -32,11 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 @XmlTransient
 class XmlPlaceProvider implements PlaceProvider {
@@ -44,13 +40,13 @@ class XmlPlaceProvider implements PlaceProvider {
     private static final Logger logger = LoggerFactory.getLogger(XmlPlaceProvider.class);
 
     private final Map<PlaceId, Place> places;
-    private final SetMultimap<PlaceId, PlaceId> children;
     private final SetMultimap<PlaceGroupId, PlaceId> groupIds;
     private final Set<Country> countries;
 
-    private XmlPlaceProvider(final Map<PlaceId, Place> places, final SetMultimap<PlaceId, PlaceId> children, final SetMultimap<PlaceGroupId, PlaceId> groupIds, final Set<Country> countries) {
+    private XmlPlaceProvider(
+            final Map<PlaceId, Place> places,
+            final SetMultimap<PlaceGroupId, PlaceId> groupIds, final Set<Country> countries) {
         this.places = places;
-        this.children = children;
         this.groupIds = groupIds;
         this.countries = countries;
     }
@@ -63,40 +59,9 @@ class XmlPlaceProvider implements PlaceProvider {
 
     @Nonnull
     @Override
-    public Set<Place> children(final PlaceId id, final int depth, final Predicate<Place> placePredicate) {
-        switch (depth) {
-            case 0:
-                return Collections.emptySet();
-            case 1:
-                return children.get(id).stream().map(this::get).filter(placePredicate).collect(Collectors.toSet());
-            default:
-                Preconditions.checkArgument(depth <= MAX_DEPTH, "Exceeded max depth");
-                final var places = Sets.<Place>newHashSet();
-                children.get(id).forEach(child -> {
-                    final var place = this.get(child);
-                    if (placePredicate.test(place)) places.add(this.get(child));
-                    places.addAll(this.children(child.placeId(), depth - 1, placePredicate));
-                });
-                return places;
-        }
-    }
-
-    @Nonnull
-    @Override
     public Set<Country> countries(final boolean onlyTopLevel) {
         if (onlyTopLevel) return Sets.filter(countries, country -> country.parent() == null);
         return countries;
-    }
-
-    @Override
-    public Set<Place> findByName(final String name, final int limit, final PlaceId within) {
-        final var findString = name.toLowerCase();
-        final var parent = within == null ? null : this.require(within);
-        return places.values().stream()
-                .filter(place -> place.name().toLowerCase().contains(findString))
-                .filter(place -> parent == null || parent.isParentOf(place))
-                .limit(limit)
-                .collect(Collectors.toSet());
     }
 
     @Nonnull
@@ -108,13 +73,12 @@ class XmlPlaceProvider implements PlaceProvider {
     void addAll(final PlaceParserContext context, final Collection<XmlPlace> places) {
         for (final var place : places) {
             place.places(context).forEach(this::add);
-            children.putAll(place.physicalParents(context));
         }
     }
 
     void add(final Place place) {
         places.put(place.placeId(), place);
-        Consumers.ifNonNull(place.parent(), parent -> children.put(parent.placeId(), place.placeId()));
+        //Consumers.ifNonNull(place.parent(), parent -> children.put(parent.placeId(), place.placeId()));
         place.as(Country.class).ifPresent(countries::add);
         groupIds.put(place.placeGroupId(), place.placeId());
     }
@@ -126,7 +90,6 @@ class XmlPlaceProvider implements PlaceProvider {
     PlaceProvider immutable() {
         return new XmlPlaceProvider(
                 ImmutableMap.copyOf(places),
-                ImmutableSetMultimap.copyOf(children),
                 ImmutableSetMultimap.copyOf(groupIds),
                 ImmutableSet.copyOf(countries));
     }
@@ -135,7 +98,7 @@ class XmlPlaceProvider implements PlaceProvider {
             final JAXBContext jaxbContext,
             final File countryRoot,
             final ParserContext context) throws JAXBException {
-        final var provider = new XmlPlaceProvider(Maps.newHashMap(), HashMultimap.create(), HashMultimap.create(), Sets.newHashSet());
+        final var provider = new XmlPlaceProvider(Maps.newHashMap(), HashMultimap.create(), Sets.newHashSet());
         final var unmarshaller = jaxbContext.createUnmarshaller();
         for (final File dir : countryRoots(countryRoot)) {
             final var countryIso = CountryIso.valueOf(dir.getName());

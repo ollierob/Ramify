@@ -33,8 +33,7 @@ public class Parish extends AbstractRegion {
     }
 
     @Nonnull
-    @Override
-    public Region parent() {
+    private Region parent() {
         return parent;
     }
 

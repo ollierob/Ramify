@@ -24,8 +24,7 @@ public class School extends AbstractBuilding implements Institution {
         this.parent = Objects.requireNonNull(parent, "parent");
     }
 
-    @Override
-    public SettlementOrRegion parent() {
+    private SettlementOrRegion parent() {
         return parent;
     }
 

@@ -97,7 +97,8 @@ public abstract class XmlPlace {
     }
 
     private Place parent(final PlaceId id, final PlaceProvider placeProvider) {
-        return placeProvider.maybeGet(id).map(Place::parent).orElse(null);
+        //return placeProvider.maybeGet(id).map(Place::parent).orElse(null);
+        return null; //FIXME use hierarchy provider
     }
 
     void addPlaces(final Place parent, final Consumer<Place> addPlace, final PlaceParserContext context) {

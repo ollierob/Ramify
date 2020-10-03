@@ -1,6 +1,7 @@
 package net.ramify.model.place.xml;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.HashMultimap;
 import com.google.inject.PrivateModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
@@ -8,6 +9,7 @@ import net.ramify.model.ParserContext;
 import net.ramify.model.place.position.PositionProvider;
 import net.ramify.model.place.provider.PlaceDescriptionProvider;
 import net.ramify.model.place.provider.PlaceGroupProvider;
+import net.ramify.model.place.provider.PlaceHierarchyProvider;
 import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.xml.archives.XmlArchives;
 import net.ramify.model.place.xml.description.XmlPlaceDescriptions;
@@ -34,6 +36,7 @@ public class XmlPlaceModule extends PrivateModule {
         this.expose(PositionProvider.class);
         this.expose(PlaceDescriptionProvider.class);
         this.expose(ArchiveProvider.class);
+        this.expose(PlaceHierarchyProvider.class);
     }
 
     @Provides
@@ -83,6 +86,12 @@ public class XmlPlaceModule extends PrivateModule {
         final var places = XmlPlaceModule.class.getResource("/xml/data/places");
         Preconditions.checkState(places != null, "Could not load XML data");
         return new File(places.toURI());
+    }
+
+    @Provides
+    @Singleton
+    PlaceHierarchyProvider hierarchyProvider() {
+        return new XmlPlaceHierarchyProvider(HashMultimap.create()); //TODO
     }
 
 }

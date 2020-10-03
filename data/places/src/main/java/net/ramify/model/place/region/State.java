@@ -34,8 +34,7 @@ public class State extends AbstractRegion {
     }
 
     @Nonnull
-    @Override
-    public Country parent() {
+    private Country parent() {
         return country;
     }
 

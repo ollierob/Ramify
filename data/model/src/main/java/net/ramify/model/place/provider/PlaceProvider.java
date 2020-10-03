@@ -8,9 +8,7 @@ import net.ramify.model.util.provider.MissingValueException;
 import net.ramify.model.util.provider.Provider;
 
 import javax.annotation.Nonnull;
-import java.util.Optional;
 import java.util.Set;
-import java.util.function.Predicate;
 
 public interface PlaceProvider extends Provider<PlaceId, Place> {
 
@@ -28,26 +26,10 @@ public interface PlaceProvider extends Provider<PlaceId, Place> {
     }
 
     @Nonnull
-    default Optional<Place> parent(final PlaceId id) {
-        return this.maybeGet(id).map(Place::parent);
-    }
-
-    @Nonnull
-    default Set<Place> children(final PlaceId id, final int depth) {
-        return this.children(id, depth, place -> true);
-    }
-
-    @Nonnull
-    Set<Place> children(PlaceId id, int depth, Predicate<Place> placePredicate);
-
-    @Nonnull
     Set<? extends Place> countries(boolean onlyTopLevel);
 
     @Nonnull
     Set<Place> findByGroup(PlaceGroupId groupId);
-
-    @Nonnull
-    Set<Place> findByName(String name, int limit, PlaceId within);
 
     class UnknownPlaceException extends MissingValueException implements HasPlaceId {
 

@@ -24,8 +24,7 @@ public class Graveyard extends AbstractBuilding implements Institution {
         this.parent = Objects.requireNonNull(parent, "parent");
     }
 
-    @Override
-    public Place parent() {
+    private Place parent() {
         return parent;
     }
 

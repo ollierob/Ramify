@@ -30,8 +30,7 @@ public class Hundred extends AbstractRegion implements CountyOrSubdivision {
     }
 
     @Nonnull
-    @Override
-    public CountyOrSubdivision parent() {
+    private CountyOrSubdivision parent() {
         return parent;
     }
 

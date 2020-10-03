@@ -25,8 +25,7 @@ public class CityDistrict extends AbstractRegion implements District {
         this.parent = parent;
     }
 
-    @Override
-    public Region parent() {
+    private Region parent() {
         return parent;
     }
 

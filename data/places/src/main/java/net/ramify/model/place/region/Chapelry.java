@@ -31,8 +31,7 @@ public class Chapelry extends AbstractRegion {
     }
 
     @Nonnull
-    @Override
-    public Parish parent() {
+    private Parish parent() {
         return parent;
     }
 
