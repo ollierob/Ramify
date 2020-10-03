@@ -7,6 +7,7 @@ import {CreateTreePage} from "./trees/CreateTreePage";
 import PersonProfilePage from "./profile/PersonProfilePage";
 import ViewTreePage from "./trees/ViewTreePage";
 import EditTreePage from "./trees/EditTreePage";
+import ViewTreePeoplePage from "./trees/ViewTreePeoplePage";
 
 class PeopleRouter extends React.PureComponent {
 
@@ -18,6 +19,7 @@ class PeopleRouter extends React.PureComponent {
                 <Route path="/tree/create" component={CreateTreePage}/>
                 <Route path="/tree/view" component={ViewTreePage}/>
                 <Route path="/tree/edit" component={EditTreePage}/>
+                <Route path="/tree/people" component={ViewTreePeoplePage}/>
                 <Route path="/profile" component={PersonProfilePage}/>
             </Switch>
         </HashRouter>;

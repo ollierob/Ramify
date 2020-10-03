@@ -17,6 +17,10 @@ export function viewTreeHref(id: FamilyTreeId) {
     return peoplePrefix() + "#/tree/view?id=" + id;
 }
 
+export function viewTreePeopleHref(id: FamilyTreeId) {
+    return peoplePrefix() + "#/tree/people?id=" + id;
+}
+
 function peoplePrefix() {
     try {
         const current = window.location.pathname;

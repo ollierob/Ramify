@@ -22,7 +22,9 @@ public class DefaultFamilyTreeResource implements FamilyTreeResource {
     private final BirthDateInference birthDateInference;
 
     @Inject
-    DefaultFamilyTreeResource(final FamilyTreeProvider familyTreeProvider, final BirthDateInference birthDateInference) {
+    DefaultFamilyTreeResource(
+            final FamilyTreeProvider familyTreeProvider,
+            final BirthDateInference birthDateInference) {
         this.familyTreeProvider = familyTreeProvider;
         this.birthDateInference = birthDateInference;
     }

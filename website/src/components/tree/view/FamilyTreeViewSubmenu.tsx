@@ -3,33 +3,36 @@ import {SubMenu} from "../../../pages/SubMenu";
 import {AsyncData} from "../../fetch/AsyncData";
 import {FamilyTree} from "../../../protobuf/generated/family_pb";
 import {Loading} from "../../style/Loading";
-import {FavouritesIcon, SearchIcon, TreeIcon, ViewIcon} from "../../images/Icons";
-import {Button, Input, Popover} from "antd";
+import {FavouritesIcon, TreeIcon, ViewIcon} from "../../images/Icons";
+import {Button, Popover} from "antd";
 import {FamilyTreeId} from "../FamilyTree";
 import {PersonSearchPopover} from "./PersonSearchPopover";
+import {viewTreeHref} from "../../../pages/people/PeopleLinks";
 
-type ZoomHandler = {zoom: number, setZoom: (zoom: number, reset?: boolean) => void}
+type ZoomHandler = {zoom?: number, setZoom?: (zoom: number, reset?: boolean) => void}
 
-export const FamilyTreeViewSubmenu = (props: {tree: AsyncData<FamilyTree.AsObject>} & ZoomHandler) => {
+export const FamilyTreeViewSubmenu = (props: {tree: AsyncData<FamilyTree.AsObject>, link?: boolean} & ZoomHandler) => {
     return <SubMenu className="top">
         {props.tree.loading && <Loading/>}
-        {props.tree.data && <FamilyTreeViewSubmenuContent {...props} tree={props.tree.data}/>}
+        {props.tree.data && <FamilyTreeViewSubmenuContent {...props} link={props.link} tree={props.tree.data}/>}
     </SubMenu>;
 };
 
-const FamilyTreeViewSubmenuContent = (props: {tree: FamilyTree.AsObject} & ZoomHandler) => {
+const FamilyTreeViewSubmenuContent = (props: {tree: FamilyTree.AsObject, link: boolean} & ZoomHandler) => {
 
     const tree = props.tree;
 
     return <>
 
         <span className="title">
-            <TreeIcon/> {tree.name}
+            {props.link
+                ? <a href={viewTreeHref(props.tree.id)}><TreeIcon/> {tree.name}</a>
+                : <><TreeIcon/> {tree.name}</>}
         </span>
 
         <PersonSearchPopover {...props}/>
         <PersonBookmark {...props}/>
-        <ViewControls {...props}/>
+        {props.setZoom && <ViewControls {...props}/>}
 
     </>;
 };

@@ -3,6 +3,7 @@ import {FamilyTree} from "../../../protobuf/generated/family_pb";
 import {Input, Popover} from "antd";
 import {SearchIcon} from "../../images/Icons";
 import {FamilyTreeId} from "../FamilyTree";
+import {viewTreePeopleHref} from "../../../pages/people/PeopleLinks";
 
 type SearchState = {popover?: boolean, input?: string};
 
@@ -32,7 +33,11 @@ const PersonSearchDropdown = (props: {id: FamilyTreeId}) => {
             value={state.input}
             onChange={e => setState({input: e.target.value})}/>
 
-        <p>List of people</p>
+        <p>
+            <a href={viewTreePeopleHref(props.id)}>
+                List of people
+            </a>
+        </p>
 
     </>;
 
