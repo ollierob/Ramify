@@ -1,5 +1,5 @@
 import {Date as DateProto} from "../../protobuf/generated/date_pb";
-import {areDatesEqual} from "./Date";
+import {areDatesEqual, areMonthsEqual} from "./Date";
 
 //FIXME make this accept two values
 export type DateFormatter = {
@@ -31,6 +31,7 @@ export const MonthDayWordsFormatter: DateFormatter = {
     formatDate: formatMonthDayWords,
     formatRange: (d1, d2) => {
         if (areDatesEqual(d1, d2)) return formatMonthDayWords(d1);
+        if (areMonthsEqual(d1, d2)) return formatMonthWord(d1);
         return formatMonthDayWords(d1) + " - " + formatMonthDayWords(d2);
     }
 };
@@ -48,5 +49,9 @@ function formatMonthDayYear(d: DateProto.AsObject) {
 }
 
 function formatMonthDayWords(d: DateProto.AsObject) {
-    return new Date(d.year, d.month-1, d.day).toLocaleDateString("default", {month: "short", day: "numeric"});
+    return new Date(d.year, d.month - 1, d.day).toLocaleDateString("default", {month: "short", day: "numeric"});
+}
+
+function formatMonthWord(d: DateProto.AsObject) {
+    return new Date(d.year, d.month - 1, d.day).toLocaleDateString("default", {month: "short"});
 }

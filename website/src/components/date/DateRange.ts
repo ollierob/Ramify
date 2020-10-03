@@ -83,6 +83,14 @@ export function isWholeYearRange(r: DateRangeProto.AsObject) {
         && isEndOfYear(r.latest);
 }
 
+export function isInMonth(r: DateRangeProto.AsObject) {
+    return !!r
+        && r.earliest && r.latest
+        && r.earliest.year == r.latest.year
+        && r.earliest.month == r.latest.month
+        && r.earliest.day != r.latest.day;
+}
+
 export function isDateOrdered(d1: DateProto.AsObject, d2: DateRangeProto.AsObject, d3: DateProto.AsObject): boolean {
     return lessThanOrEqual(d1, d2.earliest) && lessThanOrEqual(d2.latest, d3);
 }

@@ -50,4 +50,22 @@ public class BeforeDate<D extends ChronoLocalDate> extends AbstractDateRange {
         return approximate;
     }
 
+    @Nonnull
+    @Override
+    public Optional<? extends DateRange> intersection(final DateRange that) {
+        if (that instanceof BeforeDate) return this.intersection((BeforeDate<?>) that);
+        return super.intersection(that);
+    }
+
+    public Optional<BeforeDate<?>> intersection(final BeforeDate<?> that) {
+        return that.date.isAfter(this.date)
+                ? Optional.of(this)
+                : Optional.of(that);
+    }
+
+    @Override
+    public String toString() {
+        return "Before[" + date + "]";
+    }
+
 }

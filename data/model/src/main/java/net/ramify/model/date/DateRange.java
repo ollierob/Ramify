@@ -68,7 +68,7 @@ public interface DateRange extends BuildsProto<DateProto.DateRange> {
     }
 
     @Nonnull
-    default Optional<DateRange> intersection(DateRange that) {
+    default Optional<? extends DateRange> intersection(final DateRange that) {
         return Optional.ofNullable(DateRanges.intersection(this, that));
     }
 
