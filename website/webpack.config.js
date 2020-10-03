@@ -49,7 +49,7 @@ module.exports = {
                 use: [
                     {loader: 'style-loader'},
                     {loader: 'css-loader'},
-                    {loader: 'less-loader', options: {javascriptEnabled: true}}
+                    {loader: 'less-loader', options: {lessOptions: {javascriptEnabled: true}}}
                 ]
             },
             {
