@@ -41,7 +41,8 @@ export class EventBoxDate extends React.PureComponent<Props, State> {
         const event = this.props.event;
         if (!event) return null;
         const date = event.date;
-        const exactDateOrMonth = isExactRange(date) || isInMonth(date);
+        const exactDate = isExactRange(date);
+        const exactMonth = !exactDate && isInMonth(date);
 
         const person = this.props.person;
         if (!person) return null;
@@ -52,9 +53,9 @@ export class EventBoxDate extends React.PureComponent<Props, State> {
 
             <div className="year">{formatYearRange(date, EmptyPrefixWords)}</div>
 
-            {exactDateOrMonth && <div className="date">{formatDateRange(date, MonthDayWordsFormatter, EmptyPrefixWords)}</div>}
+            {(exactDate || exactMonth) && <div className="date">{formatDateRange(date, MonthDayWordsFormatter, EmptyPrefixWords)}</div>}
 
-            {!exactDateOrMonth && eventType(event) == "BIRTH" && <div className="date compute">
+            {!exactDate && eventType(event) == "BIRTH" && <div className="date compute">
                 <a onClick={() => this.setState({modalOpen: true})}>Compute</a>
             </div>}
 
