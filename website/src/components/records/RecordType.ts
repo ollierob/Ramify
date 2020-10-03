@@ -39,6 +39,7 @@ const ShortRecordTitles: { [key in RecordType]: string } = {
     MEMBERSHIP: "Membership",
     MEMORIAL: "Memorials",
     MENTION: "Mentions",
+    MILITARY: "Military Service",
     MIXED: "Mixed",
     PAYMENT: "Payments",
     PROBATE: "Probate",

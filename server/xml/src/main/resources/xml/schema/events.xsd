@@ -25,6 +25,8 @@
     
   <xs:element name="marriage" type="tns:xmlMarriageEvent"/>
     
+  <xs:element name="military" type="tns:xmlMilitaryServiceEvent"/>
+    
   <xs:element name="personEvent" type="tns:xmlPersonEvent"/>
     
   <xs:element name="probate" type="tns:xmlProbateEvent"/>
@@ -202,6 +204,20 @@
   </xs:complexType>
     
   <xs:complexType name="xmlResidenceEvent">
+        
+    <xs:complexContent>
+            
+      <xs:extension base="tns:xmlPersonEvent">
+                
+        <xs:sequence/>
+              
+      </xs:extension>
+          
+    </xs:complexContent>
+      
+  </xs:complexType>
+    
+  <xs:complexType name="xmlMilitaryServiceEvent">
         
     <xs:complexContent>
             

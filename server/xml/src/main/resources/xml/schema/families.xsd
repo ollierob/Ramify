@@ -61,6 +61,8 @@
                 
         <xs:element ref="ns2:residence"/>
                 
+        <xs:element ref="ns2:military"/>
+                
         <xs:element ref="ns2:death"/>
                 
         <xs:element ref="ns2:burial"/>

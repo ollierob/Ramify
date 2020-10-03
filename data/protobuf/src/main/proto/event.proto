@@ -61,6 +61,8 @@ enum RecordType {
     MEMBERSHIP = 34;
     TRANSACTION = 35;
 
+    MILITARY = 40;
+
     HISTORIC = 98; //Used for historic non-personal events
     MIXED = 99; //Registers
 

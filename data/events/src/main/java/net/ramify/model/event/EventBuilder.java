@@ -19,6 +19,7 @@ import net.ramify.model.event.type.misc.Flourished;
 import net.ramify.model.event.type.misc.GenericLifeEvent;
 import net.ramify.model.event.type.residence.GenericResidenceEvent;
 import net.ramify.model.event.type.residence.ResidenceEvent;
+import net.ramify.model.event.type.service.MilitaryServiceEvent;
 import net.ramify.model.event.type.will.GenericProbateEvent;
 import net.ramify.model.event.type.will.ProbateEvent;
 import net.ramify.model.person.HasPersonId;
@@ -133,6 +134,10 @@ public class EventBuilder {
 
     public LifeEvent toAnyLifeEvent(final HasPersonId person, final String title) {
         return new GenericLifeEvent(title, eventId, person.personId(), this.eventProperties());
+    }
+
+    public LifeEvent toMilitary(final HasPersonId person) {
+        return new MilitaryServiceEvent(eventId, person.personId(), this.eventProperties()).with(place);
     }
 
 }
