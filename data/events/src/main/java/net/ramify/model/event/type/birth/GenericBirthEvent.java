@@ -29,6 +29,12 @@ public class GenericBirthEvent extends AbstractPersonEvent<GenericBirthEvent> im
         return BirthEvent.super.givenAge();
     }
 
+    @Nonnull
+    @Override
+    public Optional<Age> computedAge() {
+        return BirthEvent.super.computedAge();
+    }
+
     @Override
     public Optional<String> occupation() {
         return BirthEvent.super.occupation();

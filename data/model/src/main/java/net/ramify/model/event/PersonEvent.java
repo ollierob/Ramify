@@ -60,8 +60,10 @@ public interface PersonEvent extends Event, HasAges, HasPersonId, Castable<Perso
                 .setPersonId(this.personId().value())
                 .setInferred(this.isInferred());
         HasPlace.getPlace(this).ifPresent(place -> builder.setPlace(place.toProto()));
-        this.givenAge().ifPresent(age -> builder.setGivenAge(age.toProto()));
-        this.computedAge().ifPresent(age -> builder.setComputedAge(age.toProto()));
+        if (!this.isBirth()) {
+            this.givenAge().ifPresent(age -> builder.setGivenAge(age.toProto()));
+            this.computedAge().ifPresent(age -> builder.setComputedAge(age.toProto()));
+        }
         this.occupation().ifPresent(builder::setOccupation);
         return builder;
     }

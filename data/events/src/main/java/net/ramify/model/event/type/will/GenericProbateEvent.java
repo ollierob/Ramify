@@ -10,7 +10,7 @@ import javax.annotation.Nonnull;
 
 public class GenericProbateEvent extends AbstractPersonEvent<GenericProbateEvent> implements ProbateEvent {
 
-    public GenericProbateEvent(EventId id, PersonId personId, EventProperties properties) {
+    public GenericProbateEvent(final EventId id, final PersonId personId, final EventProperties properties) {
         super(id, personId, properties);
     }
 

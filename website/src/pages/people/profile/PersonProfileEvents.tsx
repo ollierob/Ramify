@@ -82,7 +82,7 @@ export class PersonProfileEvents extends React.PureComponent<Props, State> {
 
     private historicEvents(): ReadonlyArray<ProfileEvent> {
         if (!this.state.historic.data) return [];
-        return this.state.historic.data.map<ProfileEvent>(event => ({event, type: "historic"}));
+        return this.state.historic.data.map<ProfileEvent>(event => ({event, type: "historic", relationshipToMain: "self"}));
     }
 
     componentDidMount() {

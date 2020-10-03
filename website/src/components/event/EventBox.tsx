@@ -43,7 +43,7 @@ export class EventBox extends React.PureComponent<EventBoxProps> {
                     {event.place && <div className="place">
                         <PlaceAndParent place={event.place}/>
                     </div>}
-                    {event.computedage && isSelf && eventType(event) != "BIRTH" && <div className="computedAge">
+                    {event.computedage && isSelf && <div className="computedAge">
                         Age {renderAge(event.computedage)}
                     </div>}
                 </div>

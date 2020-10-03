@@ -34,7 +34,7 @@ public class DefaultHistoricEventsResource implements HistoricEventsResource {
             events.addAll(eventProvider.within(place, date));
         }
         events.addAll(eventProvider.global(date));
-        return HistoricEvents.of(events);
+        return HistoricEvents.of(events, start);
     }
 
 }

@@ -16,6 +16,12 @@ public interface BirthEvent extends UniqueEvent {
 
     @Nonnull
     @Override
+    default Optional<Age> computedAge() {
+        return Optional.of(Age.ZERO);
+    }
+
+    @Nonnull
+    @Override
     default Optional<String> occupation() {
         return Optional.empty();
     }
