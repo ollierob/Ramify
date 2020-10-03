@@ -24,8 +24,8 @@ public class PlaceParserContext extends ParserContext {
         this.places = places;
     }
 
-    public CountryIso countryIso(final boolean includeSubdivision) {
-        return includeSubdivision ? iso : iso.withoutSubdivision();
+    public CountryIso countryIso() {
+        return iso;
     }
 
     public PlaceProvider places() {

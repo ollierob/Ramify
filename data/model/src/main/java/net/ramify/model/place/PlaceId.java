@@ -15,12 +15,11 @@ public class PlaceId extends Id implements HasPlaceId {
 
     public PlaceId(final String value) {
         super(value);
-        Preconditions.checkArgument(value.charAt(2) == ':', "Invalid country ISO: %s", value);
         Preconditions.checkArgument(value.indexOf(':', 3) > 0, "Invalid name: %s", value);
     }
 
     public PlaceId(final CountryIso iso, final Class<? extends Place> type, final String name) {
-        super(iso.withoutSubdivision() + ":" + name + ":" + type.getSimpleName().toLowerCase());
+        super(iso + ":" + name + ":" + type.getSimpleName().toLowerCase());
         this.iso = iso;
     }
 
@@ -42,7 +41,8 @@ public class PlaceId extends Id implements HasPlaceId {
     }
 
     private static String parseName(final String id) {
-        return id.substring(3, id.indexOf(':', 3));
+        final int a = id.indexOf(':') + 1, b = id.indexOf(':', a);
+        return id.substring(a, b);
     }
 
     public boolean isParentOf(final PlaceId that, final PlaceProvider placeProvider) {

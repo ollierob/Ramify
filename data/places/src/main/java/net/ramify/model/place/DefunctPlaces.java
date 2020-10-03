@@ -1,8 +1,9 @@
 package net.ramify.model.place;
 
 import com.google.common.collect.ImmutableSet;
+import net.ramify.model.place.iso.CountryIso;
+import net.ramify.model.place.iso.CountrySubdivisionIso;
 import net.ramify.model.place.region.Chapelry;
-import net.ramify.model.place.region.Country;
 import net.ramify.model.place.region.Hundred;
 import net.ramify.model.place.region.Parish;
 import net.ramify.model.place.region.Township;
@@ -21,9 +22,9 @@ public class DefunctPlaces {
             Hundred.class,
             Manor.class, Graveship.class);
 
-    public static boolean isDefunct(@Nonnull final Place place, final Country country) {
-        if (country == null) return false;
-        if (PlaceId.ENGLAND.equals(country.placeId())) return isDefunctInEngland(place);
+    public static boolean isDefunct(@Nonnull final Place place, final CountryIso iso) {
+        if (iso == null) return false;
+        if (CountrySubdivisionIso.GB_ENG.equals(iso)) return isDefunctInEngland(place);
         return false;
     }
 

@@ -52,7 +52,7 @@ public class DefaultRecordSet implements RecordSet {
         this.type = Objects.requireNonNull(type, "type");
         this.date = Objects.requireNonNull(date, "date");
         this.creatorPlaceId = creatorPlaceId;
-        this.coversPlaceId = coversPlaceId;
+        this.coversPlaceId = Objects.requireNonNull(coversPlaceId, "covers");
         this.longTitle = longTitle;
         this.shortTitle = shortTitle;
         this.description = description;

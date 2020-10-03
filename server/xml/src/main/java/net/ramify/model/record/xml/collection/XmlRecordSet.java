@@ -47,7 +47,7 @@ class XmlRecordSet implements HasRecordSetId {
     @XmlAttribute(name = "shortTitle")
     private String shortTitle;
 
-    @XmlAttribute(name = "creatorPlace")
+    @XmlAttribute(name = "creatorPlaceId")
     private String creatorPlaceId;
 
     @XmlAttribute(name = "coversPlaceId")

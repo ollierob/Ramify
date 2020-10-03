@@ -58,7 +58,7 @@ public class XmlCountyBorough extends XmlRegion<CountyBorough> {
     @Override
     protected PlaceHistory history(final PlaceParserContext context) {
         var history = super.history(context);
-        if (history == null) history = this.defaultHistory(context.countryIso(true));
+        if (history == null) history = this.defaultHistory(context.countryIso());
         return history;
     }
 

@@ -2,7 +2,6 @@ package net.ramify.model.place;
 
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.proto.PlaceProto;
-import net.ramify.model.place.region.Country;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -48,7 +47,7 @@ public abstract class AbstractPlace implements Place {
 
     @Override
     public boolean isDefunct() {
-        return (history != null && history.hasClosure()) || DefunctPlaces.isDefunct(this, this.find(Country.class).orElse(null));
+        return (history != null && history.hasClosure()) || DefunctPlaces.isDefunct(this, this.countryIso());
     }
 
     protected static PlaceProto.PlaceType.Builder placeTypeBuilder(final String name) {

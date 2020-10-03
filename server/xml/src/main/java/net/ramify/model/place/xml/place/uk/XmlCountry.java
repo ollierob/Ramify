@@ -33,7 +33,7 @@ class XmlCountry extends XmlPlace {
 
     @Nonnull
     protected PlaceId placeId(final String id, final CountryIso iso) {
-        return new PlaceId(iso, Country.class, id);
+        return new PlaceId(this.iso == null ? iso : CountryIso.valueOf(this.iso), Country.class, id);
     }
 
     @Override

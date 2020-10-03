@@ -19,8 +19,9 @@ public class CountryIso extends Iso {
             case "US":
                 return US;
             default:
-                final var dash = iso.indexOf('-');
-                return dash <= 0 ? new CountryIso(iso) : new CountrySubdivisionIso(iso.substring(0, dash), iso.substring(dash + 1));
+                return iso.indexOf('-') < 0
+                        ? new CountryIso(iso)
+                        : new CountrySubdivisionIso(iso);
         }
     }
 
@@ -31,6 +32,10 @@ public class CountryIso extends Iso {
 
     public CountryIso withoutSubdivision() {
         return this;
+    }
+
+    public boolean contains(final CountryIso that) {
+        return this.equals(that.withoutSubdivision());
     }
 
 }
