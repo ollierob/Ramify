@@ -14,7 +14,9 @@ import {DEFAULT_FAMILY_TREE_LOADER} from "../tree/FamilyTreeLoader";
 import {AsyncData, asyncLoadData} from "../fetch/AsyncData";
 import {PersonName} from "../people/PersonName";
 
-type Props = EventBoxProps;
+type Props = EventBoxProps & {
+    showCompute?: boolean;
+};
 
 type State = {
     modalOpen?: boolean;
@@ -49,17 +51,19 @@ export class EventBoxDate extends React.PureComponent<Props, State> {
 
         const anyEvents = this.props.person.eventsList != null && this.props.person.eventsList.length > 0;
 
+        const showCompute = this.props.showCompute;
+
         return <>
 
             <div className="year">{formatYearRange(date, EmptyPrefixWords)}</div>
 
             {(exactDate || exactMonth) && <div className="date">{formatDateRange(date, MonthDayWordsFormatter, EmptyPrefixWords)}</div>}
 
-            {!exactDate && eventType(event) == "BIRTH" && <div className="date compute">
+            {!exactDate && showCompute && eventType(event) == "BIRTH" && <div className="date compute">
                 <a onClick={() => this.setState({modalOpen: true})}>Compute</a>
             </div>}
 
-            <Modal
+            {showCompute && <Modal
                 className="inferBirth"
                 title={<>Compute birth date of <PersonName name={person.name}/></>}
                 visible={this.state.modalOpen}
@@ -81,7 +85,7 @@ export class EventBoxDate extends React.PureComponent<Props, State> {
                 {this.state.inferredBirthDate.loading && <Loading/>}
                 {this.state.inferredBirthDate.loaded && <>Date: {this.state.inferredBirthDate.data ? formatDateRange(this.state.inferredBirthDate.data, "day") : "Could not compute from given events"}</>}
 
-            </Modal>
+            </Modal>}
 
         </>;
 

@@ -35,7 +35,7 @@ export class EventBox extends React.PureComponent<EventBoxProps> {
 
         return <Card className={"event " + eventClass(event)}>
             <div className="left">
-                <EventBoxDate {...this.props}/>
+                <EventBoxDate {...this.props} showCompute={isSelf}/>
             </div>
             <div className="right">
                 <div className="top">
