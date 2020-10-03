@@ -7,7 +7,7 @@ import {FamilyTreeId} from "../../../components/tree/FamilyTree";
 import {FamilyTreeViewer} from "../../../components/tree/view/FamilyTreeViewer";
 import "./ViewTree.css";
 import {DEFAULT_FAMILY_TREE_LOADER} from "../../../components/tree/FamilyTreeLoader";
-import {FamilyTreeSubmenu} from "../../../components/tree/view/FamilyTreeSubmenu";
+import {FamilyTreeViewSubmenu} from "../../../components/tree/view/FamilyTreeViewSubmenu";
 
 type Props = BasePageProps;
 
@@ -34,7 +34,7 @@ export default class ViewTreePage extends PeopleBasePage<State> {
 
     body() {
         return <div className="viewTree">
-            <FamilyTreeSubmenu tree={this.state.tree} zoom={this.state.zoom} setZoom={this.setZoom}/>
+            <FamilyTreeViewSubmenu tree={this.state.tree} zoom={this.state.zoom} setZoom={this.setZoom}/>
             <FamilyTreeViewer treeId={this.state.treeId} family={this.state.family} content zoom={this.state.zoom}/>
         </div>;
     }

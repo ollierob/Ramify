@@ -22,7 +22,7 @@ const MAX_HISTORY = 10;
 type PlaceHistory = Place.AsObject[];
 
 export function addNewPlace(place: Place.AsObject, list: PlaceList, permitDuplicates: boolean = false): PlaceList {
-    place = place.parent ? {...place, parent: null} : place;
+    //place = place.parent ? {...place, parent: null} : place;
     if (!list.length) return [place];
     if (list[0].id == place.id) return list;
     const newList = [place].concat(list);

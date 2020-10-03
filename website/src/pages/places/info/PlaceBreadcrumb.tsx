@@ -25,14 +25,15 @@ export const PlaceBreadcrumb = (props: {loading?: boolean, place: Place.AsObject
 
 function listHierarchy(place: Place.AsObject, max: number): ReadonlyArray<Place.AsObject> {
     if (!place) return [];
-    let list: Place.AsObject[] = [];
-    while (place != null) {
-        list.push(place);
-        place = place.parent;
-    }
-    list = list.reverse();
-    if (list.length <= max + 1) return list;
-    return [list[0], null].concat(list.slice(list.length - max));
+    // let list: Place.AsObject[] = [];
+    // while (place != null) {
+    //     list.push(place);
+    //     place = place.parent;
+    // }
+    // list = list.reverse();
+    // if (list.length <= max + 1) return list;
+    // return [list[0], null].concat(list.slice(list.length - max));
+    return [place]
 }
 
 const Breadcrumb = (props: {place: Place.AsObject, separator: boolean, showType: boolean, link?: boolean}) => {

@@ -6,17 +6,18 @@ import {Loading} from "../../style/Loading";
 import {FavouritesIcon, SearchIcon, TreeIcon, ViewIcon} from "../../images/Icons";
 import {Button, Input, Popover} from "antd";
 import {FamilyTreeId} from "../FamilyTree";
+import {PersonSearchPopover} from "./PersonSearchPopover";
 
 type ZoomHandler = {zoom: number, setZoom: (zoom: number, reset?: boolean) => void}
 
-export const FamilyTreeSubmenu = (props: {tree: AsyncData<FamilyTree.AsObject>} & ZoomHandler) => {
+export const FamilyTreeViewSubmenu = (props: {tree: AsyncData<FamilyTree.AsObject>} & ZoomHandler) => {
     return <SubMenu className="top">
         {props.tree.loading && <Loading/>}
-        {props.tree.data && <SubmenuContent {...props} tree={props.tree.data}/>}
+        {props.tree.data && <FamilyTreeViewSubmenuContent {...props} tree={props.tree.data}/>}
     </SubMenu>;
 };
 
-const SubmenuContent = (props: {tree: FamilyTree.AsObject} & ZoomHandler) => {
+const FamilyTreeViewSubmenuContent = (props: {tree: FamilyTree.AsObject} & ZoomHandler) => {
 
     const tree = props.tree;
 
@@ -26,42 +27,11 @@ const SubmenuContent = (props: {tree: FamilyTree.AsObject} & ZoomHandler) => {
             <TreeIcon/> {tree.name}
         </span>
 
-        <PersonSearch {...props}/>
+        <PersonSearchPopover {...props}/>
         <PersonBookmark {...props}/>
         <ViewControls {...props}/>
 
     </>;
-};
-
-type SearchState = {popover?: boolean, input?: string};
-
-const PersonSearch = (props: {tree: FamilyTree.AsObject}) => {
-
-    const [state, setState] = React.useState<SearchState>({});
-
-    return <Popover
-        content={<PersonSearchDropdown id={props.tree.id}/>}
-        placement="bottomLeft"
-        visible={state.popover}
-        onVisibleChange={visible => setState({popover: visible})}>
-            <span className={"control " + (state.popover ? "red" : "gray")}>
-                <SearchIcon/> Find person
-            </span>
-    </Popover>;
-
-};
-
-const PersonSearchDropdown = (props: {id: FamilyTreeId}) => {
-
-    const [state, setState] = React.useState<SearchState>({});
-
-    return <>
-        <Input
-            placeholder="Enter a name"
-            value={state.input}
-            onChange={e => setState({input: e.target.value})}/>
-    </>;
-
 };
 
 type BookmarkState = {dropdown?: boolean};

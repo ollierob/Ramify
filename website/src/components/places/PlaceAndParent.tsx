@@ -9,8 +9,9 @@ export const PlaceAndParent = (props: {place: Place.AsObject}) => {
 
     return <>
         <PlaceAndType place={place}/>
-        {place.parent && <>&nbsp;in <PlaceAndType place={place.parent}/></>}
     </>;
+
+    //{place.parent && <>&nbsp;in <PlaceAndType place={place.parent}/></>}
 
 };
 
