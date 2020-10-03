@@ -51,7 +51,9 @@ export default class ViewTreePeoplePage extends PeopleBasePage<State> {
     body(): React.ReactNode {
         return <div className="viewTree">
             <FamilyTreeViewSubmenu tree={this.state.tree} link/>
-            <FamilyTreePeopleTable tree={this.state.tree}/>
+            <div className="content">
+                <FamilyTreePeopleTable tree={this.state.tree}/>
+            </div>
         </div>;
     }
 
