@@ -37,7 +37,7 @@ public class PlaceGroupId extends Id {
     }
 
     private static String parseName(final String id) {
-        return id.substring(id.indexOf(':'));
+        return id.substring(id.indexOf(':') + 1);
     }
 
     public PlaceId withPlaceType(final String type) {

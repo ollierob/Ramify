@@ -9,11 +9,13 @@ class PlaceGroupIdTest {
     @Test
     void testWithPlaceType() {
 
-        final var groupId = new PlaceGroupId("GB:heptonstall");
+        final var groupId = new PlaceGroupId("GB-ENG:heptonstall");
         final var placeId = groupId.withPlaceType("village");
 
-        assertEquals("GB:heptonstall:village", placeId.value());
-        assertEquals(new PlaceId("GB:heptonstall:village"), placeId);
+        assertEquals("GB-ENG:heptonstall:village", placeId.value());
+        assertEquals(new PlaceId("GB-ENG:heptonstall:village"), placeId);
+        assertEquals("heptonstall", groupId.name());
+        assertEquals("GB-ENG", groupId.countryIso().value());
 
     }
 
