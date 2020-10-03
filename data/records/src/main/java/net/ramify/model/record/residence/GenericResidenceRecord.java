@@ -15,7 +15,7 @@ public class GenericResidenceRecord extends GenericLifeEventRecord implements Re
 
     private final Place place;
 
-    public GenericResidenceRecord(RecordId recordId, RecordSet recordSet, Family family, DateRange date, final Place place) {
+    public GenericResidenceRecord(final RecordId recordId, final RecordSet recordSet, final Family family, final DateRange date, final Place place) {
         super(recordId, recordSet, family, date);
         this.place = place;
     }
@@ -24,7 +24,7 @@ public class GenericResidenceRecord extends GenericLifeEventRecord implements Re
     @Override
     public RecordProto.Record.Builder toProtoBuilder() {
         final var builder = ResidenceRecord.super.toProtoBuilder();
-        Consumers.ifNonNull(place, p -> builder.setPlace(p.toProto(false)));
+        Consumers.ifNonNull(place, p -> builder.setPlace(p.toProto()));
         return builder;
     }
 

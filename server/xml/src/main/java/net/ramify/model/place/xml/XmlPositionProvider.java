@@ -72,7 +72,7 @@ public class XmlPositionProvider implements PositionProvider {
             final var places = (XmlPositions) unmarshalled;
             locationProvider.putAll(places.positions());
         } catch (final JAXBException jex) {
-            logger.warn("Could not read locations in file " + file + ": " + jex.getMessage());
+            logger.warn("Ignoring locations in file " + file);
         } catch (final RuntimeException rex) {
             throw new RuntimeException("Could not read locations in file " + file, rex);
         }

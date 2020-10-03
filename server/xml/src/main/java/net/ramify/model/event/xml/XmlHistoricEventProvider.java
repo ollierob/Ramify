@@ -41,6 +41,16 @@ class XmlHistoricEventProvider extends AbstractMappedProvider<EventId, HistoricE
 
     @Nonnull
     @Override
+    public Set<HistoricEvent> global(final DateRange dateRange) {
+        return this.values()
+                .stream()
+                .filter(HistoricEvent::isGlobal)
+                .filter(event -> event.date().intersects(dateRange))
+                .collect(Collectors.toSet());
+    }
+    
+    @Nonnull
+    @Override
     public Set<HistoricEvent> within(final Place place, final DateRange date) {
         return this.values()
                 .stream()

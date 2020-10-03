@@ -30,9 +30,9 @@ public interface PlaceDescription extends HasPlaceId, BuildsProto<PlaceProto.Pla
     default PlaceProto.PlaceDescription toProto() {
         return PlaceProto.PlaceDescription.newBuilder()
                 .setDescription(this.description())
-                .addAllAlsoSee(Iterables.transform(this.alsoSee(), p -> p.toProto(false)))
-                .addAllLaterBecame(Iterables.transform(this.laterBecame(), p -> p.toProto(false)))
-                .addAllCoterminous(Iterables.transform(this.coterminous(), p -> p.toProto(false)))
+                .addAllAlsoSee(Iterables.transform(this.alsoSee(), Place::toProto))
+                .addAllLaterBecame(Iterables.transform(this.laterBecame(), Place::toProto))
+                .addAllCoterminous(Iterables.transform(this.coterminous(), Place::toProto))
                 .addAllLink(Iterables.transform(this.links(), Link::toProto))
                 .build();
     }

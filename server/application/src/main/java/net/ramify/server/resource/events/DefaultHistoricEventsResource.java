@@ -33,6 +33,7 @@ public class DefaultHistoricEventsResource implements HistoricEventsResource {
             final var place = placeProvider.require(placeId);
             events.addAll(eventProvider.within(place, date));
         }
+        events.addAll(eventProvider.global(date));
         return HistoricEvents.of(events);
     }
 

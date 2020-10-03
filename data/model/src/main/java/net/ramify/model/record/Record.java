@@ -37,7 +37,7 @@ public interface Record extends HasRecordId, HasRecordSet, HasDate, HasFamilies,
                 .setRecordSetId(this.recordSetId().value())
                 .setType(this.type().toProto())
                 .addAllFamily(Iterables.transform(this.families(), Family::toProto));
-        if (this instanceof HasPlace) builder.setPlace(((HasPlace) this).place().toProto(false));
+        if (this instanceof HasPlace) builder.setPlace(((HasPlace) this).place().toProto());
         return builder;
     }
 

@@ -21,30 +21,21 @@ public interface Places extends Iterable<Place>, HasPlaces, BuildsProto<PlacePro
         return Sets.newHashSet(this);
     }
 
-    default boolean protoIncludesParent() {
-        return true;
-    }
-
     @Nonnull
     @Override
     default PlaceProto.PlaceList toProto() {
         return PlaceProto.PlaceList.newBuilder()
-                .addAllPlace(Iterables.transform(this, place -> place.toProto(this.protoIncludesParent())))
+                .addAllPlace(Iterables.transform(this, Place::toProto))
                 .build();
     }
 
     static Places of() {
-        return of(ImmutableSet.of(), false);
+        return of(ImmutableSet.of());
     }
 
-    static Places of(final Collection<? extends Place> places, final boolean includeParent) {
+    static Places of(final Collection<? extends Place> places) {
         final ImmutableSet<Place> fixedPlaces = ImmutableSet.copyOf(places);
         return new Places() {
-
-            @Override
-            public boolean protoIncludesParent() {
-                return includeParent;
-            }
 
             @Override
             public Iterator<Place> iterator() {

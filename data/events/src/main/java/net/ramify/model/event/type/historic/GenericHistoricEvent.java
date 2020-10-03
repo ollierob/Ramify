@@ -6,7 +6,6 @@ import com.google.common.collect.ImmutableSet;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.EventId;
 import net.ramify.model.event.historic.HistoricEvent;
-import net.ramify.model.place.Place;
 import net.ramify.model.place.type.SettlementOrRegion;
 import net.ramify.model.util.Link;
 
@@ -21,7 +20,6 @@ public class GenericHistoricEvent implements HistoricEvent {
 
     private final EventId id;
     private final DateRange date;
-    private final Place place;
     private final SettlementOrRegion region;
     private final String title;
     private final String description;
@@ -30,7 +28,6 @@ public class GenericHistoricEvent implements HistoricEvent {
     public GenericHistoricEvent(
             final EventId id,
             final DateRange date,
-            final Place place,
             final SettlementOrRegion region,
             final String title,
             final String description,
@@ -38,7 +35,6 @@ public class GenericHistoricEvent implements HistoricEvent {
         Preconditions.checkArgument(!isBlank(title), "Blank title");
         this.id = Objects.requireNonNull(id);
         this.date = Objects.requireNonNull(date);
-        this.place = Objects.requireNonNull(place);
         this.region = region;
         this.title = Objects.requireNonNull(title);
         this.description = description;
@@ -61,12 +57,6 @@ public class GenericHistoricEvent implements HistoricEvent {
     @Override
     public DateRange date() {
         return date;
-    }
-
-    @Nonnull
-    @Override
-    public Place place() {
-        return place;
     }
 
     @Nonnull

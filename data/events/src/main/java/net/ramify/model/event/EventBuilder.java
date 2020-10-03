@@ -128,7 +128,7 @@ public class EventBuilder {
     }
 
     public HistoricEvent toHistoric(final String title, final SettlementOrRegion region) {
-        return new GenericHistoricEvent(eventId, date, place, region, title, description, links);
+        return new GenericHistoricEvent(eventId, date, region, title, description, links);
     }
 
     public LifeEvent toAnyLifeEvent(final HasPersonId person, final String title) {

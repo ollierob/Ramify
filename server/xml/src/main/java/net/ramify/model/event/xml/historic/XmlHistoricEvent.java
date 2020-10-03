@@ -8,6 +8,7 @@ import net.ramify.model.place.type.SettlementOrRegion;
 import net.ramify.model.place.xml.description.XmlLink;
 import net.ramify.model.record.xml.RecordContext;
 
+import javax.annotation.CheckForNull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -23,7 +24,7 @@ public class XmlHistoricEvent extends XmlEvent {
     @XmlAttribute(name = "place")
     private String placeId;
 
-    @XmlAttribute(name = "region", required = true)
+    @XmlAttribute(name = "region", required = false)
     private String regionId;
 
     @XmlElementRef(required = false)
@@ -41,8 +42,10 @@ public class XmlHistoricEvent extends XmlEvent {
         return context.places().require(new PlaceId(placeId));
     }
 
+    @CheckForNull
     protected SettlementOrRegion region(final RecordContext context) {
         try {
+            if (regionId == null) return null;
             return context.places().require(new PlaceId(regionId)).requireAs(SettlementOrRegion.class);
         } catch (Place.InvalidPlaceTypeException e) {
             throw new IllegalArgumentException(e);

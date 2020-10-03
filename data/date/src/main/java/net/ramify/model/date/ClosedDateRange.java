@@ -75,7 +75,7 @@ public class ClosedDateRange extends AbstractDateRange {
 
     @Override
     public String toString() {
-        return "Range[" + earliest + "-" + latest + "]";
+        return "Range[" + earliest + "," + latest + "]";
     }
 
 }

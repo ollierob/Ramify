@@ -35,7 +35,7 @@ class XmlHistoricEventModule extends PrivateModule {
     @Singleton
     @Named("data")
     File provideXmlDirectory() throws URISyntaxException {
-        final var data = XmlHistoricEventModule.class.getResource("/xml/data/places");
+        final var data = XmlHistoricEventModule.class.getResource("/xml/data");
         Preconditions.checkState(data != null, "Could not load XML data");
         return new File(data.toURI());
     }

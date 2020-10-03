@@ -43,7 +43,7 @@ public interface Place extends HasPlaceId, Castable<Place>, BuildsProto<PlacePro
     PlaceProto.PlaceType protoType();
 
     @Nonnull
-    default PlaceProto.Place.Builder toProtoBuilder(final boolean includeParent) {
+    default PlaceProto.Place.Builder toProtoBuilder() {
         final var builder = PlaceProto.Place.newBuilder()
                 .setId(this.placeId().value())
                 .setGroupId(this.placeGroupId().value())
@@ -56,14 +56,9 @@ public interface Place extends HasPlaceId, Castable<Place>, BuildsProto<PlacePro
     }
 
     @Nonnull
-    default PlaceProto.Place toProto(final boolean includeParent) {
-        return this.toProtoBuilder(includeParent).build();
-    }
-
-    @Nonnull
     @Override
     default PlaceProto.Place toProto() {
-        return this.toProto(true);
+        return this.toProtoBuilder().build();
     }
 
     default <R extends Place> R requireAs(final Class<? extends R> type) throws InvalidPlaceTypeException {

@@ -81,7 +81,7 @@ public class DefaultPlacesResource implements PlacesResource {
     @Override
     public Places countries(final boolean onlyTopLevel) {
         final var countries = placeProvider.countries(onlyTopLevel);
-        return Places.of(ListUtils.sortedCopy(countries, Place.SORT_BY_NAME), true);
+        return Places.of(ListUtils.sortedCopy(countries, Place.SORT_BY_NAME));
     }
 
     @Override
@@ -110,7 +110,7 @@ public class DefaultPlacesResource implements PlacesResource {
         Consumers.ifNonNull(this.position(id), pos -> builder.setPosition(pos.toProto()));
         descriptionProvider.maybeGet(id).ifPresent(d -> builder.setDescription(d.toProto()));
         Consumers.ifNonNull(this.describeType(id), builder::setTypeDescription);
-        this.within(id, null).forEach(child -> builder.addChild(child.toProto(false)));
+        this.within(id, null).forEach(child -> builder.addChild(child.toProto()));
         return builder.build();
     }
 

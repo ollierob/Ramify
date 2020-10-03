@@ -11,6 +11,9 @@ import java.util.Set;
 public interface HistoricEventProvider extends Provider<EventId, HistoricEvent> {
 
     @Nonnull
+    Set<HistoricEvent> global(DateRange dateRange);
+
+    @Nonnull
     Set<HistoricEvent> within(Place place, DateRange date);
 
 }
