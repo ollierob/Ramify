@@ -1,6 +1,6 @@
 import * as React from "react";
 import {Menu} from "antd";
-import {PlacesIcon, RecordsIcon, TreeIcon} from "../../images/Icons";
+import {CommunityIcon, PlacesIcon, RecordsIcon, TreeIcon} from "../../images/Icons";
 import {PlaceFavouritesHandler} from "../../places/PlaceFavourites";
 import "./HeaderMenu.css";
 import {PlaceMenu} from "./places/PlaceMenu";
@@ -56,6 +56,13 @@ export default class HeaderMenu extends React.PureComponent<Props, State> {
                 <RecordMenu {...this.props} open={this.state.openMenus.includes("records")}/>
             </Menu.SubMenu>
 
+            <Menu.SubMenu
+                key="community"
+                title={<a href="/community"><CommunityIcon/> Community</a>}
+                className={this.props.active == "community" && ActiveClass}>
+
+            </Menu.SubMenu>
+
         </Menu>;
 
     }
@@ -63,4 +70,4 @@ export default class HeaderMenu extends React.PureComponent<Props, State> {
 }
 
 const ActiveClass = "ant-menu-item-selected";
-export type HeaderMenuType = "people" | "places" | "records"
+export type HeaderMenuType = "people" | "places" | "records" | "community"
