@@ -85,8 +85,8 @@ public class Census1851Record extends CensusRecord {
                 id,
                 Name.UNKNOWN,
                 person.gender().inverse(),
-                new SingletonPersonEventSet(this.deathBeforeCensus(id)), //FIXME tighter bounds
-                "Inferred ex-spouse of " + person.name()));
+                new SingletonPersonEventSet(this.deathBeforeCensus(id))) //FIXME tighter bounds
+                .withNotes("Inferred ex-spouse of " + person.name()));
     }
 
     public static abstract class Census1851Entry {

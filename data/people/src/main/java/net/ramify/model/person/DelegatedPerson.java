@@ -4,11 +4,12 @@ import net.ramify.model.event.collection.PersonEventSet;
 import net.ramify.model.person.features.PersonFeature;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.name.Name;
+import net.ramify.model.person.proto.PersonProto;
 
 import javax.annotation.Nonnull;
 import java.util.Set;
 
-public class DelegatedPerson implements Person {
+public class DelegatedPerson implements PersonBuilder {
 
     private final Person person;
 
@@ -42,6 +43,12 @@ public class DelegatedPerson implements Person {
     @Override
     public Set<? extends PersonFeature> features() {
         return person.features();
+    }
+
+    @Nonnull
+    @Override
+    public PersonProto.Person.Builder toProtoBuilder() {
+        return person.toProtoBuilder();
     }
 
 }

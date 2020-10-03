@@ -16,6 +16,8 @@ message Person {
     repeated Event events = 10;
     repeated PersonFeature feature = 11;
 
+    repeated string label = 20;
+
 }
 
 message PersonFeature {

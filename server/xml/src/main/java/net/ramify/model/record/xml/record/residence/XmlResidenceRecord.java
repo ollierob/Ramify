@@ -41,8 +41,8 @@ public class XmlResidenceRecord extends XmlPersonOnDateWithFamilyRecord {
         final var name = this.name(context.nameParser());
         final var gender = this.gender();
         final var events = this.events(id, place, context);
-        final var notes = this.notes();
-        return new GenericRecordPerson(id, name, gender, events, notes);
+        return new GenericRecordPerson(id, name, gender, events)
+                .withNotes(this.notes());
     }
 
     protected MutablePersonEventSet events(final PersonId personId, final Place place, final RecordContext context) {

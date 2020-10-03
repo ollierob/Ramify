@@ -32,7 +32,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -93,9 +92,8 @@ public class XmlBurialRecord extends XmlPersonOnDateRecord {
                 personId,
                 this.name(nameParser),
                 this.gender(),
-                this.events(personId, context, burialPlaceId),
-                this.notes(),
-                Collections.emptySet());
+                this.events(personId, context, burialPlaceId))
+                .withNotes(this.notes());
     }
 
     MutablePersonEventSet events(final PersonId personId, final RecordContext context, final PlaceId burialPlaceId) {

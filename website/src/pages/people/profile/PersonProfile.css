@@ -68,3 +68,13 @@
 .personProfile .profile .rightHalf .ant-tabs-tab.ant-tabs-tab-active {
     font-weight: bold;
 }
+
+.personProfile .profile .profileTitle .labels {
+    margin-left: 1em;
+    display: inline-block;
+}
+
+.personProfile .profile .profileTitle .labels .label {
+    font-size: 0.8em;
+    line-height: 1.2em;
+}

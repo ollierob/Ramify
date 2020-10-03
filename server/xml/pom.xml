@@ -117,6 +117,7 @@
                                         <pattern>.*Module.java</pattern>
                                         <pattern>.*Provider.java</pattern>
                                         <pattern>.*Context.java</pattern>
+                                        <pattern>.*Loader.java</pattern>
                                     </patterns>
                                 </myExcludes>
                             </schemaSourceExcludeFilters>

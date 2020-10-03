@@ -15,7 +15,6 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 @XmlType(namespace = XmlFamily.NAMESPACE, name = "familyTree")
@@ -31,30 +30,27 @@ public class XmlFamilyTree {
     @Nonnull
     public FamilyTree toFamilyTree(final RecordContext context) {
         Preconditions.checkState(families != null && !families.isEmpty(), "No families defined");
-        final AtomicInteger numPeople = new AtomicInteger();
         final Set<Family> families = this.families.stream()
                 .map(family -> family.toFamily(context))
-                .peek(family -> numPeople.addAndGet(family.numPeople()))
                 .collect(Collectors.toSet());
-        final var meta = new DefaultInfo(name, numPeople.get());
-        return new DefaultFamilyTree(meta, families);
+        return new DefaultFamilyTree(name, families);
     }
 
     @XmlTransient
     private static class DefaultFamilyTree implements FamilyTree {
 
-        private final FamilyTreeInfo meta;
+        private final String name;
         private final Set<Family> families;
 
-        private DefaultFamilyTree(final FamilyTreeInfo meta, final Set<Family> families) {
-            this.meta = meta;
+        private DefaultFamilyTree(final String name, final Set<Family> families) {
+            this.name = name;
             this.families = families;
         }
 
         @Nonnull
         @Override
         public FamilyTreeInfo info() {
-            return meta;
+            return new DefaultInfo(name, this.numPeople());
         }
 
         @Nonnull
@@ -71,7 +67,7 @@ public class XmlFamilyTree {
         private final String name;
         private final int numPeople;
 
-        private DefaultInfo(String name, int numPeople) {
+        private DefaultInfo(final String name, final int numPeople) {
             this.name = name;
             this.numPeople = numPeople;
         }

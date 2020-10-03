@@ -37,6 +37,9 @@ public class XmlFamilyPerson extends XmlPersonRecord {
     @XmlElementRef(required = false)
     private List<XmlRelationship> relationships;
 
+    @XmlElement(name = "label", namespace = XmlFamily.NAMESPACE)
+    private Set<String> labels;
+
     protected Person toPerson(final RecordContext context) {
         final var personId = this.personId();
         return new GenericRecordPerson(
@@ -44,8 +47,9 @@ public class XmlFamilyPerson extends XmlPersonRecord {
                 this.name(context.nameParser()),
                 this.gender(),
                 this.events(personId, context),
-                this.notes(),
-                this.features());
+                this.features())
+                .withNotes(this.notes())
+                .withLabels(labels);
     }
 
     protected Set<Relationship> relationships(final Person self, final XmlFamily.FamilyPersonProvider people, final RecordContext context) {

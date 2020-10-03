@@ -24,7 +24,6 @@ import javax.annotation.CheckForNull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlSeeAlso;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -100,9 +99,7 @@ public abstract class XmlRelationship {
                 this.personId(),
                 this.name(context.nameParser()),
                 this.gender(),
-                events,
-                null,
-                Collections.emptySet());
+                events);
     }
 
 }

@@ -3,7 +3,7 @@ package net.ramify.model.person;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.name.Name;
 
-public abstract class AbstractPerson implements Person {
+public abstract class AbstractPerson implements PersonBuilder {
 
     private final PersonId id;
     private final Name name;

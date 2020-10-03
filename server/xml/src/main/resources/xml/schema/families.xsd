@@ -206,6 +206,8 @@
             <xs:element ref="tns:unknown"/>
                       
           </xs:choice>
+                    
+          <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="label" type="xs:string"/>
                   
         </xs:sequence>
               
