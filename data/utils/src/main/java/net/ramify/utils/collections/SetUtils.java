@@ -10,23 +10,23 @@ import java.util.function.IntFunction;
 
 public class SetUtils {
 
-    public static <F, T> Set<T> transform(final Collection<F> collection, final Function<? super F, ? extends T> transform) {
-        return transform(collection, transform, Sets::newLinkedHashSetWithExpectedSize);
+    public static <F, T> Set<T> eagerTransform(final Collection<F> collection, final Function<? super F, ? extends T> transform) {
+        return eagerTransform(collection, transform, Sets::newLinkedHashSetWithExpectedSize);
     }
 
-    public static <F, T> Set<T> transform(final Collection<F> collection, final Function<? super F, ? extends T> transform, final IntFunction<Set<T>> createSet) {
-        return transform(collection, transform, false, createSet);
+    public static <F, T> Set<T> eagerTransform(final Collection<F> collection, final Function<? super F, ? extends T> transform, final IntFunction<Set<T>> createSet) {
+        return eagerTransform(collection, transform, false, createSet);
     }
 
-    public static <F, T> Set<T> transformIgnoreNull(final Collection<F> collection, final Function<? super F, ? extends T> transform, final IntFunction<Set<T>> createSet) {
-        return transform(collection, transform, true, createSet);
+    public static <F, T> Set<T> eagerTransformIgnoreNull(final Collection<F> collection, final Function<? super F, ? extends T> transform, final IntFunction<Set<T>> createSet) {
+        return eagerTransform(collection, transform, true, createSet);
     }
 
-    public static <F, T> Set<T> transformIgnoreNull(final Collection<F> collection, final Function<? super F, ? extends T> transform) {
-        return transform(collection, transform, true, Sets::newLinkedHashSetWithExpectedSize);
+    public static <F, T> Set<T> eagerTransformIgnoreNull(final Collection<F> collection, final Function<? super F, ? extends T> transform) {
+        return eagerTransform(collection, transform, true, Sets::newLinkedHashSetWithExpectedSize);
     }
 
-    private static <F, T> Set<T> transform(final Collection<F> collection, final Function<? super F, ? extends T> transform, final boolean ignoreNull, final IntFunction<Set<T>> createSet) {
+    private static <F, T> Set<T> eagerTransform(final Collection<F> collection, final Function<? super F, ? extends T> transform, final boolean ignoreNull, final IntFunction<Set<T>> createSet) {
         if (collection.isEmpty()) return Collections.emptySet();
         final var set = createSet.apply(collection.size());
         for (final var element : collection) {

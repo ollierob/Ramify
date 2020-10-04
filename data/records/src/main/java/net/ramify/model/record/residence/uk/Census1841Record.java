@@ -49,7 +49,7 @@ public class Census1841Record extends CensusRecord implements HasPlace {
     @Nonnull
     @Override
     public Set<Census1841Person> people() {
-        return SetUtils.transform(entries, entry -> entry.build(this));
+        return SetUtils.eagerTransform(entries, entry -> entry.build(this));
     }
 
     @Nonnull

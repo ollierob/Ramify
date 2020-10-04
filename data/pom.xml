@@ -16,23 +16,27 @@
     <artifactId>data</artifactId>
 
     <modules>
-        <module>kml</module>
-        <module>protobuf</module>
-        <module>model</module>
-        <module>records</module>
-        <module>events</module>
         <module>date</module>
+        <module>events</module>
+        <module>families</module>
+        <module>gedcom</module>
+        <module>kml</module>
+        <module>model</module>
         <module>people</module>
         <module>places</module>
+        <module>protobuf</module>
+        <module>records</module>
         <module>utils</module>
-        <module>families</module>
     </modules>
 
     <dependencies>
         <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>29.0-jre</version>
         </dependency>
     </dependencies>
 

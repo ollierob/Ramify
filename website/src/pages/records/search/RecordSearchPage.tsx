@@ -65,6 +65,7 @@ export default class RecordSearchPage extends RecordBasePage<State> {
                         <Input
                             placeholder="Matching all names"
                             size="large"
+                            autoComplete="off"
                             value={this.state.recordName}
                             onChange={e => this.setState({recordName: e.target.value})}/>
                     </Form.Item>

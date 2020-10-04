@@ -56,7 +56,7 @@ class XmlPlaceProvider implements PlaceProvider {
     @Nonnull
     @Override
     public Set<Place> findByGroup(final PlaceGroupId groupId) {
-        return SetUtils.transform(groupIds.get(groupId), this::require);
+        return SetUtils.eagerTransform(groupIds.get(groupId), this::require);
     }
 
     void addAll(final PlaceParserContext context, final Collection<XmlPlace> places) {

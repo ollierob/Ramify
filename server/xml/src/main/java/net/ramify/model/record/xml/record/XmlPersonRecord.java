@@ -88,7 +88,7 @@ public class XmlPersonRecord extends XmlRecord {
     protected Set<PersonFeature> features() {
         return features == null
                 ? ImmutableSet.of()
-                : SetUtils.transform(features, XmlPersonFeature::toFeature);
+                : SetUtils.eagerTransform(features, XmlPersonFeature::toFeature);
     }
 
     protected MutablePersonEventSet events(final PersonId personId, final RecordContext context) {

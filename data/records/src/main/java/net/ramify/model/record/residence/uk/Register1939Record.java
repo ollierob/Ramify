@@ -47,7 +47,7 @@ public class Register1939Record extends CensusRecord {
     @Nonnull
     @Override
     public Set<Register1939Person> people() {
-        return SetUtils.transform(entries, entry -> entry.build(this));
+        return SetUtils.eagerTransform(entries, entry -> entry.build(this));
     }
 
     @Nonnull

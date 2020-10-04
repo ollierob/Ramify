@@ -34,7 +34,7 @@ public interface HasPeople extends HasEvents, HasPersonIds {
     @Nonnull
     @Override
     default Set<PersonId> personIds() {
-        return SetUtils.transform(this.people(), Person::personId);
+        return SetUtils.eagerTransform(this.people(), Person::personId);
     }
 
     @Nonnull

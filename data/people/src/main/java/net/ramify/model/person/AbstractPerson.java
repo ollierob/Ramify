@@ -1,7 +1,10 @@
 package net.ramify.model.person;
 
+import net.ramify.model.event.collection.PersonEventSet;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.name.Name;
+
+import javax.annotation.Nonnull;
 
 public abstract class AbstractPerson implements PersonBuilder {
 
@@ -29,5 +32,9 @@ public abstract class AbstractPerson implements PersonBuilder {
     public Gender gender() {
         return gender;
     }
+
+    @Nonnull
+    @Override
+    public abstract PersonEventSet events();
 
 }

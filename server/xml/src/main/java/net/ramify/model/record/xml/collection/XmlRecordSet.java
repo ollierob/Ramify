@@ -143,12 +143,12 @@ class XmlRecordSet implements HasRecordSetId {
 
     private Set<RecordSetReference> buildReferences(final RecordContext context) {
         if (references == null) return Collections.emptySet();
-        return SetUtils.transform(references, ref -> ref.build(context.archives()));
+        return SetUtils.eagerTransform(references, ref -> ref.build(context.archives()));
     }
 
     private Set<RecordSetId> nextIds() {
         if (nextIds == null) return Collections.emptySet();
-        return SetUtils.transform(nextIds, XmlRecordSetId::recordSetId);
+        return SetUtils.eagerTransform(nextIds, XmlRecordSetId::recordSetId);
     }
 
     private int numRecords() {

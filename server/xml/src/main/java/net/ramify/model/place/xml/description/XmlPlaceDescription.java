@@ -63,20 +63,20 @@ class XmlPlaceDescription {
     private Set<Place> alsoSee(final PlaceProvider places) {
         return this.alsoSee == null
                 ? Collections.emptySet()
-                : SetUtils.transformIgnoreNull(this.alsoSee, id -> places.get(id.placeId()));
+                : SetUtils.eagerTransformIgnoreNull(this.alsoSee, id -> places.get(id.placeId()));
     }
 
     @Nonnull
     private Set<Place> laterBecame(final PlaceProvider places) {
         return this.laterBecame == null
                 ? Collections.emptySet()
-                : SetUtils.transformIgnoreNull(this.laterBecame, id -> places.get(id.placeId()));
+                : SetUtils.eagerTransformIgnoreNull(this.laterBecame, id -> places.get(id.placeId()));
     }
 
     private Set<Place> coterminous(final PlaceProvider places) {
         return coterminous == null
                 ? Collections.emptySet()
-                : SetUtils.transformIgnoreNull(this.coterminous, id -> places.get(id.placeId()));
+                : SetUtils.eagerTransformIgnoreNull(this.coterminous, id -> places.get(id.placeId()));
     }
 
     @Nonnull

@@ -16,7 +16,7 @@ public interface HasPlaces extends HasPlaceIds {
 
     @Nonnull
     default PlaceIds placeIds() {
-        return PlaceIds.of(SetUtils.transform(this.places(), Place::placeId));
+        return PlaceIds.of(SetUtils.eagerTransform(this.places(), Place::placeId));
     }
 
     default boolean hasPlace(final PlaceId placeId) {

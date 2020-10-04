@@ -23,7 +23,7 @@ public abstract class XmlDatedFamiliesRecord extends XmlDatedRecord {
 
     protected Set<Family> families(final RecordContext context) {
         if (families == null) return ImmutableSet.of();
-        return SetUtils.transform(families, family -> family.toFamily(context));
+        return SetUtils.eagerTransform(families, family -> family.toFamily(context));
     }
 
 }

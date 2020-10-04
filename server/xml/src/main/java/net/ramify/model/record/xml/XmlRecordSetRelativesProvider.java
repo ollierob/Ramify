@@ -114,9 +114,9 @@ class XmlRecordSetRelativesProvider extends AbstractMappedProvider<RecordSetId, 
             return new DefaultRecordSetRelatives(
                     recordSets.require(id),
                     Functions.ifNonNull(parentId, recordSets::require),
-                    ImmutableSet.copyOf(SetUtils.transform(nextIds, recordSets::require)),
+                    ImmutableSet.copyOf(SetUtils.eagerTransform(nextIds, recordSets::require)),
                     Functions.ifNonNull(previousId, recordSets::require),
-                    ImmutableSet.copyOf(SetUtils.transform(childIds, recordSets::require)));
+                    ImmutableSet.copyOf(SetUtils.eagerTransform(childIds, recordSets::require)));
         }
 
     }
