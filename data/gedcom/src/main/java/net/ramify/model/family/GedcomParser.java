@@ -27,7 +27,7 @@ class GedcomParser {
         if (isEmpty(name)) return Name.UNKNOWN;
         if (name.endsWith("/")) {
             final var f = name.indexOf('/');
-            return new ForenameSurname(name.substring(f), name.substring(f + 1));
+            return new ForenameSurname(name.substring(0, f - 1), name.substring(f + 1, name.length() - 1));
         }
         return new StringName(name);
     }

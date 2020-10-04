@@ -29,7 +29,7 @@ public class ForenameSurname implements Name {
     public ForenameSurname(final String prefix, final List<String> forenames, final String surname, final String suffix) {
         this.prefix = prefix;
         this.forenames = forenames;
-        this.surname = MoreObjects.firstNonNull(surname, "");
+        this.surname = MoreObjects.firstNonNull(surname, "").trim();
         this.suffix = suffix;
     }
 
