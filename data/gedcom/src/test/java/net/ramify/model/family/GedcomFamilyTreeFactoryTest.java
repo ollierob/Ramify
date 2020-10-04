@@ -4,6 +4,7 @@ import net.ramify.model.family.tree.FamilyTreeId;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.relationship.type.Married;
+import net.ramify.model.relationship.type.ParentChild;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -44,6 +45,9 @@ class GedcomFamilyTreeFactoryTest {
 
         final var marriage = family.relationshipBetween(john, elizabeth).orElse(null);
         assertThat(marriage, instanceOf(Married.class));
+
+        final var fatherSon = family.relationshipBetween(john, james).orElse(null);
+        assertThat(fatherSon, instanceOf(ParentChild.class));
 
     }
 
