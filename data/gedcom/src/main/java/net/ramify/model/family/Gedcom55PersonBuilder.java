@@ -1,16 +1,20 @@
 package net.ramify.model.family;
 
+import net.ramify.model.event.EventBuilder;
+import net.ramify.model.event.PersonEvent;
+import net.ramify.model.event.collection.MutablePersonEventSet;
 import net.ramify.model.event.collection.NoPersonEvents;
 import net.ramify.model.event.collection.PersonEventSet;
-import net.ramify.model.event.type.BirthEvent;
 import net.ramify.model.person.GenericPerson;
 import net.ramify.model.person.Person;
+import net.ramify.model.person.PersonId;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.name.Name;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 
 import static net.ramify.model.family.GedcomParser.*;
 
@@ -41,13 +45,16 @@ class Gedcom55PersonBuilder implements GedcomFamilyLineReader {
             case 1:
                 reader = null;
                 final var next = line.indexOf(' ', start + 1);
-                final var type = line.substring(start, next);
+                final var type = next > 0 ? line.substring(start, next) : line.substring(start);
                 switch (type) {
-                    case "BIRT" -> this.startBirth();
-                    case "RESI" -> this.startResidence();
                     case "NAME" -> this.startBio(line.substring(next + 1));
                     case "SEX" -> this.setSex(line.substring(next + 1));
                     case "FAMS", "FAMC" -> this.addToFamily(line.substring(next + 1));
+                    //Events
+                    case "BIRT" -> this.startEvent(EventBuilder::toBirth);
+                    case "RESI" -> this.startEvent(EventBuilder::toResidence);
+                    case "DEAT" -> this.startEvent(EventBuilder::toDeath);
+                    case "BURI" -> this.startEvent(EventBuilder::toBurial);
                 }
                 break;
             default:
@@ -55,13 +62,10 @@ class Gedcom55PersonBuilder implements GedcomFamilyLineReader {
         }
     }
 
-    private void startBirth() {
-        final var reader = new BirthReader();
+    private void startEvent(final BiFunction<EventBuilder, PersonId, ? extends PersonEvent> create) {
+        final var reader = new EventReader(create);
         this.reader = reader;
         events.add(reader);
-    }
-
-    private void startResidence() {
     }
 
     private void startBio(final String name) {
@@ -77,14 +81,16 @@ class Gedcom55PersonBuilder implements GedcomFamilyLineReader {
         addToFamily.accept(familyId, this);
     }
 
-    private PersonEventSet events() {
+    private PersonEventSet events(final PersonId personId) {
         if (events.isEmpty()) return NoPersonEvents.INSTANCE;
-        throw new UnsupportedOperationException();
+        final var set = MutablePersonEventSet.notPermittingMerge();
+        events.forEach(event -> set.add(event.build(personId)));
+        return set;
     }
 
     Person build() {
         final var id = personId(this.id);
-        final var events = this.events();
+        final var events = this.events(id);
         return new GenericPerson(id, name, gender, events);
     }
 
@@ -97,11 +103,17 @@ class Gedcom55PersonBuilder implements GedcomFamilyLineReader {
 
     }
 
-    private final class BirthReader extends Gedcom55EventBuilder {
+    private final class EventReader extends Gedcom55EventBuilder {
+
+        private final BiFunction<EventBuilder, PersonId, ? extends PersonEvent> createEvent;
+
+        private EventReader(final BiFunction<EventBuilder, PersonId, ? extends PersonEvent> createEvent) {
+            this.createEvent = createEvent;
+        }
 
         @Override
-        BirthEvent build() {
-            throw new UnsupportedOperationException(); //TODO
+        PersonEvent build(final PersonId personId) {
+            return createEvent.apply(this.eventBuilder(), personId);
         }
 
     }

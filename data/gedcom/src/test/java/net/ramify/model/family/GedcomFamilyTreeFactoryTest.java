@@ -22,9 +22,7 @@ class GedcomFamilyTreeFactoryTest {
     void testPeopleSample() throws Exception {
 
         final var id = new FamilyTreeId("id");
-
         final var file = new File(this.getClass().getResource("/family.ged").toURI());
-
         final var tree = testFactory.create(id, file);
 
         assertEquals(3, tree.numPeople());
@@ -48,6 +46,15 @@ class GedcomFamilyTreeFactoryTest {
 
         final var fatherSon = family.relationshipBetween(john, james).orElse(null);
         assertThat(fatherSon, instanceOf(ParentChild.class));
+
+    }
+
+    @Test
+    void testEventsSample() throws Exception {
+
+        final var id = new FamilyTreeId("id");
+        final var file = new File(this.getClass().getResource("/events.ged").toURI());
+        final var tree = testFactory.create(id, file);
 
     }
 

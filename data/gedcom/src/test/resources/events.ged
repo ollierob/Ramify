@@ -1,0 +1,279 @@
+0 HEAD
+1 CHAR UTF-8
+1 SOUR Ancestry.com Family Trees
+2 VERS (2010.3)
+2 NAME Ancestry.com Family Trees
+2 CORP Ancestry.com
+1 GEDC
+2 VERS 5.5
+2 FORM LINEAGE-LINKED
+0 @P14@ INDI
+1 BIRT Approximate birth date can be narrowed from census and death ages (between 6th and 22nd April 1799) assuming that they are correct.
+2 DATE 15 Apr 1799
+2 PLAC Winters, Stansfield, Yorkshire
+2 SOUR @S-1869686893@
+3 PAGE Class: RG10; Piece: 4322; Folio: 47; Page: 30; GSU roll: 846982.
+3 NOTE http://search.ancestry.co.uk/cgi-bin/sse.dll?db=uki1871&h=25533022&ti=5538&indiv=try&gss=pt
+3 NOTE
+3 DATA
+4 TEXT Birth date:  abt 1800 Birth place:  Stansfield, Yorkshire, England Residence date:  1871 Residence place:  Haworth, Yorkshire, England
+3 _APID 1,7619::25533022
+2 SOUR @S-1869686164@
+3 PAGE Class: RG9; Piece: 3228; Folio: 40; Page: 18; GSU roll: 543099.
+3 NOTE http://search.ancestry.co.uk/cgi-bin/sse.dll?db=uki1861&h=9872993&ti=5538&indiv=try&gss=pt
+3 NOTE
+3 DATA
+4 TEXT Birth date:  abt 1800 Birth place:  Stansfield, Yorkshire, England Residence date:  1861 Residence place:  Haworth, Yorkshire, England
+3 _APID 1,8767::9872993
+2 SOUR @S-1869671375@
+3 PAGE Class: HO107; Piece: 2287; Folio: 844; Page: 23; GSU roll: 87476-87479.
+3 NOTE http://search.ancestry.co.uk/cgi-bin/sse.dll?db=uki1851&h=17417891&ti=5538&indiv=try&gss=pt
+3 NOTE
+3 DATA
+4 TEXT Birth date:  abt 1800 Birth place:  Halifax, Yorkshire, England Residence date:  1851 Residence place:  Haworth, Yorkshire, England
+3 _APID 1,8860::17417891
+2 SOUR @S-1869632879@
+3 PAGE Class: HO107; Piece 1295; Book: 7; Civil Parish: Bradford; County: Yorkshire; Enumeration District: 4; Folio: 14; Page: 22; Line: 15; GSU roll: 464255.
+3 NOTE http://search.ancestry.co.uk/cgi-bin/sse.dll?db=uki1841&h=12357013&ti=5538&indiv=try&gss=pt
+3 NOTE
+3 DATA
+4 TEXT Birth date:  abt 1801 Birth place:  Yorkshire, England Residence date:  1841 Residence place:  Bradford, Yorkshire, England
+3 _APID 1,8978::12357013
+2 SOUR @S-1869632040@
+3 NOTE http://search.ancestry.co.uk/cgi-bin/sse.dll?db=freebmddeath&h=28682381&ti=5538&indiv=try&gss=pt
+3 NOTE
+3 DATA
+4 TEXT Birth date:  abt 1799 Birth place:   Death date:  Apr 1878 Death place:  Yorkshire West Riding, United Kingdom
+3 _APID 1,8914::28682381
+2 SOUR @S-1869637934@
+3 PAGE West Yorkshire Archive Service; Wakefield, Yorkshire, England; Yorkshire Parish Records
+3 _APID 1,2254::10711444
+2 SOUR @S-973413233@
+3 _APID 1,60526::920330
+1 NAME Jonathan /Robertshaw/
+2 SOUR @S-1869686893@
+3 PAGE Class: RG10; Piece: 4322; Folio: 47; Page: 30; GSU roll: 846982.
+3 NOTE http://search.ancestry.co.uk/cgi-bin/sse.dll?db=uki1871&h=25533022&ti=5538&indiv=try&gss=pt
+3 NOTE
+3 DATA
+4 TEXT Birth date:  abt 1800 Birth place:  Stansfield, Yorkshire, England Residence date:  1871 Residence place:  Haworth, Yorkshire, England
+3 _APID 1,7619::25533022
+2 SOUR @S-1869686164@
+3 PAGE Class: RG9; Piece: 3228; Folio: 40; Page: 18; GSU roll: 543099.
+3 NOTE http://search.ancestry.co.uk/cgi-bin/sse.dll?db=uki1861&h=9872993&ti=5538&indiv=try&gss=pt
+3 NOTE
+3 DATA
+4 TEXT Birth date:  abt 1800 Birth place:  Stansfield, Yorkshire, England Residence date:  1861 Residence place:  Haworth, Yorkshire, England
+3 _APID 1,8767::9872993
+2 SOUR @S-1869671375@
+3 PAGE Class: HO107; Piece: 2287; Folio: 844; Page: 23; GSU roll: 87476-87479.
+3 NOTE http://search.ancestry.co.uk/cgi-bin/sse.dll?db=uki1851&h=17417891&ti=5538&indiv=try&gss=pt
+3 NOTE
+3 DATA
+4 TEXT Birth date:  abt 1800 Birth place:  Halifax, Yorkshire, England Residence date:  1851 Residence place:  Haworth, Yorkshire, England
+3 _APID 1,8860::17417891
+2 SOUR @S-1869632879@
+3 PAGE Class: HO107; Piece 1295; Book: 7; Civil Parish: Bradford; County: Yorkshire; Enumeration District: 4; Folio: 14; Page: 22; Line: 15; GSU roll: 464255.
+3 NOTE http://search.ancestry.co.uk/cgi-bin/sse.dll?db=uki1841&h=12357013&ti=5538&indiv=try&gss=pt
+3 NOTE
+3 DATA
+4 TEXT Birth date:  abt 1801 Birth place:  Yorkshire, England Residence date:  1841 Residence place:  Bradford, Yorkshire, England
+3 _APID 1,8978::12357013
+2 SOUR @S-1869632040@
+3 NOTE http://search.ancestry.co.uk/cgi-bin/sse.dll?db=freebmddeath&h=28682381&ti=5538&indiv=try&gss=pt
+3 NOTE
+3 DATA
+4 TEXT Birth date:  abt 1799 Birth place:   Death date:  Apr 1878 Death place:  Yorkshire West Riding, United Kingdom
+3 _APID 1,8914::28682381
+2 SOUR @S-1869662725@
+3 NOTE http://search.ancestry.co.uk/cgi-bin/sse.dll?db=wyorkcoemarriage&h=8149752&ti=5538&indiv=try&gss=pt
+3 DATA
+4 TEXT Marriage date:  6 Jun 1819 Marriage place:  Heptonstall, St Thomas, Yorkshire, England
+3 _APID 1,2253::8149752
+2 SOUR @S-1869662725@
+3 NOTE http://search.ancestry.co.uk/cgi-bin/sse.dll?db=wyorkcoemarriage&h=7472373&ti=5538&indiv=try&gss=pt
+3 DATA
+4 TEXT Marriage date:  26 Sep 1819 Marriage place:  Heptonstall, St Thomas, Yorkshire, England
+3 _APID 1,2253::7472373
+2 SOUR @S-1869662725@
+3 NOTE http://search.ancestry.co.uk/cgi-bin/sse.dll?db=wyorkcoemarriage&h=10674180&ti=5538&indiv=try&gss=pt
+3 DATA
+4 TEXT Marriage date:  18 Mar 1862 Marriage place:  Haworth, St Michael and All Angels, Yorkshire, England
+3 _APID 1,2253::10674180
+2 SOUR @S-1869637934@
+3 PAGE West Yorkshire Archive Service; Wakefield, Yorkshire, England; Yorkshire Parish Records
+3 _APID 1,2254::10711444
+2 SOUR @S-973413233@
+3 _APID 1,60526::920330
+2 SOUR @S-1016306526@
+3 _APID 1,9852::3285420
+2 SOUR @S1260486237@
+3 PAGE West Yorkshire Archive Service; Wakefield, Yorkshire, England
+3 _APID 1,2253::4415645
+1 DEAT Age 79Old age
+2 DATE 22 Apr 1878
+2 PLAC Union Workhouse, Keighley, Yorkshire
+2 SOUR @S-1869632040@
+3 NOTE http://search.ancestry.co.uk/cgi-bin/sse.dll?db=freebmddeath&h=28682381&ti=5538&indiv=try&gss=pt
+3 NOTE
+3 DATA
+4 TEXT Birth date:  abt 1799 Birth place:   Death date:  Apr 1878 Death place:  Yorkshire West Riding, United Kingdom
+3 _APID 1,8914::28682381
+2 SOUR @S-1869637934@
+3 PAGE West Yorkshire Archive Service; Wakefield, Yorkshire, England; Yorkshire Parish Records
+3 _APID 1,2254::10711444
+2 SOUR @S-973413233@
+3 _APID 1,60526::920330
+2 OBJE
+3 FILE http://trees.ancestry.com/rd?f=image&guid=378bb351-43e2-4761-bebe-7dc0b43be930&tid=30058439&pid=14
+3 FORM jpg
+3 TITL 1878 jonathan robertshaw death cert
+1 SEX M
+2 SOUR @S-1016306526@
+3 _APID 1,9852::3285420
+1 BURI Age: 79
+2 DATE 26 Apr 1878
+2 PLAC Haworth, Yorkshire, England
+2 SOUR @S-1869637934@
+3 PAGE West Yorkshire Archive Service; Wakefield, Yorkshire, England; Yorkshire Parish Records
+3 _APID 1,2254::10711444
+2 SOUR @S-973413233@
+3 _APID 1,60526::920330
+2 OBJE
+3 FILE http://trees.ancestry.com/rd?f=image&guid=7d3f92e4-2abc-4c9b-9c26-884755bab6b2&tid=30058439&pid=14
+3 FORM jpg
+3 TITL Jonathan Robertshaw
+2 OBJE
+3 FILE http://trees.ancestry.com/rd?f=image&guid=b41d7665-4f93-41f1-bda5-9cc31c742b90&tid=30058439&pid=14
+3 FORM jpg
+3 TITL Jonathan Robertshaw memorial
+1 RESI Lived in house next door to the White Lion.
+2 DATE 1838
+2 PLAC Ginnel, Haworth, Yorkshire
+2 OBJE
+3 FILE http://trees.ancestry.com/rd?f=image&guid=5d46b7fb-4fe1-428e-a8a8-b0bd900c5cf6&tid=30058439&pid=14
+3 FORM jpg
+3 TITL 1838 Haworth valuation
+1 RESI Probably from Pecket Well (according to late relative).
+2 DATE 1821
+2 PLAC Wadsworth, Yorkshire
+1 RESI Age 40-44, Potter. Road renamed to Changegate in 1876.
+2 DATE 6 Jun 1841
+2 PLAC Ginnel Bottom, Haworth, Yorkshire, England
+2 SOUR @S-1869632879@
+3 PAGE Class: HO107; Piece 1295; Book: 7; Civil Parish: Bradford; County: Yorkshire; Enumeration District: 4; Folio: 14; Page: 22; Line: 15; GSU roll: 464255.
+3 NOTE http://search.ancestry.co.uk/cgi-bin/sse.dll?db=uki1841&h=12357013&ti=5538&indiv=try&gss=pt
+3 NOTE
+3 DATA
+4 TEXT Birth date:  abt 1801 Birth place:  Yorkshire, England Residence date:  1841 Residence place:  Bradford, Yorkshire, England
+3 _APID 1,8978::12357013
+1 RESI Age 51Potter. Probably living at 201 Main Street; census clerk seems to have travelled downhill from 203 Main Street to Fleece Inn.
+2 DATE 30 Mar 1851
+2 PLAC Main Street, Haworth, Yorkshire, England
+2 SOUR @S-1869671375@
+3 PAGE Class: HO107; Piece: 2287; Folio: 844; Page: 23; GSU roll: 87476-87479.
+3 NOTE http://search.ancestry.co.uk/cgi-bin/sse.dll?db=uki1851&h=17417891&ti=5538&indiv=try&gss=pt
+3 NOTE
+3 DATA
+4 TEXT Birth date:  abt 1800 Birth place:  Halifax, Yorkshire, England Residence date:  1851 Residence place:  Haworth, Yorkshire, England
+3 _APID 1,8860::17417891
+1 RESI Age 61Rag dealer. House near to Main Street, most likely along Top Street.
+2 DATE 7 Apr 1861
+2 PLAC Gaugers Croft, Haworth, Yorkshire, England
+2 SOUR @S-1869686164@
+3 PAGE Class: RG9; Piece: 3228; Folio: 40; Page: 18; GSU roll: 543099.
+3 NOTE http://search.ancestry.co.uk/cgi-bin/sse.dll?db=uki1861&h=9872993&ti=5538&indiv=try&gss=pt
+3 NOTE
+3 DATA
+4 TEXT Birth date:  abt 1800 Birth place:  Stansfield, Yorkshire, England Residence date:  1861 Residence place:  Haworth, Yorkshire, England
+3 _APID 1,8767::9872993
+2 OBJE
+3 FILE http://trees.ancestry.com/rd?f=image&guid=81221452-14b3-4438-b26c-86379cc28d83&tid=30058439&pid=14
+3 FORM jpg
+3 TITL Top Street (Gaugers Croft), Haworth
+2 OBJE
+3 FILE http://trees.ancestry.com/rd?f=image&guid=ebc74068-8595-46e3-87d1-85bcb2035de8&tid=30058439&pid=14
+3 FORM jpg
+3 TITL Gaugers Croft
+1 EVEN
+2 TYPE Banns
+2 DATE May 1861
+2 PLAC Denholme St Paul, Yorkshire
+1 RESI Renting a cottage for 2s 8d. Does not appear in earlier tax records for Heptonstall township.
+2 DATE 1829
+2 PLAC Hotstones, Heptonstall, Yorkshire
+1 RESI Age 71Pot hawker. His son-in-law, James Blezard, widower, is a neighbour.
+2 DATE 2 Apr 1871
+2 PLAC Gaugers Croft, Haworth, Yorkshire, England
+2 SOUR @S-1869686893@
+3 PAGE Class: RG10; Piece: 4322; Folio: 47; Page: 30; GSU roll: 846982.
+3 NOTE http://search.ancestry.co.uk/cgi-bin/sse.dll?db=uki1871&h=25533022&ti=5538&indiv=try&gss=pt
+3 NOTE
+3 DATA
+4 TEXT Birth date:  abt 1800 Birth place:  Stansfield, Yorkshire, England Residence date:  1871 Residence place:  Haworth, Yorkshire, England
+3 _APID 1,7619::25533022
+1 SOUR @S-1869639496@
+2 PAGE Ancestry Family Trees
+2 DATA
+3 TEXT http://trees.ancestry.com/pt/AMTCitationRedir.aspx?tid=30058439&pid=14
+1 OBJE
+2 FILE http://trees.ancestry.com/rd?f=image&guid=378bb351-43e2-4761-bebe-7dc0b43be930&tid=30058439&pid=14
+2 FORM jpg
+2 TITL 1878 jonathan robertshaw death cert
+1 OBJE
+2 FILE http://trees.ancestry.com/rd?f=image&guid=3d97c7cc-61cf-46c7-83b2-3d970198dff2&tid=30058439&pid=14
+2 FORM jpg
+2 TITL Mary marriage 1852
+1 OBJE
+2 FILE http://trees.ancestry.com/rd?f=image&guid=55874209-701a-4ab0-a2a2-1eff35d4be59&tid=30058439&pid=14
+2 FORM jpg
+2 TITL Birth certificate of Joseph Robertshaw
+1 OBJE
+2 FILE http://trees.ancestry.com/rd?f=image&guid=5d46b7fb-4fe1-428e-a8a8-b0bd900c5cf6&tid=30058439&pid=14
+2 FORM jpg
+2 TITL 1838 Haworth valuation
+1 OBJE
+2 FILE http://trees.ancestry.com/rd?f=image&guid=7d3f92e4-2abc-4c9b-9c26-884755bab6b2&tid=30058439&pid=14
+2 FORM jpg
+2 TITL Jonathan Robertshaw
+1 OBJE
+2 FILE http://trees.ancestry.com/rd?f=image&guid=81221452-14b3-4438-b26c-86379cc28d83&tid=30058439&pid=14
+2 FORM jpg
+2 TITL Top Street (Gaugers Croft), Haworth
+1 OBJE
+2 FILE http://trees.ancestry.com/rd?f=image&guid=b41d7665-4f93-41f1-bda5-9cc31c742b90&tid=30058439&pid=14
+2 FORM jpg
+2 TITL Jonathan Robertshaw memorial
+1 OBJE
+2 FILE http://trees.ancestry.com/rd?f=image&guid=ebc74068-8595-46e3-87d1-85bcb2035de8&tid=30058439&pid=14
+2 FORM jpg
+2 TITL Gaugers Croft
+1 OBJE
+2 FILE http://trees.ancestry.com/rd?f=image&guid=378bb351-43e2-4761-bebe-7dc0b43be930&tid=30058439&pid=14
+2 FORM jpg
+2 TITL 1878 jonathan robertshaw death cert
+1 OBJE
+2 FILE http://trees.ancestry.com/rd?f=image&guid=81221452-14b3-4438-b26c-86379cc28d83&tid=30058439&pid=14
+2 FORM jpg
+2 TITL Top Street (Gaugers Croft), Haworth
+1 OBJE
+2 FILE http://trees.ancestry.com/rd?f=image&guid=ebc74068-8595-46e3-87d1-85bcb2035de8&tid=30058439&pid=14
+2 FORM jpg
+2 TITL Gaugers Croft
+1 OBJE
+2 FILE http://trees.ancestry.com/rd?f=image&guid=7d3f92e4-2abc-4c9b-9c26-884755bab6b2&tid=30058439&pid=14
+2 FORM jpg
+2 TITL Jonathan Robertshaw
+1 OBJE
+2 FILE http://trees.ancestry.com/rd?f=image&guid=b41d7665-4f93-41f1-bda5-9cc31c742b90&tid=30058439&pid=14
+2 FORM jpg
+2 TITL Jonathan Robertshaw memorial
+1 OBJE
+2 FILE http://trees.ancestry.com/rd?f=image&guid=5d46b7fb-4fe1-428e-a8a8-b0bd900c5cf6&tid=30058439&pid=14
+2 FORM jpg
+2 TITL 1838 Haworth valuation
+1 FAMC @F178@
+1 FAMS @F18@
+1 FAMS @F19@
+1 FAMS @F20@
+0 TRLR
