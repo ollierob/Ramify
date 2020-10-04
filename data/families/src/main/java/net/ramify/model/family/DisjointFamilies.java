@@ -47,8 +47,8 @@ public class DisjointFamilies implements Family {
 
     @Nonnull
     @Override
-    public Optional<Relationship> between(final PersonId from, final PersonId to) {
-        return families.stream().map(f -> f.between(from, to).orElse(null)).findAny();
+    public Optional<Relationship> relationshipBetween(final PersonId from, final PersonId to) {
+        return families.stream().map(f -> f.relationshipBetween(from, to).orElse(null)).findAny();
     }
 
 }

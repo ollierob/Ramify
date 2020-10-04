@@ -49,7 +49,7 @@ public class FamilyOfUnknownRelationships implements Family {
 
     @Nonnull
     @Override
-    public Optional<Relationship> between(final PersonId from, final PersonId to) {
+    public Optional<Relationship> relationshipBetween(final PersonId from, final PersonId to) {
         return Optional.of(new Unknown(from, to));
     }
 

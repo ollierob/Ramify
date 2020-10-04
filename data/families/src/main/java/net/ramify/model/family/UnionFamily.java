@@ -42,9 +42,9 @@ public class UnionFamily implements Family {
 
     @Nonnull
     @Override
-    public Optional<Relationship> between(final PersonId from, final PersonId to) {
+    public Optional<Relationship> relationshipBetween(final PersonId from, final PersonId to) {
         if (union.fromId().equals(from) && union.toId().equals(to)) return Optional.of(union);
-        return left.between(from, to).or(() -> right.between(from, to));
+        return left.relationshipBetween(from, to).or(() -> right.relationshipBetween(from, to));
     }
 
 }

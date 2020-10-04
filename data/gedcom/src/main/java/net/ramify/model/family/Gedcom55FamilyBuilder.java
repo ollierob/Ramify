@@ -23,7 +23,7 @@ class Gedcom55FamilyBuilder implements GedcomFamilyLineReader {
         switch (level) {
             case 1:
                 final var next = line.indexOf(' ', start);
-                final var type = next <= 0 ? "" : line.substring(start, next);
+                final var type = next <= 0 ? line.substring(start) : line.substring(start, next);
                 switch (type) {
                     case "HUSB" -> father = line.substring(next + 1);
                     case "WIFE" -> mother = line.substring(next + 1);

@@ -49,15 +49,17 @@ class NetworkedFamily implements Family {
 
     @Nonnull
     @Override
-    public Optional<Relationship> between(final PersonId from, final PersonId to) {
+    public Optional<Relationship> relationshipBetween(final PersonId from, final PersonId to) {
         final var start = this.find(from).orElse(null);
         if (start == null) return Optional.empty();
         final var end = this.find(to).orElse(null);
         if (end == null) return Optional.empty();
         final var path = NetworkUtils.findPath(network, start, end);
-        return Optional.of(path.isEmpty()
-                ? new Unknown(from, to)
-                : new RelationshipPath(path));
+        return Optional.of(switch (path.size()) {
+            case 0 -> new Unknown(from, to);
+            case 1 -> path.get(0);
+            default -> new RelationshipPath(path);
+        });
     }
 
 }

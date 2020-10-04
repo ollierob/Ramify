@@ -7,6 +7,7 @@ import com.google.common.graph.NetworkBuilder;
 import net.meerkat.functions.consumers.Consumers;
 import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.family.proto.FamilyProto;
+import net.ramify.model.person.HasPersonId;
 import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.collection.HasPeople;
@@ -31,7 +32,12 @@ public interface Family extends HasPeople, HasRelationships, BuildsProto<FamilyP
     Set<? extends Relationship> relationships();
 
     @Nonnull
-    Optional<Relationship> between(PersonId from, PersonId to);
+    Optional<Relationship> relationshipBetween(PersonId from, PersonId to);
+
+    @Nonnull
+    default Optional<Relationship> relationshipBetween(final HasPersonId from, final HasPersonId to) {
+        return this.relationshipBetween(from.personId(), to.personId());
+    }
 
     default boolean hasDirected() {
         return Iterables.any(this.relationships(), Relationship::isDirected);

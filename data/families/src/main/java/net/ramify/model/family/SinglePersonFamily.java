@@ -54,7 +54,7 @@ public class SinglePersonFamily implements Family, HasPersonId {
 
     @Nonnull
     @Override
-    public Optional<Relationship> between(PersonId from, PersonId to) {
+    public Optional<Relationship> relationshipBetween(PersonId from, PersonId to) {
         return Optional.empty();
     }
 
