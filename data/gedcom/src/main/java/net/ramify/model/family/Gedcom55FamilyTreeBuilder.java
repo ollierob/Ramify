@@ -38,16 +38,12 @@ class Gedcom55FamilyTreeBuilder implements GedcomFamilyTreeBuilder {
         }
     }
 
-    private void handleNewIndividual(final String id) {
-        final var builder = new Gedcom55PersonBuilder(id, this::addPersonToFamily);
-        this.current = builder;
-        people.put(id, builder);
+    private void handleNewIndividual(final String personId) {
+        current = people.computeIfAbsent(personId, id -> new Gedcom55PersonBuilder(id, this::addPersonToFamily));
     }
 
-    private Gedcom55FamilyBuilder handleNewFamily(final String id) {
-        final var builder = families.computeIfAbsent(id, i -> new Gedcom55FamilyBuilder());
-        current = builder;
-        return builder;
+    private void handleNewFamily(final String id) {
+        current = families.computeIfAbsent(id, i -> new Gedcom55FamilyBuilder());
     }
 
     private void addPersonToFamily(final String familyId, final Gedcom55PersonBuilder builder) {

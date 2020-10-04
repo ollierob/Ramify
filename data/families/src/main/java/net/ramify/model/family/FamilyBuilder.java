@@ -37,8 +37,8 @@ public class FamilyBuilder {
 
     private FamilyBuilder addRelationship(final Person from, final Person to, final Relationship relationship) {
         if (from == to) return this;
-        network.addNode(from);
-        network.addNode(to);
+        this.addPerson(from);
+        this.addPerson(to);
         network.addEdge(from, to, relationship);
         return this;
     }

@@ -3,6 +3,9 @@ package net.ramify.model.family;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import net.ramify.model.person.Person;
+import net.ramify.model.relationship.type.Married;
+import net.ramify.model.relationship.type.ParentChild;
+import net.ramify.model.relationship.type.Unknown;
 
 import java.util.Map;
 import java.util.Set;
@@ -11,7 +14,8 @@ class Gedcom55FamilyBuilder implements GedcomFamilyLineReader {
 
     private final Map<String, Person> people = Maps.newHashMap();
 
-    private String husband, wife;
+    private String father, mother;
+    private boolean married;
     private Set<String> children = Sets.newHashSet();
 
     @Override
@@ -19,11 +23,12 @@ class Gedcom55FamilyBuilder implements GedcomFamilyLineReader {
         switch (level) {
             case 1:
                 final var next = line.indexOf(' ', start);
-                final var type = next < 0 ? "" : line.substring(start, next);
+                final var type = next <= 0 ? "" : line.substring(start, next);
                 switch (type) {
-                    case "HUSB" -> husband = line.substring(next);
-                    case "WIFE" -> wife = line.substring(next);
-                    case "CHIL" -> children.add(line.substring(next));
+                    case "HUSB" -> father = line.substring(next + 1);
+                    case "WIFE" -> mother = line.substring(next + 1);
+                    case "CHIL" -> children.add(line.substring(next + 1));
+                    case "MARR" -> married = true;
                 }
         }
     }
@@ -33,7 +38,17 @@ class Gedcom55FamilyBuilder implements GedcomFamilyLineReader {
     }
 
     Family build() {
-        return new FamilyOfUnknownRelationships(people.values());
+        final var builder = new FamilyBuilder();
+        final var father = this.father == null ? null : people.get(this.father);
+        final var mother = this.mother == null ? null : people.get(this.mother);
+        if (father != null && mother != null) builder.addRelationship(father, mother, married ? Married::new : Unknown::new);
+        children.forEach(childId -> {
+            final var child = people.get(childId);
+            if (child == null) return;
+            if (father != null) builder.addRelationship(father, child, ParentChild::new);
+            if (mother != null) builder.addRelationship(mother, child, ParentChild::new);
+        });
+        return builder.build();
     }
 
 }
