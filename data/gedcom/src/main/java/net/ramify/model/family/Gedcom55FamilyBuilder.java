@@ -37,8 +37,7 @@ class Gedcom55FamilyBuilder implements GedcomFamilyLineReader {
         people.put(builder.id(), builder.build());
     }
 
-    Family build() {
-        final var builder = new FamilyBuilder();
+    void addTo(final FamilyBuilder builder) {
         final var father = this.father == null ? null : people.get(this.father);
         final var mother = this.mother == null ? null : people.get(this.mother);
         if (father != null && mother != null) builder.addRelationship(father, mother, married ? Married::new : Unknown::new);
@@ -48,7 +47,6 @@ class Gedcom55FamilyBuilder implements GedcomFamilyLineReader {
             if (father != null) builder.addRelationship(father, child, ParentChild::new);
             if (mother != null) builder.addRelationship(mother, child, ParentChild::new);
         });
-        return builder.build();
     }
 
 }

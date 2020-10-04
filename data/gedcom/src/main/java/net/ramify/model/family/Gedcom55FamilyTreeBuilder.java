@@ -57,17 +57,14 @@ class Gedcom55FamilyTreeBuilder implements GedcomFamilyTreeBuilder {
     @Override
     public FamilyTree build() {
         final var info = new DefaultFamilyTreeInfo(id, id.toString(), people.size());
-        return switch (families.size()) {
-            case 0 -> new SingletonFamilyTree(
-                    info,
-                    new FamilyOfUnknownRelationships(SetUtils.eagerTransform(people.values(), Gedcom55PersonBuilder::build)));
-            case 1 -> new SingletonFamilyTree(
-                    info,
-                    families.values().iterator().next().build());
-            default -> new SingletonFamilyTree(
-                    info,
-                    new DisjointFamilies(SetUtils.eagerTransform(families.values(), Gedcom55FamilyBuilder::build)));
-        };
+        if (families.isEmpty()) {
+            final var people = SetUtils.eagerTransform(this.people.values(), Gedcom55PersonBuilder::build);
+            return new SingletonFamilyTree(info, new FamilyOfUnknownRelationships(people));
+        } else {
+            final var builder = new FamilyBuilder();
+            families.values().forEach(family -> family.addTo(builder));
+            return new SingletonFamilyTree(info, builder.build());
+        }
     }
 
 }

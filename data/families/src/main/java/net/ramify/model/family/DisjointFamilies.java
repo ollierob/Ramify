@@ -12,6 +12,15 @@ import java.util.stream.Collectors;
 
 public class DisjointFamilies implements Family {
 
+    public static Family of(final Set<Family> families) {
+        switch (families.size()) {
+            case 1:
+                return families.iterator().next();
+            default:
+                return new DisjointFamilies(families);
+        }
+    }
+
     private final Set<Family> families;
 
     public DisjointFamilies(final Set<Family> families) {
