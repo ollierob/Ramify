@@ -2,17 +2,17 @@ package net.ramify.model.family;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import net.ramify.model.person.Person;
 import net.ramify.model.relationship.type.Married;
 import net.ramify.model.relationship.type.ParentChild;
 import net.ramify.model.relationship.type.Unknown;
+import net.ramify.utils.collections.MapUtils;
 
 import java.util.Map;
 import java.util.Set;
 
 class Gedcom55FamilyBuilder implements GedcomFamilyLineReader {
 
-    private final Map<String, Person> people = Maps.newHashMap();
+    private final Map<String, Gedcom55PersonBuilder> peopleBuilders = Maps.newHashMap();
 
     private String father, mother;
     private boolean married;
@@ -34,10 +34,14 @@ class Gedcom55FamilyBuilder implements GedcomFamilyLineReader {
     }
 
     void add(final Gedcom55PersonBuilder builder) {
-        people.put(builder.id(), builder.build());
+        peopleBuilders.put(builder.id(), builder);
     }
 
     void addTo(final FamilyBuilder builder) {
+        //Make sure people are in the tree
+        final var people = MapUtils.eagerlyTransformValues(peopleBuilders, Gedcom55PersonBuilder::build);
+        people.values().forEach(builder::addPerson);
+        //Build relationships
         final var father = this.father == null ? null : people.get(this.father);
         final var mother = this.mother == null ? null : people.get(this.mother);
         if (father != null && mother != null) builder.addRelationship(father, mother, married ? Married::new : Unknown::new);

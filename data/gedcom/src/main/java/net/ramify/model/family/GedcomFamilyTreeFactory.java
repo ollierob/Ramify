@@ -1,8 +1,11 @@
 package net.ramify.model.family;
 
+import net.ramify.model.date.parse.DateRangeParser;
 import net.ramify.model.family.tree.FamilyTree;
 import net.ramify.model.family.tree.FamilyTreeId;
+import net.ramify.model.place.provider.PlaceParser;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,6 +14,15 @@ import java.io.IOException;
 
 @Singleton
 public class GedcomFamilyTreeFactory {
+
+    private final DateRangeParser dateParser;
+    private final PlaceParser placeParser;
+
+    @Inject
+    public GedcomFamilyTreeFactory(final DateRangeParser dateParser, final PlaceParser placeParser) {
+        this.dateParser = dateParser;
+        this.placeParser = placeParser;
+    }
 
     public FamilyTree create(final FamilyTreeId id, final File gedcom) throws IOException {
         try (final var reader = new BufferedReader(new FileReader(gedcom))) {
@@ -31,7 +43,7 @@ public class GedcomFamilyTreeFactory {
 
             if (level == 0) {
                 if (header == null && family == null) {
-                    header = new GedcomHeaderReader();
+                    header = new GedcomHeaderReader(dateParser, placeParser);
                 } else if (family == null) {
                     family = header.familyBuilder(id);
                     header = null;

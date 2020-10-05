@@ -12,8 +12,6 @@ import java.util.Set;
 
 public interface PlaceProvider extends Provider<PlaceId, Place> {
 
-    int MAX_DEPTH = 5;
-
     @Nonnull
     @Override
     default Place require(final PlaceId id) throws UnknownPlaceException {

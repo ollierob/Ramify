@@ -1,10 +1,12 @@
 package net.ramify.model.family;
 
 import com.google.common.collect.Maps;
+import net.ramify.model.date.parse.DateRangeParser;
 import net.ramify.model.family.tree.DefaultFamilyTreeInfo;
 import net.ramify.model.family.tree.FamilyTree;
 import net.ramify.model.family.tree.FamilyTreeId;
 import net.ramify.model.family.tree.SingletonFamilyTree;
+import net.ramify.model.place.provider.PlaceParser;
 import net.ramify.utils.collections.SetUtils;
 
 import java.util.Map;
@@ -13,11 +15,14 @@ class Gedcom55FamilyTreeBuilder implements GedcomFamilyTreeBuilder {
 
     private final Map<String, Gedcom55PersonBuilder> people = Maps.newHashMap();
     private final Map<String, Gedcom55FamilyBuilder> families = Maps.newHashMap();
-
+    private final DateRangeParser dateParser;
+    private final PlaceParser placeParser;
     private final FamilyTreeId id;
     private GedcomFamilyLineReader current;
 
-    Gedcom55FamilyTreeBuilder(final FamilyTreeId id) {
+    Gedcom55FamilyTreeBuilder(final DateRangeParser dateParser, final PlaceParser placeParser, final FamilyTreeId id) {
+        this.dateParser = dateParser;
+        this.placeParser = placeParser;
         this.id = id;
     }
 
@@ -39,7 +44,7 @@ class Gedcom55FamilyTreeBuilder implements GedcomFamilyTreeBuilder {
     }
 
     private void handleNewIndividual(final String personId) {
-        current = people.computeIfAbsent(personId, id -> new Gedcom55PersonBuilder(id, this::addPersonToFamily));
+        current = people.computeIfAbsent(personId, id -> new Gedcom55PersonBuilder(dateParser, placeParser, id, this::addPersonToFamily));
     }
 
     private void handleNewFamily(final String id) {

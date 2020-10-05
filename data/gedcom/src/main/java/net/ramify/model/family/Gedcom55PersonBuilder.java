@@ -1,5 +1,6 @@
 package net.ramify.model.family;
 
+import net.ramify.model.date.parse.DateRangeParser;
 import net.ramify.model.event.EventBuilder;
 import net.ramify.model.event.PersonEvent;
 import net.ramify.model.event.collection.MutablePersonEventSet;
@@ -10,6 +11,7 @@ import net.ramify.model.person.Person;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.gender.Gender;
 import net.ramify.model.person.name.Name;
+import net.ramify.model.place.provider.PlaceParser;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -21,6 +23,8 @@ import static net.ramify.model.family.GedcomParser.*;
 class Gedcom55PersonBuilder implements GedcomFamilyLineReader {
 
     private final List<Gedcom55EventBuilder> events = new LinkedList<>();
+    private final DateRangeParser dateParser;
+    private final PlaceParser placeParser;
     private final String id;
     private final BiConsumer<String, Gedcom55PersonBuilder> addToFamily;
 
@@ -28,7 +32,13 @@ class Gedcom55PersonBuilder implements GedcomFamilyLineReader {
     private Name name;
     private Gender gender;
 
-    Gedcom55PersonBuilder(final String id, final BiConsumer<String, Gedcom55PersonBuilder> addToFamily) {
+    Gedcom55PersonBuilder(
+            final DateRangeParser dateParser,
+            final PlaceParser placeParser,
+            final String id,
+            final BiConsumer<String, Gedcom55PersonBuilder> addToFamily) {
+        this.dateParser = dateParser;
+        this.placeParser = placeParser;
         this.id = id;
         this.addToFamily = addToFamily;
     }
@@ -55,6 +65,7 @@ class Gedcom55PersonBuilder implements GedcomFamilyLineReader {
                     case "RESI" -> this.startEvent(EventBuilder::toResidence);
                     case "DEAT" -> this.startEvent(EventBuilder::toDeath);
                     case "BURI" -> this.startEvent(EventBuilder::toBurial);
+                    case "EVEN" -> this.startEvent(new LifeEventReader());
                 }
                 break;
             default:
@@ -63,7 +74,10 @@ class Gedcom55PersonBuilder implements GedcomFamilyLineReader {
     }
 
     private void startEvent(final BiFunction<EventBuilder, PersonId, ? extends PersonEvent> create) {
-        final var reader = new EventReader(create);
+        this.startEvent(new EventReader(create));
+    }
+
+    private void startEvent(final Gedcom55EventBuilder reader) {
         this.reader = reader;
         events.add(reader);
     }
@@ -88,10 +102,15 @@ class Gedcom55PersonBuilder implements GedcomFamilyLineReader {
         return set;
     }
 
+    private Person built;
+
     Person build() {
-        final var id = personId(this.id);
-        final var events = this.events(id);
-        return new GenericPerson(id, name, gender, events);
+        if (built == null) {
+            final var id = personId(this.id);
+            final var events = this.events(id);
+            built = new GenericPerson(id, name, gender, events);
+        }
+        return built;
     }
 
     private final class BioReader implements GedcomFamilyLineReader {
@@ -113,7 +132,18 @@ class Gedcom55PersonBuilder implements GedcomFamilyLineReader {
 
         @Override
         PersonEvent build(final PersonId personId) {
-            return createEvent.apply(this.eventBuilder(), personId);
+            return createEvent.apply(this.eventBuilder(dateParser, placeParser), personId);
+        }
+
+    }
+
+    private final class LifeEventReader extends Gedcom55EventBuilder {
+
+        @Override
+        PersonEvent build(final PersonId personId) {
+            final var type = this.type();
+            if (type == null) return null;
+            return this.eventBuilder(dateParser, placeParser).toAnyLifeEvent(personId, type);
         }
 
     }
