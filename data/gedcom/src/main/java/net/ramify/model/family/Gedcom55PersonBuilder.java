@@ -62,10 +62,13 @@ class Gedcom55PersonBuilder implements GedcomFamilyLineReader {
                     case "FAMS", "FAMC" -> this.addToFamily(line.substring(next + 1));
                     //Events
                     case "BIRT" -> this.startEvent(EventBuilder::toBirth);
+                    case "BAPM" -> this.startEvent(EventBuilder::toBaptism);
                     case "RESI" -> this.startEvent(EventBuilder::toResidence);
+                    case "MARR" -> this.startEvent(EventBuilder::toMarriage);
+                    case "DIV" -> this.startEvent(EventBuilder::toDivorce);
+                    case "EVEN" -> this.startEvent(new LifeEventReader());
                     case "DEAT" -> this.startEvent(EventBuilder::toDeath);
                     case "BURI" -> this.startEvent(EventBuilder::toBurial);
-                    case "EVEN" -> this.startEvent(new LifeEventReader());
                 }
                 break;
             default:

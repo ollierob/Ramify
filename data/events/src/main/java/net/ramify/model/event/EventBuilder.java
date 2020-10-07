@@ -13,6 +13,8 @@ import net.ramify.model.event.type.burial.BurialEvent;
 import net.ramify.model.event.type.burial.GenericBurialEvent;
 import net.ramify.model.event.type.death.GenericDeathEvent;
 import net.ramify.model.event.type.historic.GenericHistoricEvent;
+import net.ramify.model.event.type.marriage.DivorceEvent;
+import net.ramify.model.event.type.marriage.GenericDivorceEvent;
 import net.ramify.model.event.type.marriage.GenericMarriageEvent;
 import net.ramify.model.event.type.marriage.MarriageEvent;
 import net.ramify.model.event.type.misc.Flourished;
@@ -98,6 +100,10 @@ public class EventBuilder {
 
     public MarriageEvent toMarriage(final HasPersonId person) {
         return new GenericMarriageEvent(eventId, person.personId(), this.eventProperties()).with(place);
+    }
+
+    public DivorceEvent toDivorce(final HasPersonId person) {
+        return new GenericDivorceEvent(eventId, person.personId(), eventProperties()).with(place);
     }
 
     public ResidenceEvent toResidence(final HasPersonId person) {

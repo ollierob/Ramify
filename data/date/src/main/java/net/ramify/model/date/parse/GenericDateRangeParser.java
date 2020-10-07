@@ -21,9 +21,9 @@ public class GenericDateRangeParser implements DateRangeParser {
         };
     }
 
-    DateRange parseYear(final String date) {
+    DateRange parseYear(final String yyyy) {
         try {
-            return new InYears(Integer.parseInt(date));
+            return new InYears(Integer.parseInt(yyyy));
         } catch (final NumberFormatException ex) {
             return null;
         }

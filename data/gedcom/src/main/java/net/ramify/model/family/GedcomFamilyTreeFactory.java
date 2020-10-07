@@ -1,6 +1,5 @@
 package net.ramify.model.family;
 
-import net.ramify.model.date.parse.DateRangeParser;
 import net.ramify.model.family.tree.FamilyTree;
 import net.ramify.model.family.tree.FamilyTreeId;
 import net.ramify.model.place.provider.PlaceParser;
@@ -15,11 +14,11 @@ import java.io.IOException;
 @Singleton
 public class GedcomFamilyTreeFactory {
 
-    private final DateRangeParser dateParser;
+    private final GedcomDateRangeParser dateParser;
     private final PlaceParser placeParser;
 
     @Inject
-    public GedcomFamilyTreeFactory(final DateRangeParser dateParser, final PlaceParser placeParser) {
+    public GedcomFamilyTreeFactory(final GedcomDateRangeParser dateParser, final PlaceParser placeParser) {
         this.dateParser = dateParser;
         this.placeParser = placeParser;
     }

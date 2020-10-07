@@ -2,7 +2,6 @@ package net.ramify.model.family;
 
 import net.ramify.model.date.ExactDate;
 import net.ramify.model.date.InYears;
-import net.ramify.model.date.parse.DateRangeParser;
 import net.ramify.model.family.tree.FamilyTreeId;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.person.gender.Gender;
@@ -28,7 +27,7 @@ import static org.mockito.Mockito.when;
 class GedcomFamilyTreeFactoryTest {
 
     @Mock
-    private DateRangeParser mockDateParser;
+    private GedcomDateRangeParser mockDateParser;
     @Mock
     private PlaceParser mockPlaceParser;
 

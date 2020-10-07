@@ -212,66 +212,6 @@
 3 DATA
 4 TEXT Birth date:  abt 1800 Birth place:  Stansfield, Yorkshire, England Residence date:  1871 Residence place:  Haworth, Yorkshire, England
 3 _APID 1,7619::25533022
-1 SOUR @S-1869639496@
-2 PAGE Ancestry Family Trees
-2 DATA
-3 TEXT http://trees.ancestry.com/pt/AMTCitationRedir.aspx?tid=30058439&pid=14
-1 OBJE
-2 FILE http://trees.ancestry.com/rd?f=image&guid=378bb351-43e2-4761-bebe-7dc0b43be930&tid=30058439&pid=14
-2 FORM jpg
-2 TITL 1878 jonathan robertshaw death cert
-1 OBJE
-2 FILE http://trees.ancestry.com/rd?f=image&guid=3d97c7cc-61cf-46c7-83b2-3d970198dff2&tid=30058439&pid=14
-2 FORM jpg
-2 TITL Mary marriage 1852
-1 OBJE
-2 FILE http://trees.ancestry.com/rd?f=image&guid=55874209-701a-4ab0-a2a2-1eff35d4be59&tid=30058439&pid=14
-2 FORM jpg
-2 TITL Birth certificate of Joseph Robertshaw
-1 OBJE
-2 FILE http://trees.ancestry.com/rd?f=image&guid=5d46b7fb-4fe1-428e-a8a8-b0bd900c5cf6&tid=30058439&pid=14
-2 FORM jpg
-2 TITL 1838 Haworth valuation
-1 OBJE
-2 FILE http://trees.ancestry.com/rd?f=image&guid=7d3f92e4-2abc-4c9b-9c26-884755bab6b2&tid=30058439&pid=14
-2 FORM jpg
-2 TITL Jonathan Robertshaw
-1 OBJE
-2 FILE http://trees.ancestry.com/rd?f=image&guid=81221452-14b3-4438-b26c-86379cc28d83&tid=30058439&pid=14
-2 FORM jpg
-2 TITL Top Street (Gaugers Croft), Haworth
-1 OBJE
-2 FILE http://trees.ancestry.com/rd?f=image&guid=b41d7665-4f93-41f1-bda5-9cc31c742b90&tid=30058439&pid=14
-2 FORM jpg
-2 TITL Jonathan Robertshaw memorial
-1 OBJE
-2 FILE http://trees.ancestry.com/rd?f=image&guid=ebc74068-8595-46e3-87d1-85bcb2035de8&tid=30058439&pid=14
-2 FORM jpg
-2 TITL Gaugers Croft
-1 OBJE
-2 FILE http://trees.ancestry.com/rd?f=image&guid=378bb351-43e2-4761-bebe-7dc0b43be930&tid=30058439&pid=14
-2 FORM jpg
-2 TITL 1878 jonathan robertshaw death cert
-1 OBJE
-2 FILE http://trees.ancestry.com/rd?f=image&guid=81221452-14b3-4438-b26c-86379cc28d83&tid=30058439&pid=14
-2 FORM jpg
-2 TITL Top Street (Gaugers Croft), Haworth
-1 OBJE
-2 FILE http://trees.ancestry.com/rd?f=image&guid=ebc74068-8595-46e3-87d1-85bcb2035de8&tid=30058439&pid=14
-2 FORM jpg
-2 TITL Gaugers Croft
-1 OBJE
-2 FILE http://trees.ancestry.com/rd?f=image&guid=7d3f92e4-2abc-4c9b-9c26-884755bab6b2&tid=30058439&pid=14
-2 FORM jpg
-2 TITL Jonathan Robertshaw
-1 OBJE
-2 FILE http://trees.ancestry.com/rd?f=image&guid=b41d7665-4f93-41f1-bda5-9cc31c742b90&tid=30058439&pid=14
-2 FORM jpg
-2 TITL Jonathan Robertshaw memorial
-1 OBJE
-2 FILE http://trees.ancestry.com/rd?f=image&guid=5d46b7fb-4fe1-428e-a8a8-b0bd900c5cf6&tid=30058439&pid=14
-2 FORM jpg
-2 TITL 1838 Haworth valuation
 1 FAMC @F178@
 1 FAMS @F18@
 1 FAMS @F19@
