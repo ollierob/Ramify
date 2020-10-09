@@ -67,6 +67,10 @@ public interface DateRange extends BuildsProto<DateProto.DateRange> {
         throw new UnsupportedOperationException(); //TODO
     }
 
+    default DateRange plus(final Period period) {
+        throw new UnsupportedOperationException();
+    }
+
     @Nonnull
     Optional<? extends DateRange> intersection(DateRange that);
 

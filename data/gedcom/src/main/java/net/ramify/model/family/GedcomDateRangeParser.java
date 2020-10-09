@@ -12,9 +12,11 @@ import net.ramify.utils.objects.Functions;
 import javax.annotation.CheckForNull;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.time.Period;
 import java.util.Optional;
 
 import static net.ramify.utils.StringUtils.isBlank;
+import static net.ramify.utils.StringUtils.isEmpty;
 
 @Singleton
 public class GedcomDateRangeParser implements DateRangeParser {
@@ -44,16 +46,25 @@ public class GedcomDateRangeParser implements DateRangeParser {
         };
     }
 
+    private static boolean isRange(final String d) {
+        return !isEmpty(d) && d.charAt(0) == 'P';
+    }
+
     private DateRange getGedcomFormat(final String pattern) {
         final var slash = pattern.indexOf('/');
         if (slash < 0) return this.getDefault(pattern);
-        final var left = this.getDefault(pattern.substring(0, slash));
-        final var right = this.getDefault(pattern.substring(slash + 1));
-        if (left == null) return BeforeDate.strictlyBefore(right);
-        if (right == null) return AfterDate.strictlyAfter(left);
-        return ClosedDateRange.of(left, right);
+        final var left = pattern.substring(0, slash);
+        final var leftDate = this.getDefault(left);
+        final var right = pattern.substring(slash + 1);
+        final var rightDate = this.getDefault(right);
+        if (isRange(left)) return rightDate.plus(Period.parse(left));
+        if (isRange(right)) return leftDate.minus(Period.parse(right));
+        if (leftDate == null) return BeforeDate.strictlyBefore(rightDate);
+        if (rightDate == null) return AfterDate.strictlyAfter(leftDate);
+        return ClosedDateRange.of(leftDate, rightDate);
     }
 
+    @CheckForNull
     private DateRange getDefault(final String date) {
         if (date.startsWith("+")) return delegate.get(date.substring(1)); //CE
         if (date.startsWith("-")) throw new UnsupportedOperationException(); //TODO BCE
