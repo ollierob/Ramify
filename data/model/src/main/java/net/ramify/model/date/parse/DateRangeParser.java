@@ -1,11 +1,18 @@
 package net.ramify.model.date.parse;
 
+import net.meerkat.objects.Classes;
 import net.ramify.model.date.DateRange;
+import net.ramify.model.date.ExactDate;
 import net.ramify.model.util.provider.Parser;
 
 import java.time.Month;
+import java.util.Optional;
 
 public interface DateRangeParser extends Parser<DateRange> {
+
+    default Optional<ExactDate> getExact(final String date) {
+        return this.maybeGet(date).flatMap(d -> Classes.cast(d, ExactDate.class));
+    }
 
     default Month parseMonth(final String month) {
         final var first = month.substring(0, 3);

@@ -8,9 +8,15 @@ import java.util.Optional;
 public class BeforeDate<D extends ChronoLocalDate> extends AbstractDateRange {
 
     public static DateRange strictlyBefore(final DateRange range) {
+        final var earliest = range.earliestInclusive();
+        if (earliest.isPresent()) return strictlyBefore(earliest.get());
         final var latest = range.latestInclusive();
         if (latest.isPresent()) return strictlyBefore(latest.get());
         throw new UnsupportedOperationException(); //TODO
+    }
+
+    public static BeforeDate<?> strictlyBefore(final ExactDate date) {
+        return strictlyBefore(date.date());
     }
 
     public static <D extends ChronoLocalDate> BeforeDate<D> strictlyBefore(final D date) {

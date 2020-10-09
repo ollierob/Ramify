@@ -10,7 +10,7 @@ public class AgeDateRange implements DateRange {
 
     private final Optional<? extends ChronoLocalDate> earliest, latest;
 
-    public AgeDateRange(Optional<? extends ChronoLocalDate> earliest, Optional<? extends ChronoLocalDate> latest) {
+    public AgeDateRange(final Optional<? extends ChronoLocalDate> earliest, final Optional<? extends ChronoLocalDate> latest) {
         this.earliest = earliest;
         this.latest = latest;
     }
@@ -25,6 +25,12 @@ public class AgeDateRange implements DateRange {
     @Override
     public Optional<? extends ChronoLocalDate> latestInclusive() {
         return latest;
+    }
+
+    @Nonnull
+    @Override
+    public Optional<? extends DateRange> intersection(final DateRange that) {
+        throw new UnsupportedOperationException(); //TODO
     }
 
 }

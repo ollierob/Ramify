@@ -6,7 +6,7 @@ import javax.annotation.Nonnull;
 import java.time.chrono.ChronoLocalDate;
 import java.util.Optional;
 
-public class ApproximateDateRange implements DateRange {
+public class ApproximateDateRange extends AbstractDateRange {
 
     public static DateRange of(final DateRange range) {
         return range.isApproximate() ? range : new ApproximateDateRange(range);
@@ -40,6 +40,11 @@ public class ApproximateDateRange implements DateRange {
     public DateProto.DateRange.Builder toProtoBuilder() {
         return delegate.toProtoBuilder()
                 .setApproximate(this.isApproximate());
+    }
+
+    @Override
+    public String toString() {
+        return "Approximately[" + delegate + "]";
     }
 
 }

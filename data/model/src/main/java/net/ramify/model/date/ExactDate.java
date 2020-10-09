@@ -3,7 +3,6 @@ package net.ramify.model.date;
 import javax.annotation.Nonnull;
 import java.time.LocalDate;
 import java.time.Month;
-import java.time.Period;
 import java.time.chrono.ChronoLocalDate;
 import java.util.Objects;
 import java.util.Optional;
@@ -62,11 +61,6 @@ public class ExactDate implements DateRange {
     @Override
     public boolean isExact() {
         return true;
-    }
-
-    public DateRange yearsAgo(final int years) {
-        final var period = Period.ofYears(years);
-        return ClosedDateRange.of(date.minus(period.plusYears(1)), date.minus(period));
     }
 
     @Override

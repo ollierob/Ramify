@@ -48,7 +48,7 @@ public class ClosedDateRange extends AbstractDateRange {
     public static DateRange of(final ChronoLocalDate earliest, final ChronoLocalDate latest) {
         if (earliest == null && latest == null) return DateRange.ALWAYS;
         if (earliest == null) return BeforeDate.strictlyBefore(latest);
-        if (latest == null) return new AfterDate(earliest);
+        if (latest == null) return AfterDate.strictlyAfter(earliest);
         if (earliest.isAfter(latest)) return DateRange.NEVER;
         if (earliest.compareTo(latest) == 0) return ExactDate.on(earliest);
         return new ClosedDateRange(earliest, latest);
