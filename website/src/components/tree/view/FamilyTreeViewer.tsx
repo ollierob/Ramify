@@ -69,7 +69,7 @@ export class FamilyTreeViewer extends React.PureComponent<Props, State> {
 
 const PersonRow = (props: {treeId: FamilyTreeId, people: PersonMap, line: PersonId[], dragging: boolean}) => {
     return <div className="row">
-        {props.line.map(id => <PersonCard treeId={props.treeId} person={props.people[id]} dragging={props.dragging}/>)}
+        {props.line.map(id => <PersonCard key={id} treeId={props.treeId} person={props.people[id]} dragging={props.dragging}/>)}
     </div>;
 };
 

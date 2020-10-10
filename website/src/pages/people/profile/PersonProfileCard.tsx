@@ -55,10 +55,12 @@ export class PersonProfileCard extends React.PureComponent<Props, State> {
 
                 <Tabs.TabPane tab="Events" key="events">
                     <PersonProfileEvents
+                        key="events"
                         {...this.props}
                         {...this.state}
                         setSelected={this.setSelectedEvent}/>
                     <PersonProfileSources
+                        key="sources"
                         {...this.props}
                         {...this.state}/>
                 </Tabs.TabPane>

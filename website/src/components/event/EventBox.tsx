@@ -34,10 +34,10 @@ export class EventBox extends React.PureComponent<EventBoxProps> {
         const event = this.props.event;
 
         return <Card className={"event " + eventClass(event)}>
-            <div className="left">
+            <div className="left" key="left">
                 <EventBoxDate {...this.props} showCompute={isSelf}/>
             </div>
-            <div className="right">
+            <div className="right" key="right">
                 <div className="top">
                     <EventTitle {...this.props} relationship={this.props.relationshipToMain}/>
                     {event.place && <div className="place">
