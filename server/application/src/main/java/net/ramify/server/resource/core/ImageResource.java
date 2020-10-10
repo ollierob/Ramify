@@ -1,5 +1,6 @@
 package net.ramify.server.resource.core;
 
+import net.ramify.authentication.NotLoggedInException;
 import net.ramify.authentication.UserSessionContext;
 import net.ramify.model.record.collection.RecordSetId;
 import net.ramify.model.record.provider.RecordSetProvider;
@@ -39,8 +40,11 @@ public class ImageResource extends AbstractResource {
     @Cached(maxAgeDays = 1)
     public Response flagImage(
             @Context final UserSessionContext context,
-            @PathParam("flag") String flag) {
+            @PathParam("flag") String flag)
+            throws NotLoggedInException {
+
         if (isBlank(flag)) return notFound();
+
         //TODO cache
         {
             if (flag.endsWith(".svg")) flag = flag.substring(0, flag.length() - 4);
@@ -60,7 +64,7 @@ public class ImageResource extends AbstractResource {
         return null;
     }
 
-    Response webrootImage(final UserSessionContext context, String path) {
+    Response webrootImage(final UserSessionContext context, String path) throws NotLoggedInException {
         if (isBlank(path)) return notFound();
         path = path.trim();
         if (path.startsWith(".") || path.length() < 3) return notFound();
@@ -82,10 +86,13 @@ public class ImageResource extends AbstractResource {
     @Cached(maxAgeDays = 1)
     public Response generalImage(
             @Context final UserSessionContext context,
-            @PathParam("file") String filename) {
+            @PathParam("file") String filename)
+            throws NotLoggedInException {
+
         if (isBlank(filename)) return notFound();
         filename = filename.trim();
         if (filename.startsWith(".") || filename.length() < 3) return notFound();
+
         switch (filename.substring(filename.length() - 3)) {
             case "jpg":
                 return this.readSessionResource(context.session(), "/images/" + filename, JPG);
@@ -106,7 +113,8 @@ public class ImageResource extends AbstractResource {
             @Context final UserSessionContext context,
             @PathParam("id") final RecordSetId id,
             @PathParam("group") final String group,
-            @PathParam("file") final String filename) {
+            @PathParam("file") final String filename)
+            throws NotLoggedInException {
         if (filename.startsWith(".") || !filename.endsWith(".jpg") || filename.contains("/")) return notFound();
         final var recordSet = recordSets.get(id);
         if (recordSet == null) return notFound();

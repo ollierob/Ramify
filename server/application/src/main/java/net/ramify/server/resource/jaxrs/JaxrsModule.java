@@ -15,6 +15,7 @@ public class JaxrsModule extends AbstractModule {
         this.bind(DateParamConverterProvider.class);
         this.bind(DateRangeParamConverterProvider.class);
         this.bind(AdhocParamConverterProvider.class);
+        this.bind(NotLoggedInExceptionMapper.class);
     }
 
 }

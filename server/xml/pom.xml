@@ -19,14 +19,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>places</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>date</artifactId>
-        </dependency>
-        <dependency>
             <groupId>net.ramify</groupId>
             <artifactId>records</artifactId>
         </dependency>

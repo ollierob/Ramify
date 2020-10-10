@@ -1,5 +1,6 @@
 package net.ramify.server.resource.people;
 
+import net.ramify.authentication.NotLoggedInException;
 import net.ramify.authentication.UserSessionContext;
 import net.ramify.server.resource.AbstractResource;
 
@@ -15,7 +16,7 @@ public class PeopleRouterResource extends AbstractResource {
 
     @GET
     @Produces(MediaType.TEXT_HTML)
-    public Response router(@Context final UserSessionContext context) {
+    public Response router(@Context final UserSessionContext context) throws NotLoggedInException {
         return this.readRouterResource(context.session(), "people");
     }
 

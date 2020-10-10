@@ -1,7 +1,10 @@
 package net.ramify.authentication;
 
+import javax.annotation.Nonnull;
+
 public interface UserSessionContext {
 
-    UserSession session();
+    @Nonnull
+    UserSession session() throws NotLoggedInException;
 
 }
