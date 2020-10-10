@@ -1,7 +1,7 @@
 package net.ramify.model.place;
 
 import net.ramify.model.place.iso.CountryIso;
-import net.ramify.model.util.provider.Provider;
+import net.ramify.model.place.provider.PlaceProvider;
 
 import javax.annotation.Nonnull;
 
@@ -16,7 +16,7 @@ public interface HasPlaceId {
     }
 
     @Nonnull
-    default <P> P resolvePlace(final Provider<PlaceId, P> lookup) {
+    default Place resolvePlace(final PlaceProvider lookup) {
         return lookup.require(this.placeId());
     }
 
