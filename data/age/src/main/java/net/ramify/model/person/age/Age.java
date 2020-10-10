@@ -1,5 +1,6 @@
 package net.ramify.model.person.age;
 
+import net.meerkat.temporal.date.Periods;
 import net.ramify.data.proto.BuildsProto;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.person.proto.AgeProto;
@@ -8,8 +9,6 @@ import javax.annotation.Nonnull;
 import java.time.Period;
 import java.time.Year;
 import java.util.Optional;
-
-import static net.meerkat.temporal.date.Periods.approximateCompare;
 
 public interface Age extends BuildsProto<AgeProto.Age> {
 
@@ -49,12 +48,12 @@ public interface Age extends BuildsProto<AgeProto.Age> {
     }
 
     default boolean isSame(final Period period) {
-        return approximateCompare(this.lowerBound(), period) <= 0
-                && approximateCompare(period, this.upperBound()) <= 0;
+        return Periods.approximateCompare(this.lowerBound(), period) <= 0
+                && Periods.approximateCompare(period, this.upperBound()) <= 0;
     }
 
     default boolean isSameOrOlderThan(final Period period) {
-        return approximateCompare(period, this.upperBound()) <= 0;
+        return Periods.approximateCompare(period, this.upperBound()) <= 0;
     }
 
     @Nonnull
