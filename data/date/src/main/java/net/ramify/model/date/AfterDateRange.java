@@ -8,7 +8,7 @@ import java.util.Optional;
 public class AfterDateRange extends AbstractDateRange {
 
     public static DateRange of(final DateRange date) {
-        final var exact = date.exact();
+        final var exact = date.exactValue();
         if (exact.isPresent()) return new AfterDateRange(exact.get());
         final var latest = date.latestInclusive();
         if (latest.isPresent()) return new AfterDateRange(latest.get());

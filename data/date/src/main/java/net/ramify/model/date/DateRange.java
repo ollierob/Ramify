@@ -11,7 +11,7 @@ import java.time.chrono.ChronoLocalDate;
 import java.util.Comparator;
 import java.util.Optional;
 
-public interface DateRange extends BuildsProto<DateProto.DateRange> {
+public interface DateRange extends DateRangeArithmetic, BuildsProto<DateProto.DateRange> {
 
     @Nonnull
     Optional<? extends ChronoLocalDate> earliestInclusive();
@@ -30,7 +30,7 @@ public interface DateRange extends BuildsProto<DateProto.DateRange> {
     }
 
     @Nonnull
-    default Optional<? extends ChronoLocalDate> exact() {
+    default Optional<? extends ChronoLocalDate> exactValue() {
         final var earliest = this.earliestInclusive().orElse(null);
         if (earliest == null) return Optional.empty();
         final var latest = this.latestInclusive().orElse(null);
@@ -40,6 +40,10 @@ public interface DateRange extends BuildsProto<DateProto.DateRange> {
 
     default boolean isApproximate() {
         return false;
+    }
+
+    default DateRange approximately() {
+        return this.isApproximate() ? this : new ApproximateDateRange(this);
     }
 
     default boolean isExact() {
@@ -55,24 +59,15 @@ public interface DateRange extends BuildsProto<DateProto.DateRange> {
                 && this.latestInclusive().map(DateRange::covariant).orElse(LocalDate.MAX).compareTo(date) >= 0;
     }
 
-    default DateRange minusYears(final int years) {
-        return this.minus(Period.ofYears(years));
-    }
-
-    default DateRange minus(final Period period) {
-        return this.minus(period, period);
-    }
-
-    default DateRange minus(final Period max, final Period min) {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
+    @Override
     default DateRange plus(final Period period) {
-        throw new UnsupportedOperationException();
+        return period.isZero() ? this : new PeriodShiftedDateRange(this, period);
     }
 
     @Nonnull
-    Optional<? extends DateRange> intersection(DateRange that);
+    default Optional<? extends DateRange> intersection(final DateRange that) {
+        return Optional.ofNullable(DateRanges.intersection(this, that));
+    }
 
     default boolean intersects(final DateRange that) {
         return this.intersection(that).isPresent();

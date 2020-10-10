@@ -30,7 +30,7 @@ public class ExactDate implements DateRange {
 
     @Nonnull
     @Override
-    public Optional<? extends ChronoLocalDate> exact() {
+    public Optional<? extends ChronoLocalDate> exactValue() {
         return Optional.of(date);
     }
 
