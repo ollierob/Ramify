@@ -13,7 +13,6 @@ module.exports = {
         filename: "[name].bundle.js", //filename: "[name].[contenthash].bundle.js",
         chunkFilename: "[name].bundle.js",
     },
-    devtool: "source-map",
     resolve: {
         extensions: [".ts", ".tsx", ".js", ".json", ".less"]
     },
