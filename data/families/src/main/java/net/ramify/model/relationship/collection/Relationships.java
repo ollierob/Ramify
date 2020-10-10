@@ -1,7 +1,7 @@
 package net.ramify.model.relationship.collection;
 
 import com.google.common.collect.Iterables;
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.relationship.Relationship;
 import net.ramify.model.relationship.proto.RelationshipProto;
 

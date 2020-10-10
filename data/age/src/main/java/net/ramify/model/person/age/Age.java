@@ -1,7 +1,7 @@
 package net.ramify.model.person.age;
 
 import net.meerkat.temporal.date.Periods;
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.person.proto.AgeProto;
 

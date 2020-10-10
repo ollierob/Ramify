@@ -5,7 +5,7 @@ import com.google.common.collect.Maps;
 import com.google.common.graph.Network;
 import com.google.common.graph.NetworkBuilder;
 import net.meerkat.functions.consumers.Consumers;
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.family.proto.FamilyProto;
 import net.ramify.model.person.HasPersonId;
 import net.ramify.model.person.Person;

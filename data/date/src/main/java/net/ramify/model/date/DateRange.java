@@ -1,6 +1,6 @@
 package net.ramify.model.date;
 
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.date.proto.DateProto;
 import net.ramify.model.date.proto.DateProtoUtils;
 

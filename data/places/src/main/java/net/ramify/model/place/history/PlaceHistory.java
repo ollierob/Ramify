@@ -1,7 +1,7 @@
 package net.ramify.model.place.history;
 
 import net.meerkat.functions.consumers.Consumers;
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.place.proto.PlaceProto;
 

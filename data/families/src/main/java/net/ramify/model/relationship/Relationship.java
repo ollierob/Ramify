@@ -1,7 +1,7 @@
 package net.ramify.model.relationship;
 
 import net.meerkat.objects.Castable;
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.relationship.proto.RelationshipProto;
 import net.ramify.model.relationship.type.RelationshipHandler;

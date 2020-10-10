@@ -1,6 +1,6 @@
 package net.ramify.model.person.name;
 
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.person.proto.NameProto;
 import net.ramify.utils.collections.SetUtils;
 

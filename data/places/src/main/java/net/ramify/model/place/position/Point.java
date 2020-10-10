@@ -1,6 +1,6 @@
 package net.ramify.model.place.position;
 
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.place.proto.LocationProto;
 
 import javax.annotation.Nonnull;

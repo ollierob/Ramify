@@ -1,7 +1,7 @@
 package net.ramify.model.util;
 
 import com.google.common.base.MoreObjects;
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.util.proto.LinkProto;
 
 import javax.annotation.CheckForNull;

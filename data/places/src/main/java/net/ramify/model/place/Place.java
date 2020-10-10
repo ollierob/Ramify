@@ -2,7 +2,7 @@ package net.ramify.model.place;
 
 import net.meerkat.functions.consumers.Consumers;
 import net.meerkat.objects.Castable;
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.Iso;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.proto.PlaceProto;

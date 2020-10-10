@@ -2,7 +2,7 @@ package net.ramify.model.record.collection;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.record.proto.RecordProto;
 
 import javax.annotation.Nonnull;

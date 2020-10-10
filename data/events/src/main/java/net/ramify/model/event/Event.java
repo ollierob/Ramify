@@ -1,6 +1,6 @@
 package net.ramify.model.event;
 
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.date.HasDate;
 import net.ramify.model.event.proto.EventProto;
 import net.ramify.model.place.HasPlace;

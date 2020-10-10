@@ -1,7 +1,7 @@
 package net.ramify.model.place;
 
 import com.google.common.collect.Iterables;
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.util.Link;
 

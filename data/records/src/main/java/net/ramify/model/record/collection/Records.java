@@ -3,7 +3,7 @@ package net.ramify.model.record.collection;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.collection.HasPlaces;
 import net.ramify.model.record.Record;

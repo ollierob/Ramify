@@ -1,6 +1,6 @@
 package net.ramify.model.record.image;
 
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.record.collection.HasRecordSetId;
 import net.ramify.model.record.proto.RecordProto;
 

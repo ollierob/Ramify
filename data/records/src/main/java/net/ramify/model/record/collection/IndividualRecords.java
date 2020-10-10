@@ -1,7 +1,7 @@
 package net.ramify.model.record.collection;
 
 import com.google.common.collect.Lists;
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.record.IndividualRecord;
 import net.ramify.model.record.proto.RecordProto;
 

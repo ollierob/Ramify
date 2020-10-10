@@ -18,6 +18,11 @@
             <artifactId>protobuf-java</artifactId>
             <version>3.8.0</version>
         </dependency>
+        <dependency>
+            <groupId>net.ollie</groupId>
+            <artifactId>protobuf-jaxrs</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <build>

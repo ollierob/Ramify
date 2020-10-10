@@ -2,7 +2,7 @@ package net.ramify.model.record.archive;
 
 import com.google.common.base.MoreObjects;
 import net.meerkat.functions.consumers.Consumers;
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.record.HasTitleDescription;
 import net.ramify.model.record.proto.ArchiveProto;
 import net.ramify.model.util.Link;

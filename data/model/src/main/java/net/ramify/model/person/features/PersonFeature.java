@@ -1,7 +1,7 @@
 package net.ramify.model.person.features;
 
 import net.meerkat.objects.Castable;
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.person.proto.PersonProto;
 
 import javax.annotation.Nonnull;

@@ -1,6 +1,6 @@
 package net.ramify.model.record;
 
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.date.HasDate;
 import net.ramify.model.person.HasPerson;

@@ -1,7 +1,7 @@
 package net.ramify.model.event.historic;
 
 import com.google.common.collect.Iterables;
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.date.DateRange;
 import net.ramify.model.event.Event;
 import net.ramify.model.event.proto.EventProto;

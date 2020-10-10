@@ -2,7 +2,7 @@ package net.ramify.model.record;
 
 import com.google.common.collect.Iterables;
 import net.meerkat.objects.Castable;
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.date.HasDate;
 import net.ramify.model.family.Family;
 import net.ramify.model.family.collection.HasFamilies;

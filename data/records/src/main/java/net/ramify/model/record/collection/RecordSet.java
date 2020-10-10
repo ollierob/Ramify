@@ -3,7 +3,7 @@ package net.ramify.model.record.collection;
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.Iterables;
 import net.meerkat.functions.consumers.Consumers;
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.date.HasDate;
 import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.PlaceId;

@@ -3,7 +3,7 @@ package net.ramify.model.place.collection;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.proto.PlaceProto;
 

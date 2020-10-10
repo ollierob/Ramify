@@ -1,6 +1,6 @@
 package net.ramify.model.family.tree;
 
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.family.proto.FamilyProto;
 
 import javax.annotation.Nonnull;

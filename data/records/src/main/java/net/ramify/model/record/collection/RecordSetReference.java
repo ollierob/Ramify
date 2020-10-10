@@ -1,7 +1,7 @@
 package net.ramify.model.record.collection;
 
 import net.meerkat.functions.consumers.Consumers;
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.record.archive.Archive;
 import net.ramify.model.record.archive.HasArchive;
 import net.ramify.model.record.proto.RecordProto;

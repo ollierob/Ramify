@@ -1,7 +1,7 @@
 package net.ramify.model.person;
 
 import com.google.common.collect.Iterables;
-import net.ramify.data.proto.BuildsProto;
+import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.event.collection.HasPersonEvents;
 import net.ramify.model.person.features.HasPersonFeatures;
 import net.ramify.model.person.features.PersonFeature;
