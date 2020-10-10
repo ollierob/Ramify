@@ -8,6 +8,7 @@ export const PersonProfileTitle = (props: {person: Person.AsObject}) => {
     const person = props.person;
     return <div className="profileTitle">
         <PersonName name={person.name}/>
+        {" "}
         ({renderLifespan(person, {life: "", born: "b.", died: "d.", in: ""})})
         <PersonLabels labels={props.person.labelList}/>
     </div>;

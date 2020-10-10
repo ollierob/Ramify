@@ -36,3 +36,5 @@ export const EditIcon = (props: IconProps) => <Icon type="edit" {...props}/>;
 export const LinkIcon = (props: IconProps) => <Icon type="link" {...props}/>;
 
 export const CommunityIcon = (props: IconProps) => <Icon type="user" {...props}/>;
+
+export const AddTagIcon = (props: IconProps) => <Icon type="file-add" {...props}/>;

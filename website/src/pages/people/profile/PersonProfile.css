@@ -6,17 +6,13 @@
     margin-left: 32px;
 }
 
-.personProfile .profile .leftHalf {
-    display: inline-block;
-    width: calc(50% - 8px);
-    margin-right: 8px;
+.personProfile .profile .ant-tabs-tabpane {
+    vertical-align: top;
 }
 
-.personProfile .profile .rightHalf {
-    display: inline-block;
-    width: calc(50% - 8px);
-    margin-left: 8px;
-    vertical-align: top;
+.personProfile .profile .events, .personProfile .profile .source {
+    width: 50%;
+    padding: 0 4px;
 }
 
 .personProfile .profile .events .controls {
@@ -51,22 +47,6 @@
 
 .personProfile .profile .events .eventList .event.historic .description {
     font-style: italic;
-}
-
-.personProfile .profile .rightHalf .ant-tabs.ant-tabs-top {
-    margin-top: -16px;
-}
-
-.personProfile .profile .rightHalf .ant-tabs-nav {
-    height: 60px;
-}
-
-.personProfile .profile .rightHalf .ant-tabs-tab {
-    font-size: 18px;
-}
-
-.personProfile .profile .rightHalf .ant-tabs-tab.ant-tabs-tab-active {
-    font-weight: bold;
 }
 
 .personProfile .profile .profileTitle .labels {

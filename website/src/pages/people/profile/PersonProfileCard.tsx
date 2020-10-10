@@ -3,9 +3,8 @@ import {Person} from "../../../protobuf/generated/person_pb";
 import {Card, Tabs} from "antd";
 import {Family} from "../../../protobuf/generated/family_pb";
 import {FamilyTreeId} from "../../../components/tree/FamilyTree";
-import {PersonProfileRelativesList} from "./PersonProfileRelativesList";
 import {determineRelatives, Relatives} from "../../../components/relationship/Relatives";
-import {ProfileEvent, sortProfileEvents} from "../../../components/event/ProfileEvent";
+import {ProfileEvent} from "../../../components/event/ProfileEvent";
 import {Event} from "../../../protobuf/generated/event_pb";
 import {eventType} from "../../../components/event/Event";
 import {isDateOrdered} from "../../../components/date/DateRange";
@@ -14,6 +13,7 @@ import {PersonProfileTitle} from "./PersonProfileTitle";
 import {PersonProfileEvents} from "./PersonProfileEvents";
 import {lifeDateRange} from "../../../components/people/Person";
 import {DateRange} from "../../../protobuf/generated/date_pb";
+import PersonProfileSources from "./PersonProfileSources";
 
 type Props = {
     person: Person.AsObject;
@@ -25,16 +25,20 @@ type Props = {
 type State = {
     relatives: Readonly<Relatives>
     events: ReadonlyArray<ProfileEvent>
+    selectedEvent: ProfileEvent
 }
 
 export class PersonProfileCard extends React.PureComponent<Props, State> {
+
+    private readonly setSelectedEvent = (selectedEvent: ProfileEvent) => this.setState({selectedEvent});
 
     constructor(props: Props) {
         super(props);
         const relatives: Relatives = props.person && determineRelatives(props.person.id, props.family);
         this.state = {
-            relatives: relatives,
-            events: this.determineEvents(props.person, relatives)
+            relatives,
+            events: this.determineEvents(props.person, relatives),
+            selectedEvent: null
         };
     }
 
@@ -45,16 +49,23 @@ export class PersonProfileCard extends React.PureComponent<Props, State> {
 
         return <Card
             title={<PersonProfileTitle person={person}/>}
-            className="leftHalf profile large">
+            className="profile large">
 
-            {person && <>
-                <ProfileLeft
-                    {...this.props}
-                    {...this.state}/>
-                <ProfileRight
-                    {...this.props}
-                    {...this.state}/>
-            </>}
+            <Tabs tabPosition="left" size="large">
+
+                <Tabs.TabPane tab="Events" key="events">
+                    <PersonProfileEvents
+                        {...this.props}
+                        {...this.state}
+                        setSelected={this.setSelectedEvent}/>
+                    <PersonProfileSources
+                        {...this.props}
+                        {...this.state}/>
+                </Tabs.TabPane>
+
+                <Tabs.TabPane tab="Gallery" disabled/>
+
+            </Tabs>
 
         </Card>;
 
@@ -120,21 +131,3 @@ function retainFamilyEvent(event: Event.AsObject): boolean {
             return false;
     }
 }
-
-const ProfileLeft = (props: Props & State) => {
-    return <div className="leftHalf">
-        <PersonProfileEvents {...props}/>
-    </div>;
-};
-
-const ProfileRight = (props: Props & State) => {
-    return <div className="rightHalf">
-        <Tabs size="large">
-            <Tabs.TabPane key="relatives" tab="Relatives">
-                <PersonProfileRelativesList {...props}/>
-            </Tabs.TabPane>
-            <Tabs.TabPane key="records" tab="Records" disabled/>
-            <Tabs.TabPane key="places" tab="Places" disabled/>
-        </Tabs>
-    </div>;
-};

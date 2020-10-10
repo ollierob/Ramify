@@ -19,6 +19,7 @@ type Props = {
     tree: FamilyTreeId;
     relatives: Relatives
     events: ReadonlyArray<ProfileEvent>
+    setSelected: (event: ProfileEvent) => void
 }
 
 type State = {

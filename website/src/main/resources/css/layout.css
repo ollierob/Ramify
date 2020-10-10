@@ -52,14 +52,11 @@ body {
 
 .body .content {
     position: absolute;
-    top: 8px;
-    left: 8px;
-    right: 8px;
-    bottom: 8px;
+    margin: 8px;
 }
 
 .body .submenu + .content {
-    top: 54px;
+    top: 46px;
 }
 
 .body .content.error {
