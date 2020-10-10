@@ -11,6 +11,13 @@
 
     <artifactId>images</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>records</artifactId>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <!--Copy resources into server module-->

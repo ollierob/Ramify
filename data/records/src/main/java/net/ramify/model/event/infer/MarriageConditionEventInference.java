@@ -2,8 +2,8 @@ package net.ramify.model.event.infer;
 
 import net.ramify.model.date.BeforeDate;
 import net.ramify.model.date.DateRange;
-import net.ramify.model.event.PersonEvent;
 import net.ramify.model.event.EventBuilder;
+import net.ramify.model.event.PersonEvent;
 import net.ramify.model.event.type.marriage.MarriageEvent;
 import net.ramify.model.person.PersonId;
 import net.ramify.model.record.Record;

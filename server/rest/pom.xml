@@ -20,11 +20,15 @@
         </dependency>
         <dependency>
             <groupId>net.ramify</groupId>
-            <artifactId>people</artifactId>
+            <artifactId>places</artifactId>
         </dependency>
         <dependency>
-            <groupId>net.ramify</groupId>
-            <artifactId>places</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>families</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>records</artifactId>
         </dependency>
     </dependencies>
 
