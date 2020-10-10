@@ -52,6 +52,7 @@ module.exports = {
                 ]
             },
             {
+                //Used by leaflet
                 test: /\.(gif|png|jpe?g|svg)$/i,
                 use: [
                     "file-loader",
@@ -59,7 +60,6 @@ module.exports = {
                         loader: "image-webpack-loader",
                     }
                 ]
-
             }
         ]
     },
