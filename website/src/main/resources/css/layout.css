@@ -53,6 +53,7 @@ body {
 .body .content {
     position: absolute;
     margin: 8px;
+    width: 100%;
 }
 
 .body .submenu + .content {
