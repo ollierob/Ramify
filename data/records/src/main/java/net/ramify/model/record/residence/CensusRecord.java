@@ -45,11 +45,13 @@ public abstract class CensusRecord extends ExactDateRecord implements LifeEventR
     }
 
     protected BirthEvent birthEvent(final HasPersonId personId, final Age age) {
-        return EventBuilder.builderWithRandomId(age.birthDate(this.date())).toBirth(personId);
+        return EventBuilder.builderWithRandomId(age.birthDate(this.date()))
+                .toBirth(personId);
     }
 
     protected DeathEvent deathBeforeCensus(final HasPersonId personId) {
-        return EventBuilder.builderWithRandomId(BeforeDate.strictlyBefore(this.date())).toDeath(personId);
+        return EventBuilder.builderWithRandomId(BeforeDate.strictlyBefore(this.date()))
+                .toDeath(personId);
     }
 
     @Override

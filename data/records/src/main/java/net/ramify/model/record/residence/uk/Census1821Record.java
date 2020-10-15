@@ -83,7 +83,7 @@ public class Census1821Record extends CensusRecord implements HasPlace {
     private Person anonymousPerson(final Gender gender, final Age age) {
         final var personId = PersonId.random();
         final var birth = this.birthEvent(personId, age);
-        final var residence = this.eventBuilder().toResidence(personId);
+        final var residence = this.eventBuilder().withGivenAge(age).toResidence(personId);
         final var events = new MutablePersonEventSet(eventMerger, birth, residence);
         return new GenericRecordPerson(personId, Name.UNKNOWN, gender, events);
     }
