@@ -22,7 +22,7 @@ public class CountryIso extends Iso {
                 final var dash = iso.indexOf('-');
                 return dash < 0
                         ? new CountryIso(iso)
-                        : new CountrySubdivisionIso(iso);
+                        : CountrySubdivisionIso.valueOf(iso);
         }
     }
 
