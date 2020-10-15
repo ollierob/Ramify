@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import net.ramify.model.Id;
 import net.ramify.model.place.iso.CountryIso;
 
-public class PlaceId extends Id implements HasPlaceId {
+public class PlaceId extends Id implements HasPlaceId, PlaceOrGroupId {
 
     public static final PlaceId ENGLAND = new PlaceId("GB:england:country");
 
@@ -14,7 +14,7 @@ public class PlaceId extends Id implements HasPlaceId {
 
     public PlaceId(final String value) {
         super(value);
-        Preconditions.checkArgument(value.indexOf(':', 3) > 0, "Invalid name: %s", value);
+        Preconditions.checkArgument(value.indexOf(':') > 0, "Invalid name: %s", value);
     }
 
     public PlaceId(final CountryIso iso, final Class<? extends Place> type, final String name) {
@@ -44,8 +44,11 @@ public class PlaceId extends Id implements HasPlaceId {
         return id.substring(a, b);
     }
 
+    @Override
     public PlaceGroupId placeGroupId() {
-        return placeGroupId == null ? placeGroupId = new PlaceGroupId(this.countryIso(), this.name()) : placeGroupId;
+        return placeGroupId == null
+                ? placeGroupId = new PlaceGroupId(this.countryIso(), this.name())
+                : placeGroupId;
     }
 
 }

@@ -9,7 +9,7 @@ import java.util.Objects;
 
 import static net.ramify.utils.StringUtils.isBlank;
 
-public class PlaceGroupId extends Id {
+public class PlaceGroupId extends Id implements PlaceOrGroupId {
 
     private CountryIso iso;
     private String name;
@@ -43,6 +43,16 @@ public class PlaceGroupId extends Id {
     public PlaceId withPlaceType(final String type) {
         Preconditions.checkArgument(!isBlank(type), "Invalid (empty) type");
         return new PlaceId(this.value() + ':' + type);
+    }
+
+    @Override
+    public PlaceId placeId() {
+        return null;
+    }
+
+    @Override
+    public PlaceOrGroupId placeGroupId() {
+        return this;
     }
 
 }
