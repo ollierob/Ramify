@@ -10,8 +10,14 @@ import net.ramify.model.place.proto.PlaceProto;
 import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.function.BiConsumer;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.stream.Collector;
 
 public interface Places extends Iterable<Place>, HasPlaces, BuildsProto<PlaceProto.PlaceList> {
 
@@ -52,5 +58,39 @@ public interface Places extends Iterable<Place>, HasPlaces, BuildsProto<PlacePro
     }
 
     Places NONE = Collections::emptyIterator;
+
+    static Collector<Place, ?, Places> collector() {
+        return new Collector<Place, Set<Place>, Places>() {
+
+            @Override
+            public Supplier<Set<Place>> supplier() {
+                return HashSet::new;
+            }
+
+            @Override
+            public BiConsumer<Set<Place>, Place> accumulator() {
+                return Set::add;
+            }
+
+            @Override
+            public BinaryOperator<Set<Place>> combiner() {
+                return (s1, s2) -> {
+                    s1.addAll(s2);
+                    return s1;
+                };
+            }
+
+            @Override
+            public Function<Set<Place>, Places> finisher() {
+                return Places::of;
+            }
+
+            @Override
+            public Set<Characteristics> characteristics() {
+                return Collections.singleton(Characteristics.UNORDERED);
+            }
+            
+        };
+    }
 
 }

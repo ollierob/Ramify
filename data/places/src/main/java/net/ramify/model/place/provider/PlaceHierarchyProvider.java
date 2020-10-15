@@ -1,7 +1,6 @@
 package net.ramify.model.place.provider;
 
 import com.google.common.collect.Iterables;
-import net.ramify.model.place.HasPlace;
 import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.hierarchy.PlaceHierarchy;
@@ -21,12 +20,13 @@ public interface PlaceHierarchyProvider extends Provider<PlaceHierarchyId, Place
         return this.hierarchies(place.placeId());
     }
 
-    @Nonnull
-    Set<PlaceId> findByName(String name, int limit, PlaceId within);
-
-    default boolean isParent(final HasPlace parent, final HasPlace child) {
+    default boolean isParentChild(final HasPlaceId parent, final HasPlaceId child) {
         final var hierarchy = this.hierarchies(child);
-        return Iterables.any(hierarchy, h -> h.isParent(parent));
+        return Iterables.any(hierarchy, h -> h.isChildOf(parent));
+    }
+
+    default boolean isChildParent(final HasPlaceId child, final HasPlaceId parent) {
+        return this.isParentChild(parent, child);
     }
 
 }

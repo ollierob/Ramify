@@ -9,6 +9,7 @@ import net.ramify.model.util.provider.Provider;
 
 import javax.annotation.Nonnull;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public interface PlaceProvider extends Provider<PlaceId, Place> {
 
@@ -28,6 +29,9 @@ public interface PlaceProvider extends Provider<PlaceId, Place> {
 
     @Nonnull
     Set<Place> findByGroup(PlaceGroupId groupId);
+
+    @Nonnull
+    Stream<Place> findByName(String name);
 
     class UnknownPlaceException extends MissingValueException implements HasPlaceId {
 

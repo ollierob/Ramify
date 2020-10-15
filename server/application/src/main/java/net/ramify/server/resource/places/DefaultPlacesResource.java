@@ -21,6 +21,8 @@ import javax.annotation.CheckForNull;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import static net.ramify.utils.StringUtils.isBlank;
+
 @Singleton
 public class DefaultPlacesResource implements PlacesResource {
 
@@ -116,9 +118,11 @@ public class DefaultPlacesResource implements PlacesResource {
 
     @Override
     public Places find(final String name, final PlaceId within, final int limit) {
-//        if (isBlank(name)) return Places.of();
-//        return Places.of(hierarchyProvider.findByName(name, limit, within), true);
-        return null;
+        if (isBlank(name)) return Places.of();
+        return placeProvider.findByName(name)
+                .filter(place -> hierarchyProvider.isChildParent(place, within))
+                .limit(limit)
+                .collect(Places.collector());
     }
 
     @Override

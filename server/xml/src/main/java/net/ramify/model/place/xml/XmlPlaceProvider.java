@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Stream;
 
 @XmlTransient
 class XmlPlaceProvider implements PlaceProvider {
@@ -57,6 +58,15 @@ class XmlPlaceProvider implements PlaceProvider {
     @Override
     public Set<Place> findByGroup(final PlaceGroupId groupId) {
         return SetUtils.eagerTransform(groupIds.get(groupId), this::require);
+    }
+
+    @Nonnull
+    @Override
+    public Stream<Place> findByName(final String name) {
+        final var lower = name.toLowerCase();
+        return places.values()
+                .stream()
+                .filter(place -> place.name().toLowerCase().contains(lower));
     }
 
     void addAll(final PlaceParserContext context, final Collection<XmlPlace> places) {

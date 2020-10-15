@@ -27,12 +27,6 @@ public class XmlPlaceHierarchyProvider implements PlaceHierarchyProvider {
         throw new UnsupportedOperationException(); //TODO
     }
 
-    @Nonnull
-    @Override
-    public Set<PlaceId> findByName(final String name, final int limit, final PlaceId within) {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
     @CheckForNull
     @Override
     public PlaceHierarchy get(@Nonnull final PlaceHierarchyId key) {
