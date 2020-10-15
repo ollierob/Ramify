@@ -4,6 +4,8 @@ import com.google.common.base.Preconditions;
 import net.ramify.model.Id;
 import net.ramify.model.place.iso.CountryIso;
 
+import javax.annotation.Nonnull;
+
 public class PlaceId extends Id implements HasPlaceId, PlaceOrGroupId {
 
     public static final PlaceId ENGLAND = new PlaceId("GB:england:country");
@@ -45,7 +47,7 @@ public class PlaceId extends Id implements HasPlaceId, PlaceOrGroupId {
     }
 
     @Override
-    public PlaceGroupId placeGroupId() {
+    public @Nonnull PlaceGroupId placeGroupId() {
         return placeGroupId == null
                 ? placeGroupId = new PlaceGroupId(this.countryIso(), this.name())
                 : placeGroupId;

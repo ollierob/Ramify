@@ -13,8 +13,12 @@ public class CountrySubdivisionIso extends CountryIso {
 
     CountrySubdivisionIso(final String iso) {
         super(iso);
-        final int dash = iso.indexOf('-');
-        this.country = iso.substring(0, dash);
+        this.country = iso.substring(0, iso.indexOf('-'));
+    }
+
+    CountrySubdivisionIso(final String country, final String subdivision) {
+        super(country + '-' + subdivision);
+        this.country = country;
     }
 
     @Override

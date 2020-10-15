@@ -51,7 +51,7 @@ public class PlaceGroupId extends Id implements PlaceOrGroupId {
     }
 
     @Override
-    public PlaceOrGroupId placeGroupId() {
+    public PlaceGroupId placeGroupId() {
         return this;
     }
 

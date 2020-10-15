@@ -19,7 +19,8 @@ public class CountryIso extends Iso {
             case "US":
                 return US;
             default:
-                return iso.indexOf('-') < 0
+                final var dash = iso.indexOf('-');
+                return dash < 0
                         ? new CountryIso(iso)
                         : new CountrySubdivisionIso(iso);
         }

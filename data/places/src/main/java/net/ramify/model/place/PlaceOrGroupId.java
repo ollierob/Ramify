@@ -9,6 +9,6 @@ public interface PlaceOrGroupId {
     PlaceId placeId();
 
     @Nonnull
-    PlaceOrGroupId placeGroupId();
+    PlaceGroupId placeGroupId();
 
 }
