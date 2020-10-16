@@ -70,7 +70,7 @@ public class XmlPlaceHierarchyProvider extends AbstractMappedProvider<PlaceHiera
         return switch (parents.size()) {
             case 0 -> Collections.singleton(base);
             case 1 -> Sets.lazilyTransform(this.buildHierarchies(parents.iterator().next()), h -> new ChildParentHierarchy(base.placeId(), h));
-            default -> throw new UnsupportedOperationException();
+            default -> throw new UnsupportedOperationException(); //TODO
         };
     }
 
