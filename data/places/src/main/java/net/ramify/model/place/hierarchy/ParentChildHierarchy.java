@@ -61,7 +61,7 @@ public class ParentChildHierarchy implements PlaceHierarchy {
 
     @Override
     public String toString() {
-        return parent + "->" + child;
+        return parent + "<-" + child;
     }
 
 }
