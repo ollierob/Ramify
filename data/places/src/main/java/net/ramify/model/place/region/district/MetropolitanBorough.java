@@ -21,11 +21,10 @@ public class MetropolitanBorough extends Borough {
     public MetropolitanBorough(
             final PlaceId id,
             final String name,
-            final Region parent,
             final PlaceGroupId groupId,
             final CountrySubdivisionIso iso,
             final PlaceHistory history) {
-        super(id, name, parent, groupId, iso, history);
+        super(id, name, groupId, iso, history);
     }
 
     @Nonnull

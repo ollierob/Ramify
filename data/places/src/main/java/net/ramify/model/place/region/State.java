@@ -18,24 +18,16 @@ public class State extends AbstractRegion {
     static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(County.class, City.class);
     private static final PlaceProto.PlaceType PLACE_TYPE = placeType("State");
 
-    private final Country country;
     private final CountrySubdivisionIso iso;
 
     public State(
             final PlaceId id,
             final String name,
-            final Country country,
             final CountrySubdivisionIso iso,
             final PlaceGroupId groupId,
             final PlaceHistory history) {
         super(id, name, groupId, history);
-        this.country = country;
         this.iso = iso;
-    }
-
-    @Nonnull
-    private Country parent() {
-        return country;
     }
 
     @Nonnull

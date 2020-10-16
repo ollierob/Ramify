@@ -28,11 +28,11 @@ class XmlPlaceLoader {
             final File countryRoot,
             final ParserContext context) throws JAXBException {
         final var places = new XmlPlaceProvider(Maps.newHashMap(), HashMultimap.create(), Sets.newHashSet());
-        final var hierarchies = new XmlPlaceHierarchyProvider();
+        final var hierarchies = new XmlPlaceHierarchyProvider(Maps.newHashMap(), HashMultimap.create());
         final var unmarshaller = jaxbContext.createUnmarshaller();
         for (final File dir : countryRoots(countryRoot)) {
             final var countryIso = CountryIso.valueOf(dir.getName());
-            final var placeContext = new PlaceParserContext(context.nameParser(), context.dateParser(), countryIso, places);
+            final var placeContext = new PlaceParserContext(context.nameParser(), context.dateParser(), countryIso, places, hierarchies);
             FileTraverseUtils.traverseSubdirectories(dir, XmlPlaceLoader::includeFile, file -> readPlacesInFile(unmarshaller, file, places, hierarchies, placeContext));
             logger.info("Loaded {} places from {}.", places.size(), dir);
         }
@@ -61,8 +61,8 @@ class XmlPlaceLoader {
             final var unmarshalled = unmarshaller.unmarshal(file);
             if (!(unmarshalled instanceof XmlPlaces)) return;
             final var places = ((XmlPlaces) unmarshalled).places();
-            placeProvider.addAll(context, places);
             hierarchyProvider.addAll(context, places);
+            placeProvider.addAll(context, places);
         } catch (final JAXBException jex) {
             logger.warn("Could not read places in file " + file + ": " + jex.getMessage());
         } catch (final RuntimeException rex) {

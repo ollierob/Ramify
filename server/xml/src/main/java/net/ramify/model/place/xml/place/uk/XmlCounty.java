@@ -8,7 +8,6 @@ import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.iso.CountryIso;
 import net.ramify.model.place.iso.CountrySubdivisionIso;
 import net.ramify.model.place.region.County;
-import net.ramify.model.place.type.Region;
 import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.region.XmlForest;
@@ -29,7 +28,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 @XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "county")
 class XmlCounty extends XmlPlace {
@@ -63,9 +61,8 @@ class XmlCounty extends XmlPlace {
     }
 
     @Override
-    protected County toPlace(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
-        Objects.requireNonNull(parent, "parent");
-        return new County(this.placeId(context), this.name(), parent.requireAs(Region.class), this.iso(), groupId, history);
+    protected County toPlace(final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+        return new County(this.placeId(context), this.name(), this.iso(), groupId, history);
     }
 
     protected CountrySubdivisionIso iso() {

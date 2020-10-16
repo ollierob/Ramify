@@ -15,23 +15,16 @@ public class Hundred extends AbstractRegion implements CountyOrSubdivision {
 
     static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(Hundred.class, Parish.class, Manor.class);
 
-    private final CountyOrSubdivision parent;
     private final PlaceProto.PlaceType type;
 
     public Hundred(
             final PlaceId id,
             final String name,
-            final CountyOrSubdivision parent,
             final PlaceGroupId groupId,
-            final PlaceHistory history, PlaceProto.PlaceType type) {
+            final PlaceHistory history,
+            final PlaceProto.PlaceType type) {
         super(id, name, groupId, history);
-        this.parent = parent;
         this.type = type;
-    }
-
-    @Nonnull
-    private CountyOrSubdivision parent() {
-        return parent;
     }
 
     @Nonnull

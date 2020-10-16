@@ -14,20 +14,12 @@ public class Graveship extends AbstractRegion {
 
     private static final PlaceProto.PlaceType PLACE_TYPE = placeType("Graveship");
 
-    private final Manor parent;
-
     public Graveship(
             final PlaceId id,
             final String name,
-            final Manor parent,
             final PlaceGroupId groupId,
             final PlaceHistory history) {
         super(id, name, groupId, history);
-        this.parent = parent;
-    }
-
-    private Manor parent() {
-        return parent;
     }
 
     @Nonnull

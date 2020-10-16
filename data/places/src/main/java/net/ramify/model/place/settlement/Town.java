@@ -4,7 +4,6 @@ import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.proto.PlaceProto;
-import net.ramify.model.place.type.Region;
 
 public class Town extends AbstractSettlement {
 
@@ -13,10 +12,9 @@ public class Town extends AbstractSettlement {
     public Town(
             final PlaceId id,
             final String name,
-            final Region region,
             final PlaceGroupId groupId,
             final PlaceHistory history) {
-        super(id, name, region, groupId, history);
+        super(id, name, groupId, history);
     }
 
     @Override

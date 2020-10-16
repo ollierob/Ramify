@@ -9,7 +9,6 @@ import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.iso.CountrySubdivisionIso;
 import net.ramify.model.place.region.district.MetropolitanBorough;
-import net.ramify.model.place.type.Region;
 import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.region.XmlRegion;
@@ -25,7 +24,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.time.Month;
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 
 @XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "metropolitanBorough")
 public class XmlMetropolitanBorough extends XmlRegion<MetropolitanBorough> {
@@ -49,9 +47,8 @@ public class XmlMetropolitanBorough extends XmlRegion<MetropolitanBorough> {
     }
 
     @Override
-    protected MetropolitanBorough toPlace(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
-        Objects.requireNonNull(parent, "parent");
-        return new MetropolitanBorough(this.placeId(context), this.name(), parent.requireAs(Region.class), groupId, this.iso(), history);
+    protected MetropolitanBorough toPlace(final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+        return new MetropolitanBorough(this.placeId(context), this.name(), groupId, this.iso(), history);
     }
 
     @Override

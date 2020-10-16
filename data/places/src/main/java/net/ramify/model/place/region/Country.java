@@ -18,19 +18,16 @@ public class Country extends AbstractRegion {
     private static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(Country.class, State.class, County.class);
     private static final PlaceProto.PlaceType PLACE_TYPE = placeTypeBuilder("Country").setCanPrefix(false).setCanSuffix(false).setIsCountry(true).build();
 
-    @CheckForNull
-    private final Country parent;
     private final CountryIso iso;
 
-    public Country(final PlaceId id, final String name, @Nonnull final CountryIso iso, final Country parent, final PlaceGroupId groupId, final PlaceHistory history) {
+    public Country(
+            final PlaceId id,
+            final String name,
+            @Nonnull final CountryIso iso,
+            final PlaceGroupId groupId,
+            final PlaceHistory history) {
         super(id, name, groupId, history);
-        this.parent = parent;
         this.iso = iso;
-    }
-
-    @CheckForNull
-    public Country parent() {
-        return parent;
     }
 
     @Nonnull

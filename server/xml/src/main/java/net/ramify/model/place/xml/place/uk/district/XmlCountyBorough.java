@@ -8,7 +8,6 @@ import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.iso.CountryIso;
 import net.ramify.model.place.region.district.CountyBorough;
-import net.ramify.model.place.type.Region;
 import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.region.XmlRegion;
@@ -45,8 +44,8 @@ public class XmlCountyBorough extends XmlRegion<CountyBorough> {
     }
 
     @Override
-    protected CountyBorough toPlace(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
-        return new CountyBorough(this.placeId(context), this.name(), parent.requireAs(Region.class), groupId, null, this.history(context));
+    protected CountyBorough toPlace(final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+        return new CountyBorough(this.placeId(context), this.name(), groupId, null, this.history(context));
     }
 
     @CheckForNull

@@ -1,5 +1,6 @@
 package net.ramify.server.resource.places;
 
+import com.google.common.collect.Sets;
 import net.meerkat.functions.consumers.Consumers;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceDescription;
@@ -82,7 +83,8 @@ public class DefaultPlacesResource implements PlacesResource {
 
     @Override
     public Places countries(final boolean onlyTopLevel) {
-        final var countries = placeProvider.countries(onlyTopLevel);
+        var countries = placeProvider.countries();
+        if (onlyTopLevel) countries = Sets.filter(countries, country -> !hierarchyProvider.hasParent(country, Country.class, placeProvider));
         return Places.of(ListUtils.sortedCopy(countries, Place.SORT_BY_NAME));
     }
 

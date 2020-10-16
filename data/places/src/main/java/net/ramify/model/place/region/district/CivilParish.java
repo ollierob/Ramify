@@ -12,20 +12,12 @@ public class CivilParish extends AbstractRegion {
 
     private static final PlaceProto.PlaceType PLACE_TYPE = placeType("Civil Parish");
 
-    private final District parent;
-
     public CivilParish(
             final PlaceId id,
             final String name,
-            final District parent,
             final PlaceGroupId groupId,
             final PlaceHistory history) {
         super(id, name, groupId, history);
-        this.parent = parent;
-    }
-
-    private District parent() {
-        return parent;
     }
 
     @Nonnull

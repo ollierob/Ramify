@@ -29,8 +29,8 @@ class XmlCountry extends XmlRegion<Country> {
     }
 
     @Override
-    protected Country toPlace(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
-        return new Country(this.placeId(context), this.name(), this.iso(), Country.cast(parent), groupId, history);
+    protected Country toPlace(final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+        return new Country(this.placeId(context), this.name(), this.iso(), groupId, history);
     }
 
     protected CountryIso iso() {

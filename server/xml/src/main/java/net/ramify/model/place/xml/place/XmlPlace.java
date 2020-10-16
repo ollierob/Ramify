@@ -16,7 +16,6 @@ import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.iso.CountryIso;
-import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.france.XmlFrance;
 import net.ramify.model.place.xml.place.settlement.XmlSettlement;
@@ -90,38 +89,30 @@ public abstract class XmlPlace {
 
     public Set<Place> places(final PlaceParserContext context) {
         final var places = Sets.<Place>newHashSet();
-        final var id = this.placeId(context.countryIso());
-        final var parent = this.parent(id, context.places());
-        this.addPlaces(parent, places::add, context);
+        this.addPlaces(places::add, context);
         return places;
     }
 
-    private Place parent(final PlaceId id, final PlaceProvider placeProvider) {
-        //return placeProvider.maybeGet(id).map(Place::parent).orElse(null);
-        return null; //FIXME use hierarchy provider
-    }
-
-    void addPlaces(final Place parent, final Consumer<Place> addPlace, final PlaceParserContext context) {
+    void addPlaces(final Consumer<Place> addPlace, final PlaceParserContext context) {
         try {
-            final var self = this.toPlace(parent, context);
+            final var self = this.toPlace(context);
             addPlace.accept(self);
             final var children = this.children();
-            if (children != null) children.forEach(child -> child.addPlaces(self, addPlace, context));
+            if (children != null) children.forEach(child -> child.addPlaces(addPlace, context));
         } catch (final Place.InvalidPlaceTypeException | RuntimeException rex) {
             throw new RuntimeException("Error reading " + this, rex);
         }
     }
 
-    private Place toPlace(final Place parent, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+    private Place toPlace(final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
         final var placeId = this.placeId(context.countryIso());
         return isBlank(name)
                 ? context.places().require(placeId)
-                : this.toPlace(parent, this.placeGroupId(placeId), this.history(context), context);
+                : this.toPlace(this.placeGroupId(placeId), this.history(context), context);
     }
 
     @Nonnull
     protected abstract Place toPlace(
-            Place parent,
             PlaceGroupId groupId,
             PlaceHistory history,
             PlaceParserContext context) throws Place.InvalidPlaceTypeException;

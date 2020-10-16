@@ -7,7 +7,6 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.iso.CountryIso;
 import net.ramify.model.place.region.manor.Graveship;
-import net.ramify.model.place.region.manor.Manor;
 import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.uk.XmlUkPlace;
@@ -18,7 +17,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 @XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "graveship")
 class XmlGraveship extends XmlPlace {
@@ -34,9 +32,8 @@ class XmlGraveship extends XmlPlace {
     }
 
     @Override
-    protected Graveship toPlace(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
-        Objects.requireNonNull(parent, "parent");
-        return new Graveship(this.placeId(context), this.name(), parent.requireAs(Manor.class), groupId, history);
+    protected Graveship toPlace(final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+        return new Graveship(this.placeId(context), this.name(), groupId, history);
     }
 
     @Override

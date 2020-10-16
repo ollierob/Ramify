@@ -4,7 +4,6 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.region.Department;
-import net.ramify.model.place.type.Region;
 import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.region.XmlRegion;
@@ -24,8 +23,8 @@ public class XmlDepartment extends XmlRegion<Department> {
 
     @Nonnull
     @Override
-    protected Department toPlace(Place parent, PlaceGroupId groupId, PlaceHistory history, PlaceParserContext context) throws Place.InvalidPlaceTypeException {
-        return new Department(this.placeId(context), this.name(), groupId, history, parent.requireAs(Region.class));
+    protected Department toPlace(PlaceGroupId groupId, PlaceHistory history, PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+        return new Department(this.placeId(context), this.name(), groupId, history);
     }
 
     @CheckForNull

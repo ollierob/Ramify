@@ -11,7 +11,6 @@ import net.ramify.model.place.region.district.Borough;
 import net.ramify.model.place.region.district.MetropolitanBorough;
 import net.ramify.model.place.region.manor.Manor;
 import net.ramify.model.place.settlement.City;
-import net.ramify.model.place.type.Region;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
@@ -25,23 +24,16 @@ public class County extends AbstractRegion implements CountyOrSubdivision {
 
     private static final PlaceProto.PlaceType PLACE_TYPE = placeTypeBuilder("County").setCanPrefix(true).setCanSuffix(false).build();
 
-    private final Region parent;
     private final CountrySubdivisionIso iso;
 
     public County(
             final PlaceId id,
             final String name,
-            final Region parent,
             final CountrySubdivisionIso iso,
             final PlaceGroupId groupId,
             final PlaceHistory history) {
         super(id, name, groupId, history);
-        this.parent = parent;
         this.iso = iso;
-    }
-
-    private Region parent() {
-        return parent;
     }
 
     @Nonnull

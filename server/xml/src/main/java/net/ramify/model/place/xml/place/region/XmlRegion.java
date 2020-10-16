@@ -27,7 +27,6 @@ public abstract class XmlRegion<P extends Region> extends XmlPlace {
 
     @Override
     protected abstract P toPlace(
-            Place parent,
             PlaceGroupId groupId,
             PlaceHistory history,
             PlaceParserContext context) throws Place.InvalidPlaceTypeException;

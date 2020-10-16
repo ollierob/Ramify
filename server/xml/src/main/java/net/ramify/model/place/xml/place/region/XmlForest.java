@@ -3,7 +3,6 @@ package net.ramify.model.place.xml.place.region;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
-import net.ramify.model.place.region.CountyOrSubdivision;
 import net.ramify.model.place.region.Forest;
 import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
@@ -23,11 +22,10 @@ public class XmlForest extends XmlRegion<Forest> {
 
     @Override
     protected Forest toPlace(
-            final Place parent,
             final PlaceGroupId groupId,
             final PlaceHistory history,
             final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
-        return new Forest(this.placeId(context), this.name(), parent.requireAs(CountyOrSubdivision.class), groupId, history);
+        return new Forest(this.placeId(context), this.name(), groupId, history);
     }
 
     @CheckForNull

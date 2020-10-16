@@ -7,7 +7,6 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.iso.CountryIso;
 import net.ramify.model.place.region.Parish;
-import net.ramify.model.place.type.Region;
 import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
 import net.ramify.model.place.xml.place.settlement.XmlSettlement;
@@ -18,7 +17,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 @XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "parish")
 public class XmlParish extends XmlPlace {
@@ -37,9 +35,8 @@ public class XmlParish extends XmlPlace {
     }
 
     @Override
-    protected Place toPlace(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
-        Objects.requireNonNull(parent, "parent");
-        return new Parish(this.placeId(context), this.name(), Region.cast(parent), groupId, history);
+    protected Place toPlace(final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+        return new Parish(this.placeId(context), this.name(), groupId, history);
     }
 
     @Override

@@ -9,15 +9,8 @@ import javax.annotation.Nonnull;
 
 public class CountryRegion extends AbstractRegion {
 
-    private final Country parent;
-
-    public CountryRegion(PlaceId id, String name, PlaceGroupId groupId, PlaceHistory history, Country parent) {
+    public CountryRegion(final PlaceId id, final String name, final PlaceGroupId groupId, final PlaceHistory history) {
         super(id, name, groupId, history);
-        this.parent = parent;
-    }
-
-    private Country parent() {
-        return parent;
     }
 
     @Nonnull

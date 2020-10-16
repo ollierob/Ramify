@@ -4,7 +4,6 @@ import com.google.common.base.MoreObjects;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
-import net.ramify.model.place.region.Country;
 import net.ramify.model.place.region.CountryRegion;
 import net.ramify.model.place.type.Region;
 import net.ramify.model.place.xml.PlaceParserContext;
@@ -28,8 +27,8 @@ public class XmlRegion extends net.ramify.model.place.xml.place.region.XmlRegion
     }
 
     @Override
-    protected Region toPlace(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
-        return new CountryRegion(this.placeId(context), this.name(), groupId, history, parent.requireAs(Country.class));
+    protected Region toPlace(final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+        return new CountryRegion(this.placeId(context), this.name(), groupId, history);
     }
 
     @CheckForNull

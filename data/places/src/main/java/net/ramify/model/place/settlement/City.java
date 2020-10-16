@@ -5,7 +5,6 @@ import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.iso.CountrySubdivisionIso;
 import net.ramify.model.place.proto.PlaceProto;
-import net.ramify.model.place.type.Region;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
@@ -19,11 +18,10 @@ public class City extends AbstractSettlement {
     public City(
             final PlaceId id,
             final String name,
-            final Region region,
             final PlaceGroupId groupId,
             final PlaceHistory history,
             final CountrySubdivisionIso iso) {
-        super(id, name, region, groupId, history);
+        super(id, name, groupId, history);
         this.iso = iso;
     }
 

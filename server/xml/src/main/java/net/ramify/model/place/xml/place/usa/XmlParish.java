@@ -10,7 +10,6 @@ import net.ramify.model.place.type.Region;
 import net.ramify.model.place.xml.PlaceParserContext;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Objects;
 
 @XmlRootElement(namespace = XmlUsaPlace.NAMESPACE, name = "parish")
 class XmlParish extends XmlCounty {
@@ -21,9 +20,8 @@ class XmlParish extends XmlCounty {
     }
 
     @Override
-    protected Region toPlace(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
-        Objects.requireNonNull(parent, "parent");
-        return new Parish(this.placeId(context), this.name(), parent.requireAs(Region.class), groupId, history);
+    protected Region toPlace(final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+        return new Parish(this.placeId(context), this.name(), groupId, history);
     }
 
 }

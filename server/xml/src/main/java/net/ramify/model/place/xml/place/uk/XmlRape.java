@@ -5,7 +5,6 @@ import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.proto.PlaceProto;
-import net.ramify.model.place.region.County;
 import net.ramify.model.place.region.Hundred;
 import net.ramify.model.place.xml.PlaceParserContext;
 import net.ramify.model.place.xml.place.XmlPlace;
@@ -19,7 +18,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 @XmlRootElement(namespace = XmlUkPlace.NAMESPACE, name = "rape")
 class XmlRape extends XmlRegion<Hundred> {
@@ -39,9 +37,8 @@ class XmlRape extends XmlRegion<Hundred> {
     }
 
     @Override
-    protected Hundred toPlace(final Place parent, final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
-        Objects.requireNonNull(parent, "parent");
-        return new Hundred(this.placeId(context), this.name(), parent.requireAs(County.class), groupId, history, TYPE);
+    protected Hundred toPlace(final PlaceGroupId groupId, final PlaceHistory history, final PlaceParserContext context) throws Place.InvalidPlaceTypeException {
+        return new Hundred(this.placeId(context), this.name(), groupId, history, TYPE);
     }
 
     @Override

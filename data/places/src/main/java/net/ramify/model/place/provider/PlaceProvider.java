@@ -25,7 +25,7 @@ public interface PlaceProvider extends Provider<PlaceId, Place> {
     }
 
     @Nonnull
-    Set<? extends Place> countries(boolean onlyTopLevel);
+    Set<? extends Place> countries();
 
     @Nonnull
     Set<Place> findByGroup(PlaceGroupId groupId);
