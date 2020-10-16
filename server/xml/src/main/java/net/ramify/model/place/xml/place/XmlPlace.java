@@ -14,6 +14,7 @@ import net.ramify.model.place.DefaultPlaceHistory;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
+import net.ramify.model.place.hierarchy.ParentChildHierarchy;
 import net.ramify.model.place.history.PlaceHistory;
 import net.ramify.model.place.iso.CountryIso;
 import net.ramify.model.place.xml.PlaceParserContext;
@@ -29,6 +30,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -145,6 +147,22 @@ public abstract class XmlPlace {
         if (within != null) within.places().forEach(parent -> map.put(parent.placeId(context), this.placeId(context)));
         return map;
 
+    }
+
+    public Set<ParentChildHierarchy> placeHierarchies(final PlaceId placeId, final PlaceParserContext context) {
+        final var set = new HashSet<ParentChildHierarchy>();
+        this.addHierarchies(set::add, placeId, context);
+        return set;
+    }
+
+    void addHierarchies(final Consumer<ParentChildHierarchy> add, final PlaceId parentId, final PlaceParserContext context) {
+        final var children = this.children();
+        if (children == null) return;
+        for (final var child : children) {
+            final var childId = child.placeId(context);
+            add.accept(new ParentChildHierarchy(parentId, childId));
+            child.addHierarchies(add, childId, context);
+        }
     }
 
     @Override

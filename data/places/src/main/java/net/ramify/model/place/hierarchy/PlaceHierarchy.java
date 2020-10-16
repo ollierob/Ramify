@@ -4,10 +4,14 @@ import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.proto.PlaceProto;
+import net.ramify.utils.objects.Functions;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 public interface PlaceHierarchy extends HasPlaceId, Iterable<PlaceId>, BuildsProto<PlaceProto.PlaceHierarchy> {
 
@@ -61,6 +65,24 @@ public interface PlaceHierarchy extends HasPlaceId, Iterable<PlaceId>, BuildsPro
         final var builder = PlaceProto.PlaceHierarchy.newBuilder().setId(this.id().value());
         this.forEach(id -> builder.addPlace(PlaceProto.Place.newBuilder().setId(id.value())));
         return builder;
+    }
+
+    static PlaceHierarchy ofChildrenToParent(final List<PlaceId> places) {
+        if (places.size() <= 1) return ofParentToChildren(places);
+        final var reversed = new ArrayList<>(places);
+        Collections.reverse(reversed);
+        return ofParentToChildren(places);
+    }
+
+    static PlaceHierarchy ofParentToChildren(final List<PlaceId> places) {
+        //TODO use list iterator if not RandomAccess
+        PlaceHierarchy parent = null;
+        for (int i = 0; i < places.size(); i++) {
+            final var childId = places.get(i);
+            final var hierarchyId = PlaceHierarchyId.of(Functions.ifNonNull(parent, HasPlaceId::placeId), childId);
+            parent = new ChildParentHierarchy(hierarchyId, childId, parent);
+        }
+        return parent;
     }
 
 }

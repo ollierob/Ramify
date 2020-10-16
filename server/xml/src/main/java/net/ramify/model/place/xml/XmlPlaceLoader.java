@@ -28,7 +28,7 @@ class XmlPlaceLoader {
             final File countryRoot,
             final ParserContext context) throws JAXBException {
         final var places = new XmlPlaceProvider(Maps.newHashMap(), HashMultimap.create(), Sets.newHashSet());
-        final var hierarchies = new XmlPlaceHierarchyProvider(Maps.newHashMap(), HashMultimap.create());
+        final var hierarchies = new XmlPlaceHierarchyProvider();
         final var unmarshaller = jaxbContext.createUnmarshaller();
         for (final File dir : countryRoots(countryRoot)) {
             final var countryIso = CountryIso.valueOf(dir.getName());
