@@ -12,7 +12,7 @@ message Place {
     string id = 1;
     string name = 2;
     PlaceType type = 3;
-    //Place parent = 4;
+
     string iso = 5;
     bool defunct = 6;
     string groupId = 7;
@@ -70,6 +70,7 @@ message PlaceBundle {
     PlaceDescription description = 3;
     string typeDescription = 4;
     repeated Place child = 5;
+    repeated Place parent = 6;
 
 }
 

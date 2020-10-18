@@ -80,7 +80,16 @@ public class DefaultPlacesResource implements PlacesResource {
 
     private int maxDepth(final Place place) {
         if (place instanceof Country) return 1;
-        return 2;
+        return 3;
+    }
+
+    @Override
+    public Places above(final PlaceId id, final boolean immediate) {
+        var hierarchies = hierarchyProvider.hierarchiesAbove(id);
+        if (immediate) hierarchies = Sets.filter(hierarchies, h -> id.equals(h.placeId()));
+        final var ids = PlaceHierarchy.ids(hierarchies);
+        ids.remove(id);
+        return Places.of(placeProvider.getAll(ids).values());
     }
 
     @Override
@@ -117,6 +126,7 @@ public class DefaultPlacesResource implements PlacesResource {
         descriptionProvider.maybeGet(id).ifPresent(d -> builder.setDescription(d.toProto()));
         Consumers.ifNonNull(this.describeType(id), builder::setTypeDescription);
         this.within(id, null).forEach(child -> builder.addChild(child.toProto()));
+        this.above(id, true).forEach(parent -> builder.addParent(parent.toProto()));
         return builder.build();
     }
 

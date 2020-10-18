@@ -26,17 +26,20 @@ public interface PlacesResource extends RootResource {
 
     @GET
     @Path("group/find/{id}")
-    PlaceGroup group(@PathParam("id") PlaceId id);
+    PlaceGroup group(
+            @PathParam("id") PlaceId id);
 
     @GET
     @Path("group/at/{id}")
     @CheckForNull
-    PlaceGroup group(@PathParam("id") PlaceGroupId id);
+    PlaceGroup group(
+            @PathParam("id") PlaceGroupId id);
 
     @GET
     @Path("at/{id}")
     @CheckForNull
-    Place at(@PathParam("id") PlaceId id);
+    Place at(
+            @PathParam("id") PlaceId id);
 
     @GET
     @Path("children/{id}")
@@ -45,30 +48,41 @@ public interface PlacesResource extends RootResource {
             @QueryParam("depth") @DefaultValue("2") Integer depth);
 
     @GET
+    @Path("parents/{id}")
+    Places above(
+            @PathParam("id") PlaceId id,
+            @QueryParam("immediate") boolean immediate);
+
+    @GET
     @Path("countries")
-    Places countries(@QueryParam("onlyTopLevel") boolean onlyTopLevel);
+    Places countries(
+            @QueryParam("onlyTopLevel") boolean onlyTopLevel);
 
     @GET
     @Path("position/{id}")
     @CheckForNull
-    Position position(@PathParam("id") PlaceId id);
+    Position position(
+            @PathParam("id") PlaceId id);
 
     @GET
     @Path("describe/{id}")
     @CheckForNull
     @Produces(MediaType.TEXT_HTML)
-    String describe(@PathParam("id") PlaceId id);
+    String describe(
+            @PathParam("id") PlaceId id);
 
     @GET
     @Path("describe/{id}/type")
     @CheckForNull
     @Produces(MediaType.TEXT_HTML)
-    String describeType(@PathParam("id") PlaceId id);
+    String describeType(
+            @PathParam("id") PlaceId id);
 
     @GET
     @CheckForNull
     @Path("bundle/{id}")
-    PlaceProto.PlaceBundle bundle(@PathParam("id") PlaceId id);
+    PlaceProto.PlaceBundle bundle(
+            @PathParam("id") PlaceId id);
 
     @Path("favourites")
     PlaceFavouritesResource favourites();
