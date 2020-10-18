@@ -19,7 +19,7 @@ class XmlPlaceHierarchyProviderTest {
         provider.add(new ParentChildHierarchy(topId, midId));
         provider.add(new ParentChildHierarchy(midId, lowId));
 
-        final var hierarchies = provider.hierarchies(lowId);
+        final var hierarchies = provider.hierarchiesAbove(lowId);
         assertEquals(1, hierarchies.size());
 
         var hierachy = hierarchies.iterator().next();

@@ -32,12 +32,6 @@ public class State extends AbstractRegion {
 
     @Nonnull
     @Override
-    public Set<Class<? extends Place>> childTypes() {
-        return CHILD_TYPES;
-    }
-
-    @Nonnull
-    @Override
     public Optional<CountrySubdivisionIso> iso() {
         return Optional.ofNullable(iso);
     }

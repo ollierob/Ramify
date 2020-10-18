@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
@@ -40,7 +41,7 @@ public interface Places extends Iterable<Place>, HasPlaces, BuildsProto<PlacePro
     }
 
     static Places of(final Collection<? extends Place> places) {
-        final ImmutableSet<Place> fixedPlaces = ImmutableSet.copyOf(places);
+        final ImmutableSet<Place> fixedPlaces = ImmutableSet.copyOf(Iterables.filter(places, Objects::nonNull));
         return new Places() {
 
             @Override
@@ -89,7 +90,7 @@ public interface Places extends Iterable<Place>, HasPlaces, BuildsProto<PlacePro
             public Set<Characteristics> characteristics() {
                 return Collections.singleton(Characteristics.UNORDERED);
             }
-            
+
         };
     }
 

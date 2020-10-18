@@ -10,7 +10,6 @@ import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.type.Region;
 import net.ramify.model.place.type.Settlement;
 
-import javax.annotation.Nonnull;
 import java.util.Set;
 
 public class MetropolitanBorough extends Borough {
@@ -25,12 +24,6 @@ public class MetropolitanBorough extends Borough {
             final CountrySubdivisionIso iso,
             final PlaceHistory history) {
         super(id, name, groupId, iso, history);
-    }
-
-    @Nonnull
-    @Override
-    public Set<Class<? extends Place>> childTypes() {
-        return CHILD_TYPES;
     }
 
     @Override

@@ -38,12 +38,6 @@ public class County extends AbstractRegion implements CountyOrSubdivision {
 
     @Nonnull
     @Override
-    public Set<Class<? extends Place>> childTypes() {
-        return CHILD_TYPES;
-    }
-
-    @Nonnull
-    @Override
     public PlaceProto.PlaceType protoType() {
         return PLACE_TYPE;
     }

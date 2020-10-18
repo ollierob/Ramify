@@ -1,6 +1,5 @@
 package net.ramify.model.place.region;
 
-import com.google.common.collect.ImmutableSet;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
@@ -11,11 +10,9 @@ import net.ramify.model.place.proto.PlaceProto;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.util.Optional;
-import java.util.Set;
 
 public class Country extends AbstractRegion {
 
-    private static final Set<Class<? extends Place>> CHILD_TYPES = ImmutableSet.of(Country.class, State.class, County.class);
     private static final PlaceProto.PlaceType PLACE_TYPE = placeTypeBuilder("Country").setCanPrefix(false).setCanSuffix(false).setIsCountry(true).build();
 
     private final CountryIso iso;
@@ -28,12 +25,6 @@ public class Country extends AbstractRegion {
             final PlaceHistory history) {
         super(id, name, groupId, history);
         this.iso = iso;
-    }
-
-    @Nonnull
-    @Override
-    public Set<Class<? extends Place>> childTypes() {
-        return CHILD_TYPES;
     }
 
     public CountryIso countryIso() {

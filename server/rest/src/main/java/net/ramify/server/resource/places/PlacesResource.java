@@ -42,7 +42,7 @@ public interface PlacesResource extends RootResource {
     @Path("children/{id}")
     Places within(
             @PathParam("id") PlaceId id,
-            @QueryParam("depth") Integer depth);
+            @QueryParam("depth") @DefaultValue("2") Integer depth);
 
     @GET
     @Path("countries")

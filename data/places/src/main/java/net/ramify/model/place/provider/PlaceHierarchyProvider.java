@@ -14,15 +14,18 @@ import java.util.Set;
 public interface PlaceHierarchyProvider extends Provider<PlaceHierarchyId, PlaceHierarchy> {
 
     @Nonnull
-    Set<PlaceHierarchy> hierarchies(PlaceId placeId);
+    Set<PlaceHierarchy> hierarchiesAbove(PlaceId placeId);
 
     @Nonnull
-    default Set<PlaceHierarchy> hierarchies(final HasPlaceId place) {
-        return this.hierarchies(place.placeId());
+    default Set<PlaceHierarchy> hierarchiesAbove(final HasPlaceId place) {
+        return this.hierarchiesAbove(place.placeId());
     }
 
+    @Nonnull
+    Set<? extends PlaceHierarchy> hierarchiesBelow(PlaceId placeId, int depth);
+
     default boolean isParentChild(final HasPlaceId parent, final HasPlaceId child) {
-        final var hierarchy = this.hierarchies(child);
+        final var hierarchy = this.hierarchiesAbove(child);
         return Iterables.any(hierarchy, h -> h.isChildOf(parent));
     }
 
@@ -31,11 +34,11 @@ public interface PlaceHierarchyProvider extends Provider<PlaceHierarchyId, Place
     }
 
     default boolean hasParent(final HasPlaceId placeId) {
-        return !this.hierarchies(placeId).isEmpty();
+        return !this.hierarchiesAbove(placeId).isEmpty();
     }
 
     default boolean hasParent(final HasPlaceId placeId, final Class<? extends Place> placeType, final PlaceProvider places) {
-        final var hierarchies = this.hierarchies(placeId);
+        final var hierarchies = this.hierarchiesAbove(placeId);
         if (hierarchies.isEmpty()) return false;
         for (final var hierarchy : hierarchies) {
             for (final var id : hierarchy) {

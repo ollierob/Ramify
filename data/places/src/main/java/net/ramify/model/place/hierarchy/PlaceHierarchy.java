@@ -1,5 +1,6 @@
 package net.ramify.model.place.hierarchy;
 
+import com.google.common.collect.Sets;
 import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.PlaceId;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public interface PlaceHierarchy extends HasPlaceId, Iterable<PlaceId>, BuildsProto<PlaceProto.PlaceHierarchy> {
 
@@ -55,6 +57,11 @@ public interface PlaceHierarchy extends HasPlaceId, Iterable<PlaceId>, BuildsPro
     }
 
     @Nonnull
+    default Set<PlaceId> placeIds() {
+        return Sets.newHashSet(this.iterator());
+    }
+
+    @Nonnull
     @Override
     default PlaceProto.PlaceHierarchy toProto() {
         return this.toProtoBuilder().build();
@@ -83,6 +90,13 @@ public interface PlaceHierarchy extends HasPlaceId, Iterable<PlaceId>, BuildsPro
             parent = new ChildParentHierarchy(hierarchyId, childId, parent);
         }
         return parent;
+    }
+
+    static Set<PlaceId> ids(final Set<? extends PlaceHierarchy> hierarchies) {
+        if (hierarchies.isEmpty()) return Collections.emptySet();
+        final var set = Sets.<PlaceId>newHashSetWithExpectedSize(hierarchies.size() * 2);
+        hierarchies.forEach(h -> set.addAll(h.placeIds()));
+        return set;
     }
 
 }

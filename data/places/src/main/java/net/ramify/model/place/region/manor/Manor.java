@@ -29,12 +29,6 @@ public class Manor extends AbstractRegion {
 
     @Nonnull
     @Override
-    public Set<Class<? extends Place>> childTypes() {
-        return CHILD_TYPES;
-    }
-
-    @Nonnull
-    @Override
     public PlaceProto.PlaceType protoType() {
         return PLACE_TYPE;
     }

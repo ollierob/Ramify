@@ -10,10 +10,8 @@ import net.ramify.model.place.type.PlaceHandler;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Optional;
-import java.util.Set;
 
 public interface Place extends HasPlaceId, Castable<Place>, BuildsProto<PlaceProto.Place> {
 
@@ -27,11 +25,6 @@ public interface Place extends HasPlaceId, Castable<Place>, BuildsProto<PlacePro
 
     @CheckForNull
     PlaceHistory history();
-
-    @Nonnull
-    default Set<Class<? extends Place>> childTypes() {
-        return Collections.emptySet();
-    }
 
     default boolean isDefunct() {
         return false;

@@ -11,7 +11,6 @@ import net.ramify.model.place.settlement.City;
 import net.ramify.model.place.settlement.Town;
 import net.ramify.model.place.settlement.Village;
 
-import javax.annotation.Nonnull;
 import java.util.Set;
 
 public class Parish extends AbstractRegion {
@@ -25,12 +24,6 @@ public class Parish extends AbstractRegion {
             final PlaceGroupId groupId,
             final PlaceHistory history) {
         super(id, name, groupId, history);
-    }
-
-    @Nonnull
-    @Override
-    public Set<Class<? extends Place>> childTypes() {
-        return CHILD_TYPES;
     }
 
     @Override

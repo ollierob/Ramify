@@ -8,6 +8,7 @@ import net.ramify.model.place.PlaceGroup;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.collection.Places;
+import net.ramify.model.place.hierarchy.PlaceHierarchy;
 import net.ramify.model.place.position.Position;
 import net.ramify.model.place.position.PositionProvider;
 import net.ramify.model.place.proto.PlaceProto;
@@ -68,17 +69,18 @@ public class DefaultPlacesResource implements PlacesResource {
 
     @Override
     public Places within(final PlaceId id, final Integer depth) {
-        return Places.NONE;
-//        final var place = placeProvider.get(id);
-//        if (place == null) return null;
-//        final var childTypes = place.childTypes();
-//        final var children = placeProvider.children(id, this.maxDepth(place), childTypes.isEmpty() ? p -> true : p -> p.isAny(childTypes));
-//        return Places.of(children, false);
+        final var place = placeProvider.get(id);
+        if (place == null) return null;
+        final var actualDepth = Math.min(5, this.maxDepth(place));
+        final var childHierarchies = hierarchyProvider.hierarchiesBelow(id, actualDepth);
+        final var ids = PlaceHierarchy.ids(childHierarchies);
+        ids.remove(id); //Remove self
+        return Places.of(placeProvider.getAll(ids).values());
     }
 
     private int maxDepth(final Place place) {
         if (place instanceof Country) return 1;
-        return 5;
+        return 2;
     }
 
     @Override

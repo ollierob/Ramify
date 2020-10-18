@@ -1,6 +1,5 @@
 package net.ramify.model.place.region.manor;
 
-import net.ramify.model.place.Place;
 import net.ramify.model.place.PlaceGroupId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.history.PlaceHistory;
@@ -8,7 +7,6 @@ import net.ramify.model.place.proto.PlaceProto;
 import net.ramify.model.place.region.AbstractRegion;
 
 import javax.annotation.Nonnull;
-import java.util.Set;
 
 public class Graveship extends AbstractRegion {
 
@@ -20,12 +18,6 @@ public class Graveship extends AbstractRegion {
             final PlaceGroupId groupId,
             final PlaceHistory history) {
         super(id, name, groupId, history);
-    }
-
-    @Nonnull
-    @Override
-    public Set<Class<? extends Place>> childTypes() {
-        return Manor.CHILD_TYPES;
     }
 
     @Nonnull
