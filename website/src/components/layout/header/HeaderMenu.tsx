@@ -14,18 +14,19 @@ type Props = PlaceFavouritesHandler & PlaceHistoryHandler & {
 }
 
 type State = {
-    openMenus?: string[];
+    openMenu?: string;
 }
 
 export default class HeaderMenu extends React.PureComponent<Props, State> {
 
     private readonly setOpenMenus = (openMenus: string[]) => {
-        this.setState({openMenus: openMenus.length <= 1 ? openMenus : [openMenus[openMenus.length - 1]]});
+
+        this.setState({openMenu: openMenus.length == 0 ? null : openMenus[openMenus.length - 1]});
     };
 
     constructor(props) {
         super(props);
-        this.state = {openMenus: []};
+        this.state = {};
     }
 
     render() {
@@ -36,27 +37,27 @@ export default class HeaderMenu extends React.PureComponent<Props, State> {
             subMenuCloseDelay={0.3}
             onOpenChange={this.setOpenMenus}
             multiple={false}
-            openKeys={this.state.openMenus}>
+            openKeys={this.state.openMenu && [this.state.openMenu]}>
 
             <Menu.SubMenu
                 key="people"
                 title={<a href="/people"><TreeIcon/> People</a>}
                 className={this.props.active == "people" && ActiveClass}>
-                <PeopleMenu {...this.props} open={this.state.openMenus.includes("people")}/>
+                <PeopleMenu {...this.props} open={this.state.openMenu == "people"}/>
             </Menu.SubMenu>
 
             <Menu.SubMenu
                 key="places"
                 title={<><PlacesIcon/> Places</>}
                 className={this.props.active == "places" && ActiveClass}>
-                <PlaceMenu {...this.props} open={this.state.openMenus.includes("places")}/>
+                <PlaceMenu {...this.props} open={this.state.openMenu == "places"}/>
             </Menu.SubMenu>
 
             <Menu.SubMenu
                 key="records"
                 title={<a href="/records"><RecordsIcon/> Records</a>}
                 className={this.props.active == "records" && ActiveClass}>
-                <RecordMenu {...this.props} open={this.state.openMenus.includes("records")}/>
+                <RecordMenu {...this.props} open={this.state.openMenu == "records"}/>
             </Menu.SubMenu>
 
             <Menu.SubMenu
