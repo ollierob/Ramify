@@ -1,6 +1,7 @@
 package net.ramify.server.resource;
 
 import com.google.inject.AbstractModule;
+import net.ramify.server.resource.community.CommunityResourceModule;
 import net.ramify.server.resource.core.CssResource;
 import net.ramify.server.resource.core.ImageResource;
 import net.ramify.server.resource.core.JavascriptResource;
@@ -21,6 +22,7 @@ public class ResourceModule extends AbstractModule {
         this.install(new RecordsResourceModule());
         this.install(new PeopleResourceModule());
         this.install(new EventsResourceModule());
+        this.install(new CommunityResourceModule());
         this.install(new HomeModule());
         this.bind(CssResource.class);
         this.bind(JavascriptResource.class);

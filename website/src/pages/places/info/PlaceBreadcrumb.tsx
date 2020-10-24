@@ -27,8 +27,8 @@ export class PlaceBreadcrumb extends React.PureComponent<Props> {
 
 function listHierarchy(place: Place.AsObject, places: ReadonlyArray<Place.AsObject>, max: number): ReadonlyArray<Place.AsObject> {
     if (!place || !places || !places.length) return [];
-    if (places.length == 1) return places;
-    const topDown = [place, ...places];
+    let topDown = [place, ...places];
+    if (topDown[0].id == topDown[1].id) topDown = topDown.slice(1);
     topDown.reverse();
     if (topDown.length <= max + 1) return topDown;
     return [topDown[0], null].concat(topDown.slice(topDown.length - max));
