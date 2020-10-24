@@ -5,6 +5,7 @@ import net.ollie.protobuf.BuildsProto;
 import net.ramify.model.place.HasPlaceId;
 import net.ramify.model.place.PlaceId;
 import net.ramify.model.place.proto.PlaceProto;
+import net.ramify.model.place.provider.PlaceProvider;
 import net.ramify.utils.objects.Functions;
 
 import javax.annotation.CheckForNull;
@@ -14,6 +15,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 
 public interface PlaceHierarchy extends HasPlaceId, Iterable<PlaceId>, BuildsProto<PlaceProto.PlaceHierarchy> {
 
@@ -69,8 +71,23 @@ public interface PlaceHierarchy extends HasPlaceId, Iterable<PlaceId>, BuildsPro
 
     @Nonnull
     default PlaceProto.PlaceHierarchy.Builder toProtoBuilder() {
+        return this.toProtoBuilder(id -> PlaceProto.Place.newBuilder().setId(id.value()).build());
+    }
+
+    @Nonnull
+    default PlaceProto.PlaceHierarchy toProto(final PlaceProvider places) {
+        return this.toProtoBuilder(places).build();
+    }
+
+    @Nonnull
+    default PlaceProto.PlaceHierarchy.Builder toProtoBuilder(final PlaceProvider places) {
+        return this.toProtoBuilder(id -> places.require(id).toProto());
+    }
+
+    @Nonnull
+    default PlaceProto.PlaceHierarchy.Builder toProtoBuilder(final Function<? super PlaceId, ? extends PlaceProto.Place> toProto) {
         final var builder = PlaceProto.PlaceHierarchy.newBuilder().setId(this.id().value());
-        this.forEach(id -> builder.addPlace(PlaceProto.Place.newBuilder().setId(id.value())));
+        this.forEach(id -> builder.addPlace(toProto.apply(id)));
         return builder;
     }
 

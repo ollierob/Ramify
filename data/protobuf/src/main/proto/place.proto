@@ -70,7 +70,7 @@ message PlaceBundle {
     PlaceDescription description = 3;
     string typeDescription = 4;
     repeated Place child = 5;
-    repeated Place parent = 6;
+    repeated PlaceHierarchy parent = 6;
 
 }
 

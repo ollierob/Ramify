@@ -1,36 +1,50 @@
-import {Place} from "../../../protobuf/generated/place_pb";
+import {Place, PlaceHierarchy} from "../../../protobuf/generated/place_pb";
 import {SubMenu} from "../../SubMenu";
 import * as React from "react";
 import {placeHref} from "../PlaceLinks";
 import {PlacesIcon} from "../../../components/images/Icons";
 
-export const PlaceBreadcrumb = (props: {loading?: boolean, place: Place.AsObject, parents: ReadonlyArray<Place.AsObject>, showType?: boolean}) => {
+type Props = {
+    loading?: boolean;
+    place: Place.AsObject;
+    hierarchies: ReadonlyArray<PlaceHierarchy.AsObject>
+    showType?: boolean
+}
 
-    const hierarchy = listHierarchy(props.place, props.parents, 7);
-    if (hierarchy.length <= 1) return null;
+export class PlaceBreadcrumb extends React.PureComponent<Props> {
 
-    return <SubMenu>
-        <div className="places">
-            <PlacesIcon style={{marginRight: 8}}/>
-            {hierarchy.map((place, i) => <Breadcrumb
-                key={place ? place.id : i}
-                place={place}
-                link={i < hierarchy.length - 1}
-                separator={i < hierarchy.length - 1}
-                showType={props.showType || i < hierarchy.length - 1}/>)}
-        </div>
-    </SubMenu>;
+    render() {
+        //TODO selector if multiple
+        return <SubMenu>
+            <div className="places">
+                <PlacesIcon style={{marginRight: 8}}/>
+                {this.props.hierarchies.length == 1 && <Breadcrumbs {...this.props} hierarchy={this.props.hierarchies[0]}/>}
+            </div>
+        </SubMenu>;
+    }
 
 };
 
-function listHierarchy(place: Place.AsObject, parents: ReadonlyArray<Place.AsObject>, max: number): ReadonlyArray<Place.AsObject> {
-    if (!place || !parents || !parents.length) return [];
-    if (parents.length == 1) return parents;
-    const topDown = [place, ...parents];
+function listHierarchy(place: Place.AsObject, places: ReadonlyArray<Place.AsObject>, max: number): ReadonlyArray<Place.AsObject> {
+    if (!place || !places || !places.length) return [];
+    if (places.length == 1) return places;
+    const topDown = [place, ...places];
     topDown.reverse();
     if (topDown.length <= max + 1) return topDown;
     return [topDown[0], null].concat(topDown.slice(topDown.length - max));
 }
+
+const Breadcrumbs = (props: {place: Place.AsObject, hierarchy: PlaceHierarchy.AsObject, showType?: boolean}) => {
+    const places = listHierarchy(props.place, props.hierarchy.placeList, 7);
+    return <>
+        {places.map((place, i) => <Breadcrumb
+            key={place ? place.id : i}
+            place={place}
+            link={i < places.length - 1}
+            separator={i < places.length - 1}
+            showType={props.showType || i < places.length - 1}/>)}
+    </>;
+};
 
 const Breadcrumb = (props: {place: Place.AsObject, separator: boolean, showType: boolean, link?: boolean}) => {
 

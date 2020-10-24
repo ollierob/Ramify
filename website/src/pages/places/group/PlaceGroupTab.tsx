@@ -49,7 +49,7 @@ export class PlaceGroupTab extends React.PureComponent<Props, State> {
 
             <PlaceBreadcrumb
                 place={place.place}
-                parents={place.parentList}
+                hierarchies={place.parentList}
                 showType={group && place.place.name != group.name}/>
 
             <PlaceInfo
