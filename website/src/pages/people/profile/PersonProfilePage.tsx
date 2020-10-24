@@ -7,11 +7,11 @@ import {Person} from "../../../protobuf/generated/person_pb";
 import {PersonId} from "../../../components/people/PersonId";
 import {Family, FamilyTree} from "../../../protobuf/generated/family_pb";
 import {FamilyTreeId, findPersonInTree} from "../../../components/tree/FamilyTree";
-import {BasePageProps} from "../../BasePage";
+import {BaseRoutedPageProps} from "../../BaseRoutedPage";
 import {DEFAULT_FAMILY_TREE_LOADER} from "../../../components/tree/FamilyTreeLoader";
 import {PersonProfileCard} from "./PersonProfileCard";
 
-type Props = BasePageProps;
+type Props = BaseRoutedPageProps;
 
 type IdState = {
     personId: PersonId;
@@ -68,7 +68,7 @@ export default class PersonProfilePage extends PeopleBasePage<State> {
         this.loadTree();
     }
 
-    componentDidUpdate(prevProps: Readonly<BasePageProps>, prevState: Readonly<State>, snapshot?: any): void {
+    componentDidUpdate(prevProps: Readonly<BaseRoutedPageProps>, prevState: Readonly<State>, snapshot?: any): void {
         if (this.props.location != prevProps.location)
             this.updatePerson();
         if (this.state.personId != prevState.personId || this.state.treeId != prevState.treeId)

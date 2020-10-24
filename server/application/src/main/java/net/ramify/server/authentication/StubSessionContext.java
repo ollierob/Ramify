@@ -16,7 +16,7 @@ class StubSessionContext implements UserSessionContext {
         private static final StubSession INSTANCE = new StubSession();
 
         @Override
-        public boolean permits(Resource resource) {
+        public boolean permits(final Resource resource) {
             return true;
         }
     }

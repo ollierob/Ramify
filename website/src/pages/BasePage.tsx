@@ -1,17 +1,14 @@
 import * as React from "react";
-import HeaderMenu, {HeaderMenuType} from "../components/layout/header/HeaderMenu";
 import "./Core";
-import {PlaceHistoryHandler, SessionPlaceHistoryHandler} from "../components/places/PlaceHistory";
+
+import HeaderMenu, {HeaderMenuType} from "../components/layout/header/HeaderMenu";
 import {PlaceFavouritesHandler, RemotePlaceFavouritesHandler} from "../components/places/PlaceFavourites";
-import {RouteComponentProps} from "react-router";
+import {PlaceHistoryHandler, SessionPlaceHistoryHandler} from "../components/places/PlaceHistory";
 
-export type BasePageProps = RouteComponentProps<any>;
-
-export default abstract class BasePage<S = any> extends React.PureComponent<BasePageProps, S> {
+export default abstract class BasePage<P = any, S = any> extends React.PureComponent<P, S> {
 
     readonly placeFavourites: PlaceFavouritesHandler = RemotePlaceFavouritesHandler;
     readonly placeHistory: PlaceHistoryHandler = SessionPlaceHistoryHandler;
-    private readonly onHashChange = () => this.hashChanged();
 
     render() {
 
@@ -40,26 +37,8 @@ export default abstract class BasePage<S = any> extends React.PureComponent<Base
 
     abstract active(): HeaderMenuType;
 
-    urlParameter(key: string): string {
-        const location = this.props.location;
-        if (!location) return null;
-        return new URLSearchParams(location.search).get(key);
-    }
-
     setPageTitle(title?: string) {
         document.title = "Ramify" + (title ? " | " + title : "");
-    }
-
-    componentDidMount() {
-        this.setPageTitle();
-        window.addEventListener("hashchange", this.onHashChange, false);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener("hashchange", this.onHashChange, false);
-    }
-
-    protected hashChanged(): void {
     }
 
 }

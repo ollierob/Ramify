@@ -1,6 +1,6 @@
 import * as React from "react";
 import {PeopleBasePage} from "../PeopleBasePage";
-import {BasePageProps} from "../../BasePage";
+import {BaseRoutedPageProps} from "../../BaseRoutedPage";
 import {AsyncData, asyncLoadData} from "../../../components/fetch/AsyncData";
 import {Family, FamilyTree} from "../../../protobuf/generated/family_pb";
 import {FamilyTreeId} from "../../../components/tree/FamilyTree";
@@ -9,7 +9,7 @@ import "./ViewTree.css";
 import {DEFAULT_FAMILY_TREE_LOADER} from "../../../components/tree/FamilyTreeLoader";
 import {FamilyTreeViewSubmenu} from "../../../components/tree/view/FamilyTreeViewSubmenu";
 
-type Props = BasePageProps;
+type Props = BaseRoutedPageProps;
 
 type State = {
     treeId: string;

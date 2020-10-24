@@ -18,12 +18,12 @@ export class PlaceBreadcrumb extends React.PureComponent<Props> {
         return <SubMenu>
             <div className="places">
                 <PlacesIcon style={{marginRight: 8}}/>
-                {this.props.hierarchies.length == 1 && <Breadcrumbs {...this.props} hierarchy={this.props.hierarchies[0]}/>}
+                {this.props.hierarchies.length >= 1 && <Breadcrumbs {...this.props} hierarchy={this.props.hierarchies[0]}/>}
             </div>
         </SubMenu>;
     }
 
-};
+}
 
 function listHierarchy(place: Place.AsObject, places: ReadonlyArray<Place.AsObject>, max: number): ReadonlyArray<Place.AsObject> {
     if (!place || !places || !places.length) return [];
