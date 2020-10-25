@@ -12,8 +12,8 @@ module.exports = {
     },
     output: {
         path: __dirname + "/target/classes/js",
-        filename: "[name].[contenthash].bundle.js",
-        chunkFilename: "[name].[contenthash].bundle.js",
+        filename: "[name].bundle.js", //filename: "[name].[contenthash].bundle.js",
+        chunkFilename: "[name].bundle.js", //chunkFilename: "[name].[contenthash].bundle.js"
     },
     resolve: {
         extensions: [".ts", ".tsx", ".js", ".json", ".less"]
