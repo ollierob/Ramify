@@ -20,7 +20,7 @@ export default class CommunityMenu extends React.PureComponent<Props, State> {
 
     render() {
 
-        return <div className="tabbedSubmenu">
+        return <div className="community tabbedSubmenu">
 
             <Tabs tabPosition="left" activeKey={this.state.activeTab} size="large">
 

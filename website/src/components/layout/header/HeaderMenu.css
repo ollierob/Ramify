@@ -3,12 +3,12 @@
     border-bottom: 1px solid #D7D7D7 !important;
 }
 
-.header .ant-menu-submenu .tabbedSubmenu {
+.ant-menu-submenu .tabbedSubmenu {
     padding: 8px;
     width: 460px;
 }
 
-.header .ant-menu-submenu .tabbedSubmenu .ant-tabs .ant-tabs-left-content {
+.ant-menu-submenu .tabbedSubmenu .ant-tabs .ant-tabs-left-content {
     font-size: 16px;
     padding-left: 18px;
     width: 320px;
@@ -18,24 +18,24 @@
     color: unset;
 }
 
-.header .ant-menu-submenu .treeList .ant-list-item {
+.ant-menu-submenu .treeList .ant-list-item {
     font-size: 16px;
 }
 
-.header .ant-menu-submenu .placeFavouritesList {
+.ant-menu-submenu .placeFavouritesList {
     max-height: 300px;
     overflow-y: auto;
 }
 
-.header .ant-menu-submenu .menuSearch .ant-form-item {
+.ant-menu-submenu .menuSearch .ant-form-item {
     margin-bottom: 8px;
 }
 
-.header .ant-menu-submenu .menuSearch .results .ant-list-item {
+.ant-menu-submenu .menuSearch .results .ant-list-item {
     display: block;
 }
 
-.header .ant-menu-submenu .menuSearch .regionCascader {
+.ant-menu-submenu .menuSearch .regionCascader {
     width: 210px;
     float: right;
 }

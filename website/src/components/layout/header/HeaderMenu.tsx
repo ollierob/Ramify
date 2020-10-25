@@ -21,7 +21,6 @@ type State = {
 export default class HeaderMenu extends React.PureComponent<Props, State> {
 
     private readonly setOpenMenus = (openMenus: string[]) => {
-
         this.setState({openMenu: openMenus.length == 0 ? null : openMenus[openMenus.length - 1]});
     };
 
