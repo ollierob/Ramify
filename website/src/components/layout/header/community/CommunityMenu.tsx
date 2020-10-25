@@ -11,6 +11,7 @@ export default class CommunityMenu extends React.PureComponent<Props, State> {
 
     private readonly setGroupsActive = () => this.setState({activeTab: "groups"});
     private readonly setForumsActive = () => this.setState({activeTab: "forums"});
+    private readonly setMessagesActive = () => this.setState({activeTab: "messages"});
 
     constructor(props) {
         super(props);
@@ -26,6 +27,8 @@ export default class CommunityMenu extends React.PureComponent<Props, State> {
                 <Tabs.TabPane key="groups" tab={<TabTitle title="Groups" onMouseover={this.setGroupsActive}/>}/>
 
                 <Tabs.TabPane key="forums" tab={<TabTitle title="Forums" onMouseover={this.setForumsActive}/>}/>
+
+                <Tabs.TabPane key="messages" tab={<TabTitle title="Messages" onMouseover={this.setMessagesActive}/>}/>
 
             </Tabs>
 
