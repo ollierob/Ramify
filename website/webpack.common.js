@@ -24,13 +24,9 @@ module.exports = {
             maxInitialRequests: Infinity,
             minSize: 0,
             cacheGroups: {
-                reactVendor: {
-                    name: "vendors.react",
-                    test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/
-                },
                 vendor: {
                     name: "vendors",
-                    test: /[\\/]node_modules[\\/](!react)/,
+                    test: /node_modules/
                     // name(module) {
                     //     const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
                     //     return `npm.${packageName.replace('@', '')}`;
