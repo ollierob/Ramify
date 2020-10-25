@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import BasePage from "../BasePage";
+import "./HomePage.css"
 
 class HomePage extends BasePage {
 

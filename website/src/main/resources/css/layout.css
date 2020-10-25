@@ -23,11 +23,6 @@ body {
     font-size: 1.25em;
 }
 
-.header ul.menu {
-    background-color: transparent;
-    border-bottom: 1px solid #D7D7D7 !important;
-}
-
 .body {
     position: absolute;
     top: 70px;

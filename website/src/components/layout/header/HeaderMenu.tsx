@@ -8,6 +8,7 @@ import {RecordMenu} from "./records/RecordMenu";
 import {PeopleMenu} from "./people/PeopleMenu";
 import {PlaceHistoryHandler} from "../../places/PlaceHistory";
 import CommunityMenu from "./community/CommunityMenu";
+import UserMenu from "./UserMenu";
 
 type Props = PlaceFavouritesHandler & PlaceHistoryHandler & {
     active: HeaderMenuType;
@@ -31,43 +32,49 @@ export default class HeaderMenu extends React.PureComponent<Props, State> {
 
     render() {
 
-        return <Menu
-            mode="horizontal"
-            className="menu"
-            subMenuCloseDelay={0.3}
-            onOpenChange={this.setOpenMenus}
-            multiple={false}
-            openKeys={this.state.openMenu && [this.state.openMenu]}>
+        return <>
 
-            <Menu.SubMenu
-                key="people"
-                title={<a href="/people"><TreeIcon/> People</a>}
-                className={this.props.active == "people" && ActiveClass}>
-                <PeopleMenu {...this.props} open={this.state.openMenu == "people"}/>
-            </Menu.SubMenu>
+            <Menu
+                mode="horizontal"
+                className="menu"
+                subMenuCloseDelay={0.3}
+                onOpenChange={this.setOpenMenus}
+                multiple={false}
+                openKeys={this.state.openMenu && [this.state.openMenu]}>
 
-            <Menu.SubMenu
-                key="places"
-                title={<><PlacesIcon/> Places</>}
-                className={this.props.active == "places" && ActiveClass}>
-                <PlaceMenu {...this.props} open={this.state.openMenu == "places"}/>
-            </Menu.SubMenu>
+                <Menu.SubMenu
+                    key="people"
+                    title={<a href="/people"><TreeIcon/> People</a>}
+                    className={this.props.active == "people" && ActiveClass}>
+                    <PeopleMenu {...this.props} open={this.state.openMenu == "people"}/>
+                </Menu.SubMenu>
 
-            <Menu.SubMenu
-                key="records"
-                title={<a href="/records"><RecordsIcon/> Records</a>}
-                className={this.props.active == "records" && ActiveClass}>
-                <RecordMenu {...this.props} open={this.state.openMenu == "records"}/>
-            </Menu.SubMenu>
+                <Menu.SubMenu
+                    key="places"
+                    title={<><PlacesIcon/> Places</>}
+                    className={this.props.active == "places" && ActiveClass}>
+                    <PlaceMenu {...this.props} open={this.state.openMenu == "places"}/>
+                </Menu.SubMenu>
 
-            <Menu.SubMenu
-                key="community"
-                title={<a href="/community"><CommunityIcon/> Community</a>}
-                className={this.props.active == "community" && ActiveClass}>
-                <CommunityMenu {...this.props}/>
-            </Menu.SubMenu>
+                <Menu.SubMenu
+                    key="records"
+                    title={<a href="/records"><RecordsIcon/> Records</a>}
+                    className={this.props.active == "records" && ActiveClass}>
+                    <RecordMenu {...this.props} open={this.state.openMenu == "records"}/>
+                </Menu.SubMenu>
 
-        </Menu>;
+                <Menu.SubMenu
+                    key="community"
+                    title={<a href="/community"><CommunityIcon/> Community</a>}
+                    className={this.props.active == "community" && ActiveClass}>
+                    <CommunityMenu {...this.props}/>
+                </Menu.SubMenu>
+
+            </Menu>
+
+            <UserMenu/>
+
+        </>;
 
     }
 
