@@ -41,8 +41,7 @@ module.exports = {
                 test: /\.tsx?$/,
                 use: [
                     {loader: 'cache-loader'},
-                    {loader: 'thread-loader'},
-                    {loader: 'ts-loader', options: {happyPackMode: true, transpileOnly: true}}
+                    {loader: 'ts-loader'}
                 ]
             },
             {
@@ -72,7 +71,7 @@ module.exports = {
     plugins: [
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         new Chunks2JsonPlugin({outputDir: 'target/classes/js/'}), //Outputs manifest
-        new ForkTsCheckerWebpackPlugin({checkSyntacticErrors: true}) //Type checks
+        new ForkTsCheckerWebpackPlugin() //Type checks
     ],
     externals: {
         // "react": "React",
