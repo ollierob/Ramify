@@ -12,8 +12,8 @@ module.exports = {
     },
     output: {
         path: __dirname + "/target/classes/js",
-        filename: "[name].bundle.js", //filename: "[name].[contenthash].bundle.js",
-        chunkFilename: "[name].bundle.js",
+        filename: "[name].[contenthash].bundle.js",
+        chunkFilename: "[name].[contenthash].bundle.js",
     },
     resolve: {
         extensions: [".ts", ".tsx", ".js", ".json", ".less"]
@@ -24,9 +24,13 @@ module.exports = {
             maxInitialRequests: Infinity,
             minSize: 0,
             cacheGroups: {
+                reactVendor: {
+                    name: "vendors.react",
+                    test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/
+                },
                 vendor: {
                     name: "vendors",
-                    test: /node_modules/,
+                    test: /[\\/]node_modules[\\/](!react)/,
                     // name(module) {
                     //     const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
                     //     return `npm.${packageName.replace('@', '')}`;

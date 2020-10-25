@@ -30,7 +30,7 @@ public abstract class AbstractResource implements Resource {
     private static final Map<String, String> bundleCache = Maps.newConcurrentMap();
 
     protected Response readRouterResource(final UserSession session, final String bundleKey) {
-        final var replacements = Collections.singletonMap("<!--%BUNDLEs%-->", bundleCache.computeIfAbsent(bundleKey, this::readBundles));
+        final var replacements = Collections.singletonMap("<!--%BUNDLES%-->", bundleCache.computeIfAbsent(bundleKey, this::readBundles));
         return this.readSessionResource(session, "/router.html", replacements, MediaType.TEXT_HTML_TYPE);
     }
 
@@ -67,7 +67,7 @@ public abstract class AbstractResource implements Resource {
             final var mapper = new ObjectMapper();
             mapper.configure(JsonParser.Feature.AUTO_CLOSE_SOURCE, true);
             final Map<String, Bundle> map = mapper.readValue(manifest, Bundle.TYPE_REFERENCE);
-            Maps.filterKeys(map, key -> key.equals("vendors") || key.contains(manifestKey)).forEach((k, bundle) -> jsBundleFiles.addAll(bundle.jsBundleFiles));
+            Maps.filterKeys(map, key -> key.startsWith("vendors") || key.contains(manifestKey)).forEach((k, bundle) -> jsBundleFiles.addAll(bundle.jsBundleFiles));
             return jsBundleFiles.stream().map(AbstractResource::scriptTag).collect(Collectors.joining("\n"));
         } catch (final IOException ex) {
             throw new RuntimeException(ex);
