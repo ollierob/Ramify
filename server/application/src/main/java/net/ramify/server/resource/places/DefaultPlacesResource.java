@@ -134,7 +134,7 @@ public class DefaultPlacesResource implements PlacesResource {
     public Places find(final String name, final PlaceId within, final int limit) {
         if (isBlank(name)) return Places.of();
         return placeProvider.findByName(name)
-                .filter(place -> hierarchyProvider.isChildParent(place, within))
+                .filter(within == null ? place -> true : place -> hierarchyProvider.isChildParent(place, within))
                 .limit(limit)
                 .collect(Places.collector());
     }
