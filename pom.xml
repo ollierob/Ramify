@@ -15,6 +15,7 @@
         <module>server</module>
         <module>website</module>
         <module>data/age</module>
+        <module>data/forums</module>
     </modules>
 
     <properties>

@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option java_package = "net.ramify.forum.proto";
+option java_outer_classname = "ForumProto";
+
+message Board {
+
+    string id = 1;
+    string name = 2;
+
+}
+
+message Topic {
+
+    string id = 1;
+    string name = 2;
+
+    bool pinned = 10;
+    bool locked = 11;
+
+    repeated Topic subTopic = 20;
+
+}
