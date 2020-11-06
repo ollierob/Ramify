@@ -7,6 +7,9 @@ message Board {
 
     string id = 1;
     string name = 2;
+    string description = 3;
+
+    repeated Board subBoard = 10;
 
 }
 
@@ -19,5 +22,21 @@ message Topic {
     bool locked = 11;
 
     repeated Topic subTopic = 20;
+
+}
+
+message Post {
+
+    string id = 1;
+    Author author = 2;
+
+    string message = 10;
+
+}
+
+message Author {
+
+    string id = 1;
+    string name = 2;
 
 }

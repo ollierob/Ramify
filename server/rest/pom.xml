@@ -30,6 +30,11 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>records</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>forums</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
 </project>
