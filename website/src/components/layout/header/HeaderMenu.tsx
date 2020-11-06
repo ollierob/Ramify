@@ -50,7 +50,7 @@ export default class HeaderMenu extends React.PureComponent<Props, State> {
 
                 <Menu.SubMenu
                     key="places"
-                    title={<><PlacesIcon/> Places</>}
+                    title={<a href="/places"><PlacesIcon/> Places</a>}
                     className={this.props.active == "places" && ActiveClass}>
                     <PlaceMenu {...this.props} open={this.state.openMenu == "places"}/>
                 </Menu.SubMenu>
