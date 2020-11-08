@@ -1,5 +1,4 @@
 const webpack = require("webpack");
-const Chunks2JsonPlugin = require('chunks-2-json-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
