@@ -1,0 +1,18 @@
+<html>
+
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap">
+    <link rel="stylesheet" href="/css/layout.css"/>
+    <link rel="stylesheet" href="/css/colours.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/ant-overrides.css"/>
+    <%= htmlWebpackPlugin.tags.headTags %>
+</head>
+
+<body>
+    <div id="main"></div>
+    <%= htmlWebpackPlugin.tags.bodyTags %>
+</body>
+
+</html>

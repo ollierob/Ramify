@@ -1,6 +1,7 @@
 const webpack = require("webpack");
 const Chunks2JsonPlugin = require('chunks-2-json-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -16,7 +17,8 @@ module.exports = {
         chunkFilename: "[name].bundle.js", //chunkFilename: "[name].[contenthash].bundle.js"
     },
     resolve: {
-        extensions: [".ts", ".tsx", ".js", ".json", ".less"]
+        extensions: [".ts", ".tsx", ".js", ".json", ".less"],
+        fallback: {"path": require.resolve("path-browserify")}
     },
     optimization: {
         splitChunks: {
@@ -70,11 +72,31 @@ module.exports = {
     },
     plugins: [
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-        new Chunks2JsonPlugin({outputDir: 'target/classes/js/'}), //Outputs manifest
-        new ForkTsCheckerWebpackPlugin() //Type checks
-    ],
-    externals: {
-        // "react": "React",
-        // "react-dom": "ReactDOM"
-    }
+        //new Chunks2JsonPlugin({outputDir: 'target/classes/js/'}), //Outputs manifest
+        new ForkTsCheckerWebpackPlugin(), //Type checks
+        new HtmlWebpackPlugin({
+            chunks: ["people"],
+            publicPath: "/js",
+            template: "src/main/resources/router.html.template",
+            filename: "people.html"
+        }),
+        new HtmlWebpackPlugin({
+            chunks: ["places"],
+            publicPath: "/js",
+            template: "src/main/resources/router.html.template",
+            filename: "places.html"
+        }),
+        new HtmlWebpackPlugin({
+            chunks: ["records"],
+            publicPath: "/js",
+            template: "src/main/resources/router.html.template",
+            filename: "records.html"
+        }),
+        new HtmlWebpackPlugin({
+            chunks: ["community"],
+            publicPath: "/js",
+            template: "src/main/resources/router.html.template",
+            filename: "community.html"
+        })
+    ]
 };
