@@ -5,7 +5,7 @@ import HomeBasePage from "./HomeBasePage";
 export default class HomePage extends HomeBasePage {
 
     body() {
-        return null;
+        return <>Hello world</>;
     }
 
 }
