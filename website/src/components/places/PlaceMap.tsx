@@ -1,7 +1,7 @@
 import * as React from "react";
 import {HasClass} from "../style/HasClass";
 import {Point} from "../../protobuf/generated/location_pb";
-import {GeoJSON, Map, Marker, Popup, TileLayer} from 'react-leaflet';
+import {GeoJSON, MapContainer, Marker, Popup, TileLayer} from 'react-leaflet';
 import {Icon, LatLngLiteral, PathOptions} from "leaflet";
 import {Loading} from "../style/Loading";
 import {PlaceBundle} from "../../protobuf/generated/place_pb";
@@ -92,13 +92,13 @@ const MapComponent = (props: {center: Point.AsObject, zoom: number, markers: Rea
 
     const markers = props.markers || [];
 
-    return <Map center={toLatLong(center)} zoom={props.zoom}>
+    return <MapContainer center={toLatLong(center)} zoom={props.zoom}>
         <TileLayer url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}/>
         {props.area && <GeoJSON data={toGeoJson(props.area)} style={AreaStyle}/>}
         {markers.map(marker => <Marker position={toLatLong(marker.point)} icon={MarkerIcon}>
             <Popup>{marker.label}</Popup>
         </Marker>)}
-    </Map>;
+    </MapContainer>;
 
 };
 
