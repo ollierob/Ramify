@@ -1,15 +1,21 @@
 syntax = "proto3";
 
+import "google/protobuf/timestamp.proto";
+
 option java_package = "net.ramify.forum.proto";
 option java_outer_classname = "ForumProto";
+
+message Forum {
+
+    string name = 1;
+
+}
 
 message Board {
 
     string id = 1;
     string name = 2;
     string description = 3;
-
-    repeated Board subBoard = 20;
 
 }
 
@@ -21,14 +27,15 @@ message Topic {
     bool pinned = 10;
     bool locked = 11;
 
-    repeated Topic subTopic = 20;
-
 }
 
 message Post {
 
     string id = 1;
     Author author = 2;
+
+    google.protobuf.Timestamp created = 3;
+    google.protobuf.Timestamp edited = 4;
 
     string message = 10;
 
