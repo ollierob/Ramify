@@ -1,3 +1,4 @@
+import * as React from "react";
 import BaseRoutedPage from "../BaseRoutedPage";
 import {HeaderMenuType} from "../../components/layout/header/HeaderMenu";
 

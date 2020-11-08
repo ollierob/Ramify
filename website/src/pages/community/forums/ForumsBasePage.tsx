@@ -1,9 +1,6 @@
+import * as React from "react";
 import CommunityBasePage from "../CommunityBasePage";
 
-export default class ForumsBasePage extends CommunityBasePage {
-
-    body() {
-        return null;
-    }
+export default abstract class ForumsBasePage extends CommunityBasePage {
 
 }
