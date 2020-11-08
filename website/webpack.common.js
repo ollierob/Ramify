@@ -75,24 +75,35 @@ module.exports = {
         //new Chunks2JsonPlugin({outputDir: 'target/classes/js/'}), //Outputs manifest
         new ForkTsCheckerWebpackPlugin(), //Type checks
         new HtmlWebpackPlugin({
+            inject: false,
+            chunks: ["home"],
+            publicPath: "/js",
+            template: "src/main/resources/router.html.template",
+            filename: "home.html"
+        }),
+        new HtmlWebpackPlugin({
+            inject: false,
             chunks: ["people"],
             publicPath: "/js",
             template: "src/main/resources/router.html.template",
             filename: "people.html"
         }),
         new HtmlWebpackPlugin({
+            inject: false,
             chunks: ["places"],
             publicPath: "/js",
             template: "src/main/resources/router.html.template",
             filename: "places.html"
         }),
         new HtmlWebpackPlugin({
+            inject: false,
             chunks: ["records"],
             publicPath: "/js",
             template: "src/main/resources/router.html.template",
             filename: "records.html"
         }),
         new HtmlWebpackPlugin({
+            inject: false,
             chunks: ["community"],
             publicPath: "/js",
             template: "src/main/resources/router.html.template",
