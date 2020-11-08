@@ -1001,15 +1001,15 @@
         
     <xs:restriction base="xs:string">
             
+      <xs:enumeration value="manor"/>
+            
+      <xs:enumeration value="government"/>
+            
       <xs:enumeration value="church"/>
             
       <xs:enumeration value="individual"/>
             
       <xs:enumeration value="corporate"/>
-            
-      <xs:enumeration value="manor"/>
-            
-      <xs:enumeration value="government"/>
           
     </xs:restriction>
       
@@ -1019,31 +1019,31 @@
         
     <xs:restriction base="xs:string">
             
-      <xs:enumeration value="residence"/>
+      <xs:enumeration value="census"/>
             
-      <xs:enumeration value="burial"/>
+      <xs:enumeration value="probate"/>
             
       <xs:enumeration value="death"/>
             
+      <xs:enumeration value="baptism"/>
+            
       <xs:enumeration value="payment"/>
-            
-      <xs:enumeration value="mention"/>
-            
-      <xs:enumeration value="membership"/>
             
       <xs:enumeration value="birth"/>
             
-      <xs:enumeration value="will"/>
-            
-      <xs:enumeration value="census"/>
-            
-      <xs:enumeration value="mixed"/>
-            
-      <xs:enumeration value="baptism"/>
+      <xs:enumeration value="burial"/>
             
       <xs:enumeration value="marriage"/>
             
-      <xs:enumeration value="probate"/>
+      <xs:enumeration value="mixed"/>
+            
+      <xs:enumeration value="will"/>
+            
+      <xs:enumeration value="mention"/>
+            
+      <xs:enumeration value="residence"/>
+            
+      <xs:enumeration value="membership"/>
           
     </xs:restriction>
       
@@ -1069,9 +1069,9 @@
             
       <xs:enumeration value="parent"/>
             
-      <xs:enumeration value="child"/>
-            
       <xs:enumeration value="spouse"/>
+            
+      <xs:enumeration value="child"/>
           
     </xs:restriction>
       
@@ -1081,11 +1081,11 @@
         
     <xs:restriction base="xs:string">
             
+      <xs:enumeration value="married"/>
+            
       <xs:enumeration value="unmarried"/>
             
       <xs:enumeration value="widowed"/>
-            
-      <xs:enumeration value="married"/>
           
     </xs:restriction>
       

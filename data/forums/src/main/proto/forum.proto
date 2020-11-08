@@ -9,7 +9,7 @@ message Board {
     string name = 2;
     string description = 3;
 
-    repeated Board subBoard = 10;
+    repeated Board subBoard = 20;
 
 }
 

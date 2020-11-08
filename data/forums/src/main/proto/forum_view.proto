@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option java_package = "net.ramify.forum.proto";
+option java_outer_classname = "ViewProto";
+
+import "forum.proto";
+
+message BoardView {
+
+    Board board = 1;
+    repeated TopicSummary topic = 2;
+
+    uint32 numPosts = 10;
+    uint32 numTopics = 11;
+
+}
+
+message TopicSummary {
+
+    Topic topic = 1;
+    Post latestPost = 2;
+
+}
+
+message TopicView {
+
+    Topic topic = 1;
+    repeated Post post = 2;
+
+    uint32 numPosts = 10;
+    uint32 numViews = 11;
+
+}
