@@ -70,7 +70,7 @@ class RecordSearch {
     }
 
     private boolean testName(final IndividualRecord record, final Name searchName) {
-        return searchName == null || nameMatch.match(record.person().name(), searchName).isTrue();
+        return searchName == null || nameMatch.match(record.person().name(), searchName).isMatch();
     }
 
 }

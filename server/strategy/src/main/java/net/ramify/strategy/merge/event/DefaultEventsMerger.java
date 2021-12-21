@@ -5,6 +5,7 @@ import net.ramify.model.event.collection.HasPersonEvents;
 import net.ramify.model.event.collection.MutablePersonEventSet;
 import net.ramify.model.event.collection.PersonEventSet;
 import net.ramify.model.event.merge.EventsMerger;
+import net.ramify.model.strategy.MergeResult;
 
 import javax.annotation.Nonnull;
 
@@ -20,13 +21,13 @@ public class DefaultEventsMerger implements EventsMerger {
 
     @Nonnull
     @Override
-    public Result<PersonEventSet> merge(final HasPersonEvents e1, final HasPersonEvents e2) {
+    public MergeResult<PersonEventSet> merge(final HasPersonEvents e1, final HasPersonEvents e2) {
 
         final var birth = births.merge(e1.events().findBirth(), e2.events().findBirth());
-        if (birth.isImpossibleMerge()) return Result.impossible();
+        if (birth.isImpossibleMerge()) return MergeResult.impossible();
 
         final var death = deaths.merge(e1.events().findDeath(), e2.events().findDeath());
-        if (death.isImpossibleMerge()) return Result.impossible();
+        if (death.isImpossibleMerge()) return MergeResult.impossible();
 
         final var events = MutablePersonEventSet.notPermittingMerge();
         events.addAll(e1.events());
@@ -36,7 +37,7 @@ public class DefaultEventsMerger implements EventsMerger {
         birth.ifPresent(events::add);
         death.ifPresent(events::add);
 
-        return Result.of(events);
+        return MergeResult.of(events);
 
     }
 

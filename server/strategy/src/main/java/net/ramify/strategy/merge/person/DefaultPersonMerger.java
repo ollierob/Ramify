@@ -3,6 +3,7 @@ package net.ramify.strategy.merge.person;
 import net.ramify.model.person.Person;
 import net.ramify.model.record.GenericRecordPerson;
 import net.ramify.model.event.merge.EventsMerger;
+import net.ramify.model.strategy.MergeResult;
 import net.ramify.strategy.merge.person.gender.GenderMerger;
 import net.ramify.strategy.merge.person.name.PersonNamesMerger;
 
@@ -25,7 +26,7 @@ public class DefaultPersonMerger implements PersonMerger {
 
     @Nonnull
     @Override
-    public Result<Person> merge(final Person p1, final Person p2) {
+    public MergeResult<Person> merge(final Person p1, final Person p2) {
 
         final var gender = genderMerger.merge(p1.gender(), p2.gender());
         if (!gender.isMergeable()) return gender.cannotMerge();
@@ -37,7 +38,7 @@ public class DefaultPersonMerger implements PersonMerger {
         if (!events.isMergeable()) return events.cannotMerge();
 
         final var person = new GenericRecordPerson(p1.personId(), name.require(), gender.require(), events.require(), null);
-        return Result.of(person);
+        return MergeResult.of(person);
 
     }
 

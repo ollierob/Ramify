@@ -1,6 +1,7 @@
 package net.ramify.strategy.merge.person.feature;
 
 import net.ramify.model.person.feature.Literacy;
+import net.ramify.model.strategy.MergeResult;
 
 import javax.annotation.Nonnull;
 
@@ -14,9 +15,9 @@ public class LiteracyMerger implements PersonFeatureMerger<Literacy> {
 
     @Nonnull
     @Override
-    public Result<Literacy> merge(final Literacy f1, final Literacy f2) {
-        if (f1.isLiterate() == f2.isLiterate()) return Result.of(f1);
-        return strict ? Result.impossible() : Result.unknown();
+    public MergeResult<Literacy> merge(final Literacy f1, final Literacy f2) {
+        if (f1.isLiterate() == f2.isLiterate()) return MergeResult.of(f1);
+        return strict ? MergeResult.impossible() : MergeResult.unknown();
     }
 
 }

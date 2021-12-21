@@ -2,6 +2,7 @@ package net.ramify.strategy.merge.place;
 
 import net.ramify.model.place.Place;
 import net.ramify.model.place.merge.PlaceMerger;
+import net.ramify.model.strategy.MergeResult;
 
 import javax.annotation.Nonnull;
 
@@ -15,7 +16,7 @@ public class ChildPlaceMerger implements PlaceMerger {
 
     @Nonnull
     @Override
-    public Result<Place> merge(final Place p1, final Place p2) {
+    public MergeResult<Place> merge(final Place p1, final Place p2) {
 //        if (p1.isChildOf(p2)) return Result.of(p1);
 //        if (p2.isChildOf(p1)) return Result.of(p2);
 //        return fallback.merge(p1, p2);

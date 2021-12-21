@@ -8,6 +8,7 @@ import net.ramify.model.person.PersonId;
 import net.ramify.model.place.HasPlace;
 import net.ramify.model.place.Place;
 import net.ramify.model.place.merge.PlaceMerger;
+import net.ramify.model.strategy.MergeResult;
 
 import javax.annotation.Nonnull;
 
@@ -21,7 +22,7 @@ abstract class AbstractEventMerger<E extends UniqueEvent> implements EventMerger
 
     @Nonnull
     @Override
-    public Result<E> merge(final E e1, final E e2) {
+    public MergeResult<E> merge(final E e1, final E e2) {
 
         final var date = e1.date().intersection(e2.date());
         if (date.isEmpty()) return this.impossible(e1, e2);
@@ -32,12 +33,12 @@ abstract class AbstractEventMerger<E extends UniqueEvent> implements EventMerger
         final var builder = this.eventBuilder(date.get(), place.orElse(null))
                 .setInferred(e1.isInferred() && e2.isInferred());
 
-        return Result.of(this.merge(e1.personId(), builder));
+        return MergeResult.of(this.merge(e1.personId(), builder));
 
     }
 
-    Result<E> impossible(final E e1, final E e2) {
-        return Result.impossible();
+    MergeResult<E> impossible(final E e1, final E e2) {
+        return MergeResult.impossible();
     }
 
     EventBuilder eventBuilder(final DateRange date, final Place place) {

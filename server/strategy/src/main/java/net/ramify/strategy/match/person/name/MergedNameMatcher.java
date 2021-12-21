@@ -1,7 +1,7 @@
 package net.ramify.strategy.match.person.name;
 
-import net.meerkat.functions.optionals.OptionalBoolean;
 import net.ramify.model.person.name.Name;
+import net.ramify.strategy.match.MatchResult;
 import net.ramify.strategy.merge.person.name.NameMerger;
 
 import javax.annotation.Nonnull;
@@ -16,8 +16,11 @@ public class MergedNameMatcher implements NameMatcher {
 
     @Nonnull
     @Override
-    public OptionalBoolean match(final Name t1, final Name t2) {
-        return nameMerger.merge(t1, t2).isPresent();
+    public MatchResult match(final Name t1, final Name t2) {
+        final var result = nameMerger.merge(t1, t2);
+        if (result.isImpossibleMerge()) return MatchResult.NO;
+        if (result.isMergeable()) return MatchResult.YES;
+        return MatchResult.PASS;
     }
 
 }
