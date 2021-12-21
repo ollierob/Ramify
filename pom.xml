@@ -14,14 +14,12 @@
         <module>data</module>
         <module>server</module>
         <module>website</module>
-        <module>data/age</module>
-        <module>data/forums</module>
     </modules>
 
     <properties>
         <!--guice 4.3.2 doesn't support java 15 yet-->
-        <maven.compiler.source>14</maven.compiler.source>
-        <maven.compiler.target>14</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <encoding>UTF-8</encoding>
         <guice.version>4.2.3</guice.version>
         <guava.version>29.0-jre</guava.version>

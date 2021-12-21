@@ -16,6 +16,7 @@
     <artifactId>data</artifactId>
 
     <modules>
+        <module>age</module>
         <module>date</module>
         <module>events</module>
         <module>families</module>
