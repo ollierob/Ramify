@@ -42,7 +42,7 @@
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
-            <version>3.8.0</version>
+            <version>3.19.1</version>
         </dependency>
         <dependency>
             <groupId>net.ollie</groupId>
@@ -54,20 +54,22 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.xolstice.maven.plugins</groupId>
-                <artifactId>protobuf-maven-plugin</artifactId>
-                <version>0.6.1</version>
-                <configuration>
-                    <protocExecutable>protoc</protocExecutable>
-                </configuration>
+                <groupId>com.github.os72</groupId>
+                <artifactId>protoc-jar-maven-plugin</artifactId>
+                <version>3.11.4</version>
                 <executions>
                     <execution>
                         <phase>generate-sources</phase>
                         <goals>
-                            <goal>compile</goal>
+                            <goal>run</goal>
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <inputDirectories>
+                        <include>src/main/proto</include>
+                    </inputDirectories>
+                </configuration>
             </plugin>
         </plugins>
     </build>
